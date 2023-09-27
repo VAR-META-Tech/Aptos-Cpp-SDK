@@ -11,8 +11,9 @@
 #include "PublicKey.h"
 #include "../BCS/Serialization.h"
 #include <stdexcept>
+#include <cryptopp/xed25519.h>
 
-class PrivateKey
+class PrivateKey : public CryptoPP::ed25519PrivateKey
 {
 public:
     static const int ExtendedKeyLength = 64;
@@ -22,6 +23,8 @@ private:
     std::string _key;
     std::vector<CryptoPP::byte> _extendedKeyBytes;
     std::vector<CryptoPP::byte> _keyBytes;
+
+    void GenerateExtendedKey();
 
 public:
     std::string Key();
@@ -35,7 +38,7 @@ public:
     PrivateKey(std::array<CryptoPP::byte, KeyLength> privateKey);
 
     static PrivateKey FromHex(std::string key);
-    PublicKey PublicKey();
+    PublicKey GetPublicKey();
     static PrivateKey Random();
 
     bool operator ==(const PrivateKey& rhs) const;

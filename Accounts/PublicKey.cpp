@@ -58,8 +58,15 @@ std::vector<CryptoPP::byte> PublicKey::KeyBytes()
         if (key.substr(0, 2) == "0x") {
             key = key.substr(2);
         }
-        CryptoPP::StringSource(key, true, new CryptoPP::HexDecoder())
-                .Ref().Get(_keyBytes[0]);
+        CryptoPP::HexDecoder decoder;
+        decoder.Put((CryptoPP::byte*)key.data(),key.size());
+        decoder.MessageEnd();
+        size_t size = decoder.MaxRetrievable();
+        if(size && size <= SIZE_MAX)
+        {
+            _keyBytes.resize(size);
+            decoder.Get((CryptoPP::byte*)&_keyBytes[0], _keyBytes.size());
+        }
     }
     return _keyBytes;
 }

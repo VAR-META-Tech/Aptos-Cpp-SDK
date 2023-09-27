@@ -131,3 +131,29 @@ TEST(AccountTest, GenerateKeysWithBytesSuccess)
     ASSERT_EQ(publicKeyHex, PublicKeyHex);
 }
 
+TEST(AccountTest, GenerateKeysWithStringSuccess)
+{
+    PrivateKey* privateKey = new PrivateKey(PrivateKeyHex);
+    PublicKey* publicKey = new PublicKey(PublicKeyHex);
+
+    ASSERT_TRUE(privateKey->KeyBytes().data() != nullptr);
+    ASSERT_TRUE(publicKey->KeyBytes().data() != nullptr);
+
+    ASSERT_EQ(privateKey->KeyBytes(), PrivateKeyBytes);
+    ASSERT_EQ(publicKey->KeyBytes(), PublicKeyBytes);
+
+    std::string privateKeyHex = privateKey->Key();
+    std::string publicKeyHex = publicKey->Key();
+
+    ASSERT_EQ(privateKeyHex, PrivateKeyHex);
+    ASSERT_EQ(publicKeyHex, PublicKeyHex);
+}
+
+TEST(AccountTest, GeneratePublicKeyFromPrivateKeySuccess)
+{
+    PrivateKey* privateKey = new PrivateKey(PrivateKeyHex);
+    PublicKey publicKey = privateKey->GetPublicKey();
+
+    ASSERT_EQ(PublicKeyBytes, publicKey.KeyBytes());
+}
+

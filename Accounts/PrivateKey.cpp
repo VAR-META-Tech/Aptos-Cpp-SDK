@@ -36,8 +36,16 @@ std::vector<CryptoPP::byte> PrivateKey::KeyBytes() {
         if (key.substr(0, 2) == "0x") {
             key = key.substr(2);
         }
-        CryptoPP::StringSource(key, true, new CryptoPP::HexDecoder())
-                .Ref().Get(_keyBytes[0]);
+        CryptoPP::HexDecoder decoder;
+        decoder.Put((CryptoPP::byte*)key.data(),key.size());
+        decoder.MessageEnd();
+        size_t size = decoder.MaxRetrievable();
+        if(size && size <= SIZE_MAX)
+            {
+                _keyBytes.resize(size);
+                decoder.Get((CryptoPP::byte*)&_keyBytes[0], _keyBytes.size());
+                GenerateExtendedKey();
+            }
     }
     return _keyBytes;
 }
@@ -66,8 +74,14 @@ PrivateKey PrivateKey::FromHex(std::string key) {
     return PrivateKey(key);
 }
 
-PublicKey PrivateKey::PublicKey() {
-    return PublicKey();
+PublicKey PrivateKey::GetPublicKey() {
+    if (_keyBytes.empty()){
+        KeyBytes();
+    }
+    std::vector<CryptoPP::byte> publicKeyBytes;
+    publicKeyBytes.resize(CryptoPP::ed25519PublicKey::PUBLIC_KEYLENGTH);
+    this->SecretToPublicKey(publicKeyBytes.data(),_keyBytes.data());
+    return PublicKey(publicKeyBytes);
 }
 
 bool PrivateKey::operator!=(const PrivateKey &rhs) const {
@@ -116,4 +130,15 @@ PrivateKey::PrivateKey(std::vector<CryptoPP::byte> privateKey) {
 
 bool PrivateKey::operator==(const PrivateKey &rhs) const {
     return Equals(rhs);
+}
+
+void PrivateKey::GenerateExtendedKey() {
+
+    CryptoPP::SecByteBlock extendedKey(ExtendedKeyLength);
+
+    CryptoPP::SHA512 sha;
+    sha.CalculateDigest(extendedKey,
+                        _keyBytes.data(), _keyBytes.size());
+
+    _extendedKeyBytes.assign(extendedKey.begin(), extendedKey.end());
 }
