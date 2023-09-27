@@ -89,11 +89,20 @@ bool PrivateKey::operator!=(const PrivateKey &rhs) const {
 }
 
 Signature PrivateKey::Sign(std::vector<CryptoPP::byte> message) {
-    CryptoPP::ed25519::Signer signer(_extendedKeyBytes.data());
-    CryptoPP::SecByteBlock signature(64);
+    //CryptoPP::AutoSeededRandomPool prng;
+    if (_keyBytes.empty()){
+        KeyBytes();
+    }
+    CryptoPP::ed25519::Signer signer(_keyBytes.data());
+    std::string signature;
+    size_t siglen = signer.MaxSignatureLength();
+    signature.resize(siglen);
     signer.SignMessage(CryptoPP::NullRNG(), message.data(), message.size(),
-                       signature);
-    std::vector<CryptoPP::byte> signatureData(*signature.BytePtr(),64);
+                       (CryptoPP::byte*)&signature[0]);
+    signature.resize(siglen);
+    std::vector<CryptoPP::byte> signatureData;
+    signatureData.resize(signature.size());
+    std::copy(signature.begin(), signature.end(), signatureData.begin());
     return Signature(signatureData);
 }
 
