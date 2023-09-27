@@ -15,12 +15,12 @@ public:
     static const int SignatureLength = 64;
 
 private:
-    std::vector<uint8_t> _signatureBytes;
+    std::vector<CryptoPP::byte> _signatureBytes;
     mutable std::string _signature;
 
 public:
-    Signature(const std::vector<uint8_t>& signature);
-    std::vector<uint8_t> Data() const;
+    Signature(const std::vector<CryptoPP::byte>& signature);
+    std::vector<CryptoPP::byte> Data() const;
     void Serialize(Serialization& serializer) override;
     static Signature Deserialize(Deserialization& deserializer);
     bool operator==(const Signature& other) const;

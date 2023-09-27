@@ -15,20 +15,20 @@ public:
     static const int KeyLength = 32;
 
 private:
-    std::string key_;
-    std::vector<uint8_t> keyBytes_;
+    std::string _key;
+    std::vector<CryptoPP::byte> _keyBytes;
 
 public:
-    PublicKey(const std::vector<uint8_t>& publicKey);
+    PublicKey(const std::vector<CryptoPP::byte>& publicKey);
     PublicKey(const std::string& key);
 
-    std::string getKey();
-    void setKey(const std::string& key);
+    std::string Key();
+    void Key(const std::string& key);
 
-    std::vector<uint8_t> getKeyBytes();
-    void setKeyBytes(const std::vector<uint8_t>& bytes);
+    std::vector<CryptoPP::byte> KeyBytes();
+    void KeyBytes(const std::vector<CryptoPP::byte>& bytes);
 
-    bool Verify(const std::vector<uint8_t>& message, const Signature& signature);
+    bool Verify(const std::vector<CryptoPP::byte>& message, const Signature& signature);
     bool IsOnCurve() const;
 
     void Serialize(Serialization& serializer) const;

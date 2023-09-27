@@ -8,10 +8,10 @@
 #include <cryptopp/hex.h>
 #include <cryptopp/filters.h>
 
-Signature::Signature(const std::vector<uint8_t>& signature)
+Signature::Signature(const std::vector<CryptoPP::byte>& signature)
         : _signatureBytes(signature) {}
 
-std::vector<uint8_t> Signature::Data() const {
+std::vector<CryptoPP::byte> Signature::Data() const {
     return _signatureBytes;
 }
 
@@ -20,7 +20,7 @@ void Signature::Serialize(Serialization& serializer) {
 }
 
 Signature Signature::Deserialize(Deserialization& deserializer) {
-    std::vector<uint8_t> sigBytes = deserializer.ToBytes();
+    std::vector<CryptoPP::byte> sigBytes = deserializer.ToBytes();
     if (sigBytes.size() != SignatureLength)
         throw std::runtime_error("Length mismatch");
 

@@ -16,9 +16,6 @@ if (NOT CryptoPP_LIB)
 endif()
 
 add_library(Aptos
-        ./Accounts/Types/MultiEd25519PublicKey.cpp
-        Accounts/Signature.cpp
-        Accounts/Signature.h
         BCS/Deserialization.cpp
         BCS/Deserialization.h
         BCS/Serialization.cpp
@@ -57,6 +54,9 @@ add_library(Aptos
         HDWallet/Utils/Utils.h
         Accounts/PrivateKey.cpp
         Accounts/PrivateKey.h
+        Accounts/Types/MultiEd25519PublicKey.cpp
+        Accounts/Signature.cpp
+        Accounts/Signature.h
 )
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
@@ -65,9 +65,14 @@ include(CPack)
 
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
+
 add_executable(test_serialization Test/test_serialization.cpp)
+add_executable(test_account Test/test_account.cpp)
+
 target_link_libraries(test_serialization ${GTEST_BOTH_LIBRARIES} pthread Aptos) # Link lib
+target_link_libraries(test_account ${GTEST_BOTH_LIBRARIES} pthread Aptos) # Link
 
 add_test(NAME SerializationTest COMMAND test_serialization)
+add_test(NAME AccountTest COMMAND test_account)
 
 target_link_libraries(Aptos PRIVATE ${CryptoPP_LIB})

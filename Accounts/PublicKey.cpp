@@ -6,14 +6,15 @@
 #include "Signature.h"
 #include "../HDWallet/Utils/Utils.h"
 #include "cryptopp/hex.h"
+#include "cryptopp/xed25519.h"
 
-PublicKey::PublicKey(const std::vector<uint8_t>& publicKey)
+PublicKey::PublicKey(const std::vector<CryptoPP::byte>& publicKey)
 {
     if (publicKey.empty())
         throw std::invalid_argument("PublicKey cannot be null.");
     if (publicKey.size() != KeyLength)
         throw std::invalid_argument("Invalid key length.");
-    keyBytes_ = publicKey;
+    _keyBytes = publicKey;
 }
 
 PublicKey::PublicKey(const std::string& key)
@@ -22,60 +23,60 @@ PublicKey::PublicKey(const std::string& key)
         throw std::invalid_argument("Invalid key.");
     if (key.empty())
         throw std::invalid_argument("Key cannot be null.");
-    key_ = key;
+    _key = key;
 }
 
-std::string PublicKey::getKey()
+std::string PublicKey::Key()
 {
-    if(key_.empty() && !keyBytes_.empty())
+    if(_key.empty() && !_keyBytes.empty())
     {
-        key_ = "0x";
-        CryptoPP::StringSource ss(reinterpret_cast<const CryptoPP::byte *>(keyBytes_[0]), sizeof(keyBytes_), true,
+        _key = "0x";
+        CryptoPP::StringSource ss(_keyBytes.data(), _keyBytes.size(), true,
                                   new CryptoPP::HexEncoder(
-                                new CryptoPP::StringSink(key_),
-                                true,   // uppercase
-                                2,      // grouping
-                                ""  // separator
+                                new CryptoPP::StringSink(_key),
+                                false
                         ) // HexDecoder
         ); // StringSource
     }
-    return key_;
+    return _key;
 }
 
-void PublicKey::setKey(const std::string& key)
+void PublicKey::Key(const std::string& key)
 {
     if (!Utils::IsValidAddress(key))
         throw std::invalid_argument("Invalid key.");
     if (key.empty())
         throw std::invalid_argument("Key cannot be null.");
-    key_ = key;
+    _key = key;
 }
 
-std::vector<uint8_t> PublicKey::getKeyBytes()
+std::vector<CryptoPP::byte> PublicKey::KeyBytes()
 {
-    if (keyBytes_.empty() && !key_.empty())
+    if (_keyBytes.empty() && !_key.empty())
     {
-        std::string key = key_;
+        std::string key = _key;
         if (key.substr(0, 2) == "0x") {
             key = key.substr(2);
         }
         CryptoPP::StringSource(key, true, new CryptoPP::HexDecoder())
-                .Ref().Get(keyBytes_[0]);
+                .Ref().Get(_keyBytes[0]);
     }
-    return keyBytes_;
+    return _keyBytes;
 }
 
-void PublicKey::setKeyBytes(const std::vector<uint8_t>& bytes)
+void PublicKey::KeyBytes(const std::vector<CryptoPP::byte>& bytes)
 {
     if (bytes.empty())
         throw std::invalid_argument("Key bytes cannot be null.");
     if (bytes.size() != KeyLength)
         throw std::invalid_argument("Invalid key length.");
-    keyBytes_ = bytes;
+    _keyBytes = bytes;
 }
 
-bool PublicKey::Verify(const std::vector<uint8_t>& message, const Signature& signature) {
-   //todo
+bool PublicKey::Verify(const std::vector<CryptoPP::byte>& message, const Signature& signature) {
+    CryptoPP::ed25519::Verifier verifier;
+    verifier.VerifyMessage(message.data(), message.size(),
+                           signature.Data().data(), signature.Data().size());
    return false;
 }
 
@@ -87,12 +88,12 @@ bool PublicKey::IsOnCurve() const
 
 void PublicKey::Serialize(Serialization& serializer) const
 {
-    serializer.SerializeBytes(this->keyBytes_);
+    serializer.SerializeBytes(this->_keyBytes);
 }
 
 PublicKey PublicKey::Deserialize(Deserialization& deserializer)
 {
-    std::vector<uint8_t> keyBytes = deserializer.ToBytes();
+    std::vector<CryptoPP::byte> keyBytes = deserializer.ToBytes();
     if (keyBytes.size() != KeyLength)
         throw std::runtime_error("Length mismatch. Expected: " + std::to_string(KeyLength) + ", Actual: " + std::to_string(keyBytes.size()));
     return PublicKey(keyBytes);
@@ -101,7 +102,7 @@ PublicKey PublicKey::Deserialize(Deserialization& deserializer)
 bool PublicKey::isEqual(PublicKey& other)
 {
     if (&other == this) return true;
-    return other.getKey() == this->getKey();
+    return other.Key() == this->Key();
 }
 
 bool PublicKey::isNotEqual(PublicKey& other)
@@ -111,10 +112,10 @@ bool PublicKey::isNotEqual(PublicKey& other)
 
 std::string PublicKey::ToString()
 {
-    return getKey();
+    return Key();
 }
 
 size_t PublicKey::GetHashCode() const
 {
-    return std::hash<std::string>{}(key_);
+    return std::hash<std::string>{}(_key);
 }
