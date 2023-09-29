@@ -93,8 +93,11 @@ bool PublicKey::IsOnCurve() const
    return false;
 }
 
-void PublicKey::Serialize(Serialization& serializer) const
+void PublicKey::Serialize(Serialization& serializer)
 {
+    if (_keyBytes.empty()){
+        KeyBytes();
+    }
     serializer.SerializeBytes(this->_keyBytes);
 }
 
@@ -106,17 +109,6 @@ PublicKey PublicKey::Deserialize(Deserialization& deserializer)
     return PublicKey(keyBytes);
 }
 
-bool PublicKey::isEqual(PublicKey& other)
-{
-    if (&other == this) return true;
-    return other.Key() == this->Key();
-}
-
-bool PublicKey::isNotEqual(PublicKey& other)
-{
-    return !isEqual(other);
-}
-
 std::string PublicKey::ToString()
 {
     return Key();
@@ -125,4 +117,16 @@ std::string PublicKey::ToString()
 size_t PublicKey::GetHashCode() const
 {
     return std::hash<std::string>{}(_key);
+}
+
+bool PublicKey::Equals(const PublicKey &rhs) const {
+    return _key == rhs._key;
+}
+
+bool PublicKey::operator==(const PublicKey &rhs) const {
+    return Equals(rhs);
+}
+
+bool PublicKey::operator!=(const PublicKey &rhs) const {
+    return !Equals(rhs);
 }

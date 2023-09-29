@@ -26,6 +26,7 @@ public:
     bool operator==(const Signature& other) const;
     bool operator!=(const Signature& other) const;
     std::string ToString() const;
+    bool Equals(const Signature& rhs) const;
 };
 
 #endif //APTOS_SIGNATURE_H

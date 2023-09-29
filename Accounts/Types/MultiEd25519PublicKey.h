@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <stdexcept>
+#include <cryptopp/xed25519.h>
+#include "../PublicKey.h"
 
 namespace Aptos {
 namespace Accounts {
@@ -12,12 +14,12 @@ class MultiEd25519PublicKey {
 public:
     static constexpr int MAX_SIGNATURES_SUPPORTED = 32;
 
-    std::vector<unsigned char*> PublicKeys;
+    std::vector<PublicKey> PublicKeys;
     int threshold;
 
-    MultiEd25519PublicKey(std::vector<unsigned char*> PublicKeys, int threshold);
+    MultiEd25519PublicKey(std::vector<PublicKey> PublicKeys, int threshold);
 
-    std::vector<unsigned char> ToBytes();
+    std::vector<CryptoPP::byte> ToBytes();
 };
 
 } // namespace Types

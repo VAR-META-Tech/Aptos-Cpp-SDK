@@ -46,7 +46,7 @@ public:
 
     Signature Sign(std::vector<CryptoPP::byte> message);
 
-    void Serialize(Serialization serializer);
+    void Serialize(Serialization& serializer);
 
     bool Equals(const PrivateKey& rhs) const;
     int GetHashCode() const;

@@ -11,6 +11,10 @@
 Signature::Signature(const std::vector<CryptoPP::byte>& signature)
         : _signatureBytes(signature) {}
 
+bool Signature::Equals(const Signature &rhs) const {
+    return _signatureBytes == rhs._signatureBytes;
+}
+
 std::vector<CryptoPP::byte> Signature::Data() const {
     return _signatureBytes;
 }

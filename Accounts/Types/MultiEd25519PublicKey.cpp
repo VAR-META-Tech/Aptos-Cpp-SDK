@@ -4,26 +4,26 @@
 namespace Aptos {
 namespace Accounts {
 namespace Types {
+    MultiEd25519PublicKey::MultiEd25519PublicKey(std::vector<PublicKey> PublicKeys, int threshold)
+    {
+        if (threshold > MAX_SIGNATURES_SUPPORTED)
+            throw std::invalid_argument("Threshold cannot be larger than " + std::to_string(MAX_SIGNATURES_SUPPORTED));
 
-MultiEd25519PublicKey::MultiEd25519PublicKey(std::vector<unsigned char*> PublicKeys, int threshold)
-{
-    if (threshold > MAX_SIGNATURES_SUPPORTED)
-        throw std::invalid_argument("Threshold cannot be larger than " + std::to_string(MAX_SIGNATURES_SUPPORTED));
-
-    this->PublicKeys = PublicKeys;
-    this->threshold = threshold;
-}
+        this->PublicKeys = PublicKeys;
+        this->threshold = threshold;
+    }
 
     std::vector<unsigned char> MultiEd25519PublicKey::ToBytes()
     {
-//        const size_t publicKeySize = CryptoPP::ed25519::Signer::PUBLIC_KEYLENGTH; // The size of each public key in bytes
-//        std::vector<unsigned char> bytes((PublicKeys.size() * publicKeySize) + 1);
-//        for (size_t i = 0; i < PublicKeys.size(); i++)
-//            std::copy(PublicKeys[i].begin(), PublicKeys[i].end(), bytes.begin() + i * publicKeySize);
-//
-//        bytes[PublicKeys.size() * publicKeySize] = (unsigned char) threshold;
-//
-//        return bytes;
+        std::vector<CryptoPP::byte> bytes;
+        bytes.resize((PublicKeys.size() * CryptoPP::ed25519PublicKey::PUBLIC_KEYLENGTH) + 1);
+        for (int i = 0; i < PublicKeys.size(); i++)
+            bytes.insert(bytes.end(),
+                         PublicKeys[i].KeyBytes().begin(),PublicKeys[i].KeyBytes().end());
+
+        bytes[PublicKeys.size() * CryptoPP::ed25519PublicKey::PUBLIC_KEYLENGTH] = threshold;
+
+        return bytes;
     }
 } // namespace Types
 } // namespace Accounts

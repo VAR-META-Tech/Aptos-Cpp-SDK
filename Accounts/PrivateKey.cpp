@@ -106,8 +106,11 @@ Signature PrivateKey::Sign(std::vector<CryptoPP::byte> message) {
     return Signature(signatureData);
 }
 
-void PrivateKey::Serialize(Serialization serializer) {
-
+void PrivateKey::Serialize(Serialization& serializer) {
+    if (_keyBytes.empty()){
+        KeyBytes();
+    }
+    serializer.SerializeBytes(this->_keyBytes);
 }
 
 bool PrivateKey::Equals(const PrivateKey &rhs) const {

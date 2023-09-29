@@ -8,6 +8,7 @@
 #include "../Accounts/Signature.h"
 #include "../Accounts/PublicKey.h"
 #include "../Accounts/PrivateKey.h"
+#include "../BCS/Serialization.h"
 
 using CryptoPP::byte;
 
@@ -97,7 +98,7 @@ Signature signatureObject(SignatureBytes);
 
 std::string SignatureHex = "0xaa42bbc2a9fc751beeee3b312b8452c445c7d4ab8698036b0cf9f2e46a098bb02c369fbc8dfefd231a128d8a4bb9adcfe45e07188b758c3ad398d7f84e82ef05";
 
-byte SignatureSerializedOutput[] ={
+std::vector<byte> SignatureSerializedOutput ={
         64, 170, 66, 187, 194, 169, 252, 117,
         27, 238, 238, 59, 49, 43, 132, 82,
         196, 69, 199, 212, 171, 134, 152, 3,
@@ -185,3 +186,72 @@ TEST(AccountTest, InvalidKeyGeneration)
     },std::invalid_argument);
 }
 
+TEST(AccountTest, PublicKeySerialization)
+{
+    Serialization serializer;
+    PublicKey* publicKey = new PublicKey(PublicKeyBytes);
+    publicKey->Serialize(serializer);
+    std::vector<byte> output = serializer.GetBytes();
+
+    ASSERT_EQ(output, PublicKeySerializedOutput);
+}
+
+TEST(AccountTest, PublicKeyDeserialization)
+{
+    Serialization serializer;
+    PublicKey publicKey(PublicKeyBytes);
+    publicKey.Serialize(serializer);
+    std::vector<byte> output = serializer.GetBytes();
+
+    ASSERT_EQ(output, PublicKeySerializedOutput);
+
+    Deserialization deserializer(output);
+    PublicKey actualDeserialized = publicKey.Deserialize(deserializer);
+
+    ASSERT_EQ(publicKey, actualDeserialized);
+}
+
+TEST(AccountTest, PrivateKeySerialization)
+{
+    Serialization serializer;
+    PrivateKey privateKey(PrivateKeyBytes);
+    privateKey.Serialize(serializer);
+    std::vector<byte> output = serializer.GetBytes();
+
+    ASSERT_EQ(output, PrivateKeySerializedOutput);
+}
+
+TEST(AccountTest, SignatureEquality)
+{
+    Signature* sigOne = new Signature(SignatureBytes);
+    Signature* sigTwo = new Signature(SignatureBytes);
+    ASSERT_TRUE(sigOne->Equals(*sigTwo));
+}
+
+TEST(AccountTest, SignatureSerialization)
+{
+    Serialization serializer;
+    Signature sig(SignatureBytes);
+    sig.Serialize(serializer);
+    std::vector<byte> output = serializer.GetBytes();
+    ASSERT_EQ(output, SignatureSerializedOutput);
+}
+
+TEST(AccountTest, SignatureDeserialization)
+{
+    Serialization serializer;
+    Signature sig(SignatureBytes);
+    sig.Serialize(serializer);
+    std::vector<byte> output = serializer.GetBytes();
+
+    Deserialization deser(output);
+    Signature actualSig = sig.Deserialize(deser);
+    ASSERT_EQ(sig, actualSig);
+}
+
+TEST(AccountTest, GenerateAccountAddressFromPublicKey)
+{
+    PublicKey publicKey(PublicKeyBytes);
+    //Accounts.AccountAddress accountAddress = Accounts.AccountAddress.FromKey(publicKey);
+    //ASSERT_EQ(accountAddress.ToString(), AccountAddressHex);
+}

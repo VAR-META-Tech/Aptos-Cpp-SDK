@@ -31,14 +31,16 @@ public:
     bool Verify(const std::vector<CryptoPP::byte>& message, const Signature& signature);
     bool IsOnCurve() const;
 
-    void Serialize(Serialization& serializer) const;
+    void Serialize(Serialization& serializer);
     static PublicKey Deserialize(Deserialization& deserializer);
-
-    bool isEqual(PublicKey& other);
-    bool isNotEqual(PublicKey& other);
 
     std::string ToString();
     size_t GetHashCode() const;
+
+    bool Equals(const PublicKey& rhs) const;
+
+    bool operator ==(const PublicKey& rhs) const;
+    bool operator !=(const PublicKey& rhs) const;
 };
 
 

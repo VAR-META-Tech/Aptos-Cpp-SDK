@@ -57,6 +57,9 @@ add_library(Aptos
         Accounts/Types/MultiEd25519PublicKey.cpp
         Accounts/Signature.cpp
         Accounts/Signature.h
+        Accounts/AccountAddress.cpp
+        Accounts/Account.cpp
+        Accounts/AuthenticationKey.cpp
 )
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
