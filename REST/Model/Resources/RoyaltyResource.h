@@ -1,0 +1,33 @@
+#ifndef ROYALTYRESOURCE_H
+#define ROYALTYRESOURCE_H
+
+#include <nlohmann/json.hpp>
+#include "Base/ResourceDataBase.h"
+#include "Base/IResourceBase.h"
+
+namespace AptosRESTModel {
+
+class RoyaltyResourceData : public ResourceDataBase {
+public:
+    nlohmann::json ToJson() const;
+    static RoyaltyResourceData FromJson(const nlohmann::json& royaltyDataJson);
+    std::string getDenominator() const;
+    std::string getNumerator() const;
+    std::string getPayeeAddress() const;
+
+private:
+    std::string Denominator;
+    std::string Numerator;
+    std::string PayeeAddress;
+};
+
+class RoyaltyResource : public IResourceBase {
+public:
+    nlohmann::json ToJson() const;
+    static RoyaltyResource FromJson(const nlohmann::json& royaltyResourceJson);
+private:
+    std::string Type;
+    RoyaltyResourceData Data;
+};
+}
+#endif // ROYALTYRESOURCE_H

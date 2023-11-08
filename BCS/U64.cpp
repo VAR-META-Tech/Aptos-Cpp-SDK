@@ -12,21 +12,21 @@ U64::U64(uint64_t value) {
     this->value = value;
 }
 
-void U64::Serialize(Serialization& serializer) {
+void U64::Serialize(Serialization& serializer) const {
     serializer.SerializeU64(this->value);
 }
 
-U64* U64::Deserialize(Deserialization& deserializer) {
+std::shared_ptr<ISerializableTag> U64::Deserialize(Deserialization& deserializer) {
     uint64_t value = deserializer.DeserializeU64();
-    return new U64(value);
+    return std::make_shared<U64>(value);
 }
 
-TypeTag U64::Variant() {
+TypeTag U64::Variant() const {
     return TypeTag::U8;
 }
 
-void* U64::GetValue() {
-    return &this->value;
+uint64_t U64::GetValue() const {
+    return value;
 }
 
 bool U64::Equals(const U64& other) const {

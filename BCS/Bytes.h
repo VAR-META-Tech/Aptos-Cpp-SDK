@@ -5,6 +5,7 @@
 #ifndef APTOS_BYTES_H
 #define APTOS_BYTES_H
 #include "BCSTypes.h"
+#include <cstdint>
 
 class Bytes : public ISerializable {
 private:
@@ -13,15 +14,15 @@ private:
 public:
     Bytes(const std::vector<uint8_t>& values);
 
-    void Serialize(Serialization& serializer);
+    void Serialize(Serialization& serializer) const override;
 
     static Bytes* Deserialize(Deserialization& deserializer);
 
-    std::vector<uint8_t> getValue();
+    std::vector<uint8_t> getValue() const;
 
     bool Equals(const Bytes& other) const;
 
-    std::string ToString() const;
+    std::string ToString() const override;
 
     size_t GetHashCode() const;
 };

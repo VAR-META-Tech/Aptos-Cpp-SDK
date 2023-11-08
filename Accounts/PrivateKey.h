@@ -19,21 +19,13 @@ public:
     static const int ExtendedKeyLength = 64;
     static const int KeyLength = 32;
 
-private:
-    std::string _key;
-    std::vector<CryptoPP::byte> _extendedKeyBytes;
-    std::vector<CryptoPP::byte> _keyBytes;
-
-    void GenerateExtendedKey();
-
-public:
     std::string Key();
     void Key(std::string key);
 
-    std::vector<CryptoPP::byte> KeyBytes();
-    void KeyBytes(std::vector<CryptoPP::byte> value);
+    CryptoPP::SecByteBlock KeyBytes();
+    void KeyBytes(CryptoPP::SecByteBlock value);
 
-    PrivateKey(std::vector<CryptoPP::byte> privateKey);
+    PrivateKey(CryptoPP::SecByteBlock privateKey);
     PrivateKey(std::string key);
     PrivateKey(std::array<CryptoPP::byte, KeyLength> privateKey);
 
@@ -44,13 +36,22 @@ public:
     bool operator ==(const PrivateKey& rhs) const;
     bool operator !=(const PrivateKey& rhs) const;
 
-    Signature Sign(std::vector<CryptoPP::byte> message);
+    Signature Sign(CryptoPP::SecByteBlock message);
 
     void Serialize(Serialization& serializer);
 
     bool Equals(const PrivateKey& rhs) const;
     int GetHashCode() const;
     std::string ToString();
+
+private:
+    std::string _key;
+    CryptoPP::SecByteBlock _extendedKeyBytes;
+    CryptoPP::SecByteBlock _keyBytes;
+
+    void GenerateExtendedKey();
+
+
 };
 
 

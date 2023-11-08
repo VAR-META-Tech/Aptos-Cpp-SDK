@@ -9,6 +9,7 @@
 #include <cryptopp/xed25519.h>
 #include "../BCS/Serialization.h"
 #include "../BCS/Deserialization.h"
+#include "multipublickey.h"
 
 struct AuthKeyScheme {
     static const CryptoPP::byte Ed25519 = 0x00;
@@ -20,26 +21,35 @@ struct AuthKeyScheme {
 
 class AccountAddress : public ISerializableTag{
 private:
-    std::vector<CryptoPP::byte> _addressBytes;
+    CryptoPP::SecByteBlock _addressBytes;
 
 public:
     static const int Length = 32;
-    AccountAddress(std::vector<CryptoPP::byte>& addressBytes);
-    std::string ToString();
+    AccountAddress(const CryptoPP::SecByteBlock &addressBytes);
+    std::string ToString() const override;
     static AccountAddress FromHex(std::string address);
-    static AccountAddress FromKey(std::vector<CryptoPP::byte>& publicKey);
+    static AccountAddress FromKey(const CryptoPP::SecByteBlock &publicKey);
+    static AccountAddress FromKey(const PublicKey &publicKey);
 
-    void Serialize(Serialization &serializer) override;
-    static AccountAddress Deserialize(Deserialization& deserializer);
-
+    void Serialize(Serialization &serializer) const override;
+    static std::shared_ptr<ISerializableTag> Deserialize(Deserialization& deserializer);
+    static AccountAddress ForNamedObject(const AccountAddress& creator, const CryptoPP::SecByteBlock &seed);
+    static AccountAddress ForNamedToken(const AccountAddress& creator,
+                                        const std::string& collectionName,
+                                        const std::string& tokenName);
+    static AccountAddress ForNamedCollection(AccountAddress creator, std::string collectionName);
+    static AccountAddress ForResourceAccount(AccountAddress creator, const CryptoPP::SecByteBlock &seed);
+    static AccountAddress FromMultiEd25519(MultiPublicKey keys);
     size_t GetHashCode() override;
 
-    TypeTag Variant() override;
+    TypeTag Variant() const override;
 
-    void *GetValue() override;
+    CryptoPP::SecByteBlock addressBytes() const;
 
 private:
-    bool IsSpecial();
+    bool IsSpecial() const;
 };
+
+bool operator==(const AccountAddress& lhs, const AccountAddress& rhs);
 
 #endif //APTOS_ACCOUNTADDRESS_H

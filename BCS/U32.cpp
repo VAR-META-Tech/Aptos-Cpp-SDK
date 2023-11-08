@@ -12,21 +12,21 @@ U32::U32(uint32_t value) {
     this->value = value;
 }
 
-void U32::Serialize(Serialization& serializer) {
+void U32::Serialize(Serialization& serializer) const {
     serializer.SerializeU32(this->value);
 }
 
-U32* U32::Deserialize(Deserialization& deserializer) {
+std::shared_ptr<ISerializableTag> U32::Deserialize(Deserialization& deserializer) {
     uint32_t value = deserializer.DeserializeU32();
-    return new U32(value);
+    return std::make_shared<U32>(value);
 }
 
-TypeTag U32::Variant() {
+TypeTag U32::Variant() const {
     return TypeTag::U8;
 }
 
-void* U32::GetValue() {
-    return &this->value;
+uint32_t U32::GetValue() const {
+    return value;
 }
 
 bool U32::Equals(const U32& other) const {

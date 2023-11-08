@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.10.0)
 project(Aptos VERSION 0.1.0 LANGUAGES C CXX)
 
 include(CTest)
@@ -48,6 +48,24 @@ add_library(Aptos
         BCS/BCSMap.h
         BCS/BString.cpp
         BCS/BString.h
+        BCS/rawtransaction.h
+        BCS/rawtransaction.cpp
+        BCS/MultiAgentRawTransaction.h
+        BCS/MultiAgentRawTransaction.cpp
+        BCS/TransactionPayload.h
+        BCS/TransactionPayload.cpp
+        BCS/Script.h
+        BCS/Script.cpp
+        BCS/ScriptArgument.h
+        BCS/ScriptArgument.cpp
+        BCS/EntryFunction.h
+        BCS/EntryFunction.cpp
+        BCS/ModuleId.h
+        BCS/ModuleId.cpp
+        BCS/TransactionArgument.h
+        BCS/TransactionArgument.cpp
+        BCS/SignedTransaction.h
+        BCS/SignedTransaction.cpp
         Accounts/PublicKey.cpp
         Accounts/PublicKey.h
         HDWallet/Utils/Utils.cpp
@@ -60,7 +78,90 @@ add_library(Aptos
         Accounts/AccountAddress.cpp
         Accounts/Account.cpp
         Accounts/AuthenticationKey.cpp
+        Accounts/multipublickey.h
+        Accounts/multipublickey.cpp
+        Accounts/multisignature.h
+        Accounts/multisignature.cpp
+        HDWallet/wallet.h
+        HDWallet/wallet.cpp
+        BCS/Authenticator.h
+        BCS/Authenticator.cpp
+        BCS/StructTag.h
+        BCS/StructTag.cpp
+        REST/Constant.h
+        REST/Constant.cpp
+        REST/Model/AccountData.h
+        REST/Model/AccountData.cpp
+        REST/Model/AccountResourceCoin.h
+        REST/Model/AccountResourceCoin.cpp
+        REST/Model/AccountResourceCollection.h
+        REST/Model/AccountResourceCollection.cpp
+        REST/Model/AccountResourceTokenStore.h
+        REST/Model/AccountResourceTokenStore.cpp
+        REST/Model/AptosError.h
+        REST/Model/AptosError.cpp
+        REST/Model/GasEstimation.h
+        REST/Model/GasEstimation.cpp
+        REST/Model/LedgerInfo.h
+        REST/Model/LedgerInfo.cpp
+        REST/Model/ResourceCollection.h
+        REST/Model/ResourceCollection.cpp
+        REST/Model/ResponseInfo.h
+        REST/Model/ResponseInfo.cpp
+        REST/Model/TableItemRequest.h
+        REST/Model/TableItemRequest.cpp
+        REST/Model/TableItemRequestNFT.h
+        REST/Model/TableItemRequestNFT.cpp
+        REST/Model/TableItemRequestTokenData.h
+        REST/Model/TableItemRequestTokenData.cpp
+        REST/Model/TokenDataId.h
+        REST/Model/TokenDataId.cpp
+        REST/Model/TokenDataIdRequest.h
+        REST/Model/TokenDataIdRequest.cpp
+        REST/Model/TokenIdRequest.h
+        REST/Model/TokenIdRequest.cpp
+        REST/Model/Transaction.h
+        REST/Model/Transaction.cpp
+        REST/Model/TransactionPayload.h
+        REST/Model/TransactionPayload.cpp
+        REST/Model/TransactionRequest.h
+        REST/Model/TransactionRequest.cpp
+        REST/Model/ViewRequest.h
+        REST/Model/ViewRequest.cpp
+        REST/Model/Resources/AccountResource.h
+        REST/Model/Resources/AccountResource.cpp
+        REST/Model/Resources/Base/CapabilityOffer.h
+        REST/Model/Resources/Base/CapabilityOffer.cpp
+        REST/Model/Resources/Base/IResourceBase.h
+        REST/Model/Resources/Base/IResourceBase.cpp
+        REST/Model/Resources/Base/ResourceDataBase.h
+        REST/Model/Resources/Base/ResourceDataBase.cpp
+        REST/Model/Resources/Base/ResourceEvent.h
+        REST/Model/Resources/Base/ResourceEvent.cpp
+        REST/Model/Resources/CollectionResource.h
+        REST/Model/Resources/CollectionResource.cpp
+        REST/Model/Resources/ObjectResource.h
+        REST/Model/Resources/ObjectResource.cpp
+        REST/Model/Resources/PropertyMapResource.h
+        REST/Model/Resources/PropertyMapResource.cpp
+        REST/Model/Resources/RoyaltyResource.h
+        REST/Model/Resources/RoyaltyResource.cpp
+        REST/Model/Resources/TokenResource.h
+        REST/Model/Resources/TokenResource.cpp
+        REST/Model/TableItemToken/TableItemToken.h
+        REST/Model/TableItemToken/TableItemToken.cpp
+        REST/Model/TableItemToken/TableItemTokenMetadata.h
+        REST/Model/TableItemToken/TableItemTokenMetadata.cpp
+        REST/FaucetClient.h
+        REST/FaucetClient.cpp
+        REST/RequestClient.h
+        REST/RequestClient.cpp
+        REST/AptosTokenClient.h
+        REST/AptosTokenClient.cpp
 )
+
+find_package(nlohmann_json 3.2.0 REQUIRED)
+target_link_libraries(Aptos PRIVATE nlohmann_json::nlohmann_json)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
@@ -71,11 +172,21 @@ include_directories(${GTEST_INCLUDE_DIRS})
 
 add_executable(test_serialization Test/test_serialization.cpp)
 add_executable(test_account Test/test_account.cpp)
+add_executable(test_utils Test/test_utils.cpp)
+add_executable(test_wallet Test/test_wallet.cpp)
+add_executable(test_transaction_serialization Test/test_transaction_serialization.cpp)
 
-target_link_libraries(test_serialization ${GTEST_BOTH_LIBRARIES} pthread Aptos) # Link lib
-target_link_libraries(test_account ${GTEST_BOTH_LIBRARIES} pthread Aptos) # Link
+target_link_libraries(test_serialization ${GTEST_BOTH_LIBRARIES} pthread Aptos)
+target_link_libraries(test_account ${GTEST_BOTH_LIBRARIES} pthread Aptos)
+target_link_libraries(test_utils ${GTEST_BOTH_LIBRARIES} pthread Aptos)
+target_link_libraries(test_wallet ${GTEST_BOTH_LIBRARIES} pthread Aptos)
+target_link_libraries(test_transaction_serialization ${GTEST_BOTH_LIBRARIES} pthread Aptos)
 
 add_test(NAME SerializationTest COMMAND test_serialization)
 add_test(NAME AccountTest COMMAND test_account)
+add_test(NAME UtilsTest COMMAND test_utils)
+add_test(NAME WalletTest COMMAND test_wallet)
+add_test(NAME TransactionSerializationTest COMMAND test_transaction_serialization)
+file(COPY Test/two_by_two_transfer.mv DESTINATION ${CMAKE_BINARY_DIR})
 
 target_link_libraries(Aptos PRIVATE ${CryptoPP_LIB})

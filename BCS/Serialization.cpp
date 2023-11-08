@@ -50,14 +50,13 @@ Serialization& Serialization::Serialize(CryptoPP::Integer num) {
     return *this;
 }
 
-Serialization& Serialization::Serialize(ISerializable& value) {
+Serialization& Serialization::Serialize(const ISerializable& value) {
     value.Serialize(*this);
     return *this;
 }
 
 Serialization& Serialization::SerializeString(const std::string& value) {
-    auto u8str = std::filesystem::u8path(value).u8string();
-    std::vector<uint8_t> utf8_bytes(u8str.begin(), u8str.end());
+    std::vector<uint8_t> utf8_bytes(value.begin(), value.end());
     SerializeBytes(utf8_bytes);
     return *this;
 }
@@ -160,9 +159,9 @@ Serialization& Serialization::SerializeU256(CryptoPP::Integer num) {
     return *this;
 }
 
-Serialization &Serialization::Serialize(std::vector<ISerializable *> args) {
+Serialization &Serialization::Serialize(std::vector<std::shared_ptr<ISerializable>> args) {
     SerializeU32AsUleb128(static_cast<uint32_t>(args.size()));
-    for (ISerializable* element : args) {
+    for (auto& element : args) {
         Serialization s;
         element->Serialize(s);
         std::vector<uint8_t> b = s.GetBytes();

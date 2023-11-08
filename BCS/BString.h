@@ -11,17 +11,18 @@ private:
     std::string value;
 
 public:
+    BString();
     BString(const std::string& value);
 
-    void Serialize(Serialization& serializer) override;
+    void Serialize(Serialization& serializer) const override;
 
     static std::string Deserialize(const std::vector<uint8_t>& data);
 
-    static BString* Deserialize(Deserialization& deserializer);
+    static std::shared_ptr<ISerializable> Deserialize(Deserialization& deserializer);
 
     bool Equals(const BString& other) const;
 
-    std::string ToString() const;
+    std::string ToString() const override;
 
     size_t GetHashCode() const;
 

@@ -13,20 +13,21 @@ private:
 public:
     Bool(bool value);
 
-    void Serialize(Serialization& serializer);
+    void Serialize(Serialization& serializer) const override;
 
-    static Bool* Deserialize(Deserialization& deserializer);
+    static std::shared_ptr<ISerializableTag> Deserialize(Deserialization& deserializer);
 
-    TypeTag Variant();
+    TypeTag Variant() const override;
 
-    virtual void* GetValue();
+    bool GetValue() const;
 
     bool Equals(const Bool& other) const;
 
-    std::string ToString() const;
+    std::string ToString() const override;
 
     size_t GetHashCode() const;
 };
 
+bool operator==(const Bool &lhs, const Bool &rhs);
 
 #endif //APTOS_BOOL_H

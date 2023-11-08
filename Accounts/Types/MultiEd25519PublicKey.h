@@ -19,7 +19,7 @@ public:
 
     MultiEd25519PublicKey(std::vector<PublicKey> PublicKeys, int threshold);
 
-    std::vector<CryptoPP::byte> ToBytes();
+    CryptoPP::SecByteBlock ToBytes();
 };
 
 } // namespace Types

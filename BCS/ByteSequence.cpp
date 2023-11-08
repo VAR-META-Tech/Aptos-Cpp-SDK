@@ -12,7 +12,7 @@
 BytesSequence::BytesSequence(const std::vector<std::vector<uint8_t>>& values)
         : values(values) {}
 
-void BytesSequence::Serialize(Serialization& serializer) {
+void BytesSequence::Serialize(Serialization& serializer) const {
     serializer.SerializeU32AsUleb128(values.size());
     for (const auto& element : values)
         serializer.SerializeBytes(element);
@@ -28,8 +28,8 @@ BytesSequence* BytesSequence::Deserialize(Deserialization& deserializer) {
     return new BytesSequence(bytesList);
 }
 
-void* BytesSequence::GetValue() {
-    return &values;
+std::vector<std::vector<uint8_t>> BytesSequence::GetValue() const {
+    return values;
 }
 
 bool BytesSequence::Equals(const BytesSequence& other) const {

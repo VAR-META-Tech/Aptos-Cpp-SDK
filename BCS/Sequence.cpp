@@ -5,10 +5,11 @@
 #include "Sequence.h"
 #include <sstream>
 #include <functional>
+#include "Bytes.h"
 #include "Serialization.h"
 #include "Deserialization.h"
 
-Sequence::Sequence(const std::vector<ISerializable*>& values) {
+Sequence::Sequence(const std::vector<std::shared_ptr<ISerializable> > &values) {
     this->values = values;
 }
 
@@ -16,16 +17,16 @@ int Sequence::Length() const {
     return this->values.size();
 }
 
-void* Sequence::GetValue() {
-    return &this->values; // return address of value
+std::vector<std::shared_ptr<ISerializable> > Sequence::GetValue() const {
+    return values;
 }
 
-void Sequence::Serialize(Serialization& serializer) {
+void Sequence::Serialize(Serialization& serializer) const {
     serializer.SerializeU32AsUleb128(this->values.size());
-    for (ISerializable* element : this->values) {
-        if (dynamic_cast<Sequence*>(element)) {
+    for (const auto& element : this->values) {
+        if (std::dynamic_pointer_cast<Sequence>(element)) {
             Serialization seqSerializer;
-            Sequence* seq = dynamic_cast<Sequence*>(element);
+            auto seq = std::dynamic_pointer_cast<Sequence>(element);
             seq->Serialize(seqSerializer);
 
             std::vector<uint8_t> elementsBytes = seqSerializer.GetBytes();
@@ -42,22 +43,19 @@ void Sequence::Serialize(Serialization& serializer) {
     }
 }
 
-Sequence* Sequence::Deserialize(Deserialization& deserializer) {
+std::shared_ptr<ISerializable> Sequence::Deserialize(Deserialization& deserializer) {
     int length = deserializer.DeserializeUleb128();
-
-    std::vector<ISerializable*> values;
+    std::vector<std::shared_ptr<ISerializable>> values;
 
     while (values.size() < length) {
-        ISerializable* value = ISerializable::Deserialize(deserializer);
-        values.push_back(value);
+        values.push_back(std::make_shared<Bytes>(deserializer.ToBytes()));
     }
 
-    return new Sequence(values);
+    return std::make_shared<Sequence>(values);
 }
 
 bool Sequence::Equals(const Sequence& other) const {
-    // Simple equality check, more sophisticated method might be needed
-    return this->values == other.values;
+    return std::equal(this->values.begin(), this->values.end(), other.values.begin(), other.values.end());
 }
 
 std::string Sequence::ToString() const {

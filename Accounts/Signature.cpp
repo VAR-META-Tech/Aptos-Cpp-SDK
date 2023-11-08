@@ -7,28 +7,30 @@
 #include <sstream>
 #include <cryptopp/hex.h>
 #include <cryptopp/filters.h>
+#include "../HDWallet/Utils/Utils.h"
 
-Signature::Signature(const std::vector<CryptoPP::byte>& signature)
+Signature::Signature(const CryptoPP::SecByteBlock& signature)
         : _signatureBytes(signature) {}
 
 bool Signature::Equals(const Signature &rhs) const {
     return _signatureBytes == rhs._signatureBytes;
 }
 
-std::vector<CryptoPP::byte> Signature::Data() const {
+CryptoPP::SecByteBlock Signature::Data() const {
     return _signatureBytes;
 }
 
-void Signature::Serialize(Serialization& serializer) {
-    serializer.SerializeBytes(_signatureBytes);
+void Signature::Serialize(Serialization& serializer) const {
+    auto bytes = Utils::SecBlockToByteVector(_signatureBytes);
+    serializer.SerializeBytes(bytes);
 }
 
-Signature Signature::Deserialize(Deserialization& deserializer) {
-    std::vector<CryptoPP::byte> sigBytes = deserializer.ToBytes();
-    if (sigBytes.size() != SignatureLength)
+std::shared_ptr<ISerializable> Signature::Deserialize(Deserialization& deserializer) {
+    CryptoPP::SecByteBlock sigBytes = Utils::ByteVectorToSecBlock(deserializer.ToBytes());
+    if (sigBytes.size() != SignatureLength) {
         throw std::runtime_error("Length mismatch");
-
-    return Signature(sigBytes);
+    }
+    return std::make_shared<Signature>(sigBytes);
 }
 
 bool Signature::operator==(const Signature& other) const {

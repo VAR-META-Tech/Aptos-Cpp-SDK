@@ -12,21 +12,21 @@ U16::U16(uint16_t value) {
     this->value = value;
 }
 
-void U16::Serialize(Serialization& serializer) {
+void U16::Serialize(Serialization& serializer) const {
     serializer.SerializeU16(this->value);
 }
 
-U16* U16::Deserialize(Deserialization& deserializer) {
+std::shared_ptr<ISerializableTag> U16::Deserialize(Deserialization& deserializer) {
     uint16_t value = deserializer.DeserializeU16();
-    return new U16(value);
+    return std::make_shared<U16>(value);
 }
 
-TypeTag U16::Variant() {
+TypeTag U16::Variant() const {
     return TypeTag::U8;
 }
 
-void* U16::GetValue() {
-    return &this->value;
+uint16_t U16::GetValue() const {
+    return value;
 }
 
 bool U16::Equals(const U16& other) const {

@@ -7,24 +7,19 @@
 #include "BCSTypes.h"
 
 class TagSequence : public ISerializable {
-private:
-    std::vector<ISerializable*> serializableTags;
-
 public:
-    TagSequence(const std::vector<ISerializable*>& serializableTags);
-
-    void Serialize(Serialization& serializer);
-
-    static TagSequence* Deserialize(Deserialization& deserializer);
-
-    void* GetValue();
-
+    TagSequence(const std::vector<std::shared_ptr<ISerializableTag>>& serializableTags);
+    void Serialize(Serialization& serializer) const override;
+    static std::shared_ptr<ISerializable> Deserialize(Deserialization& deserializer);
+    std::vector<std::shared_ptr<ISerializableTag>> GetValue() const;
     bool Equals(const TagSequence& other) const;
-
-    std::string ToString() const;
-
+    std::string ToString() const override;
     size_t GetHashCode() const;
+
+private:
+    std::vector<std::shared_ptr<ISerializableTag>> serializableTags;
 };
 
+bool operator==(const TagSequence &lhs, const TagSequence &rhs);
 
 #endif //APTOS_TAGSEQUENCE_H

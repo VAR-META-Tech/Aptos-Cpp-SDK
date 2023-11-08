@@ -15,16 +15,16 @@ public:
     static const CryptoPP::byte ED25519_SCHEME = 0x00;
     static const CryptoPP::byte DERIVE_RESOURCE_ACCOUNT_SCHEME = 255;
 
-    AuthenticationKey(const std::vector<CryptoPP::byte> &bytes);
+    AuthenticationKey(const CryptoPP::SecByteBlock &bytes);
 
     static AuthenticationKey FromMultiEd25519PublicKey(Aptos::Accounts::Types::MultiEd25519PublicKey publicKey);
 
-    static AuthenticationKey FromEd25519PublicKey(const std::vector<CryptoPP::byte> &publicKey);
+    static AuthenticationKey FromEd25519PublicKey(const CryptoPP::SecByteBlock &publicKey);
 
     std::string DerivedAddress();
 
 private:
-    std::vector<CryptoPP::byte> _bytes;
+    CryptoPP::SecByteBlock _bytes;
 
 };
 

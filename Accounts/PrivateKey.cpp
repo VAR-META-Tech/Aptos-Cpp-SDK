@@ -29,7 +29,7 @@ void PrivateKey::Key(std::string key) {
     _key = key;
 }
 
-std::vector<CryptoPP::byte> PrivateKey::KeyBytes() {
+CryptoPP::SecByteBlock PrivateKey::KeyBytes() {
     if (_keyBytes.empty() && !_key.empty())
     {
         std::string key = _key;
@@ -50,7 +50,7 @@ std::vector<CryptoPP::byte> PrivateKey::KeyBytes() {
     return _keyBytes;
 }
 
-void PrivateKey::KeyBytes(std::vector<CryptoPP::byte> value) {
+void PrivateKey::KeyBytes(CryptoPP::SecByteBlock value) {
     if (value.empty())
         throw std::invalid_argument("PublicKey cannot be null.");
     if (value.size() != KeyLength)
@@ -78,7 +78,7 @@ PublicKey PrivateKey::GetPublicKey() {
     if (_keyBytes.empty()){
         KeyBytes();
     }
-    std::vector<CryptoPP::byte> publicKeyBytes;
+    CryptoPP::SecByteBlock publicKeyBytes;
     publicKeyBytes.resize(CryptoPP::ed25519PublicKey::PUBLIC_KEYLENGTH);
     this->SecretToPublicKey(publicKeyBytes.data(),_keyBytes.data());
     return PublicKey(publicKeyBytes);
@@ -88,7 +88,7 @@ bool PrivateKey::operator!=(const PrivateKey &rhs) const {
     return Equals(rhs);
 }
 
-Signature PrivateKey::Sign(std::vector<CryptoPP::byte> message) {
+Signature PrivateKey::Sign(CryptoPP::SecByteBlock message) {
     //CryptoPP::AutoSeededRandomPool prng;
     if (_keyBytes.empty()){
         KeyBytes();
@@ -100,7 +100,7 @@ Signature PrivateKey::Sign(std::vector<CryptoPP::byte> message) {
     signer.SignMessage(CryptoPP::NullRNG(), message.data(), message.size(),
                        (CryptoPP::byte*)&signature[0]);
     signature.resize(siglen);
-    std::vector<CryptoPP::byte> signatureData;
+    CryptoPP::SecByteBlock signatureData;
     signatureData.resize(signature.size());
     std::copy(signature.begin(), signature.end(), signatureData.begin());
     return Signature(signatureData);
@@ -110,7 +110,8 @@ void PrivateKey::Serialize(Serialization& serializer) {
     if (_keyBytes.empty()){
         KeyBytes();
     }
-    serializer.SerializeBytes(this->_keyBytes);
+    auto bytes = Utils::SecBlockToByteVector(_keyBytes);
+    serializer.SerializeBytes(bytes);
 }
 
 bool PrivateKey::Equals(const PrivateKey &rhs) const {
@@ -126,13 +127,13 @@ std::string PrivateKey::ToString(){
 }
 
 PrivateKey PrivateKey::Random() {
-    std::vector<CryptoPP::byte> seed(KeyLength);
+    CryptoPP::SecByteBlock seed(KeyLength);
     CryptoPP::AutoSeededRandomPool rng;
     rng.GenerateBlock(seed.data(), seed.size());
     return PrivateKey(seed);
 }
 
-PrivateKey::PrivateKey(std::vector<CryptoPP::byte> privateKey) {
+PrivateKey::PrivateKey(CryptoPP::SecByteBlock privateKey) {
     if (privateKey.empty())
         throw std::invalid_argument("PublicKey cannot be null.");
     if (privateKey.size() != KeyLength)
@@ -152,5 +153,5 @@ void PrivateKey::GenerateExtendedKey() {
     sha.CalculateDigest(extendedKey,
                         _keyBytes.data(), _keyBytes.size());
 
-    _extendedKeyBytes.assign(extendedKey.begin(), extendedKey.end());
+    _extendedKeyBytes.Assign(extendedKey.data(), extendedKey.size());
 }

@@ -4,9 +4,7 @@
 
 #include "BCSTypes.h"
 #include "Deserialization.h"
-#include "Serialization.h"
 #include <algorithm>
-#include "BString.h"
 #include "Bool.h"
 #include "U8.h"
 #include "U16.h"
@@ -14,8 +12,10 @@
 #include "U64.h"
 #include "U128.h"
 #include "U256.h"
+#include "../Accounts/AccountAddress.h"
+#include "StructTag.h"
 
-ISerializableTag* ISerializableTag::DeserializeTag(Deserialization& deserializer) {
+std::shared_ptr<ISerializableTag> ISerializableTag::DeserializeTag(Deserialization& deserializer) {
     TypeTag variant = static_cast<TypeTag>(deserializer.DeserializeUleb128());
 
     switch (variant) {
@@ -34,15 +34,15 @@ ISerializableTag* ISerializableTag::DeserializeTag(Deserialization& deserializer
         case TypeTag::U256:
             return U256::Deserialize(deserializer);
         case TypeTag::ACCOUNT_ADDRESS:
-            //return AccountAddress::Deserialize(deserializer);
+            return AccountAddress::Deserialize(deserializer);
         case TypeTag::STRUCT:
-            //return StructTag::Deserialize(deserializer);
+            return StructTag::Deserialize(deserializer);
         default:
             throw std::logic_error("The method or operation is not implemented.");
     }
 }
 
-std::string ISerializableTag::ToString() {
+std::string ISerializableTag::ToString() const {
     std::string typeTagStr;
     switch (Variant()) {
         case TypeTag::BOOL:
@@ -82,4 +82,17 @@ std::string ISerializableTag::ToString() {
             typeTagStr = "UNKNOWN";
     }
     return "ISerializableTag (" + typeTagStr + ")";
+}
+
+std::shared_ptr<ISerializable> ISerializable::Deserialize(Deserialization &deserializer) {
+    throw std::logic_error("The method or operation is not implemented.");
+    return nullptr;
+}
+
+std::size_t ISerializable::GetHashCode() {
+    // Your hash logic here. This is just a simple example.
+    std::size_t seed = 0;
+    //boost::hash_combine(seed, int_member);
+    //boost::hash_combine(seed, boost::hash_value(string_member));
+    return seed;
 }

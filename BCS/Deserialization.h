@@ -14,6 +14,8 @@
 #include "BCSTypes.h"
 #include "BCSMap.h"
 #include <cryptopp/integer.h>
+#include "Sequence.h"
+#include "TagSequence.h"
 
 class Deserialization {
 public:
@@ -24,10 +26,11 @@ public:
     std::vector<uint8_t> ToBytes();
     std::vector<uint8_t> FixedBytes(std::size_t length);
     BCSMap DeserializeMap(ISerializable* (*deserializeFunc)(Deserialization&));
-    std::vector<ISerializable*> DeserializeSequence(std::function<ISerializable*(Deserialization&)> deserializeFunc);
-    std::vector<ISerializable> DeserializeTagSequence();
-    std::vector<ISerializable> DeserializeScriptArgSequence();
-    std::vector<ISerializable> DeserializeArgSequence();
+    std::vector<std::shared_ptr<ISerializable>> DeserializeSequence(
+        std::function<std::shared_ptr<ISerializable> (Deserialization &)> deserializeFunc);
+    std::shared_ptr<TagSequence> DeserializeTagSequence();
+    std::shared_ptr<Sequence> DeserializeScriptArgSequence();
+    std::vector<Sequence> DeserializeArgSequence();
     std::string DeserializeString();
     ISerializable DeserializeStruct();
     uint8_t DeserializeU8();

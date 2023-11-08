@@ -15,11 +15,9 @@ private:
 public:
     BCSMap(const std::map<BString, ISerializable*>& values);
 
-    void Serialize(Serialization& serializer) override;
+    void Serialize(Serialization& serializer) const override;
 
-    void* GetValue();
-
-    std::string ToString() const;
+    std::string ToString() const override;
 };
 
 #endif //APTOS_BCSMAP_H

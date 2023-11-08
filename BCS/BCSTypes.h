@@ -7,11 +7,13 @@
 #include <stdexcept>
 #include <vector>
 #include <string>
+#include <cstdint>
+#include <memory>
 
 class Serialization;
 class Deserialization;
 
-enum class TypeTag{
+enum class TypeTag {
     BOOL, // int = 0
     U8, // int = 1
     U64, // int = 2
@@ -22,46 +24,30 @@ enum class TypeTag{
     STRUCT, // int = 7
     U16,
     U32,
-    U256
+    U256,
+    SCRIPT,
+    ENTRY_FUNCTION
 };
 
 class ISerializable {
 public:
-    // Pure virtual function providing interface framework.
-    virtual void Serialize(Serialization& serializer) = 0;
-
-    // Static function equivalent
-    static ISerializable* Deserialize(Deserialization& deserializer) {
-        // You can throw an exception here or handle it in your own way
-        throw std::logic_error("The method or operation is not implemented.");
-    }
-
-    virtual std::size_t GetHashCode() {
-        // Your hash logic here. This is just a simple example.
-        std::size_t seed = 0;
-        //boost::hash_combine(seed, int_member);
-        //boost::hash_combine(seed, boost::hash_value(string_member));
-        return seed;
-    };
-
-    // Virtual destructor to ensure correct deletion through base-class pointers
+    virtual void Serialize(Serialization& serializer) const = 0;
+    static std::shared_ptr<ISerializable> Deserialize(Deserialization& deserializer);
+    virtual std::size_t GetHashCode();;
     virtual ~ISerializable() {}
-
-    std::string ToString() {
-        return std::string();
-    }
+    virtual std::string ToString() const = 0;
 };
 
 class ISerializableTag : public ISerializable {
 public:
-    virtual TypeTag Variant() = 0;
-    virtual void* GetValue() = 0;
+    virtual TypeTag Variant() const = 0;
     virtual void SerializeTag(Serialization& serializer) {
         this->Serialize(serializer);
     }
-    static ISerializableTag* DeserializeTag(Deserialization& deserializer);
+    static std::shared_ptr<ISerializableTag> DeserializeTag(Deserialization& deserializer);
+    virtual ~ISerializableTag() {}
 
-    std::string ToString();
+    std::string ToString() const override;
 };
 
 #endif //APTOS_BCSTYPES_H

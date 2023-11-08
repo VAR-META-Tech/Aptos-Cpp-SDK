@@ -7,16 +7,21 @@
 #include "Serialization.h"
 #include <functional>
 
-BString::BString(const std::string& value)
-        : value(value) {}
+BString::BString(): ISerializable()
+{
 
-void BString::Serialize(Serialization& serializer) {
+}
+
+BString::BString(const std::string& value)
+    : ISerializable(), value(value) {}
+
+void BString::Serialize(Serialization& serializer) const {
     serializer.Serialize(value);
 }
 
-BString* BString::Deserialize(Deserialization& deserializer) {
+std::shared_ptr<ISerializable> BString::Deserialize(Deserialization& deserializer) {
     std::string deserStr = deserializer.DeserializeString();
-    return new BString(deserStr);
+    return std::make_shared<BString>(deserStr);
 }
 
 bool BString::Equals(const BString& other) const {

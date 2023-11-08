@@ -30,9 +30,9 @@ public:
 
     Serialization& Serialize(CryptoPP::Integer num);
 
-    Serialization& Serialize(ISerializable& value);
+    Serialization& Serialize(const ISerializable &value);
 
-    Serialization& Serialize(std::vector<ISerializable*> args);
+    Serialization& Serialize(std::vector<std::shared_ptr<ISerializable> > args);
 
     Serialization& SerializeString(const std::string& value);
 
@@ -59,5 +59,6 @@ public:
 private:
     std::vector<uint8_t> buffer;
 };
+
 
 #endif //APTOS_SERIALIZATION_H

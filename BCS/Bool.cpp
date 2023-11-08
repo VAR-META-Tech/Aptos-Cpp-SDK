@@ -11,21 +11,21 @@ Bool::Bool(bool value) {
     this->value = value;
 }
 
-void Bool::Serialize(Serialization& serializer) {
+void Bool::Serialize(Serialization& serializer) const {
     serializer.SerializeBool(this->value);
 }
 
-Bool* Bool::Deserialize(Deserialization& deserializer) {
+std::shared_ptr<ISerializableTag> Bool::Deserialize(Deserialization& deserializer) {
     bool value = deserializer.DeserializeBool();
-    return new Bool(value);
+    return std::make_shared<Bool>(value);
 }
 
-TypeTag Bool::Variant() {
+TypeTag Bool::Variant() const {
     return TypeTag::BOOL;
 }
 
-void* Bool::GetValue() {
-    return &this->value;
+bool Bool::GetValue() const {
+    return value;
 }
 
 bool Bool::Equals(const Bool& other) const {
@@ -39,4 +39,8 @@ std::string Bool::ToString() const {
 size_t Bool::GetHashCode() const {
     // Simple hash code calculation, more sophisticated method might be needed
     return std::hash<bool>{}(this->value);
+}
+
+bool operator==(const Bool &lhs, const Bool &rhs) {
+    return lhs.Equals(rhs);
 }

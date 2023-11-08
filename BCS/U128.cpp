@@ -17,13 +17,13 @@ U128::U128(CryptoPP::Integer value) {
     this->value = value;
 }
 
-void U128::Serialize(Serialization& serializer) {
+void U128::Serialize(Serialization& serializer) const {
     serializer.SerializeU128(value);
 }
 
-U128* U128::Deserialize(Deserialization& deserializer) {
+std::shared_ptr<ISerializableTag> U128::Deserialize(Deserialization& deserializer) {
     CryptoPP::Integer value = deserializer.DeserializeU128();
-    return new U128(value);
+    return std::make_shared<U128>(value);
 }
 
 std::string U128::ToString() const {
@@ -62,10 +62,10 @@ CryptoPP::Integer U128::Deserialize(const std::vector<uint8_t> &data) {
     return res;
 }
 
-TypeTag U128::Variant() {
+TypeTag U128::Variant() const {
     return TypeTag::U128;
 }
 
-void* U128::GetValue() {
-    return &this->value;
+CryptoPP::Integer U128::GetValue() const{
+    return this->value;
 }

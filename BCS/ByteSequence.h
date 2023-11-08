@@ -13,15 +13,15 @@ private:
 public:
     BytesSequence(const std::vector<std::vector<uint8_t>>& values);
 
-    void Serialize(Serialization& serializer) override;
+    void Serialize(Serialization& serializer) const override;
 
     static BytesSequence* Deserialize(Deserialization& deserializer);
 
-    void* GetValue();
+    std::vector<std::vector<uint8_t>> GetValue() const;
 
     bool Equals(const BytesSequence& other) const;
 
-    std::string ToString() const;
+    std::string ToString() const override;
 
     size_t GetHashCode() const;
 };

@@ -9,32 +9,31 @@
 #include <stdexcept>
 #include "Signature.h"
 
-class PublicKey
+class PublicKey : public ISerializable
 {
 public:
     static const int KeyLength = 32;
 
 private:
-    std::string _key;
-    std::vector<CryptoPP::byte> _keyBytes;
+    CryptoPP::SecByteBlock _keyBytes;
 
 public:
-    PublicKey(const std::vector<CryptoPP::byte>& publicKey);
-    PublicKey(const std::string& key);
+    PublicKey(const CryptoPP::SecByteBlock& publicKey);
+    PublicKey(std::string key);
 
-    std::string Key();
-    void Key(const std::string& key);
+    std::string Key() const;
+    void setKey(std::string key);
 
-    std::vector<CryptoPP::byte> KeyBytes();
-    void KeyBytes(const std::vector<CryptoPP::byte>& bytes);
+    CryptoPP::SecByteBlock KeyBytes() const;
+    void setKeyBytes(const CryptoPP::SecByteBlock& bytes);
 
-    bool Verify(const std::vector<CryptoPP::byte>& message, const Signature& signature);
+    bool Verify(const CryptoPP::SecByteBlock& message, const Signature& signature) const;
     bool IsOnCurve() const;
 
-    void Serialize(Serialization& serializer);
-    static PublicKey Deserialize(Deserialization& deserializer);
+    void Serialize(Serialization& serializer) const override;
+    static std::shared_ptr<ISerializable> Deserialize(Deserialization& deserializer);
 
-    std::string ToString();
+    std::string ToString() const;
     size_t GetHashCode() const;
 
     bool Equals(const PublicKey& rhs) const;

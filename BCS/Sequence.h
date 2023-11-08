@@ -5,27 +5,21 @@
 #ifndef APTOS_SEQUENCE_H
 #define APTOS_SEQUENCE_H
 #include "BCSTypes.h"
+#include <memory>
 
 class Sequence : public ISerializable {
-private:
-    std::vector<ISerializable*> values;
 
 public:
-    Sequence(const std::vector<ISerializable*>& values);
-
+    Sequence(const std::vector<std::shared_ptr<ISerializable>>& values);
     int Length() const;
-
-    void* GetValue();
-
-    void Serialize(Serialization& serializer);
-
-    static Sequence* Deserialize(Deserialization& deserializer);
-
+    std::vector<std::shared_ptr<ISerializable>> GetValue() const;
+    void Serialize(Serialization& serializer) const override;
+    static std::shared_ptr<ISerializable> Deserialize(Deserialization& deserializer);
     bool Equals(const Sequence& other) const;
-
-    std::string ToString() const;
-
-    size_t GetHashCode() const;
+    std::string ToString() const override;
+    size_t GetHashCode() const;    
+private:
+    std::vector<std::shared_ptr<ISerializable>> values;
 };
 
 #endif //APTOS_SEQUENCE_H

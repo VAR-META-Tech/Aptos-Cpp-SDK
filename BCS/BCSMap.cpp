@@ -10,7 +10,7 @@
 BCSMap::BCSMap(const std::map<BString, ISerializable*>& values)
         : values(values) {}
 
-void BCSMap::Serialize(Serialization& serializer) {
+void BCSMap::Serialize(Serialization& serializer) const {
     Serialization mapSerializer;
     std::map<std::string, std::pair<std::vector<uint8_t>, std::vector<uint8_t>>> byteMap;
 
@@ -35,9 +35,6 @@ void BCSMap::Serialize(Serialization& serializer) {
     serializer.SerializeFixedBytes(mapSerializer.GetBytes());
 }
 
-void* BCSMap::GetValue() {
-    return &values;
-}
 
 std::string BCSMap::ToString() const {
     std::stringstream ss;

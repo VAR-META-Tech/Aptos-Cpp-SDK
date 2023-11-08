@@ -53,8 +53,6 @@ TEST(SerializationTest, BoolFalseDeserialize) {
     ASSERT_EQ(expected, actual);
 }
 
-#include <cstring>
-
 TEST(SerializationTest, ByteArraySerialize) {
 
     std::string value = "1234567890";
@@ -240,7 +238,7 @@ TEST(SerializationTest, StringDeserialize) {
 }
 
 TEST(SerializationTest, StringLongSerialize) {
-    std::string longString = "potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔";
+    std::string longString = "potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔";
     std::vector<uint8_t> res = Serialization().SerializeString(longString).GetBytes();
 
     std::vector<uint8_t> exp = { 231, 2, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
@@ -323,23 +321,25 @@ TEST(SerializationTest, MapBStringU32TestDe) {
 
     std::vector<uint8_t> bytes = ser.GetBytes();
     Deserialization deser(bytes);
-    BCSMap actualBcsMap = deser.DeserializeMap(
-            [](Deserialization& d) -> ISerializable* { return U32::Deserialize(d); });
+//    BCSMap actualBcsMap = deser.DeserializeMap(
+//            [](Deserialization& d) -> ISerializable* { return U32::Deserialize(d); });
 
-    std::map<BString, ISerializable*>* values = reinterpret_cast<std::map<BString, ISerializable*>*>(actualBcsMap.GetValue());
-    // Expect the keys and values to be the same, but in sorted order
-    std::vector<BString> key;
-    std::vector<ISerializable*> value;
-    for(std::map<BString,ISerializable*>::iterator it = values->begin(); it != values->end(); ++it) {
-        key.push_back(it->first);
-        value.push_back(it->second);
-    }
-    EXPECT_TRUE(BString("b").Equals(key[0]));
-    EXPECT_TRUE(BString("c").Equals(key[1]));
-    EXPECT_TRUE(BString("x").Equals(key[2]));
-    EXPECT_TRUE(U32(99234).Equals(*(U32*)value[0]));
-    EXPECT_TRUE(U32(23829).Equals(*(U32*)value[1]));
-    EXPECT_TRUE(U32(12345).Equals(*(U32*)value[2]));
+//    std::map<BString, ISerializable*>* values = reinterpret_cast<std::map<BString, ISerializable*>*>(actualBcsMap.GetValue());
+//    // Expect the keys and values to be the same, but in sorted order
+    std::vector<BString> key(5);
+    std::vector<ISerializable*> value(5);
+//    for(std::map<BString,ISerializable*>::iterator it = values->begin(); it != values->end(); ++it) {
+//        key.push_back(it->first);
+//        value.push_back(it->second);
+//    }
+    EXPECT_TRUE(false);
+
+//    EXPECT_TRUE(BString("b").Equals(key[0]));
+//    EXPECT_TRUE(BString("c").Equals(key[1]));
+//    EXPECT_TRUE(BString("x").Equals(key[2]));
+//    EXPECT_TRUE(U32(99234).Equals(*(U32*)value[0]));
+//    EXPECT_TRUE(U32(23829).Equals(*(U32*)value[1]));
+//    EXPECT_TRUE(U32(12345).Equals(*(U32*)value[2]));
 }
 
 
@@ -456,7 +456,7 @@ TEST(SerializationTest, MultipleValues_Serialize) {
 
 TEST(SerializationTest, SequenceBStringEmptySerialize) {
     Serialization ser;
-    std::vector<ISerializable*> strArr = { new BString("") };
+    std::vector<std::shared_ptr<ISerializable>> strArr = { std::make_shared<BString>("") };
     Sequence seq(strArr);
 
     seq.Serialize(ser);
@@ -467,31 +467,31 @@ TEST(SerializationTest, SequenceBStringEmptySerialize) {
 }
 
 TEST(SerializationTest, SequenceBStringLongDeserialize) {
-Serialization ser;
-std::vector<ISerializable*> expectedStrArr = { new BString("a"), new BString("abc"),
-                                               new BString("def"), new BString("ghi") };
-ser.Serialize(expectedStrArr);
+    Serialization ser;
+    std::vector<std::shared_ptr<ISerializable>> expectedStrArr = { std::make_shared<BString>("a"), std::make_shared<BString>("abc"),
+                                                              std::make_shared<BString>("def"), std::make_shared<BString>("ghi") };
+    ser.Serialize(expectedStrArr);
 
-Sequence expectedSeq(expectedStrArr);
+    Sequence expectedSeq(expectedStrArr);
 
-std::vector<uint8_t> actual = ser.GetBytes();
-std::vector<uint8_t> exp = { 4, 1, 97, 3, 97, 98, 99, 3, 100, 101, 102, 3, 103, 104, 105 };
-EXPECT_EQ(exp, actual);
+    std::vector<uint8_t> actual = ser.GetBytes();
+    std::vector<uint8_t> exp = { 4, 1, 97, 3, 97, 98, 99, 3, 100, 101, 102, 3, 103, 104, 105 };
+    EXPECT_EQ(exp, actual);
 
-Deserialization deser(actual);
-std::vector<ISerializable*> actualSequenceArr = deser.DeserializeSequence(
-        [](Deserialization& d) -> BString* { return BString::Deserialize(d); });
+    Deserialization deser(actual);
+    std::vector<std::shared_ptr<ISerializable>> actualSequenceArr = deser.DeserializeSequence(
+        [](Deserialization& d) -> std::shared_ptr<ISerializable> { return BString::Deserialize(d); });
 
-for (int i = 0; i < expectedStrArr.size(); i++){
-    EXPECT_EQ(expectedStrArr[i]->ToString(), actualSequenceArr[i]->ToString());
-}
+    for (int i = 0; i < expectedStrArr.size(); i++){
+        EXPECT_EQ(expectedStrArr[i]->ToString(), actualSequenceArr[i]->ToString());
+    }
 }
 
 
 TEST(SerializationTest, SequenceBStringSerialize) {
     Serialization ser;
-    std::vector<ISerializable*> expectedStrArr = { new BString("a"), new BString("abc"),
-                                                   new BString("def"), new BString("ghi") };
+    std::vector<std::shared_ptr<ISerializable>> expectedStrArr = { std::make_shared<BString>("a"), std::make_shared<BString>("abc"),
+                                                   std::make_shared<BString>("def"), std::make_shared<BString>("ghi") };
     ser.Serialize(expectedStrArr);
 
     std::vector<uint8_t> actual = ser.GetBytes();
@@ -501,8 +501,8 @@ TEST(SerializationTest, SequenceBStringSerialize) {
 
 TEST(SerializationTest, SequenceBoolSerialize) {
     Serialization ser;
-    std::vector<ISerializable*> expectedStrArr = { new Bool(false), new Bool(true),
-                                                   new Bool(false)};
+    std::vector<std::shared_ptr<ISerializable>> expectedStrArr = { std::make_shared<Bool>(false), std::make_shared<Bool>(true),
+                                                   std::make_shared<Bool>(false)};
     ser.Serialize(expectedStrArr);
 
     std::vector<uint8_t> actual = ser.GetBytes();
@@ -512,20 +512,20 @@ TEST(SerializationTest, SequenceBoolSerialize) {
 
 TEST(SerializationTest, SequenceBoolDeserializer) {
     Serialization ser;
-    std::vector<ISerializable*> expectedStrArr = { new Bool(false), new Bool(true),
-                                                   new Bool(false)};
-    ser.Serialize(expectedStrArr);
+    std::vector<std::shared_ptr<ISerializable>> expectedBoolArr = { std::make_shared<Bool>(false), std::make_shared<Bool>(true),
+                                                   std::make_shared<Bool>(false)};
+    ser.Serialize(expectedBoolArr);
 
-    std::vector<uint8_t> expectedByteArr = ser.GetBytes();
-    std::vector<uint8_t> actualByteArr = { 3, 0, 1, 0 };
+    std::vector<uint8_t> expectedByteArr = { 3, 0, 1, 0 };
+    std::vector<uint8_t> actualByteArr = ser.GetBytes();
     EXPECT_EQ(expectedByteArr, actualByteArr);
 
     Deserialization deser(expectedByteArr);
-    std::vector<ISerializable*> actualSequenceArr = deser.DeserializeSequence(
-            [](Deserialization& d) -> Bool* { return Bool::Deserialize(d); });
-
-    EXPECT_EQ(expectedStrArr[0]->ToString(), actualSequenceArr[0]->ToString());
-    EXPECT_EQ(expectedStrArr[1]->ToString(), actualSequenceArr[1]->ToString());
-    EXPECT_EQ(expectedStrArr[2]->ToString(), actualSequenceArr[2]->ToString());
-    EXPECT_EQ(expectedStrArr[3]->ToString(), actualSequenceArr[3]->ToString());
+    std::vector<std::shared_ptr<ISerializable>> actualBoolArr = deser.DeserializeSequence(
+            [](Deserialization& d) -> std::shared_ptr<ISerializable> { return Bool::Deserialize(d); });
+    EXPECT_EQ(expectedBoolArr.size(), actualBoolArr.size());
+    for (std::size_t i = 0; i < expectedBoolArr.size(); ++i) {
+        EXPECT_EQ(*std::dynamic_pointer_cast<Bool>(expectedBoolArr[i]),
+                  *std::dynamic_pointer_cast<Bool>(actualBoolArr[i]));
+    }
 }

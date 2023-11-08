@@ -11,21 +11,21 @@ U8::U8(uint8_t value) {
     this->value = value;
 }
 
-void U8::Serialize(Serialization& serializer) {
+void U8::Serialize(Serialization& serializer) const {
     serializer.SerializeU8(this->value);
 }
 
-U8* U8::Deserialize(Deserialization& deserializer) {
+std::shared_ptr<ISerializableTag> U8::Deserialize(Deserialization& deserializer) {
     uint8_t value = deserializer.DeserializeU8();
-    return new U8(value);
+    return std::make_shared<U8>(value);
 }
 
-TypeTag U8::Variant() {
+TypeTag U8::Variant() const {
     return TypeTag::U8;
 }
 
-void* U8::GetValue() {
-    return &this->value;
+uint8_t U8::GetValue() const {
+    return value;
 }
 
 bool U8::Equals(const U8& other) const {

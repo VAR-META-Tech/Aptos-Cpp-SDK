@@ -14,19 +14,19 @@ private:
 public:
     U64(uint64_t value);
 
-    void Serialize(Serialization& serializer);
+    void Serialize(Serialization& serializer) const override;
 
     static uint64_t Deserialize(const std::vector<uint8_t>& data);
 
-    static U64* Deserialize(Deserialization& deserializer);
+    static std::shared_ptr<ISerializableTag> Deserialize(Deserialization& deserializer);
 
-    TypeTag Variant();
+    TypeTag Variant() const override;
 
-    virtual void* GetValue();
+    uint64_t GetValue() const;
 
     bool Equals(const U64& other) const;
 
-    std::string ToString() const;
+    std::string ToString() const override;
 
     size_t GetHashCode() const;
 };

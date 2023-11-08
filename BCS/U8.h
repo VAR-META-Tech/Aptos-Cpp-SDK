@@ -6,6 +6,7 @@
 #define APTOS_U8_H
 
 #include "BCSTypes.h"
+#include <cstdint>
 
 class U8 : public ISerializableTag {
 private:
@@ -13,19 +14,12 @@ private:
 
 public:
     U8(uint8_t value);
-
-    void Serialize(Serialization& serializer);
-
-    static U8* Deserialize(Deserialization& deserializer);
-
-    TypeTag Variant();
-
-    virtual void* GetValue();
-
+    void Serialize(Serialization& serializer) const override;
+    static std::shared_ptr<ISerializableTag> Deserialize(Deserialization& deserializer);
+    TypeTag Variant() const override;
+    uint8_t GetValue() const;
     bool Equals(const U8& other) const;
-
-    std::string ToString() const;
-
+    std::string ToString() const override;
     size_t GetHashCode() const;
 };
 

@@ -1,5 +1,6 @@
 // Deserialization.cpp
 #include "Deserialization.h"
+#include "Sequence.h"
 #include "Serialization.h"
 //#include "BCS.h"
 #include <algorithm>
@@ -9,6 +10,8 @@
 #include "U128.h"
 #include "U256.h"
 #include "BString.h"
+#include "TagSequence.h"
+#include "ScriptArgument.h"
 
 Deserialization::Deserialization(const std::vector<uint8_t>& data) : buffer(data), position(0) {
 }
@@ -116,12 +119,11 @@ BCSMap Deserialization::DeserializeMap(ISerializable* (*deserializeFunc)(Deseria
     return BCSMap(values);
 }
 
-std::vector<ISerializable *>
-Deserialization::DeserializeSequence(std::function<ISerializable *(Deserialization &)> deserializeFunc) {
+std::vector<std::shared_ptr<ISerializable>> Deserialization::DeserializeSequence(std::function<std::shared_ptr<ISerializable> (Deserialization &)> deserializeFunc) {
     // Read the number of values
     uint32_t numPairs = this->DeserializeUleb128();
 
-    std::vector<ISerializable*> values;
+    std::vector<std::shared_ptr<ISerializable>> values;
 
     // Deserialize each value
     for (uint32_t i = 0; i < numPairs; i++) {
@@ -130,4 +132,29 @@ Deserialization::DeserializeSequence(std::function<ISerializable *(Deserializati
     }
 
     return values;
+}
+
+std::shared_ptr<TagSequence> Deserialization::DeserializeTagSequence()
+{
+    int length = DeserializeUleb128();
+    std::vector<std::shared_ptr<ISerializableTag>> values;
+
+    while (values.size() < length) {
+        std::shared_ptr<ISerializableTag> val = ISerializableTag::DeserializeTag(*this);
+        values.push_back(val);
+    }
+
+    return std::make_shared<TagSequence>(values);
+}
+
+std::shared_ptr<Sequence> Deserialization::DeserializeScriptArgSequence()
+{
+    int length = DeserializeUleb128();
+    std::vector<std::shared_ptr<ISerializable>> values;
+
+    while (values.size() < length) {
+        std::shared_ptr<ISerializable> val = ScriptArgument::Deserialize(*this);
+        values.push_back(val);
+    }
+    return std::make_shared<Sequence>(values);
 }

@@ -6,6 +6,7 @@
 #define APTOS_U16_H
 
 #include "BCSTypes.h"
+#include <cstdint>
 
 class U16 : public ISerializableTag {
 private:
@@ -14,19 +15,19 @@ private:
 public:
     U16(uint16_t value);
 
-    void Serialize(Serialization& serializer);
+    void Serialize(Serialization& serializer) const override;
 
     static uint16_t Deserialize(const std::vector<uint8_t>& data);
 
-    static U16* Deserialize(Deserialization& deserializer);
+    static std::shared_ptr<ISerializableTag> Deserialize(Deserialization& deserializer);
 
-    TypeTag Variant();
+    TypeTag Variant() const override;
 
-    virtual void* GetValue();
+    uint16_t GetValue() const;
 
     bool Equals(const U16& other) const;
 
-    std::string ToString() const;
+    std::string ToString() const override;
 
     size_t GetHashCode() const;
 };

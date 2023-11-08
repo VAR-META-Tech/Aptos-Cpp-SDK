@@ -8,18 +8,18 @@
 #include "BCSTypes.h"
 #include <cryptopp/integer.h>
 
-class U256  : public ISerializableTag{
+class U256 : public ISerializableTag{
 private:
     CryptoPP::Integer value;
 
 public:
     U256(CryptoPP::Integer value);
 
-    void Serialize(Serialization& serializer);
-    static U256* Deserialize(Deserialization& deserializer);
-    TypeTag Variant();
-    void* GetValue();
-    std::string ToString() const;
+    void Serialize(Serialization& serializer) const override;
+    static std::shared_ptr<ISerializableTag> Deserialize(Deserialization& deserializer);
+    TypeTag Variant() const override;
+    CryptoPP::Integer GetValue() const;
+    std::string ToString() const override;
     bool Equals(const U256& other) const;
     size_t GetHashCode() const;
 

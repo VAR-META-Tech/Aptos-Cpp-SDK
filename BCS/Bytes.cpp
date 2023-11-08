@@ -15,7 +15,7 @@ Bytes::Bytes(const std::vector<uint8_t>& values) {
     this->values = values;
 }
 
-void Bytes::Serialize(Serialization& serializer) {
+void Bytes::Serialize(Serialization& serializer) const {
     serializer.SerializeBytes(this->values);
 }
 
@@ -24,7 +24,7 @@ Bytes* Bytes::Deserialize(Deserialization& deserializer) {
     return new Bytes(values);
 }
 
-std::vector<uint8_t> Bytes::getValue() {
+std::vector<uint8_t> Bytes::getValue() const {
     return this->values;
 }
 
