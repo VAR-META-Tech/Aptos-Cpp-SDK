@@ -137,7 +137,7 @@ namespace Aptos::Accounts
 
     int PrivateKey::GetHashCode() const
     {
-        return 0;
+         return std::hash<std::string>{}(_key);
     }
 
     std::string PrivateKey::ToString()

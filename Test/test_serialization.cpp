@@ -19,6 +19,7 @@
 #include "../BCS/U128.h"
 #include "../BCS/U256.h"
 #include <boost/endian/conversion.hpp>
+#include "../HDWallet/Utils/Utils.h"
 
 
 TEST(SerializationTest, BoolSerialize) {
@@ -774,7 +775,7 @@ TEST(U32Test, Variant) {
     TypeTag variant = u32.Variant();
 
     // Assert that the variant is TypeTag::U8
-    EXPECT_EQ(variant, TypeTag::U8);
+    EXPECT_EQ(variant, TypeTag::U32);
 }
 
 TEST(U32Test, GetValue) {
@@ -972,7 +973,7 @@ TEST(U64Test, Variant) {
     TypeTag typeTag = u64.Variant();
 
     // Assert that the returned TypeTag is TypeTag::U8
-    EXPECT_EQ(typeTag, TypeTag::U8);
+    EXPECT_EQ(typeTag, TypeTag::U64);
 }
 
 TEST(U64Test, GetValue) {
@@ -1082,7 +1083,7 @@ TEST(U16Test, Variant) {
     TypeTag variant = u16.Variant();
 
     // Check that the returned variant is TypeTag::U8
-    EXPECT_EQ(variant, TypeTag::U8);
+    EXPECT_EQ(variant, TypeTag::U16);
 }
 
 TEST(U16Test, GetValue) {
@@ -1730,4 +1731,130 @@ TEST(StructTagTest, FromStrTest) {
 
     // Check that the returned StructTag matches the expected StructTag
     EXPECT_EQ(expected, actual);
+}
+
+TEST(ISerializableTag, DeserializeTagBool)
+{
+    bool actual = true;
+    Serialization s;
+    s.SerializeBool(actual);
+    std::vector<uint8_t> res;
+    std::vector<uint8_t> data = s.GetBytes();
+    res.push_back((uint8_t)TypeTag::BOOL);
+    res.insert(res.end(),data.begin(),data.end());
+
+    Deserialization d(res);
+    std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
+    ASSERT_EQ(std::dynamic_pointer_cast<Bool>(result)->Variant(),TypeTag::BOOL);
+    ASSERT_EQ(std::dynamic_pointer_cast<Bool>(result)->GetValue(), true);
+}
+
+TEST(ISerializableTag, DeserializeTagU8)
+{
+    Serialization s;
+    s.SerializeU8(1);
+    std::vector<uint8_t> res;
+    std::vector<uint8_t> data = s.GetBytes();
+    res.push_back((uint8_t)TypeTag::U8);
+    res.insert(res.end(),data.begin(),data.end());
+
+    Deserialization d(res);
+    std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
+    ASSERT_EQ(std::dynamic_pointer_cast<U8>(result)->Variant(),TypeTag::U8);
+    ASSERT_EQ(std::dynamic_pointer_cast<U8>(result)->GetValue(), 1);
+}
+
+TEST(ISerializableTag, DeserializeTagU16)
+{
+    std::vector<uint8_t> res;
+    std::vector<uint8_t> data = {0xF4, 0x01};
+    res.push_back((uint8_t)TypeTag::U16);
+    res.insert(res.end(),data.begin(),data.end());
+
+    Deserialization d(res);
+    std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
+    ASSERT_EQ(std::dynamic_pointer_cast<U16>(result)->Variant(),TypeTag::U16);
+    ASSERT_EQ(std::dynamic_pointer_cast<U16>(result)->GetValue(), 500);
+}
+
+TEST(ISerializableTag, DeserializeTagU32)
+{
+    Serialization s;
+    s.SerializeU32(1);
+    std::vector<uint8_t> res;
+    std::vector<uint8_t> data = s.GetBytes();
+    res.push_back((uint8_t)TypeTag::U32);
+    res.insert(res.end(),data.begin(),data.end());
+
+    Deserialization d(res);
+    std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
+    ASSERT_EQ(std::dynamic_pointer_cast<U32>(result)->Variant(),TypeTag::U32);
+    ASSERT_EQ(std::dynamic_pointer_cast<U32>(result)->GetValue(), 1);
+}
+
+TEST(ISerializableTag, DeserializeTagU64)
+{
+    Serialization s;
+    s.SerializeU64(1);
+    std::vector<uint8_t> res;
+    std::vector<uint8_t> data = s.GetBytes();
+    res.push_back((uint8_t)TypeTag::U64);
+    res.insert(res.end(),data.begin(),data.end());
+
+    Deserialization d(res);
+    std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
+    ASSERT_EQ(std::dynamic_pointer_cast<U64>(result)->Variant(),TypeTag::U64);
+    ASSERT_EQ(std::dynamic_pointer_cast<U64>(result)->GetValue(), 1);
+}
+
+TEST(ISerializableTag, DeserializeTagU128)
+{
+    Serialization s;
+    s.SerializeU128(1);
+    std::vector<uint8_t> res;
+    std::vector<uint8_t> data = s.GetBytes();
+    res.push_back((uint8_t)TypeTag::U128);
+    res.insert(res.end(),data.begin(),data.end());
+
+    Deserialization d(res);
+    std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
+    ASSERT_EQ(std::dynamic_pointer_cast<U128>(result)->Variant(),TypeTag::U128);
+    ASSERT_EQ(std::dynamic_pointer_cast<U128>(result)->GetValue(), 1);
+}
+
+TEST(ISerializableTag, DeserializeTagU256)
+{
+    Serialization s;
+    s.SerializeU256(1);
+    std::vector<uint8_t> res;
+    std::vector<uint8_t> data = s.GetBytes();
+    res.push_back((uint8_t)TypeTag::U256);
+    res.insert(res.end(),data.begin(),data.end());
+
+    Deserialization d(res);
+    std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
+    ASSERT_EQ(std::dynamic_pointer_cast<U256>(result)->Variant(),TypeTag::U256);
+    ASSERT_EQ(std::dynamic_pointer_cast<U256>(result)->GetValue(), 1);
+}
+
+TEST(ISerializableTag, DeserializeTagAccountAddress)
+{
+    CryptoPP::SecByteBlock publicKeyBytes = Aptos::Utils::ByteVectorToSecBlock({
+    88, 110, 60, 141, 68, 125, 118, 121,
+    34, 46, 19, 144, 51, 227, 130, 2,
+    53, 227, 61, 165, 9, 30, 155, 11,
+    184, 241, 161, 18, 207, 12, 143, 245
+});
+    PublicKey publicKey(publicKeyBytes);
+    AccountAddress accountAddress = AccountAddress::FromKey(publicKey.KeyBytes());
+    Serialization s;
+    accountAddress.Serialize(s);
+    std::vector<uint8_t> res;
+    std::vector<uint8_t> data = s.GetBytes();
+    res.push_back((uint8_t)TypeTag::ACCOUNT_ADDRESS);
+    res.insert(res.end(),data.begin(),data.end());
+
+    Deserialization d(res);
+    std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
+    ASSERT_EQ(std::dynamic_pointer_cast<AccountAddress>(result)->Variant(),TypeTag::ACCOUNT_ADDRESS);
 }

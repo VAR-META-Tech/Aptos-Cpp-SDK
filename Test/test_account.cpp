@@ -4,6 +4,7 @@
 
 #include "gtest/gtest.h"
 #include <string>
+#define private public
 #include "../Accounts/Signature.h"
 #include "../Accounts/PublicKey.h"
 #include "../Accounts/PrivateKey.h"
@@ -13,9 +14,9 @@
 #include "../HDWallet/Utils/Utils.h"
 #include "../Accounts/multisignature.h"
 #include "../Accounts/Account.h"
-
 #include "../Accounts/AuthenticationKey.h"
 #include "../Accounts/Types/MultiEd25519PublicKey.h"
+#include "../Accounts/Ed25519Bip32.h"
 
 using namespace Aptos::Accounts;
 using namespace Aptos;
@@ -521,6 +522,23 @@ TEST(AuthenticationKeyTest, ConstructorWithInvalidLength)
     ASSERT_THROW(AuthenticationKey authKey(bytes), std::invalid_argument);
 }
 
+TEST(AuthenticationKeyTest, FromMultiEd25519PublicKey)
+{
+    // Setup: Create a vector of PublicKeys and define a valid threshold
+    PublicKey key1(g_publicKeyBytes);
+    PublicKey key2(g_publicKeyHex);
+    std::vector<PublicKey> publicKeys = {key1, key2};
+    int validThreshold = 15;
+
+    // Execute: Construct the MultiEd25519PublicKey
+    Aptos::Accounts::Types::MultiEd25519PublicKey multiPublicKey(publicKeys, validThreshold);
+
+    AuthenticationKey key = AuthenticationKey::FromMultiEd25519PublicKey(multiPublicKey);
+
+    ASSERT_FALSE(key.DerivedAddress().empty());
+}
+   
+
 TEST(PrivateKeyTest, ConstructorWithKeyInvalid)
 {
     // Setup: Create a PrivateKey instance
@@ -623,6 +641,32 @@ TEST(PrivateKeyTest, KeyBytesWithValidValue)
     // This assumes you have a way to get _keyBytes for verification
     ASSERT_EQ(privateKey.KeyBytes(), validBlock);
 }
+
+TEST(PrivateKeyTest, GetHashCode)
+{
+    // Setup: Create a PrivateKey instance and a valid SecByteBlock
+    PrivateKey privateKey = PrivateKey::FromHex(
+        "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5fe");
+    CryptoPP::SecByteBlock validBlock(PrivateKey::KeyLength);
+    // Optionally fill validBlock with some data
+
+    // Execute: Set the valid SecByteBlock
+    ASSERT_NO_THROW(privateKey.KeyBytes(validBlock));
+
+    ASSERT_TRUE(privateKey.GetHashCode() != 0);
+}
+
+TEST(PrivateKeyTest, SignEmptyMessage)
+{
+    // Setup: Create a PrivateKey instance and a valid SecByteBlock
+    PrivateKey privateKey = PrivateKey::FromHex(
+        "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5fe");
+    CryptoPP::SecByteBlock validBlock(PrivateKey::KeyLength);
+    // Optionally fill validBlock with some data
+    ASSERT_NO_THROW(privateKey.Sign(Utils::StringToSecByteBlock("multisig")));
+}
+
+
 
 TEST(PublicKeyTest, IsOnCurveAlwaysReturnsFalse)
 {
@@ -834,6 +878,18 @@ TEST(MultiEd25519PublicKeyTest, ConstructorSuccessfulInitialization)
     // Verify: Check if the object is initialized correctly
     // This part of the test depends on the available public methods of MultiEd25519PublicKey.
     // For example:
-    // ASSERT_EQ(multiPublicKey.getThreshold(), validThreshold);
-    // ASSERT_EQ(multiPublicKey.getPublicKeys(), publicKeys);
+    ASSERT_TRUE(multiPublicKey.PublicKeys.size() > 0);
+}
+
+TEST(Ed25519Bip32Test,IsValidPath)
+{
+    bool result = Ed25519Bip32::IsValidPath("");
+    ASSERT_FALSE(result);
+}
+
+TEST(Ed25519Bip32Test,DerivePath)
+{
+    std::vector<uint8_t> seed;
+    Ed25519Bip32 ed25519Bip32(seed);
+    ASSERT_THROW(ed25519Bip32.DerivePath(""),std::invalid_argument);
 }

@@ -24,7 +24,7 @@ namespace Aptos::BCS
 
     TypeTag U64::Variant() const
     {
-        return TypeTag::U8;
+        return TypeTag::U64;
     }
 
     uint64_t U64::GetValue() const

@@ -24,7 +24,7 @@ namespace Aptos::BCS
 
     TypeTag U32::Variant() const
     {
-        return TypeTag::U8;
+        return TypeTag::U32;
     }
 
     uint32_t U32::GetValue() const

@@ -24,7 +24,7 @@ namespace Aptos::BCS
 
     TypeTag U16::Variant() const
     {
-        return TypeTag::U8;
+        return TypeTag::U16;
     }
 
     uint16_t U16::GetValue() const
