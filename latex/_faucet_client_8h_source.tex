@@ -1,0 +1,25 @@
+\doxysection{Faucet\+Client.\+h}
+\hypertarget{_faucet_client_8h_source}{}\label{_faucet_client_8h_source}\index{REST/FaucetClient.h@{REST/FaucetClient.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ FAUCETCLIENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ FAUCETCLIENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cpprest/http\_client.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Model/ResponseInfo.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }Aptos::Rest}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_faucet_client}{FaucetClient}}}
+\DoxyCodeLine{00016\ \ \ \ \ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_faucet_client_ab44b3cc39e05a8d2b1e17aad1b49566d}{FundAccount}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keywordtype}{bool},\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&address,\ \textcolor{keywordtype}{int}\ amount,\ \textcolor{keyword}{const}\ std::string\ \&endpoint);}
+\DoxyCodeLine{00029\ \ \ \ \ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FAUCETCLIENT\_H}}
+
+\end{DoxyCode}

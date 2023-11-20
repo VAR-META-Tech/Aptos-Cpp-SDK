@@ -1,30 +1,70 @@
 #ifndef STRUCTTAG_H
 #define STRUCTTAG_H
-
 #include <string>
 #include <vector>
 #include "BCSTypes.h"
 #include "../Accounts/AccountAddress.h"
 
-class StructTag : public ISerializableTag {
-public:
-    StructTag(AccountAddress address, std::string module, std::string name,
-              const std::vector<std::shared_ptr<ISerializableTag> >& typeArgs);
+using namespace Aptos::Accounts;
+namespace Aptos::BCS
+{
+    /// <summary>
+    /// Representation of a struct tag.
+    /// </summary>
+    class StructTag : public ISerializableTag
+    {
+    public:
+        /// <summary>
+        /// Creates a StructTag object from an address, module, function name,
+        /// and type arguments.
+        /// </summary>
+        /// <param name="address">An AccountAddress.</param>
+        /// <param name="module">The module name.</param>
+        /// <param name="name">The function name.</param>
+        /// <param name="typeArgs">A list of type arguments.</param>
+        StructTag(AccountAddress address, std::string module, std::string name,
+                  const std::vector<std::shared_ptr<ISerializableTag>> &typeArgs);
 
-    TypeTag Variant() const override;
-    void Serialize(Serialization& serializer) const override;
-    static std::shared_ptr<ISerializableTag> Deserialize(Deserialization& deserializer);
-    bool Equals(const StructTag &other) const;
-    std::string ToString() const override;
-    static StructTag FromStr(const std::string& typeTag);
+        /// <inheritdoc/>
+        TypeTag Variant() const override;
 
-private:
-    AccountAddress address;
-    std::string module;
-    std::string name;
-    std::vector<std::shared_ptr<ISerializableTag>> typeArgs;
-};
+        /// <inheritdoc/>
+        void Serialize(Serialization &serializer) const override;
 
-bool operator==(const StructTag &lhs, const StructTag &rhs);
+        /// <inheritdoc/>
+        static std::shared_ptr<ISerializableTag> Deserialize(Deserialization &deserializer);
 
+        /// <inheritdoc/>
+        bool Equals(const StructTag &other) const;
+
+        /// <inheritdoc/>
+        std::string ToString() const override;
+
+        /// <inheritdoc/>
+        static StructTag FromStr(const std::string &typeTag);
+
+    private:
+        /// <summary>
+        /// The account address of the struct tag.
+        /// </summary>
+        AccountAddress address;
+
+        /// <summary>
+        /// The module name of the struct tag.
+        /// </summary>
+        std::string module;
+
+        /// <summary>
+        /// The function name of the struct tag.
+        /// </summary
+        std::string name;
+
+        /// <summary>
+        /// A set of type arguments, if any.
+        /// </summary>
+        std::vector<std::shared_ptr<ISerializableTag>> typeArgs;
+    };
+
+    bool operator==(const StructTag &lhs, const StructTag &rhs);
+}
 #endif // STRUCTTAG_H

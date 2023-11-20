@@ -1,43 +1,51 @@
 #include "multisignature.h"
 #include "../HDWallet/Utils/Utils.h"
+#if defined(__APPLE__)
+#include <libkern/OSByteOrder.h>
 
-MultiSignature::MultiSignature(MultiPublicKey PublicKeyMulti, std::vector<std::tuple<PublicKey, Signature> > SignatureMap)
+#define htobe32(x) OSSwapHostToBigInt32(x)
+#define be32toh(x) OSSwapBigToHostInt32(x)
+#endif
+
+namespace Aptos::Accounts
 {
-    Signatures = std::vector<Signature>();
-//    uint32_t bitmap = 0;
-//    for (std::tuple<PublicKey, Signature> entry : SignatureMap)
-//    {
-//        Signatures.push_back(std::get<1>(entry));
-//        int index = PublicKeyMulti.Keys.IndexOf(std::get<0>(entry));
-//        int shift = 31 - index; // 32 bit positions, left to right.
-//        bitmap = bitmap | (1 << shift);
-//    }
-
-//    // 4-byte big endian bitmap.
-//    // this.Bitmap = bitmap.to_bytes(4, "big")
-//    uint32_t uBitmap = htonl(bitmap);
-//    Bitmap = std::vector<uint8_t>((uint8_t*)&uBitmap, (uint8_t*)&uBitmap + sizeof(uBitmap));
-}
-
-std::vector<uint8_t> MultiSignature::ToBytes() const
-{
-    std::vector<uint8_t> concatenatedSignatures;
-    for (Signature signature : Signatures)
+    MultiSignature::MultiSignature(const MultiPublicKey &PublicKeyMulti, const std::vector<std::pair<PublicKey, Signature>> &SignatureMap)
     {
-        std::vector<uint8_t> signatureBytes = Utils::SecBlockToByteVector(signature.Data());
-        concatenatedSignatures.insert(std::end(concatenatedSignatures), std::begin(signatureBytes), std::end(signatureBytes));
+        Signatures = std::vector<Signature>();
+        int bitmap = 0;
+        auto keys = PublicKeyMulti.getKeys();
+        for (const auto &entry : SignatureMap)
+        {
+            this->Signatures.push_back(entry.second);
+            int index = std::distance(keys.begin(), std::find(keys.begin(), keys.end(), entry.first));
+            int shift = 31 - index;
+            bitmap = bitmap | (1 << shift);
+        }
+
+        uint32_t uBitmap = htobe32(static_cast<uint32_t>(bitmap));
+        this->Bitmap = std::vector<uint8_t>(reinterpret_cast<uint8_t *>(&uBitmap), reinterpret_cast<uint8_t *>(&uBitmap) + sizeof(uint32_t));
     }
-    concatenatedSignatures.insert(std::end(concatenatedSignatures), std::begin(Bitmap), std::end(Bitmap));
-    return concatenatedSignatures;
-}
 
-void MultiSignature::Serialize(Serialization& serializer) const
-{
-    std::vector<uint8_t> bytes = ToBytes();
-    serializer.SerializeBytes(bytes);
-}
+    std::vector<uint8_t> MultiSignature::ToBytes() const
+    {
+        std::vector<uint8_t> concatenatedSignatures;
+        for (const Signature &signature : Signatures)
+        {
+            std::vector<uint8_t> signatureBytes = Utils::SecBlockToByteVector(signature.Data());
+            concatenatedSignatures.insert(std::end(concatenatedSignatures), std::begin(signatureBytes), std::end(signatureBytes));
+        }
+        concatenatedSignatures.insert(std::end(concatenatedSignatures), std::begin(Bitmap), std::end(Bitmap));
+        return concatenatedSignatures;
+    }
 
-std::string MultiSignature::ToString() const
-{
-    return "MultiSignature";
+    void MultiSignature::Serialize(Serialization &serializer) const
+    {
+        std::vector<uint8_t> bytes = ToBytes();
+        serializer.SerializeBytes(bytes);
+    }
+
+    std::string MultiSignature::ToString() const
+    {
+        return "MultiSignature";
+    }
 }

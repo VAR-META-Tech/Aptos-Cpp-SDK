@@ -1,0 +1,72 @@
+\doxysection{Private\+Key.\+h}
+\hypertarget{_private_key_8h_source}{}\label{_private_key_8h_source}\index{Accounts/PrivateKey.h@{Accounts/PrivateKey.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Anh\ NPH\ on\ 26/09/2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ APTOS\_PRIVATEKEY\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ APTOS\_PRIVATEKEY\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}Signature.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}PublicKey.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}../BCS/Serialization.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <cryptopp/xed25519.h>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }Aptos::Accounts}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key}{PrivateKey}}\ :\ \textcolor{keyword}{public}\ CryptoPP::ed25519PrivateKey}
+\DoxyCodeLine{00025\ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key_a536f10e741a61b322988a8c77d15978a}{ExtendedKeyLength}}\ =\ 64;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key_a6e1471515fde1c3a57cd67c4f0a04bc5}{KeyLength}}\ =\ 32;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key_ac1f5ab06998652f5fdbdc97f52e88b03}{Key}}();}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key_ac1f5ab06998652f5fdbdc97f52e88b03}{Key}}(std::string\ key);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ CryptoPP::SecByteBlock\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key_acdd392b37097d65825910051d1bdcc72}{KeyBytes}}();}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key_acdd392b37097d65825910051d1bdcc72}{KeyBytes}}(CryptoPP::SecByteBlock\ value);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key}{PrivateKey}}(CryptoPP::SecByteBlock\ privateKey);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key}{PrivateKey}}(std::string\ key);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key}{PrivateKey}}(std::array<CryptoPP::byte,\ KeyLength>\ privateKey);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key}{PrivateKey}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key_a4fe88d1e36c019fb1d92128d3edb2df3}{FromHex}}(std::string\ key);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_public_key}{PublicKey}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key_a35efdf90a99fd119d59edb38902597ee}{GetPublicKey}}();}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key}{PrivateKey}}\ Random();}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key_ae7bc2a3ff011be315ac70950e39a209f}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key}{PrivateKey}}\ \&rhs)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ operator!=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key}{PrivateKey}}\ \&rhs)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature}{Signature}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key_a33e94f164b8d1363a03536a582c5d4cd}{Sign}}(CryptoPP::SecByteBlock\ message);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key_a06f8841a61766822745c9e6c3945d081}{Serialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&serializer);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key_afe7962c28663a82bc0fb3f79aca598ef}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key}{PrivateKey}}\ \&rhs)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key_a175e5fe11be6643b6cec05615c8d436f}{GetHashCode}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key_af1a079065e44c9a66d027b48a7d720ae}{ToString}}();}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ std::string\ \_key;}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ CryptoPP::SecByteBlock\ \_extendedKeyBytes;}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ CryptoPP::SecByteBlock\ \_keyBytes;}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ GenerateExtendedKey();}
+\DoxyCodeLine{00141\ \ \ \ \ \};}
+\DoxyCodeLine{00142\ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ APTOS\_PRIVATEKEY\_H}}
+
+\end{DoxyCode}

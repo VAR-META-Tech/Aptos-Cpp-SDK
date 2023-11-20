@@ -8,16 +8,41 @@
 #include "BString.h"
 #include <map>
 
-class BCSMap : public ISerializable {
-private:
-    std::map<BString, ISerializable*> values;
+namespace Aptos::BCS
+{
+    /// <summary>
+    /// Representation of a map in BCS.
+    /// </summary>
+    class BCSMap : public ISerializable
+    {
+    private:
+        /// <summary>
+        /// A dictionary mapping to values that are serializable.
+        /// </summary>
+        std::map<BString, std::shared_ptr<ISerializable>> values;
 
-public:
-    BCSMap(const std::map<BString, ISerializable*>& values);
+    public:
+        /// <summary>
+        /// Creates a BCSMap from a Dictionary.
+        /// </summary>
+        /// <param name="values">A dictionary mapping to values that are
+        /// serializable.</param>
+        BCSMap(const std::map<BString, std::shared_ptr<ISerializable>> &values);
 
-    void Serialize(Serialization& serializer) const override;
+        /// <summary>
+        /// Maps (Key / Value Stores)
+        /// Maps are represented as a variable-length, sorted sequence of(Key, Value) tuples.
+        /// Keys must be unique and the tuples sorted by increasing lexicographical order on
+        /// the BCS bytes of each key.
+        /// The representation is otherwise similar to that of a variable-length sequence.
+        /// In particular, it is preceded by the number of tuples, encoded in ULEB128.
+        /// </summary>
+        /// <param name="serializer"></param>
+        void Serialize(Serialization &serializer) const override;
 
-    std::string ToString() const override;
-};
-
-#endif //APTOS_BCSMAP_H
+        /// <inheritdoc/>
+        std::string ToString() const override;
+        std::map<BString, std::shared_ptr<ISerializable>> getValues() const;
+    };
+}
+#endif // APTOS_BCSMAP_H

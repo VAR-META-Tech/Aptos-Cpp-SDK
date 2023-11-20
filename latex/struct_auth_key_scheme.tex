@@ -1,0 +1,37 @@
+\doxysection{Auth\+Key\+Scheme Struct Reference}
+\hypertarget{struct_auth_key_scheme}{}\label{struct_auth_key_scheme}\index{AuthKeyScheme@{AuthKeyScheme}}
+
+
+A class representing the available authorization key schemes for Aptos Blockchain accounts.  
+
+
+
+
+{\ttfamily \#include $<$Account\+Address.\+h$>$}
+
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_auth_key_scheme_a13838a1e801cdf1bb0fabc0eb4031565}\label{struct_auth_key_scheme_a13838a1e801cdf1bb0fabc0eb4031565} 
+static const Crypto\+PP\+::byte {\bfseries Ed25519} = 0x00
+\begin{DoxyCompactList}\small\item\em The ED25519 authorization key scheme value. \end{DoxyCompactList}\item 
+\Hypertarget{struct_auth_key_scheme_a8a882ae562f6115c3c19f0a4fed174d7}\label{struct_auth_key_scheme_a8a882ae562f6115c3c19f0a4fed174d7} 
+static const Crypto\+PP\+::byte {\bfseries Multi\+Ed25519} = 0x01
+\begin{DoxyCompactList}\small\item\em The multi-\/\+ED25519 authorization key scheme value. \end{DoxyCompactList}\item 
+\Hypertarget{struct_auth_key_scheme_a374dc1d95fe31449bd4914bf701fef9f}\label{struct_auth_key_scheme_a374dc1d95fe31449bd4914bf701fef9f} 
+static const Crypto\+PP\+::byte {\bfseries Derive\+Object\+Address\+From\+Guid} = 0x\+FD
+\begin{DoxyCompactList}\small\item\em The authorization key scheme value used to derive an object address from a GUID. \end{DoxyCompactList}\item 
+\Hypertarget{struct_auth_key_scheme_a6fc47847af79c7a17a721493be326400}\label{struct_auth_key_scheme_a6fc47847af79c7a17a721493be326400} 
+static const Crypto\+PP\+::byte {\bfseries Derive\+Object\+Address\+From\+Seed} = 0x\+FE
+\begin{DoxyCompactList}\small\item\em The authorization key scheme value used to derive an object address from a seed. \end{DoxyCompactList}\item 
+\Hypertarget{struct_auth_key_scheme_a34c70d1c2be2ded4fe0d850bd5bfc3d0}\label{struct_auth_key_scheme_a34c70d1c2be2ded4fe0d850bd5bfc3d0} 
+static const Crypto\+PP\+::byte {\bfseries Derive\+Resource\+Account\+Address} = 0x\+FF
+\begin{DoxyCompactList}\small\item\em The authorization key scheme value used to derive a resource account address. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class representing the available authorization key schemes for Aptos Blockchain accounts. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Accounts/Account\+Address.\+h\end{DoxyCompactItemize}

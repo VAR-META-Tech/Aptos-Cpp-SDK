@@ -1,0 +1,44 @@
+\doxysection{wallet.\+h}
+\hypertarget{wallet_8h_source}{}\label{wallet_8h_source}\index{HDWallet/wallet.h@{HDWallet/wallet.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ WALLET\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ WALLET\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../Accounts/Ed25519Bip32.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../Accounts/Account.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <bitcoin/system.hpp>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{using\ namespace\ }Aptos::Accounts;}
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }Aptos::HDWallet}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{enum\ class}\ SeedMode}
+\DoxyCodeLine{00020\ \ \ \ \ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_ed25519_bip32}{Ed25519Bip32}},}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ Bip39}
+\DoxyCodeLine{00031\ \ \ \ \ \};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_h_d_wallet_1_1_wallet}{Wallet}}}
+\DoxyCodeLine{00033\ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\ DerivationPath;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ bc::wallet::word\_list\ wordList;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ bc::wallet::hd\_private\ privateKey;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ std::string\ passphrase;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ std::unique\_ptr<Ed25519Bip32>\ \_ed25519Bip32;}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ std::vector<std::uint8\_t>\ \_seed;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ SeedMode\ \_seedMode;}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ \_account;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ bc::data\_chunk\ DeriveMnemonicSeed();}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ InitializeFirstAccount();}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ GetDerivedAccount(\textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ InitializeSeed();}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_h_d_wallet_1_1_wallet}{Wallet}}(\textcolor{keyword}{const}\ std::string\ \&mnemonicWords,}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SeedMode\ seedMode\ =\ SeedMode::Ed25519Bip32);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ account()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00055\ \ \ \ \ \};}
+\DoxyCodeLine{00056\ \}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ WALLET\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,162 @@
+\doxysection{U256 Class Reference}
+\hypertarget{class_u256}{}\label{class_u256}\index{U256@{U256}}
+
+
+Representation of a 256.  
+
+
+
+
+{\ttfamily \#include $<$U256.\+h$>$}
+
+Inheritance diagram for U256\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_u256}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_u256_ad5aa94e21ac133ab9f5d314f0391ead4}{U256}} (Crypto\+PP\+::\+Integer value)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{class_u256}{U256} object from a given Big\+Integer value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_u256_acade2d2966b36182f8dc74bbfc061593}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+Type\+Tag \mbox{\hyperlink{class_u256_a232ac8c956b043c10fd292f79e7d78e4}{Variant}} () const override
+\begin{DoxyCompactList}\small\item\em Returns the type of type tag.
+
+\begin{DoxyReturn}{Returns}
+A Type\+Tag enum.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+\Hypertarget{class_u256_a3e16123f5bd601a42a18c880e922fd6e}\label{class_u256_a3e16123f5bd601a42a18c880e922fd6e} 
+Crypto\+PP\+::\+Integer {\bfseries Get\+Value} () const
+\item 
+std\+::string \mbox{\hyperlink{class_u256_aa3c0dc392fc4ae49229e4165f37b3e77}{To\+String}} () const override
+\item 
+\Hypertarget{class_u256_a51b88a6897c6259968deb79036db878e}\label{class_u256_a51b88a6897c6259968deb79036db878e} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_u256}{U256}} \&other) const
+\item 
+\Hypertarget{class_u256_a11d79b846bc4349b0c90ef25f8e839be}\label{class_u256_a11d79b846bc4349b0c90ef25f8e839be} 
+size\+\_\+t {\bfseries Get\+Hash\+Code} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable_tag}{ISerializable\+Tag}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_i_serializable_tag_ab3675f858dd4d74c0a8412338f031fa8}{Serialize\+Tag}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer)
+\begin{DoxyCompactList}\small\item\em Serializes the type tag using it\textquotesingle{}s own serializaton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_u256_ab3dfe59aa31386c9bef23d846fbcdd25}\label{class_u256_ab3dfe59aa31386c9bef23d846fbcdd25} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable_tag}{ISerializable\+Tag}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\item 
+\Hypertarget{class_u256_a735f5d5031b0432b42468e550cc38668}\label{class_u256_a735f5d5031b0432b42468e550cc38668} 
+static Crypto\+PP\+::\+Integer {\bfseries Deserialize} (const std\+::vector$<$ uint8\+\_\+t $>$ \&data)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable_tag}{ISerializable\+Tag}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable_tag}{ISerializable\+Tag}} $>$ \mbox{\hyperlink{class_i_serializable_tag_aafee410c658f20ad2751148492c4db0e}{Deserialize\+Tag}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserialize a tag based on it\textquotesingle{}s type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of a 256. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_u256_ad5aa94e21ac133ab9f5d314f0391ead4}\label{class_u256_ad5aa94e21ac133ab9f5d314f0391ead4} 
+\index{U256@{U256}!U256@{U256}}
+\index{U256@{U256}!U256@{U256}}
+\doxysubsubsection{\texorpdfstring{U256()}{U256()}}
+{\footnotesize\ttfamily U256\+::\+U256 (\begin{DoxyParamCaption}\item[{Crypto\+PP\+::\+Integer}]{value }\end{DoxyParamCaption})}
+
+
+
+Creates a \doxylink{class_u256}{U256} object from a given Big\+Integer value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & A Big\+Integer value to serialize as u256.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_u256_acade2d2966b36182f8dc74bbfc061593}\label{class_u256_acade2d2966b36182f8dc74bbfc061593} 
+\index{U256@{U256}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!U256@{U256}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void U256\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{ISerializable}}.
+
+\Hypertarget{class_u256_aa3c0dc392fc4ae49229e4165f37b3e77}\label{class_u256_aa3c0dc392fc4ae49229e4165f37b3e77} 
+\index{U256@{U256}!ToString@{ToString}}
+\index{ToString@{ToString}!U256@{U256}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string U256\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Reimplemented from \mbox{\hyperlink{class_i_serializable_tag}{ISerializable\+Tag}}.
+
+\Hypertarget{class_u256_a232ac8c956b043c10fd292f79e7d78e4}\label{class_u256_a232ac8c956b043c10fd292f79e7d78e4} 
+\index{U256@{U256}!Variant@{Variant}}
+\index{Variant@{Variant}!U256@{U256}}
+\doxysubsubsection{\texorpdfstring{Variant()}{Variant()}}
+{\footnotesize\ttfamily Type\+Tag U256\+::\+Variant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the type of type tag.
+
+\begin{DoxyReturn}{Returns}
+A Type\+Tag enum.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable_tag_a801689c2520c6167fc687bc1c92bc28a}{ISerializable\+Tag}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/U256.\+h\item 
+BCS/U256.\+cpp\end{DoxyCompactItemize}

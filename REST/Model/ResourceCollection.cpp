@@ -17,6 +17,11 @@ ResourceCollection ResourceCollection::FromJson(const std::string &jsonStr) {
     return resourceCollection;
 }
 
+ResourceCollection::Data ResourceCollection::getDataProp() const
+{
+    return DataProp;
+}
+
 nlohmann::json ResourceCollection::Data::ToJson() const {
     return nlohmann::json{
                           {"collection_data", CollectionDataProp.ToJson()},
@@ -37,6 +42,16 @@ ResourceCollection::Data ResourceCollection::Data::FromJson(const nlohmann::json
     return data;
 }
 
+ResourceCollection::CollectionData ResourceCollection::Data::getCollectionDataProp() const
+{
+    return CollectionDataProp;
+}
+
+ResourceCollection::TokenData ResourceCollection::Data::getTokenDataProp() const
+{
+    return TokenDataProp;
+}
+
 nlohmann::json ResourceCollection::CollectionData::ToJson() const {
     return nlohmann::json{
         {"handle", Handle}
@@ -47,6 +62,11 @@ ResourceCollection::CollectionData ResourceCollection::CollectionData::FromJson(
     CollectionData data;
     data.Handle = jsonData["handle"].get<std::string>();
     return data;
+}
+
+std::string ResourceCollection::CollectionData::getHandle() const
+{
+    return Handle;
 }
 
 nlohmann::json ResourceCollection::Guid::ToJson() const {
@@ -73,6 +93,11 @@ ResourceCollection::TokenData ResourceCollection::TokenData::FromJson(const nloh
     TokenData data;
     data.Handle = jsonData["handle"].get<std::string>();
     return data;
+}
+
+std::string ResourceCollection::TokenData::getHandle() const
+{
+    return Handle;
 }
 
 nlohmann::json ResourceCollection::CollectionEvents::ToJson() const {

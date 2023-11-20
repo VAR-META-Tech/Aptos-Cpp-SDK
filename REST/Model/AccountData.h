@@ -18,6 +18,8 @@ public:
     nlohmann::json ToJson() const;
     // Deserialize the JSON to an object
     static AccountData FromJson(const nlohmann::json& jsonObject);
+    const std::string &getSequenceNumber() const;
+
 private:
     std::string SequenceNumber;
     std::string AuthenticationKey;

@@ -1,29 +1,52 @@
-//
-// Created by Anh NPH on 21/09/2023.
-//
-
 #ifndef APTOS_U128_H
 #define APTOS_U128_H
 
 #include "BCSTypes.h"
 #include <cryptopp/integer.h>
 
-class U128  : public ISerializableTag{
-private:
-    CryptoPP::Integer value;
+namespace Aptos::BCS
+{
+    /// <summary>
+    /// Representation of a U128.
+    /// </summary>
+    class U128 : public ISerializableTag
+    {
+    private:
+        /// <summary>
+        /// The internal U128 value as a BigInteger data type.
+        /// </summary>
+        CryptoPP::Integer value;
 
-public:
-    U128(CryptoPP::Integer value);
+    public:
+        /// <summary>
+        /// Creates a U128 objeect from a BigInteger value.
+        /// </summary>
+        /// <param name="value">A BigInteger value to serialize as u128.</param>
+        U128(CryptoPP::Integer value);
 
-    void Serialize(Serialization& serializer) const override;
-    static std::shared_ptr<ISerializableTag> Deserialize(Deserialization& deserializer);
-    TypeTag Variant() const override;
-    CryptoPP::Integer GetValue() const;
-    std::string ToString() const override;
-    bool Equals(const U128& other) const;
-    size_t GetHashCode() const;
+        /// <inheritdoc/>
+        void Serialize(Serialization &serializer) const override;
 
-    static CryptoPP::Integer Deserialize(const std::vector<uint8_t> &data);
-};
+        /// <inheritdoc/>
+        static std::shared_ptr<ISerializableTag> Deserialize(Deserialization &deserializer);
 
-#endif //APTOS_U128_H
+        /// <inheritdoc/>
+        TypeTag Variant() const override;
+
+        /// <inheritdoc/>
+        CryptoPP::Integer GetValue() const;
+
+        /// <inheritdoc/>
+        std::string ToString() const override;
+
+        /// <inheritdoc/>
+        bool Equals(const U128 &other) const;
+
+        /// <inheritdoc/>
+        size_t GetHashCode() const;
+
+        /// <inheritdoc/>
+        static CryptoPP::Integer Deserialize(const std::vector<uint8_t> &data);
+    };
+}
+#endif // APTOS_U128_H

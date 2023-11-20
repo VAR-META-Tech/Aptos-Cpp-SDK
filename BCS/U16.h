@@ -1,34 +1,51 @@
-//
-// Created by Anh NPH on 21/09/2023.
-//
-
 #ifndef APTOS_U16_H
 #define APTOS_U16_H
-
 #include "BCSTypes.h"
 #include <cstdint>
 
-class U16 : public ISerializableTag {
-private:
-    uint16_t value;
+namespace Aptos::BCS
+{
+    /// <summary>
+    /// Representation of a U32.
+    /// </summary>
+    class U16 : public ISerializableTag
+    {
+    private:
+        /// <summary>
+        /// The internal U16 values as a uint data type.
+        /// </summary>
+        uint16_t value;
 
-public:
-    U16(uint16_t value);
+    public:
+        /// <summary>
+        /// Creates a U16 object from a given uint value.
+        /// </summary>
+        /// <param name="value">A uint value to serialize as u16.</param>
+        U16(uint16_t value);
 
-    void Serialize(Serialization& serializer) const override;
+        /// <inheritdoc/>
+        void Serialize(Serialization &serializer) const override;
 
-    static uint16_t Deserialize(const std::vector<uint8_t>& data);
+        /// <inheritdoc/>
+        static uint16_t Deserialize(const std::vector<uint8_t> &data);
 
-    static std::shared_ptr<ISerializableTag> Deserialize(Deserialization& deserializer);
+        /// <inheritdoc/>
+        static std::shared_ptr<ISerializableTag> Deserialize(Deserialization &deserializer);
 
-    TypeTag Variant() const override;
+        /// <inheritdoc/>
+        TypeTag Variant() const override;
 
-    uint16_t GetValue() const;
+        /// <inheritdoc/>
+        uint16_t GetValue() const;
 
-    bool Equals(const U16& other) const;
+        /// <inheritdoc/>
+        bool Equals(const U16 &other) const;
 
-    std::string ToString() const override;
+        /// <inheritdoc/>
+        std::string ToString() const override;
 
-    size_t GetHashCode() const;
-};
-#endif //APTOS_U16_H
+        /// <inheritdoc/>
+        size_t GetHashCode() const;
+    };
+}
+#endif // APTOS_U16_H

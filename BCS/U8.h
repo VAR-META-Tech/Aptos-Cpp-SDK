@@ -1,26 +1,45 @@
-//
-// Created by Anh NPH on 21/09/2023.
-//
-
 #ifndef APTOS_U8_H
 #define APTOS_U8_H
-
 #include "BCSTypes.h"
 #include <cstdint>
 
-class U8 : public ISerializableTag {
-private:
-    uint8_t value;
+namespace Aptos::BCS
+{
+    class U8 : public ISerializableTag
+    {
+    private:
+        /// <summary>
+        /// The internal U8 value as a byte.
+        /// </summary>
+        uint8_t value;
 
-public:
-    U8(uint8_t value);
-    void Serialize(Serialization& serializer) const override;
-    static std::shared_ptr<ISerializableTag> Deserialize(Deserialization& deserializer);
-    TypeTag Variant() const override;
-    uint8_t GetValue() const;
-    bool Equals(const U8& other) const;
-    std::string ToString() const override;
-    size_t GetHashCode() const;
-};
+    public:
+        /// <summary>
+        /// Creates a U8 object from a given byte.
+        /// </summary>
+        /// <param name="value">A byte value to serialize as u8.</param>
+        U8(uint8_t value);
 
-#endif //APTOS_U8_H
+        /// <inheritdoc/>
+        void Serialize(Serialization &serializer) const override;
+
+        /// <inheritdoc/>
+        static std::shared_ptr<ISerializableTag> Deserialize(Deserialization &deserializer);
+
+        /// <inheritdoc/>
+        TypeTag Variant() const override;
+
+        /// <inheritdoc/>
+        uint8_t GetValue() const;
+
+        /// <inheritdoc/>
+        bool Equals(const U8 &other) const;
+
+        /// <inheritdoc/>
+        std::string ToString() const override;
+
+        /// <inheritdoc/>
+        size_t GetHashCode() const;
+    };
+}
+#endif // APTOS_U8_H

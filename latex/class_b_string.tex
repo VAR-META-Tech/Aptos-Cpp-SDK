@@ -1,0 +1,177 @@
+\doxysection{BString Class Reference}
+\hypertarget{class_b_string}{}\label{class_b_string}\index{BString@{BString}}
+
+
+Representation of a string in BCS.  
+
+
+
+
+{\ttfamily \#include $<$BString.\+h$>$}
+
+Inheritance diagram for BString\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_b_string}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_b_string_af8b1fce0a11702293c064727999c8f00}{BString}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{class_b_string}{BString} from a string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_b_string_acc360b1a5c65f1477b080e924c9afb7f}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{class_b_string}{BString} object using the given Serializer. \end{DoxyCompactList}\item 
+\Hypertarget{class_b_string_ac46ded6fdc4b1c18c016599945a56df8}\label{class_b_string_ac46ded6fdc4b1c18c016599945a56df8} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_b_string}{BString}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{class_b_string_add7a3989e3def1524ef013daef4e4db4}{To\+String}} () const override
+\item 
+\Hypertarget{class_b_string_a61ab9449a4d8b907d03560c35205f71c}\label{class_b_string_a61ab9449a4d8b907d03560c35205f71c} 
+size\+\_\+t {\bfseries Get\+Hash\+Code} () const
+\item 
+\Hypertarget{class_b_string_a529f8dfecd423c797497ba3182f01437}\label{class_b_string_a529f8dfecd423c797497ba3182f01437} 
+std\+::string {\bfseries Get\+Value} () const
+\item 
+std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{class_b_string_ac185751bc3339f49890f9f66773f8eb7}{Remove\+BOM}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Utility function used to Remove\+BOM prefixes. \end{DoxyCompactList}\item 
+\Hypertarget{class_b_string_a6d52a2432c56f774d8234f05801e5991}\label{class_b_string_a6d52a2432c56f774d8234f05801e5991} 
+bool {\bfseries operator$<$} (const \mbox{\hyperlink{class_b_string}{BString}} \&other) const
+\item 
+\Hypertarget{class_b_string_a5d0b9613d2cacfeedb3c4d18a1577916}\label{class_b_string_a5d0b9613d2cacfeedb3c4d18a1577916} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{class_b_string}{BString}} \&other) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{class_b_string_ac08a2a49d89899670ab63112f5ffaa20}{Deserialize}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes a give byte array into a UTF8 compliant string. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_b_string_a9b691e29770cb4e7100471673d9fa7a0}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array contained by the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of a string in BCS. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_b_string_af8b1fce0a11702293c064727999c8f00}\label{class_b_string_af8b1fce0a11702293c064727999c8f00} 
+\index{BString@{BString}!BString@{BString}}
+\index{BString@{BString}!BString@{BString}}
+\doxysubsubsection{\texorpdfstring{BString()}{BString()}}
+{\footnotesize\ttfamily BString\+::\+BString (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value }\end{DoxyParamCaption})}
+
+
+
+Creates a \doxylink{class_b_string}{BString} from a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & A string value.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_b_string_ac08a2a49d89899670ab63112f5ffaa20}\label{class_b_string_ac08a2a49d89899670ab63112f5ffaa20} 
+\index{BString@{BString}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!BString@{BString}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::string BString\+::\+Deserialize (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Deserializes a give byte array into a UTF8 compliant string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & A string represented as a byte array.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_b_string_a9b691e29770cb4e7100471673d9fa7a0}\label{class_b_string_a9b691e29770cb4e7100471673d9fa7a0} 
+\index{BString@{BString}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!BString@{BString}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ BString\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_deserialization}{Deserialization}} \&}]{deserializer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Deserializes a byte array contained by the Deserializer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em deserializer} & The Deserializer that contains the bytes.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \doxylink{class_b_string}{BString} object.
+\end{DoxyReturn}
+\Hypertarget{class_b_string_ac185751bc3339f49890f9f66773f8eb7}\label{class_b_string_ac185751bc3339f49890f9f66773f8eb7} 
+\index{BString@{BString}!RemoveBOM@{RemoveBOM}}
+\index{RemoveBOM@{RemoveBOM}!BString@{BString}}
+\doxysubsubsection{\texorpdfstring{RemoveBOM()}{RemoveBOM()}}
+{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ BString\+::\+Remove\+BOM (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{data }\end{DoxyParamCaption})}
+
+
+
+Utility function used to Remove\+BOM prefixes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & A string represented as a byte array.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The cleaned byte array.
+\end{DoxyReturn}
+\Hypertarget{class_b_string_acc360b1a5c65f1477b080e924c9afb7f}\label{class_b_string_acc360b1a5c65f1477b080e924c9afb7f} 
+\index{BString@{BString}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!BString@{BString}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void BString\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{class_b_string}{BString} object using the given Serializer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & The Serializer object.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{ISerializable}}.
+
+\Hypertarget{class_b_string_add7a3989e3def1524ef013daef4e4db4}\label{class_b_string_add7a3989e3def1524ef013daef4e4db4} 
+\index{BString@{BString}!ToString@{ToString}}
+\index{ToString@{ToString}!BString@{BString}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string BString\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable}{ISerializable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/BString.\+h\item 
+BCS/BString.\+cpp\end{DoxyCompactItemize}

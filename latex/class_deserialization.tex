@@ -1,0 +1,88 @@
+\doxysection{Deserialization Class Reference}
+\hypertarget{class_deserialization}{}\label{class_deserialization}\index{Deserialization@{Deserialization}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_deserialization_aacec891aab98dade1cd6eee31e45dadb}\label{class_deserialization_aacec891aab98dade1cd6eee31e45dadb} 
+{\bfseries Deserialization} (const std\+::vector$<$ uint8\+\_\+t $>$ \&data)
+\item 
+\Hypertarget{class_deserialization_a322226daca43f299f54c68628f57ced3}\label{class_deserialization_a322226daca43f299f54c68628f57ced3} 
+std\+::size\+\_\+t {\bfseries Remaining} () const
+\item 
+\Hypertarget{class_deserialization_a487c5fc747a6e6eccb46f55896c7f0dd}\label{class_deserialization_a487c5fc747a6e6eccb46f55896c7f0dd} 
+bool {\bfseries Deserialize\+Bool} ()
+\item 
+\Hypertarget{class_deserialization_ab1e9b0ec925c3270c0513dd68efd59c1}\label{class_deserialization_ab1e9b0ec925c3270c0513dd68efd59c1} 
+std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries To\+Bytes} ()
+\item 
+\Hypertarget{class_deserialization_a748444fecb741e0c2798c1620605a5d6}\label{class_deserialization_a748444fecb741e0c2798c1620605a5d6} 
+std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries Fixed\+Bytes} (std\+::size\+\_\+t length)
+\item 
+\Hypertarget{class_deserialization_af8378e8f7ae5fb6846386dac457fa57b}\label{class_deserialization_af8378e8f7ae5fb6846386dac457fa57b} 
+\mbox{\hyperlink{class_b_c_s_map}{BCSMap}} {\bfseries Deserialize\+Map} (\mbox{\hyperlink{class_i_serializable}{ISerializable}} \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*}deserialize\+Func)(\mbox{\hyperlink{class_deserialization}{Deserialization}} \&))
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ $>$ \mbox{\hyperlink{class_deserialization_a520ddb2d36b00a6704ecd945a6e7b832}{Deserialize\+Sequence}} (std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$(\mbox{\hyperlink{class_deserialization}{Deserialization}} \&)$>$ deserialize\+Func)
+\begin{DoxyCompactList}\small\item\em Deserializes a list of objects of same type. \end{DoxyCompactList}\item 
+\Hypertarget{class_deserialization_afe1c983cae9f7824186855db70d68e2e}\label{class_deserialization_afe1c983cae9f7824186855db70d68e2e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_tag_sequence}{Tag\+Sequence}} $>$ {\bfseries Deserialize\+Tag\+Sequence} ()
+\item 
+\Hypertarget{class_deserialization_ab92c22bc587e9af5efa8f848b063e350}\label{class_deserialization_ab92c22bc587e9af5efa8f848b063e350} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_sequence}{Sequence}} $>$ {\bfseries Deserialize\+Script\+Arg\+Sequence} ()
+\item 
+\Hypertarget{class_deserialization_acfa63758e2a7bb3dbb10fae95dbb2ca7}\label{class_deserialization_acfa63758e2a7bb3dbb10fae95dbb2ca7} 
+std\+::vector$<$ \mbox{\hyperlink{class_sequence}{Sequence}} $>$ {\bfseries Deserialize\+Arg\+Sequence} ()
+\item 
+\Hypertarget{class_deserialization_a862f1d1c003004b662eea245ba9cb818}\label{class_deserialization_a862f1d1c003004b662eea245ba9cb818} 
+std\+::string {\bfseries Deserialize\+String} ()
+\item 
+\Hypertarget{class_deserialization_a71aa068723e4aaa208558da883554021}\label{class_deserialization_a71aa068723e4aaa208558da883554021} 
+\mbox{\hyperlink{class_i_serializable}{ISerializable}} {\bfseries Deserialize\+Struct} ()
+\item 
+\Hypertarget{class_deserialization_a2fd21416b86ef85ff10d88599c43547a}\label{class_deserialization_a2fd21416b86ef85ff10d88599c43547a} 
+uint8\+\_\+t {\bfseries Deserialize\+U8} ()
+\item 
+\Hypertarget{class_deserialization_ae8408b93e7c0a7ff90204f91a784870c}\label{class_deserialization_ae8408b93e7c0a7ff90204f91a784870c} 
+uint16\+\_\+t {\bfseries Deserialize\+U16} ()
+\item 
+\Hypertarget{class_deserialization_aa12ac5eb8695852ffa61b273a5bfba49}\label{class_deserialization_aa12ac5eb8695852ffa61b273a5bfba49} 
+uint32\+\_\+t {\bfseries Deserialize\+U32} ()
+\item 
+\Hypertarget{class_deserialization_a640e7cea16cbd373ef9240653866937d}\label{class_deserialization_a640e7cea16cbd373ef9240653866937d} 
+uint64\+\_\+t {\bfseries Deserialize\+U64} ()
+\item 
+\Hypertarget{class_deserialization_af880ee15ec4d2923f990078805161b6b}\label{class_deserialization_af880ee15ec4d2923f990078805161b6b} 
+Crypto\+PP\+::\+Integer {\bfseries Deserialize\+U128} ()
+\item 
+\Hypertarget{class_deserialization_a7609614658da2426b81b77ab0405ec3f}\label{class_deserialization_a7609614658da2426b81b77ab0405ec3f} 
+Crypto\+PP\+::\+Integer {\bfseries Deserialize\+U256} ()
+\item 
+\Hypertarget{class_deserialization_ac816dc3cd5618206f3b16dca28597c66}\label{class_deserialization_ac816dc3cd5618206f3b16dca28597c66} 
+std\+::size\+\_\+t {\bfseries Deserialize\+Uleb128} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_deserialization_a520ddb2d36b00a6704ecd945a6e7b832}\label{class_deserialization_a520ddb2d36b00a6704ecd945a6e7b832} 
+\index{Deserialization@{Deserialization}!DeserializeSequence@{DeserializeSequence}}
+\index{DeserializeSequence@{DeserializeSequence}!Deserialization@{Deserialization}}
+\doxysubsubsection{\texorpdfstring{DeserializeSequence()}{DeserializeSequence()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ $>$ Deserialization\+::\+Deserialize\+Sequence (\begin{DoxyParamCaption}\item[{std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$(\mbox{\hyperlink{class_deserialization}{Deserialization}} \&)$>$}]{deserialize\+Func }\end{DoxyParamCaption})}
+
+
+
+Deserializes a list of objects of same type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value\+Decoder\+Type} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Deserialization.\+h\item 
+BCS/Deserialization.\+cpp\end{DoxyCompactItemize}

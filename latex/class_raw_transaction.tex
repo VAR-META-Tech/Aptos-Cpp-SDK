@@ -1,0 +1,99 @@
+\doxysection{Raw\+Transaction Class Reference}
+\hypertarget{class_raw_transaction}{}\label{class_raw_transaction}\index{RawTransaction@{RawTransaction}}
+
+
+Representation of a raw transaction.  
+
+
+
+
+{\ttfamily \#include $<$rawtransaction.\+h$>$}
+
+Inheritance diagram for Raw\+Transaction\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_raw_transaction}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_raw_transaction_a96b64fc89df81ca902928d1590a2c135}\label{class_raw_transaction_a96b64fc89df81ca902928d1590a2c135} 
+{\bfseries Raw\+Transaction} (const \mbox{\hyperlink{class_account_address}{Account\+Address}} \&sender, int sequence\+Number, const \mbox{\hyperlink{class_transaction_payload}{Transaction\+Payload}} \&payload, int max\+Gas\+Amount, int gas\+Unit\+Price, uint64\+\_\+t expiration\+Timestamps\+Secs, int chain\+Id)
+\item 
+\Hypertarget{class_raw_transaction_ad680246653206c6409b273480cfb9230}\label{class_raw_transaction_ad680246653206c6409b273480cfb9230} 
+std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries Prehash} ()
+\item 
+\Hypertarget{class_raw_transaction_a84496a7f4d5ea1a477af2835cc938c05}\label{class_raw_transaction_a84496a7f4d5ea1a477af2835cc938c05} 
+std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries Keyed} ()
+\item 
+\Hypertarget{class_raw_transaction_af25a382edf760228e4d1ab5d32c3b3a5}\label{class_raw_transaction_af25a382edf760228e4d1ab5d32c3b3a5} 
+\mbox{\hyperlink{class_signature}{Signature}} {\bfseries Sign} (\mbox{\hyperlink{class_private_key}{Private\+Key}} key)
+\item 
+\Hypertarget{class_raw_transaction_a9a71c00dd2ea933c21bb50335a85f57e}\label{class_raw_transaction_a9a71c00dd2ea933c21bb50335a85f57e} 
+bool {\bfseries Verify} (\mbox{\hyperlink{class_public_key}{Public\+Key}} key, const \mbox{\hyperlink{class_signature}{Signature}} \&signature)
+\item 
+void \mbox{\hyperlink{class_raw_transaction_adf558be823b03bdc37b4ec5067a494d7}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_raw_transaction_a1d5f6b607efd55db073765feaf6102f8}{To\+String}} () const override
+\item 
+\Hypertarget{class_raw_transaction_a3755503ea3fcc9216768858e9251d6bb}\label{class_raw_transaction_a3755503ea3fcc9216768858e9251d6bb} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_raw_transaction}{Raw\+Transaction}} \&other) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_raw_transaction_aba0689cea99062346e30543c38506d51}\label{class_raw_transaction_aba0689cea99062346e30543c38506d51} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of a raw transaction. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raw_transaction_adf558be823b03bdc37b4ec5067a494d7}\label{class_raw_transaction_adf558be823b03bdc37b4ec5067a494d7} 
+\index{RawTransaction@{RawTransaction}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!RawTransaction@{RawTransaction}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Raw\+Transaction\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{ISerializable}}.
+
+\Hypertarget{class_raw_transaction_a1d5f6b607efd55db073765feaf6102f8}\label{class_raw_transaction_a1d5f6b607efd55db073765feaf6102f8} 
+\index{RawTransaction@{RawTransaction}!ToString@{ToString}}
+\index{ToString@{ToString}!RawTransaction@{RawTransaction}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Raw\+Transaction\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable}{ISerializable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/rawtransaction.\+h\item 
+BCS/rawtransaction.\+cpp\end{DoxyCompactItemize}

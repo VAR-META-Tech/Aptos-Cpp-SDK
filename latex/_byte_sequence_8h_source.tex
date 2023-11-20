@@ -1,0 +1,38 @@
+\doxysection{Byte\+Sequence.\+h}
+\hypertarget{_byte_sequence_8h_source}{}\label{_byte_sequence_8h_source}\index{BCS/ByteSequence.h@{BCS/ByteSequence.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Anh\ NPH\ on\ 21/09/2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ APTOS\_BYTESEQUENCE\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ APTOS\_BYTESEQUENCE\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}BCSTypes.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }Aptos::BCS}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_sequence}{BytesSequence}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}}}
+\DoxyCodeLine{00015\ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ std::vector<std::vector<uint8\_t>>\ values;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_sequence}{BytesSequence}}(\textcolor{keyword}{const}\ std::vector<std::vector<uint8\_t>>\ \&values);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_sequence_ae39fce7693f8facb6395db1b4ee236ab}{Serialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&serializer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_sequence}{BytesSequence}}\ *\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_sequence_a1cbaa12c5af97611dbd19c3a2566ab80}{Deserialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}\ \&deserializer);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ std::vector<std::vector<uint8\_t>>\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_sequence_a66c11978bf5846fd876038ee8bc88da8}{GetValue}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_sequence_a15721516ceef9dc06b9f3f144e24e243}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_sequence}{BytesSequence}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_sequence_adfcf97e0db6d236b98fc3b888503814e}{ToString}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_sequence_ace850bcf1d74f7a9db4e43a44fb0307e}{GetHashCode}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ \ \ \ \ \};}
+\DoxyCodeLine{00047\ \}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ APTOS\_BYTESEQUENCE\_H}}
+
+\end{DoxyCode}

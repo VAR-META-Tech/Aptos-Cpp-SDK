@@ -1,0 +1,39 @@
+\doxysection{U16.\+h}
+\hypertarget{_u16_8h_source}{}\label{_u16_8h_source}\index{BCS/U16.h@{BCS/U16.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ APTOS\_U16\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ APTOS\_U16\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}BCSTypes.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }Aptos::BCS}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u16}{U16}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{ISerializableTag}}}
+\DoxyCodeLine{00012\ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ uint16\_t\ value;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u16}{U16}}(uint16\_t\ value);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u16_a914da966e77013bc9ec8232cd3ddca77}{Serialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&serializer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ uint16\_t\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u16_a7077e1c2570681c78d68e3be737929f2}{Deserialize}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\ \&data);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<ISerializableTag>\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u16_a7077e1c2570681c78d68e3be737929f2}{Deserialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}\ \&deserializer);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ TypeTag\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u16_a486067889df66776f7c97bc42ee16de6}{Variant}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u16_a60ba932065e9815c17ce6125c528298f}{GetValue}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u16_a3dd9da5f6c0678bba6dc8461584d245c}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u16}{U16}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u16_a89ee953ed2a912c6c78ef0a3434a774c}{ToString}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u16_a79f6eab1522825b9e8ce7bd78b0fea8d}{GetHashCode}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00049\ \ \ \ \ \};}
+\DoxyCodeLine{00050\ \}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ APTOS\_U16\_H}}
+
+\end{DoxyCode}

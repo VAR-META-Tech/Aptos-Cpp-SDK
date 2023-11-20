@@ -1,0 +1,41 @@
+\doxysection{IResource Class Reference}
+\hypertarget{class_i_resource}{}\label{class_i_resource}\index{IResource@{IResource}}
+
+
+Interface implemented by all resource types. Necessary to create Dictionaries or Lists of different resources.  
+
+
+
+
+{\ttfamily \#include $<$Aptos\+Token\+Client.\+h$>$}
+
+Inheritance diagram for IResource\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_i_resource}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_i_resource_afdeb377932a1f5d5c365c93882fa7d2b}\label{class_i_resource_afdeb377932a1f5d5c365c93882fa7d2b} 
+virtual std\+::string {\bfseries Get\+Struct\+Tag} () const =0
+\item 
+\Hypertarget{class_i_resource_ac37b61d5c916650bae70d50086056a23}\label{class_i_resource_ac37b61d5c916650bae70d50086056a23} 
+virtual std\+::string {\bfseries To\+String} () const =0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_i_resource_a17cace660f4d1a17a8403761b0579d7a}\label{class_i_resource_a17cace660f4d1a17a8403761b0579d7a} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_resource}{IResource}} $>$ {\bfseries Parse} (std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Resource\+Data\+Base $>$ resource)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface implemented by all resource types. Necessary to create Dictionaries or Lists of different resources. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+REST/Aptos\+Token\+Client.\+h\item 
+REST/Aptos\+Token\+Client.\+cpp\end{DoxyCompactItemize}

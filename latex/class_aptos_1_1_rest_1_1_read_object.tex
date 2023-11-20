@@ -1,0 +1,47 @@
+\doxysection{Aptos\+::Rest\+::Read\+Object Class Reference}
+\hypertarget{class_aptos_1_1_rest_1_1_read_object}{}\label{class_aptos_1_1_rest_1_1_read_object}\index{Aptos::Rest::ReadObject@{Aptos::Rest::ReadObject}}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_read_object_afd89175bcfc726e96d41918d5ed01450}\label{class_aptos_1_1_rest_1_1_read_object_afd89175bcfc726e96d41918d5ed01450} 
+using {\bfseries Func\+Value} = std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{IResource}} $>$(std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Resource\+Data\+Base $>$)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_read_object_a333b7d29fe88ad56894046b9d2d5111e}\label{class_aptos_1_1_rest_1_1_read_object_a333b7d29fe88ad56894046b9d2d5111e} 
+{\bfseries Read\+Object} (const std\+::unordered\+\_\+map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{IResource}} $>$ $>$ \&Resources)
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_read_object_a3aecff2a82407d546169fe67df51855a}\label{class_aptos_1_1_rest_1_1_read_object_a3aecff2a82407d546169fe67df51855a} 
+std\+::string {\bfseries To\+String} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::map$<$ std\+::string, Func\+Value \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_read_object_ad9cc5139dc4ba68750a1349ccc63c0bb}{Resource\+Map}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_aptos_1_1_rest_1_1_read_object_ad9cc5139dc4ba68750a1349ccc63c0bb}\label{class_aptos_1_1_rest_1_1_read_object_ad9cc5139dc4ba68750a1349ccc63c0bb} 
+\index{Aptos::Rest::ReadObject@{Aptos::Rest::ReadObject}!ResourceMap@{ResourceMap}}
+\index{ResourceMap@{ResourceMap}!Aptos::Rest::ReadObject@{Aptos::Rest::ReadObject}}
+\doxysubsubsection{\texorpdfstring{ResourceMap}{ResourceMap}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, Read\+Object\+::\+Func\+Value \texorpdfstring{$\ast$}{*} $>$ Aptos\+::\+Rest\+::\+Read\+Object\+::\+Resource\+Map\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{Collection::StructTag,\ \&Collection::Parse\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{Object::StructTag,\ \&\mbox{\hyperlink{class_aptos_1_1_rest_1_1_object_a303cf9ae7397f1290330b7eab1966edd}{Object::Parse}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{PropertyMap::StructTag,\ \&PropertyMap::Parse\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{Royalty::StructTag,\ \&Royalty::Parse\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{Token::StructTag,\ \&Token::Parse\}\}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+REST/Aptos\+Token\+Client.\+h\item 
+REST/Aptos\+Token\+Client.\+cpp\end{DoxyCompactItemize}

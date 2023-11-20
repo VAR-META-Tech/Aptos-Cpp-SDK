@@ -1,0 +1,166 @@
+\doxysection{Multi\+Public\+Key Class Reference}
+\hypertarget{class_multi_public_key}{}\label{class_multi_public_key}\index{MultiPublicKey@{MultiPublicKey}}
+
+
+The ED25519 Multi-\/\+Public Key implementation.  
+
+
+
+
+{\ttfamily \#include $<$multipublickey.\+h$>$}
+
+Inheritance diagram for Multi\+Public\+Key\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_multi_public_key}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_multi_public_key_aa223c900eb9c2a54f5e6d2964e758203}{Multi\+Public\+Key}} (const std\+::vector$<$ \mbox{\hyperlink{class_public_key}{Public\+Key}} $>$ \&keys, Crypto\+PP\+::byte threshold, bool checked=true)
+\begin{DoxyCompactList}\small\item\em Initializer for the \doxylink{class_multi_public_key}{Multi\+Public\+Key}. \end{DoxyCompactList}\item 
+std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{class_multi_public_key_a845873f4be8a66f2d9cfb2a73523d005}{To\+Bytes}} () const
+\begin{DoxyCompactList}\small\item\em Serialize the threshold and concatenated keys of a given threshold signature scheme instance to a Data object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_multi_public_key_a3dff76a0c0544b7ee4af28363076d423}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const
+\begin{DoxyCompactList}\small\item\em Serialize the object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_multi_public_key_a0cd0fe7d448178d9012c034d834bd58e}{To\+String}} () const
+\item 
+\Hypertarget{class_multi_public_key_a5d2ba976622183020b957195914b491f}\label{class_multi_public_key_a5d2ba976622183020b957195914b491f} 
+std\+::vector$<$ \mbox{\hyperlink{class_public_key}{Public\+Key}} $>$ {\bfseries get\+Keys} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_multi_public_key}{Multi\+Public\+Key}} \mbox{\hyperlink{class_multi_public_key_ae68b9850c732bff5a7e5bc57a80375cc}{From\+Bytes}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&key\+Bytes)
+\begin{DoxyCompactList}\small\item\em Deserialize a Data object to a \doxylink{class_multi_public_key}{Multi\+Public\+Key} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_multi_public_key_a2e2dc1c05e31fbc9ab755855efb0ca10}\label{class_multi_public_key_a2e2dc1c05e31fbc9ab755855efb0ca10} 
+static const int {\bfseries MIN\+\_\+\+KEYS} = 2
+\begin{DoxyCompactList}\small\item\em The minimum amount of keys to initialize this class. \end{DoxyCompactList}\item 
+\Hypertarget{class_multi_public_key_a008bd93f7e5849528b8d475928ba2956}\label{class_multi_public_key_a008bd93f7e5849528b8d475928ba2956} 
+static const int {\bfseries MAX\+\_\+\+KEYS} = 32
+\begin{DoxyCompactList}\small\item\em The maximum amount of keys allowed for initialization. \end{DoxyCompactList}\item 
+\Hypertarget{class_multi_public_key_a617be7ae3b933db9afba58eb6eb02bbc}\label{class_multi_public_key_a617be7ae3b933db9afba58eb6eb02bbc} 
+static const int {\bfseries MIN\+\_\+\+THRESHOLD} = 1
+\begin{DoxyCompactList}\small\item\em The minimum threshold amount. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The ED25519 Multi-\/\+Public Key implementation. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_multi_public_key_aa223c900eb9c2a54f5e6d2964e758203}\label{class_multi_public_key_aa223c900eb9c2a54f5e6d2964e758203} 
+\index{MultiPublicKey@{MultiPublicKey}!MultiPublicKey@{MultiPublicKey}}
+\index{MultiPublicKey@{MultiPublicKey}!MultiPublicKey@{MultiPublicKey}}
+\doxysubsubsection{\texorpdfstring{MultiPublicKey()}{MultiPublicKey()}}
+{\footnotesize\ttfamily Multi\+Public\+Key\+::\+Multi\+Public\+Key (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_public_key}{Public\+Key}} $>$ \&}]{keys,  }\item[{Crypto\+PP\+::byte}]{threshold,  }\item[{bool}]{checked = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Initializer for the \doxylink{class_multi_public_key}{Multi\+Public\+Key}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em keys} & The Public Keys themselves.\\
+\hline
+{\em threshold} & The current amount of keys in the keys array.\\
+\hline
+{\em checked} & Verify whether the amount of keys fit within the threshold from 2 to 32 keys, both sides are inclusive.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_multi_public_key_ae68b9850c732bff5a7e5bc57a80375cc}\label{class_multi_public_key_ae68b9850c732bff5a7e5bc57a80375cc} 
+\index{MultiPublicKey@{MultiPublicKey}!FromBytes@{FromBytes}}
+\index{FromBytes@{FromBytes}!MultiPublicKey@{MultiPublicKey}}
+\doxysubsubsection{\texorpdfstring{FromBytes()}{FromBytes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_multi_public_key}{Multi\+Public\+Key}} Multi\+Public\+Key\+::\+From\+Bytes (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{key\+Bytes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Deserialize a Data object to a \doxylink{class_multi_public_key}{Multi\+Public\+Key} instance. 
+
+This function deserializes the given Data object to a \doxylink{class_multi_public_key}{Multi\+Public\+Key} instance by extracting the threshold and keys from it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key\+Bytes} & A Data object containing the serialized threshold and keys of a \doxylink{class_multi_public_key}{Multi\+Public\+Key} instance.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \doxylink{class_multi_public_key}{Multi\+Public\+Key} instance initialized with the deserialized keys and threshold.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_multi_public_key_a3dff76a0c0544b7ee4af28363076d423}\label{class_multi_public_key_a3dff76a0c0544b7ee4af28363076d423} 
+\index{MultiPublicKey@{MultiPublicKey}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!MultiPublicKey@{MultiPublicKey}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Multi\+Public\+Key\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Serialize the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{ISerializable}}.
+
+\Hypertarget{class_multi_public_key_a845873f4be8a66f2d9cfb2a73523d005}\label{class_multi_public_key_a845873f4be8a66f2d9cfb2a73523d005} 
+\index{MultiPublicKey@{MultiPublicKey}!ToBytes@{ToBytes}}
+\index{ToBytes@{ToBytes}!MultiPublicKey@{MultiPublicKey}}
+\doxysubsubsection{\texorpdfstring{ToBytes()}{ToBytes()}}
+{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Multi\+Public\+Key\+::\+To\+Bytes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Serialize the threshold and concatenated keys of a given threshold signature scheme instance to a Data object. 
+
+This function concatenates the keys of the instance and serializes the threshold and concatenated keys to a Data object.
+
+\begin{DoxyReturn}{Returns}
+A bytes array containing the serialized threshold and concatenated keys.
+\end{DoxyReturn}
+\Hypertarget{class_multi_public_key_a0cd0fe7d448178d9012c034d834bd58e}\label{class_multi_public_key_a0cd0fe7d448178d9012c034d834bd58e} 
+\index{MultiPublicKey@{MultiPublicKey}!ToString@{ToString}}
+\index{ToString@{ToString}!MultiPublicKey@{MultiPublicKey}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Multi\+Public\+Key\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable}{ISerializable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Accounts/multipublickey.\+h\item 
+Accounts/multipublickey.\+cpp\end{DoxyCompactItemize}

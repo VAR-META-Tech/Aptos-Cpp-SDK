@@ -1,0 +1,23 @@
+\doxysection{Request\+Client.\+h}
+\hypertarget{_request_client_8h_source}{}\label{_request_client_8h_source}\index{REST/RequestClient.h@{REST/RequestClient.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ REQUESTCLIENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ REQUESTCLIENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cpprest/http\_client.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cpprest/uri.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }Aptos::Rest}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_request_client}{RequestClient}}}
+\DoxyCodeLine{00013\ \ \ \ \ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ web::http::http\_request\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_request_client_a2f268b1fa9ec72128f12b4b41cdd3a03}{SubmitRequest}}(web::http::uri\ uri,\ web::http::method\ method\ =\ web::http::methods::GET);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ utility::string\_t\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_request_client_ac9d957d6c742a2ebb817d600e1932b7f}{GetAptosHeaderValue}}();}
+\DoxyCodeLine{00028\ \ \ \ \ \};}
+\DoxyCodeLine{00029\ \}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ REQUESTCLIENT\_H}}
+
+\end{DoxyCode}

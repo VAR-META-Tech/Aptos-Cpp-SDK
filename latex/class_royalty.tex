@@ -1,0 +1,64 @@
+\doxysection{Royalty Class Reference}
+\hypertarget{class_royalty}{}\label{class_royalty}\index{Royalty@{Royalty}}
+Inheritance diagram for Royalty\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_royalty}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_royalty_a9096bbb7942463b9276ce66de0294fe7}\label{class_royalty_a9096bbb7942463b9276ce66de0294fe7} 
+{\bfseries Royalty} (int numerator, int denominator, const \mbox{\hyperlink{class_account_address}{Account\+Address}} \&payee\+Address)
+\item 
+std\+::string \mbox{\hyperlink{class_royalty_a2f985eceff63b361d0ffec71801065d0}{Get\+Struct\+Tag}} () const override
+\item 
+std\+::string \mbox{\hyperlink{class_royalty_a6672141c371d683e5f7d848626b37691}{To\+String}} () const override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_royalty_a2810e9b96575bd6de00e2730c9fd42ed}\label{class_royalty_a2810e9b96575bd6de00e2730c9fd42ed} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_resource}{IResource}} $>$ {\bfseries Parse} (std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Resource\+Data\+Base $>$ resource)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_resource}{IResource}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_resource}{IResource}} $>$ {\bfseries Parse} (std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Resource\+Data\+Base $>$ resource)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_royalty_a912480969261d897210457c2860c536c}\label{class_royalty_a912480969261d897210457c2860c536c} 
+static std\+::string {\bfseries Struct\+Tag} = "{}0x4\+::royalty\+::\+Royalty"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_royalty_a2f985eceff63b361d0ffec71801065d0}\label{class_royalty_a2f985eceff63b361d0ffec71801065d0} 
+\index{Royalty@{Royalty}!GetStructTag@{GetStructTag}}
+\index{GetStructTag@{GetStructTag}!Royalty@{Royalty}}
+\doxysubsubsection{\texorpdfstring{GetStructTag()}{GetStructTag()}}
+{\footnotesize\ttfamily std\+::string Royalty\+::\+Get\+Struct\+Tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_resource}{IResource}}.
+
+\Hypertarget{class_royalty_a6672141c371d683e5f7d848626b37691}\label{class_royalty_a6672141c371d683e5f7d848626b37691} 
+\index{Royalty@{Royalty}!ToString@{ToString}}
+\index{ToString@{ToString}!Royalty@{Royalty}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Royalty\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_resource}{IResource}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+REST/Aptos\+Token\+Client.\+h\item 
+REST/Aptos\+Token\+Client.\+cpp\end{DoxyCompactItemize}

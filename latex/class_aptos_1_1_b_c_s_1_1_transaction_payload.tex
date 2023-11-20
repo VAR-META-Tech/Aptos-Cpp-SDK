@@ -1,0 +1,85 @@
+\doxysection{Aptos\+::BCS\+::Transaction\+Payload Class Reference}
+\hypertarget{class_aptos_1_1_b_c_s_1_1_transaction_payload}{}\label{class_aptos_1_1_b_c_s_1_1_transaction_payload}\index{Aptos::BCS::TransactionPayload@{Aptos::BCS::TransactionPayload}}
+Inheritance diagram for Aptos\+::BCS\+::Transaction\+Payload\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_aptos_1_1_b_c_s_1_1_transaction_payload}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_transaction_payload_a94fad5cb2f7425cfc2c1ed6015bdcdea}\label{class_aptos_1_1_b_c_s_1_1_transaction_payload_a94fad5cb2f7425cfc2c1ed6015bdcdea} 
+{\bfseries Transaction\+Payload} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ \&payload)
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_transaction_payload_a8129d9c80256d86d26300d36257db480}\label{class_aptos_1_1_b_c_s_1_1_transaction_payload_a8129d9c80256d86d26300d36257db480} 
+Transaction\+Payload\+Type\+Tag {\bfseries Variant} () const
+\item 
+void \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload_ac5b8e1aac4b088b35cace3c75a018105}{Serialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object. \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_transaction_payload_a627bd8a2ceff874dedb7c846f8bdeb88}\label{class_aptos_1_1_b_c_s_1_1_transaction_payload_a627bd8a2ceff874dedb7c846f8bdeb88} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload}{Transaction\+Payload}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload_a4d3e99fa61a582f1ca0540d9737c4b75}{To\+String}} () const override
+\item 
+size\+\_\+t \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload_aed262082471b03d05b398c5ddd5b5805}{Get\+Hash\+Code}} () override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_transaction_payload_a0bd9a086bc43ab41723fefa476776960}\label{class_aptos_1_1_b_c_s_1_1_transaction_payload_a0bd9a086bc43ab41723fefa476776960} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_aa692ec6a618d04663c1e5d3cf83f59d7}{Deserialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_transaction_payload_aed262082471b03d05b398c5ddd5b5805}\label{class_aptos_1_1_b_c_s_1_1_transaction_payload_aed262082471b03d05b398c5ddd5b5805} 
+\index{Aptos::BCS::TransactionPayload@{Aptos::BCS::TransactionPayload}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!Aptos::BCS::TransactionPayload@{Aptos::BCS::TransactionPayload}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}}
+{\footnotesize\ttfamily size\+\_\+t Aptos\+::\+BCS\+::\+Transaction\+Payload\+::\+Get\+Hash\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_transaction_payload_ac5b8e1aac4b088b35cace3c75a018105}\label{class_aptos_1_1_b_c_s_1_1_transaction_payload_ac5b8e1aac4b088b35cace3c75a018105} 
+\index{Aptos::BCS::TransactionPayload@{Aptos::BCS::TransactionPayload}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Aptos::BCS::TransactionPayload@{Aptos::BCS::TransactionPayload}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Aptos\+::\+BCS\+::\+Transaction\+Payload\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_a69bdbb0faf3fda49df818174878938b1}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_transaction_payload_a4d3e99fa61a582f1ca0540d9737c4b75}\label{class_aptos_1_1_b_c_s_1_1_transaction_payload_a4d3e99fa61a582f1ca0540d9737c4b75} 
+\index{Aptos::BCS::TransactionPayload@{Aptos::BCS::TransactionPayload}!ToString@{ToString}}
+\index{ToString@{ToString}!Aptos::BCS::TransactionPayload@{Aptos::BCS::TransactionPayload}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Aptos\+::\+BCS\+::\+Transaction\+Payload\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Transaction\+Payload.\+h\item 
+BCS/Transaction\+Payload.\+cpp\end{DoxyCompactItemize}

@@ -1,7 +1,3 @@
-//
-// Created by Anh NPH on 25/09/2023.
-//
-
 #include "Utils.h"
 #include <algorithm>
 #include <cryptopp/sha.h>
@@ -10,112 +6,140 @@
 #include <cryptopp/xed25519.h>
 #include <sstream>
 #include <iomanip>
+#include "../../Accounts/PrivateKey.h"
 
-namespace Utils {
-bool IsValidAddress(std::string walletAddress) {
-    if (walletAddress.substr(0, 2) == "0x")
-        walletAddress = walletAddress.substr(2);
+using namespace Aptos::Accounts;
+namespace Aptos::Utils
+{
+    bool IsValidAddress(std::string walletAddress)
+    {
+        if (walletAddress.substr(0, 2) == "0x")
+            walletAddress = walletAddress.substr(2);
 
-    std::regex pattern("[a-fA-F0-9]{64}$");
-    return std::regex_match(walletAddress, pattern);
-}
-
-std::vector<uint8_t> ByteArrayFromHexString(std::string input) {
-    if (input.substr(0, 2) == "0x")
-        input = input.substr(2);
-
-    size_t outputLength = input.length() / 2;
-    std::vector<uint8_t> output(outputLength);
-
-    for (int i = 0; i < outputLength; i++)
-        output[i] = std::stoi(input.substr(i * 2, 2), nullptr, 16);
-
-    return output;
-}
-
-std::string HexStringFromByteArray(const std::vector<uint8_t> &input) {
-    std::string output;
-    for (const auto &byte: input) {
-        char buf[3];
-        snprintf(buf, sizeof(buf), "%02x", byte);
-        output += buf;
+        std::regex pattern("[a-fA-F0-9]{64}$");
+        return std::regex_match(walletAddress, pattern);
     }
-    return output;
-}
 
-template<typename TKey, typename TValue>
-void addOrReplace(std::map < TKey, TValue > &dictionary, TKey
-                                                          key,
-                  TValue value
-                  ) {
-    dictionary[key] =
-        value;
-}
+    std::vector<uint8_t> ByteArrayFromHexString(std::string input)
+    {
+        if (input.substr(0, 2) == "0x")
+            input = input.substr(2);
 
+        size_t outputLength = input.length() / 2;
+        std::vector<uint8_t> output(outputLength);
 
-template<typename TKey, typename TValue>
-TValue TryGet(const std::map<TKey, TValue> &dictionary, TKey key) {
-    auto it = dictionary.find(key);
-    if (it != dictionary.end())
-        return it->second;
-    else
-        return TValue();  // Or whatever default value you want
-}
+        for (int i = 0; i < outputLength; i++)
+            output[i] = std::stoi(input.substr(i * 2, 2), nullptr, 16);
 
-template<typename T>
-std::vector<T> Slice(std::vector<T> source, int start, int end) {
-    if (end < 0)
-        end = source.size();
+        return output;
+    }
 
-    int len = end - start;
+    std::string HexStringFromByteArray(const std::vector<uint8_t> &input)
+    {
+        std::string output;
+        for (const auto &byte : input)
+        {
+            char buf[3];
+            snprintf(buf, sizeof(buf), "%02x", byte);
+            output += buf;
+        }
+        return output;
+    }
 
-    std::vector<T> res(source.begin() + start, source.begin() + end);
-    return res;
-}
+    template <typename TKey, typename TValue>
+    void addOrReplace(std::map<TKey, TValue> &dictionary, TKey key,
+                      TValue value)
+    {
+        dictionary[key] =
+            value;
+    }
 
-template<typename T>
-std::vector<T> Slice(std::vector<T> source, int start) {
-    return Slice(source, start, -1);
-}
+    template <typename TKey, typename TValue>
+    TValue TryGet(const std::map<TKey, TValue> &dictionary, TKey key)
+    {
+        auto it = dictionary.find(key);
+        if (it != dictionary.end())
+            return it->second;
+        else
+            return TValue(); // Or whatever default value you want
+    }
 
-std::vector<uint8_t> Sha256(const std::vector<uint8_t>& data, int offset, int count) {
-    CryptoPP::SHA256 hash;
-    std::vector<uint8_t> digest(hash.DigestSize());
+    template <typename T>
+    std::vector<T> Slice(std::vector<T> source, int start, int end)
+    {
+        if (end < 0)
+            end = source.size();
 
-    std::string message(data.begin() + offset, data.begin() + offset + count);
-    hash.CalculateDigest(digest.data(), (unsigned char*)message.data(), message.size());
+        int len = end - start;
 
-    return digest;
-}
+        std::vector<T> res(source.begin() + start, source.begin() + end);
+        return res;
+    }
 
-std::vector<uint8_t> Sha256(const std::vector<uint8_t>& data) {
-    return Sha256(data, 0, data.size());
-}
+    template <typename T>
+    std::vector<T> Slice(std::vector<T> source, int start)
+    {
+        return Slice(source, start, -1);
+    }
 
-std::pair<std::vector<uint8_t>, std::vector<uint8_t>> EdKeyPairFromSeed(const std::vector<uint8_t>& seed) {
-    //todo
-    std::vector<uint8_t> privateKey(32);
-    std::vector<uint8_t> publicKey(32);
-    return {privateKey, publicKey};
-}
+    std::vector<uint8_t> Sha256(const std::vector<uint8_t> &data, int offset, int count)
+    {
+        CryptoPP::SHA256 hash;
+        std::vector<uint8_t> digest(hash.DigestSize());
 
-CryptoPP::SecByteBlock ByteVectorToSecBlock(const std::vector<uint8_t> &input)
-{
-    CryptoPP::SecByteBlock output(input.data(), input.size());
-    return output;
-}
+        std::string message(data.begin() + offset, data.begin() + offset + count);
+        hash.CalculateDigest(digest.data(), (unsigned char *)message.data(), message.size());
 
-std::vector<uint8_t> SecBlockToByteVector(const CryptoPP::SecByteBlock &input)
-{
-    std::vector<uint8_t> byteArray(input.data(), input.data() + input.size());
-    return byteArray;
-}
+        return digest;
+    }
 
-CryptoPP::SecByteBlock StringToSecByteBlock(const std::string &str) {
-    CryptoPP::SecByteBlock secBlock(str.size());
-    std::memcpy(secBlock.BytePtr(), str.c_str(), str.size());
-    return secBlock;
-}
+    std::vector<uint8_t> Sha256(const std::vector<uint8_t> &data)
+    {
+        return Sha256(data, 0, data.size());
+    }
 
+    std::pair<CryptoPP::SecByteBlock, CryptoPP::SecByteBlock> EdKeyPairFromSeed(const CryptoPP::SecByteBlock &seed)
+    {
+        PrivateKey priv(seed);
+        auto pub = priv.GetPublicKey();
+        return {seed, pub.KeyBytes()};
+    }
 
+    CryptoPP::SecByteBlock ByteVectorToSecBlock(const std::vector<uint8_t> &input)
+    {
+        CryptoPP::SecByteBlock output(input.data(), input.size());
+        return output;
+    }
+
+    std::vector<uint8_t> SecBlockToByteVector(const CryptoPP::SecByteBlock &input)
+    {
+        std::vector<uint8_t> byteArray(input.data(), input.data() + input.size());
+        return byteArray;
+    }
+
+    CryptoPP::SecByteBlock StringToSecByteBlock(const std::string &str)
+    {
+        CryptoPP::SecByteBlock secBlock(str.size());
+        std::memcpy(secBlock.BytePtr(), str.c_str(), str.size());
+        return secBlock;
+    }
+
+    std::string ltrim(const std::string &s, const std::string &charsToTrim)
+    {
+        auto it = std::find_if(s.begin(), s.end(), [charsToTrim](char c)
+                               { return charsToTrim.find(c) == std::string::npos; });
+        return std::string(it, s.end());
+    }
+
+    std::string rtrim(const std::string &s, const std::string &charsToTrim)
+    {
+        auto it = std::find_if(s.rbegin(), s.rend(), [charsToTrim](char c)
+                               { return charsToTrim.find(c) == std::string::npos; });
+        return std::string(s.begin(), it.base());
+    }
+
+    std::string trim(const std::string &s, const std::string &charsToTrim)
+    {
+        return rtrim(ltrim(s, charsToTrim), charsToTrim);
+    }
 }

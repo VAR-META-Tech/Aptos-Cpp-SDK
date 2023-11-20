@@ -1,0 +1,93 @@
+\doxysection{Module\+Id Class Reference}
+\hypertarget{class_module_id}{}\label{class_module_id}\index{ModuleId@{ModuleId}}
+
+
+Representation of a module ID.  
+
+
+
+
+{\ttfamily \#include $<$Module\+Id.\+h$>$}
+
+Inheritance diagram for Module\+Id\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_module_id}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_module_id_a02c843b36c93655048943f7bc68f575c}\label{class_module_id_a02c843b36c93655048943f7bc68f575c} 
+{\bfseries Module\+Id} (const \mbox{\hyperlink{class_account_address}{Account\+Address}} \&address, const std\+::string \&name)
+\item 
+void \mbox{\hyperlink{class_module_id_af2fcd61370540f5b3cd16ef8528d4b0f}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object. \end{DoxyCompactList}\item 
+\Hypertarget{class_module_id_a073db012c47a98840373daa4a29915b0}\label{class_module_id_a073db012c47a98840373daa4a29915b0} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_module_id}{Module\+Id}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{class_module_id_a4261dd8c32d2193cab49fa5824fd5989}{To\+String}} () const
+\item 
+\Hypertarget{class_module_id_a5b6aebec565dc9fc5368195a4f427e11}\label{class_module_id_a5b6aebec565dc9fc5368195a4f427e11} 
+size\+\_\+t {\bfseries Get\+Hash\+Code} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_module_id_ae6a992ba7e2cf4a0d056fd8846d59c40}\label{class_module_id_ae6a992ba7e2cf4a0d056fd8846d59c40} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\item 
+\Hypertarget{class_module_id_aedbe1c7aab696e906f6ab471110312af}\label{class_module_id_aedbe1c7aab696e906f6ab471110312af} 
+static \mbox{\hyperlink{class_module_id}{Module\+Id}} {\bfseries From\+Str} (const std\+::string \&module\+Id)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of a module ID. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_module_id_af2fcd61370540f5b3cd16ef8528d4b0f}\label{class_module_id_af2fcd61370540f5b3cd16ef8528d4b0f} 
+\index{ModuleId@{ModuleId}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!ModuleId@{ModuleId}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Module\+Id\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{ISerializable}}.
+
+\Hypertarget{class_module_id_a4261dd8c32d2193cab49fa5824fd5989}\label{class_module_id_a4261dd8c32d2193cab49fa5824fd5989} 
+\index{ModuleId@{ModuleId}!ToString@{ToString}}
+\index{ToString@{ToString}!ModuleId@{ModuleId}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Module\+Id\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable}{ISerializable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Module\+Id.\+h\item 
+BCS/Module\+Id.\+cpp\end{DoxyCompactItemize}

@@ -40,6 +40,11 @@ Id Id::FromJson(const nlohmann::json &idJson) {
     return id;
 }
 
+TokenDataId &Id::getTokenDataIdProp()
+{
+    return TokenDataIdProp;
+}
+
 nlohmann::json TableItemToken::ToJson() const {
     nlohmann::json tableItemTokenJson;
     tableItemTokenJson["amount"] = Amount;
@@ -54,6 +59,21 @@ TableItemToken TableItemToken::FromJson(const nlohmann::json &tableItemTokenJson
     tableItemToken.IdProp = Id::FromJson(tableItemTokenJson["id"]);
     tableItemToken.TokenPropertiesProp = TokenProperties::FromJson(tableItemTokenJson["token_properties"]);
     return tableItemToken;
+}
+
+Id &TableItemToken::getIdProp()
+{
+    return IdProp;
+}
+
+std::string TableItemToken::getAmount() const
+{
+    return Amount;
+}
+
+void TableItemToken::setAmount(const std::string &newAmount)
+{
+    Amount = newAmount;
 }
 
 }

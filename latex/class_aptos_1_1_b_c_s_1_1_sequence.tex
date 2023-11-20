@@ -1,0 +1,126 @@
+\doxysection{Aptos\+::BCS\+::Sequence Class Reference}
+\hypertarget{class_aptos_1_1_b_c_s_1_1_sequence}{}\label{class_aptos_1_1_b_c_s_1_1_sequence}\index{Aptos::BCS::Sequence@{Aptos::BCS::Sequence}}
+
+
+Representation of a Transaction Argument sequence / list. NOTE\+: Transaction Arguments have different types hence they cannot be represented using a regular list. NOTE\+: This class does not implement deserialization because the developer would know the types beforehand, and hence would apply the appropriate deserialization based on the type.  
+
+
+
+
+{\ttfamily \#include $<$Sequence.\+h$>$}
+
+Inheritance diagram for Aptos\+::BCS\+::Sequence\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_aptos_1_1_b_c_s_1_1_sequence}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_sequence_a2097b053f9b0f5d2fafef7df56fda56e}\label{class_aptos_1_1_b_c_s_1_1_sequence_a2097b053f9b0f5d2fafef7df56fda56e} 
+{\bfseries Sequence} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ $>$ \&values)
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_sequence_a51cabb496c12b3d6945f7c171f7815f2}\label{class_aptos_1_1_b_c_s_1_1_sequence_a51cabb496c12b3d6945f7c171f7815f2} 
+int {\bfseries Length} () const
+\begin{DoxyCompactList}\small\item\em The length of the \doxylink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence_ad61ce6e6af0ea45216690f684edcfeda}{Get\+Value}} () const
+\begin{DoxyCompactList}\small\item\em Gets the internal list of objects inside the \doxylink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence_aba289d4ffd7f82d9d0356cce704348bb}{Serialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_sequence_ae9445c948efc79b52741a2daed2f6e64}\label{class_aptos_1_1_b_c_s_1_1_sequence_ae9445c948efc79b52741a2daed2f6e64} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence_a536afb736da3c2bf7c024d0436e172b2}{To\+String}} () const override
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_sequence_a4f924998986b9222f1405934f32b8ed5}\label{class_aptos_1_1_b_c_s_1_1_sequence_a4f924998986b9222f1405934f32b8ed5} 
+size\+\_\+t {\bfseries Get\+Hash\+Code} () const
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_sequence_ac4fcd46fb5063b343281621371080b5b}\label{class_aptos_1_1_b_c_s_1_1_sequence_ac4fcd46fb5063b343281621371080b5b} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ $>$ \& {\bfseries get\+Values} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_sequence_a26949e9e87e54aad76ecf1f109f3e880}\label{class_aptos_1_1_b_c_s_1_1_sequence_a26949e9e87e54aad76ecf1f109f3e880} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_aa692ec6a618d04663c1e5d3cf83f59d7}{Deserialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of a Transaction Argument sequence / list. NOTE\+: Transaction Arguments have different types hence they cannot be represented using a regular list. NOTE\+: This class does not implement deserialization because the developer would know the types beforehand, and hence would apply the appropriate deserialization based on the type. 
+
+Fixed and Variable Length Sequences Sequences can be made of up of any BCS supported types(even complex structures) but all elements in the sequence must be of the same type.\+If the length of a sequence is fixed and well known then BCS represents this as just the concatenation of the serialized form of each individual element in the sequence. If the length of the sequence can be variable, then the serialized sequence is length prefixed with a ULEB128-\/encoded unsigned integer indicating the number of elements in the sequence. All variable length sequences must be MAX\+\_\+\+SEQUENCE\+\_\+\+LENGTH elements long or less. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_sequence_ad61ce6e6af0ea45216690f684edcfeda}\label{class_aptos_1_1_b_c_s_1_1_sequence_ad61ce6e6af0ea45216690f684edcfeda} 
+\index{Aptos::BCS::Sequence@{Aptos::BCS::Sequence}!GetValue@{GetValue}}
+\index{GetValue@{GetValue}!Aptos::BCS::Sequence@{Aptos::BCS::Sequence}}
+\doxysubsubsection{\texorpdfstring{GetValue()}{GetValue()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ $>$ Aptos\+::\+BCS\+::\+Sequence\+::\+Get\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the internal list of objects inside the \doxylink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}. 
+
+\begin{DoxyReturn}{Returns}
+The list of object.
+\end{DoxyReturn}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_sequence_aba289d4ffd7f82d9d0356cce704348bb}\label{class_aptos_1_1_b_c_s_1_1_sequence_aba289d4ffd7f82d9d0356cce704348bb} 
+\index{Aptos::BCS::Sequence@{Aptos::BCS::Sequence}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Aptos::BCS::Sequence@{Aptos::BCS::Sequence}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Aptos\+::\+BCS\+::\+Sequence\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_a69bdbb0faf3fda49df818174878938b1}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_sequence_a536afb736da3c2bf7c024d0436e172b2}\label{class_aptos_1_1_b_c_s_1_1_sequence_a536afb736da3c2bf7c024d0436e172b2} 
+\index{Aptos::BCS::Sequence@{Aptos::BCS::Sequence}!ToString@{ToString}}
+\index{ToString@{ToString}!Aptos::BCS::Sequence@{Aptos::BCS::Sequence}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Aptos\+::\+BCS\+::\+Sequence\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Sequence.\+h\item 
+BCS/Sequence.\+cpp\end{DoxyCompactItemize}

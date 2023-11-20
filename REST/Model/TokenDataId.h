@@ -9,6 +9,15 @@ class TokenDataId {
 public:
     nlohmann::json ToJson() const;
     static TokenDataId FromJson(const nlohmann::json& jsonData);
+    std::string getCollection() const;
+    void setCollection(const std::string &newCollection);
+
+    std::string getCreator() const;
+    void setCreator(const std::string &newCreator);
+
+    std::string getName() const;
+    void setName(const std::string &newName);
+
 private:
     std::string collection;
     std::string creator;

@@ -1,0 +1,26 @@
+\doxysection{Transaction\+Argument.\+h}
+\hypertarget{_transaction_argument_8h_source}{}\label{_transaction_argument_8h_source}\index{BCS/TransactionArgument.h@{BCS/TransactionArgument.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TRANSACTIONARGUMENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TRANSACTIONARGUMENT\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}BCSTypes.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }Aptos::BCS}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_argument}{TransactionArgument}}}
+\DoxyCodeLine{00010\ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_argument}{TransactionArgument}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}}\ *value,\ TypeTag\ encoderType);}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ Encode();}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}}\ *value;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ TypeTag\ encoderType;}
+\DoxyCodeLine{00018\ \ \ \ \ \};}
+\DoxyCodeLine{00019\ \}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TRANSACTIONARGUMENT\_H}}
+
+\end{DoxyCode}

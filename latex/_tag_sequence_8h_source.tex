@@ -1,0 +1,36 @@
+\doxysection{Tag\+Sequence.\+h}
+\hypertarget{_tag_sequence_8h_source}{}\label{_tag_sequence_8h_source}\index{BCS/TagSequence.h@{BCS/TagSequence.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ APTOS\_TAGSEQUENCE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ APTOS\_TAGSEQUENCE\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}BCSTypes.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }Aptos::BCS}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{TagSequence}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}}}
+\DoxyCodeLine{00011\ \ \ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{TagSequence}}(\textcolor{keyword}{const}\ std::vector<std::shared\_ptr<ISerializableTag>>\ \&serializableTags);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence_ac6cef0e3e679c90b5f2266e4fbb9103b}{Serialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&serializer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<ISerializable>\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence_a5662d735a8a8b19350ec883a04b94d24}{Deserialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}\ \&deserializer);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<ISerializableTag>>\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence_abc25ef3a35a957204776572867aeb8e7}{GetValue}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence_ab851605aa21ec6d16a801c280a4c0ea4}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{TagSequence}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence_a0448e101dc80ea28e2e87e6c915945c1}{ToString}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence_a8d84dcd0b66781349f6ce6e8b874b3d2}{GetHashCode}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<ISerializableTag>>\ serializableTags;}
+\DoxyCodeLine{00045\ \ \ \ \ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{TagSequence}}\ \&lhs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{TagSequence}}\ \&rhs);}
+\DoxyCodeLine{00048\ \}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ APTOS\_TAGSEQUENCE\_H}}
+
+\end{DoxyCode}

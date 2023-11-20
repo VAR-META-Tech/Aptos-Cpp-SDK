@@ -1,0 +1,41 @@
+\doxysection{Authentication\+Key.\+h}
+\hypertarget{_authentication_key_8h_source}{}\label{_authentication_key_8h_source}\index{Accounts/AuthenticationKey.h@{Accounts/AuthenticationKey.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Anh\ NPH\ on\ 28/09/2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ APTOS\_AUTHENTICATIONKEY\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ APTOS\_AUTHENTICATIONKEY\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Types/MultiEd25519PublicKey.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cryptopp/xed25519.h>}}
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }Aptos::Accounts}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_authentication_key}{AuthenticationKey}}}
+\DoxyCodeLine{00023\ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_authentication_key_a48e19c46c9dad6241f6ac93e202fb1d9}{LENGTH}}\ =\ 32;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ CryptoPP::byte\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_authentication_key_ad04c29f2b595eb8c913a7c50d6a7567d}{MULTI\_ED25519\_SCHEME}}\ =\ 0x01;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ CryptoPP::byte\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_authentication_key_a274048beac9586df075968bfa3fba17b}{ED25519\_SCHEME}}\ =\ 0x00;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ CryptoPP::byte\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_authentication_key_a714dfcb1b59c4dccb8d5800c9b2dce9a}{DERIVE\_RESOURCE\_ACCOUNT\_SCHEME}}\ =\ 255;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_authentication_key}{AuthenticationKey}}(\textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&bytes);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_authentication_key}{AuthenticationKey}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_authentication_key_a97bc7f5dff65c3bbd794cef9fd4e4619}{FromMultiEd25519PublicKey}}(Aptos::Accounts::Types::MultiEd25519PublicKey\ publicKey);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_authentication_key}{AuthenticationKey}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_authentication_key_a2fa843b7dfab36393611f9edd540ddf5}{FromEd25519PublicKey}}(\textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&publicKey);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_authentication_key_ae147532efa5f9f9948ec97070ca29f27}{DerivedAddress}}();}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ CryptoPP::SecByteBlock\ \_bytes;}
+\DoxyCodeLine{00080\ \ \ \ \ \};}
+\DoxyCodeLine{00081\ \}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ APTOS\_AUTHENTICATIONKEY\_H}}
+
+\end{DoxyCode}

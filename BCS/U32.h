@@ -1,36 +1,51 @@
-//
-// Created by Anh NPH on 21/09/2023.
-//
-
 #ifndef APTOS_U32_H
 #define APTOS_U32_H
-
 #include "BCSTypes.h"
 #include <cstdint>
 
+namespace Aptos::BCS
+{
+    /// <summary>
+    /// Representation of a U32.
+    /// </summary>
+    class U32 : public ISerializableTag
+    {
+    private:
+        /// <summary>
+        /// The internal U32 values as a uint data type.
+        /// </summary>
+        uint32_t value;
 
-class U32 : public ISerializableTag {
-private:
-    uint32_t value;
+    public:
+        /// <summary>
+        /// Creates a U32 object from a uint value.
+        /// </summary>
+        /// <param name="value">A uint value to serialize as u32.</param>
+        U32(uint32_t value);
 
-public:
-    U32(uint32_t value);
+        /// <inheritdoc/>
+        void Serialize(Serialization &serializer) const override;
 
-    void Serialize(Serialization& serializer) const override;
+        /// <inheritdoc/>
+        static uint32_t Deserialize(const std::vector<uint8_t> &data);
 
-    static uint32_t Deserialize(const std::vector<uint8_t>& data);
+        /// <inheritdoc/>
+        static std::shared_ptr<ISerializableTag> Deserialize(Deserialization &deserializer);
 
-    static std::shared_ptr<ISerializableTag> Deserialize(Deserialization& deserializer);
+        /// <inheritdoc/>
+        TypeTag Variant() const override;
 
-    TypeTag Variant() const override;
+        /// <inheritdoc/>
+        uint32_t GetValue() const;
 
-    uint32_t GetValue() const;
+        /// <inheritdoc/>
+        bool Equals(const U32 &other) const;
 
-    bool Equals(const U32& other) const;
+        /// <inheritdoc/>
+        std::string ToString() const override;
 
-    std::string ToString() const override;
-
-    size_t GetHashCode() const;
-};
-
-#endif //APTOS_U32_H
+        /// <inheritdoc/>
+        size_t GetHashCode() const;
+    };
+}
+#endif // APTOS_U32_H

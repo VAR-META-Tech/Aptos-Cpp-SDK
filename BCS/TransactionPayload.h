@@ -1,23 +1,32 @@
 #ifndef TRANSACTIONPAYLOAD_H
 #define TRANSACTIONPAYLOAD_H
-
 #include "BCSTypes.h"
 
-class TransactionPayload : public ISerializable {
-public:
-    TransactionPayload(const std::shared_ptr<ISerializable>& payload);
-    TypeTag Variant() const;
-    void Serialize(Serialization& serializer) const override;
-    static std::shared_ptr<ISerializable> Deserialize(Deserialization& deserializer);
-    bool Equals(const TransactionPayload& other) const;
-    std::string ToString() const override;
-    size_t GetHashCode() override;
+namespace Aptos::BCS
+{
+    enum class TransactionPayloadTypeTag
+    {
+        SCRIPT,
+        MODULE_BUNDLE,
+        SCRIPT_FUNCTION
+    };
 
-private:
-    std::shared_ptr<ISerializable> value;
-    TypeTag variant;
-};
+    class TransactionPayload : public ISerializable
+    {
+    public:
+        TransactionPayload(const std::shared_ptr<ISerializable> &payload);
+        TransactionPayloadTypeTag Variant() const;
+        void Serialize(Serialization &serializer) const override;
+        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
+        bool Equals(const TransactionPayload &other) const;
+        std::string ToString() const override;
+        size_t GetHashCode() override;
 
-bool operator==(const TransactionPayload &lhs, const TransactionPayload &rhs);
+    private:
+        std::shared_ptr<ISerializable> value;
+        TransactionPayloadTypeTag variant;
+    };
 
+    bool operator==(const TransactionPayload &lhs, const TransactionPayload &rhs);
+}
 #endif // TRANSACTIONPAYLOAD_H

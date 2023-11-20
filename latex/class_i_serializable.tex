@@ -1,0 +1,86 @@
+\doxysection{ISerializable Class Reference}
+\hypertarget{class_i_serializable}{}\label{class_i_serializable}\index{ISerializable@{ISerializable}}
+
+
+{\ttfamily \#include $<$BCSTypes.\+h$>$}
+
+Inheritance diagram for ISerializable\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{class_i_serializable}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const =0
+\begin{DoxyCompactList}\small\item\em Serialize the object. \end{DoxyCompactList}\item 
+\Hypertarget{class_i_serializable_ae7eea88d38a04a5f7ef8f2a6deb10711}\label{class_i_serializable_ae7eea88d38a04a5f7ef8f2a6deb10711} 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\item 
+virtual std\+::string \mbox{\hyperlink{class_i_serializable_a309b944338843df11042f84b25267bcd}{To\+String}} () const =0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An interfaces that enforces types to implement a serialization method. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}\label{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7} 
+\index{ISerializable@{ISerializable}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!ISerializable@{ISerializable}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ ISerializable\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_deserialization}{Deserialization}} \&}]{deserializer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Deserializes a byte array hosted inside the Deserializer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em deserializer} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}\label{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d} 
+\index{ISerializable@{ISerializable}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!ISerializable@{ISerializable}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily virtual void ISerializable\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Serialize the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_multi_public_key_a3dff76a0c0544b7ee4af28363076d423}{Multi\+Public\+Key}}, \mbox{\hyperlink{class_account_address_a9599ce7f6a6e3147b5bda0b443ac5581}{Account\+Address}}, \mbox{\hyperlink{class_multi_signature_aa8564e2e6d52c40b66425cf01a612222}{Multi\+Signature}}, \mbox{\hyperlink{class_public_key_a76f106bae2e8121193482fde590e7a58}{Public\+Key}}, \mbox{\hyperlink{class_signature_ae32de4d106df0de50fab71d08450421b}{Signature}}, \mbox{\hyperlink{class_authenticator_a0d3b3019dc43d4aabdc151a4f90fa5dd}{Authenticator}}, \mbox{\hyperlink{class_ed25519_authenticator_a40bc89ab826b5f6c29334540ab0c62d1}{Ed25519\+Authenticator}}, \mbox{\hyperlink{class_multi_agent_authenticator_a28247174c0388c64a7e6b908007e4dd9}{Multi\+Agent\+Authenticator}}, \mbox{\hyperlink{class_multi_ed25519_authenticator_a82fbaae04169bbe3c883a991d3e881ed}{Multi\+Ed25519\+Authenticator}}, \mbox{\hyperlink{class_b_c_s_map_aaf03bf31263a89a55991bc3ec74eca7a}{BCSMap}}, \mbox{\hyperlink{class_bool_a2201c3de5e34af62654fa778ab701c20}{Bool}}, \mbox{\hyperlink{class_b_string_acc360b1a5c65f1477b080e924c9afb7f}{BString}}, \mbox{\hyperlink{class_bytes_a01f17f4211cb136ca8cb9a6dc86bed83}{Bytes}}, \mbox{\hyperlink{class_bytes_sequence_aff14da89315135772d60e82e5db1b099}{Bytes\+Sequence}}, \mbox{\hyperlink{class_entry_function_a0ebdde40d4b3fff21ccd849d01107051}{Entry\+Function}}, \mbox{\hyperlink{class_module_id_af2fcd61370540f5b3cd16ef8528d4b0f}{Module\+Id}}, \mbox{\hyperlink{class_raw_transaction_adf558be823b03bdc37b4ec5067a494d7}{Raw\+Transaction}}, \mbox{\hyperlink{class_script_a0ab2a7cd20acc98db948adfaff44b526}{Script}}, \mbox{\hyperlink{class_script_argument_a8e329b0c85cb04487eb2b66751795562}{Script\+Argument}}, \mbox{\hyperlink{class_sequence_a0e44b2355af4cf9373478c8db5e249c2}{Sequence}}, \mbox{\hyperlink{class_signed_transaction_a73183bd305ab79f697db5111498f0b19}{Signed\+Transaction}}, \mbox{\hyperlink{class_struct_tag_a6c495e0d42f559c4655f043841670839}{Struct\+Tag}}, \mbox{\hyperlink{class_tag_sequence_af57cc145ef0f2d63b0565282d883030a}{Tag\+Sequence}}, \mbox{\hyperlink{class_transaction_payload_a6265924c6263bf578c2dc79e73fa178f}{Transaction\+Payload}}, \mbox{\hyperlink{class_u128_ada3afcbe5938a679bcb0198f69f09a5c}{U128}}, \mbox{\hyperlink{class_u16_a02a8eaefcaa23c7f950ecc714749f03d}{U16}}, \mbox{\hyperlink{class_u256_acade2d2966b36182f8dc74bbfc061593}{U256}}, \mbox{\hyperlink{class_u32_a012fdcc7e753c9c1fb46b512ff1e5d33}{U32}}, \mbox{\hyperlink{class_u64_a9e7a2e85fb948d984407d26fc2571d7a}{U64}}, and \mbox{\hyperlink{class_u8_a1b87b4a9b74f05c9945ce10a25f4a52b}{U8}}.
+
+\Hypertarget{class_i_serializable_a309b944338843df11042f84b25267bcd}\label{class_i_serializable_a309b944338843df11042f84b25267bcd} 
+\index{ISerializable@{ISerializable}!ToString@{ToString}}
+\index{ToString@{ToString}!ISerializable@{ISerializable}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily virtual std\+::string ISerializable\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_public_key_ac23f2d865f63b6c12752fdd7bd635983}{Public\+Key}}, \mbox{\hyperlink{class_account_address_a4d1e7b2f5f384bcf947fee4a7533ec4a}{Account\+Address}}, \mbox{\hyperlink{class_signature_ae1b21b421578dfe15b81f3bf4d1c2284}{Signature}}, \mbox{\hyperlink{class_authenticator_a70b5c51899b55c9ada1ce8a18be40af3}{Authenticator}}, \mbox{\hyperlink{class_ed25519_authenticator_a23e27e524d817425bd7eb95be86019ec}{Ed25519\+Authenticator}}, \mbox{\hyperlink{class_multi_agent_authenticator_a3176b6952d47e3dbc03d24703afb329c}{Multi\+Agent\+Authenticator}}, \mbox{\hyperlink{class_b_c_s_map_ad23f77adf8e75e6e5bcad16490e3955f}{BCSMap}}, \mbox{\hyperlink{class_bool_a9eb058979b998b789c16c864038ccc90}{Bool}}, \mbox{\hyperlink{class_b_string_add7a3989e3def1524ef013daef4e4db4}{BString}}, \mbox{\hyperlink{class_bytes_acd593c175cdb773d0d2eff6b7faa9de9}{Bytes}}, \mbox{\hyperlink{class_bytes_sequence_a45a3cccf953a6b931b4c37c4a025452f}{Bytes\+Sequence}}, \mbox{\hyperlink{class_sequence_ab259eff91215042bb6ec3e13dd4a774b}{Sequence}}, \mbox{\hyperlink{class_struct_tag_a2c2d06dbe676a429a922cebd1a17f6fe}{Struct\+Tag}}, \mbox{\hyperlink{class_tag_sequence_ab7c6807f2ed053f417dc6c6d6452a980}{Tag\+Sequence}}, \mbox{\hyperlink{class_u128_ad15b2a42df721ddfeb18805d6bd98377}{U128}}, \mbox{\hyperlink{class_u16_aaa17a1e433b6ed72926aba6bb7ff253d}{U16}}, \mbox{\hyperlink{class_u256_aa3c0dc392fc4ae49229e4165f37b3e77}{U256}}, \mbox{\hyperlink{class_u32_a21c068dca1410cb4ea02987bfa8afcc7}{U32}}, \mbox{\hyperlink{class_u64_aaa622e7718435a2deabfd3af76420dc0}{U64}}, and \mbox{\hyperlink{class_u8_a2956b9e0a6b93d4ed59854cee29cf09c}{U8}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/BCSTypes.\+h\item 
+BCS/BCSTypes.\+cpp\end{DoxyCompactItemize}

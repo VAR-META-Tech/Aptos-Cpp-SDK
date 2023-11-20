@@ -1,0 +1,43 @@
+\doxysection{multipublickey.\+h}
+\hypertarget{multipublickey_8h_source}{}\label{multipublickey_8h_source}\index{Accounts/multipublickey.h@{Accounts/multipublickey.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MULTIPUBLICKEY\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MULTIPUBLICKEY\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}PublicKey.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../BCS/BCSTypes.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }Aptos::Accounts}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_public_key}{MultiPublicKey}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}}}
+\DoxyCodeLine{00015\ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_public_key_a5a4610ea43883bb3d7940d9790d0268d}{MIN\_KEYS}}\ =\ 2;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_public_key_afe5183a5e062bed032d78d18ed5a8c25}{MAX\_KEYS}}\ =\ 32;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_public_key_a990ac35b50bb8c39a09e64c6d01ccf99}{MIN\_THRESHOLD}}\ =\ 1;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_public_key}{MultiPublicKey}}(\textcolor{keyword}{const}\ std::vector<PublicKey>\ \&keys,\ CryptoPP::byte\ threshold,\ \textcolor{keywordtype}{bool}\ checked\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_public_key_a9920a345e3d049fd10d402547b806dd8}{ToBytes}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_public_key}{MultiPublicKey}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_public_key_a8f4dd5f1ab931bbec12df81f157a6779}{FromBytes}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\ \&keyBytes);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_public_key_a069faf066fc89bca450855c25c0ccba1}{Serialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&serializer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ std::vector<PublicKey>\ getKeys()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ std::vector<PublicKey>\ Keys;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ CryptoPP::byte\ Threshold;}
+\DoxyCodeLine{00074\ \ \ \ \ \};}
+\DoxyCodeLine{00075\ \}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MULTIPUBLICKEY\_H}}
+
+\end{DoxyCode}

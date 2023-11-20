@@ -35,6 +35,8 @@ public:
         Coin();
         static AccountResourceCoin::Coin FromJson(const nlohmann::json& jsonData);
         nlohmann::json ToJson() const;
+        std::string value() const;
+
     private:
         std::string m_value;
     };
@@ -64,6 +66,8 @@ public:
         Data() {}
         static AccountResourceCoin::Data FromJson(const nlohmann::json& jsonData);
         nlohmann::json ToJson() const;
+        Coin coinProp() const;
+
     private:
         Coin m_coinProp;
         DespositEvents m_depositEvents;
@@ -74,6 +78,7 @@ public:
     AccountResourceCoin();
     static AccountResourceCoin FromJson(const std::string& jsonStr);
     nlohmann::json ToJson() const;
+    AccountResourceCoin::Data dataProp() const;
 private:
     std::string m_type;
     Data m_dataProp;

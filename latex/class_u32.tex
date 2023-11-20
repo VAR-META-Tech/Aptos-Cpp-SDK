@@ -1,0 +1,155 @@
+\doxysection{U32 Class Reference}
+\hypertarget{class_u32}{}\label{class_u32}\index{U32@{U32}}
+
+
+{\ttfamily \#include $<$U32.\+h$>$}
+
+Inheritance diagram for U32\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_u32}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_u32_a45e23b245e90c0de2a42906f5e17f3e7}{U32}} (uint32\+\_\+t value)
+\item 
+void \mbox{\hyperlink{class_u32_a012fdcc7e753c9c1fb46b512ff1e5d33}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+Type\+Tag \mbox{\hyperlink{class_u32_a0b58fd7943ddbd6271c86f6a04ad83d4}{Variant}} () const override
+\begin{DoxyCompactList}\small\item\em Returns the type of type tag.
+
+\begin{DoxyReturn}{Returns}
+A Type\+Tag enum.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+\Hypertarget{class_u32_a42a1637e7aad65280edcc2b3aeaad8ed}\label{class_u32_a42a1637e7aad65280edcc2b3aeaad8ed} 
+uint32\+\_\+t {\bfseries Get\+Value} () const
+\item 
+\Hypertarget{class_u32_afc121648488ff6c27f18696642d43c46}\label{class_u32_afc121648488ff6c27f18696642d43c46} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_u32}{U32}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{class_u32_a21c068dca1410cb4ea02987bfa8afcc7}{To\+String}} () const override
+\item 
+\Hypertarget{class_u32_a85e8990a8acf6662e2f6d1057a93a0a3}\label{class_u32_a85e8990a8acf6662e2f6d1057a93a0a3} 
+size\+\_\+t {\bfseries Get\+Hash\+Code} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable_tag}{ISerializable\+Tag}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_i_serializable_tag_ab3675f858dd4d74c0a8412338f031fa8}{Serialize\+Tag}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer)
+\begin{DoxyCompactList}\small\item\em Serializes the type tag using it\textquotesingle{}s own serializaton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_u32_ab3d55f282df23d097ee2e2320c959b89}\label{class_u32_ab3d55f282df23d097ee2e2320c959b89} 
+static uint32\+\_\+t {\bfseries Deserialize} (const std\+::vector$<$ uint8\+\_\+t $>$ \&data)
+\item 
+\Hypertarget{class_u32_a22ecd44f17ef54e34974492d7a4ca604}\label{class_u32_a22ecd44f17ef54e34974492d7a4ca604} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable_tag}{ISerializable\+Tag}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable_tag}{ISerializable\+Tag}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable_tag}{ISerializable\+Tag}} $>$ \mbox{\hyperlink{class_i_serializable_tag_aafee410c658f20ad2751148492c4db0e}{Deserialize\+Tag}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserialize a tag based on it\textquotesingle{}s type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of a \doxylink{class_u32}{U32}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_u32_a45e23b245e90c0de2a42906f5e17f3e7}\label{class_u32_a45e23b245e90c0de2a42906f5e17f3e7} 
+\index{U32@{U32}!U32@{U32}}
+\index{U32@{U32}!U32@{U32}}
+\doxysubsubsection{\texorpdfstring{U32()}{U32()}}
+{\footnotesize\ttfamily U32\+::\+U32 (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+Creates a \doxylink{class_u32}{U32} object from a uint value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & A uint value to serialize as u32.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_u32_a012fdcc7e753c9c1fb46b512ff1e5d33}\label{class_u32_a012fdcc7e753c9c1fb46b512ff1e5d33} 
+\index{U32@{U32}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!U32@{U32}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void U32\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{ISerializable}}.
+
+\Hypertarget{class_u32_a21c068dca1410cb4ea02987bfa8afcc7}\label{class_u32_a21c068dca1410cb4ea02987bfa8afcc7} 
+\index{U32@{U32}!ToString@{ToString}}
+\index{ToString@{ToString}!U32@{U32}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string U32\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Reimplemented from \mbox{\hyperlink{class_i_serializable_tag}{ISerializable\+Tag}}.
+
+\Hypertarget{class_u32_a0b58fd7943ddbd6271c86f6a04ad83d4}\label{class_u32_a0b58fd7943ddbd6271c86f6a04ad83d4} 
+\index{U32@{U32}!Variant@{Variant}}
+\index{Variant@{Variant}!U32@{U32}}
+\doxysubsubsection{\texorpdfstring{Variant()}{Variant()}}
+{\footnotesize\ttfamily Type\+Tag U32\+::\+Variant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the type of type tag.
+
+\begin{DoxyReturn}{Returns}
+A Type\+Tag enum.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable_tag_a801689c2520c6167fc687bc1c92bc28a}{ISerializable\+Tag}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/U32.\+h\item 
+BCS/U32.\+cpp\end{DoxyCompactItemize}

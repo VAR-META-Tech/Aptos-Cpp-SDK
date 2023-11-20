@@ -1,0 +1,47 @@
+\doxysection{Struct\+Tag.\+h}
+\hypertarget{_struct_tag_8h_source}{}\label{_struct_tag_8h_source}\index{BCS/StructTag.h@{BCS/StructTag.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ STRUCTTAG\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ STRUCTTAG\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}BCSTypes.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../Accounts/AccountAddress.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{using\ namespace\ }Aptos::Accounts;}
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }Aptos::BCS}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag}{StructTag}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{ISerializableTag}}}
+\DoxyCodeLine{00015\ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag}{StructTag}}(\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ address,\ std::string\ module,\ std::string\ name,}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<ISerializableTag>>\ \&typeArgs);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ TypeTag\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag_af6cfa9b3ecdea084f6fbdd292cc54f81}{Variant}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag_ad2b807cb21f4d62aa58473cfcc6f4d13}{Serialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&serializer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<ISerializableTag>\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag_a9a3d887bd6536fa46752b4d79b1fc579}{Deserialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}\ \&deserializer);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag_a5faba5167e7407410a4e0b8ce7060aa8}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag}{StructTag}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag_a8dbdb4ed8ac9acdd5f35d703fa882f4f}{ToString}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag}{StructTag}}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag_ae491408a56bac71d33f8539c9ff36f60}{FromStr}}(\textcolor{keyword}{const}\ std::string\ \&typeTag);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ address;}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ std::string\ \textcolor{keyword}{module};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ std::string\ name;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<ISerializableTag>>\ typeArgs;}
+\DoxyCodeLine{00066\ \ \ \ \ \};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag}{StructTag}}\ \&lhs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag}{StructTag}}\ \&rhs);}
+\DoxyCodeLine{00069\ \}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ STRUCTTAG\_H}}
+
+\end{DoxyCode}

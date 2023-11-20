@@ -1,25 +1,49 @@
-//
-// Created by Anh NPH on 21/09/2023.
-//
-
 #ifndef APTOS_TAGSEQUENCE_H
 #define APTOS_TAGSEQUENCE_H
 #include "BCSTypes.h"
 
-class TagSequence : public ISerializable {
-public:
-    TagSequence(const std::vector<std::shared_ptr<ISerializableTag>>& serializableTags);
-    void Serialize(Serialization& serializer) const override;
-    static std::shared_ptr<ISerializable> Deserialize(Deserialization& deserializer);
-    std::vector<std::shared_ptr<ISerializableTag>> GetValue() const;
-    bool Equals(const TagSequence& other) const;
-    std::string ToString() const override;
-    size_t GetHashCode() const;
+namespace Aptos::BCS
+{
+    /// <summary>
+    /// Representation of a tag sequence.
+    /// </summary>
+    class TagSequence : public ISerializable
+    {
+    public:
+        /// <summary>
+        /// Creates a TagSequence objects from a list of serializable tags.
+        /// </summary>
+        /// <param name="serializableTags">A list of serializable tags.</param>
+        TagSequence(const std::vector<std::shared_ptr<ISerializableTag>> &serializableTags);
 
-private:
-    std::vector<std::shared_ptr<ISerializableTag>> serializableTags;
-};
+        /// <inheritdoc/>
+        void Serialize(Serialization &serializer) const override;
 
-bool operator==(const TagSequence &lhs, const TagSequence &rhs);
+        /// <inheritdoc/>
+        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
 
-#endif //APTOS_TAGSEQUENCE_H
+        /// <summary>
+        /// Gets the internal list of objects inside the TagSequence.
+        /// </summary>
+        /// <returns>The list of objects.</returns>
+        std::vector<std::shared_ptr<ISerializableTag>> GetValue() const;
+
+        /// <inheritdoc/>
+        bool Equals(const TagSequence &other) const;
+
+        /// <inheritdoc/>
+        std::string ToString() const override;
+
+        /// <inheritdoc/>
+        size_t GetHashCode() const;
+
+    private:
+        /// <summary>
+        /// A list of serializable tags.
+        /// </summary>
+        std::vector<std::shared_ptr<ISerializableTag>> serializableTags;
+    };
+
+    bool operator==(const TagSequence &lhs, const TagSequence &rhs);
+}
+#endif // APTOS_TAGSEQUENCE_H

@@ -4,11 +4,36 @@ project(Aptos VERSION 0.1.0 LANGUAGES C CXX)
 include(CTest)
 enable_testing()
 
+# Check for doxygen presence
+find_package(Doxygen)
+if (DOXYGEN_FOUND)
+    # Set the path to the Doxyfile
+    set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile)
+    set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/html)
+
+    # Add "doc" target for make (or "Documentation" for IDEs)
+    add_custom_target(doc_doxygen ALL 
+        COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_IN}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        COMMENT "Generating API documentation with Doxygen"
+        VERBATIM)
+endif(DOXYGEN_FOUND)
+
+# Code coverage configuration
+option(CODE_COVERAGE "Enable coverage reporting" OFF)
+if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  set(CMAKE_XCODE_ATTRIBUTE_ENABLE_TESTABILITY YES)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-instr-generate -fcoverage-mapping")
+endif()
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include_directories(/usr/local/include)
 include_directories(/opt/homebrew/include)
 include_directories(Libs)
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  include_directories(/opt/homebrew/Cellar/boost@1.76/1.76.0_4/include)
+endif()
 
 find_library(CryptoPP_LIB NAMES libcryptopp.a PATHS /usr/local/lib)
 if (NOT CryptoPP_LIB)
@@ -158,10 +183,33 @@ add_library(Aptos
         REST/RequestClient.cpp
         REST/AptosTokenClient.h
         REST/AptosTokenClient.cpp
+        REST/RestClient.h
+        REST/RestClient.cpp
+        Accounts/Ed25519Bip32.h
+        Accounts/Ed25519Bip32.cpp
 )
 
 find_package(nlohmann_json 3.2.0 REQUIRED)
+find_package(Boost REQUIRED program_options regex)
+
 target_link_libraries(Aptos PRIVATE nlohmann_json::nlohmann_json)
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  target_link_libraries(Aptos PRIVATE
+  Boost::boost 
+  Boost::program_options
+  Boost::regex
+  /opt/homebrew/Cellar/secp256k1/0.4.0/lib/libsecp256k1.a
+  /opt/homebrew/Cellar/libbitcoin-system/3.8.0/lib/libbitcoin-system.a
+  )
+else()
+  target_link_libraries(Aptos PRIVATE
+    Boost::boost 
+    Boost::program_options
+    Boost::regex
+    secp256k1
+    bitcoin-system
+    )
+endif()
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
@@ -190,3 +238,22 @@ add_test(NAME TransactionSerializationTest COMMAND test_transaction_serializatio
 file(COPY Test/two_by_two_transfer.mv DESTINATION ${CMAKE_BINARY_DIR})
 
 target_link_libraries(Aptos PRIVATE ${CryptoPP_LIB})
+
+# Link test executable against gtest & gtest_main
+add_executable(runAllTests 
+    Test/test_account.cpp 
+    Test/test_utils.cpp 
+    Test/test_wallet.cpp 
+    Test/test_transaction_serialization.cpp 
+    Test/test_serialization.cpp
+)
+target_link_libraries(runAllTests ${GTEST_LIBRARIES} GTest::gtest_main pthread Aptos)
+
+if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_custom_target(coverage
+    COMMAND xcrun ${CMAKE_CURRENT_BINARY_DIR}/runAllTests
+    COMMAND xcrun llvm-profdata merge -sparse default.profraw -o default.profdata
+    COMMAND xcrun llvm-cov show ${CMAKE_CURRENT_BINARY_DIR}/runAllTests -instr-profile=default.profdata -format=html > coverage_report.html
+    COMMAND xcrun llvm-cov report ${CMAKE_CURRENT_BINARY_DIR}/runAllTests -instr-profile=default.profdata > coverage_summary.txt
+  )
+endif()

@@ -1,0 +1,119 @@
+\doxysection{Entry\+Function Class Reference}
+\hypertarget{class_entry_function}{}\label{class_entry_function}\index{EntryFunction@{EntryFunction}}
+
+
+Representation of an entry function.  
+
+
+
+
+{\ttfamily \#include $<$Entry\+Function.\+h$>$}
+
+Inheritance diagram for Entry\+Function\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_entry_function}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_entry_function_afd06b0b3d6bc490188f28246e312bb4f}{Entry\+Function}} (const \mbox{\hyperlink{class_module_id}{Module\+Id}} \&module, const std\+::string \&function, const \mbox{\hyperlink{class_tag_sequence}{Tag\+Sequence}} \&type\+Args, const \mbox{\hyperlink{class_sequence}{Sequence}} \&args)
+\begin{DoxyCompactList}\small\item\em Converts a \doxylink{class_sequence}{Sequence} of \doxylink{class_i_serializable}{ISerializable} objects and converts it to a \doxylink{class_sequence}{Sequence} of \doxylink{class_bytes}{Bytes} objects. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_entry_function_a0ebdde40d4b3fff21ccd849d01107051}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object. \end{DoxyCompactList}\item 
+\Hypertarget{class_entry_function_a544d71f726d1d9d4e6b29f471f93164b}\label{class_entry_function_a544d71f726d1d9d4e6b29f471f93164b} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_entry_function}{Entry\+Function}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{class_entry_function_a67774d54932cca9e6f16be45b16aa920}{To\+String}} () const
+\item 
+\Hypertarget{class_entry_function_a35d3f9433c50e9aaa16a63774f149dfa}\label{class_entry_function_a35d3f9433c50e9aaa16a63774f149dfa} 
+size\+\_\+t {\bfseries Get\+Hash\+Code} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_entry_function_a05ccec05bd253700ec71f957e6b10b05}\label{class_entry_function_a05ccec05bd253700ec71f957e6b10b05} 
+static \mbox{\hyperlink{class_entry_function}{Entry\+Function}} {\bfseries Natural} (const \mbox{\hyperlink{class_module_id}{Module\+Id}} \&module, const std\+::string \&function, const \mbox{\hyperlink{class_tag_sequence}{Tag\+Sequence}} \&type\+Args, const \mbox{\hyperlink{class_sequence}{Sequence}} \&args)
+\item 
+\Hypertarget{class_entry_function_ab6db0a1ba25b0e56a08eadf4c83ce220}\label{class_entry_function_ab6db0a1ba25b0e56a08eadf4c83ce220} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of an entry function. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_entry_function_afd06b0b3d6bc490188f28246e312bb4f}\label{class_entry_function_afd06b0b3d6bc490188f28246e312bb4f} 
+\index{EntryFunction@{EntryFunction}!EntryFunction@{EntryFunction}}
+\index{EntryFunction@{EntryFunction}!EntryFunction@{EntryFunction}}
+\doxysubsubsection{\texorpdfstring{EntryFunction()}{EntryFunction()}}
+{\footnotesize\ttfamily Entry\+Function\+::\+Entry\+Function (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_module_id}{Module\+Id}} \&}]{module,  }\item[{const std\+::string \&}]{function,  }\item[{const \mbox{\hyperlink{class_tag_sequence}{Tag\+Sequence}} \&}]{type\+Args,  }\item[{const \mbox{\hyperlink{class_sequence}{Sequence}} \&}]{args }\end{DoxyParamCaption})}
+
+
+
+Converts a \doxylink{class_sequence}{Sequence} of \doxylink{class_i_serializable}{ISerializable} objects and converts it to a \doxylink{class_sequence}{Sequence} of \doxylink{class_bytes}{Bytes} objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em module} & \\
+\hline
+{\em function} & \\
+\hline
+{\em type\+Args} & \\
+\hline
+{\em args} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_entry_function_a0ebdde40d4b3fff21ccd849d01107051}\label{class_entry_function_a0ebdde40d4b3fff21ccd849d01107051} 
+\index{EntryFunction@{EntryFunction}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!EntryFunction@{EntryFunction}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Entry\+Function\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{ISerializable}}.
+
+\Hypertarget{class_entry_function_a67774d54932cca9e6f16be45b16aa920}\label{class_entry_function_a67774d54932cca9e6f16be45b16aa920} 
+\index{EntryFunction@{EntryFunction}!ToString@{ToString}}
+\index{ToString@{ToString}!EntryFunction@{EntryFunction}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Entry\+Function\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable}{ISerializable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Entry\+Function.\+h\item 
+BCS/Entry\+Function.\+cpp\end{DoxyCompactItemize}

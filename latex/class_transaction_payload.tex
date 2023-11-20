@@ -1,0 +1,85 @@
+\doxysection{Transaction\+Payload Class Reference}
+\hypertarget{class_transaction_payload}{}\label{class_transaction_payload}\index{TransactionPayload@{TransactionPayload}}
+Inheritance diagram for Transaction\+Payload\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_transaction_payload}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_transaction_payload_abec8ffbfd12d5c2e483cb8759e3f29a2}\label{class_transaction_payload_abec8ffbfd12d5c2e483cb8759e3f29a2} 
+{\bfseries Transaction\+Payload} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \&payload)
+\item 
+\Hypertarget{class_transaction_payload_a8566eed1922ef5021915ded06f662dc9}\label{class_transaction_payload_a8566eed1922ef5021915ded06f662dc9} 
+Type\+Tag {\bfseries Variant} () const
+\item 
+void \mbox{\hyperlink{class_transaction_payload_a6265924c6263bf578c2dc79e73fa178f}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object. \end{DoxyCompactList}\item 
+\Hypertarget{class_transaction_payload_ab4b49ba556a96e83c3d946cdc34bd41a}\label{class_transaction_payload_ab4b49ba556a96e83c3d946cdc34bd41a} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_transaction_payload}{Transaction\+Payload}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{class_transaction_payload_a483fc5c98b93e41092425c51e7124a46}{To\+String}} () const override
+\item 
+size\+\_\+t \mbox{\hyperlink{class_transaction_payload_abc9e86e37a038a86f0f1b07d04d6338a}{Get\+Hash\+Code}} () override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_transaction_payload_a52ccef7def26509408dddfbd1122c903}\label{class_transaction_payload_a52ccef7def26509408dddfbd1122c903} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_transaction_payload_abc9e86e37a038a86f0f1b07d04d6338a}\label{class_transaction_payload_abc9e86e37a038a86f0f1b07d04d6338a} 
+\index{TransactionPayload@{TransactionPayload}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!TransactionPayload@{TransactionPayload}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}}
+{\footnotesize\ttfamily size\+\_\+t Transaction\+Payload\+::\+Get\+Hash\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_i_serializable}{ISerializable}}.
+
+\Hypertarget{class_transaction_payload_a6265924c6263bf578c2dc79e73fa178f}\label{class_transaction_payload_a6265924c6263bf578c2dc79e73fa178f} 
+\index{TransactionPayload@{TransactionPayload}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!TransactionPayload@{TransactionPayload}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Transaction\+Payload\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{ISerializable}}.
+
+\Hypertarget{class_transaction_payload_a483fc5c98b93e41092425c51e7124a46}\label{class_transaction_payload_a483fc5c98b93e41092425c51e7124a46} 
+\index{TransactionPayload@{TransactionPayload}!ToString@{ToString}}
+\index{ToString@{ToString}!TransactionPayload@{TransactionPayload}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Transaction\+Payload\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable}{ISerializable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Transaction\+Payload.\+h\item 
+BCS/Transaction\+Payload.\+cpp\end{DoxyCompactItemize}

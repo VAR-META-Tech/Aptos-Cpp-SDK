@@ -1,0 +1,155 @@
+\doxysection{Ed25519\+Authenticator Class Reference}
+\hypertarget{class_ed25519_authenticator}{}\label{class_ed25519_authenticator}\index{Ed25519Authenticator@{Ed25519Authenticator}}
+
+
+ED25519 \doxylink{class_authenticator}{Authenticator}.  
+
+
+
+
+{\ttfamily \#include $<$Authenticator.\+h$>$}
+
+Inheritance diagram for Ed25519\+Authenticator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_ed25519_authenticator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_ed25519_authenticator_a8eafb4bca5e45ad058e1778bf917dc6b}{Ed25519\+Authenticator}} (\mbox{\hyperlink{class_public_key}{Public\+Key}} public\+Key, \mbox{\hyperlink{class_signature}{Signature}} signature)
+\begin{DoxyCompactList}\small\item\em Creates an \doxylink{class_ed25519_authenticator}{Ed25519\+Authenticator} using a given public key and signature. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_ed25519_authenticator_aa6368da5c2af73d523f6a96645f10102}{Verify}} (const Crypto\+PP\+::\+Sec\+Byte\+Block \&data) override
+\begin{DoxyCompactList}\small\item\em Verifies the data with the signature. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_ed25519_authenticator_a40bc89ab826b5f6c29334540ab0c62d1}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+\Hypertarget{class_ed25519_authenticator_a210166d1008a2143fb7bdb5e0fe8d56f}\label{class_ed25519_authenticator_a210166d1008a2143fb7bdb5e0fe8d56f} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_ed25519_authenticator}{Ed25519\+Authenticator}} \&other) const
+\item 
+\Hypertarget{class_ed25519_authenticator_a2fd5c81f40b6cf5f70b677cadafdfd14}\label{class_ed25519_authenticator_a2fd5c81f40b6cf5f70b677cadafdfd14} 
+int {\bfseries Get\+Hash\+Code} () const
+\item 
+std\+::string \mbox{\hyperlink{class_ed25519_authenticator_a23e27e524d817425bd7eb95be86019ec}{To\+String}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_ed25519_authenticator_ad814fc57a5345079b00da4a5c266e94b}\label{class_ed25519_authenticator_ad814fc57a5345079b00da4a5c266e94b} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_ed25519_authenticator_a39994ae1929e7f9b826b73b3a715dcff}\label{class_ed25519_authenticator_a39994ae1929e7f9b826b73b3a715dcff} 
+\mbox{\hyperlink{class_public_key}{Public\+Key}} {\bfseries m\+\_\+public\+Key}
+\begin{DoxyCompactList}\small\item\em The authenticators public key. \end{DoxyCompactList}\item 
+\Hypertarget{class_ed25519_authenticator_a968e95f6fbfb23f1d0807b7aa12e2c60}\label{class_ed25519_authenticator_a968e95f6fbfb23f1d0807b7aa12e2c60} 
+\mbox{\hyperlink{class_signature}{Signature}} {\bfseries m\+\_\+signature}
+\begin{DoxyCompactList}\small\item\em The authenticator\textquotesingle{}s public key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+ED25519 \doxylink{class_authenticator}{Authenticator}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_ed25519_authenticator_a8eafb4bca5e45ad058e1778bf917dc6b}\label{class_ed25519_authenticator_a8eafb4bca5e45ad058e1778bf917dc6b} 
+\index{Ed25519Authenticator@{Ed25519Authenticator}!Ed25519Authenticator@{Ed25519Authenticator}}
+\index{Ed25519Authenticator@{Ed25519Authenticator}!Ed25519Authenticator@{Ed25519Authenticator}}
+\doxysubsubsection{\texorpdfstring{Ed25519Authenticator()}{Ed25519Authenticator()}}
+{\footnotesize\ttfamily Ed25519\+Authenticator\+::\+Ed25519\+Authenticator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_public_key}{Public\+Key}}}]{public\+Key,  }\item[{\mbox{\hyperlink{class_signature}{Signature}}}]{signature }\end{DoxyParamCaption})}
+
+
+
+Creates an \doxylink{class_ed25519_authenticator}{Ed25519\+Authenticator} using a given public key and signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Key} & \\
+\hline
+{\em signature} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_ed25519_authenticator_a40bc89ab826b5f6c29334540ab0c62d1}\label{class_ed25519_authenticator_a40bc89ab826b5f6c29334540ab0c62d1} 
+\index{Ed25519Authenticator@{Ed25519Authenticator}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Ed25519Authenticator@{Ed25519Authenticator}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Ed25519\+Authenticator\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{ISerializable}}.
+
+\Hypertarget{class_ed25519_authenticator_a23e27e524d817425bd7eb95be86019ec}\label{class_ed25519_authenticator_a23e27e524d817425bd7eb95be86019ec} 
+\index{Ed25519Authenticator@{Ed25519Authenticator}!ToString@{ToString}}
+\index{ToString@{ToString}!Ed25519Authenticator@{Ed25519Authenticator}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Ed25519\+Authenticator\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable}{ISerializable}}.
+
+\Hypertarget{class_ed25519_authenticator_aa6368da5c2af73d523f6a96645f10102}\label{class_ed25519_authenticator_aa6368da5c2af73d523f6a96645f10102} 
+\index{Ed25519Authenticator@{Ed25519Authenticator}!Verify@{Verify}}
+\index{Verify@{Verify}!Ed25519Authenticator@{Ed25519Authenticator}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily bool Ed25519\+Authenticator\+::\+Verify (\begin{DoxyParamCaption}\item[{const Crypto\+PP\+::\+Sec\+Byte\+Block \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Verifies the data with the signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_i_authenticator}{IAuthenticator}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Authenticator.\+h\item 
+BCS/Authenticator.\+cpp\end{DoxyCompactItemize}

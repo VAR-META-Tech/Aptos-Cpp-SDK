@@ -1,0 +1,161 @@
+\doxysection{Aptos\+::BCS\+::Multi\+Agent\+Authenticator Class Reference}
+\hypertarget{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator}{}\label{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator}\index{Aptos::BCS::MultiAgentAuthenticator@{Aptos::BCS::MultiAgentAuthenticator}}
+
+
+An \doxylink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator} that uses a list of tuples of account addresses and authenticator pairs.  
+
+
+
+
+{\ttfamily \#include $<$Authenticator.\+h$>$}
+
+Inheritance diagram for Aptos\+::BCS\+::Multi\+Agent\+Authenticator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a383669389909ce904ad75d9e10f16a2c}{Multi\+Agent\+Authenticator}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator}} sender, const std\+::vector$<$ std\+::tuple$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Account\+Address}} $>$, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator}} $>$ $>$ $>$ \&secondary\+Signers)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator}{Multi\+Agent\+Authenticator} object from a given sender authenticator, and a list of acount address to authenticator tuples. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}} \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a219e5466fa1c63311808d57eb275cb00}{Secondary\+Addresses}} () const
+\begin{DoxyCompactList}\small\item\em Returns the list (\doxylink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}) of corresponding account addresses. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_ad215aa161de0567a0d220d4ff82de389}{Verify}} (const Crypto\+PP\+::\+Sec\+Byte\+Block \&data) override
+\begin{DoxyCompactList}\small\item\em Verifies the data with all the account addresses. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_aed37c62ac54ad1731381d00d79fc3c56}{Serialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a8def5290f56efaa8dcef2b233583ee04}\label{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a8def5290f56efaa8dcef2b233583ee04} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator}{Multi\+Agent\+Authenticator}} \&other) const
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_ab85f9efb6e76a8461634c76a3592c0ac}\label{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_ab85f9efb6e76a8461634c76a3592c0ac} 
+int {\bfseries Get\+Hash\+Code} () const
+\item 
+std\+::string \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a26efd7f152aa0a1fcdf3b9a81e93d358}{To\+String}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_ae03a8287722cd32c0f7a46aadbc32f7a}\label{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_ae03a8287722cd32c0f7a46aadbc32f7a} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_aa692ec6a618d04663c1e5d3cf83f59d7}{Deserialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An \doxylink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator} that uses a list of tuples of account addresses and authenticator pairs. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a383669389909ce904ad75d9e10f16a2c}\label{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a383669389909ce904ad75d9e10f16a2c} 
+\index{Aptos::BCS::MultiAgentAuthenticator@{Aptos::BCS::MultiAgentAuthenticator}!MultiAgentAuthenticator@{MultiAgentAuthenticator}}
+\index{MultiAgentAuthenticator@{MultiAgentAuthenticator}!Aptos::BCS::MultiAgentAuthenticator@{Aptos::BCS::MultiAgentAuthenticator}}
+\doxysubsubsection{\texorpdfstring{MultiAgentAuthenticator()}{MultiAgentAuthenticator()}}
+{\footnotesize\ttfamily Aptos\+::\+BCS\+::\+Multi\+Agent\+Authenticator\+::\+Multi\+Agent\+Authenticator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator}}}]{sender,  }\item[{const std\+::vector$<$ std\+::tuple$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Account\+Address}} $>$, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator}} $>$ $>$ $>$ \&}]{secondary\+Signers }\end{DoxyParamCaption})}
+
+
+
+Creates a \doxylink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator}{Multi\+Agent\+Authenticator} object from a given sender authenticator, and a list of acount address to authenticator tuples. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em secondary\+Signers} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a219e5466fa1c63311808d57eb275cb00}\label{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a219e5466fa1c63311808d57eb275cb00} 
+\index{Aptos::BCS::MultiAgentAuthenticator@{Aptos::BCS::MultiAgentAuthenticator}!SecondaryAddresses@{SecondaryAddresses}}
+\index{SecondaryAddresses@{SecondaryAddresses}!Aptos::BCS::MultiAgentAuthenticator@{Aptos::BCS::MultiAgentAuthenticator}}
+\doxysubsubsection{\texorpdfstring{SecondaryAddresses()}{SecondaryAddresses()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}} Aptos\+::\+BCS\+::\+Multi\+Agent\+Authenticator\+::\+Secondary\+Addresses (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the list (\doxylink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}) of corresponding account addresses. 
+
+\begin{DoxyReturn}{Returns}
+A \doxylink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence} of account addresses
+\end{DoxyReturn}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_aed37c62ac54ad1731381d00d79fc3c56}\label{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_aed37c62ac54ad1731381d00d79fc3c56} 
+\index{Aptos::BCS::MultiAgentAuthenticator@{Aptos::BCS::MultiAgentAuthenticator}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Aptos::BCS::MultiAgentAuthenticator@{Aptos::BCS::MultiAgentAuthenticator}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Aptos\+::\+BCS\+::\+Multi\+Agent\+Authenticator\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_a69bdbb0faf3fda49df818174878938b1}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a26efd7f152aa0a1fcdf3b9a81e93d358}\label{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a26efd7f152aa0a1fcdf3b9a81e93d358} 
+\index{Aptos::BCS::MultiAgentAuthenticator@{Aptos::BCS::MultiAgentAuthenticator}!ToString@{ToString}}
+\index{ToString@{ToString}!Aptos::BCS::MultiAgentAuthenticator@{Aptos::BCS::MultiAgentAuthenticator}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Aptos\+::\+BCS\+::\+Multi\+Agent\+Authenticator\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_ad215aa161de0567a0d220d4ff82de389}\label{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_ad215aa161de0567a0d220d4ff82de389} 
+\index{Aptos::BCS::MultiAgentAuthenticator@{Aptos::BCS::MultiAgentAuthenticator}!Verify@{Verify}}
+\index{Verify@{Verify}!Aptos::BCS::MultiAgentAuthenticator@{Aptos::BCS::MultiAgentAuthenticator}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily bool Aptos\+::\+BCS\+::\+Multi\+Agent\+Authenticator\+::\+Verify (\begin{DoxyParamCaption}\item[{const Crypto\+PP\+::\+Sec\+Byte\+Block \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Verifies the data with all the account addresses. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if all accouncts can verify, false otherwise.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_authenticator}{Aptos\+::\+BCS\+::\+IAuthenticator}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Authenticator.\+h\item 
+BCS/Authenticator.\+cpp\end{DoxyCompactItemize}

@@ -24,4 +24,34 @@ TableItemRequest TableItemRequest::FromJson(const nlohmann::json &jsonData) {
     return request;
 }
 
+std::string TableItemRequest::getKeyType() const
+{
+    return KeyType;
+}
+
+void TableItemRequest::setKeyType(const std::string &newKeyType)
+{
+    KeyType = newKeyType;
+}
+
+std::string TableItemRequest::getValueType() const
+{
+    return ValueType;
+}
+
+void TableItemRequest::setValueType(const std::string &newValueType)
+{
+    ValueType = newValueType;
+}
+
+std::string TableItemRequest::getKey() const
+{
+    return Key;
+}
+
+void TableItemRequest::setKey(const std::string &newKey)
+{
+    Key = newKey;
+}
+
 }

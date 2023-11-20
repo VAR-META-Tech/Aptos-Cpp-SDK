@@ -18,4 +18,34 @@ TableItemRequestTokenData TableItemRequestTokenData::FromJson(const nlohmann::js
     return request;
 }
 
+std::string TableItemRequestTokenData::getKey_type() const
+{
+    return key_type;
+}
+
+void TableItemRequestTokenData::setKey_type(const std::string &newKey_type)
+{
+    key_type = newKey_type;
+}
+
+std::string TableItemRequestTokenData::getValue_type() const
+{
+    return value_type;
+}
+
+void TableItemRequestTokenData::setValue_type(const std::string &newValue_type)
+{
+    value_type = newValue_type;
+}
+
+TokenDataId TableItemRequestTokenData::getKey() const
+{
+    return key;
+}
+
+void TableItemRequestTokenData::setKey(const TokenDataId &newKey)
+{
+    key = newKey;
+}
+
 }

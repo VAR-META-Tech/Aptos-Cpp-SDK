@@ -93,6 +93,12 @@ public:
     static Transaction FromJson(const nlohmann::json& j);
     nlohmann::json ToJson() const;
 
+    std::string getType() const;
+    void setType(const std::string &newType);
+
+    bool getSuccess() const;
+    void setSuccess(bool newSuccess);
+
 private:
     std::string Type;
     std::string Version;

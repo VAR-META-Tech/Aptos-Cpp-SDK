@@ -12,6 +12,15 @@ class TableItemRequest {
 public:
     nlohmann::json ToJson() const;
     static TableItemRequest FromJson(const nlohmann::json& jsonData);
+    std::string getKeyType() const;
+    void setKeyType(const std::string &newKeyType);
+
+    std::string getValueType() const;
+    void setValueType(const std::string &newValueType);
+
+    std::string getKey() const;
+    void setKey(const std::string &newKey);
+
 private:
     std::string KeyType;
     std::string ValueType;

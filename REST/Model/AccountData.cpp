@@ -24,4 +24,9 @@ AccountData AccountData::FromJson(const nlohmann::json &jsonObject) {
     accountData.AuthenticationKey = jsonObject["authentication_key"];
     return accountData;
 }
+
+const std::string &AccountData::getSequenceNumber() const
+{
+    return SequenceNumber;
+}
 }

@@ -1,0 +1,233 @@
+\doxysection{Private\+Key Class Reference}
+\hypertarget{class_private_key}{}\label{class_private_key}\index{PrivateKey@{PrivateKey}}
+
+
+Represents a 64-\/byte extended private key. An extended private key is a requirement from Choas.\+Na\+Cl.  
+
+
+
+
+{\ttfamily \#include $<$Private\+Key.\+h$>$}
+
+Inheritance diagram for Private\+Key\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_private_key}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_private_key_a462b1cd678dfb588f530c9419b55af67}\label{class_private_key_a462b1cd678dfb588f530c9419b55af67} 
+std\+::string {\bfseries Key} ()
+\begin{DoxyCompactList}\small\item\em The key as a 32-\/byte hexadecimal string (64 characters). ~\newline
+ \end{DoxyCompactList}\item 
+\Hypertarget{class_private_key_aad3c017e943eece98aab1009bc13205c}\label{class_private_key_aad3c017e943eece98aab1009bc13205c} 
+void {\bfseries Key} (std\+::string key)
+\item 
+\Hypertarget{class_private_key_a84460a12aa9bfa61bd182ca0c9fc407a}\label{class_private_key_a84460a12aa9bfa61bd182ca0c9fc407a} 
+Crypto\+PP\+::\+Sec\+Byte\+Block {\bfseries Key\+Bytes} ()
+\begin{DoxyCompactList}\small\item\em The 32-\/byte private key in bytes. Checks if we have the 32-\/byte private key or 64-\/byte extended key, otherwise uses the string representation to create both. \end{DoxyCompactList}\item 
+\Hypertarget{class_private_key_ace38eae9522f81e2d3f2bc1674c3a4a0}\label{class_private_key_ace38eae9522f81e2d3f2bc1674c3a4a0} 
+void {\bfseries Key\+Bytes} (Crypto\+PP\+::\+Sec\+Byte\+Block value)
+\item 
+\mbox{\hyperlink{class_private_key_a1d544b15398962b7c75b86b46d6c21d1}{Private\+Key}} (Crypto\+PP\+::\+Sec\+Byte\+Block private\+Key)
+\begin{DoxyCompactList}\small\item\em Initializes the \doxylink{class_private_key}{Private\+Key} object with a 64 byte array that represents the expanded private key from seed. ~\newline
+ For example, using\+: {\ttfamily Ed25519.\+Expanded\+Private\+Key\+From\+Seed(seed)}. ~\newline
+ This constructor is expected to be called from the \doxylink{class_account_a366660970b5eeb5c17436062327f1b14}{Account} constructor. ~\newline
+ Note\+: To create a private key from a 32-\/byte string see \doxylink{class_private_key}{Private\+Key(string key)} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_private_key_aa62aca1c968009c2e13271a5d8797400}{Private\+Key}} (std\+::string key)
+\begin{DoxyCompactList}\small\item\em Initializes the \doxylink{class_private_key}{Private\+Key} object with a 64 character (32-\/byte) ASCII representation of a private key. ~\newline
+ Note\+: The undelying cryptographic library (Chaos.\+Na\+CL) uses an extended private key (64 byte) for fast computation. ~\newline
+ This hex string is used as a seed to create an extended private key when \doxylink{class_private_key_a84460a12aa9bfa61bd182ca0c9fc407a}{Key\+Bytes} is requested. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_private_key_af2390ea1b4af037d27ec4444ed768b10}{Private\+Key}} (std\+::array$<$ Crypto\+PP\+::byte, \mbox{\hyperlink{class_private_key_ab43a6a4fb08256a1717c9b324f814e5c}{Key\+Length}} $>$ private\+Key)
+\begin{DoxyCompactList}\small\item\em Initialize the \doxylink{class_private_key}{Private\+Key} object from the given string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_public_key}{Public\+Key}} \mbox{\hyperlink{class_private_key_a2ebc3b31d5e1b5dfa080be5719ad7f27}{Get\+Public\+Key}} ()
+\begin{DoxyCompactList}\small\item\em Derives public key from the private key bytes. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_private_key_ad75eb64648bb1d5e06a4fc6323d98d6e}{operator==}} (const \mbox{\hyperlink{class_private_key}{Private\+Key}} \&rhs) const
+\begin{DoxyCompactList}\small\item\em Compartor for two private keys. \end{DoxyCompactList}\item 
+\Hypertarget{class_private_key_a2590ee9b98695f2e822a730c8890503b}\label{class_private_key_a2590ee9b98695f2e822a730c8890503b} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{class_private_key}{Private\+Key}} \&rhs) const
+\item 
+\mbox{\hyperlink{class_signature}{Signature}} \mbox{\hyperlink{class_private_key_ac74aad8ee9b397c52bebefad3c5b48b4}{Sign}} (Crypto\+PP\+::\+Sec\+Byte\+Block message)
+\begin{DoxyCompactList}\small\item\em Sign a message using the extended private key. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_private_key_a3d0020e9c9ef149425fe173dfe07d9e1}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer)
+\begin{DoxyCompactList}\small\item\em Serialize private key. \end{DoxyCompactList}\item 
+\Hypertarget{class_private_key_a3b7adc12d7dcc5a324ed114679dea003}\label{class_private_key_a3b7adc12d7dcc5a324ed114679dea003} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_private_key}{Private\+Key}} \&rhs) const
+\item 
+\Hypertarget{class_private_key_aa3c0c7d6a1928c19362d08aa93d87603}\label{class_private_key_aa3c0c7d6a1928c19362d08aa93d87603} 
+int {\bfseries Get\+Hash\+Code} () const
+\item 
+\Hypertarget{class_private_key_a3b42d89d8ad76ba306735ccdedc6a08e}\label{class_private_key_a3b42d89d8ad76ba306735ccdedc6a08e} 
+std\+::string {\bfseries To\+String} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_private_key}{Private\+Key}} \mbox{\hyperlink{class_private_key_ab6f1a6f3a27718169ec938686a5b5719}{From\+Hex}} (std\+::string key)
+\begin{DoxyCompactList}\small\item\em Create a private key from a string literal. Conforms to the standard Python and Typescript Aptos SDK. \end{DoxyCompactList}\item 
+\Hypertarget{class_private_key_af3bac74031d395787ae6bd4a331d2842}\label{class_private_key_af3bac74031d395787ae6bd4a331d2842} 
+static \mbox{\hyperlink{class_private_key}{Private\+Key}} {\bfseries Random} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_private_key_a3f00ddeff2203798c82e042f28ac0a84}\label{class_private_key_a3f00ddeff2203798c82e042f28ac0a84} 
+static const int {\bfseries Extended\+Key\+Length} = 64
+\begin{DoxyCompactList}\small\item\em Extended private key length. \end{DoxyCompactList}\item 
+\Hypertarget{class_private_key_ab43a6a4fb08256a1717c9b324f814e5c}\label{class_private_key_ab43a6a4fb08256a1717c9b324f814e5c} 
+static const int {\bfseries Key\+Length} = 32
+\begin{DoxyCompactList}\small\item\em Private key length. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a 64-\/byte extended private key. An extended private key is a requirement from Choas.\+Na\+Cl. 
+
+Note that the hexadecimal string representation is of the 32-\/byte private key on it\textquotesingle{}s own. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_private_key_a1d544b15398962b7c75b86b46d6c21d1}\label{class_private_key_a1d544b15398962b7c75b86b46d6c21d1} 
+\index{PrivateKey@{PrivateKey}!PrivateKey@{PrivateKey}}
+\index{PrivateKey@{PrivateKey}!PrivateKey@{PrivateKey}}
+\doxysubsubsection{\texorpdfstring{PrivateKey()}{PrivateKey()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Private\+Key\+::\+Private\+Key (\begin{DoxyParamCaption}\item[{Crypto\+PP\+::\+Sec\+Byte\+Block}]{private\+Key }\end{DoxyParamCaption})}
+
+
+
+Initializes the \doxylink{class_private_key}{Private\+Key} object with a 64 byte array that represents the expanded private key from seed. ~\newline
+ For example, using\+: {\ttfamily Ed25519.\+Expanded\+Private\+Key\+From\+Seed(seed)}. ~\newline
+ This constructor is expected to be called from the \doxylink{class_account_a366660970b5eeb5c17436062327f1b14}{Account} constructor. ~\newline
+ Note\+: To create a private key from a 32-\/byte string see \doxylink{class_private_key}{Private\+Key(string key)} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em private\+Key} & 64-\/byte array representation of the private key.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_private_key_aa62aca1c968009c2e13271a5d8797400}\label{class_private_key_aa62aca1c968009c2e13271a5d8797400} 
+\index{PrivateKey@{PrivateKey}!PrivateKey@{PrivateKey}}
+\index{PrivateKey@{PrivateKey}!PrivateKey@{PrivateKey}}
+\doxysubsubsection{\texorpdfstring{PrivateKey()}{PrivateKey()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Private\+Key\+::\+Private\+Key (\begin{DoxyParamCaption}\item[{std\+::string}]{key }\end{DoxyParamCaption})}
+
+
+
+Initializes the \doxylink{class_private_key}{Private\+Key} object with a 64 character (32-\/byte) ASCII representation of a private key. ~\newline
+ Note\+: The undelying cryptographic library (Chaos.\+Na\+CL) uses an extended private key (64 byte) for fast computation. ~\newline
+ This hex string is used as a seed to create an extended private key when \doxylink{class_private_key_a84460a12aa9bfa61bd182ca0c9fc407a}{Key\+Bytes} is requested. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The private key as an ASCII encoded string. ~\newline
+ Example\+: {\ttfamily 0x64f57603b58af16907c18a866123286e1cbce89790613558dc1775abb3fc5c8c}\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_private_key_af2390ea1b4af037d27ec4444ed768b10}\label{class_private_key_af2390ea1b4af037d27ec4444ed768b10} 
+\index{PrivateKey@{PrivateKey}!PrivateKey@{PrivateKey}}
+\index{PrivateKey@{PrivateKey}!PrivateKey@{PrivateKey}}
+\doxysubsubsection{\texorpdfstring{PrivateKey()}{PrivateKey()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Private\+Key\+::\+Private\+Key (\begin{DoxyParamCaption}\item[{std\+::array$<$ Crypto\+PP\+::byte, \mbox{\hyperlink{class_private_key_ab43a6a4fb08256a1717c9b324f814e5c}{Key\+Length}} $>$}]{private\+Key }\end{DoxyParamCaption})}
+
+
+
+Initialize the \doxylink{class_private_key}{Private\+Key} object from the given string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The private key as a hex encoded byte array.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_private_key_ab6f1a6f3a27718169ec938686a5b5719}\label{class_private_key_ab6f1a6f3a27718169ec938686a5b5719} 
+\index{PrivateKey@{PrivateKey}!FromHex@{FromHex}}
+\index{FromHex@{FromHex}!PrivateKey@{PrivateKey}}
+\doxysubsubsection{\texorpdfstring{FromHex()}{FromHex()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_private_key}{Private\+Key}} Private\+Key\+::\+From\+Hex (\begin{DoxyParamCaption}\item[{std\+::string}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create a private key from a string literal. Conforms to the standard Python and Typescript Aptos SDK. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The private key as an ASCII encoded string.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Private key object.
+\end{DoxyReturn}
+\Hypertarget{class_private_key_a2ebc3b31d5e1b5dfa080be5719ad7f27}\label{class_private_key_a2ebc3b31d5e1b5dfa080be5719ad7f27} 
+\index{PrivateKey@{PrivateKey}!GetPublicKey@{GetPublicKey}}
+\index{GetPublicKey@{GetPublicKey}!PrivateKey@{PrivateKey}}
+\doxysubsubsection{\texorpdfstring{GetPublicKey()}{GetPublicKey()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_public_key}{Public\+Key}} Private\+Key\+::\+Get\+Public\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Derives public key from the private key bytes. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{class_public_key}{Public\+Key} object.
+\end{DoxyReturn}
+\Hypertarget{class_private_key_ad75eb64648bb1d5e06a4fc6323d98d6e}\label{class_private_key_ad75eb64648bb1d5e06a4fc6323d98d6e} 
+\index{PrivateKey@{PrivateKey}!operator==@{operator==}}
+\index{operator==@{operator==}!PrivateKey@{PrivateKey}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Private\+Key\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_private_key}{Private\+Key}} \&}]{rhs }\end{DoxyParamCaption}) const}
+
+
+
+Compartor for two private keys. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lhs} & First private key in comparison..\\
+\hline
+{\em rhs} & Second private key in comparison.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_private_key_a3d0020e9c9ef149425fe173dfe07d9e1}\label{class_private_key_a3d0020e9c9ef149425fe173dfe07d9e1} 
+\index{PrivateKey@{PrivateKey}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!PrivateKey@{PrivateKey}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Private\+Key\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption})}
+
+
+
+Serialize private key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & Serializer object\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_private_key_ac74aad8ee9b397c52bebefad3c5b48b4}\label{class_private_key_ac74aad8ee9b397c52bebefad3c5b48b4} 
+\index{PrivateKey@{PrivateKey}!Sign@{Sign}}
+\index{Sign@{Sign}!PrivateKey@{PrivateKey}}
+\doxysubsubsection{\texorpdfstring{Sign()}{Sign()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_signature}{Signature}} Private\+Key\+::\+Sign (\begin{DoxyParamCaption}\item[{Crypto\+PP\+::\+Sec\+Byte\+Block}]{message }\end{DoxyParamCaption})}
+
+
+
+Sign a message using the extended private key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to sign, represented in bytes.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The signature generated for the message as an object
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Accounts/Private\+Key.\+h\item 
+Accounts/Private\+Key.\+cpp\end{DoxyCompactItemize}

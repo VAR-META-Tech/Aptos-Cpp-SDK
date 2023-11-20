@@ -1,0 +1,93 @@
+\doxysection{Aptos\+::BCS\+::Module\+Id Class Reference}
+\hypertarget{class_aptos_1_1_b_c_s_1_1_module_id}{}\label{class_aptos_1_1_b_c_s_1_1_module_id}\index{Aptos::BCS::ModuleId@{Aptos::BCS::ModuleId}}
+
+
+Representation of a module ID.  
+
+
+
+
+{\ttfamily \#include $<$Module\+Id.\+h$>$}
+
+Inheritance diagram for Aptos\+::BCS\+::Module\+Id\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_aptos_1_1_b_c_s_1_1_module_id}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_module_id_a0cc4018b22f527579ed6f5876adcf896}\label{class_aptos_1_1_b_c_s_1_1_module_id_a0cc4018b22f527579ed6f5876adcf896} 
+{\bfseries Module\+Id} (const \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Account\+Address}} \&address, const std\+::string \&name)
+\item 
+void \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id_acb37ae3eb358c7636179a813634e965a}{Serialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object. \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_module_id_a77c8f60f801a602dd7b1b06e0e36cb4f}\label{class_aptos_1_1_b_c_s_1_1_module_id_a77c8f60f801a602dd7b1b06e0e36cb4f} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{Module\+Id}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id_a2b5eee14a76b0ac43307e232973228e0}{To\+String}} () const override
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_module_id_aa9ee600a577eb67e1d3d1ed99bf745c8}\label{class_aptos_1_1_b_c_s_1_1_module_id_aa9ee600a577eb67e1d3d1ed99bf745c8} 
+size\+\_\+t {\bfseries Get\+Hash\+Code} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_module_id_ab1d43994f3b93684a7d9343898f5193b}\label{class_aptos_1_1_b_c_s_1_1_module_id_ab1d43994f3b93684a7d9343898f5193b} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_module_id_a3af5b6777d75fcef771e3569022e64bd}\label{class_aptos_1_1_b_c_s_1_1_module_id_a3af5b6777d75fcef771e3569022e64bd} 
+static \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{Module\+Id}} {\bfseries From\+Str} (const std\+::string \&module\+Id)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_aa692ec6a618d04663c1e5d3cf83f59d7}{Deserialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of a module ID. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_module_id_acb37ae3eb358c7636179a813634e965a}\label{class_aptos_1_1_b_c_s_1_1_module_id_acb37ae3eb358c7636179a813634e965a} 
+\index{Aptos::BCS::ModuleId@{Aptos::BCS::ModuleId}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Aptos::BCS::ModuleId@{Aptos::BCS::ModuleId}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Aptos\+::\+BCS\+::\+Module\+Id\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_a69bdbb0faf3fda49df818174878938b1}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_module_id_a2b5eee14a76b0ac43307e232973228e0}\label{class_aptos_1_1_b_c_s_1_1_module_id_a2b5eee14a76b0ac43307e232973228e0} 
+\index{Aptos::BCS::ModuleId@{Aptos::BCS::ModuleId}!ToString@{ToString}}
+\index{ToString@{ToString}!Aptos::BCS::ModuleId@{Aptos::BCS::ModuleId}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Aptos\+::\+BCS\+::\+Module\+Id\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Module\+Id.\+h\item 
+BCS/Module\+Id.\+cpp\end{DoxyCompactItemize}

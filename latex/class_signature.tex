@@ -1,0 +1,135 @@
+\doxysection{Signature Class Reference}
+\hypertarget{class_signature}{}\label{class_signature}\index{Signature@{Signature}}
+
+
+Representation of a ED25519 signature.  
+
+
+
+
+{\ttfamily \#include $<$Signature.\+h$>$}
+
+Inheritance diagram for Signature\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_signature}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_signature_a01e846cc934766ab8908e0199bc4eb49}{Signature}} (const Crypto\+PP\+::\+Sec\+Byte\+Block \&signature)
+\begin{DoxyCompactList}\small\item\em Initialize the signature. \end{DoxyCompactList}\item 
+Crypto\+PP\+::\+Sec\+Byte\+Block \mbox{\hyperlink{class_signature_aa11c134727f7c943a9c40b9b29f4bf49}{Data}} () const
+\begin{DoxyCompactList}\small\item\em The signature data in 64-\/bytes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_signature_ae32de4d106df0de50fab71d08450421b}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize signature. \end{DoxyCompactList}\item 
+\Hypertarget{class_signature_a11dad968daadfea2e2e9f04c9d7862b0}\label{class_signature_a11dad968daadfea2e2e9f04c9d7862b0} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{class_signature}{Signature}} \&other) const
+\item 
+\Hypertarget{class_signature_a32aa21e643a0a280ee9c4863d6c506ca}\label{class_signature_a32aa21e643a0a280ee9c4863d6c506ca} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{class_signature}{Signature}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{class_signature_ae1b21b421578dfe15b81f3bf4d1c2284}{To\+String}} () const override
+\item 
+\Hypertarget{class_signature_af20c76a1130c063c42fbdc0f93cce897}\label{class_signature_af20c76a1130c063c42fbdc0f93cce897} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_signature}{Signature}} \&rhs) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_signature_ad84f609b147cffc18f8c3ae08e455a32}\label{class_signature_ad84f609b147cffc18f8c3ae08e455a32} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_signature_a5a9f7733f69a7197e1ac33ad03a07992}\label{class_signature_a5a9f7733f69a7197e1ac33ad03a07992} 
+static const int {\bfseries Signature\+Length} = 64
+\begin{DoxyCompactList}\small\item\em \doxylink{class_signature}{Signature} length. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of a ED25519 signature. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_signature_a01e846cc934766ab8908e0199bc4eb49}\label{class_signature_a01e846cc934766ab8908e0199bc4eb49} 
+\index{Signature@{Signature}!Signature@{Signature}}
+\index{Signature@{Signature}!Signature@{Signature}}
+\doxysubsubsection{\texorpdfstring{Signature()}{Signature()}}
+{\footnotesize\ttfamily Signature\+::\+Signature (\begin{DoxyParamCaption}\item[{const Crypto\+PP\+::\+Sec\+Byte\+Block \&}]{signature }\end{DoxyParamCaption})}
+
+
+
+Initialize the signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em signature} & The raw signature in byte array format.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_signature_aa11c134727f7c943a9c40b9b29f4bf49}\label{class_signature_aa11c134727f7c943a9c40b9b29f4bf49} 
+\index{Signature@{Signature}!Data@{Data}}
+\index{Data@{Data}!Signature@{Signature}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}}
+{\footnotesize\ttfamily Crypto\+PP\+::\+Sec\+Byte\+Block Signature\+::\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+The signature data in 64-\/bytes. 
+
+\begin{DoxyReturn}{Returns}
+64-\/byte array representing the signature data
+\end{DoxyReturn}
+\Hypertarget{class_signature_ae32de4d106df0de50fab71d08450421b}\label{class_signature_ae32de4d106df0de50fab71d08450421b} 
+\index{Signature@{Signature}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Signature@{Signature}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Signature\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & Serializer object\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{ISerializable}}.
+
+\Hypertarget{class_signature_ae1b21b421578dfe15b81f3bf4d1c2284}\label{class_signature_ae1b21b421578dfe15b81f3bf4d1c2284} 
+\index{Signature@{Signature}!ToString@{ToString}}
+\index{ToString@{ToString}!Signature@{Signature}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Signature\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable}{ISerializable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Accounts/Signature.\+h\item 
+Accounts/Signature.\+cpp\end{DoxyCompactItemize}

@@ -1,33 +1,50 @@
-//
-// Created by Anh NPH on 21/09/2023.
-//
-
 #ifndef APTOS_U64_H
 #define APTOS_U64_H
-
 #include "BCSTypes.h"
 
-class U64 : public ISerializableTag {
-private:
-    uint64_t value;
+namespace Aptos::BCS
+{
+    /// <summary>
+    /// Representation of U64.
+    /// </summary>
+    class U64 : public ISerializableTag
+    {
+    private:
+        /// <summary>
+        /// The internal U64 value as a ulong data type.
+        /// </summary>
+        uint64_t value;
 
-public:
-    U64(uint64_t value);
+    public:
+        /// <summary>
+        /// Creates a U64 object from a given ulong value.
+        /// </summary>
+        /// <param name="value">A ulong value to serialize as u64.</param>
+        U64(uint64_t value);
 
-    void Serialize(Serialization& serializer) const override;
+        /// <inheritdoc/>
+        void Serialize(Serialization &serializer) const override;
 
-    static uint64_t Deserialize(const std::vector<uint8_t>& data);
+        /// <inheritdoc/>
+        static uint64_t Deserialize(const std::vector<uint8_t> &data);
 
-    static std::shared_ptr<ISerializableTag> Deserialize(Deserialization& deserializer);
+        /// <inheritdoc/>
+        static std::shared_ptr<ISerializableTag> Deserialize(Deserialization &deserializer);
 
-    TypeTag Variant() const override;
+        /// <inheritdoc/>
+        TypeTag Variant() const override;
 
-    uint64_t GetValue() const;
+        /// <inheritdoc/>
+        uint64_t GetValue() const;
 
-    bool Equals(const U64& other) const;
+        /// <inheritdoc/>
+        bool Equals(const U64 &other) const;
 
-    std::string ToString() const override;
+        /// <inheritdoc/>
+        std::string ToString() const override;
 
-    size_t GetHashCode() const;
-};
-#endif //APTOS_U64_H
+        /// <inheritdoc/>
+        size_t GetHashCode() const;
+    };
+}
+#endif // APTOS_U64_H

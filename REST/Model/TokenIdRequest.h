@@ -10,6 +10,13 @@ class TokenIdRequest {
 public:
     nlohmann::json ToJson() const;
     static TokenIdRequest FromJson(const nlohmann::json& jsonData);
+    TokenDataId getTokenDataIdProp() const;
+
+    void setTokenDataIdProp(const TokenDataId &newTokenDataIdProp);
+
+    std::string getPropertyVersion() const;
+    void setPropertyVersion(const std::string &newPropertyVersion);
+
 private:
     TokenDataId TokenDataIdProp;
     std::string PropertyVersion;

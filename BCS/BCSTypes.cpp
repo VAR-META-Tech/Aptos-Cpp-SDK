@@ -15,10 +15,14 @@
 #include "../Accounts/AccountAddress.h"
 #include "StructTag.h"
 
-std::shared_ptr<ISerializableTag> ISerializableTag::DeserializeTag(Deserialization& deserializer) {
-    TypeTag variant = static_cast<TypeTag>(deserializer.DeserializeUleb128());
+namespace Aptos::BCS
+{
+    std::shared_ptr<ISerializableTag> ISerializableTag::DeserializeTag(Deserialization &deserializer)
+    {
+        TypeTag variant = static_cast<TypeTag>(deserializer.DeserializeUleb128());
 
-    switch (variant) {
+        switch (variant)
+        {
         case TypeTag::BOOL:
             return Bool::Deserialize(deserializer);
         case TypeTag::U8:
@@ -34,17 +38,19 @@ std::shared_ptr<ISerializableTag> ISerializableTag::DeserializeTag(Deserializati
         case TypeTag::U256:
             return U256::Deserialize(deserializer);
         case TypeTag::ACCOUNT_ADDRESS:
-            return AccountAddress::Deserialize(deserializer);
+            return Accounts::AccountAddress::Deserialize(deserializer);
         case TypeTag::STRUCT:
             return StructTag::Deserialize(deserializer);
         default:
             throw std::logic_error("The method or operation is not implemented.");
+        }
     }
-}
 
-std::string ISerializableTag::ToString() const {
-    std::string typeTagStr;
-    switch (Variant()) {
+    std::string ISerializableTag::ToString() const
+    {
+        std::string typeTagStr;
+        switch (Variant())
+        {
         case TypeTag::BOOL:
             typeTagStr = "BOOL";
             break;
@@ -80,19 +86,22 @@ std::string ISerializableTag::ToString() const {
             break;
         default:
             typeTagStr = "UNKNOWN";
+        }
+        return "ISerializableTag (" + typeTagStr + ")";
     }
-    return "ISerializableTag (" + typeTagStr + ")";
-}
 
-std::shared_ptr<ISerializable> ISerializable::Deserialize(Deserialization &deserializer) {
-    throw std::logic_error("The method or operation is not implemented.");
-    return nullptr;
-}
+    std::shared_ptr<ISerializable> ISerializable::Deserialize(Deserialization &deserializer)
+    {
+        throw std::logic_error("The method or operation is not implemented.");
+        return nullptr;
+    }
 
-std::size_t ISerializable::GetHashCode() {
-    // Your hash logic here. This is just a simple example.
-    std::size_t seed = 0;
-    //boost::hash_combine(seed, int_member);
-    //boost::hash_combine(seed, boost::hash_value(string_member));
-    return seed;
+    std::size_t ISerializable::GetHashCode()
+    {
+        // Your hash logic here. This is just a simple example.
+        std::size_t seed = 0;
+        // boost::hash_combine(seed, int_member);
+        // boost::hash_combine(seed, boost::hash_value(string_member));
+        return seed;
+    }
 }

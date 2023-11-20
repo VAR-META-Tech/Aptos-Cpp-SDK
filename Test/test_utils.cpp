@@ -2,6 +2,7 @@
 #include "../HDWallet/Utils/Utils.h"
 #include <string>
 
+using namespace Aptos;
 class UtilsTest : public ::testing::Test {
 protected:
     const std::string PrivateKeyHex = "0x64f57603b58af16907c18a866123286e1cbce89790613558dc1775abb3fc5c8c";

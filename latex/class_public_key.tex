@@ -1,0 +1,206 @@
+\doxysection{Public\+Key Class Reference}
+\hypertarget{class_public_key}{}\label{class_public_key}\index{PublicKey@{PublicKey}}
+
+
+Represents a 32-\/byte public key.  
+
+
+
+
+{\ttfamily \#include $<$Public\+Key.\+h$>$}
+
+Inheritance diagram for Public\+Key\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_public_key}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_public_key_af592d169d4214756d9d0390b9a3ed925}{Public\+Key}} (const Crypto\+PP\+::\+Sec\+Byte\+Block \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Initializes the \doxylink{class_public_key}{Public\+Key} object with a given byte array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_public_key_aabed2027ce97e734053b124d19ae721b}{Public\+Key}} (std\+::string key)
+\begin{DoxyCompactList}\small\item\em Initializes the \doxylink{class_public_key}{Public\+Key} object with a given hexadecimal representation of public . \end{DoxyCompactList}\item 
+\Hypertarget{class_public_key_ac2f3ef1a9d49303d570c2c5e3feac955}\label{class_public_key_ac2f3ef1a9d49303d570c2c5e3feac955} 
+std\+::string {\bfseries Key} () const
+\begin{DoxyCompactList}\small\item\em The key as a hexadecimal string. \end{DoxyCompactList}\item 
+\Hypertarget{class_public_key_a9f202d3e5d68104b2094ea765379bf81}\label{class_public_key_a9f202d3e5d68104b2094ea765379bf81} 
+void {\bfseries set\+Key} (std\+::string key)
+\item 
+\Hypertarget{class_public_key_a036a2a3483c50a9c705b4a8c2acbe8c0}\label{class_public_key_a036a2a3483c50a9c705b4a8c2acbe8c0} 
+Crypto\+PP\+::\+Sec\+Byte\+Block {\bfseries Key\+Bytes} () const
+\begin{DoxyCompactList}\small\item\em The key in bytes. \end{DoxyCompactList}\item 
+\Hypertarget{class_public_key_a86dfe2eff2e926068aaacce39bd47bd8}\label{class_public_key_a86dfe2eff2e926068aaacce39bd47bd8} 
+void {\bfseries set\+Key\+Bytes} (const Crypto\+PP\+::\+Sec\+Byte\+Block \&bytes)
+\item 
+bool \mbox{\hyperlink{class_public_key_a8085e199516c0833133395b911c306e2}{Verify}} (const Crypto\+PP\+::\+Sec\+Byte\+Block \&message, const \mbox{\hyperlink{class_signature}{Signature}} \&signature) const
+\begin{DoxyCompactList}\small\item\em Verify a signed message using the current public key. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_public_key_a8ae3931badd7c6ca94cf350d7d649609}{Is\+On\+Curve}} () const
+\begin{DoxyCompactList}\small\item\em Check if Publi\+Key is a valid on the Ed25519 curve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_public_key_a76f106bae2e8121193482fde590e7a58}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize public key. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_public_key_ac23f2d865f63b6c12752fdd7bd635983}{To\+String}} () const
+\begin{DoxyCompactList}\small\item\em To\+String implementation return the key as a hex string. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{class_public_key_a987450a9e5fe2f985ce3d97b92ffcd08}{Get\+Hash\+Code}} () const
+\begin{DoxyCompactList}\small\item\em Value used as a hash. \end{DoxyCompactList}\item 
+\Hypertarget{class_public_key_ab0a438114eb704973fb1972461e715cd}\label{class_public_key_ab0a438114eb704973fb1972461e715cd} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_public_key}{Public\+Key}} \&rhs) const
+\item 
+\Hypertarget{class_public_key_acc9172d6c3e1aa7c6ae1d1d6ab13caf9}\label{class_public_key_acc9172d6c3e1aa7c6ae1d1d6ab13caf9} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{class_public_key}{Public\+Key}} \&rhs) const
+\item 
+\Hypertarget{class_public_key_aa1cafcf372d7607334138ce436df5c36}\label{class_public_key_aa1cafcf372d7607334138ce436df5c36} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{class_public_key}{Public\+Key}} \&rhs) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_public_key_a13a93bea4cc3cfefdb8d03d8a2fed993}\label{class_public_key_a13a93bea4cc3cfefdb8d03d8a2fed993} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_public_key_a0e32df47ab3e37e79d82b42b319a69ed}\label{class_public_key_a0e32df47ab3e37e79d82b42b319a69ed} 
+static const int {\bfseries Key\+Length} = 32
+\begin{DoxyCompactList}\small\item\em Public key length. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a 32-\/byte public key. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_public_key_af592d169d4214756d9d0390b9a3ed925}\label{class_public_key_af592d169d4214756d9d0390b9a3ed925} 
+\index{PublicKey@{PublicKey}!PublicKey@{PublicKey}}
+\index{PublicKey@{PublicKey}!PublicKey@{PublicKey}}
+\doxysubsubsection{\texorpdfstring{PublicKey()}{PublicKey()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Public\+Key\+::\+Public\+Key (\begin{DoxyParamCaption}\item[{const Crypto\+PP\+::\+Sec\+Byte\+Block \&}]{public\+Key }\end{DoxyParamCaption})}
+
+
+
+Initializes the \doxylink{class_public_key}{Public\+Key} object with a given byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Key} & The public key as byte array.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_public_key_aabed2027ce97e734053b124d19ae721b}\label{class_public_key_aabed2027ce97e734053b124d19ae721b} 
+\index{PublicKey@{PublicKey}!PublicKey@{PublicKey}}
+\index{PublicKey@{PublicKey}!PublicKey@{PublicKey}}
+\doxysubsubsection{\texorpdfstring{PublicKey()}{PublicKey()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Public\+Key\+::\+Public\+Key (\begin{DoxyParamCaption}\item[{std\+::string}]{key }\end{DoxyParamCaption})}
+
+
+
+Initializes the \doxylink{class_public_key}{Public\+Key} object with a given hexadecimal representation of public . 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The public key as a hexadecimal string. ~\newline
+ Example\+: {\ttfamily 0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5} \\
+\hline
+\end{DoxyParams}
+~\newline
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_public_key_a987450a9e5fe2f985ce3d97b92ffcd08}\label{class_public_key_a987450a9e5fe2f985ce3d97b92ffcd08} 
+\index{PublicKey@{PublicKey}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!PublicKey@{PublicKey}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}}
+{\footnotesize\ttfamily size\+\_\+t Public\+Key\+::\+Get\+Hash\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Value used as a hash. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_public_key_a8ae3931badd7c6ca94cf350d7d649609}\label{class_public_key_a8ae3931badd7c6ca94cf350d7d649609} 
+\index{PublicKey@{PublicKey}!IsOnCurve@{IsOnCurve}}
+\index{IsOnCurve@{IsOnCurve}!PublicKey@{PublicKey}}
+\doxysubsubsection{\texorpdfstring{IsOnCurve()}{IsOnCurve()}}
+{\footnotesize\ttfamily bool Public\+Key\+::\+Is\+On\+Curve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Check if Publi\+Key is a valid on the Ed25519 curve. 
+
+\begin{DoxyReturn}{Returns}
+Returns true if public key is on the curve.
+\end{DoxyReturn}
+\Hypertarget{class_public_key_a76f106bae2e8121193482fde590e7a58}\label{class_public_key_a76f106bae2e8121193482fde590e7a58} 
+\index{PublicKey@{PublicKey}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!PublicKey@{PublicKey}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Public\+Key\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize public key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & Serializer object\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{ISerializable}}.
+
+\Hypertarget{class_public_key_ac23f2d865f63b6c12752fdd7bd635983}\label{class_public_key_ac23f2d865f63b6c12752fdd7bd635983} 
+\index{PublicKey@{PublicKey}!ToString@{ToString}}
+\index{ToString@{ToString}!PublicKey@{PublicKey}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Public\+Key\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+To\+String implementation return the key as a hex string. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_i_serializable}{ISerializable}}.
+
+\Hypertarget{class_public_key_a8085e199516c0833133395b911c306e2}\label{class_public_key_a8085e199516c0833133395b911c306e2} 
+\index{PublicKey@{PublicKey}!Verify@{Verify}}
+\index{Verify@{Verify}!PublicKey@{PublicKey}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily bool Public\+Key\+::\+Verify (\begin{DoxyParamCaption}\item[{const Crypto\+PP\+::\+Sec\+Byte\+Block \&}]{message,  }\item[{const \mbox{\hyperlink{class_signature}{Signature}} \&}]{signature }\end{DoxyParamCaption}) const}
+
+
+
+Verify a signed message using the current public key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Message that was signed.\\
+\hline
+{\em signature} & The signature from the message.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Accounts/Public\+Key.\+h\item 
+Accounts/Public\+Key.\+cpp\end{DoxyCompactItemize}

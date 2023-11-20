@@ -1,0 +1,74 @@
+\doxysection{Serialization.\+h}
+\hypertarget{_serialization_8h_source}{}\label{_serialization_8h_source}\index{BCS/Serialization.h@{BCS/Serialization.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Anh\ NPH\ on\ 18/09/2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ APTOS\_SERIALIZATION\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ APTOS\_SERIALIZATION\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}BCSTypes.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <cryptopp/integer.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}Sequence.h"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }Aptos::BCS}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}}
+\DoxyCodeLine{00020\ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_ad3f2567998d4f18410eced2263d35320}{GetBytes}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a78a9438de6d189979cda48f61d2f0723}{Serialize}}(\textcolor{keyword}{const}\ std::string\ \&value);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a78a9438de6d189979cda48f61d2f0723}{Serialize}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\ \&value);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a78a9438de6d189979cda48f61d2f0723}{Serialize}}(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a78a9438de6d189979cda48f61d2f0723}{Serialize}}(uint8\_t\ num);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a78a9438de6d189979cda48f61d2f0723}{Serialize}}(uint16\_t\ num);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a78a9438de6d189979cda48f61d2f0723}{Serialize}}(uint32\_t\ num);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a78a9438de6d189979cda48f61d2f0723}{Serialize}}(uint64\_t\ num);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a78a9438de6d189979cda48f61d2f0723}{Serialize}}(CryptoPP::Integer\ num);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a78a9438de6d189979cda48f61d2f0723}{Serialize}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}}\ \&value);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a78a9438de6d189979cda48f61d2f0723}{Serialize}}(std::vector<std::shared\_ptr<ISerializable>>\ args);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a78a9438de6d189979cda48f61d2f0723}{Serialize}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}}\ \&args);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_ab828682806ee1d9e739bf1052720901f}{SerializeString}}(\textcolor{keyword}{const}\ std::string\ \&value);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a60e47bb25db4075ea1704140ad963071}{SerializeBytes}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\ \&bytes);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a4c0176d979501d1c9559be545bf602c7}{SerializeFixedBytes}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\ \&bytes);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a4a7f61a8ae7ba9f1716eb9a3caa8139a}{SerializeU32AsUleb128}}(uint32\_t\ value);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a0c551a8fca0558b113cc7336044422b3}{SerializeBool}}(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_ab8cd7ab8d93dbfa3540c01b7ddc9cbcb}{SerializeU8}}(uint8\_t\ num);}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a38dcf10eab6c1cae4302cb61bf7b6f22}{SerializeU16}}(uint16\_t\ num);}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a1cdb90c302f251bbd7d081a9bd44df84}{SerializeU32}}(uint32\_t\ num);}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a6505664f4a27e18af955fb3fbed7af36}{SerializeU64}}(uint64\_t\ num);}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_ab510ac2a89a7f99ecdef153d5e36f510}{SerializeU128}}(CryptoPP::Integer\ num);}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization_a652f21c06d3f595a42a6c29fbed0e964}{SerializeU256}}(CryptoPP::Integer\ num);}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ buffer;}
+\DoxyCodeLine{00188\ \ \ \ \ \};}
+\DoxyCodeLine{00189\ \}}
+\DoxyCodeLine{00190\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ APTOS\_SERIALIZATION\_H}}
+
+\end{DoxyCode}

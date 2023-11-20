@@ -10,23 +10,53 @@
 #include "../BCS/Serialization.h"
 #include "../BCS/Deserialization.h"
 
-class Signature: public ISerializable {
-public:
-    static const int SignatureLength = 64;
+using namespace Aptos::BCS;
+namespace Aptos::Accounts
+{
+    /// <summary>
+    /// Representation of a ED25519 signature
+    /// </summary>
+    class Signature : public ISerializable
+    {
+    public:
+        /// <summary>
+        /// Signature length
+        /// </summary>
+        static const int SignatureLength = 64;
 
-private:
-    CryptoPP::SecByteBlock _signatureBytes;
-    mutable std::string _signature;
+    private:
+        /// <summary>
+        /// Byte representation of the signature
+        /// </summary>
+        CryptoPP::SecByteBlock _signatureBytes;
 
-public:
-    Signature(const CryptoPP::SecByteBlock& signature);
-    CryptoPP::SecByteBlock Data() const;
-    void Serialize(Serialization& serializer) const override;
-    static std::shared_ptr<ISerializable> Deserialize(Deserialization& deserializer);
-    bool operator==(const Signature& other) const;
-    bool operator!=(const Signature& other) const;
-    std::string ToString() const;
-    bool Equals(const Signature& rhs) const;
-};
+    public:
+        /// <summary>
+        /// Initialize the signature.
+        /// </summary>
+        /// <param name="signature">The raw signature in byte array format.</param>
+        Signature(const CryptoPP::SecByteBlock &signature);
 
-#endif //APTOS_SIGNATURE_H
+        /// <summary>
+        /// The signature data in 64-bytes.
+        /// </summary>
+        /// <returns>64-byte array representing the signature data</returns>
+        CryptoPP::SecByteBlock Data() const;
+
+        /// <summary>
+        /// Serialize signature
+        /// </summary>
+        /// <param name="serializer">Serializer object</param>
+        void Serialize(Serialization &serializer) const override;
+        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
+        bool operator==(const Signature &other) const;
+        bool operator!=(const Signature &other) const;
+
+        /// <inheritdoc cref="ToString"/>
+        std::string ToString() const override;
+
+        /// <inheritdoc cref="Equals(object)"/>
+        bool Equals(const Signature &rhs) const;
+    };
+}
+#endif // APTOS_SIGNATURE_H

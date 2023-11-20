@@ -6,28 +6,48 @@
 #define APTOS_BOOL_H
 #include "BCSTypes.h"
 
-class Bool : public ISerializableTag {
-private:
-    bool value;
+namespace Aptos::BCS
+{
+    /// <summary>
+    /// Representation of a Boolean.
+    /// </summary>
+    class Bool : public ISerializableTag
+    {
+    private:
+        /// <summary>
+        /// The internal boolean value.
+        /// </summary>
+        bool value;
 
-public:
-    Bool(bool value);
+    public:
+        /// <summary>
+        /// Creates a Bool object from a given boolean.
+        /// </summary>
+        /// <param name="value">A bolean value to serialize.</param>
+        Bool(bool value);
 
-    void Serialize(Serialization& serializer) const override;
+        /// <inheritdoc/>
+        void Serialize(Serialization &serializer) const override;
 
-    static std::shared_ptr<ISerializableTag> Deserialize(Deserialization& deserializer);
+        /// <inheritdoc/>
+        static std::shared_ptr<ISerializableTag> Deserialize(Deserialization &deserializer);
 
-    TypeTag Variant() const override;
+        /// <inheritdoc/>
+        TypeTag Variant() const override;
 
-    bool GetValue() const;
+        /// <inheritdoc/>
+        bool GetValue() const;
 
-    bool Equals(const Bool& other) const;
+        /// <inheritdoc/>
+        bool Equals(const Bool &other) const;
 
-    std::string ToString() const override;
+        /// <inheritdoc/>
+        std::string ToString() const override;
 
-    size_t GetHashCode() const;
-};
+        /// <inheritdoc/>
+        size_t GetHashCode() const;
+    };
 
-bool operator==(const Bool &lhs, const Bool &rhs);
-
-#endif //APTOS_BOOL_H
+    bool operator==(const Bool &lhs, const Bool &rhs);
+}
+#endif // APTOS_BOOL_H

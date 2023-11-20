@@ -31,6 +31,66 @@ TransactionRequest TransactionRequest::FromJson(const nlohmann::json &requestJso
     return request;
 }
 
+std::string TransactionRequest::getSender() const
+{
+    return Sender;
+}
+
+void TransactionRequest::setSender(const std::string &newSender)
+{
+    Sender = newSender;
+}
+
+std::string TransactionRequest::getSequenceNumber() const
+{
+    return SequenceNumber;
+}
+
+void TransactionRequest::setSequenceNumber(const std::string &newSequenceNumber)
+{
+    SequenceNumber = newSequenceNumber;
+}
+
+std::string TransactionRequest::getMaxGasAmount() const
+{
+    return MaxGasAmount;
+}
+
+void TransactionRequest::setMaxGasAmount(const std::string &newMaxGasAmount)
+{
+    MaxGasAmount = newMaxGasAmount;
+}
+
+std::string TransactionRequest::getGasUnitPrice() const
+{
+    return GasUnitPrice;
+}
+
+void TransactionRequest::setGasUnitPrice(const std::string &newGasUnitPrice)
+{
+    GasUnitPrice = newGasUnitPrice;
+}
+
+std::string TransactionRequest::getExpirationTimestampSecs() const
+{
+    return ExpirationTimestampSecs;
+}
+
+void TransactionRequest::setExpirationTimestampSecs(const std::string &newExpirationTimestampSecs)
+{
+    ExpirationTimestampSecs = newExpirationTimestampSecs;
+}
+
+SignatureData TransactionRequest::getSignature() const
+{
+    return Signature;
+}
+
+void TransactionRequest::setSignature(const SignatureData &newSignature)
+{
+    Signature = newSignature;
+}
+
 nlohmann::json SignatureData::ToJson() const {
     nlohmann::json signatureJson;
     signatureJson["type"] = Type;
@@ -60,6 +120,21 @@ std::string SignatureData::getPublicKey() const
 std::string SignatureData::getSignature() const
 {
     return Signature;
+}
+
+void SignatureData::setType(const std::string &newType)
+{
+    Type = newType;
+}
+
+void SignatureData::setPublicKey(const std::string &newPublicKey)
+{
+    PublicKey = newPublicKey;
+}
+
+void SignatureData::setSignature(const std::string &newSignature)
+{
+    Signature = newSignature;
 }
 
 }

@@ -6,35 +6,70 @@
 #define APTOS_BSTRING_H
 #include "BCSTypes.h"
 
-class BString : public ISerializable {
-private:
-    std::string value;
+namespace Aptos::BCS
+{
+    /// <summary>
+    /// Representation of a string in BCS.
+    /// </summary>
+    class BString : public ISerializable
+    {
+    private:
+        /// <summary>
+        /// The internal string value.
+        /// </summary>
+        std::string value;
 
-public:
-    BString();
-    BString(const std::string& value);
+    public:
+        BString();
 
-    void Serialize(Serialization& serializer) const override;
+        /// <summary>
+        /// Creates a BString from a string.
+        /// </summary>
+        /// <param name="value">A string value.</param>
+        BString(const std::string &value);
 
-    static std::string Deserialize(const std::vector<uint8_t>& data);
+        /// <summary>
+        /// Serializes the BString object using the given Serializer.
+        /// </summary>
+        /// <param name="serializer">The Serializer object.</param>
+        void Serialize(Serialization &serializer) const override;
 
-    static std::shared_ptr<ISerializable> Deserialize(Deserialization& deserializer);
+        /// <summary>
+        /// Deserializes a give byte array into a UTF8 compliant string.
+        /// </summary>
+        /// <param name="data">A string represented as a byte array.</param>
+        /// <returns></returns>
+        static std::string Deserialize(const std::vector<uint8_t> &data);
 
-    bool Equals(const BString& other) const;
+        /// <summary>
+        /// Deserializes a byte array contained by the Deserializer.
+        /// </summary>
+        /// <param name="deserializer">The Deserializer that contains the bytes.</param>
+        /// <returns>A BString object.</returns>
+        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
 
-    std::string ToString() const override;
+        /// <inheritdoc/>
+        bool Equals(const BString &other) const;
 
-    size_t GetHashCode() const;
+        /// <inheritdoc/>
+        std::string ToString() const override;
 
-    std::string GetValue() const;
+        /// <inheritdoc/>
+        size_t GetHashCode() const;
 
-    std::vector<uint8_t> RemoveBOM(const std::vector<uint8_t>& data);
+        /// <inheritdoc/>
+        std::string GetValue() const;
 
-    bool operator<(const BString& other) const;
+        /// <summary>
+        /// Utility function used to RemoveBOM prefixes.
+        /// </summary>
+        /// <param name="data">A string represented as a byte array.</param>
+        /// <returns>The cleaned byte array.</returns>
+        std::vector<uint8_t> RemoveBOM(const std::vector<uint8_t> &data);
 
-    bool operator==(const BString& other) const;
-};
+        bool operator<(const BString &other) const;
 
-
-
-#endif //APTOS_BSTRING_H
+        bool operator==(const BString &other) const;
+    };
+}
+#endif // APTOS_BSTRING_H

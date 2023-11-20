@@ -1,0 +1,162 @@
+\doxysection{Aptos\+::BCS\+::U32 Class Reference}
+\hypertarget{class_aptos_1_1_b_c_s_1_1_u32}{}\label{class_aptos_1_1_b_c_s_1_1_u32}\index{Aptos::BCS::U32@{Aptos::BCS::U32}}
+
+
+Representation of a \doxylink{class_aptos_1_1_b_c_s_1_1_u32}{U32}.  
+
+
+
+
+{\ttfamily \#include $<$U32.\+h$>$}
+
+Inheritance diagram for Aptos\+::BCS\+::U32\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_aptos_1_1_b_c_s_1_1_u32}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u32_ab75be5a5056d39032579eb8931e71329}{U32}} (uint32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{class_aptos_1_1_b_c_s_1_1_u32}{U32} object from a uint value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u32_aace34e689f69ef6070aaa7db08f333bd}{Serialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+Type\+Tag \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u32_a9a06c8bfc98312063cf2e8c86fdf4e90}{Variant}} () const override
+\begin{DoxyCompactList}\small\item\em Returns the type of type tag.
+
+\begin{DoxyReturn}{Returns}
+A Type\+Tag enum.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_u32_a9b6ed4d7a01e024b4c620a8c1ce0e65b}\label{class_aptos_1_1_b_c_s_1_1_u32_a9b6ed4d7a01e024b4c620a8c1ce0e65b} 
+uint32\+\_\+t {\bfseries Get\+Value} () const
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_u32_a31578718368b033f67047c2e297dc038}\label{class_aptos_1_1_b_c_s_1_1_u32_a31578718368b033f67047c2e297dc038} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u32}{U32}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u32_a57e7e2f99f93879d00873ec7ee621180}{To\+String}} () const override
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_u32_a8318847c0225baab5843ecc572b20f1b}\label{class_aptos_1_1_b_c_s_1_1_u32_a8318847c0225baab5843ecc572b20f1b} 
+size\+\_\+t {\bfseries Get\+Hash\+Code} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{Aptos\+::\+BCS\+::\+ISerializable\+Tag}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag_a05663afb615b0ddaa2732b3225a2fee5}{Serialize\+Tag}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&serializer)
+\begin{DoxyCompactList}\small\item\em Serializes the type tag using it\textquotesingle{}s own serializaton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_u32_adf7a864a1897ae003342dd6cdf365769}\label{class_aptos_1_1_b_c_s_1_1_u32_adf7a864a1897ae003342dd6cdf365769} 
+static uint32\+\_\+t {\bfseries Deserialize} (const std\+::vector$<$ uint8\+\_\+t $>$ \&data)
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_u32_a8124f78dd86614b242a2d099db3f6aa5}\label{class_aptos_1_1_b_c_s_1_1_u32_a8124f78dd86614b242a2d099db3f6aa5} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{ISerializable\+Tag}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{Aptos\+::\+BCS\+::\+ISerializable\+Tag}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{ISerializable\+Tag}} $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag_ad3508f94384876e2280bfe24f00eccef}{Deserialize\+Tag}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserialize a tag based on it\textquotesingle{}s type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_aa692ec6a618d04663c1e5d3cf83f59d7}{Deserialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of a \doxylink{class_aptos_1_1_b_c_s_1_1_u32}{U32}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_u32_ab75be5a5056d39032579eb8931e71329}\label{class_aptos_1_1_b_c_s_1_1_u32_ab75be5a5056d39032579eb8931e71329} 
+\index{Aptos::BCS::U32@{Aptos::BCS::U32}!U32@{U32}}
+\index{U32@{U32}!Aptos::BCS::U32@{Aptos::BCS::U32}}
+\doxysubsubsection{\texorpdfstring{U32()}{U32()}}
+{\footnotesize\ttfamily Aptos\+::\+BCS\+::\+U32\+::\+U32 (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+
+
+Creates a \doxylink{class_aptos_1_1_b_c_s_1_1_u32}{U32} object from a uint value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & A uint value to serialize as u32.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_u32_aace34e689f69ef6070aaa7db08f333bd}\label{class_aptos_1_1_b_c_s_1_1_u32_aace34e689f69ef6070aaa7db08f333bd} 
+\index{Aptos::BCS::U32@{Aptos::BCS::U32}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Aptos::BCS::U32@{Aptos::BCS::U32}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Aptos\+::\+BCS\+::\+U32\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_a69bdbb0faf3fda49df818174878938b1}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_u32_a57e7e2f99f93879d00873ec7ee621180}\label{class_aptos_1_1_b_c_s_1_1_u32_a57e7e2f99f93879d00873ec7ee621180} 
+\index{Aptos::BCS::U32@{Aptos::BCS::U32}!ToString@{ToString}}
+\index{ToString@{ToString}!Aptos::BCS::U32@{Aptos::BCS::U32}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Aptos\+::\+BCS\+::\+U32\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Reimplemented from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{Aptos\+::\+BCS\+::\+ISerializable\+Tag}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_u32_a9a06c8bfc98312063cf2e8c86fdf4e90}\label{class_aptos_1_1_b_c_s_1_1_u32_a9a06c8bfc98312063cf2e8c86fdf4e90} 
+\index{Aptos::BCS::U32@{Aptos::BCS::U32}!Variant@{Variant}}
+\index{Variant@{Variant}!Aptos::BCS::U32@{Aptos::BCS::U32}}
+\doxysubsubsection{\texorpdfstring{Variant()}{Variant()}}
+{\footnotesize\ttfamily Type\+Tag Aptos\+::\+BCS\+::\+U32\+::\+Variant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the type of type tag.
+
+\begin{DoxyReturn}{Returns}
+A Type\+Tag enum.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag_ab03966e83bd0fb36c56256b5924a56f1}{Aptos\+::\+BCS\+::\+ISerializable\+Tag}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/U32.\+h\item 
+BCS/U32.\+cpp\end{DoxyCompactItemize}

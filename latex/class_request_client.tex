@@ -1,0 +1,63 @@
+\doxysection{Request\+Client Class Reference}
+\hypertarget{class_request_client}{}\label{class_request_client}\index{RequestClient@{RequestClient}}
+
+
+Unity\+Web\+Request wrapper client.  
+
+
+
+
+{\ttfamily \#include $<$Request\+Client.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static web\+::http\+::http\+\_\+request \mbox{\hyperlink{class_request_client_a25e58273c7247227e8763f2791dd0132}{Submit\+Request}} (web\+::http\+::uri uri, web\+::http\+::method method=web\+::http\+::methods\+::\+GET)
+\begin{DoxyCompactList}\small\item\em Get the Unity\+Web\+Request object for the given path, default to GET method. \end{DoxyCompactList}\item 
+static utility\+::string\+\_\+t \mbox{\hyperlink{class_request_client_ad096a02c4f8bc2a8ffac0b2b19959b57}{Get\+Aptos\+Header\+Value}} ()
+\begin{DoxyCompactList}\small\item\em Get the default Aptos header value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Unity\+Web\+Request wrapper client. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_request_client_ad096a02c4f8bc2a8ffac0b2b19959b57}\label{class_request_client_ad096a02c4f8bc2a8ffac0b2b19959b57} 
+\index{RequestClient@{RequestClient}!GetAptosHeaderValue@{GetAptosHeaderValue}}
+\index{GetAptosHeaderValue@{GetAptosHeaderValue}!RequestClient@{RequestClient}}
+\doxysubsubsection{\texorpdfstring{GetAptosHeaderValue()}{GetAptosHeaderValue()}}
+{\footnotesize\ttfamily utility\+::string\+\_\+t Request\+Client\+::\+Get\+Aptos\+Header\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the default Aptos header value. 
+
+\begin{DoxyReturn}{Returns}
+String with the default Aptos header value
+\end{DoxyReturn}
+\Hypertarget{class_request_client_a25e58273c7247227e8763f2791dd0132}\label{class_request_client_a25e58273c7247227e8763f2791dd0132} 
+\index{RequestClient@{RequestClient}!SubmitRequest@{SubmitRequest}}
+\index{SubmitRequest@{SubmitRequest}!RequestClient@{RequestClient}}
+\doxysubsubsection{\texorpdfstring{SubmitRequest()}{SubmitRequest()}}
+{\footnotesize\ttfamily web\+::http\+::http\+\_\+request Request\+Client\+::\+Submit\+Request (\begin{DoxyParamCaption}\item[{web\+::http\+::uri}]{uri,  }\item[{web\+::http\+::method}]{method = {\ttfamily web\+:\+:http\+:\+:methods\+:\+:GET} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the Unity\+Web\+Request object for the given path, default to GET method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uri} & endpoint uri\\
+\hline
+{\em method} & HTTP method\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Unity\+Web\+Request object
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+REST/Request\+Client.\+h\item 
+REST/Request\+Client.\+cpp\end{DoxyCompactItemize}

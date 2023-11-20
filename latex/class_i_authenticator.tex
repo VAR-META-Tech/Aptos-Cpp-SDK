@@ -1,0 +1,58 @@
+\doxysection{IAuthenticator Class Reference}
+\hypertarget{class_i_authenticator}{}\label{class_i_authenticator}\index{IAuthenticator@{IAuthenticator}}
+
+
+Each transaction submitted to the Aptos blockchain contains a {\ttfamily Transaction\+Authenticator}. During transaction execution, the executor will check if every {\ttfamily Account\+Authenticator}\textquotesingle{}s signature on the transaction hash is well-\/formed and whether the sha3 hash of the {\ttfamily Account\+Authenticator}\textquotesingle{}s {\ttfamily Authentication\+Key\+Preimage} matches the {\ttfamily \doxylink{class_authentication_key}{Authentication\+Key}} stored under the participating signer\textquotesingle{}s account address.  
+
+
+
+
+{\ttfamily \#include $<$Authenticator.\+h$>$}
+
+Inheritance diagram for IAuthenticator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.441860cm]{class_i_authenticator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{class_i_authenticator_a0aa244882c96bdb168a85799f649a0ae}{Verify}} (const Crypto\+PP\+::\+Sec\+Byte\+Block \&data)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const =0
+\begin{DoxyCompactList}\small\item\em Serialize the object. \end{DoxyCompactList}\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\item 
+virtual std\+::string \mbox{\hyperlink{class_i_serializable_a309b944338843df11042f84b25267bcd}{To\+String}} () const =0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Each transaction submitted to the Aptos blockchain contains a {\ttfamily Transaction\+Authenticator}. During transaction execution, the executor will check if every {\ttfamily Account\+Authenticator}\textquotesingle{}s signature on the transaction hash is well-\/formed and whether the sha3 hash of the {\ttfamily Account\+Authenticator}\textquotesingle{}s {\ttfamily Authentication\+Key\+Preimage} matches the {\ttfamily \doxylink{class_authentication_key}{Authentication\+Key}} stored under the participating signer\textquotesingle{}s account address. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_i_authenticator_a0aa244882c96bdb168a85799f649a0ae}\label{class_i_authenticator_a0aa244882c96bdb168a85799f649a0ae} 
+\index{IAuthenticator@{IAuthenticator}!Verify@{Verify}}
+\index{Verify@{Verify}!IAuthenticator@{IAuthenticator}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily virtual bool IAuthenticator\+::\+Verify (\begin{DoxyParamCaption}\item[{const Crypto\+PP\+::\+Sec\+Byte\+Block \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_authenticator_a71d072fec60cfd183e6ee05e3d0b60d0}{Authenticator}}, \mbox{\hyperlink{class_ed25519_authenticator_aa6368da5c2af73d523f6a96645f10102}{Ed25519\+Authenticator}}, \mbox{\hyperlink{class_multi_agent_authenticator_a4b158caab4ea47ad65c74d66d6a2afb3}{Multi\+Agent\+Authenticator}}, and \mbox{\hyperlink{class_multi_ed25519_authenticator_acb2840806037215fa1b8675c3874fa33}{Multi\+Ed25519\+Authenticator}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Authenticator.\+h\end{DoxyCompactItemize}

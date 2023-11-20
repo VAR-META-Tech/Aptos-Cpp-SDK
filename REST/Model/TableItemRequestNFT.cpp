@@ -23,4 +23,34 @@ TableItemRequestNFT TableItemRequestNFT::FromJson(const nlohmann::json &jsonData
     }
     return request;
 }
+
+std::string TableItemRequestNFT::getKeyType() const
+{
+    return KeyType;
+}
+
+void TableItemRequestNFT::setKeyType(const std::string &newKeyType)
+{
+    KeyType = newKeyType;
+}
+
+std::string TableItemRequestNFT::getValueType() const
+{
+    return ValueType;
+}
+
+void TableItemRequestNFT::setValueType(const std::string &newValueType)
+{
+    ValueType = newValueType;
+}
+
+TokenIdRequest TableItemRequestNFT::getKey() const
+{
+    return Key;
+}
+
+void TableItemRequestNFT::setKey(const TokenIdRequest &newKey)
+{
+    Key = newKey;
+}
 }

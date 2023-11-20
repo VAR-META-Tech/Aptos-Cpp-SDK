@@ -9,64 +9,88 @@
 #include "Serialization.h"
 #include "Deserialization.h"
 
-Sequence::Sequence(const std::vector<std::shared_ptr<ISerializable> > &values) {
-    this->values = values;
-}
+namespace Aptos::BCS
+{
+    Sequence::Sequence(const std::vector<std::shared_ptr<ISerializable>> &values)
+    {
+        this->values = values;
+    }
 
-int Sequence::Length() const {
-    return this->values.size();
-}
+    int Sequence::Length() const
+    {
+        return this->values.size();
+    }
 
-std::vector<std::shared_ptr<ISerializable> > Sequence::GetValue() const {
-    return values;
-}
+    std::vector<std::shared_ptr<ISerializable>> Sequence::GetValue() const
+    {
+        return values;
+    }
 
-void Sequence::Serialize(Serialization& serializer) const {
-    serializer.SerializeU32AsUleb128(this->values.size());
-    for (const auto& element : this->values) {
-        if (std::dynamic_pointer_cast<Sequence>(element)) {
-            Serialization seqSerializer;
-            auto seq = std::dynamic_pointer_cast<Sequence>(element);
-            seq->Serialize(seqSerializer);
+    void Sequence::Serialize(Serialization &serializer) const
+    {
+        serializer.SerializeU32AsUleb128(this->values.size());
+        for (const auto &element : this->values)
+        {
+            if (std::dynamic_pointer_cast<Sequence>(element))
+            {
+                Serialization seqSerializer;
+                auto seq = std::dynamic_pointer_cast<Sequence>(element);
+                seqSerializer.Serialize(*seq);
 
-            std::vector<uint8_t> elementsBytes = seqSerializer.GetBytes();
-            int sequenceLen = elementsBytes.size();
-            serializer.SerializeU32AsUleb128(sequenceLen);
-            serializer.SerializeFixedBytes(elementsBytes);
+                std::vector<uint8_t> elementsBytes = seqSerializer.GetBytes();
+                int sequenceLen = elementsBytes.size();
+                serializer.SerializeU32AsUleb128(sequenceLen);
+                serializer.SerializeFixedBytes(elementsBytes);
+            }
+            else
+            {
+                Serialization s;
+                element->Serialize(s);
+                std::vector<uint8_t> b = s.GetBytes();
+                serializer.SerializeBytes(b);
+            }
         }
-        else {
-            Serialization s;
-            element->Serialize(s);
-            std::vector<uint8_t> b = s.GetBytes();
-            serializer.SerializeBytes(b);
+    }
+
+    std::shared_ptr<ISerializable> Sequence::Deserialize(Deserialization &deserializer)
+    {
+        int length = deserializer.DeserializeUleb128();
+        std::vector<std::shared_ptr<ISerializable>> values;
+
+        while (values.size() < length)
+        {
+            values.push_back(std::make_shared<Bytes>(deserializer.ToBytes()));
         }
-    }
-}
 
-std::shared_ptr<ISerializable> Sequence::Deserialize(Deserialization& deserializer) {
-    int length = deserializer.DeserializeUleb128();
-    std::vector<std::shared_ptr<ISerializable>> values;
-
-    while (values.size() < length) {
-        values.push_back(std::make_shared<Bytes>(deserializer.ToBytes()));
+        return std::make_shared<Sequence>(values);
     }
 
-    return std::make_shared<Sequence>(values);
-}
-
-bool Sequence::Equals(const Sequence& other) const {
-    return std::equal(this->values.begin(), this->values.end(), other.values.begin(), other.values.end());
-}
-
-std::string Sequence::ToString() const {
-    std::ostringstream oss;
-    for (const auto& value : this->values) {
-        oss << value->ToString();
+    bool Sequence::Equals(const Sequence &other) const
+    {
+        Serialization s1;
+        this->Serialize(s1);
+        Serialization s2;
+        other.Serialize(s2);
+        return s1.GetBytes() == s2.GetBytes();
     }
-    return oss.str();
-}
 
-size_t Sequence::GetHashCode() const {
-    // Simple hash code calculation, more sophisticated method might be needed
-//    return std::hash<std::vector<ISerializable*>>{}(this->values);
+    std::string Sequence::ToString() const
+    {
+        std::ostringstream oss;
+        for (const auto &value : this->values)
+        {
+            oss << value->ToString();
+        }
+        return oss.str();
+    }
+
+    size_t Sequence::GetHashCode() const
+    {
+        return 0;
+    }
+
+    const std::vector<std::shared_ptr<ISerializable>> &Sequence::getValues() const
+    {
+        return values;
+    }
 }

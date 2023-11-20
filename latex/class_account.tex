@@ -1,0 +1,142 @@
+\doxysection{Account Class Reference}
+\hypertarget{class_account}{}\label{class_account}\index{Account@{Account}}
+
+
+Represents an Aptos Accounts. ~\newline
+ An Aptos account is represented by an extended private key, a public key and it\textquotesingle{}s authentication key.  
+
+
+
+
+{\ttfamily \#include $<$Account.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_account_a366660970b5eeb5c17436062327f1b14}\label{class_account_a366660970b5eeb5c17436062327f1b14} 
+{\bfseries Account} ()
+\begin{DoxyCompactList}\small\item\em Create a new Aptos \doxylink{class_account}{Account}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_account_a57a479004d50e5c05f9e27bc389029a5}{Account}} (std\+::string private\+Key\+Str, std\+::string public\+Key\+Str)
+\item 
+\Hypertarget{class_account_a9fbe413a2849e6c94fdb75f909061f2a}\label{class_account_a9fbe413a2849e6c94fdb75f909061f2a} 
+{\bfseries Account} (const Crypto\+PP\+::\+Sec\+Byte\+Block \&private\+Key\+Bytes, const Crypto\+PP\+::\+Sec\+Byte\+Block \&public\+Key\+Bytes)
+\item 
+std\+::string \mbox{\hyperlink{class_account_afcd60a2c33ad4a717e86f510d074e512}{Auth\+Key}} ()
+\begin{DoxyCompactList}\small\item\em Returns the Authentication Key for the associated account. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_account_a080d4725639e839eff8b460ca47eea48}{Verify}} (const Crypto\+PP\+::\+Sec\+Byte\+Block \&message, \mbox{\hyperlink{class_signature}{Signature}} signature)
+\begin{DoxyCompactList}\small\item\em Verify a given signed message with the current account\textquotesingle{}s public key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_signature}{Signature}} \mbox{\hyperlink{class_account_a619647fa73803f5a2d59f61ed0feaf1c}{Sign}} (Crypto\+PP\+::\+Sec\+Byte\+Block message)
+\begin{DoxyCompactList}\small\item\em Sign a given byte array (data) with the current account\textquotesingle{}s private key. \end{DoxyCompactList}\item 
+\Hypertarget{class_account_a662e954a814c0ac96cae32992ba64978}\label{class_account_a662e954a814c0ac96cae32992ba64978} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_private_key}{Private\+Key}} $>$ {\bfseries get\+Private\+Key} () const
+\begin{DoxyCompactList}\small\item\em Private key representation. \end{DoxyCompactList}\item 
+\Hypertarget{class_account_a4c4ce07cc30d407a9e8f4d6679dac359}\label{class_account_a4c4ce07cc30d407a9e8f4d6679dac359} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_public_key}{Public\+Key}} $>$ {\bfseries get\+Public\+Key} () const
+\begin{DoxyCompactList}\small\item\em Public key representation. \end{DoxyCompactList}\item 
+\Hypertarget{class_account_a4060d7f7b822e2faf459ae2e2ea64c18}\label{class_account_a4060d7f7b822e2faf459ae2e2ea64c18} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_account_address}{Account\+Address}} $>$ {\bfseries get\+Account\+Address} () const
+\begin{DoxyCompactList}\small\item\em \doxylink{class_account}{Account} address representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_account}{Account}} \mbox{\hyperlink{class_account_a5c8609d89cf3bd69db12eba838cb7cfc}{Load\+Key}} (std\+::string private\+Key\+Hex)
+\begin{DoxyCompactList}\small\item\em Creates an account from private key in string format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an Aptos Accounts. ~\newline
+ An Aptos account is represented by an extended private key, a public key and it\textquotesingle{}s authentication key. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_account_a57a479004d50e5c05f9e27bc389029a5}\label{class_account_a57a479004d50e5c05f9e27bc389029a5} 
+\index{Account@{Account}!Account@{Account}}
+\index{Account@{Account}!Account@{Account}}
+\doxysubsubsection{\texorpdfstring{Account()}{Account()}}
+{\footnotesize\ttfamily Account\+::\+Account (\begin{DoxyParamCaption}\item[{std\+::string}]{private\+Key\+Str,  }\item[{std\+::string}]{public\+Key\+Str }\end{DoxyParamCaption})}
+
+Initialize an account with a given private and public keys. 
+\begin{DoxyParams}{Parameters}
+{\em private\+Key\+Str} & The private key.\\
+\hline
+{\em public\+Key\+Str} & The public key.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_account_afcd60a2c33ad4a717e86f510d074e512}\label{class_account_afcd60a2c33ad4a717e86f510d074e512} 
+\index{Account@{Account}!AuthKey@{AuthKey}}
+\index{AuthKey@{AuthKey}!Account@{Account}}
+\doxysubsubsection{\texorpdfstring{AuthKey()}{AuthKey()}}
+{\footnotesize\ttfamily std\+::string Account\+::\+Auth\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the Authentication Key for the associated account. 
+
+\begin{DoxyReturn}{Returns}
+String representation of the authentication key
+\end{DoxyReturn}
+\Hypertarget{class_account_a5c8609d89cf3bd69db12eba838cb7cfc}\label{class_account_a5c8609d89cf3bd69db12eba838cb7cfc} 
+\index{Account@{Account}!LoadKey@{LoadKey}}
+\index{LoadKey@{LoadKey}!Account@{Account}}
+\doxysubsubsection{\texorpdfstring{LoadKey()}{LoadKey()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_account}{Account}} Account\+::\+Load\+Key (\begin{DoxyParamCaption}\item[{std\+::string}]{private\+Key\+Hex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates an account from private key in string format. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em private\+Key\+Hex} & The private key.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new account.
+\end{DoxyReturn}
+\Hypertarget{class_account_a619647fa73803f5a2d59f61ed0feaf1c}\label{class_account_a619647fa73803f5a2d59f61ed0feaf1c} 
+\index{Account@{Account}!Sign@{Sign}}
+\index{Sign@{Sign}!Account@{Account}}
+\doxysubsubsection{\texorpdfstring{Sign()}{Sign()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_signature}{Signature}} Account\+::\+Sign (\begin{DoxyParamCaption}\item[{Crypto\+PP\+::\+Sec\+Byte\+Block}]{message }\end{DoxyParamCaption})}
+
+
+
+Sign a given byte array (data) with the current account\textquotesingle{}s private key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & \\
+\hline
+\end{DoxyParams}
+The signature of the data. \begin{DoxyReturn}{Returns}
+The signature as an object
+\end{DoxyReturn}
+\Hypertarget{class_account_a080d4725639e839eff8b460ca47eea48}\label{class_account_a080d4725639e839eff8b460ca47eea48} 
+\index{Account@{Account}!Verify@{Verify}}
+\index{Verify@{Verify}!Account@{Account}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily bool Account\+::\+Verify (\begin{DoxyParamCaption}\item[{const Crypto\+PP\+::\+Sec\+Byte\+Block \&}]{message,  }\item[{\mbox{\hyperlink{class_signature}{Signature}}}]{signature }\end{DoxyParamCaption})}
+
+
+
+Verify a given signed message with the current account\textquotesingle{}s public key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The signed message.\\
+\hline
+{\em signature} & The signature of the message.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True is the signature is valid, False otherwise
+\end{DoxyReturn}
+~\newline
+ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Accounts/Account.\+h\item 
+Accounts/Account.\+cpp\end{DoxyCompactItemize}

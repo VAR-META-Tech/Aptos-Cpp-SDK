@@ -1,0 +1,161 @@
+\doxysection{Bool Class Reference}
+\hypertarget{class_bool}{}\label{class_bool}\index{Bool@{Bool}}
+
+
+Representation of a Boolean.  
+
+
+
+
+{\ttfamily \#include $<$Bool.\+h$>$}
+
+Inheritance diagram for Bool\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_bool}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_bool_a7c194972ee721468ffb9d174a5d10afd}{Bool}} (bool value)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{class_bool}{Bool} object from a given boolean. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bool_a2201c3de5e34af62654fa778ab701c20}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+Type\+Tag \mbox{\hyperlink{class_bool_a217a337288eaa0826c05ace26ef1ff5b}{Variant}} () const override
+\begin{DoxyCompactList}\small\item\em Returns the type of type tag.
+
+\begin{DoxyReturn}{Returns}
+A Type\+Tag enum.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+\Hypertarget{class_bool_a618b8d8435a9eb49209feeb035cd912e}\label{class_bool_a618b8d8435a9eb49209feeb035cd912e} 
+bool {\bfseries Get\+Value} () const
+\item 
+\Hypertarget{class_bool_a28c32aac311dc9a322df47a42a6b0d4f}\label{class_bool_a28c32aac311dc9a322df47a42a6b0d4f} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_bool}{Bool}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{class_bool_a9eb058979b998b789c16c864038ccc90}{To\+String}} () const override
+\item 
+\Hypertarget{class_bool_a63f89d189d07e4eff0dba72cbb53327d}\label{class_bool_a63f89d189d07e4eff0dba72cbb53327d} 
+size\+\_\+t {\bfseries Get\+Hash\+Code} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable_tag}{ISerializable\+Tag}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_i_serializable_tag_ab3675f858dd4d74c0a8412338f031fa8}{Serialize\+Tag}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer)
+\begin{DoxyCompactList}\small\item\em Serializes the type tag using it\textquotesingle{}s own serializaton method. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_i_serializable_tag_a33d90176fe90d3bcf0635f5126011ac9}{To\+String}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_bool_a9c2254d44a285d2d80b209c0c3d369ed}\label{class_bool_a9c2254d44a285d2d80b209c0c3d369ed} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable_tag}{ISerializable\+Tag}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable_tag}{ISerializable\+Tag}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable_tag}{ISerializable\+Tag}} $>$ \mbox{\hyperlink{class_i_serializable_tag_aafee410c658f20ad2751148492c4db0e}{Deserialize\+Tag}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserialize a tag based on it\textquotesingle{}s type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of a Boolean. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_bool_a7c194972ee721468ffb9d174a5d10afd}\label{class_bool_a7c194972ee721468ffb9d174a5d10afd} 
+\index{Bool@{Bool}!Bool@{Bool}}
+\index{Bool@{Bool}!Bool@{Bool}}
+\doxysubsubsection{\texorpdfstring{Bool()}{Bool()}}
+{\footnotesize\ttfamily Bool\+::\+Bool (\begin{DoxyParamCaption}\item[{bool}]{value }\end{DoxyParamCaption})}
+
+
+
+Creates a \doxylink{class_bool}{Bool} object from a given boolean. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & A bolean value to serialize.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_bool_a2201c3de5e34af62654fa778ab701c20}\label{class_bool_a2201c3de5e34af62654fa778ab701c20} 
+\index{Bool@{Bool}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Bool@{Bool}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Bool\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{ISerializable}}.
+
+\Hypertarget{class_bool_a9eb058979b998b789c16c864038ccc90}\label{class_bool_a9eb058979b998b789c16c864038ccc90} 
+\index{Bool@{Bool}!ToString@{ToString}}
+\index{ToString@{ToString}!Bool@{Bool}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Bool\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable}{ISerializable}}.
+
+\Hypertarget{class_bool_a217a337288eaa0826c05ace26ef1ff5b}\label{class_bool_a217a337288eaa0826c05ace26ef1ff5b} 
+\index{Bool@{Bool}!Variant@{Variant}}
+\index{Variant@{Variant}!Bool@{Bool}}
+\doxysubsubsection{\texorpdfstring{Variant()}{Variant()}}
+{\footnotesize\ttfamily Type\+Tag Bool\+::\+Variant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the type of type tag.
+
+\begin{DoxyReturn}{Returns}
+A Type\+Tag enum.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable_tag_a801689c2520c6167fc687bc1c92bc28a}{ISerializable\+Tag}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Bool.\+h\item 
+BCS/Bool.\+cpp\end{DoxyCompactItemize}

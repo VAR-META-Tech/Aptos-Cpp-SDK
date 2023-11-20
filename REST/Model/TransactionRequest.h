@@ -13,6 +13,9 @@ public:
     std::string getType() const;
     std::string getPublicKey() const;
     std::string getSignature() const;
+    void setType(const std::string &newType);
+    void setPublicKey(const std::string &newPublicKey);
+    void setSignature(const std::string &newSignature);
 
 private:
     std::string Type;
@@ -28,6 +31,24 @@ class TransactionRequest {
 public:
     nlohmann::json ToJson() const;
     static TransactionRequest FromJson(const nlohmann::json& requestJson);
+    std::string getSender() const;
+    void setSender(const std::string &newSender);
+
+    std::string getSequenceNumber() const;
+    void setSequenceNumber(const std::string &newSequenceNumber);
+
+    std::string getMaxGasAmount() const;
+    void setMaxGasAmount(const std::string &newMaxGasAmount);
+
+    std::string getGasUnitPrice() const;
+    void setGasUnitPrice(const std::string &newGasUnitPrice);
+
+    std::string getExpirationTimestampSecs() const;
+    void setExpirationTimestampSecs(const std::string &newExpirationTimestampSecs);
+
+    SignatureData getSignature() const;
+    void setSignature(const SignatureData &newSignature);
+
 private:
     std::string Sender;
     std::string SequenceNumber;

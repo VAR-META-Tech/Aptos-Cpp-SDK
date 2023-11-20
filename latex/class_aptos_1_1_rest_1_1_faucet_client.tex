@@ -1,0 +1,53 @@
+\doxysection{Aptos\+::Rest\+::Faucet\+Client Class Reference}
+\hypertarget{class_aptos_1_1_rest_1_1_faucet_client}{}\label{class_aptos_1_1_rest_1_1_faucet_client}\index{Aptos::Rest::FaucetClient@{Aptos::Rest::FaucetClient}}
+
+
+Faucet Client for claiming APT from Devnet. To claim APT from Testnet you can visit Aptos Testnet Airdrop site.  
+
+
+
+
+{\ttfamily \#include $<$Faucet\+Client.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_faucet_client_ab44b3cc39e05a8d2b1e17aad1b49566d}{Fund\+Account}} (std\+::function$<$ void(bool, Aptos\+RESTModel\+::\+Response\+Info)$>$ callback, const std\+::string \&address, int amount, const std\+::string \&endpoint)
+\begin{DoxyCompactList}\small\item\em Funds a Testnet Account. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Faucet Client for claiming APT from Devnet. To claim APT from Testnet you can visit Aptos Testnet Airdrop site. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_rest_1_1_faucet_client_ab44b3cc39e05a8d2b1e17aad1b49566d}\label{class_aptos_1_1_rest_1_1_faucet_client_ab44b3cc39e05a8d2b1e17aad1b49566d} 
+\index{Aptos::Rest::FaucetClient@{Aptos::Rest::FaucetClient}!FundAccount@{FundAccount}}
+\index{FundAccount@{FundAccount}!Aptos::Rest::FaucetClient@{Aptos::Rest::FaucetClient}}
+\doxysubsubsection{\texorpdfstring{FundAccount()}{FundAccount()}}
+{\footnotesize\ttfamily void Aptos\+::\+Rest\+::\+Faucet\+Client\+::\+Fund\+Account (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(bool, Aptos\+RESTModel\+::\+Response\+Info)$>$}]{callback,  }\item[{const std\+::string \&}]{address,  }\item[{int}]{amount,  }\item[{const std\+::string \&}]{endpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Funds a Testnet Account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & Callback function used when response is received.\\
+\hline
+{\em address} & Address that will get funded.\\
+\hline
+{\em amount} & Amount of APT requested.\\
+\hline
+{\em endpoint} & Base URL for faucet.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Calls {\ttfamily callback} function with {\ttfamily (bool, Responsive\+Info)}\+: ~\newline
+A boolean stating that the request for funding was successful, and an object containg the response details
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+REST/Faucet\+Client.\+h\item 
+REST/Faucet\+Client.\+cpp\end{DoxyCompactItemize}

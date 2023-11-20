@@ -25,15 +25,25 @@ class Id {
 public:
     nlohmann::json ToJson() const;
     static Id FromJson(const nlohmann::json& idJson);
+    TokenDataId& getTokenDataIdProp();
+
 private:
     TokenDataId TokenDataIdProp;
     std::string PropertyVersion;
 };
 
+/// <summary>
+/// https://fullnode.mainnet.aptoslabs.com/v1/spec#/operations/get_table_item
+/// </summary>
 class TableItemToken {
 public:
     nlohmann::json ToJson() const;
     static TableItemToken FromJson(const nlohmann::json& tableItemTokenJson);
+    Id& getIdProp();
+
+    std::string getAmount() const;
+    void setAmount(const std::string &newAmount);
+
 private:
     std::string Amount;
     Id IdProp;

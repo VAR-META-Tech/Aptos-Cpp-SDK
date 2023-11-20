@@ -28,6 +28,11 @@ PropertyMapResourceData PropertyMapResourceData::FromJson(const nlohmann::json &
     return propertyMapData;
 }
 
+const Inner &PropertyMapResourceData::getInnerData() const
+{
+    return InnerData;
+}
+
 nlohmann::json Inner::ToJson() const {
     nlohmann::json innerJson;
     for (const auto& propertyResource : Data) {
@@ -44,6 +49,11 @@ Inner Inner::FromJson(const nlohmann::json &innerJson) {
     return inner;
 }
 
+const std::vector<PropertyResource> &Inner::getData() const
+{
+    return Data;
+}
+
 nlohmann::json PropertyResource::ToJson() const {
     nlohmann::json propertyResourceJson;
     propertyResourceJson["key"] = Key;
@@ -58,6 +68,16 @@ PropertyResource PropertyResource::FromJson(const nlohmann::json &propertyResour
     return propertyResource;
 }
 
+const std::string &PropertyResource::getKey() const
+{
+    return Key;
+}
+
+const PropertyValue &PropertyResource::getValue() const
+{
+    return Value;
+}
+
 nlohmann::json PropertyValue::ToJson() const {
     nlohmann::json propertyValueJson;
     propertyValueJson["type"] = Type;
@@ -70,6 +90,16 @@ PropertyValue PropertyValue::FromJson(const nlohmann::json &propertyValueJson) {
     propertyValue.Type = propertyValueJson["type"];
     propertyValue.Value = propertyValueJson["value"];
     return propertyValue;
+}
+
+const std::string &PropertyValue::getType() const
+{
+    return Type;
+}
+
+const std::string &PropertyValue::getValue() const
+{
+    return Value;
 }
 
 }

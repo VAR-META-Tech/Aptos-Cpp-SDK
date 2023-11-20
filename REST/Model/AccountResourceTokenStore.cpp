@@ -23,6 +23,11 @@ AccountResourceTokenStore AccountResourceTokenStore::FromJson(const std::string 
     return resourceTokenStore;
 }
 
+AccountResourceTokenStore::Data AccountResourceTokenStore::getDataProp() const
+{
+    return DataProp;
+}
+
 nlohmann::json AccountResourceTokenStore::Data::ToJson() const {
     return nlohmann::json{
         {"burn_events", BurnEvent.ToJson()},
@@ -41,6 +46,11 @@ AccountResourceTokenStore::Data AccountResourceTokenStore::Data::FromJson(const 
     data.MutateTokenPropertyEventsProp = MutateTokenPropertyEvents::FromJson(jsonData["mutate_token_property_events"]);
     data.TokensProp = Tokens::FromJson(jsonData["tokens"]);
     return data;
+}
+
+AccountResourceTokenStore::Tokens AccountResourceTokenStore::Data::getTokensProp() const
+{
+    return TokensProp;
 }
 
 nlohmann::json AccountResourceTokenStore::BurnEvents::ToJson() const {
@@ -135,5 +145,10 @@ AccountResourceTokenStore::Tokens AccountResourceTokenStore::Tokens::FromJson(co
     Tokens tokens;
     tokens.Handle = jsonData["handle"];
     return tokens;
+}
+
+std::string AccountResourceTokenStore::Tokens::getHandle() const
+{
+    return Handle;
 }
 }

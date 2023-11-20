@@ -4,6 +4,17 @@
 #include <nlohmann/json.hpp>
 namespace AptosRESTModel {
 
+/// <summary>
+/// "transfer_events":{
+///     "counter":"0",
+///     "guid":{
+///         "id":{
+///             "addr":"0xe0f9ff3281477d787365fec2531ba0ffc01b272ee692dfd2eb49839d893e9771",
+///             "creation_num":"1125899906842624"
+///         }
+///     }
+/// }
+/// </summary>
 class ResourceEvent {
 public:
     class EventId {

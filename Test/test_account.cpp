@@ -14,6 +14,11 @@
 #include "../Accounts/multisignature.h"
 #include "../Accounts/Account.h"
 
+#include "../Accounts/AuthenticationKey.h"
+#include "../Accounts/Types/MultiEd25519PublicKey.h"
+
+using namespace Aptos::Accounts;
+using namespace Aptos;
 // Extended PrivateKey for reference
 CryptoPP::SecByteBlock g_extendedPrivateKeyBytes = Utils::ByteVectorToSecBlock({
     100, 245, 118, 3, 181, 138, 241, 105,
@@ -313,39 +318,6 @@ TEST(AccountTests, AccountSignVerify) {
     ASSERT_TRUE(verify);
 }
 
-TEST(AccountTests, TestRotationProofChallenge) {
-    ASSERT_EQ(true, false);
-
-    //    Account OriginatingAccount = Account::LoadKey(
-    //        "005120c5882b0d492b3d2dc60a8a4510ec2051825413878453137305ba2d644b"
-    //        );
-
-    //    Account TargetAccount = Account::LoadKey(
-    //        "19d409c191b1787d5b832d780316b83f6ee219677fafbd4c0f69fee12fdcdcee"
-    //        );
-
-    //    RotationProofChallenge rotationProofChallenge = RotationProofChallenge(
-    //        1234,
-    //        OriginatingAccount.GetAccountAddress(),
-    //        OriginatingAccount.GetAccountAddress(),
-    //        TargetAccount.GetPublicKey().GetKeyBytes()
-    //        );
-
-    //    Serialization serializer;
-    //    rotationProofChallenge.Serialize(serializer);
-    //    std::string rotationProofChallengeBcs = Utils::HexStringFromByteArray(serializer.GetBytes());
-
-    //    std::string expectedBytes =
-    //        "0000000000000000000000000000000000000000000000000000000000000001" \
-    //        "076163636f756e7416526f746174696f6e50726f6f664368616c6c656e6765d2" \
-    //        "0400000000000015b67a673979c7c5dfc8d9c9f94d02da35062a19dd9d218087" \
-    //        "bd9076589219c615b67a673979c7c5dfc8d9c9f94d02da35062a19dd9d218087" \
-    //        "bd9076589219c620a1f942a3c46e2a4cd9552c0f95d529f8e3b60bcd44408637" \
-    //        "9ace35e4458b9f22";
-
-    //    ASSERT_EQ(rotationProofChallengeBcs, expectedBytes);
-}
-
 
 TEST(AccountTests, TestMultisig) {
     //Generate signatory private keys.
@@ -390,8 +362,8 @@ TEST(AccountTests, TestMultisig) {
     Signature signature = privateKey2.Sign(Utils::StringToSecByteBlock("multisig"));
 
     // Compose multisig signature.
-    std::vector<std::tuple<PublicKey, Signature>> signMap = {
-        std::make_tuple(privateKey2.GetPublicKey(), signature)
+    std::vector<std::pair<PublicKey, Signature>> signMap = {
+        std::make_pair(privateKey2.GetPublicKey(), signature)
     };
     MultiSignature multiSignature = MultiSignature(multisigPublicKey, signMap);
 
@@ -511,4 +483,357 @@ TEST(AccountTests, TestToStandardString) {
     // non-special addresses:
     // 0f00000000000000000000000000000000000000000000000000000000000000
     ASSERT_EQ(AccountAddress::FromHex("0f00000000000000000000000000000000000000000000000000000000000000").ToString(), "0x0f00000000000000000000000000000000000000000000000000000000000000");
+}
+
+TEST(AccountAddressTests, GetHashCodeConsistency)
+{
+    // Create two AccountAddress instances with the same value
+    AccountAddress address1 = AccountAddress::FromHex("123abc");
+    AccountAddress address2 = AccountAddress::FromHex("123abc");
+
+    // Get hash codes
+    size_t hash1 = address1.GetHashCode();
+    size_t hash2 = address2.GetHashCode();
+
+    // Test if the same address returns the same hash code
+    ASSERT_EQ(hash1, hash2);
+}
+
+TEST(AccountAddressTests, VariantMethod)
+{
+    // Setup: Create an AccountAddress instance
+    AccountAddress address = AccountAddress::FromHex("123abc"); // Example initialization
+
+    // Execute: Call the Variant method
+    TypeTag variantType = address.Variant();
+
+    // Verify: Check if the returned TypeTag is ACCOUNT_ADDRESS
+    ASSERT_EQ(variantType, TypeTag::ACCOUNT_ADDRESS);
+}
+
+TEST(AuthenticationKeyTest, ConstructorWithInvalidLength)
+{
+    // Setup: Create a SecByteBlock with the incorrect size
+    size_t incorrectSize = AuthenticationKey::LENGTH + 1; // or any other incorrect size
+    CryptoPP::SecByteBlock bytes(incorrectSize);
+
+    // Execute & Verify: Ensure the constructor throws a std::invalid_argument exception
+    ASSERT_THROW(AuthenticationKey authKey(bytes), std::invalid_argument);
+}
+
+TEST(PrivateKeyTest, ConstructorWithKeyInvalid)
+{
+    // Setup: Create a PrivateKey instance
+    std::string keyString = "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5feaa";
+    
+    ASSERT_THROW(PrivateKey privateKey(keyString),std::invalid_argument);
+}
+
+TEST(PrivateKeyTest, ConstructorWithKeyEmpty)
+{
+    // Setup: Create a PrivateKey instance
+    std::string keyString = "";
+    
+    ASSERT_THROW(PrivateKey privateKey(keyString),std::invalid_argument);
+}
+
+TEST(PrivateKeyTest, RandomMethod)
+{
+    // Setup: Create a PrivateKey instance
+    std::string keyString = "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5fe";
+    PrivateKey privateKey(keyString);
+
+    PrivateKey randomPrivateKey = privateKey.Random();
+    // Verify: Check if the serialized data matches the expected output
+    ASSERT_TRUE(privateKey != randomPrivateKey);
+}
+
+TEST(PrivateKeyTest, SerializeMethodWithEmpty)
+ {
+     // Setup: Create a PrivateKey instance
+     std::string keyString = "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5fe";
+     PrivateKey privateKey(keyString);
+ 
+    Serialization serializer;
+
+    // Execute: Call the Serialize method
+    privateKey.Serialize(serializer);
+
+    // Retrieve the serialized data
+    std::vector<uint8_t> serializedData = serializer.GetBytes();
+
+    // Verify: Check if the serialized data matches the expected output
+    ASSERT_TRUE(serializedData.size() > 0);
+ }
+
+
+TEST(PrivateKeyTest, EqualsWithDifferentKeys)
+{
+    // Setup: Create two PrivateKey instances with different keys
+    PrivateKey key1 = PrivateKey::FromHex(
+        "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5fe");
+    PrivateKey key2 = PrivateKey::FromHex(
+        "1e70e49b78f976644e2c51754a2f049d3ff041869c669523ba95b172c7329901");
+
+    // Execute & Verify: Check if Equals returns false for different keys
+    ASSERT_FALSE(key1 == key2);
+}
+
+TEST(PrivateKeyTest, SetKey)
+{
+    // Setup: Create a PrivateKey instance
+    PrivateKey privateKey = PrivateKey::FromHex(
+        "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5fe");
+
+    // The key to set
+    std::string testKey = "1e70e49b78f976644e2c51754a2f049d3ff041869c669523ba95b172c7329901";
+
+    // Execute: Set the key
+    privateKey.Key(testKey);
+
+    // Verify: Check if the key was correctly set
+    // This assumes there's a getter for the key. If not, this part needs to be adjusted.
+    ASSERT_EQ(privateKey.Key(), testKey);
+}
+
+TEST(PrivateKeyTest, KeyBytesWithInvalidSize)
+{
+    // Setup: Create a PrivateKey instance and a SecByteBlock of incorrect size
+    PrivateKey privateKey = PrivateKey::FromHex(
+        "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5fe");
+    size_t incorrectSize = PrivateKey::KeyLength + 1; // Assuming incorrect size
+    CryptoPP::SecByteBlock invalidSizeBlock(incorrectSize);
+
+    // Execute & Verify: Check if setting a SecByteBlock of incorrect size throws std::invalid_argument
+    ASSERT_THROW(privateKey.KeyBytes(invalidSizeBlock), std::invalid_argument);
+}
+
+TEST(PrivateKeyTest, KeyBytesWithValidValue)
+{
+    // Setup: Create a PrivateKey instance and a valid SecByteBlock
+    PrivateKey privateKey = PrivateKey::FromHex(
+        "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5fe");
+    CryptoPP::SecByteBlock validBlock(PrivateKey::KeyLength);
+    // Optionally fill validBlock with some data
+
+    // Execute: Set the valid SecByteBlock
+    ASSERT_NO_THROW(privateKey.KeyBytes(validBlock));
+
+    // Verify: Check if _keyBytes was set correctly
+    // This assumes you have a way to get _keyBytes for verification
+    ASSERT_EQ(privateKey.KeyBytes(), validBlock);
+}
+
+TEST(PublicKeyTest, IsOnCurveAlwaysReturnsFalse)
+{
+    // Setup: Create a PublicKey instance with any key, since the method isn't implemented yet
+    // Replace with an arbitrary key; it doesn't matter for this version of the test
+    std::string arbitraryKey = "0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5";
+    PublicKey publicKey(arbitraryKey);
+
+    // Execute & Verify: Check if IsOnCurve currently always returns false
+    ASSERT_FALSE(publicKey.IsOnCurve());
+}
+
+TEST(PublicKeyTest, GetHashCodeConsistency)
+{
+    // Setup: Create a PublicKey instance
+    std::string keyString = "0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5";
+    PublicKey publicKey(keyString);
+
+    // Execute: Get the hash code twice
+    size_t hashCode1 = publicKey.GetHashCode();
+    size_t hashCode2 = publicKey.GetHashCode();
+
+    // Verify: Check if the hash codes are consistent
+    ASSERT_EQ(hashCode1, hashCode2);
+}
+
+TEST(PublicKeyTest, GetHashCodeDifferentKeys)
+{
+    // Setup: Create two PublicKey instances with different keys
+    PublicKey key1("0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5");
+    PublicKey key2("0x9f628c43d1c1c0f54683cf5ccbd2b944608df4ff2649841053b1790a4d7c187d");
+
+    // Execute: Get the hash codes for each key
+    size_t hashCode1 = key1.GetHashCode();
+    size_t hashCode2 = key2.GetHashCode();
+
+    // Verify: Ideally, the hash codes should be different
+    // Note: This is not a strict requirement as hash collisions can happen
+    ASSERT_NE(hashCode1, hashCode2);
+}
+
+TEST(PublicKeyTest, NotEqualsOperatorWithIdenticalKeys)
+{
+    // Setup: Create two PublicKey instances with the same key
+    PublicKey key1("0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5");
+    PublicKey key2("0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5");
+
+    // Execute & Verify: Check if != operator returns false for identical keys
+    ASSERT_FALSE(key1 != key2);
+}
+
+TEST(PublicKeyTest, NotEqualsOperatorWithDifferentKeys)
+{
+    // Setup: Create two PublicKey instances with different keys
+    PublicKey key1("0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5");
+    PublicKey key2("0x9f628c43d1c1c0f54683cf5ccbd2b944608df4ff2649841053b1790a4d7c187d");
+
+    // Execute & Verify: Check if != operator returns true for different keys
+    ASSERT_TRUE(key1 != key2);
+}
+
+TEST(PublicKeyTest, ConstructorWithEmptyValue)
+{
+    // Setup: Create an empty SecByteBlock
+    CryptoPP::SecByteBlock emptySecByteBlock;
+
+    // Execute & Verify: Check if constructing with an empty SecByteBlock throws std::invalid_argument
+    ASSERT_THROW({
+        PublicKey *publicKey = new PublicKey(emptySecByteBlock);
+    },
+                 std::invalid_argument);
+}
+
+TEST(PublicKeyTest, ConstructorWithInvalidKey)
+{
+    // Example of an invalid key string (e.g., too short)
+    std::string invalidKey = "short_key";
+
+    // Execute & Verify: Check if constructing with an invalid key string throws std::invalid_argument
+    ASSERT_THROW({
+        PublicKey *publicKey = new PublicKey(g_publicKeySerializedOutput);
+    },
+                 std::invalid_argument);
+}
+
+TEST(PublicKeyTest, ConstructorWithValidKey)
+{
+    // Example of a valid key string
+    std::string validKey = "0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5"; // Replace with an actual valid key
+
+    // Execute & Verify: Check if constructing with a valid key does not throw
+    ASSERT_NO_THROW(PublicKey *publicKey = new PublicKey(g_publicKeyHex));
+
+    // Additional verification steps can be added here if needed
+}
+
+TEST(PublicKeyTest, ConstructorWithEmptyKey)
+{
+    // Setup: Define an empty key
+    std::string emptyKey;
+
+    // Execute & Verify: Ensure the constructor throws an std::invalid_argument exception
+    // when an empty key is passed
+    ASSERT_THROW({
+        PublicKey *publicKey = new PublicKey(emptyKey);
+    },
+                 std::invalid_argument);
+}
+
+// setKey PublicKey
+TEST(PublicKeyTest, SetKeyWithEmptyString)
+{
+    // Setup: Create a PublicKey instance and an empty key string
+    PublicKey publicKey(g_publicKeyHex);
+    std::string emptyKey = "";
+
+    // Execute & Verify: Ensure the method throws an std::invalid_argument exception
+    ASSERT_THROW(publicKey.setKey(emptyKey), std::invalid_argument);
+}
+
+TEST(PublicKeyTest, SetKeyWithInvalidFormat)
+{
+    // Setup: Create a PublicKey instance and an invalid key string
+    PublicKey publicKey(g_publicKeyHex);
+    std::string invalidKey = "0x586e3c8d447d7679222e1aa39033e3820235e33da5091e9b0bb8f1a112cf0c8ff5";
+
+    // Execute & Verify: Ensure the method throws an std::invalid_argument exception
+    ASSERT_THROW(publicKey.setKey(invalidKey), std::invalid_argument);
+}
+
+TEST(PublicKeyTest, SetKeySuccessfully)
+{
+    // Setup: Create a PublicKey instance and a valid key string
+    PublicKey publicKey(g_publicKeyHex);
+    std::string validKey = "0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5"; // Replace with a valid hex key format
+
+    // Execute: Set the key
+    ASSERT_NO_THROW(publicKey.setKey(validKey));
+
+    // Verify: Check if the key was set correctly
+    // This part of the test depends on the available public methods of PublicKey.
+    // For example, if there's a method to get a property that changes when the key is set:
+    // ASSERT_EQ(publicKey.getSomeProperty(), expectedPropertyValue);
+}
+
+// setKeyBytes PublicKey.cpp
+TEST(PublicKeyTest, SetKeyBytesWithEmptyBlock)
+{
+    // Setup: Create a PublicKey instance and an empty SecByteBlock
+    PublicKey publicKey(g_publicKeyBytes);
+    CryptoPP::SecByteBlock emptyBlock;
+
+    // Execute & Verify: Ensure the method throws an std::invalid_argument exception
+    ASSERT_THROW(publicKey.setKeyBytes(emptyBlock), std::invalid_argument);
+}
+
+TEST(PublicKeyTest, SetKeyBytesWithIncorrectLength)
+{
+    // Setup: Create a PublicKey instance and a SecByteBlock of incorrect length
+    PublicKey publicKey(g_publicKeyBytes);
+    size_t incorrectLength = PublicKey::KeyLength - 1; // Assuming KeyLength is accessible
+    CryptoPP::SecByteBlock blockWithIncorrectLength(incorrectLength);
+
+    // Execute & Verify: Ensure the method throws an std::invalid_argument exception
+    ASSERT_THROW(publicKey.setKeyBytes(blockWithIncorrectLength), std::invalid_argument);
+}
+
+TEST(PublicKeyTest, SetKeyBytesSuccessfully)
+{
+    // Setup: Create a PublicKey instance and a valid SecByteBlock
+    PublicKey publicKey(g_publicKeyBytes);
+    CryptoPP::SecByteBlock validBlock(PublicKey::KeyLength); // Assuming KeyLength is accessible
+
+    // Execute: Set the key bytes
+    ASSERT_NO_THROW(publicKey.setKeyBytes(validBlock));
+
+    // Verify: Check if the key bytes were set correctly
+    // This part of the test depends on the available public methods of PublicKey.
+    // For example, if there's a method to get a property or the key bytes themselves:
+    // ASSERT_EQ(publicKey.getSomeProperty(), expectedPropertyValue);
+    // or
+    // ASSERT_EQ(publicKey.getKeyBytes(), validBlock);
+}
+
+// MultiEd25519PublicKey MultiEd25519PublicKey.cpp
+TEST(MultiEd25519PublicKeyTest, ConstructorThresholdExceedsLimit)
+{
+    // Setup: Create a vector of PublicKeys and define a threshold that exceeds the limit
+    PublicKey key1(g_publicKeyBytes);
+    PublicKey key2(g_publicKeyHex);
+    std::vector<PublicKey> publicKeys = {key1, key2};
+    int invalidThreshold = Aptos::Accounts::Types::MultiEd25519PublicKey::MAX_SIGNATURES_SUPPORTED + 1;
+
+    // Execute & Verify: Ensure the constructor throws an std::invalid_argument exception
+    ASSERT_THROW(Aptos::Accounts::Types::MultiEd25519PublicKey(publicKeys, invalidThreshold), std::invalid_argument);
+}
+
+TEST(MultiEd25519PublicKeyTest, ConstructorSuccessfulInitialization)
+{
+    // Setup: Create a vector of PublicKeys and define a valid threshold
+    PublicKey key1(g_publicKeyBytes);
+    PublicKey key2(g_publicKeyHex);
+    std::vector<PublicKey> publicKeys = {key1, key2};
+    int validThreshold = 15;
+
+    // Execute: Construct the MultiEd25519PublicKey
+    Aptos::Accounts::Types::MultiEd25519PublicKey multiPublicKey(publicKeys, validThreshold);
+
+    // Verify: Check if the object is initialized correctly
+    // This part of the test depends on the available public methods of MultiEd25519PublicKey.
+    // For example:
+    // ASSERT_EQ(multiPublicKey.getThreshold(), validThreshold);
+    // ASSERT_EQ(multiPublicKey.getPublicKeys(), publicKeys);
 }

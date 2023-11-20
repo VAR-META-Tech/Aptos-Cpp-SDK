@@ -42,6 +42,11 @@ nlohmann::json AccountResourceCoin::ToJson() const {
     };
 }
 
+AccountResourceCoin::Data AccountResourceCoin::dataProp() const
+{
+    return m_dataProp;
+}
+
 AccountResourceCoin::Guid::Guid() {}
 
 AccountResourceCoin::Guid AccountResourceCoin::Guid::FromJson(const nlohmann::json &jsonData) {
@@ -106,6 +111,11 @@ nlohmann::json AccountResourceCoin::Data::ToJson() const {
     };
 }
 
+AccountResourceCoin::Coin AccountResourceCoin::Data::coinProp() const
+{
+    return m_coinProp;
+}
+
 AccountResourceCoin::Coin::Coin() {}
 
 AccountResourceCoin::Coin AccountResourceCoin::Coin::FromJson(const nlohmann::json &jsonData) {
@@ -118,6 +128,11 @@ nlohmann::json AccountResourceCoin::Coin::ToJson() const {
     return nlohmann::json{
                           {"value", m_value}
     };
+}
+
+std::string AccountResourceCoin::Coin::value() const
+{
+    return m_value;
 }
 
 }

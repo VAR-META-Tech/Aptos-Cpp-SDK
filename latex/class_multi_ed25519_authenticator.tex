@@ -1,0 +1,121 @@
+\doxysection{Multi\+Ed25519\+Authenticator Class Reference}
+\hypertarget{class_multi_ed25519_authenticator}{}\label{class_multi_ed25519_authenticator}\index{MultiEd25519Authenticator@{MultiEd25519Authenticator}}
+
+
+\doxylink{class_multi_ed25519_authenticator}{Multi\+Ed25519\+Authenticator}.  
+
+
+
+
+{\ttfamily \#include $<$Authenticator.\+h$>$}
+
+Inheritance diagram for Multi\+Ed25519\+Authenticator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_multi_ed25519_authenticator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_multi_ed25519_authenticator_aa477a5a1ae1443a4a83a0ec7b1998268}{Multi\+Ed25519\+Authenticator}} (\mbox{\hyperlink{class_multi_public_key}{Multi\+Public\+Key}} public\+Key, \mbox{\hyperlink{class_multi_signature}{Multi\+Signature}} signature)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{class_multi_ed25519_authenticator}{Multi\+Ed25519\+Authenticator} from a given multi-\/public key and multi-\/signature. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_multi_ed25519_authenticator_acb2840806037215fa1b8675c3874fa33}{Verify}} (const Crypto\+PP\+::\+Sec\+Byte\+Block \&data) override
+\item 
+void \mbox{\hyperlink{class_multi_ed25519_authenticator_a82fbaae04169bbe3c883a991d3e881ed}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+\Hypertarget{class_multi_ed25519_authenticator_a6d40ff22b400f15746c2459e400fabce}\label{class_multi_ed25519_authenticator_a6d40ff22b400f15746c2459e400fabce} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_multi_agent_authenticator}{Multi\+Agent\+Authenticator}} \&other) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\item 
+virtual std\+::string \mbox{\hyperlink{class_i_serializable_a309b944338843df11042f84b25267bcd}{To\+String}} () const =0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_multi_ed25519_authenticator_a8cf2faa4614fe5b616248eecebd3e481}\label{class_multi_ed25519_authenticator_a8cf2faa4614fe5b616248eecebd3e481} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{class_multi_ed25519_authenticator}{Multi\+Ed25519\+Authenticator}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_multi_ed25519_authenticator_aa477a5a1ae1443a4a83a0ec7b1998268}\label{class_multi_ed25519_authenticator_aa477a5a1ae1443a4a83a0ec7b1998268} 
+\index{MultiEd25519Authenticator@{MultiEd25519Authenticator}!MultiEd25519Authenticator@{MultiEd25519Authenticator}}
+\index{MultiEd25519Authenticator@{MultiEd25519Authenticator}!MultiEd25519Authenticator@{MultiEd25519Authenticator}}
+\doxysubsubsection{\texorpdfstring{MultiEd25519Authenticator()}{MultiEd25519Authenticator()}}
+{\footnotesize\ttfamily Multi\+Ed25519\+Authenticator\+::\+Multi\+Ed25519\+Authenticator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_multi_public_key}{Multi\+Public\+Key}}}]{public\+Key,  }\item[{\mbox{\hyperlink{class_multi_signature}{Multi\+Signature}}}]{signature }\end{DoxyParamCaption})}
+
+
+
+Creates a \doxylink{class_multi_ed25519_authenticator}{Multi\+Ed25519\+Authenticator} from a given multi-\/public key and multi-\/signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Key} & \\
+\hline
+{\em signature} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_multi_ed25519_authenticator_a82fbaae04169bbe3c883a991d3e881ed}\label{class_multi_ed25519_authenticator_a82fbaae04169bbe3c883a991d3e881ed} 
+\index{MultiEd25519Authenticator@{MultiEd25519Authenticator}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!MultiEd25519Authenticator@{MultiEd25519Authenticator}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Multi\+Ed25519\+Authenticator\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{ISerializable}}.
+
+\Hypertarget{class_multi_ed25519_authenticator_acb2840806037215fa1b8675c3874fa33}\label{class_multi_ed25519_authenticator_acb2840806037215fa1b8675c3874fa33} 
+\index{MultiEd25519Authenticator@{MultiEd25519Authenticator}!Verify@{Verify}}
+\index{Verify@{Verify}!MultiEd25519Authenticator@{MultiEd25519Authenticator}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily bool Multi\+Ed25519\+Authenticator\+::\+Verify (\begin{DoxyParamCaption}\item[{const Crypto\+PP\+::\+Sec\+Byte\+Block \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Implements \mbox{\hyperlink{class_i_authenticator}{IAuthenticator}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Authenticator.\+h\item 
+BCS/Authenticator.\+cpp\end{DoxyCompactItemize}

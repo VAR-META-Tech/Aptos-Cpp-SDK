@@ -6,25 +6,43 @@
 #define APTOS_BYTESEQUENCE_H
 #include "BCSTypes.h"
 
-class BytesSequence : public ISerializable {
-private:
-    std::vector<std::vector<uint8_t>> values;
+namespace Aptos::BCS
+{
+    /// <summary>
+    /// Representation of a byte sequence.
+    /// </summary>
+    class BytesSequence : public ISerializable
+    {
+    private:
+        /// <summary>
+        /// A list of a list of bytes.
+        /// </summary>
+        std::vector<std::vector<uint8_t>> values;
 
-public:
-    BytesSequence(const std::vector<std::vector<uint8_t>>& values);
+    public:
+        /// <summary>
+        /// Creates a ByteSequence object from a list of a list of bytes.
+        /// </summary>
+        /// <param name="values">A lsit of a list of bytes.</param>
+        BytesSequence(const std::vector<std::vector<uint8_t>> &values);
 
-    void Serialize(Serialization& serializer) const override;
+        /// <inheritdoc/>
+        void Serialize(Serialization &serializer) const override;
 
-    static BytesSequence* Deserialize(Deserialization& deserializer);
+        /// <inheritdoc/>
+        static BytesSequence *Deserialize(Deserialization &deserializer);
 
-    std::vector<std::vector<uint8_t>> GetValue() const;
+        /// <inheritdoc/>
+        std::vector<std::vector<uint8_t>> GetValue() const;
 
-    bool Equals(const BytesSequence& other) const;
+        /// <inheritdoc/>
+        bool Equals(const BytesSequence &other) const;
 
-    std::string ToString() const override;
+        /// <inheritdoc/>
+        std::string ToString() const override;
 
-    size_t GetHashCode() const;
-};
-
-
-#endif //APTOS_BYTESEQUENCE_H
+        /// <inheritdoc/>
+        size_t GetHashCode() const;
+    };
+}
+#endif // APTOS_BYTESEQUENCE_H

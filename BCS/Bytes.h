@@ -7,26 +7,46 @@
 #include "BCSTypes.h"
 #include <cstdint>
 
-class Bytes : public ISerializable {
-private:
-    std::vector<uint8_t> values;
+namespace Aptos::BCS
+{
+    /// <summary>
+    /// Representation of Bytes in BCS.
+    /// </summary>
+    class Bytes : public ISerializable
+    {
+    private:
+        /// <summary>
+        /// The internals byte array.
+        /// </summary>
+        std::vector<uint8_t> values;
 
-public:
-    Bytes(const std::vector<uint8_t>& values);
+    public:
+        /// <summary>
+        /// Creates a Bytes object from a given byte array.
+        /// </summary>
+        /// <param name="values">A list of bytes to serialize.</param>
+        Bytes(const std::vector<uint8_t> &values);
 
-    void Serialize(Serialization& serializer) const override;
+        /// <inheritdoc/>
+        void Serialize(Serialization &serializer) const override;
 
-    static Bytes* Deserialize(Deserialization& deserializer);
+        /// <inheritdoc/>
+        static Bytes *Deserialize(Deserialization &deserializer);
 
-    std::vector<uint8_t> getValue() const;
+        /// <summary>
+        /// Gets the byte array containes within the Bytes object.
+        /// </summary>
+        /// <returns></returns>
+        std::vector<uint8_t> getValue() const;
 
-    bool Equals(const Bytes& other) const;
+        /// <inheritdoc/>
+        bool Equals(const Bytes &other) const;
 
-    std::string ToString() const override;
+        /// <inheritdoc/>
+        std::string ToString() const override;
 
-    size_t GetHashCode() const;
-};
-
-
-
-#endif //APTOS_BYTES_H
+        /// <inheritdoc/>
+        size_t GetHashCode() const;
+    };
+}
+#endif // APTOS_BYTES_H

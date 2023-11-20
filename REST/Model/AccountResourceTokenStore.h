@@ -16,6 +16,8 @@ public:
     public:
         nlohmann::json ToJson() const;
         static Tokens FromJson(const nlohmann::json& jsonData);
+        std::string getHandle() const;
+
     private:
         std::string Handle;
     };
@@ -78,6 +80,8 @@ public:
     public:
         nlohmann::json ToJson() const;
         static Data FromJson(const nlohmann::json& jsonData);
+        Tokens getTokensProp() const;
+
     private:
         BurnEvents BurnEvent;
         DespositEvents DepositEvents;
@@ -89,6 +93,8 @@ public:
     AccountResourceTokenStore();
     nlohmann::json ToJson() const;
     static AccountResourceTokenStore FromJson(const std::string& jsonStr);
+    Data getDataProp() const;
+
 private:
     std::string Type;
     Data DataProp;

@@ -24,4 +24,34 @@ TokenDataId TokenDataId::FromJson(const nlohmann::json &jsonData) {
     return tokenDataId;
 }
 
+std::string TokenDataId::getCollection() const
+{
+    return collection;
+}
+
+void TokenDataId::setCollection(const std::string &newCollection)
+{
+    collection = newCollection;
+}
+
+std::string TokenDataId::getCreator() const
+{
+    return creator;
+}
+
+void TokenDataId::setCreator(const std::string &newCreator)
+{
+    creator = newCreator;
+}
+
+std::string TokenDataId::getName() const
+{
+    return name;
+}
+
+void TokenDataId::setName(const std::string &newName)
+{
+    name = newName;
+}
+
 }

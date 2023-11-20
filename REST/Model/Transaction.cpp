@@ -117,6 +117,26 @@ nlohmann::json Transaction::ToJson() const {
     return j;
 }
 
+std::string Transaction::getType() const
+{
+    return Type;
+}
+
+void Transaction::setType(const std::string &newType)
+{
+    Type = newType;
+}
+
+bool Transaction::getSuccess() const
+{
+    return Success;
+}
+
+void Transaction::setSuccess(bool newSuccess)
+{
+    Success = newSuccess;
+}
+
 nlohmann::json ChangeWriteResourceWriteTableItem::ToJson() const {
     nlohmann::json changeWriteResourceWriteTableItemJson = Change::ToJson();
     changeWriteResourceWriteTableItemJson["state_key_hash"] = StateKeyHash;

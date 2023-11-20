@@ -3,6 +3,9 @@
 
 #include <string>
 
+/// <summary>
+/// A set of constants used globably across
+/// </summary>
 namespace Constants {
 extern const std::string MAINNET_BASE_URL;
 extern const std::string TESTNET_BASE_URL;

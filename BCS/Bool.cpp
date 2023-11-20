@@ -6,41 +6,52 @@
 #include "Serialization.h"
 #include "Deserialization.h"
 
+namespace Aptos::BCS
+{
+    Bool::Bool(bool value)
+    {
+        this->value = value;
+    }
 
-Bool::Bool(bool value) {
-    this->value = value;
-}
+    void Bool::Serialize(Serialization &serializer) const
+    {
+        serializer.SerializeBool(this->value);
+    }
 
-void Bool::Serialize(Serialization& serializer) const {
-    serializer.SerializeBool(this->value);
-}
+    std::shared_ptr<ISerializableTag> Bool::Deserialize(Deserialization &deserializer)
+    {
+        bool value = deserializer.DeserializeBool();
+        return std::make_shared<Bool>(value);
+    }
 
-std::shared_ptr<ISerializableTag> Bool::Deserialize(Deserialization& deserializer) {
-    bool value = deserializer.DeserializeBool();
-    return std::make_shared<Bool>(value);
-}
+    TypeTag Bool::Variant() const
+    {
+        return TypeTag::BOOL;
+    }
 
-TypeTag Bool::Variant() const {
-    return TypeTag::BOOL;
-}
+    bool Bool::GetValue() const
+    {
+        return value;
+    }
 
-bool Bool::GetValue() const {
-    return value;
-}
+    bool Bool::Equals(const Bool &other) const
+    {
+        return this->value == other.value;
+    }
 
-bool Bool::Equals(const Bool& other) const {
-    return this->value == other.value;
-}
+    std::string Bool::ToString() const
+    {
+        return this->value ? "true" : "false";
+    }
 
-std::string Bool::ToString() const {
-    return this->value ? "true" : "false";
-}
+    size_t Bool::GetHashCode() const
+    {
+        // Simple hash code calculation, more sophisticated method might be needed
+        return std::hash<bool>{}(this->value);
+    }
 
-size_t Bool::GetHashCode() const {
-    // Simple hash code calculation, more sophisticated method might be needed
-    return std::hash<bool>{}(this->value);
-}
-
-bool operator==(const Bool &lhs, const Bool &rhs) {
-    return lhs.Equals(rhs);
+    bool operator==(const Bool &lhs, const Bool &rhs)
+    {
+        return lhs.Equals(rhs);
+    }
 }

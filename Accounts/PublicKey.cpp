@@ -8,133 +8,148 @@
 #include "cryptopp/hex.h"
 #include "cryptopp/xed25519.h"
 
-PublicKey::PublicKey(const CryptoPP::SecByteBlock& publicKey)
+namespace Aptos::Accounts
 {
-    if (publicKey.empty()) {
-        throw std::invalid_argument("PublicKey cannot be null.");
-    }
-    if (publicKey.size() != KeyLength) {
-        throw std::invalid_argument("Invalid key length.");
-    }
-    _keyBytes = publicKey;
-}
-
-PublicKey::PublicKey(std::string key)
-{
-    if (!Utils::IsValidAddress(key)) {
-        throw std::invalid_argument("Invalid key.");
-    }
-    if (key.empty()) {
-        throw std::invalid_argument("Key cannot be null.");
-    }
-    if (key.substr(0, 2) == "0x") {
-        key = key.substr(2);
-    }
-    CryptoPP::HexDecoder decoder;
-    decoder.Put((CryptoPP::byte*)key.data(),key.size());
-    decoder.MessageEnd();
-    size_t size = decoder.MaxRetrievable();
-    if(size && size <= SIZE_MAX)
+    PublicKey::PublicKey(const CryptoPP::SecByteBlock &publicKey)
     {
-        _keyBytes.resize(size);
-        decoder.Get((CryptoPP::byte*)&_keyBytes[0], _keyBytes.size());
+        if (publicKey.empty())
+        {
+            throw std::invalid_argument("PublicKey cannot be null.");
+        }
+        if (publicKey.size() != KeyLength)
+        {
+            throw std::invalid_argument("Invalid key length.");
+        }
+        _keyBytes = publicKey;
     }
-}
 
-std::string PublicKey::Key() const
-{
-    std::string key = "0x";
-    CryptoPP::StringSource ss(_keyBytes.data(), _keyBytes.size(), true,
-                              new CryptoPP::HexEncoder(
-                                  new CryptoPP::StringSink(key),
-                                  false
-                                  ) // HexDecoder
-                              ); // StringSource
-    return key;
-}
-
-void PublicKey::setKey(std::string key)
-{
-    if (!Utils::IsValidAddress(key)) {
-        throw std::invalid_argument("Invalid key.");
-    }
-    if (key.empty()) {
-        throw std::invalid_argument("Key cannot be null.");
-    }
-    CryptoPP::HexDecoder decoder;
-    decoder.Put((CryptoPP::byte*)key.data(),key.size());
-    decoder.MessageEnd();
-    size_t size = decoder.MaxRetrievable();
-    if(size && size <= SIZE_MAX)
+    PublicKey::PublicKey(std::string key)
     {
-        _keyBytes.resize(size);
-        decoder.Get((CryptoPP::byte*)&_keyBytes[0], _keyBytes.size());
+        if (!Utils::IsValidAddress(key))
+        {
+            throw std::invalid_argument("Invalid key.");
+        }
+        if (key.empty())
+        {
+            throw std::invalid_argument("Key cannot be null.");
+        }
+        if (key.substr(0, 2) == "0x")
+        {
+            key = key.substr(2);
+        }
+        CryptoPP::HexDecoder decoder;
+        decoder.Put((CryptoPP::byte *)key.data(), key.size());
+        decoder.MessageEnd();
+        size_t size = decoder.MaxRetrievable();
+        if (size && size <= SIZE_MAX)
+        {
+            _keyBytes.resize(size);
+            decoder.Get((CryptoPP::byte *)&_keyBytes[0], _keyBytes.size());
+        }
     }
-}
 
-CryptoPP::SecByteBlock PublicKey::KeyBytes() const
-{
-    return _keyBytes;
-}
-
-void PublicKey::setKeyBytes(const CryptoPP::SecByteBlock& bytes)
-{
-    if (bytes.empty()) {
-        throw std::invalid_argument("Key bytes cannot be null.");
+    std::string PublicKey::Key() const
+    {
+        std::string key = "0x";
+        CryptoPP::StringSource ss(_keyBytes.data(), _keyBytes.size(), true,
+                                  new CryptoPP::HexEncoder(
+                                      new CryptoPP::StringSink(key),
+                                      false) // HexDecoder
+        );                                   // StringSource
+        return key;
     }
-    if (bytes.size() != KeyLength) {
-        throw std::invalid_argument("Invalid key length.");
+
+    void PublicKey::setKey(std::string key)
+    {
+        if (!Utils::IsValidAddress(key))
+        {
+            throw std::invalid_argument("Invalid key.");
+        }
+        if (key.empty())
+        {
+            throw std::invalid_argument("Key cannot be null.");
+        }
+        CryptoPP::HexDecoder decoder;
+        decoder.Put((CryptoPP::byte *)key.data(), key.size());
+        decoder.MessageEnd();
+        size_t size = decoder.MaxRetrievable();
+        if (size && size <= SIZE_MAX)
+        {
+            _keyBytes.resize(size);
+            decoder.Get((CryptoPP::byte *)&_keyBytes[0], _keyBytes.size());
+        }
     }
-    _keyBytes = bytes;
-}
 
-bool PublicKey::Verify(const CryptoPP::SecByteBlock& message, const Signature& signature) const {
-    CryptoPP::ed25519::Verifier verifier;
-    verifier.VerifyMessage(message.data(), message.size(),
-                           signature.Data().data(), signature.Data().size());
-    return false;
-}
-
-bool PublicKey::IsOnCurve() const
-{
-    //todo
-    return false;
-}
-
-void PublicKey::Serialize(Serialization& serializer) const
-{
-    std::vector<uint8_t> byteArray = Utils::SecBlockToByteVector(_keyBytes);
-    serializer.SerializeBytes(byteArray);
-}
-
-std::shared_ptr<ISerializable> PublicKey::Deserialize(Deserialization& deserializer)
-{
-    auto bytes = deserializer.ToBytes();
-    CryptoPP::SecByteBlock keyBytes = Utils::ByteVectorToSecBlock(bytes);
-    if (keyBytes.size() != KeyLength) {
-        throw std::runtime_error("Length mismatch. Expected: " + std::to_string(KeyLength) + ", Actual: " + std::to_string(keyBytes.size()));
+    CryptoPP::SecByteBlock PublicKey::KeyBytes() const
+    {
+        return _keyBytes;
     }
-    return std::make_shared<PublicKey>(keyBytes);
-}
 
-std::string PublicKey::ToString() const
-{
-    return Key();
-}
+    void PublicKey::setKeyBytes(const CryptoPP::SecByteBlock &bytes)
+    {
+        if (bytes.empty())
+        {
+            throw std::invalid_argument("Key bytes cannot be null.");
+        }
+        if (bytes.size() != KeyLength)
+        {
+            throw std::invalid_argument("Invalid key length.");
+        }
+        _keyBytes = bytes;
+    }
 
-size_t PublicKey::GetHashCode() const
-{
-    return std::hash<std::string>{}(Key());
-}
+    bool PublicKey::Verify(const CryptoPP::SecByteBlock &message, const Signature &signature) const
+    {
+        CryptoPP::ed25519::Verifier verifier(_keyBytes);
+        return verifier.VerifyMessage(message.data(), message.size(),
+                                      signature.Data().data(), signature.Data().size());
+    }
 
-bool PublicKey::Equals(const PublicKey &rhs) const {
-    return Key() == rhs.Key();
-}
+    bool PublicKey::IsOnCurve() const
+    {
+        // todo
+        return false;
+    }
 
-bool PublicKey::operator==(const PublicKey &rhs) const {
-    return Equals(rhs);
-}
+    void PublicKey::Serialize(Serialization &serializer) const
+    {
+        std::vector<uint8_t> byteArray = Utils::SecBlockToByteVector(_keyBytes);
+        serializer.SerializeBytes(byteArray);
+    }
 
-bool PublicKey::operator!=(const PublicKey &rhs) const {
-    return !Equals(rhs);
+    std::shared_ptr<ISerializable> PublicKey::Deserialize(Deserialization &deserializer)
+    {
+        auto bytes = deserializer.ToBytes();
+        CryptoPP::SecByteBlock keyBytes = Utils::ByteVectorToSecBlock(bytes);
+        if (keyBytes.size() != KeyLength)
+        {
+            throw std::runtime_error("Length mismatch. Expected: " + std::to_string(KeyLength) + ", Actual: " + std::to_string(keyBytes.size()));
+        }
+        return std::make_shared<PublicKey>(keyBytes);
+    }
+
+    std::string PublicKey::ToString() const
+    {
+        return Key();
+    }
+
+    size_t PublicKey::GetHashCode() const
+    {
+        return std::hash<std::string>{}(Key());
+    }
+
+    bool PublicKey::Equals(const PublicKey &rhs) const
+    {
+        return Key() == rhs.Key();
+    }
+
+    bool PublicKey::operator==(const PublicKey &rhs) const
+    {
+        return Equals(rhs);
+    }
+
+    bool PublicKey::operator!=(const PublicKey &rhs) const
+    {
+        return !Equals(rhs);
+    }
 }

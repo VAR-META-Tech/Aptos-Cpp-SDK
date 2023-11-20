@@ -1,0 +1,162 @@
+\doxysection{Aptos\+::BCS\+::Struct\+Tag Class Reference}
+\hypertarget{class_aptos_1_1_b_c_s_1_1_struct_tag}{}\label{class_aptos_1_1_b_c_s_1_1_struct_tag}\index{Aptos::BCS::StructTag@{Aptos::BCS::StructTag}}
+
+
+Representation of a struct tag.  
+
+
+
+
+{\ttfamily \#include $<$Struct\+Tag.\+h$>$}
+
+Inheritance diagram for Aptos\+::BCS\+::Struct\+Tag\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_aptos_1_1_b_c_s_1_1_struct_tag}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag_a5e4f7b00b8667865968e25495dda48dc}{Struct\+Tag}} (\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Account\+Address}} address, std\+::string module, std\+::string name, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{ISerializable\+Tag}} $>$ $>$ \&type\+Args)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{class_aptos_1_1_b_c_s_1_1_struct_tag}{Struct\+Tag} object from an address, module, function name, and type arguments. \end{DoxyCompactList}\item 
+Type\+Tag \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag_af6cfa9b3ecdea084f6fbdd292cc54f81}{Variant}} () const override
+\begin{DoxyCompactList}\small\item\em Returns the type of type tag.
+
+\begin{DoxyReturn}{Returns}
+A Type\+Tag enum.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag_ad2b807cb21f4d62aa58473cfcc6f4d13}{Serialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_struct_tag_a5faba5167e7407410a4e0b8ce7060aa8}\label{class_aptos_1_1_b_c_s_1_1_struct_tag_a5faba5167e7407410a4e0b8ce7060aa8} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag}{Struct\+Tag}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag_a8dbdb4ed8ac9acdd5f35d703fa882f4f}{To\+String}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{Aptos\+::\+BCS\+::\+ISerializable\+Tag}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag_a05663afb615b0ddaa2732b3225a2fee5}{Serialize\+Tag}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&serializer)
+\begin{DoxyCompactList}\small\item\em Serializes the type tag using it\textquotesingle{}s own serializaton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_struct_tag_a9a3d887bd6536fa46752b4d79b1fc579}\label{class_aptos_1_1_b_c_s_1_1_struct_tag_a9a3d887bd6536fa46752b4d79b1fc579} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{ISerializable\+Tag}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_struct_tag_ae491408a56bac71d33f8539c9ff36f60}\label{class_aptos_1_1_b_c_s_1_1_struct_tag_ae491408a56bac71d33f8539c9ff36f60} 
+static \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag}{Struct\+Tag}} {\bfseries From\+Str} (const std\+::string \&type\+Tag)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{Aptos\+::\+BCS\+::\+ISerializable\+Tag}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{ISerializable\+Tag}} $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag_ad3508f94384876e2280bfe24f00eccef}{Deserialize\+Tag}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserialize a tag based on it\textquotesingle{}s type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_aa692ec6a618d04663c1e5d3cf83f59d7}{Deserialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of a struct tag. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_struct_tag_a5e4f7b00b8667865968e25495dda48dc}\label{class_aptos_1_1_b_c_s_1_1_struct_tag_a5e4f7b00b8667865968e25495dda48dc} 
+\index{Aptos::BCS::StructTag@{Aptos::BCS::StructTag}!StructTag@{StructTag}}
+\index{StructTag@{StructTag}!Aptos::BCS::StructTag@{Aptos::BCS::StructTag}}
+\doxysubsubsection{\texorpdfstring{StructTag()}{StructTag()}}
+{\footnotesize\ttfamily Aptos\+::\+BCS\+::\+Struct\+Tag\+::\+Struct\+Tag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Account\+Address}}}]{address,  }\item[{std\+::string}]{module,  }\item[{std\+::string}]{name,  }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{ISerializable\+Tag}} $>$ $>$ \&}]{type\+Args }\end{DoxyParamCaption})}
+
+
+
+Creates a \doxylink{class_aptos_1_1_b_c_s_1_1_struct_tag}{Struct\+Tag} object from an address, module, function name, and type arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & An Account\+Address.\\
+\hline
+{\em module} & The module name.\\
+\hline
+{\em name} & The function name.\\
+\hline
+{\em type\+Args} & A list of type arguments.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_struct_tag_ad2b807cb21f4d62aa58473cfcc6f4d13}\label{class_aptos_1_1_b_c_s_1_1_struct_tag_ad2b807cb21f4d62aa58473cfcc6f4d13} 
+\index{Aptos::BCS::StructTag@{Aptos::BCS::StructTag}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Aptos::BCS::StructTag@{Aptos::BCS::StructTag}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Aptos\+::\+BCS\+::\+Struct\+Tag\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_a69bdbb0faf3fda49df818174878938b1}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_struct_tag_a8dbdb4ed8ac9acdd5f35d703fa882f4f}\label{class_aptos_1_1_b_c_s_1_1_struct_tag_a8dbdb4ed8ac9acdd5f35d703fa882f4f} 
+\index{Aptos::BCS::StructTag@{Aptos::BCS::StructTag}!ToString@{ToString}}
+\index{ToString@{ToString}!Aptos::BCS::StructTag@{Aptos::BCS::StructTag}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Aptos\+::\+BCS\+::\+Struct\+Tag\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Reimplemented from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{Aptos\+::\+BCS\+::\+ISerializable\+Tag}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_struct_tag_af6cfa9b3ecdea084f6fbdd292cc54f81}\label{class_aptos_1_1_b_c_s_1_1_struct_tag_af6cfa9b3ecdea084f6fbdd292cc54f81} 
+\index{Aptos::BCS::StructTag@{Aptos::BCS::StructTag}!Variant@{Variant}}
+\index{Variant@{Variant}!Aptos::BCS::StructTag@{Aptos::BCS::StructTag}}
+\doxysubsubsection{\texorpdfstring{Variant()}{Variant()}}
+{\footnotesize\ttfamily Type\+Tag Aptos\+::\+BCS\+::\+Struct\+Tag\+::\+Variant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the type of type tag.
+
+\begin{DoxyReturn}{Returns}
+A Type\+Tag enum.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag_ab03966e83bd0fb36c56256b5924a56f1}{Aptos\+::\+BCS\+::\+ISerializable\+Tag}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Struct\+Tag.\+h\item 
+BCS/Struct\+Tag.\+cpp\end{DoxyCompactItemize}

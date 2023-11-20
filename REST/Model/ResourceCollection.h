@@ -25,6 +25,8 @@ public:
     public:
         nlohmann::json ToJson() const;
         static TokenData FromJson(const nlohmann::json& jsonData);
+        std::string getHandle() const;
+
     private:
         std::string Handle;
     };
@@ -42,6 +44,8 @@ public:
     public:
         nlohmann::json ToJson() const;
         static CollectionData FromJson(const nlohmann::json& jsonData);
+        std::string getHandle() const;
+
     private:
         std::string Handle;
     };
@@ -50,6 +54,10 @@ public:
     public:
         nlohmann::json ToJson() const;
         static Data FromJson(const nlohmann::json& jsonData);
+        TokenData getTokenDataProp() const;
+
+        ResourceCollection::ResourceCollection::CollectionData getCollectionDataProp() const;
+
     private:
         CollectionData CollectionDataProp;
         CollectionEvents CreateCollectionEvents;
@@ -60,6 +68,8 @@ public:
 
     nlohmann::json ToJson() const;
     static ResourceCollection FromJson(const std::string& jsonStr);
+    ResourceCollection::Data getDataProp() const;
+
 private:
     std::string Type;
     Data DataProp;

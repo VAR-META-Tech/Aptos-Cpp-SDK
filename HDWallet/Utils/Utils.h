@@ -1,10 +1,5 @@
-//
-// Created by Anh NPH on 25/09/2023.
-//
-
 #ifndef APTOS_UTILS_H
 #define APTOS_UTILS_H
-
 #include <regex>
 #include <map>
 #include <vector>
@@ -12,32 +7,111 @@
 #include <cstdint>
 #include <cryptopp/hex.h>
 
-namespace Utils {
-constexpr int Ed25519PrivateKeySeedSizeInBytes = 32;
-constexpr int Ed25519PublicKeySizeInBytes = 32;
+/// <summary>
+/// Implements utility methods to be used in the wallet.
+/// </summary>
+namespace Aptos::Utils
+{
+    constexpr int Ed25519PrivateKeySeedSizeInBytes = 32;
+    constexpr int Ed25519PublicKeySizeInBytes = 32;
 
-bool IsValidAddress(std::string walletAddress);
-std::vector<uint8_t> ByteArrayFromHexString(std::string input);
-std::string HexStringFromByteArray(const std::vector<uint8_t>& input);
+    /// <summary>
+    /// Check if it's a valid hex address.
+    /// </summary>
+    /// <param name="walletAddress"></param>
+    /// <returns>true if is a valid hex address, false otherwise.</returns>
+    bool IsValidAddress(std::string walletAddress);
 
-template<typename TKey, typename TValue>
-void AddOrReplace(std::map<TKey, TValue>& dictionary, TKey key, TValue value);
+    /// <summary>
+    /// Converts a hexadecimal string to an array of bytes
+    /// NOTE: string must not contain "0x"
+    /// Wrong input:   0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5
+    /// Correct input: 586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5
+    /// </summary>
+    /// <param name="input"></param> Valid hexadecimal string
+    /// <returns>Byte array representation of hexadecimal string</returns>
+    std::vector<uint8_t> ByteArrayFromHexString(std::string input);
 
-template<typename TKey, typename TValue>
-TValue TryGet(const std::map<TKey, TValue>& dictionary, TKey key);
+    /// <summary>
+    /// Turn byte array to hex string without 0x identifier
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    std::string HexStringFromByteArray(const std::vector<uint8_t> &input);
 
-template <typename T>
-std::vector<T> Slice(std::vector<T> source, int start, int end);
-template <typename T>
-std::vector<T> Slice(std::vector<T> source, int start);
+    /// <summary>
+    /// Adds or replaces a value in a dictionary.
+    /// </summary>
+    /// <param name="dictionary">The dictionary.</param>
+    /// <param name="key">The key to add or replace.</param>
+    /// <param name="value">The value.</param>
+    /// <typeparam name="TKey">The type of the key.</typeparam>
+    /// <typeparam name="TValue">The type of the value.</typeparam>
+    template <typename TKey, typename TValue>
+    void AddOrReplace(std::map<TKey, TValue> &dictionary, TKey key, TValue value);
 
-std::vector<uint8_t> Sha256(const std::vector<uint8_t>& data, int offset, int count);
-std::vector<uint8_t> Sha256(const std::vector<uint8_t>& data);
+    /// <summary>
+    /// Attempts to get a value from a dictionary.
+    /// </summary>
+    /// <param name="dictionary">The dictionary to get the value from.</param>
+    /// <param name="key">The key to get.</param>
+    /// <typeparam name="TKey">The type of the key.</typeparam>
+    /// <typeparam name="TValue">The type of the value.</typeparam>
+    /// <returns>The value.</returns>
+    template <typename TKey, typename TValue>
+    TValue TryGet(const std::map<TKey, TValue> &dictionary, TKey key);
 
-std::pair<std::vector<uint8_t>, std::vector<uint8_t>> EdKeyPairFromSeed(const std::vector<uint8_t>& seed);
-CryptoPP::SecByteBlock ByteVectorToSecBlock(const std::vector<uint8_t>& input);
-std::vector<uint8_t> SecBlockToByteVector(const CryptoPP::SecByteBlock& input);
-CryptoPP::SecByteBlock StringToSecByteBlock(const std::string& str);
+    /// <summary>
+    /// Slices the array, returning a new array starting at <c>start</c> index and ending at <c>end</c> index.
+    /// </summary>
+    /// <param name="source">The array to slice.</param>
+    /// <param name="start">The starting index of the slicing.</param>
+    /// <param name="end">The ending index of the slicing.</param>
+    /// <typeparam name="T">The array type.</typeparam>
+    /// <returns>The sliced array.</returns>
+    template <typename T>
+    std::vector<T> Slice(std::vector<T> source, int start, int end);
+
+    /// <summary>
+    /// Slices the array, returning a new array starting at <c>start</c>.
+    /// </summary>
+    /// <param name="source">The array to slice.</param>
+    /// <param name="start">The starting index of the slicing.</param>
+    /// <typeparam name="T">The array type.</typeparam>
+    /// <returns>The sliced array.</returns>
+    template <typename T>
+    std::vector<T> Slice(std::vector<T> source, int start);
+
+    /// <summary>
+    /// Calculates the Sha256 of the given data.
+    /// </summary>
+    /// <param name="data">The data to hash.</param>
+    /// <returns>The hash.</returns>
+    std::vector<uint8_t> Sha256(const std::vector<uint8_t> &data, int offset, int count);
+
+    /// <summary>
+    /// Calculates the SHA256 of the given data.
+    /// </summary>
+    /// <param name="data">The data to hash.</param>
+    /// <param name="offset">The offset at which to start.</param>
+    /// <param name="count">The number of bytes to in the array to use as data.</param>
+    /// <returns>The hash.</returns>
+    std::vector<uint8_t> Sha256(const std::vector<uint8_t> &data);
+
+    /// <summary>
+    /// Gets the corresponding ed25519 key pair from the passed seed.
+    /// </summary>
+    /// <param name="seed">The seed</param>
+    /// <returns>The key pair.</returns>
+    std::pair<CryptoPP::SecByteBlock, CryptoPP::SecByteBlock> EdKeyPairFromSeed(const CryptoPP::SecByteBlock &seed);
+    CryptoPP::SecByteBlock ByteVectorToSecBlock(const std::vector<uint8_t> &input);
+    std::vector<uint8_t> SecBlockToByteVector(const CryptoPP::SecByteBlock &input);
+    CryptoPP::SecByteBlock StringToSecByteBlock(const std::string &str);
+    // Function to trim specified characters from the left side of a string
+    std::string ltrim(const std::string &s, const std::string &charsToTrim);
+    // Function to trim specified characters from the right side of a string
+    std::string rtrim(const std::string &s, const std::string &charsToTrim);
+    // Function to trim specified characters from both sides of a string
+    std::string trim(const std::string &s, const std::string &charsToTrim);
 }
-
-#endif //APTOS_UTILS_H
+#endif // APTOS_UTILS_H

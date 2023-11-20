@@ -1,0 +1,161 @@
+\doxysection{Multi\+Agent\+Authenticator Class Reference}
+\hypertarget{class_multi_agent_authenticator}{}\label{class_multi_agent_authenticator}\index{MultiAgentAuthenticator@{MultiAgentAuthenticator}}
+
+
+An \doxylink{class_authenticator}{Authenticator} that uses a list of tuples of account addresses and authenticator pairs.  
+
+
+
+
+{\ttfamily \#include $<$Authenticator.\+h$>$}
+
+Inheritance diagram for Multi\+Agent\+Authenticator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_multi_agent_authenticator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_multi_agent_authenticator_a67a6f20717748b6aeb8b6f187256b17e}{Multi\+Agent\+Authenticator}} (\mbox{\hyperlink{class_authenticator}{Authenticator}} sender, const std\+::vector$<$ std\+::tuple$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_account_address}{Account\+Address}} $>$, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_authenticator}{Authenticator}} $>$ $>$ $>$ \&secondary\+Signers)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{class_multi_agent_authenticator}{Multi\+Agent\+Authenticator} object from a given sender authenticator, and a list of acount address to authenticator tuples. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_sequence}{Sequence}} \mbox{\hyperlink{class_multi_agent_authenticator_a3f7a82679118f8dd4b011e407ae70f27}{Secondary\+Addresses}} () const
+\begin{DoxyCompactList}\small\item\em Returns the list (\doxylink{class_sequence}{Sequence}) of corresponding account addresses. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_multi_agent_authenticator_a4b158caab4ea47ad65c74d66d6a2afb3}{Verify}} (const Crypto\+PP\+::\+Sec\+Byte\+Block \&data) override
+\begin{DoxyCompactList}\small\item\em Verifies the data with all the account addresses. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_multi_agent_authenticator_a28247174c0388c64a7e6b908007e4dd9}{Serialize}} (\mbox{\hyperlink{class_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+\Hypertarget{class_multi_agent_authenticator_aa9e41513a5959dd658ee60bb1eaafa0c}\label{class_multi_agent_authenticator_aa9e41513a5959dd658ee60bb1eaafa0c} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_multi_agent_authenticator}{Multi\+Agent\+Authenticator}} \&other) const
+\item 
+\Hypertarget{class_multi_agent_authenticator_af8f4bb41b94ee713837d7c0cdb3f1810}\label{class_multi_agent_authenticator_af8f4bb41b94ee713837d7c0cdb3f1810} 
+int {\bfseries Get\+Hash\+Code} () const
+\item 
+std\+::string \mbox{\hyperlink{class_multi_agent_authenticator_a3176b6952d47e3dbc03d24703afb329c}{To\+String}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t {\bfseries Get\+Hash\+Code} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_multi_agent_authenticator_a646062805e06f6fc6ab7baba04829b5a}\label{class_multi_agent_authenticator_a646062805e06f6fc6ab7baba04829b5a} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_i_serializable}{ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_i_serializable_a8d959b924c6e8aff141d6d6c64d2eac7}{Deserialize}} (\mbox{\hyperlink{class_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An \doxylink{class_authenticator}{Authenticator} that uses a list of tuples of account addresses and authenticator pairs. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_multi_agent_authenticator_a67a6f20717748b6aeb8b6f187256b17e}\label{class_multi_agent_authenticator_a67a6f20717748b6aeb8b6f187256b17e} 
+\index{MultiAgentAuthenticator@{MultiAgentAuthenticator}!MultiAgentAuthenticator@{MultiAgentAuthenticator}}
+\index{MultiAgentAuthenticator@{MultiAgentAuthenticator}!MultiAgentAuthenticator@{MultiAgentAuthenticator}}
+\doxysubsubsection{\texorpdfstring{MultiAgentAuthenticator()}{MultiAgentAuthenticator()}}
+{\footnotesize\ttfamily Multi\+Agent\+Authenticator\+::\+Multi\+Agent\+Authenticator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_authenticator}{Authenticator}}}]{sender,  }\item[{const std\+::vector$<$ std\+::tuple$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_account_address}{Account\+Address}} $>$, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_authenticator}{Authenticator}} $>$ $>$ $>$ \&}]{secondary\+Signers }\end{DoxyParamCaption})}
+
+
+
+Creates a \doxylink{class_multi_agent_authenticator}{Multi\+Agent\+Authenticator} object from a given sender authenticator, and a list of acount address to authenticator tuples. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em secondary\+Signers} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_multi_agent_authenticator_a3f7a82679118f8dd4b011e407ae70f27}\label{class_multi_agent_authenticator_a3f7a82679118f8dd4b011e407ae70f27} 
+\index{MultiAgentAuthenticator@{MultiAgentAuthenticator}!SecondaryAddresses@{SecondaryAddresses}}
+\index{SecondaryAddresses@{SecondaryAddresses}!MultiAgentAuthenticator@{MultiAgentAuthenticator}}
+\doxysubsubsection{\texorpdfstring{SecondaryAddresses()}{SecondaryAddresses()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sequence}{Sequence}} Multi\+Agent\+Authenticator\+::\+Secondary\+Addresses (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the list (\doxylink{class_sequence}{Sequence}) of corresponding account addresses. 
+
+\begin{DoxyReturn}{Returns}
+A \doxylink{class_sequence}{Sequence} of account addresses
+\end{DoxyReturn}
+\Hypertarget{class_multi_agent_authenticator_a28247174c0388c64a7e6b908007e4dd9}\label{class_multi_agent_authenticator_a28247174c0388c64a7e6b908007e4dd9} 
+\index{MultiAgentAuthenticator@{MultiAgentAuthenticator}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!MultiAgentAuthenticator@{MultiAgentAuthenticator}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Multi\+Agent\+Authenticator\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable_af2524059fbf67b4a55bf1b34f1d9fa4d}{ISerializable}}.
+
+\Hypertarget{class_multi_agent_authenticator_a3176b6952d47e3dbc03d24703afb329c}\label{class_multi_agent_authenticator_a3176b6952d47e3dbc03d24703afb329c} 
+\index{MultiAgentAuthenticator@{MultiAgentAuthenticator}!ToString@{ToString}}
+\index{ToString@{ToString}!MultiAgentAuthenticator@{MultiAgentAuthenticator}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Multi\+Agent\+Authenticator\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Implements \mbox{\hyperlink{class_i_serializable}{ISerializable}}.
+
+\Hypertarget{class_multi_agent_authenticator_a4b158caab4ea47ad65c74d66d6a2afb3}\label{class_multi_agent_authenticator_a4b158caab4ea47ad65c74d66d6a2afb3} 
+\index{MultiAgentAuthenticator@{MultiAgentAuthenticator}!Verify@{Verify}}
+\index{Verify@{Verify}!MultiAgentAuthenticator@{MultiAgentAuthenticator}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily bool Multi\+Agent\+Authenticator\+::\+Verify (\begin{DoxyParamCaption}\item[{const Crypto\+PP\+::\+Sec\+Byte\+Block \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Verifies the data with all the account addresses. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if all accouncts can verify, false otherwise.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_i_authenticator}{IAuthenticator}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Authenticator.\+h\item 
+BCS/Authenticator.\+cpp\end{DoxyCompactItemize}
