@@ -387,6 +387,113 @@ TEST(ModuleFromStringTest, ModuleFromString) {
     EXPECT_EQ(expectedModuleId, actualModuleId);
 }
 
+TEST(ModuleIdTest, ToString) {
+    // Create a ModuleId object
+    AccountAddress accountAddress = AccountAddress::FromHex("0x1");
+    std::string name = "coin";
+    ModuleId moduleId(accountAddress, name);
+
+    // Call ToString() method
+    std::string actualString = moduleId.ToString();
+
+    // Check if the resulting string matches the expected format
+    std::string expectedString = "0x1::coin";
+    EXPECT_EQ(expectedString, actualString);
+}
+
+TEST(ModuleIdTest, GetHashCode) {
+    // Create a ModuleId object
+    AccountAddress accountAddress = AccountAddress::FromHex("0x1");
+    std::string name = "coin";
+    ModuleId moduleId(accountAddress, name);
+
+    // Call GetHashCode() method
+    size_t actualHash = moduleId.GetHashCode();
+
+    // Check if the resulting hash is 0
+    EXPECT_EQ(0, actualHash);
+}
+
+TEST(ModuleIdTest, EqualityOperator) {
+    // Create two identical ModuleId objects
+    AccountAddress accountAddress1 = AccountAddress::FromHex("0x1");
+    std::string name1 = "coin";
+    ModuleId moduleId1(accountAddress1, name1);
+    ModuleId moduleId2(accountAddress1, name1);
+
+    // Check if the two identical ModuleId objects are equal
+    EXPECT_TRUE(moduleId1 == moduleId2);
+
+    // Create two different ModuleId objects
+    AccountAddress accountAddress3 = AccountAddress::FromHex("0x2");
+    std::string name3 = "token";
+    ModuleId moduleId3(accountAddress3, name3);
+
+    // Check if the two different ModuleId objects are not equal
+    EXPECT_FALSE(moduleId1 == moduleId3);
+}
+
+TEST(ModuleIdTest, Constructor) {
+    // Create an AccountAddress object and a name string
+    AccountAddress accountAddress = AccountAddress::FromHex("0x1");
+    std::string name = "coin";
+
+    // Create a ModuleId object using the AccountAddress object and the name string
+    ModuleId moduleId(accountAddress, name);
+
+    // Check if the ToString method of the ModuleId object returns the correct string
+    std::string expectedString = "0x1::coin";
+    EXPECT_EQ(expectedString, moduleId.ToString());
+}
+
+TEST(ModuleIdTest, Equals) {
+    // Create two identical ModuleId objects
+    AccountAddress accountAddress1 = AccountAddress::FromHex("0x1");
+    std::string name1 = "coin";
+    ModuleId moduleId1(accountAddress1, name1);
+
+    AccountAddress accountAddress2 = AccountAddress::FromHex("0x1");
+    std::string name2 = "coin";
+    ModuleId moduleId2(accountAddress2, name2);
+
+    // Check if Equals returns true for identical objects
+    EXPECT_TRUE(moduleId1.Equals(moduleId2));
+
+    // Modify one of the ModuleId objects
+    AccountAddress accountAddress3 = AccountAddress::FromHex("0x2");
+    ModuleId moduleId3(accountAddress3, name1);
+
+    // Check if Equals returns false for different objects
+    EXPECT_FALSE(moduleId1.Equals(moduleId3));
+
+    std::string name3 = "coin2";
+    ModuleId moduleId4(accountAddress1, name3);
+
+    // Check if Equals returns false for different objects
+    EXPECT_FALSE(moduleId1.Equals(moduleId4));
+}
+
+TEST(ModuleIdTest, FromStr) {
+    // Test with a valid ModuleId string
+    std::string validModuleIdStr = "0x1::coin";
+    ModuleId validModuleId = ModuleId::FromStr(validModuleIdStr);
+    // Test with an empty string
+    std::string emptyStr = "";
+    EXPECT_THROW(ModuleId::FromStr(emptyStr), std::invalid_argument);
+
+    // Test with a string with no "::"
+    std::string noSeparatorStr = "0x1coin";
+    EXPECT_THROW(ModuleId::FromStr(noSeparatorStr), std::invalid_argument);
+
+    // Test with a string with "::" at the beginning
+    std::string startSeparatorStr = "::coin";
+    EXPECT_THROW(ModuleId::FromStr(startSeparatorStr), std::invalid_argument);
+
+    // Test with a string with "::" at the end
+    std::string endSeparatorStr = "0x1::";
+    EXPECT_THROW(ModuleId::FromStr(endSeparatorStr), std::invalid_argument);
+}
+
 TEST(StructTagFromStringTest, StructTagFromString) {
     AccountAddress accountAddress = AccountAddress::FromHex("0x1");
     std::string module = "aptos_coin";
@@ -506,6 +613,95 @@ TEST(ScriptSerializeTest, ScriptSerialize) {
     ASSERT_EQ(script, *actualScript);
 }
 
+TEST(ScriptTest, ToString) {
+    // Create a ISerializable object with a known ToString value
+    TagSequence typeTags
+        {std::vector<std::shared_ptr<ISerializableTag>>
+                         {std::make_shared<StructTag>(AccountAddress::FromHex("0x1"), "aptos_coin", "AptosCoin", std::vector<std::shared_ptr<ISerializableTag>>{})}};
+
+    std::vector<std::shared_ptr<ISerializable>> args = {
+        std::make_shared<AccountAddress>(AccountAddress::FromHex("0x1")),
+        std::make_shared<U64>(1000),
+    };
+    Sequence scriptArgs(args);
+
+    std::vector<uint8_t> code;  // Filled with some arbitrary bytecode
+
+    // Create a Script object with the known ToString value
+    Script script(code, typeTags, scriptArgs);
+
+    // Call the ToString method
+    std::string returned_str = script.ToString();
+
+    // Known value is updated to the expected string
+    std::string known_value = "<0x1::aptos_coin::AptosCoin>(0x11000)";
+
+    // Assert that the returned string is the same as the string representation of the known ToString value
+    EXPECT_EQ(returned_str, known_value);
+}
+
+TEST(ScriptTest, EqualsMethod) {
+    // Create two identical Script objects
+    TagSequence typeTags
+        {std::vector<std::shared_ptr<ISerializableTag>>
+                         {std::make_shared<StructTag>(AccountAddress::FromHex("0x1"), "aptos_coin", "AptosCoin", std::vector<std::shared_ptr<ISerializableTag>>{})}};
+
+    std::vector<std::shared_ptr<ISerializable>> args = {
+        std::make_shared<AccountAddress>(AccountAddress::FromHex("0x1")),
+        std::make_shared<U64>(1000),
+    };
+    Sequence scriptArgs(args);
+
+    std::vector<uint8_t> code = {1, 2, 3, 4, 5};  // Some arbitrary bytecode
+
+    // Create two identical Script objects
+    Script script1(code, typeTags, scriptArgs);
+    Script script2(code, typeTags, scriptArgs);
+
+    // Assert that the two scripts are equal
+    EXPECT_TRUE(script1.Equals(script2));
+
+    // Now alter one of the scripts
+    std::vector<uint8_t> codeDifferent = {5, 4, 3, 2, 1};  // Different arbitrary bytecode
+    Script script3(codeDifferent, typeTags, scriptArgs);
+
+    // Assert that the scripts are no longer equal
+    EXPECT_FALSE(script1.Equals(script3));
+}
+
+TEST(ScriptTest, GetHashCodeMethod) {
+    // Create a Script object
+    TagSequence typeTags
+        {std::vector<std::shared_ptr<ISerializableTag>>
+                         {std::make_shared<StructTag>(AccountAddress::FromHex("0x1"), "aptos_coin", "AptosCoin", std::vector<std::shared_ptr<ISerializableTag>>{})}};
+
+    std::vector<std::shared_ptr<ISerializable>> args = {
+        std::make_shared<AccountAddress>(AccountAddress::FromHex("0x1")),
+        std::make_shared<U64>(1000),
+    };
+    Sequence scriptArgs(args);
+
+    std::vector<uint8_t> code = {1, 2, 3, 4, 5};  // Some arbitrary bytecode
+
+    // Create a Script object
+    Script script(code, typeTags, scriptArgs);
+
+    // Call GetHashCode() method
+    size_t actualHash = script.GetHashCode();
+
+    // Calculate expected hash
+    size_t expectedHash = 17;
+    for (uint8_t byte : code) {
+        expectedHash = expectedHash * 23 + static_cast<size_t>(byte);
+    }
+    expectedHash = expectedHash * 23 + typeTags.GetHashCode();
+    expectedHash = expectedHash * 23 + scriptArgs.GetHashCode();
+
+    // Check if the resulting hash is as expected
+    EXPECT_EQ(actualHash, expectedHash);
+}
+
+
 TEST(TransactionPayloadSerializeTest, Transaction_PayloadForTransferCoin_Serialize) {
     TagSequence typeTags
         {std::vector<std::shared_ptr<ISerializableTag>>
@@ -529,6 +725,90 @@ TEST(TransactionPayloadSerializeTest, Transaction_PayloadForTransferCoin_Seriali
 
     ASSERT_EQ(expected, actual);
 }
+
+TEST(TransactionPayloadTest, ToString) {
+    // Create a ISerializable object with a known ToString value
+    TagSequence typeTags
+        {std::vector<std::shared_ptr<ISerializableTag>>
+                         {std::make_shared<StructTag>(AccountAddress::FromHex("0x1"), "aptos_coin", "AptosCoin", std::vector<std::shared_ptr<ISerializableTag>>{})}};
+
+    std::vector<std::shared_ptr<ISerializable>> args = {
+        std::make_shared<AccountAddress>(AccountAddress::FromHex("0x1")),
+        std::make_shared<U64>(1000),
+    };
+    Sequence txnArgs(args);
+
+    ModuleId moduleId(AccountAddress::FromHex("0x1"), "coin");
+    EntryFunction payload = EntryFunction::Natural(moduleId, "transfer", typeTags, txnArgs);
+
+    // Create a TransactionPayload object with the known ToString value
+    TransactionPayload transactionPayload(std::make_shared<EntryFunction>(payload));
+
+    // Call the ToString method
+    std::string returned_str = transactionPayload.ToString();
+
+    // Known value is updated to the expected string
+    std::string known_value = "0x1::coin::transfer<0x1::aptos_coin::AptosCoin>(000000000000000000000000000000012323000000)";
+
+    // Assert that the returned string is the same as the string representation of the known ToString value
+    EXPECT_EQ(returned_str, known_value);
+}
+
+TEST(TransactionPayloadTest, EqualsMethod) {
+    // Create two identical TransactionPayload objects
+    TagSequence typeTags
+        {std::vector<std::shared_ptr<ISerializableTag>>
+                         {std::make_shared<StructTag>(AccountAddress::FromHex("0x1"), "aptos_coin", "AptosCoin", std::vector<std::shared_ptr<ISerializableTag>>{})}};
+
+    std::vector<std::shared_ptr<ISerializable>> args = {
+        std::make_shared<AccountAddress>(AccountAddress::FromHex("0x1")),
+        std::make_shared<U64>(1000),
+    };
+    Sequence txnArgs(args);
+
+    ModuleId moduleId(AccountAddress::FromHex("0x1"), "coin");
+    EntryFunction payload = EntryFunction::Natural(moduleId, "transfer", typeTags, txnArgs);
+
+    TransactionPayload payload1(std::make_shared<EntryFunction>(payload));
+    TransactionPayload payload2(std::make_shared<EntryFunction>(payload));
+
+    // Assert that the two payloads are equal
+    EXPECT_TRUE(payload1.Equals(payload2));
+
+    // Now alter one of the payloads
+    ModuleId moduleIdDifferent(AccountAddress::FromHex("0x2"), "coin");
+    EntryFunction payloadDifferent = EntryFunction::Natural(moduleIdDifferent, "transfer", typeTags, txnArgs);
+    TransactionPayload payload3(std::make_shared<EntryFunction>(payloadDifferent));
+
+    // Assert that the payloads are no longer equal
+    EXPECT_FALSE(payload1.Equals(payload3));
+}
+
+TEST(TransactionPayloadTest, GetHashCodeMethod) {
+     // Create a TransactionPayload object
+    TagSequence typeTags
+        {std::vector<std::shared_ptr<ISerializableTag>>
+                         {std::make_shared<StructTag>(AccountAddress::FromHex("0x1"), "aptos_coin", "AptosCoin", std::vector<std::shared_ptr<ISerializableTag>>{})}};
+
+    std::vector<std::shared_ptr<ISerializable>> args = {
+        std::make_shared<AccountAddress>(AccountAddress::FromHex("0x1")),
+        std::make_shared<U64>(1000),
+    };
+    Sequence txnArgs(args);
+
+    ModuleId moduleId(AccountAddress::FromHex("0x1"), "coin");
+    EntryFunction entryFunction1 = EntryFunction::Natural(moduleId, "transfer", typeTags, txnArgs);
+
+    TransactionPayload payload1(std::make_shared<EntryFunction>(entryFunction1));
+
+    // Create another identical TransactionPayload object
+    EntryFunction entryFunction2 = EntryFunction::Natural(moduleId, "transfer", typeTags, txnArgs);
+    TransactionPayload payload2(std::make_shared<EntryFunction>(entryFunction2));
+
+    // Given the same input, GetHashCode should output the same hash
+    EXPECT_EQ(payload1.GetHashCode(), payload2.GetHashCode());
+}
+
 
 TEST(RawTransactionSerializeTest, RawTransaction_TransferCoin_Serialize) {
     TagSequence typeTags

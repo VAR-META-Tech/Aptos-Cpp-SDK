@@ -1141,6 +1141,31 @@ TEST(U16Test, GetHashCode) {
     EXPECT_EQ(hash_code, expected_hash_code);
 }
 
+TEST(U16Test, Deserialize) {
+    // Create a known uint64_t value
+    uint16_t known_value = 1234567890123456789;
+
+    // Convert the known_value to little-endian byte order
+    uint16_t little_endian_value = boost::endian::native_to_little(known_value);
+
+    // Prepare the byte data
+    std::vector<uint8_t> data(sizeof(uint16_t));
+    std::memcpy(data.data(), &little_endian_value, sizeof(uint16_t));
+
+    // Call the Deserialize method and ensure it does not throw exception
+    uint16_t deserialized_value;
+    ASSERT_NO_THROW(deserialized_value = U16::Deserialize(data));
+
+    // Check that the deserialized value is equal to the known value
+    ASSERT_EQ(deserialized_value, known_value);
+
+    // Test with not enough bytes
+    data.resize(sizeof(uint16_t) - 1);
+
+    // Call the Deserialize method and ensure it throws an exception
+    ASSERT_THROW(U16::Deserialize(data), std::runtime_error);
+}
+
 TEST(U128Test, Serialize) {
     // Create a U128 object with a known value
     CryptoPP::Integer known_value("1234567890123456789012345678901234567890");
