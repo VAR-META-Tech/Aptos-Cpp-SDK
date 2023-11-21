@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class AptopsDemo : ModuleRules
+public class AptosUI : ModuleRules
 {
-	public AptopsDemo(ReadOnlyTargetRules Target) : base(Target)
+	public AptosUI(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	

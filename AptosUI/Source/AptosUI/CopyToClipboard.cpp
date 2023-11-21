@@ -2,7 +2,7 @@
 
 #include "CopyToClipboard.h"
 
-void UCopyToClipboard::CopyText(FString text)
+void UCopyToClipboard::CopyStringToClipboard(FString text)
 {
     FPlatformMisc::ClipboardCopy(*text);
 }

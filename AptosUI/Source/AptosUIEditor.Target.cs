@@ -3,13 +3,13 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class AptopsDemoTarget : TargetRules
+public class AptosUIEditorTarget : TargetRules
 {
-	public AptopsDemoTarget(TargetInfo Target) : base(Target)
+	public AptosUIEditorTarget(TargetInfo Target) : base(Target)
 	{
-		Type = TargetType.Game;
+		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V4;
 
-		ExtraModuleNames.AddRange( new string[] { "AptopsDemo" } );
+		ExtraModuleNames.AddRange( new string[] { "AptosUI" } );
 	}
 }

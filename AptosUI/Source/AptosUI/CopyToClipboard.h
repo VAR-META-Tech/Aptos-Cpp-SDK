@@ -10,9 +10,9 @@
  *
  */
 UCLASS()
-class APTOPSDEMO_API UCopyToClipboard : public UBlueprintFunctionLibrary
+class APTOSUI_API UCopyToClipboard : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Copy String To Clipboard"), Category = "AddStringToClipboard")
-	static void CopyText(FString text);
+	static void CopyStringToClipboard(FString text);
 };
