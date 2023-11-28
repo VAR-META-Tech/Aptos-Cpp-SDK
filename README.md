@@ -1,5 +1,9 @@
 # Aptos-Cpp-SDK
 
+#For build source code on MacOS
+To install dependency library:
+brew install boost cpprestsdk sec256k1 libbitcoin-system doxygen llvm lcov nlohmann-json crytopp cmake googletest 
+
 #For run code coverage on MacOS
 
 First of all, make sure you have llvm and lcov installed. You can install them using brew:
