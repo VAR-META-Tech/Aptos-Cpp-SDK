@@ -5,3 +5,7 @@
 void UUIController::OnCreateWalletClicked()
 {
 }
+
+void UUIController::OnImportWalletClicked()
+{
+}

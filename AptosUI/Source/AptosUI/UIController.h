@@ -15,4 +15,6 @@ class APTOSUI_API UUIController : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnCreateWallet Clicked"), Category = "UIController")
 	static void OnCreateWalletClicked();
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnImportWallet Clicked"), Category = "UIController")
+	static void OnImportWalletClicked();
 };
