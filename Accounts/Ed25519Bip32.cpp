@@ -43,23 +43,10 @@ namespace Aptos::Accounts
     {
         boost::regex regex("^m(\\/[0-9]+')+$");
 
-        if (!boost::regex_match(path, regex))
+        if (!boost::regex_match(path, regex)){
             return false;
-
-        std::vector<std::string> parts;
-        boost::split(parts, path, boost::is_any_of("/"));
-
-        if (parts.size() < 2)
-            return false;
-
-        parts.erase(parts.begin()); // Remove the "m" part
-        for (auto &part : parts)
-        {
-            boost::replace_all(part, "'", "");
-            if (!boost::algorithm::all(part, boost::algorithm::is_digit()))
-                return false;
         }
-
+            
         return true;
     }
 

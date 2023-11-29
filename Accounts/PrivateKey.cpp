@@ -73,10 +73,10 @@ namespace Aptos::Accounts
         _key = key;
     }
 
-    PrivateKey::PrivateKey(std::array<CryptoPP::byte, KeyLength> privateKey)
-    {
-        // todo
-    }
+    // PrivateKey::PrivateKey(std::array<CryptoPP::byte, KeyLength> privateKey)
+    // {
+    //     // todo
+    // }
 
     PrivateKey PrivateKey::FromHex(std::string key)
     {

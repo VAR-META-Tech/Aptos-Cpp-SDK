@@ -941,8 +941,8 @@ TEST(MultiPublicKeyTest, ToString)
 
 TEST(Ed25519Bip32Test,IsValidPath)
 {
-    bool result = Ed25519Bip32::IsValidPath("");
-    ASSERT_FALSE(result);
+    bool result = Ed25519Bip32::IsValidPath("m/44'/0'/0'");
+    ASSERT_TRUE(result);
 }
 
 TEST(Ed25519Bip32Test,DerivePath)
@@ -950,4 +950,30 @@ TEST(Ed25519Bip32Test,DerivePath)
     std::vector<uint8_t> seed;
     Ed25519Bip32 ed25519Bip32(seed);
     ASSERT_THROW(ed25519Bip32.DerivePath(""),std::invalid_argument);
+}
+
+TEST(Ed25519Bip32Test,InValidPath)
+{
+
+    // Test with a path that doesn't start with 'm'
+    EXPECT_FALSE(Ed25519Bip32::IsValidPath("44'/0'/0'"));
+
+    // Test with a path that doesn't have any slashes after 'm'
+    EXPECT_FALSE(Ed25519Bip32::IsValidPath("m"));
+
+    // Test with a path that has a non-numeric path component
+    EXPECT_FALSE(Ed25519Bip32::IsValidPath("m/44'/0'/a'"));
+
+    // Test with an empty path
+    EXPECT_FALSE(Ed25519Bip32::IsValidPath(""));
+
+    // Test with a path that has a part with no digits
+    EXPECT_FALSE(Ed25519Bip32::IsValidPath("m/'/0'/0'"));
+}
+
+TEST(PrivateKey, keyEmpty){
+    PrivateKey privateKey(g_privateKeyHex);
+    CryptoPP::SecByteBlock value;
+    EXPECT_ANY_THROW(privateKey.KeyBytes(value));
+    EXPECT_ANY_THROW( PrivateKey privateKey2(value));
 }
