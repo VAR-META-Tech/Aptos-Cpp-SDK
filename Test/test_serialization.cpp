@@ -1662,13 +1662,13 @@ TEST(SerializationTest, SerializeU16) {
     // Check that the serialized bytes match the known value
     ASSERT_EQ(serialized_bytes.size(), 2);
 
-    // Test for big-endian order if little-endian order test failed
+    // Test for little-endian order
     for (int i = 0; i < 2; i++) {
-        uint8_t expected_byte = static_cast<uint8_t>((known_value >> (8*(1-i))) & 0xFF);
+        uint8_t expected_byte = static_cast<uint8_t>((known_value >> (8 * i)) & 0xFF);
         ASSERT_EQ(serialized_bytes[i], expected_byte)
             << "Failed at index " << i << ". "
-            << "Expected: " << (int) expected_byte << ", "
-            << "but was: " << (int) serialized_bytes[i] << ".";
+            << "Expected: " << static_cast<int>(expected_byte) << ", "
+            << "but was: " << static_cast<int>(serialized_bytes[i]) << ".";
     }
 }
 
@@ -1787,6 +1787,7 @@ TEST(ISerializableTag, DeserializeTagU8)
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
     ASSERT_EQ(std::dynamic_pointer_cast<U8>(result)->Variant(),TypeTag::U8);
     ASSERT_EQ(std::dynamic_pointer_cast<U8>(result)->GetValue(), 1);
+    ASSERT_EQ(result->ISerializableTag::ToString(), "ISerializableTag (U8)");
 }
 
 TEST(ISerializableTag, DeserializeTagU16)
@@ -1800,6 +1801,7 @@ TEST(ISerializableTag, DeserializeTagU16)
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
     ASSERT_EQ(std::dynamic_pointer_cast<U16>(result)->Variant(),TypeTag::U16);
     ASSERT_EQ(std::dynamic_pointer_cast<U16>(result)->GetValue(), 500);
+    ASSERT_EQ(result->ISerializableTag::ToString(), "ISerializableTag (U16)");
 }
 
 TEST(ISerializableTag, DeserializeTagU32)
@@ -1815,6 +1817,7 @@ TEST(ISerializableTag, DeserializeTagU32)
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
     ASSERT_EQ(std::dynamic_pointer_cast<U32>(result)->Variant(),TypeTag::U32);
     ASSERT_EQ(std::dynamic_pointer_cast<U32>(result)->GetValue(), 1);
+    ASSERT_EQ(result->ISerializableTag::ToString(), "ISerializableTag (U32)");
 }
 
 TEST(ISerializableTag, DeserializeTagU64)
@@ -1830,6 +1833,7 @@ TEST(ISerializableTag, DeserializeTagU64)
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
     ASSERT_EQ(std::dynamic_pointer_cast<U64>(result)->Variant(),TypeTag::U64);
     ASSERT_EQ(std::dynamic_pointer_cast<U64>(result)->GetValue(), 1);
+    ASSERT_EQ(result->ISerializableTag::ToString(), "ISerializableTag (U64)");
 }
 
 TEST(ISerializableTag, DeserializeTagU128)
@@ -1845,6 +1849,7 @@ TEST(ISerializableTag, DeserializeTagU128)
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
     ASSERT_EQ(std::dynamic_pointer_cast<U128>(result)->Variant(),TypeTag::U128);
     ASSERT_EQ(std::dynamic_pointer_cast<U128>(result)->GetValue(), 1);
+    ASSERT_EQ(result->ISerializableTag::ToString(), "ISerializableTag (U128)");
 }
 
 TEST(ISerializableTag, DeserializeTagU256)
@@ -1860,6 +1865,7 @@ TEST(ISerializableTag, DeserializeTagU256)
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
     ASSERT_EQ(std::dynamic_pointer_cast<U256>(result)->Variant(),TypeTag::U256);
     ASSERT_EQ(std::dynamic_pointer_cast<U256>(result)->GetValue(), 1);
+    ASSERT_EQ(result->ISerializableTag::ToString(), "ISerializableTag (U256)");
 }
 
 TEST(ISerializableTag, DeserializeTagAccountAddress)
@@ -1882,4 +1888,5 @@ TEST(ISerializableTag, DeserializeTagAccountAddress)
     Deserialization d(res);
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
     ASSERT_EQ(std::dynamic_pointer_cast<AccountAddress>(result)->Variant(),TypeTag::ACCOUNT_ADDRESS);
+    ASSERT_EQ(result->ISerializableTag::ToString(), "ISerializableTag (ACCOUNT_ADDRESS)");
 }

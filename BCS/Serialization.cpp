@@ -115,8 +115,8 @@ namespace Aptos::BCS
     {
         uint8_t lower = num & 0xFF;
         uint8_t upper = (num >> 8) & 0xFF;
-        buffer.push_back(upper);
-        buffer.push_back(lower);
+        buffer.push_back(lower); // Store the lower byte first (little-endian order)
+        buffer.push_back(upper); // Store the upper byte second
         return *this;
     }
 

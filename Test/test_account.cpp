@@ -881,6 +881,64 @@ TEST(MultiEd25519PublicKeyTest, ConstructorSuccessfulInitialization)
     ASSERT_TRUE(multiPublicKey.PublicKeys.size() > 0);
 }
 
+TEST(MultiPublicKeyTest, ConstructorFail)
+{
+    // Setup: Create a vector of PublicKeys and define a valid threshold
+    PublicKey key1(g_publicKeyBytes);
+    PublicKey key2(g_publicKeyHex);
+    std::vector<PublicKey> publicKeys = {};
+    int validThreshold = 15;
+    std::vector<uint8_t> keyBytes;
+
+    ASSERT_THROW(Aptos::Accounts::MultiPublicKey(publicKeys, validThreshold),std::invalid_argument);
+    ASSERT_THROW(Aptos::Accounts::MultiPublicKey::FromBytes(keyBytes),std::invalid_argument);
+}
+
+TEST(MultiPublicKeyTest, NoCheck)
+{
+    // Setup: Create a vector of PublicKeys and define a valid threshold
+    PublicKey key1(g_publicKeyBytes);
+    PublicKey key2(g_publicKeyHex);
+    std::vector<PublicKey> publicKeys = {};
+    int validThreshold = 15;
+    std::vector<uint8_t> keyBytes;
+
+    ASSERT_NO_THROW(Aptos::Accounts::MultiPublicKey(publicKeys, validThreshold, false));
+}
+
+TEST(MultiPublicKeyTest, ConstructorFailThressholdMin)
+{
+    // Setup: Create a vector of PublicKeys and define a valid threshold
+    PublicKey key1(g_publicKeyBytes);
+    PublicKey key2(g_publicKeyHex);
+     std::vector<PublicKey> publicKeys = {key1, key2};
+    int validThreshold = 0;
+     std::vector<uint8_t> keyBytes({
+    88, 110, 60, 141, 68, 125, 118, 121,
+    34, 46, 19, 144, 51, 227, 130, 2,
+    53, 227, 61, 165, 9, 30, 155, 11,
+    184, 241, 161, 18, 207, 12, 143, 245
+});
+     keyBytes.push_back((uint8_t)0);
+
+    ASSERT_THROW(Aptos::Accounts::MultiPublicKey(publicKeys, validThreshold),std::invalid_argument);
+    ASSERT_THROW(Aptos::Accounts::MultiPublicKey::FromBytes(keyBytes),std::invalid_argument);
+}
+
+TEST(MultiPublicKeyTest, ToString)
+{
+    // Setup: Create a vector of PublicKeys and define a valid threshold
+    PublicKey key1(g_publicKeyBytes);
+    PublicKey key2(g_publicKeyHex);
+     std::vector<PublicKey> publicKeys = {key1, key2};
+    int validThreshold = 1;
+
+    Aptos::Accounts::MultiPublicKey multiPublicKey(publicKeys, validThreshold);
+    
+
+    ASSERT_EQ(multiPublicKey.ToString(),"1-of-2 Multi-Ed25519 public key");
+}
+
 TEST(Ed25519Bip32Test,IsValidPath)
 {
     bool result = Ed25519Bip32::IsValidPath("");

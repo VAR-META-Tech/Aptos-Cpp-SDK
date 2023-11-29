@@ -15,7 +15,7 @@ namespace Aptos::BCS
 {
     ScriptArgument::ScriptArgument(ScriptArgumentTypeTag variant, std::shared_ptr<ISerializableTag> value)
     {
-        if (variant < ScriptArgumentTypeTag::U8 || variant > ScriptArgumentTypeTag::BOOL)
+        if (variant < ScriptArgumentTypeTag::U8 || variant > ScriptArgumentTypeTag::U256)
         {
             throw std::invalid_argument("Invalid variant");
         }
