@@ -1,5 +1,6 @@
 #ifndef WALLET_H
 #define WALLET_H
+#define BOOST_ASIO_HAS_STD_INVOKE_RESULT
 #include "../Accounts/Ed25519Bip32.h"
 #include "../Accounts/Account.h"
 #include <bitcoin/system.hpp>

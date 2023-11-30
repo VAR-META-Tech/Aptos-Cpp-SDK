@@ -5,164 +5,165 @@
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ RESTCLIENT\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ RESTCLIENT\_H}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cpprest/http\_client.h>}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cpprest/json.h>}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Model/AccountData.h"{}}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Model/LedgerInfo.h"{}}}
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Model/ResourceCollection.h"{}}}
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}Model/ResponseInfo.h"{}}}
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}Model/AccountResourceCoin.h"{}}}
-\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}Model/TableItemToken/TableItemToken.h"{}}}
-\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}Model/TableItemToken/TableItemTokenMetadata.h"{}}}
-\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}Model/TokenIdRequest.h"{}}}
-\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}../BCS/rawtransaction.h"{}}}
-\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}../BCS/SignedTransaction.h"{}}}
-\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}Model/Transaction.h"{}}}
-\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}Model/ViewRequest.h"{}}}
-\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}../Accounts/Account.h"{}}}
-\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}../BCS/EntryFunction.h"{}}}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{keyword}{namespace\ }Aptos::Rest}
-\DoxyCodeLine{00023\ \{}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_client_config}{ClientConfig}}}
-\DoxyCodeLine{00025\ \ \ \ \ \{}
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ EXPIRATION\_TTL\ =\ 600;}
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ GAS\_UNIT\_PRICE\ =\ 100;}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ MAX\_GAS\_AMOUNT\ =\ 100000;}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ TRANSACTION\_WAIT\_IN\_SECONDS\ =\ 20;\ \textcolor{comment}{//\ Amount\ of\ seconds\ to\ wait\ during\ each\ polling\ cycle.}}
-\DoxyCodeLine{00031\ \ \ \ \ \};}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client}{RestClient}}}
-\DoxyCodeLine{00034\ \ \ \ \ \{}
-\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetEndpoint(\textcolor{keyword}{const}\ std::string\ \&url);}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client}{RestClient}}();}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a4abb9a067dc11c6dc14056e725d4f567}{GetAccount}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::AccountData>,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&accountAddress);}
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_ade335e2b881fcbd023059a911fddb6f2}{GetAccountSequenceNumber}}(std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ callback,\ \textcolor{keyword}{const}\ std::string\ \&accountAddress);}
-\DoxyCodeLine{00067\ }
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a6f57f6a0eccb9a56f333217eacd3d40e}{GetAccountBalance}}(std::function<\textcolor{keywordtype}{void}(AptosRESTModel::AccountResourceCoin::Coin,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&accountAddress);}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a1d184cf5746e1ec444f5baaca1354baa}{GetAccountResource}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keywordtype}{bool},\ \textcolor{keywordtype}{long},\ std::string)>\ callback,}
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&accountAddress,}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&resourceType\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&ledgerVersion\ =\ \textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a64207a8d50733671263df6bd8eeda5e7}{GetAccountResources}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keywordtype}{bool},\ \textcolor{keywordtype}{long},\ std::string)>\ callback,}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&accountAddress,}
-\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&ledgerVersion\ =\ \textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a261328c97168be945407a4f916dbaf22}{GetAccountResourceCollection}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::ResourceCollection>,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&accountAddress,}
-\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&resourceType);}
-\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a8dc992d0be56866d5448f569aad38a3c}{GetTableItemCoin}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::AccountResourceCoin>,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&handle,}
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&keyType,}
-\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&valueType,}
-\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&key);}
-\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a561921488e1fb82581282138378cdc78}{GetTableItem}}(std::function<\textcolor{keywordtype}{void}(std::string)>\ callback,}
-\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&handle,}
-\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&keyType,}
-\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&valueType,}
-\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&key);}
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_aa9f6158f3da351313036b1a150349cd7}{GetTableItemNFT}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::TableItemToken>,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&handle,}
-\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&keyType,}
-\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&valueType,}
-\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AptosRESTModel::TokenIdRequest\ key);}
-\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a46da8c123b4e8dce0c1b62e1f24b0e70}{GetTableItemTokenData}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::TableItemTokenMetadata>,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&handle,}
-\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&keyType,}
-\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&valueType,}
-\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AptosRESTModel::TokenDataId\ key);}
-\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_adac047bd1620633d484e1b6937f82d78}{GetInfo}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::LedgerInfo>,\ AptosRESTModel::ResponseInfo)>\ callback);}
-\DoxyCodeLine{00269\ }
-\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SimulateTransaction(std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_raw_transaction}{RawTransaction}}\ transaction,\ std::vector<uint8\_t>\ publicKey);}
-\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a751e7d378353dc81daacd8b0e699eb92}{SubmitBCSTransaction}}(std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ callback,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_signed_transaction}{SignedTransaction}}\ \&signedTransaction);}
-\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a47d2e16f646950f633544972693f63ef}{View}}(std::function<\textcolor{keywordtype}{void}(std::vector<std::string>,\ AptosRESTModel::ResponseInfo)>\ callback,\ \textcolor{keyword}{const}\ AptosRESTModel::ViewRequest\ \&viewRequest);}
-\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_afd1b5b51df0f34e7356a8a00bcdbb12d}{SubmitTransaction}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::Transaction>,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ sender,}
-\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function}{EntryFunction}}\ entryFunction);}
-\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a417ce9c2945b89c10ab33aa04d9fd71f}{WaitForTransaction}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keywordtype}{bool},\ AptosRESTModel::ResponseInfo)>\ callback,\ \textcolor{keyword}{const}\ std::string\ \&txnHash);}
-\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_aec9ebd0103d2a17229db9ad16afb57e1}{TransactionPending}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keywordtype}{bool},\ AptosRESTModel::ResponseInfo)>\ callback,\ \textcolor{keyword}{const}\ std::string\ \&txnHash);}
-\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ TransactionByHash(std::function<\textcolor{keywordtype}{void}(AptosRESTModel::Transaction,\ AptosRESTModel::ResponseInfo)>\ callback,\ \textcolor{keyword}{const}\ std::string\ \&txnHash);}
-\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CreateBCSSignedTransaction(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<SignedTransaction>)>\ Callback,\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ Sender,\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload}{TransactionPayload}}\ Payload);}
-\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CreateBCSTransaction(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<RawTransaction>)>\ Callback,\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ Sender,\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload}{TransactionPayload}}\ payload);}
-\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a0334dc427fedb3262f3d16798a93a405}{Transfer}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::Transaction>,\ AptosRESTModel::ResponseInfo)>\ callback,\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ sender,\ \textcolor{keyword}{const}\ std::string\ \&to,\ \textcolor{keywordtype}{long}\ amount);}
-\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ BCSTransfer(std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ Callback,\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ Sender,\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ Recipient,\ \textcolor{keywordtype}{int}\ Amount);}
-\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_aa4b7bc399e741949c2d9df0bd4e30745}{EncodeSubmission}}(\textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{const}\ std::string\ \&)>\ \&callback,\ \textcolor{keyword}{const}\ std::string\ \&txnRequestJson);}
-\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a70d5065731bd0e6afc5bc79f1244d9f9}{EncodeSubmissionAsBytes}}(\textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\ \&)>\ \&callback,\ \textcolor{keyword}{const}\ std::string\ \&txnRequestJson);}
-\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_aaca7a3cf5ab19fa267acee19eac1979f}{CreateCollection}}(}
-\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(AptosRESTModel::Transaction,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ sender,}
-\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName,}
-\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionDescription,}
-\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ uri);}
-\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a0ea073dcfba84872417a42f0ad3e3e63}{CreateToken}}(}
-\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(AptosRESTModel::Transaction,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ senderRoyaltyPayeeAddress,}
-\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName,}
-\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ tokenName,}
-\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ description,}
-\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ supply,}
-\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ max,}
-\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ uri,}
-\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ royaltyPointsPerMillion);}
-\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_af21c61d50baccae85063c8ac373358b9}{OfferToken}}(}
-\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::Transaction>,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ account,}
-\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ receiver,}
-\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ creator,}
-\DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName,}
-\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ tokenName,}
-\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ amount,}
-\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ propertyVersion);}
-\DoxyCodeLine{00483\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a8d2fe166e0d89aeafe6d93d31b14e5ff}{ClaimToken}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::Transaction>,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ account,}
-\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ sender,}
-\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ creator,}
-\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName,}
-\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ tokenName,}
-\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ propertyVersion);}
-\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_af5b79a7b149f83c0de754b370b0d103b}{GetToken}}(}
-\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(AptosRESTModel::TableItemToken,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ ownerAddress,}
-\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ creatorAddress,}
-\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName,}
-\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ tokenName,}
-\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ propertyVersion);}
-\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a6a23a13667b9bf80013fd783f0d68e16}{GetTokenBalance}}(}
-\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::string)>\ callback,}
-\DoxyCodeLine{00521\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ ownerAddress,}
-\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ creatorAddress,}
-\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName,}
-\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ tokenName,}
-\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ propertyVersion);}
-\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a380972f75453cd720c814537184c8cad}{GetTokenData}}(}
-\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(AptosRESTModel::TableItemTokenMetadata,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ creator,}
-\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName,}
-\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ tokenName,}
-\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ propertyVersion);}
-\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a8c861376c7bb79ef9621ae7ba3dfa61c}{GetCollection}}(}
-\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::string)>\ callback,}
-\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ creator,}
-\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName);}
-\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ TransferObject(}
-\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ callback,}
-\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ Owner,}
-\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_object}{Object}},}
-\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ To);}
-\DoxyCodeLine{00601\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a1d184cf5746e1ec444f5baaca1354baa}{GetAccountResource}}(}
-\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(\textcolor{keywordtype}{bool},\ \textcolor{keywordtype}{long},\ std::string)>\ callback,}
-\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ accountAddress,}
-\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ resourceType);}
-\DoxyCodeLine{00605\ }
-\DoxyCodeLine{00606\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ web::uri\ endpoint;}
-\DoxyCodeLine{00608\ \ \ \ \ \};}
-\DoxyCodeLine{00609\ \}}
-\DoxyCodeLine{00610\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ RESTCLIENT\_H}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ BOOST\_ASIO\_HAS\_STD\_INVOKE\_RESULT}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cpprest/http\_client.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cpprest/json.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Model/AccountData.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Model/LedgerInfo.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}Model/ResourceCollection.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}Model/ResponseInfo.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}Model/AccountResourceCoin.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}Model/TableItemToken/TableItemToken.h"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}Model/TableItemToken/TableItemTokenMetadata.h"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}Model/TokenIdRequest.h"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}../BCS/rawtransaction.h"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}../BCS/SignedTransaction.h"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}Model/Transaction.h"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}Model/ViewRequest.h"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}../Accounts/Account.h"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}../BCS/EntryFunction.h"{}}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{namespace\ }Aptos::Rest}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_client_config}{ClientConfig}}}
+\DoxyCodeLine{00026\ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ EXPIRATION\_TTL\ =\ 600;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ GAS\_UNIT\_PRICE\ =\ 100;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ MAX\_GAS\_AMOUNT\ =\ 100000;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ TRANSACTION\_WAIT\_IN\_SECONDS\ =\ 20;\ \textcolor{comment}{//\ Amount\ of\ seconds\ to\ wait\ during\ each\ polling\ cycle.}}
+\DoxyCodeLine{00032\ \ \ \ \ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client}{RestClient}}}
+\DoxyCodeLine{00035\ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetEndpoint(\textcolor{keyword}{const}\ std::string\ \&url);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client}{RestClient}}();}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a4abb9a067dc11c6dc14056e725d4f567}{GetAccount}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::AccountData>,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&accountAddress);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_ade335e2b881fcbd023059a911fddb6f2}{GetAccountSequenceNumber}}(std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ callback,\ \textcolor{keyword}{const}\ std::string\ \&accountAddress);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a6f57f6a0eccb9a56f333217eacd3d40e}{GetAccountBalance}}(std::function<\textcolor{keywordtype}{void}(AptosRESTModel::AccountResourceCoin::Coin,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&accountAddress);}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a1d184cf5746e1ec444f5baaca1354baa}{GetAccountResource}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keywordtype}{bool},\ \textcolor{keywordtype}{long},\ std::string)>\ callback,}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&accountAddress,}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&resourceType\ =\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&ledgerVersion\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a64207a8d50733671263df6bd8eeda5e7}{GetAccountResources}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keywordtype}{bool},\ \textcolor{keywordtype}{long},\ std::string)>\ callback,}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&accountAddress,}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&ledgerVersion\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a261328c97168be945407a4f916dbaf22}{GetAccountResourceCollection}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::ResourceCollection>,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&accountAddress,}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&resourceType);}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a8dc992d0be56866d5448f569aad38a3c}{GetTableItemCoin}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::AccountResourceCoin>,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&handle,}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&keyType,}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&valueType,}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&key);}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a561921488e1fb82581282138378cdc78}{GetTableItem}}(std::function<\textcolor{keywordtype}{void}(std::string)>\ callback,}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&handle,}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&keyType,}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&valueType,}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&key);}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_aa9f6158f3da351313036b1a150349cd7}{GetTableItemNFT}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::TableItemToken>,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&handle,}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&keyType,}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&valueType,}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AptosRESTModel::TokenIdRequest\ key);}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a46da8c123b4e8dce0c1b62e1f24b0e70}{GetTableItemTokenData}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::TableItemTokenMetadata>,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&handle,}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&keyType,}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&valueType,}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AptosRESTModel::TokenDataId\ key);}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_adac047bd1620633d484e1b6937f82d78}{GetInfo}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::LedgerInfo>,\ AptosRESTModel::ResponseInfo)>\ callback);}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SimulateTransaction(std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_raw_transaction}{RawTransaction}}\ transaction,\ std::vector<uint8\_t>\ publicKey);}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a751e7d378353dc81daacd8b0e699eb92}{SubmitBCSTransaction}}(std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ callback,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_signed_transaction}{SignedTransaction}}\ \&signedTransaction);}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a47d2e16f646950f633544972693f63ef}{View}}(std::function<\textcolor{keywordtype}{void}(std::vector<std::string>,\ AptosRESTModel::ResponseInfo)>\ callback,\ \textcolor{keyword}{const}\ AptosRESTModel::ViewRequest\ \&viewRequest);}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_afd1b5b51df0f34e7356a8a00bcdbb12d}{SubmitTransaction}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::Transaction>,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ sender,}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function}{EntryFunction}}\ entryFunction);}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a417ce9c2945b89c10ab33aa04d9fd71f}{WaitForTransaction}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keywordtype}{bool},\ AptosRESTModel::ResponseInfo)>\ callback,\ \textcolor{keyword}{const}\ std::string\ \&txnHash);}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_aec9ebd0103d2a17229db9ad16afb57e1}{TransactionPending}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keywordtype}{bool},\ AptosRESTModel::ResponseInfo)>\ callback,\ \textcolor{keyword}{const}\ std::string\ \&txnHash);}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ TransactionByHash(std::function<\textcolor{keywordtype}{void}(AptosRESTModel::Transaction,\ AptosRESTModel::ResponseInfo)>\ callback,\ \textcolor{keyword}{const}\ std::string\ \&txnHash);}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CreateBCSSignedTransaction(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<SignedTransaction>)>\ Callback,\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ Sender,\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload}{TransactionPayload}}\ Payload);}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CreateBCSTransaction(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<RawTransaction>)>\ Callback,\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ Sender,\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload}{TransactionPayload}}\ payload);}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a0334dc427fedb3262f3d16798a93a405}{Transfer}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::Transaction>,\ AptosRESTModel::ResponseInfo)>\ callback,\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ sender,\ \textcolor{keyword}{const}\ std::string\ \&to,\ \textcolor{keywordtype}{long}\ amount);}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ BCSTransfer(std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ Callback,\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ Sender,\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ Recipient,\ \textcolor{keywordtype}{int}\ Amount);}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_aa4b7bc399e741949c2d9df0bd4e30745}{EncodeSubmission}}(\textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{const}\ std::string\ \&)>\ \&callback,\ \textcolor{keyword}{const}\ std::string\ \&txnRequestJson);}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a70d5065731bd0e6afc5bc79f1244d9f9}{EncodeSubmissionAsBytes}}(\textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\ \&)>\ \&callback,\ \textcolor{keyword}{const}\ std::string\ \&txnRequestJson);}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_aaca7a3cf5ab19fa267acee19eac1979f}{CreateCollection}}(}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(AptosRESTModel::Transaction,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ sender,}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName,}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionDescription,}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ uri);}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a0ea073dcfba84872417a42f0ad3e3e63}{CreateToken}}(}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(AptosRESTModel::Transaction,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ senderRoyaltyPayeeAddress,}
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName,}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ tokenName,}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ description,}
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ supply,}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ max,}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ uri,}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ royaltyPointsPerMillion);}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_af21c61d50baccae85063c8ac373358b9}{OfferToken}}(}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::Transaction>,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ account,}
+\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ receiver,}
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ creator,}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName,}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ tokenName,}
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ amount,}
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ propertyVersion);}
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a8d2fe166e0d89aeafe6d93d31b14e5ff}{ClaimToken}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<AptosRESTModel::Transaction>,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ account,}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ sender,}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ creator,}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName,}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ tokenName,}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ propertyVersion);}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_af5b79a7b149f83c0de754b370b0d103b}{GetToken}}(}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(AptosRESTModel::TableItemToken,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ ownerAddress,}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ creatorAddress,}
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName,}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ tokenName,}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ propertyVersion);}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a6a23a13667b9bf80013fd783f0d68e16}{GetTokenBalance}}(}
+\DoxyCodeLine{00521\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::string)>\ callback,}
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ ownerAddress,}
+\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ creatorAddress,}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName,}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ tokenName,}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ propertyVersion);}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a380972f75453cd720c814537184c8cad}{GetTokenData}}(}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(AptosRESTModel::TableItemTokenMetadata,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ creator,}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName,}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ tokenName,}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ propertyVersion);}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a8c861376c7bb79ef9621ae7ba3dfa61c}{GetCollection}}(}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::string)>\ callback,}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ creator,}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ collectionName);}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ TransferObject(}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ Owner,}
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_object}{Object}},}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ To);}
+\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a1d184cf5746e1ec444f5baaca1354baa}{GetAccountResource}}(}
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(\textcolor{keywordtype}{bool},\ \textcolor{keywordtype}{long},\ std::string)>\ callback,}
+\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ accountAddress,}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ resourceType);}
+\DoxyCodeLine{00606\ }
+\DoxyCodeLine{00607\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00608\ \ \ \ \ \ \ \ \ web::uri\ endpoint;}
+\DoxyCodeLine{00609\ \ \ \ \ \};}
+\DoxyCodeLine{00610\ \}}
+\DoxyCodeLine{00611\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ RESTCLIENT\_H}}
 
 \end{DoxyCode}

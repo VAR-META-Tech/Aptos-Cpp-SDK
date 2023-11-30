@@ -1,6 +1,7 @@
 #ifndef REQUESTCLIENT_H
 #define REQUESTCLIENT_H
 
+#define BOOST_ASIO_HAS_STD_INVOKE_RESULT
 #include <cpprest/http_client.h>
 #include <cpprest/uri.h>
 

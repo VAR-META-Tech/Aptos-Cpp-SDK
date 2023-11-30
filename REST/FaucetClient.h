@@ -1,6 +1,7 @@
 #ifndef FAUCETCLIENT_H
 #define FAUCETCLIENT_H
 
+#define BOOST_ASIO_HAS_STD_INVOKE_RESULT
 #include <functional>
 #include <string>
 #include <cpprest/http_client.h>

@@ -1,6 +1,7 @@
 #ifndef RESTCLIENT_H
 #define RESTCLIENT_H
 
+#define BOOST_ASIO_HAS_STD_INVOKE_RESULT
 #include <cpprest/http_client.h>
 #include <cpprest/json.h>
 #include <memory>

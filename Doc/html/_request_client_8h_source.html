@@ -84,23 +84,24 @@ $(document).ready(function() { init_codefold(0); });
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef REQUESTCLIENT_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define REQUESTCLIENT_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;cpprest/http_client.h&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;cpprest/uri.h&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span>Aptos::Rest</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
-<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_aptos_1_1_rest_1_1_request_client.html">   12</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_aptos_1_1_rest_1_1_request_client.html">RequestClient</a></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keyword">static</span> web::http::http_request <a class="code hl_function" href="class_aptos_1_1_rest_1_1_request_client.html#a2f268b1fa9ec72128f12b4b41cdd3a03">SubmitRequest</a>(web::http::uri uri, web::http::method method = web::http::methods::GET);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keyword">static</span> utility::string_t <a class="code hl_function" href="class_aptos_1_1_rest_1_1_request_client.html#ac9d957d6c742a2ebb817d600e1932b7f">GetAptosHeaderValue</a>();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    };</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#define BOOST_ASIO_HAS_STD_INVOKE_RESULT</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;cpprest/http_client.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;cpprest/uri.h&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span>Aptos::Rest</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_aptos_1_1_rest_1_1_request_client.html">   13</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_aptos_1_1_rest_1_1_request_client.html">RequestClient</a></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keyword">static</span> web::http::http_request <a class="code hl_function" href="class_aptos_1_1_rest_1_1_request_client.html#a2f268b1fa9ec72128f12b4b41cdd3a03">SubmitRequest</a>(web::http::uri uri, web::http::method method = web::http::methods::GET);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keyword">static</span> utility::string_t <a class="code hl_function" href="class_aptos_1_1_rest_1_1_request_client.html#ac9d957d6c742a2ebb817d600e1932b7f">GetAptosHeaderValue</a>();</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    };</div>
 </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>}</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif </span><span class="comment">// REQUESTCLIENT_H</span></div>
-<div class="ttc" id="aclass_aptos_1_1_rest_1_1_request_client_html"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_request_client.html">Aptos::Rest::RequestClient</a></div><div class="ttdoc">UnityWebRequest wrapper client.</div><div class="ttdef"><b>Definition</b> RequestClient.h:13</div></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif </span><span class="comment">// REQUESTCLIENT_H</span></div>
+<div class="ttc" id="aclass_aptos_1_1_rest_1_1_request_client_html"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_request_client.html">Aptos::Rest::RequestClient</a></div><div class="ttdoc">UnityWebRequest wrapper client.</div><div class="ttdef"><b>Definition</b> RequestClient.h:14</div></div>
 <div class="ttc" id="aclass_aptos_1_1_rest_1_1_request_client_html_a2f268b1fa9ec72128f12b4b41cdd3a03"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_request_client.html#a2f268b1fa9ec72128f12b4b41cdd3a03">Aptos::Rest::RequestClient::SubmitRequest</a></div><div class="ttdeci">static web::http::http_request SubmitRequest(web::http::uri uri, web::http::method method=web::http::methods::GET)</div><div class="ttdoc">Get the UnityWebRequest object for the given path, default to GET method.</div><div class="ttdef"><b>Definition</b> RequestClient.cpp:7</div></div>
 <div class="ttc" id="aclass_aptos_1_1_rest_1_1_request_client_html_ac9d957d6c742a2ebb817d600e1932b7f"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_request_client.html#ac9d957d6c742a2ebb817d600e1932b7f">Aptos::Rest::RequestClient::GetAptosHeaderValue</a></div><div class="ttdeci">static utility::string_t GetAptosHeaderValue()</div><div class="ttdoc">Get the default Aptos header value.</div><div class="ttdef"><b>Definition</b> RequestClient.cpp:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
