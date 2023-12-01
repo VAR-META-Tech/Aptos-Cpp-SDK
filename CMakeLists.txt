@@ -40,7 +40,7 @@ if (NOT CryptoPP_LIB)
     message(FATAL_ERROR "Crypto++ library not found")
 endif()
 
-add_library(Aptos
+add_library(Aptos SHARED
         BCS/Deserialization.cpp
         BCS/Deserialization.h
         BCS/Serialization.cpp
@@ -188,8 +188,9 @@ add_library(Aptos
         Accounts/Ed25519Bip32.h
         Accounts/Ed25519Bip32.cpp
 )
-
+target_compile_options(Aptos PRIVATE -fPIC)
 find_package(nlohmann_json 3.2.0 REQUIRED)
+set(BOOST_ROOT /usr/local)
 find_package(Boost REQUIRED program_options regex)
 
 target_link_libraries(Aptos PRIVATE nlohmann_json::nlohmann_json)
@@ -202,13 +203,16 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   /opt/homebrew/Cellar/libbitcoin-system/3.8.0/lib/libbitcoin-system.a
   )
 else()
-  target_link_libraries(Aptos PRIVATE
+  target_link_libraries(Aptos PUBLIC
     Boost::boost 
     Boost::program_options
     Boost::regex
     secp256k1
     bitcoin-system
+    cpprest
+    gmp
     )
+    include_directories(${Boost_INCLUDE_DIRS})
 endif()
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
@@ -225,11 +229,11 @@ add_executable(test_utils Test/test_utils.cpp)
 add_executable(test_wallet Test/test_wallet.cpp)
 add_executable(test_transaction_serialization Test/test_transaction_serialization.cpp)
 
-target_link_libraries(test_serialization ${GTEST_BOTH_LIBRARIES} pthread Aptos)
-target_link_libraries(test_account ${GTEST_BOTH_LIBRARIES} pthread Aptos)
-target_link_libraries(test_utils ${GTEST_BOTH_LIBRARIES} pthread Aptos)
-target_link_libraries(test_wallet ${GTEST_BOTH_LIBRARIES} pthread Aptos)
-target_link_libraries(test_transaction_serialization ${GTEST_BOTH_LIBRARIES} pthread Aptos)
+target_link_libraries(test_serialization ${GTEST_BOTH_LIBRARIES} pthread Aptos cpprest)
+target_link_libraries(test_account ${GTEST_BOTH_LIBRARIES} pthread Aptos cpprest)
+target_link_libraries(test_utils ${GTEST_BOTH_LIBRARIES} pthread Aptos cpprest)
+target_link_libraries(test_wallet ${GTEST_BOTH_LIBRARIES} pthread bitcoin-system Aptos cpprest )
+target_link_libraries(test_transaction_serialization ${GTEST_BOTH_LIBRARIES} pthread Aptos cpprest)
 
 add_test(NAME SerializationTest COMMAND test_serialization)
 add_test(NAME AccountTest COMMAND test_account)
@@ -248,7 +252,7 @@ add_executable(runAllTests
     Test/test_transaction_serialization.cpp 
     Test/test_serialization.cpp
 )
-target_link_libraries(runAllTests ${GTEST_LIBRARIES} GTest::gtest_main pthread Aptos)
+target_link_libraries(runAllTests ${GTEST_LIBRARIES} GTest::gtest_main pthread Aptos cpprest)
 
 if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_custom_target(coverage
@@ -258,3 +262,14 @@ if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     COMMAND xcrun llvm-cov report ${CMAKE_CURRENT_BINARY_DIR}/runAllTests -instr-profile=default.profdata > coverage_summary.txt
   )
 endif()
+
+add_library(AptosUILogic SHARED
+    AptosUILogic/uicontrollerlogic.h
+    AptosUILogic/uicontrollerlogic.cpp
+)
+target_link_libraries(AptosUILogic ${GTEST_LIBRARIES} GTest::gtest_main pthread Aptos cpprest)
+
+add_executable(AptosUILogicTest
+    AptosUILogic/main.cpp
+)
+target_link_libraries(AptosUILogicTest ${GTEST_LIBRARIES} GTest::gtest_main pthread Aptos cpprest AptosUILogic)

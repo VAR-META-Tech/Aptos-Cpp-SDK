@@ -17,11 +17,11 @@
 
 namespace Aptos::Rest
 {
-    std::string Object::StructTag = "0x1::object::ObjectCore";
-    std::string Collection::StructTag = "0x4::collection::Collection";
-    std::string Royalty::StructTag = "0x4::royalty::Royalty";
-    std::string Token::StructTag = "0x4::token::Token";
-    // std::string PropertyMap::StructTag = "0x4::property_map::PropertyMap";
+    const std::string Object::StructTag = "0x1::object::ObjectCore";
+    const std::string Collection::StructTag = "0x4::collection::Collection";
+    const std::string Royalty::StructTag = "0x4::royalty::Royalty";
+    const std::string Token::StructTag = "0x4::token::Token";
+    const std::string PropertyMap::StructTag = "0x4::property_map::PropertyMap";
 
     std::map<std::string, ReadObject::FuncValue *> ReadObject::ResourceMap = {
         {Collection::StructTag, &Collection::Parse},

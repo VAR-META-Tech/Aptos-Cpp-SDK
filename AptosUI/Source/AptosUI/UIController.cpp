@@ -2,6 +2,8 @@
 
 #include "UIController.h"
 
+AptosUILogic::UIController* UUIController::m_controller = AptosUILogic::createUiController();
+
 void UUIController::OnCreateWalletClicked()
 {
 }

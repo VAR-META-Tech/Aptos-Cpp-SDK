@@ -32,7 +32,7 @@ namespace Aptos::Rest
         AccountAddress Owner;
 
     public:
-        static std::string StructTag;
+        static const std::string StructTag;
         Object(bool allowUngatedTransfer, AccountAddress owner);
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Aptos::Rest
         std::string Uri;
 
     public:
-        static std::string StructTag;
+        static const std::string StructTag;
 
         Collection(AccountAddress creator, const std::string &description, const std::string &name, const std::string &uri);
 
@@ -75,7 +75,7 @@ namespace Aptos::Rest
         AccountAddress PayeeAddress;
 
     public:
-        static std::string StructTag;
+        static const std::string StructTag;
 
         Royalty(int numerator, int denominator, const AccountAddress &payeeAddress);
         static std::shared_ptr<IResource> Parse(std::shared_ptr<AptosRESTModel::ResourceDataBase> resource);
@@ -96,7 +96,7 @@ namespace Aptos::Rest
         std::string Uri;
 
     public:
-        static std::string StructTag;
+        static const std::string StructTag;
         Token(const AccountAddress &collection, int index, const std::string &description, const std::string &name, const std::string &uri);
         static std::shared_ptr<IResource> Parse(std::shared_ptr<AptosRESTModel::ResourceDataBase> resource);
         std::string GetStructTag() const override;

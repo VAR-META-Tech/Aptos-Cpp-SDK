@@ -3,6 +3,8 @@
 #include <boost/regex.hpp>
 #include <boost/range/adaptors.hpp>
 #include <boost/algorithm/string.hpp>
+#include <arpa/inet.h>
+
 namespace Aptos::Accounts
 {
     const std::string Ed25519Bip32::Curve = "ed25519 seed";

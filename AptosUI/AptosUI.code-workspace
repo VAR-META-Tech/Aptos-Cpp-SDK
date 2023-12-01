@@ -6,7 +6,7 @@
 		},
 		{
 			"name": "UE5",
-			"path": "/Users/Shared/Epic Games/UE_5.3"
+			"path": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 		}
 	],
 	"settings": {
@@ -26,718 +26,718 @@
 		"version": "2.0.0",
 		"tasks": [
 			{
-				"label": "AptosUI Mac Debug Build",
+				"label": "AptosUI Linux Debug Build",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"Debug",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI Mac Debug Rebuild",
+				"label": "AptosUI Linux Debug Rebuild",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"Debug",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"AptosUI Mac Debug Clean"
+					"AptosUI Linux Debug Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI Mac Debug Clean",
+				"label": "AptosUI Linux Debug Clean",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"Debug",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI Mac DebugGame Build",
+				"label": "AptosUI Linux DebugGame Build",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"DebugGame",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI Mac DebugGame Rebuild",
+				"label": "AptosUI Linux DebugGame Rebuild",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"DebugGame",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"AptosUI Mac DebugGame Clean"
+					"AptosUI Linux DebugGame Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI Mac DebugGame Clean",
+				"label": "AptosUI Linux DebugGame Clean",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"DebugGame",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI Mac Development Build",
+				"label": "AptosUI Linux Development Build",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"Development",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI Mac Development Rebuild",
+				"label": "AptosUI Linux Development Rebuild",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"Development",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"AptosUI Mac Development Clean"
+					"AptosUI Linux Development Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI Mac Development Clean",
+				"label": "AptosUI Linux Development Clean",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"Development",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI Mac Test Build",
+				"label": "AptosUI Linux Test Build",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"Test",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI Mac Test Rebuild",
+				"label": "AptosUI Linux Test Rebuild",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"Test",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"AptosUI Mac Test Clean"
+					"AptosUI Linux Test Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI Mac Test Clean",
+				"label": "AptosUI Linux Test Clean",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"Test",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI Mac Shipping Build",
+				"label": "AptosUI Linux Shipping Build",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"Shipping",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI Mac Shipping Rebuild",
+				"label": "AptosUI Linux Shipping Rebuild",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"Shipping",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"AptosUI Mac Shipping Clean"
+					"AptosUI Linux Shipping Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI Mac Shipping Clean",
+				"label": "AptosUI Linux Shipping Clean",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"Mac",
+					"Linux",
 					"Shipping",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS Debug Build",
+				"label": "AptosUI LinuxArm64 Debug Build",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"Debug",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS Debug Rebuild",
+				"label": "AptosUI LinuxArm64 Debug Rebuild",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"Debug",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"AptosUI IOS Debug Clean"
+					"AptosUI LinuxArm64 Debug Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS Debug Clean",
+				"label": "AptosUI LinuxArm64 Debug Clean",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"Debug",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS DebugGame Build",
+				"label": "AptosUI LinuxArm64 DebugGame Build",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"DebugGame",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS DebugGame Rebuild",
+				"label": "AptosUI LinuxArm64 DebugGame Rebuild",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"DebugGame",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"AptosUI IOS DebugGame Clean"
+					"AptosUI LinuxArm64 DebugGame Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS DebugGame Clean",
+				"label": "AptosUI LinuxArm64 DebugGame Clean",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"DebugGame",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS Development Build",
+				"label": "AptosUI LinuxArm64 Development Build",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"Development",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS Development Rebuild",
+				"label": "AptosUI LinuxArm64 Development Rebuild",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"Development",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"AptosUI IOS Development Clean"
+					"AptosUI LinuxArm64 Development Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS Development Clean",
+				"label": "AptosUI LinuxArm64 Development Clean",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"Development",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS Test Build",
+				"label": "AptosUI LinuxArm64 Test Build",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"Test",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS Test Rebuild",
+				"label": "AptosUI LinuxArm64 Test Rebuild",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"Test",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"AptosUI IOS Test Clean"
+					"AptosUI LinuxArm64 Test Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS Test Clean",
+				"label": "AptosUI LinuxArm64 Test Clean",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"Test",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS Shipping Build",
+				"label": "AptosUI LinuxArm64 Shipping Build",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"Shipping",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS Shipping Rebuild",
+				"label": "AptosUI LinuxArm64 Shipping Rebuild",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"Shipping",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"AptosUI IOS Shipping Clean"
+					"AptosUI LinuxArm64 Shipping Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUI IOS Shipping Clean",
+				"label": "AptosUI LinuxArm64 Shipping Clean",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUI",
-					"IOS",
+					"LinuxArm64",
 					"Shipping",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUIEditor Mac Debug Build",
+				"label": "AptosUIEditor Linux Debug Build",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUIEditor",
-					"Mac",
+					"Linux",
 					"Debug",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUIEditor Mac Debug Rebuild",
+				"label": "AptosUIEditor Linux Debug Rebuild",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUIEditor",
-					"Mac",
+					"Linux",
 					"Debug",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"AptosUIEditor Mac Debug Clean"
+					"AptosUIEditor Linux Debug Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUIEditor Mac Debug Clean",
+				"label": "AptosUIEditor Linux Debug Clean",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUIEditor",
-					"Mac",
+					"Linux",
 					"Debug",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUIEditor Mac DebugGame Build",
+				"label": "AptosUIEditor Linux DebugGame Build",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUIEditor",
-					"Mac",
+					"Linux",
 					"DebugGame",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUIEditor Mac DebugGame Rebuild",
+				"label": "AptosUIEditor Linux DebugGame Rebuild",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUIEditor",
-					"Mac",
+					"Linux",
 					"DebugGame",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"AptosUIEditor Mac DebugGame Clean"
+					"AptosUIEditor Linux DebugGame Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUIEditor Mac DebugGame Clean",
+				"label": "AptosUIEditor Linux DebugGame Clean",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUIEditor",
-					"Mac",
+					"Linux",
 					"DebugGame",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUIEditor Mac Development Build",
+				"label": "AptosUIEditor Linux Development Build",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUIEditor",
-					"Mac",
+					"Linux",
 					"Development",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUIEditor Mac Development Rebuild",
+				"label": "AptosUIEditor Linux Development Rebuild",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUIEditor",
-					"Mac",
+					"Linux",
 					"Development",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"AptosUIEditor Mac Development Clean"
+					"AptosUIEditor Linux Development Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "AptosUIEditor Mac Development Clean",
+				"label": "AptosUIEditor Linux Development Clean",
 				"group": "build",
-				"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"AptosUIEditor",
-					"Mac",
+					"Linux",
 					"Development",
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/Users/Shared/Epic Games/UE_5.3"
+					"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 				}
 			}
 		]
@@ -748,96 +748,112 @@
 			{
 				"name": "Launch AptosUI (Debug)",
 				"request": "launch",
-				"program": "/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/Binaries/Mac/UnrealGame-Mac-Debug.app/Contents/MacOS/UnrealGame-Mac-Debug",
-				"preLaunchTask": "AptosUI Mac Debug Build",
+				"program": "/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/Binaries/Linux/UnrealGame-Linux-Debug",
+				"preLaunchTask": "AptosUI Linux Debug Build",
 				"args": [
 				],
-				"cwd": "/Users/Shared/Epic Games/UE_5.3",
-				"type": "lldb"
+				"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Launch AptosUI (DebugGame)",
 				"request": "launch",
-				"program": "/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/Binaries/Mac/UnrealGame-Mac-DebugGame.app/Contents/MacOS/UnrealGame-Mac-DebugGame",
-				"preLaunchTask": "AptosUI Mac DebugGame Build",
+				"program": "/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/Binaries/Linux/UnrealGame-Linux-DebugGame",
+				"preLaunchTask": "AptosUI Linux DebugGame Build",
 				"args": [
 				],
-				"cwd": "/Users/Shared/Epic Games/UE_5.3",
-				"type": "lldb"
+				"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Launch AptosUI (Development)",
 				"request": "launch",
-				"program": "/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/Binaries/Mac/UnrealGame.app/Contents/MacOS/UnrealGame",
-				"preLaunchTask": "AptosUI Mac Development Build",
+				"program": "/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/Binaries/Linux/UnrealGame",
+				"preLaunchTask": "AptosUI Linux Development Build",
 				"args": [
 				],
-				"cwd": "/Users/Shared/Epic Games/UE_5.3",
-				"type": "lldb"
+				"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Launch AptosUI (Test)",
 				"request": "launch",
-				"program": "/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/Binaries/Mac/UnrealGame-Mac-Test.app/Contents/MacOS/UnrealGame-Mac-Test",
-				"preLaunchTask": "AptosUI Mac Test Build",
+				"program": "/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/Binaries/Linux/UnrealGame-Linux-Test",
+				"preLaunchTask": "AptosUI Linux Test Build",
 				"args": [
 				],
-				"cwd": "/Users/Shared/Epic Games/UE_5.3",
-				"type": "lldb"
+				"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Launch AptosUI (Shipping)",
 				"request": "launch",
-				"program": "/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/Binaries/Mac/UnrealGame-Mac-Shipping.app/Contents/MacOS/UnrealGame-Mac-Shipping",
-				"preLaunchTask": "AptosUI Mac Shipping Build",
+				"program": "/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/Binaries/Linux/UnrealGame-Linux-Shipping",
+				"preLaunchTask": "AptosUI Linux Shipping Build",
 				"args": [
 				],
-				"cwd": "/Users/Shared/Epic Games/UE_5.3",
-				"type": "lldb"
+				"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Launch AptosUIEditor (Debug)",
 				"request": "launch",
-				"program": "/Users/Shared/Epic Games/UE_5.3/Engine/Binaries/Mac/UnrealEditor-Mac-Debug.app/Contents/MacOS/UnrealEditor-Mac-Debug",
-				"preLaunchTask": "AptosUIEditor Mac Debug Build",
+				"program": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2/Engine/Binaries/Linux/UnrealEditor-Linux-Debug",
+				"preLaunchTask": "AptosUIEditor Linux Debug Build",
 				"args": [
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject"
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject"
 				],
-				"cwd": "/Users/Shared/Epic Games/UE_5.3",
-				"type": "lldb"
+				"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Launch AptosUIEditor (DebugGame)",
 				"request": "launch",
-				"program": "/Users/Shared/Epic Games/UE_5.3/Engine/Binaries/Mac/UnrealEditor-Mac-DebugGame.app/Contents/MacOS/UnrealEditor-Mac-DebugGame",
-				"preLaunchTask": "AptosUIEditor Mac DebugGame Build",
+				"program": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2/Engine/Binaries/Linux/UnrealEditor-Linux-DebugGame",
+				"preLaunchTask": "AptosUIEditor Linux DebugGame Build",
 				"args": [
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject"
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject"
 				],
-				"cwd": "/Users/Shared/Epic Games/UE_5.3",
-				"type": "lldb"
+				"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Launch AptosUIEditor (Development)",
 				"request": "launch",
-				"program": "/Users/Shared/Epic Games/UE_5.3/Engine/Binaries/Mac/UnrealEditor.app/Contents/MacOS/UnrealEditor",
-				"preLaunchTask": "AptosUIEditor Mac Development Build",
+				"program": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2/Engine/Binaries/Linux/UnrealEditor",
+				"preLaunchTask": "AptosUIEditor Linux Development Build",
 				"args": [
-					"/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject"
+					"/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject"
 				],
-				"cwd": "/Users/Shared/Epic Games/UE_5.3",
-				"type": "lldb"
+				"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Generate Project Files",
 				"type": "coreclr",
 				"request": "launch",
-				"preLaunchTask": "UnrealBuildTool Mac Development Build",
-				"program": "/Users/Shared/Epic Games/UE_5.3/Engine/Build/BatchFiles/RunUBT.bat",
+				"preLaunchTask": "UnrealBuildTool Linux Development Build",
+				"program": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2/Engine/Build/BatchFiles/RunUBT.bat",
 				"args": [
 					"-projectfiles",
 					"-vscode",
-					"-project=/Users/cloudsguitar/Desktop/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
+					"-project=/home/nodoka/Documents/Aptos-Cpp-SDK/AptosUI/AptosUI.uproject",
 					"-game",
 					"-engine",
 					"-dotnet"
@@ -845,7 +861,7 @@
 				"console": "internalConsole",
 				"internalConsoleOptions": "openOnSessionStart",
 				"stopAtEntry": false,
-				"cwd": "/Users/Shared/Epic Games/UE_5.3"
+				"cwd": "/home/nodoka/Downloads/Linux_Unreal_Engine_5.3.2"
 			}
 		]
 	}
