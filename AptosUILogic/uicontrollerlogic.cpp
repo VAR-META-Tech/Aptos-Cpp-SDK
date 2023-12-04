@@ -7,12 +7,19 @@ class UIController
 {
 public:
     UIController();
+    void setWallet(const std::shared_ptr<Aptos::HDWallet::Wallet> &newWallet);
+
 private:
     std::shared_ptr<Aptos::HDWallet::Wallet> m_wallet;
 };
 
 
 UIController::UIController() {}
+
+void UIController::setWallet(const std::shared_ptr<Aptos::HDWallet::Wallet> &newWallet)
+{
+    m_wallet = newWallet;
+}
 
 UIController *createUiController()
 {
@@ -31,7 +38,7 @@ bool createNewWallet(UIController *controller)
 
     bc::wallet::word_list my_word_list = bc::wallet::create_mnemonic(
         my_entropy, bc::wallet::language::en);
-    std::cout << bc::join(my_word_list) << std::endl;
+    controller->setWallet(std::make_shared<Aptos::HDWallet::Wallet>(bc::join(my_word_list)));
     return true;
 }
 
