@@ -36,5 +36,5 @@ class APTOSUI_API UUIController : public UBlueprintFunctionLibrary
 	static void OnImportWalletClicked();
 
 	private:
-	static AptosUILogic::UIController* m_controller;
+	static void* m_controller;
 };

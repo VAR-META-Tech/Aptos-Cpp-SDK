@@ -3,10 +3,17 @@
 
 #include <string>
 
-namespace AptosUILogic {
-class UIController;
-UIController* createUiController();
-void deleteUiController(UIController* controller);
-bool createNewWallet(UIController* controller);
+extern "C" {
+void* AptosUILogic_createUiController();
+void AptosUILogic_deleteUiController(void* controller);
+void AptosUILogic_setNetwork(void* controller, const char *target);
+bool AptosUILogic_createNewWallet(void* controller);
+bool AptosUILogic_initWalletFromCache(void* controller, const char* mnemonicsKey, int currentAddressIndexKey);
+bool AptosUILogic_restoreWallet(void* controller, const char* mnemonicsKey);
+
+char* AptosUILogic_getMnemonicsKey(void* controller);
+char* AptosUILogic_getCurrentWalletBalanceText(void* controller);
+void AptosUILogic_deleteString(char* str);
 }
+
 #endif // UICONTROLLERLOGIC_H

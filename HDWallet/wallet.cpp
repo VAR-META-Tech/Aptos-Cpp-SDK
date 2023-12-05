@@ -9,6 +9,11 @@ namespace Aptos::HDWallet
         return _account;
     }
 
+    std::string Wallet::getMnemonicsKey() const
+    {
+        return bc::join(wordList);
+    }
+
     libbitcoin::data_chunk Wallet::DeriveMnemonicSeed()
     {
         auto hd_seed = bc::wallet::decode_mnemonic(wordList);

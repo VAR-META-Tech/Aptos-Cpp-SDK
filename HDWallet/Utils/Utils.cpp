@@ -142,4 +142,11 @@ namespace Aptos::Utils
     {
         return rtrim(ltrim(s, charsToTrim), charsToTrim);
     }
-}
+
+    std::string floatToStringWithFormat(float value, int precision) {
+        std::stringstream stream;
+        stream << std::fixed << std::setprecision(precision) << value;
+        return stream.str();
+    }
+
+    }
