@@ -81,9 +81,9 @@ namespace Aptos::Accounts
         std::shared_ptr<AccountAddress> getAccountAddress() const;
 
     private:
-        std::shared_ptr<PrivateKey> m_privateKey;
-        std::shared_ptr<PublicKey> m_publicKey;
-        std::shared_ptr<AccountAddress> m_accountAddress;
+        std::shared_ptr<PrivateKey> m_privateKey = nullptr;
+        std::shared_ptr<PublicKey> m_publicKey = nullptr;
+        std::shared_ptr<AccountAddress> m_accountAddress = nullptr;
     };
 }
 #endif // APTOS_ACCOUNT_H
