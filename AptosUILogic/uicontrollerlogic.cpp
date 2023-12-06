@@ -161,7 +161,7 @@ bool AptosUILogic_createNewWallet(void *controller)
     ptr->setWallet(std::make_shared<Aptos::HDWallet::Wallet>(bc::join(my_word_list)));
     ptr->setCurrentAddressIndexKey(0);
     ptr->getWalletAddress();
-    ptr->loadCurrentWalletBalance();
+    //ptr->loadCurrentWalletBalance();
 
     return true;
 }

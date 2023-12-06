@@ -18,6 +18,8 @@ if (DOXYGEN_FOUND)
         COMMENT "Generating API documentation with Doxygen"
         VERBATIM)
 endif(DOXYGEN_FOUND)
+link_directories(/opt/homebrew/lib)
+    find_package(OpenSSL REQUIRED)
 
 # Code coverage configuration
 option(CODE_COVERAGE "Enable coverage reporting" OFF)
@@ -192,7 +194,8 @@ target_compile_options(Aptos PRIVATE -fPIC)
 find_package(nlohmann_json 3.2.0 REQUIRED)
 set(BOOST_ROOT /usr/local)
 find_package(Boost REQUIRED program_options regex)
-
+set(OPENSSL_ROOT_DIR /opt/homebrew/)
+find_package(OpenSSL REQUIRED)
 target_link_libraries(Aptos PRIVATE nlohmann_json::nlohmann_json)
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   target_link_libraries(Aptos PRIVATE
@@ -201,6 +204,10 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   Boost::regex
   /opt/homebrew/Cellar/secp256k1/0.4.0/lib/libsecp256k1.a
   /opt/homebrew/Cellar/libbitcoin-system/3.8.0/lib/libbitcoin-system.a
+    cpprest
+${OPENSSL_LIBRARIES} 
+crypto
+/opt/homebrew/lib/libssl.a
   )
 else()
   target_link_libraries(Aptos PUBLIC
@@ -211,6 +218,9 @@ else()
     bitcoin-system
     cpprest
     gmp
+${OPENSSL_LIBRARIES} 
+crypto
+ssl
     )
     include_directories(${Boost_INCLUDE_DIRS})
 endif()
@@ -263,13 +273,13 @@ if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   )
 endif()
 
-add_library(AptosUILogic SHARED
+add_library(AptosUILogic
     AptosUILogic/uicontrollerlogic.h
     AptosUILogic/uicontrollerlogic.cpp
 )
-target_link_libraries(AptosUILogic ${GTEST_LIBRARIES} GTest::gtest_main pthread Aptos cpprest)
+target_link_libraries(AptosUILogic ${GTEST_LIBRARIES} GTest::gtest_main pthread Aptos pthread bitcoin-system Aptos cpprest)
 
 add_executable(AptosUILogicTest
     AptosUILogic/main.cpp
 )
-target_link_libraries(AptosUILogicTest ${GTEST_LIBRARIES} GTest::gtest_main pthread Aptos cpprest AptosUILogic)
+target_link_libraries(AptosUILogicTest ${GTEST_LIBRARIES} GTest::gtest_main pthread Aptos cpprest AptosUILogic pthread bitcoin-system Aptos cpprest crypto)

@@ -12,21 +12,21 @@ public class AptosUI : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG" });
 		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		PrivateDependencyModuleNames.AddRange(new string[] { });
-		string AptosUiLogicPath = Path.Combine(ModuleDirectory, "../../../build/", "libAptosUILogic.so");
-		string AptosLibPath = Path.Combine(ModuleDirectory, "../../../build/", "libAptos.so");
-        string destinationDirectory = Target.ProjectFile.Directory.FullName;
-        File.Copy(AptosUiLogicPath, Path.Combine(destinationDirectory, "libAptosUILogic.so"), true);
-		File.Copy(AptosLibPath, Path.Combine(destinationDirectory, "libAptos.so") , true);
+		string AptosUiLogicPath = Path.Combine(ModuleDirectory, "../../../build/", "libAptosUILogic.dylib");
+		string AptosLibPath = Path.Combine(ModuleDirectory, "../../../build/", "libAptos.dylib");
+		string destinationDirectory = Target.ProjectFile.Directory.FullName;
+		File.Copy(AptosUiLogicPath, Path.Combine(destinationDirectory, "libAptosUILogic.dylib"), true);
+		File.Copy(AptosLibPath, Path.Combine(destinationDirectory, "libAptos.dylib"), true);
 
-		PublicIncludePaths.AddRange(new string[] { Path.Combine(ModuleDirectory, "../../../")});
-		PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libAptosUILogic.so"));
-        PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libAptos.so"));
-		PublicAdditionalLibraries.Add("/usr/local/lib/libbitcoin-system.so");
-		PublicAdditionalLibraries.Add("/usr/local/lib/libcpprest.so");
+		PublicIncludePaths.AddRange(new string[] { Path.Combine(ModuleDirectory, "../../../") });
+		PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libAptosUILogic.dylib"));
+		PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libAptos.dylib"));
+		//PublicAdditionalLibraries.Add("/usr/local/lib/libbitcoin-system.so");
+		//PublicAdditionalLibraries.Add("/usr/local/lib/libcpprest.so");
 
 		PublicIncludePaths.AddRange(new string[] { "/usr/local/include/" });
 		//bUseRTTI = true;
-		bEnableUndefinedIdentifierWarnings = false;		
+		bEnableUndefinedIdentifierWarnings = false;
 		CppStandard = CppStandardVersion.Cpp17;
 		//PublicDefinitions.Add("_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION");
 	}
