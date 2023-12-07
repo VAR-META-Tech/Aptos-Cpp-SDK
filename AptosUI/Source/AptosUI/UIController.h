@@ -31,10 +31,10 @@ class APTOSUI_API UUIController : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnCreateWallet Clicked"), Category = "UIController")
-	static void OnCreateWalletClicked();
+	static void OnCreateWalletClicked(FString &mnemonic_key_return);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnImportWallet Clicked"), Category = "UIController")
 	static void OnImportWalletClicked();
 
-	private:
-	static void* m_controller;
+private:
+	static void *m_controller;
 };
