@@ -5,11 +5,15 @@
 
 void *UUIController::m_controller = AptosUILogic_createUiController();
 
-void UUIController::OnCreateWalletClicked(FString &mnemonic_key_return, bool &IsCreateOk)
+void UUIController::OnCreateWalletClicked(FString netWork, FString &mnemonic_key_return, bool &IsCreateOk)
 {
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCreateWalletClicked"));
     std::cerr << "UUIController::OnCreateWalletClicked" << std::endl;
-    AptosUILogic_setNetwork(m_controller, "Devnet");
+    // Convert FString to const char*
+    std::string MyStdString(TCHAR_TO_UTF8(*netWork));
+    const char *MyNetWork = MyStdString.c_str();
+
+    AptosUILogic_setNetwork(m_controller, MyNetWork);
 
     if (AptosUILogic_createNewWallet(m_controller))
     {
