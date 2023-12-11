@@ -20,7 +20,6 @@
 #pragma GCC diagnostic pop
 
 #include <string>
-
 #include "UIController.generated.h"
 
 /**
@@ -31,7 +30,7 @@ class APTOSUI_API UUIController : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnCreateWallet Clicked"), Category = "UIController")
-	static void OnCreateWalletClicked(FString netWork, FString &mnemonic_key_return, bool &IsCreateOk);
+	static void OnCreateWalletClicked(class UWidget *TargetComboBox, FString netWork, FString &balance_return, FString &mnemonic_key_return, bool &IsCreateOk);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnImportWallet Clicked"), Category = "UIController")
 	static void OnImportWalletClicked();
 

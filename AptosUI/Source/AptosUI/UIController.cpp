@@ -1,11 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "UIController.h"
+#include "Components/ComboBoxString.h"
 #include <iostream>
 
 void *UUIController::m_controller = AptosUILogic_createUiController();
 
-void UUIController::OnCreateWalletClicked(FString netWork, FString &mnemonic_key_return, bool &IsCreateOk)
+void UUIController::OnCreateWalletClicked(class UWidget *TargetComboBox, FString netWork, FString &balance_return, FString &mnemonic_key_return, bool &IsCreateOk)
 {
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCreateWalletClicked"));
     std::cerr << "UUIController::OnCreateWalletClicked" << std::endl;
@@ -20,7 +21,34 @@ void UUIController::OnCreateWalletClicked(FString netWork, FString &mnemonic_key
         char *mnemonic_key = AptosUILogic_getMnemonicsKey(m_controller);
         mnemonic_key_return = mnemonic_key;
         std::cout << mnemonic_key << std::endl;
+
+        char *balance = AptosUILogic_getCurrentWalletBalanceText(m_controller);
+        balance_return = balance;
+        std::cout << balance << std::endl;
+
+        size_t size = 0;
+        char **addressList = AptosUILogic_getWalletAddress(m_controller, &size);
+        UComboBoxString *MyCombobox = Cast<UComboBoxString>(TargetComboBox);
+        if (MyCombobox)
+        {
+            // Clear existing options
+            MyCombobox->ClearOptions();
+            for (std::size_t i = 0; i < size; ++i)
+            {
+                MyCombobox->AddOption(FString(addressList[i]));
+                std::cout << addressList[i] << std::endl;
+            }
+            MyCombobox->SetSelectedIndex(0);
+        }
+        else
+        {
+            IsCreateOk = false;
+        }
+        // std::cout << "Address list:" << std::endl;
+
+        AptosUILogic_deleteStringArray(addressList, size);
         AptosUILogic_deleteString(mnemonic_key);
+        AptosUILogic_deleteString(balance);
         IsCreateOk = true;
     }
     else
