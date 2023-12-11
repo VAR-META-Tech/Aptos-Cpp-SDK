@@ -14,6 +14,9 @@ bool AptosUILogic_restoreWallet(void* controller, const char* mnemonicsKey);
 char* AptosUILogic_getMnemonicsKey(void* controller);
 char* AptosUILogic_getCurrentWalletBalanceText(void* controller);
 void AptosUILogic_deleteString(char* str);
+void AptosUILogic_deleteStringArray(char** strArr, int size);
+char** AptosUILogic_getWalletAddress(void* controller, size_t *size);
+
 }
 
 #endif // UICONTROLLERLOGIC_H

@@ -194,7 +194,7 @@ bool AptosUILogic_initWalletFromCache(void *controller, char* mnemonicsKey, int 
     return true;
 }
 
-bool AptosUILogic_restoreWallet(void *controller, char* mnemonicsKey)
+bool AptosUILogic_restoreWallet(void *controller, const char* mnemonicsKey)
 {
     auto ptr = static_cast<AptosUILogic::UIController*>(controller);
     ptr->setWallet(std::make_shared<Aptos::HDWallet::Wallet>(AptosUILogic::charToString(mnemonicsKey)));
@@ -207,4 +207,27 @@ bool AptosUILogic_restoreWallet(void *controller, char* mnemonicsKey)
 void AptosUILogic_deleteString(char *str)
 {
     delete[] str;
+}
+
+void AptosUILogic_deleteStringArray(char **strArr, int size)
+{
+    for (std::size_t i = 0; i < size; ++i) {
+        AptosUILogic_deleteString(strArr[i]);
+    }
+    delete[] strArr;
+}
+
+char** AptosUILogic_getWalletAddress(void *controller, size_t *size)
+{
+    auto ptr = static_cast<AptosUILogic::UIController*>(controller);
+    auto addressList = ptr->getWalletAddress();
+    *size = addressList.size();
+    if (size == 0) {
+        return nullptr;
+    }
+    char** ret = new char*[*size];
+    for (std::size_t i = 0; i < *size; ++i) {
+        ret[i] = AptosUILogic::stringToChar(addressList[i]);
+    }
+    return ret;
 }
