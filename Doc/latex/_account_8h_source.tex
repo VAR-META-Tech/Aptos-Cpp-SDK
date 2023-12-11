@@ -23,9 +23,9 @@
 \DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_ab51e8eb5f0c45ffb21c69985970d03cf}{Account}}();}
 \DoxyCodeLine{00029\ }
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_ab51e8eb5f0c45ffb21c69985970d03cf}{Account}}(std::string\ privateKeyStr,\ std::string\ publicKeyStr);}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_ab51e8eb5f0c45ffb21c69985970d03cf}{Account}}(std::string\ privateKeyStr,\ std::string\ publicKeyStr);}
 \DoxyCodeLine{00036\ }
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_ab51e8eb5f0c45ffb21c69985970d03cf}{Account}}(\textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&privateKeyBytes,\ \textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&publicKeyBytes);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_ab51e8eb5f0c45ffb21c69985970d03cf}{Account}}(\textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&privateKeyBytes,\ \textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&publicKeyBytes);}
 \DoxyCodeLine{00039\ }
 \DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Account}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_a07ea513620db6d83b78c58b3408bf074}{LoadKey}}(std::string\ privateKeyHex);}
 \DoxyCodeLine{00046\ }
@@ -42,9 +42,9 @@
 \DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ std::shared\_ptr<AccountAddress>\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_a2f967184bab42e28ab7517b2adc5f1f5}{getAccountAddress}}()\ \textcolor{keyword}{const};}
 \DoxyCodeLine{00082\ }
 \DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ std::shared\_ptr<PrivateKey>\ m\_privateKey;}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ std::shared\_ptr<PublicKey>\ m\_publicKey;}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ std::shared\_ptr<AccountAddress>\ m\_accountAddress;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ std::shared\_ptr<PrivateKey>\ m\_privateKey\ =\ nullptr\ ;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ std::shared\_ptr<PublicKey>\ m\_publicKey\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ std::shared\_ptr<AccountAddress>\ m\_accountAddress\ =\ \textcolor{keyword}{nullptr};}
 \DoxyCodeLine{00087\ \ \ \ \ \};}
 \DoxyCodeLine{00088\ \}}
 \DoxyCodeLine{00089\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ APTOS\_ACCOUNT\_H}}

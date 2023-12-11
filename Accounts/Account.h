@@ -32,10 +32,10 @@ namespace Aptos::Accounts
         /// Initialize an account with a given private and public keys.
         /// <param name="privateKeyStr">The private key.</param>
         /// <param name="publicKeyStr">The public key.</param>
-        Account(std::string privateKeyStr, std::string publicKeyStr);
+        explicit Account(std::string privateKeyStr, std::string publicKeyStr);
 
         /// <inheritdoc cref="Account(string, string)"/>
-        Account(const CryptoPP::SecByteBlock &privateKeyBytes, const CryptoPP::SecByteBlock &publicKeyBytes);
+        explicit Account(const CryptoPP::SecByteBlock &privateKeyBytes, const CryptoPP::SecByteBlock &publicKeyBytes);
 
         /// <summary>
         /// Creates an account from private key in string format.
