@@ -11,7 +11,7 @@
 #include "../BCS/Deserialization.h"
 #include "multipublickey.h"
 
-using namespace Aptos::BCS;
+namespace Aptos::BCS;
 namespace Aptos::Accounts
 {
     /// <summary>
@@ -65,7 +65,7 @@ namespace Aptos::Accounts
         /// Initializes an account address by setting a 32-byte representation of an address.
         /// </summary>
         /// <param name="addressBytes">Byte array representing address.</param>
-        AccountAddress(const CryptoPP::SecByteBlock &addressBytes);
+        explicit AccountAddress(const CryptoPP::SecByteBlock &addressBytes);
 
         /// <summary>
         /// Represent an account address in a way that is compliant with the v1 address

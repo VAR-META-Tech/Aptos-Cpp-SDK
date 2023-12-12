@@ -67,7 +67,7 @@ namespace Aptos::Accounts
             addr = "0x" + addr;
         }
 
-        if (addr.substr(0, 2) == "0x")
+        if (addr.starts_with("0x"))
         {
             addr = addr.substr(2);
         }
@@ -82,7 +82,7 @@ namespace Aptos::Accounts
         for (size_t i = 0; i < addr.length(); i += 2)
         {
             std::string byteStr = addr.substr(i, 2);
-            uint8_t byte = static_cast<uint8_t>(std::stoul(byteStr, nullptr, 16));
+            auto byte = static_cast<uint8_t>(std::stoul(byteStr, nullptr, 16));
             byteArray.push_back(byte);
         }
 
