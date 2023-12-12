@@ -16,7 +16,8 @@ char* AptosUILogic_getCurrentWalletBalanceText(void* controller);
 void AptosUILogic_deleteString(char* str);
 void AptosUILogic_deleteStringArray(char** strArr, int size);
 char** AptosUILogic_getWalletAddress(void* controller, size_t *size);
-
+char* AptosUILogic_onWalletListDropdownValueChanged(void* controller, int listIndex);
+char* AptosUILogic_getCurrentWalletAddress(void* controller);
 }
 
 #endif // UICONTROLLERLOGIC_H

@@ -161,7 +161,7 @@ bool AptosUILogic_createNewWallet(void *controller)
     ptr->setWallet(std::make_shared<Aptos::HDWallet::Wallet>(bc::join(my_word_list)));
     ptr->setCurrentAddressIndexKey(0);
     ptr->getWalletAddress();
-    //ptr->loadCurrentWalletBalance();
+    ptr->loadCurrentWalletBalance();
 
     return true;
 }
@@ -230,4 +230,18 @@ char** AptosUILogic_getWalletAddress(void *controller, size_t *size)
         ret[i] = AptosUILogic::stringToChar(addressList[i]);
     }
     return ret;
+}
+
+char* AptosUILogic_onWalletListDropdownValueChanged(void *controller, int listIndex)
+{
+    auto ptr = static_cast<AptosUILogic::UIController*>(controller);
+    ptr->setCurrentAddressIndexKey(listIndex);
+    ptr->loadCurrentWalletBalance();
+    return AptosUILogic::stringToChar(ptr->getCurrentWalletAddress());
+}
+
+char *AptosUILogic_getCurrentWalletAddress(void *controller)
+{
+    auto ptr = static_cast<AptosUILogic::UIController*>(controller);
+    return AptosUILogic::stringToChar(ptr->getCurrentWalletAddress());
 }
