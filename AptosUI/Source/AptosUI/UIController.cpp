@@ -57,6 +57,25 @@ void UUIController::OnCreateWalletClicked(class UWidget *TargetComboBox, FString
     }
 }
 
-void UUIController::OnImportWalletClicked()
+void UUIController::OnImportWalletClicked(FString mnemonic_key_import, bool &IsImportOk)
 {
+    std::string MyStdString(TCHAR_TO_UTF8(*mnemonic_key_import));
+    const char *mnemonic_key = MyStdString.c_str();
+    if (AptosUILogic_restoreWallet(m_controller, mnemonic_key))
+    {
+        IsImportOk = true;
+    }
+    else
+    {
+        IsImportOk = false;
+    }
+}
+
+void UUIController::OnWalletListDropdownValueChanged(int index, FString &balance_return)
+{
+    char *curAddress = AptosUILogic_onWalletListDropdownValueChanged(m_controller, index);
+    char *balance = AptosUILogic_getCurrentWalletBalanceText(m_controller);
+    balance_return = balance;
+    AptosUILogic_deleteString(curAddress);
+    AptosUILogic_deleteString(balance);
 }

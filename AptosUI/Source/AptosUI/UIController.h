@@ -32,7 +32,9 @@ class APTOSUI_API UUIController : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnCreateWallet Clicked"), Category = "UIController")
 	static void OnCreateWalletClicked(class UWidget *TargetComboBox, FString netWork, FString &balance_return, FString &mnemonic_key_return, bool &IsCreateOk);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnImportWallet Clicked"), Category = "UIController")
-	static void OnImportWalletClicked();
+	static void OnImportWalletClicked(FString mnemonic_key_import, bool &IsImportOk);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "WalletListDropdownValueChanged"), Category = "UIController")
+	static void OnWalletListDropdownValueChanged(int index, FString &balance_return);
 
 private:
 	static void *m_controller;
