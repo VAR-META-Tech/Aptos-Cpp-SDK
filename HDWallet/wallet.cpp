@@ -9,15 +9,27 @@ namespace Aptos::HDWallet
         return _account;
     }
 
-    libbitcoin::data_chunk Wallet::DeriveMnemonicSeed()
+    std::vector<uint8_t> Wallet::toVector(const bip3x::bytes_data& data) {
+
+        std::vector<uint8_t> result;
+        result.reserve(data.size());
+
+        for(size_t i = 0; i < data.size(); i++) {
+            result.push_back(data[i]); 
+        }
+
+        return result;
+    }
+
+    bip3x::bytes_data Wallet::DeriveMnemonicSeed()
     {
-        auto hd_seed = bc::wallet::decode_mnemonic(wordList);
-        return bc::to_chunk(hd_seed);
+        // create seed from mnemonic phrase vector
+        return bip3x::bip3x_mnemonic::decode_mnemonic(wordList.data());
     }
 
     void Wallet::InitializeFirstAccount()
     {
-        _ed25519Bip32 = std::make_unique<Ed25519Bip32>(_seed);
+        _ed25519Bip32 = std::make_unique<Ed25519Bip32>(toVector(_seed));
         _account = GetDerivedAccount(0);
     }
 
@@ -49,8 +61,7 @@ namespace Aptos::HDWallet
     Wallet::Wallet(const std::string &mnemonicWords, SeedMode seedMode)
         : _seedMode(seedMode)
     {
-        wordList = bc::split(mnemonicWords, " ", true);
-        //    wordList = bc::wallet::create_mnemonic(my_word_list, bc::wallet::language::en);
+        
         InitializeSeed();
     }
 }

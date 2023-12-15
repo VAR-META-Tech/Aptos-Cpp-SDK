@@ -30,7 +30,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include_directories(/usr/local/include)
 include_directories(/opt/homebrew/include)
-include_directories(Libs)
+include_directories(Plugins/include)
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   include_directories(/opt/homebrew/Cellar/boost@1.76/1.76.0_4/include)
 endif()
@@ -192,14 +192,14 @@ add_library(Aptos
 find_package(nlohmann_json 3.2.0 REQUIRED)
 find_package(Boost REQUIRED program_options regex)
 
+link_directories(Plugins/lib)
 target_link_libraries(Aptos PRIVATE nlohmann_json::nlohmann_json)
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   target_link_libraries(Aptos PRIVATE
   Boost::boost 
   Boost::program_options
   Boost::regex
-  /opt/homebrew/Cellar/secp256k1/0.4.0/lib/libsecp256k1.a
-  /opt/homebrew/Cellar/libbitcoin-system/3.8.0/lib/libbitcoin-system.a
+  bip3x
   )
 else()
   target_link_libraries(Aptos PRIVATE

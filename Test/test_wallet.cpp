@@ -37,7 +37,7 @@ static const std::vector<uint8_t> SignatureBytes = {
 
 TEST(WalletTest, CreateWallet) {
     Wallet wallet = Wallet(mnemo);
-    ASSERT_EQ(SeedNoPhrase, wallet.DeriveMnemonicSeed());
+    ASSERT_EQ(bip3x::bytes_data(SeedNoPhrase), wallet.DeriveMnemonicSeed());
 }
 
 TEST(WalletTest, SignMessage) {

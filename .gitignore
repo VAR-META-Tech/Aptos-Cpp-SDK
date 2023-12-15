@@ -34,3 +34,5 @@ cmake-build-debug
 .idea
 
 build/*
+AptosUI/.vscode/*
+AptosUI/Binaries/*

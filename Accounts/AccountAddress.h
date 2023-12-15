@@ -11,7 +11,8 @@
 #include "../BCS/Deserialization.h"
 #include "multipublickey.h"
 
-namespace Aptos::BCS;
+using namespace Aptos::BCS;
+
 namespace Aptos::Accounts
 {
     /// <summary>

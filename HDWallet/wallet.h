@@ -3,7 +3,8 @@
 #define BOOST_ASIO_HAS_STD_INVOKE_RESULT
 #include "../Accounts/Ed25519Bip32.h"
 #include "../Accounts/Account.h"
-#include <bitcoin/system.hpp>
+#include "bip3x/bip3x_mnemonic.h"
+#include "bip3x/bip3x_hdkey_encoder.h"
 #include <memory>
 
 using namespace Aptos::Accounts;
@@ -34,19 +35,19 @@ namespace Aptos::HDWallet
     {
     private:
         static const std::string DerivationPath;
-        bc::wallet::word_list wordList;
-        bc::wallet::hd_private privateKey;
+        std::string wordList;
         std::string passphrase;
         /// <summary>
         /// The method used for <see cref="SeedMode.Ed25519Bip32"/> key generation.
         /// </summary>
         std::unique_ptr<Ed25519Bip32> _ed25519Bip32;
-        std::vector<std::uint8_t> _seed;
+        bip3x::bytes_data _seed;
         SeedMode _seedMode;
         Account _account;
+        std::vector<uint8_t> toVector(const bip3x::bytes_data& data);
 
     public:
-        bc::data_chunk DeriveMnemonicSeed();
+        bip3x::bytes_data DeriveMnemonicSeed();
         void InitializeFirstAccount();
         Account GetDerivedAccount(int index);
         void InitializeSeed();

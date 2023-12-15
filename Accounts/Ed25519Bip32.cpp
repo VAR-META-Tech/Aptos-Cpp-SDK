@@ -1,8 +1,7 @@
 #include "Ed25519Bip32.h"
 #include "../HDWallet/Utils/Utils.h"
-#include <boost/regex.hpp>
-#include <boost/range/adaptors.hpp>
-#include <boost/algorithm/string.hpp>
+#include <regex>
+
 namespace Aptos::Accounts
 {
     const std::string Ed25519Bip32::Curve = "ed25519 seed";
@@ -41,12 +40,12 @@ namespace Aptos::Accounts
 
     bool Ed25519Bip32::IsValidPath(const std::string &path)
     {
-        boost::regex regex("^m(\\/[0-9]+')+$");
+        std::regex regex("^m(\\/[0-9]+')+$");
 
-        if (!boost::regex_match(path, regex)){
-            return false;
+        if (!std::regex_match(path, regex)){
+        return false; 
         }
-            
+
         return true;
     }
 
