@@ -79,3 +79,38 @@ void UUIController::OnWalletListDropdownValueChanged(int index, FString &balance
     AptosUILogic_deleteString(curAddress);
     AptosUILogic_deleteString(balance);
 }
+
+void UUIController::CopyMnemonicWords()
+{
+    UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCopyMnemonicWordsClicked"));
+}
+
+void UUIController::CopyPrivateKey()
+{
+    UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCopyPrivateKeyClicked"));
+}
+
+void UUIController::Airdrop()
+{
+    UE_LOG(LogTemp, Warning, TEXT("UUIController::OnAirdropClicked"));
+}
+
+void UUIController::Logout()
+{
+    UE_LOG(LogTemp, Warning, TEXT("UUIController::OnLogoutClicked"));
+}
+
+void UUIController::SendToken()
+{
+    UE_LOG(LogTemp, Warning, TEXT("UUIController::OnSendTokenClicked"));
+}
+
+void UUIController::CreateCollection()
+{
+    UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCreateCollectionClicked"));
+}
+
+void UUIController::CreateNFT()
+{
+    UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCreateNFTClicked"));
+}
