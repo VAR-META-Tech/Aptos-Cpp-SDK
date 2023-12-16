@@ -54,6 +54,7 @@ namespace Aptos::HDWallet
         Wallet(const std::string &mnemonicWords,
                SeedMode seedMode = SeedMode::Ed25519Bip32);
         Account account() const;
+        std::string getMnemonicsKey() const;
     };
 }
 #endif // WALLET_H

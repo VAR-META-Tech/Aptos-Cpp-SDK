@@ -113,5 +113,6 @@ namespace Aptos::Utils
     std::string rtrim(const std::string &s, const std::string &charsToTrim);
     // Function to trim specified characters from both sides of a string
     std::string trim(const std::string &s, const std::string &charsToTrim);
+    std::string floatToStringWithFormat(float value, int precision);
 }
 #endif // APTOS_UTILS_H
