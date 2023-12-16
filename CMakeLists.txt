@@ -1,8 +1,13 @@
-cmake_minimum_required(VERSION 3.10.0)
+cmake_minimum_required(VERSION 3.27.6)
 project(Aptos VERSION 0.1.0 LANGUAGES C CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_BUILD_TYPE Debug)
 
 include(CTest)
 enable_testing()
+include(conan_toolchain.cmake)
 
 # Check for doxygen presence
 find_package(Doxygen)
@@ -19,6 +24,10 @@ if (DOXYGEN_FOUND)
         VERBATIM)
 endif(DOXYGEN_FOUND)
 
+find_package(nlohmann_json REQUIRED)
+find_package(cryptopp REQUIRED)
+find_package(GTest REQUIRED)
+
 # Code coverage configuration
 option(CODE_COVERAGE "Enable coverage reporting" OFF)
 if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -26,19 +35,8 @@ if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-instr-generate -fcoverage-mapping")
 endif()
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-include_directories(/usr/local/include)
-include_directories(/opt/homebrew/include)
 include_directories(Plugins/include)
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  include_directories(/opt/homebrew/Cellar/boost@1.76/1.76.0_4/include)
-endif()
-
-find_library(CryptoPP_LIB NAMES libcryptopp.a PATHS /usr/local/lib)
-if (NOT CryptoPP_LIB)
-    message(FATAL_ERROR "Crypto++ library not found")
-endif()
+link_directories(Plugins/lib)
 
 add_library(Aptos
         BCS/Deserialization.cpp
@@ -189,35 +187,12 @@ add_library(Aptos
         Accounts/Ed25519Bip32.cpp
 )
 
-find_package(nlohmann_json 3.2.0 REQUIRED)
-find_package(Boost REQUIRED program_options regex)
-
-link_directories(Plugins/lib)
-target_link_libraries(Aptos PRIVATE nlohmann_json::nlohmann_json)
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  target_link_libraries(Aptos PRIVATE
-  Boost::boost 
-  Boost::program_options
-  Boost::regex
-  bip3x
-  )
-else()
-  target_link_libraries(Aptos PRIVATE
-    Boost::boost 
-    Boost::program_options
-    Boost::regex
-    secp256k1
-    bitcoin-system
-    )
-endif()
+target_link_libraries(Aptos PRIVATE cryptopp::cryptopp nlohmann_json::nlohmann_json bip3x)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 set(CMAKE_BUILD_TYPE Debug)
 include(CPack)
-
-find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
 
 add_executable(test_serialization Test/test_serialization.cpp)
 add_executable(test_account Test/test_account.cpp)
@@ -225,11 +200,11 @@ add_executable(test_utils Test/test_utils.cpp)
 add_executable(test_wallet Test/test_wallet.cpp)
 add_executable(test_transaction_serialization Test/test_transaction_serialization.cpp)
 
-target_link_libraries(test_serialization ${GTEST_BOTH_LIBRARIES} pthread Aptos)
-target_link_libraries(test_account ${GTEST_BOTH_LIBRARIES} pthread Aptos)
-target_link_libraries(test_utils ${GTEST_BOTH_LIBRARIES} pthread Aptos)
-target_link_libraries(test_wallet ${GTEST_BOTH_LIBRARIES} pthread Aptos)
-target_link_libraries(test_transaction_serialization ${GTEST_BOTH_LIBRARIES} pthread Aptos)
+target_link_libraries(test_serialization GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
+target_link_libraries(test_account GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
+target_link_libraries(test_utils GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
+target_link_libraries(test_wallet GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
+target_link_libraries(test_transaction_serialization GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
 
 add_test(NAME SerializationTest COMMAND test_serialization)
 add_test(NAME AccountTest COMMAND test_account)
@@ -237,8 +212,6 @@ add_test(NAME UtilsTest COMMAND test_utils)
 add_test(NAME WalletTest COMMAND test_wallet)
 add_test(NAME TransactionSerializationTest COMMAND test_transaction_serialization)
 file(COPY Test/two_by_two_transfer.mv DESTINATION ${CMAKE_BINARY_DIR})
-
-target_link_libraries(Aptos PRIVATE ${CryptoPP_LIB})
 
 # Link test executable against gtest & gtest_main
 add_executable(runAllTests 
@@ -248,7 +221,7 @@ add_executable(runAllTests
     Test/test_transaction_serialization.cpp 
     Test/test_serialization.cpp
 )
-target_link_libraries(runAllTests ${GTEST_LIBRARIES} GTest::gtest_main pthread Aptos)
+target_link_libraries(runAllTests GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
 
 if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_custom_target(coverage

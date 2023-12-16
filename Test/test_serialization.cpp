@@ -1,6 +1,6 @@
 // test_serialization.cpp
 
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 #include "../BCS/Serialization.h"
 #include "../BCS/Deserialization.h"
 #include "../BCS/BCSTypes.h"

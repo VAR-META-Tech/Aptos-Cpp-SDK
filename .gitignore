@@ -36,3 +36,11 @@ cmake-build-debug
 build/*
 AptosUI/.vscode/*
 AptosUI/Binaries/*
+*.cmake
+CMakePresets.json
+conanbuild.sh
+conanbuildenv-release-armv8.sh
+conanrun.sh
+conanrunenv-release-armv8.sh
+deactivate_conanbuild.sh
+deactivate_conanrun.sh
