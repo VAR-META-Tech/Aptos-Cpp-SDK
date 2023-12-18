@@ -1,4 +1,8 @@
 # Aptos-Cpp-SDK
+#Dependency library
+https://github.com/edwardstock/bip3x
+https://github.com/edwardstock/toolbox
+
 #For setup project 
 conan install . -s compiler.cppstd=20 --build=missing
 
