@@ -1,4 +1,6 @@
 # Aptos-Cpp-SDK
+#For setup project 
+conan install . -s compiler.cppstd=20 --build=missing
 
 #For build source code on MacOS
 To install dependency library:
