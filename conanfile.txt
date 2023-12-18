@@ -5,7 +5,11 @@ nlohmann_json/3.11.3
 cryptopp/8.8.0
 cmake/3.27.9
 gtest/1.14.0
+openssl/3.2.0
 
 [generators]
 CMakeDeps
 CMakeToolchain
+
+[layout]
+cmake_layout

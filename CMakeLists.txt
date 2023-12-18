@@ -27,6 +27,8 @@ endif(DOXYGEN_FOUND)
 find_package(nlohmann_json REQUIRED)
 find_package(cryptopp REQUIRED)
 find_package(GTest REQUIRED)
+find_package(httplib REQUIRED)
+find_package(OpenSSL REQUIRED)
 
 # Code coverage configuration
 option(CODE_COVERAGE "Enable coverage reporting" OFF)
@@ -37,6 +39,7 @@ endif()
 
 include_directories(Plugins/include)
 link_directories(Plugins/lib)
+include_directories(${httplib_INCLUDE_DIR})
 
 add_library(Aptos
         BCS/Deserialization.cpp
@@ -187,7 +190,7 @@ add_library(Aptos
         Accounts/Ed25519Bip32.cpp
 )
 
-target_link_libraries(Aptos PRIVATE cryptopp::cryptopp nlohmann_json::nlohmann_json bip3x)
+target_link_libraries(Aptos PRIVATE cryptopp::cryptopp nlohmann_json::nlohmann_json bip3x httplib::httplib OpenSSL::SSL OpenSSL::Crypto)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
@@ -221,7 +224,8 @@ add_executable(runAllTests
     Test/test_transaction_serialization.cpp 
     Test/test_serialization.cpp
 )
-target_link_libraries(runAllTests GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
+message(${cryptopp_LIB_DIRS_RELEASE})
+target_link_libraries(runAllTests PRIVATE GTest::gtest_main pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a)
 
 if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_custom_target(coverage
@@ -231,3 +235,16 @@ if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     COMMAND xcrun llvm-cov report ${CMAKE_CURRENT_BINARY_DIR}/runAllTests -instr-profile=default.profdata > coverage_summary.txt
   )
 endif()
+
+add_library(AptosUILogic
+    AptosUILogic/uicontrollerlogic.h
+    AptosUILogic/uicontrollerlogic.cpp
+)
+target_link_libraries(AptosUILogic GTest::gtest_main pthread Aptos )
+
+add_executable(AptosUILogicTest
+    AptosUILogic/main.cpp
+)
+
+target_link_libraries(AptosUILogicTest PRIVATE GTest::gtest_main Aptos AptosUILogic ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a  
+${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)

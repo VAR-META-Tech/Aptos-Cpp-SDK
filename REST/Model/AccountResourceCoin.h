@@ -71,7 +71,7 @@ public:
     private:
         Coin m_coinProp;
         DespositEvents m_depositEvents;
-        std::string m_frozen;
+        bool m_frozen;
         WithdrawEvents m_withdrawEvents;
     };
 

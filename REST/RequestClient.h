@@ -1,9 +1,7 @@
 #ifndef REQUESTCLIENT_H
 #define REQUESTCLIENT_H
-
-#define BOOST_ASIO_HAS_STD_INVOKE_RESULT
-#include <cpprest/http_client.h>
-#include <cpprest/uri.h>
+#define CPPHTTPLIB_OPENSSL_SUPPORT
+#include <httplib.h>
 
 namespace Aptos::Rest
 {
@@ -14,18 +12,17 @@ namespace Aptos::Rest
     {
     public:
         /// <summary>
-        /// Get the UnityWebRequest object for the given path, default to GET method
+        /// Get the Client object for the given path, default to GET method
         /// </summary>
         /// <param name="uri">endpoint uri</param>
-        /// <param name="method">HTTP method</param>
-        /// <returns>UnityWebRequest object</returns>
-        static web::http::http_request SubmitRequest(web::http::uri uri, web::http::method method = web::http::methods::GET);
+        /// <returns>httplib::Client object</returns>
+        static httplib::Client GetWebClient(std::string uri);
 
         /// <summary>
         /// Get the default Aptos header value
         /// </summary>
         /// <returns>String with the default Aptos header value</returns>
-        static utility::string_t GetAptosHeaderValue();
+        static std::string GetAptosHeaderValue();
     };
 }
 #endif // REQUESTCLIENT_H

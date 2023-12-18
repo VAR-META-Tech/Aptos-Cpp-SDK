@@ -2,8 +2,6 @@
 #define RESTCLIENT_H
 
 #define BOOST_ASIO_HAS_STD_INVOKE_RESULT
-#include <cpprest/http_client.h>
-#include <cpprest/json.h>
 #include <memory>
 #include "Model/AccountData.h"
 #include "Model/LedgerInfo.h"
@@ -53,7 +51,7 @@ namespace Aptos::Rest
         /// and a response object that contains the response details.
         /// </returns>
         void GetAccount(std::function<void(std::shared_ptr<AptosRESTModel::AccountData>, AptosRESTModel::ResponseInfo)> callback,
-                        const std::string &accountAddress);
+                        const AccountAddress &accountAddress);
         /// <summary>
         /// Get an account's balance.
         ///
@@ -64,7 +62,7 @@ namespace Aptos::Rest
         /// <param name="accountAddress">Address of the account.</param>
         /// <returns>Calls <c>callback</c> function with <c>(string, ResponseInfo)</c>: \n
         /// A Sequence number as a string - null if the request fails, and a response object containing the response details. </returns>
-        void GetAccountSequenceNumber(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const std::string &accountAddress);
+        void GetAccountSequenceNumber(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const AccountAddress &accountAddress);
 
         /// <summary>
         /// Get an account's balance.
@@ -105,7 +103,7 @@ namespace Aptos::Rest
         /// <returns>Calls <c>callback</c> function with <c>(AccountResourceCoin.Coin, ResponseInfo)</c>: \n
         /// A representation of the coin, and an object containing the response details.</returns>
         void GetAccountBalance(std::function<void(AptosRESTModel::AccountResourceCoin::Coin, AptosRESTModel::ResponseInfo)> callback,
-                               const std::string &accountAddress);
+                               const AccountAddress &accountAddress);
         /// <summary>
         /// Get a resource of a given type from an account.
         /// NOTE: The response is a complex object of types only known to the developer writing the contracts.
@@ -120,7 +118,7 @@ namespace Aptos::Rest
         /// -- long: - error code, string - JSON response to be deserialized by the consumer of the function\n
         /// -- string: - the response which may contain the resource details</returns>
         void GetAccountResource(std::function<void(bool, long, std::string)> callback,
-                                const std::string &accountAddress,
+                                const AccountAddress &accountAddress,
                                 const std::string &resourceType = "",
                                 const std::string &ledgerVersion = "");
         /// <summary>
@@ -131,7 +129,7 @@ namespace Aptos::Rest
         /// <param name="ledgerVersion">Type of resource being queried for.</param>
         /// <returns></returns>
         void GetAccountResources(std::function<void(bool, long, std::string)> callback,
-                                 const std::string &accountAddress,
+                                 const AccountAddress &accountAddress,
                                  const std::string &ledgerVersion = "");
         /// <summary>
         /// Get Account Resource
@@ -142,7 +140,7 @@ namespace Aptos::Rest
         /// <returns>Calls <c>callback</c> function with <c>(ResourceCollection, ResponseInfo)</c>:\n
         /// An object representing a collection resource - null if the request fails, and a response object contains the response details.</returns>
         void GetAccountResourceCollection(std::function<void(std::shared_ptr<AptosRESTModel::ResourceCollection>, AptosRESTModel::ResponseInfo)> callback,
-                                          const std::string &accountAddress,
+                                          const AccountAddress &accountAddress,
                                           const std::string &resourceType);
         /// <summary>
         /// Gets table item that represents a coin resource
@@ -601,11 +599,11 @@ namespace Aptos::Rest
         /// -- string: - the response which may contain the resource details</returns>
         void GetAccountResource(
             std::function<void(bool, long, std::string)> callback,
-            AccountAddress accountAddress,
+            AccountAddress &accountAddress,
             std::string resourceType);
 
     private:
-        web::uri endpoint;
+       std::string endpoint;
     };
 }
 #endif // RESTCLIENT_H

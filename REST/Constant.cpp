@@ -1,10 +1,10 @@
 #include "Constant.h"
 
-const std::string Constants::MAINNET_BASE_URL = "https://fullnode.mainnet.aptoslabs.com/v1";
-const std::string Constants::TESTNET_BASE_URL = "https://fullnode.testnet.aptoslabs.com/v1";
-const std::string Constants::DEVNET_BASE_URL = "https://fullnode.devnet.aptoslabs.com/v1";
+const std::string Constants::MAINNET_BASE_URL = "https://fullnode.mainnet.aptoslabs.com";
+const std::string Constants::TESTNET_BASE_URL = "https://fullnode.testnet.aptoslabs.com";
+const std::string Constants::DEVNET_BASE_URL = "https://fullnode.devnet.aptoslabs.com";
 
-const std::string Constants::APTOS_COIN_TYPE = "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>";
+const std::string Constants::APTOS_COIN_TYPE = "0x1::coin::CoinStore%3C0x1::aptos_coin::AptosCoin%3E";
 
 const int Constants::EXPIRATION_TTL = 600;
 const int Constants::GAS_UNIT_PRICE = 100;

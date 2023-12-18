@@ -15,52 +15,55 @@
 #include "../BCS/Bool.h"
 #include "../BCS/Bytes.h"
 #include "Model/AccountResourceTokenStore.h"
+#include "RequestClient.h"
 
 namespace Aptos::Rest
 {
     void RestClient::SetEndpoint(const std::string &url)
     {
-        endpoint = web::uri(url);
+        endpoint = url;
     }
 
     RestClient::RestClient() {}
 
-    void RestClient::GetAccount(std::function<void(std::shared_ptr<AptosRESTModel::AccountData>, AptosRESTModel::ResponseInfo)> callback, const std::string &accountAddress)
+    void RestClient::GetAccount(std::function<void(std::shared_ptr<AptosRESTModel::AccountData>, AptosRESTModel::ResponseInfo)> callback, const AccountAddress &accountAddress)
     {
         using namespace AptosRESTModel;
-        web::uri_builder builder(endpoint);
-        builder.append_path(U("/accounts/")).append_path(utility::conversions::to_string_t(accountAddress));
-        web::uri accountsURI = builder.to_uri();
-        web::http::client::http_client client(accountsURI);
 
-        client.request(web::http::methods::GET).then([=](web::http::http_response response)
-                                                     {
-                                               ResponseInfo responseInfo;
+        std::string uri = "/v1/accounts/" + accountAddress.ToString();
+        ResponseInfo responseInfo;
+        if (auto response = RequestClient::GetWebClient(endpoint).Get(uri))
+        {
+            if (response->status == 200)
+            {
+                responseInfo.status = ResponseInfo::Status::Success;
+                responseInfo.message = response->body;
+                AccountData accountData = AccountData::FromJson(response->body);
 
-                                               if (response.status_code() == web::http::status_codes::OK)
-                                               {
-                                                   responseInfo.status = ResponseInfo::Status::Success;
-                                                   responseInfo.message = utility::conversions::to_utf8string(response.to_string());
-                                                   AccountData accountData = AccountData::FromJson(response.to_string());
-
-                                                   callback(std::make_shared<AccountData>(accountData), responseInfo);
-                                               }
-                                               else if (response.status_code() == web::http::status_codes::NotFound)
-                                               {
-                                                   responseInfo.status = ResponseInfo::Status::NotFound;
-                                                   responseInfo.message = "Account not found";
-                                                   callback(nullptr, responseInfo);
-                                               }
-                                               else
-                                               {
-                                                   responseInfo.status = ResponseInfo::Status::Failed;
-                                                   responseInfo.message = utility::conversions::to_utf8string(response.to_string());
-                                                   callback(nullptr, responseInfo);
-                                               } })
-            .wait();
+                callback(std::make_shared<AccountData>(accountData), responseInfo);
+            }
+            else if (response->status == 404)
+            {
+                responseInfo.status = ResponseInfo::Status::NotFound;
+                responseInfo.message = "Account not found";
+                callback(nullptr, responseInfo);
+            }
+            else
+            {
+                responseInfo.status = ResponseInfo::Status::Failed;
+                responseInfo.message = response->body;
+                callback(nullptr, responseInfo);
+            }
+        }
+        else
+        {
+            responseInfo.status = ResponseInfo::Status::Failed;
+            responseInfo.message = httplib::to_string(response.error());
+            callback(nullptr, responseInfo);
+        }
     }
 
-    void RestClient::GetAccountSequenceNumber(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const std::string &accountAddress)
+    void RestClient::GetAccountSequenceNumber(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const AccountAddress &accountAddress)
     {
         using namespace AptosRESTModel;
         std::shared_ptr<AccountData> accountData;
@@ -83,189 +86,188 @@ namespace Aptos::Rest
     }
 
     void RestClient::GetAccountBalance(std::function<void(AptosRESTModel::AccountResourceCoin::Coin, AptosRESTModel::ResponseInfo)> callback,
-                                       const std::string &accountAddress)
+                                       const AccountAddress &accountAddress)
     {
         using namespace AptosRESTModel;
-        web::uri_builder builder(endpoint);
-        builder.append_path(U("/accounts/")).append_path(utility::conversions::to_string_t(accountAddress)).append_path(U("/resource/")).append_path(U("aptos_coin_type"));
-        web::uri accountsURI = builder.to_uri();
+        std::string uri = "/v1/accounts/" + accountAddress.ToString() + "/resource/" + Constants::APTOS_COIN_TYPE;
+        ResponseInfo responseInfo;
+        if (auto response = RequestClient::GetWebClient(endpoint).Get(uri))
+        {
 
-        web::http::client::http_client client(accountsURI);
+            if (response->status == 200)
+            {
+                responseInfo.status = ResponseInfo::Status::Success;
+                responseInfo.message = response->body;
 
-        client.request(web::http::methods::GET).then([=](web::http::http_response response)
-                                                     {
-                                               ResponseInfo responseInfo;
+                // Parse the response and fill the Coin object accordingly
+                AccountResourceCoin acctResourceCoin = AccountResourceCoin::FromJson(response->body);\
 
-                                               if (response.status_code() == web::http::status_codes::OK)
-                                               {
-                                                   responseInfo.status = ResponseInfo::Status::Success;
-                                                   responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+                callback(acctResourceCoin.dataProp().coinProp(), responseInfo);
+            }
+            else if (response->status == 404)
+            {
+                responseInfo.status = ResponseInfo::Status::NotFound;
+                responseInfo.message = "Resource not found. " + response->body;
 
-                                                   // Parse the response and fill the Coin object accordingly
-                                                   AccountResourceCoin acctResourceCoin = AccountResourceCoin::FromJson(response.to_string());
-                                                   AptosRESTModel::AccountResourceCoin::Coin coin;
-                                                   coin.value() = acctResourceCoin.dataProp().coinProp().value();
-
-                                                   callback(coin, responseInfo);
-                                               }
-                                               else if (response.status_code() == web::http::status_codes::NotFound)
-                                               {
-                                                   responseInfo.status = ResponseInfo::Status::NotFound;
-                                                   responseInfo.message = "Resource not found. " + utility::conversions::to_utf8string(response.to_string());
-
-                                                   AptosRESTModel::AccountResourceCoin::Coin coin;
-                                                   coin.value() = "0";
-                                                   callback(coin, responseInfo);
-                                               }
-                                               else
-                                               {
-                                                   responseInfo.status = ResponseInfo::Status::Failed;
-                                                   responseInfo.message = "Connection error. " + utility::conversions::to_utf8string(response.to_string());
-                                                   callback(AptosRESTModel::AccountResourceCoin::Coin(), responseInfo);
-                                               } })
-            .wait();
+                AptosRESTModel::AccountResourceCoin::Coin coin;
+                coin.value() = "0";
+                callback(coin, responseInfo);
+            }
+            else
+            {
+                responseInfo.status = ResponseInfo::Status::Failed;
+                responseInfo.message = "Connection error. " + response->body;
+                callback(AptosRESTModel::AccountResourceCoin::Coin(), responseInfo);
+            }
+        }
+        else
+        {
+            responseInfo.status = ResponseInfo::Status::Failed;
+            responseInfo.message = httplib::to_string(response.error());
+            callback(AptosRESTModel::AccountResourceCoin::Coin(), responseInfo);
+        }
     }
 
-    void RestClient::GetAccountResource(std::function<void(bool, long, std::string)> callback, const std::string &accountAddress, const std::string &resourceType, const std::string &ledgerVersion)
+    void RestClient::GetAccountResource(std::function<void(bool, long, std::string)> callback, const AccountAddress &accountAddress, const std::string &resourceType, const std::string &ledgerVersion)
     {
-        web::uri_builder builder(endpoint);
-        builder.append_path(U("/accounts/")).append_path(utility::conversions::to_string_t(accountAddress)).append_path(U("/resource/")).append_path(utility::conversions::to_string_t(resourceType));
-        web::uri accountsURI = builder.to_uri();
+        // web::uri_builder builder(endpoint);
+        // builder.append_path(U("/accounts/")).append_path(utility::conversions::to_string_t(accountAddress)).append_path(U("/resource/")).append_path(utility::conversions::to_string_t(resourceType));
+        // web::uri accountsURI = builder.to_uri();
 
-        web::http::client::http_client client(accountsURI);
+        // web::http::client::http_client client(accountsURI);
 
-        client.request(web::http::methods::GET).then([=](web::http::http_response response)
-                                                     {
-                                               if (response.status_code() == web::http::status_codes::OK) {
-                                                   callback(true, response.status_code(), utility::conversions::to_utf8string(response.to_string()));
-                                               } else if (response.status_code() == web::http::status_codes::NotFound || response.status_code() >= 400) {
-                                                   callback(false, response.status_code(), utility::conversions::to_utf8string(response.to_string()));
-                                               } else {
-                                                   callback(false, 0, "ERROR: Connection Error");
-                                               } })
-            .wait();
+        // client.request(web::http::methods::GET).then([=](web::http::http_response response)
+        //                                              {
+        //                                        if (response.status_code() == web::http::status_codes::OK) {
+        //                                            callback(true, response.status_code(), utility::conversions::to_utf8string(response.to_string()));
+        //                                        } else if (response.status_code() == web::http::status_codes::NotFound || response.status_code() >= 400) {
+        //                                            callback(false, response.status_code(), utility::conversions::to_utf8string(response.to_string()));
+        //                                        } else {
+        //                                            callback(false, 0, "ERROR: Connection Error");
+        //                                        } })
+        //     .wait();
     }
 
-    void RestClient::GetAccountResources(std::function<void(bool, long, std::string)> callback, const std::string &accountAddress, const std::string &ledgerVersion)
+    void RestClient::GetAccountResources(std::function<void(bool, long, std::string)> callback, const AccountAddress &accountAddress, const std::string &ledgerVersion)
     {
-        web::uri_builder builder(endpoint);
-        builder.append_path(U("/accounts/")).append_path(utility::conversions::to_string_t(accountAddress)).append_path(U("/resources"));
-        web::uri accountsURI = builder.to_uri();
+        // web::uri_builder builder(endpoint);
+        // builder.append_path(U("/accounts/")).append_path(utility::conversions::to_string_t(accountAddress)).append_path(U("/resources"));
+        // web::uri accountsURI = builder.to_uri();
 
-        web::http::client::http_client client(accountsURI);
+        // web::http::client::http_client client(accountsURI);
 
-        client.request(web::http::methods::GET).then([=](web::http::http_response response)
-                                                     {
-                                               if (response.status_code() == web::http::status_codes::OK)
-                                               {
-                                                   callback(true, response.status_code(), utility::conversions::to_utf8string(response.to_string()));
-                                               }
-                                               else if (response.status_code() == web::http::status_codes::NotFound || response.status_code() >= 400)
-                                               {
-                                                   callback(false, response.status_code(), utility::conversions::to_utf8string(response.to_string()));
-                                               }
-                                               else
-                                               {
-                                                   callback(false, 0, "ERROR: Connection Error");
-                                               } })
-            .wait();
+        // client.request(web::http::methods::GET).then([=](web::http::http_response response)
+        //                                              {
+        //                                        if (response.status_code() == web::http::status_codes::OK)
+        //                                        {
+        //                                            callback(true, response.status_code(), utility::conversions::to_utf8string(response.to_string()));
+        //                                        }
+        //                                        else if (response.status_code() == web::http::status_codes::NotFound || response.status_code() >= 400)
+        //                                        {
+        //                                            callback(false, response.status_code(), utility::conversions::to_utf8string(response.to_string()));
+        //                                        }
+        //                                        else
+        //                                        {
+        //                                            callback(false, 0, "ERROR: Connection Error");
+        //                                        } })
+        //     .wait();
     }
 
     void RestClient::GetAccountResourceCollection(std::function<void(std::shared_ptr<AptosRESTModel::ResourceCollection>, AptosRESTModel::ResponseInfo)> callback,
-                                                  const std::string &accountAddress,
+                                                  const AccountAddress &accountAddress,
                                                   const std::string &resourceType)
     {
-        using namespace AptosRESTModel;
-        web::uri_builder builder(endpoint);
-        builder.append_path(U("/accounts/")).append_path(utility::conversions::to_string_t(accountAddress)).append_path(U("/resource/")).append_path(utility::conversions::to_string_t(resourceType));
-        web::uri accountsURI = builder.to_uri();
-        web::http::client::http_client client(accountsURI);
-        client.request(web::http::methods::GET).then([=](web::http::http_response response)
-                                                     {
-                                               ResponseInfo responseInfo;
-                                               if (response.status_code() == web::http::status_codes::OK)
-                                               {
-                                                   ResourceCollection acctResource = ResourceCollection::FromJson(response.to_string());
-                                                   responseInfo.status = ResponseInfo::Status::Success;
-                                                   responseInfo.message = utility::conversions::to_utf8string(response.to_string());
-                                                   callback(std::make_shared<ResourceCollection>(acctResource), responseInfo);
-                                               }
-                                               else if (response.status_code() == web::http::status_codes::NotFound || response.status_code() >= 400)
-                                               {
-                                                   responseInfo.status = ResponseInfo::Status::Failed;
-                                                   responseInfo.message = "Account resource not found. " + utility::conversions::to_utf8string(response.to_string());
-                                                   callback(nullptr, responseInfo);
-                                               }
-                                               else
-                                               {
-                                                   responseInfo.status = ResponseInfo::Status::Failed;
-                                                   responseInfo.message = "Connection error. " + utility::conversions::to_utf8string(response.to_string());
-                                                   callback(nullptr, responseInfo);
-                                               } })
-            .wait();
+        // using namespace AptosRESTModel;
+        // web::uri_builder builder(endpoint);
+        // builder.append_path(U("/accounts/")).append_path(utility::conversions::to_string_t(accountAddress)).append_path(U("/resource/")).append_path(utility::conversions::to_string_t(resourceType));
+        // web::uri accountsURI = builder.to_uri();
+        // web::http::client::http_client client(accountsURI);
+        // client.request(web::http::methods::GET).then([=](web::http::http_response response)
+        //                                              {
+        //                                        ResponseInfo responseInfo;
+        //                                        if (response.status_code() == web::http::status_codes::OK)
+        //                                        {
+        //                                            ResourceCollection acctResource = ResourceCollection::FromJson(response.to_string());
+        //                                            responseInfo.status = ResponseInfo::Status::Success;
+        //                                            responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+        //                                            callback(std::make_shared<ResourceCollection>(acctResource), responseInfo);
+        //                                        }
+        //                                        else if (response.status_code() == web::http::status_codes::NotFound || response.status_code() >= 400)
+        //                                        {
+        //                                            responseInfo.status = ResponseInfo::Status::Failed;
+        //                                            responseInfo.message = "Account resource not found. " + utility::conversions::to_utf8string(response.to_string());
+        //                                            callback(nullptr, responseInfo);
+        //                                        }
+        //                                        else
+        //                                        {
+        //                                            responseInfo.status = ResponseInfo::Status::Failed;
+        //                                            responseInfo.message = "Connection error. " + utility::conversions::to_utf8string(response.to_string());
+        //                                            callback(nullptr, responseInfo);
+        //                                        } })
+        //     .wait();
     }
 
     void RestClient::GetTableItemCoin(std::function<void(std::shared_ptr<AptosRESTModel::AccountResourceCoin>, AptosRESTModel::ResponseInfo)> callback, const std::string &handle, const std::string &keyType, const std::string &valueType, const std::string &key)
     {
-        using namespace AptosRESTModel;
-        web::uri_builder builder(endpoint);
-        builder.append_path(U("/tables/")).append_path(utility::conversions::to_string_t(handle)).append_path(U("/item/"));
-        web::uri getTableItemURI = builder.to_uri();
-        web::http::client::http_client client(getTableItemURI);
-        client.request(web::http::methods::GET).then([=](web::http::http_response response)
-                                                     {
-                                               ResponseInfo responseInfo;
-                                               if (response.status_code() == web::http::status_codes::OK)
-                                               {
-                                                   AccountResourceCoin acctResource = AccountResourceCoin::FromJson(response.to_string());
-                                                   responseInfo.status = ResponseInfo::Status::Success;
-                                                   responseInfo.message = utility::conversions::to_utf8string(response.to_string());
-                                                   callback(std::make_shared<AccountResourceCoin>(acctResource), responseInfo);
-                                               }
-                                               else if (response.status_code() == web::http::status_codes::NotFound)
-                                               {
-                                                   responseInfo.status = ResponseInfo::Status::NotFound;
-                                                   responseInfo.message = "Table item not found. " + utility::conversions::to_utf8string(response.to_string());
-                                                   callback(nullptr, responseInfo);
-                                               }
-                                               else
-                                               {
-                                                   responseInfo.status = ResponseInfo::Status::Failed;
-                                                   responseInfo.message = "Error while sending request for table item. " + utility::conversions::to_utf8string(response.to_string());
-                                                   callback(nullptr, responseInfo);
-                                               } })
-            .wait();
+        // using namespace AptosRESTModel;
+        // web::uri_builder builder(endpoint);
+        // builder.append_path(U("/tables/")).append_path(utility::conversions::to_string_t(handle)).append_path(U("/item/"));
+        // web::uri getTableItemURI = builder.to_uri();
+        // web::http::client::http_client client(getTableItemURI);
+        // client.request(web::http::methods::GET).then([=](web::http::http_response response)
+        //                                              {
+        //                                        ResponseInfo responseInfo;
+        //                                        if (response.status_code() == web::http::status_codes::OK)
+        //                                        {
+        //                                            AccountResourceCoin acctResource = AccountResourceCoin::FromJson(response.to_string());
+        //                                            responseInfo.status = ResponseInfo::Status::Success;
+        //                                            responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+        //                                            callback(std::make_shared<AccountResourceCoin>(acctResource), responseInfo);
+        //                                        }
+        //                                        else if (response.status_code() == web::http::status_codes::NotFound)
+        //                                        {
+        //                                            responseInfo.status = ResponseInfo::Status::NotFound;
+        //                                            responseInfo.message = "Table item not found. " + utility::conversions::to_utf8string(response.to_string());
+        //                                            callback(nullptr, responseInfo);
+        //                                        }
+        //                                        else
+        //                                        {
+        //                                            responseInfo.status = ResponseInfo::Status::Failed;
+        //                                            responseInfo.message = "Error while sending request for table item. " + utility::conversions::to_utf8string(response.to_string());
+        //                                            callback(nullptr, responseInfo);
+        //                                        } })
+        //     .wait();
     }
 
     void RestClient::GetTableItem(std::function<void(std::string)> callback, const std::string &handle, const std::string &keyType, const std::string &valueType, const std::string &key)
     {
-        using namespace AptosRESTModel;
-        TableItemRequest tableItemRequest;
-        tableItemRequest.setKeyType(keyType);
-        tableItemRequest.setValueType(valueType);
-        tableItemRequest.setKey(key);
+        // using namespace AptosRESTModel;
+        // TableItemRequest tableItemRequest;
+        // tableItemRequest.setKeyType(keyType);
+        // tableItemRequest.setValueType(valueType);
+        // tableItemRequest.setKey(key);
 
-        web::uri_builder builder(endpoint);
-        builder.append_path(U("/tables/")).append_path(utility::conversions::to_string_t(handle)).append_path(U("/item"));
-        web::uri getTableItemURI = builder.to_uri();
+        // web::uri_builder builder(endpoint);
+        // builder.append_path(U("/tables/")).append_path(utility::conversions::to_string_t(handle)).append_path(U("/item"));
+        // web::uri getTableItemURI = builder.to_uri();
 
-        web::http::client::http_client client(getTableItemURI);
+        // web::http::client::http_client client(getTableItemURI);
 
-        web::http::http_request request(web::http::methods::POST);
-        request.headers().set_content_type(U("application/json"));
-        request.set_body(web::json::value::string(utility::conversions::to_string_t(tableItemRequest.ToJson().dump())));
+        // web::http::http_request request(web::http::methods::POST);
+        // request.headers().set_content_type(U("application/json"));
+        // request.set_body(web::json::value::string(utility::conversions::to_string_t(tableItemRequest.ToJson().dump())));
 
-        client.request(request).then([=](web::http::http_response response)
-                                     {
-                               if (response.status_code() == web::http::status_codes::OK)
-                               {
-                                   callback(utility::conversions::to_utf8string(response.to_string()));
-                               }
-                               else
-                               {
-                                   callback(nullptr);
-                               } })
-            .wait();
+        // client.request(request).then([=](web::http::http_response response)
+        //                              {
+        //                        if (response.status_code() == web::http::status_codes::OK)
+        //                        {
+        //                            callback(utility::conversions::to_utf8string(response.to_string()));
+        //                        }
+        //                        else
+        //                        {
+        //                            callback(nullptr);
+        //                        } })
+        //     .wait();
     }
 
     void RestClient::GetTableItemNFT(std::function<void(std::shared_ptr<AptosRESTModel::TableItemToken>, AptosRESTModel::ResponseInfo)> callback,
@@ -274,378 +276,378 @@ namespace Aptos::Rest
                                      const std::string &valueType,
                                      AptosRESTModel::TokenIdRequest key)
     {
-        using namespace AptosRESTModel;
-        TableItemRequestNFT tableItemRequest;
-        tableItemRequest.setKeyType(keyType);
-        tableItemRequest.setValueType(valueType);
-        tableItemRequest.setKey(key);
+        // using namespace AptosRESTModel;
+        // TableItemRequestNFT tableItemRequest;
+        // tableItemRequest.setKeyType(keyType);
+        // tableItemRequest.setValueType(valueType);
+        // tableItemRequest.setKey(key);
 
-        // Serialize the request object to JSON
-        std::string tableItemRequestJson = utility::conversions::to_utf8string(tableItemRequest.ToJson().dump());
+        // // Serialize the request object to JSON
+        // std::string tableItemRequestJson = utility::conversions::to_utf8string(tableItemRequest.ToJson().dump());
 
-        // Perform the HTTP request using the serialized JSON
-        web::http::client::http_client client(endpoint);
-        web::uri_builder builder(U("/tables/" + handle + "/item"));
+        // // Perform the HTTP request using the serialized JSON
+        // web::http::client::http_client client(endpoint);
+        // web::uri_builder builder(U("/tables/" + handle + "/item"));
 
-        client.request(web::http::methods::POST, builder.to_string(), U(tableItemRequestJson), U("application/json"))
-            .then([=](web::http::http_response response)
-                  {
-            ResponseInfo responseInfo;
-            TableItemToken tableItemToken;
-            if (response.status_code() == web::http::status_codes::OK)
-            {
-                tableItemToken = TableItemToken::FromJson(response.to_string());
-                responseInfo.status = ResponseInfo::Status::Success;
-                responseInfo.message = utility::conversions::to_utf8string(response.to_string());
-                callback(std::make_shared<TableItemToken>(tableItemToken), responseInfo);
-            }
-            else if (response.status_code() == web::http::status_codes::NotFound)
-            {
-                tableItemToken.getIdProp().getTokenDataIdProp().setCreator(key.getTokenDataIdProp().getCreator());
-                tableItemToken.getIdProp().getTokenDataIdProp().setCollection(key.getTokenDataIdProp().getCollection());
-                tableItemToken.getIdProp().getTokenDataIdProp().setName(key.getTokenDataIdProp().getName());
-                tableItemToken.setAmount("0");
+        // client.request(web::http::methods::POST, builder.to_string(), U(tableItemRequestJson), U("application/json"))
+        //     .then([=](web::http::http_response response)
+        //           {
+        //     ResponseInfo responseInfo;
+        //     TableItemToken tableItemToken;
+        //     if (response.status_code() == web::http::status_codes::OK)
+        //     {
+        //         tableItemToken = TableItemToken::FromJson(response.to_string());
+        //         responseInfo.status = ResponseInfo::Status::Success;
+        //         responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+        //         callback(std::make_shared<TableItemToken>(tableItemToken), responseInfo);
+        //     }
+        //     else if (response.status_code() == web::http::status_codes::NotFound)
+        //     {
+        //         tableItemToken.getIdProp().getTokenDataIdProp().setCreator(key.getTokenDataIdProp().getCreator());
+        //         tableItemToken.getIdProp().getTokenDataIdProp().setCollection(key.getTokenDataIdProp().getCollection());
+        //         tableItemToken.getIdProp().getTokenDataIdProp().setName(key.getTokenDataIdProp().getName());
+        //         tableItemToken.setAmount("0");
 
-                responseInfo.status = ResponseInfo::Status::NotFound;
-                responseInfo.message = "Table item not found.";
-                callback(std::make_shared<TableItemToken>(tableItemToken), responseInfo);
-            }  else if (response.status_code() == web::http::status_codes::BadRequest)
-            {
-                responseInfo.status = ResponseInfo::Status::Failed;
-                responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+        //         responseInfo.status = ResponseInfo::Status::NotFound;
+        //         responseInfo.message = "Table item not found.";
+        //         callback(std::make_shared<TableItemToken>(tableItemToken), responseInfo);
+        //     }  else if (response.status_code() == web::http::status_codes::BadRequest)
+        //     {
+        //         responseInfo.status = ResponseInfo::Status::Failed;
+        //         responseInfo.message = utility::conversions::to_utf8string(response.to_string());
 
-                callback(nullptr, responseInfo);
-            } else {
-                tableItemToken = TableItemToken::FromJson(response.to_string());
-                responseInfo.status = ResponseInfo::Status::Success;
-                responseInfo.message = utility::conversions::to_utf8string(response.to_string());
-                callback(std::make_shared<TableItemToken>(tableItemToken), responseInfo);
-            } })
-            .wait();
+        //         callback(nullptr, responseInfo);
+        //     } else {
+        //         tableItemToken = TableItemToken::FromJson(response.to_string());
+        //         responseInfo.status = ResponseInfo::Status::Success;
+        //         responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+        //         callback(std::make_shared<TableItemToken>(tableItemToken), responseInfo);
+        //     } })
+        //     .wait();
     }
 
     void RestClient::GetTableItemTokenData(std::function<void(std::shared_ptr<AptosRESTModel::TableItemTokenMetadata>, AptosRESTModel::ResponseInfo)> callback, const std::string &handle, const std::string &keyType, const std::string &valueType, AptosRESTModel::TokenDataId key)
     {
-        using namespace AptosRESTModel;
-        TableItemRequestTokenData tableItemRequest;
-        tableItemRequest.setKey_type(keyType);
-        tableItemRequest.setValue_type(valueType);
-        tableItemRequest.setKey(key);
+        // using namespace AptosRESTModel;
+        // TableItemRequestTokenData tableItemRequest;
+        // tableItemRequest.setKey_type(keyType);
+        // tableItemRequest.setValue_type(valueType);
+        // tableItemRequest.setKey(key);
 
-        // Serialize the request object to JSON
-        std::string tableItemRequestJson = utility::conversions::to_utf8string(tableItemRequest.ToJson().dump());
+        // // Serialize the request object to JSON
+        // std::string tableItemRequestJson = utility::conversions::to_utf8string(tableItemRequest.ToJson().dump());
 
-        // Perform the HTTP request using the serialized JSON
-        web::http::client::http_client client(endpoint);
-        web::uri_builder builder(U("/tables/" + handle + "/item"));
+        // // Perform the HTTP request using the serialized JSON
+        // web::http::client::http_client client(endpoint);
+        // web::uri_builder builder(U("/tables/" + handle + "/item"));
 
-        client.request(web::http::methods::POST, builder.to_string(), U(tableItemRequestJson), U("application/json"))
-            .then([=](pplx::task<web::http::http_response> task)
-                  {
-            ResponseInfo responseInfo;
-            std::shared_ptr<TableItemTokenMetadata> tableItemToken = nullptr;
-            try
-            {
-                web::http::http_response response = task.get();
+        // client.request(web::http::methods::POST, builder.to_string(), U(tableItemRequestJson), U("application/json"))
+        //     .then([=](pplx::task<web::http::http_response> task)
+        //           {
+        //     ResponseInfo responseInfo;
+        //     std::shared_ptr<TableItemTokenMetadata> tableItemToken = nullptr;
+        //     try
+        //     {
+        //         web::http::http_response response = task.get();
 
-                if (response.status_code() == web::http::status_codes::OK)
-                {
-                    // Deserialize the JSON response
-                    tableItemToken = std::make_shared<TableItemTokenMetadata>(TableItemTokenMetadata::FromJson(response.to_string()));
-                    responseInfo.status = ResponseInfo::Status::Success;
-                    responseInfo.message = utility::conversions::to_utf8string(response.to_string());
-                }
-                else if (response.status_code() == web::http::status_codes::NotFound)
-                {
-                    // Handle the case when the item is not found
-                    responseInfo.status = ResponseInfo::Status::NotFound;
-                    responseInfo.message = "Table item not found.";
-                }
-                else
-                {
-                    // Deserialize the JSON response
-                    tableItemToken = std::make_shared<TableItemTokenMetadata>(TableItemTokenMetadata::FromJson(response.to_string()));
-                    responseInfo.status = ResponseInfo::Status::Success;
-                    responseInfo.message = utility::conversions::to_utf8string(response.to_string());
-                }
-            }
-            catch (const std::exception& e)
-            {
-                // Handle connection errors
-                responseInfo.status = ResponseInfo::Status::Failed;
-                responseInfo.message = e.what();
-            }
+        //         if (response.status_code() == web::http::status_codes::OK)
+        //         {
+        //             // Deserialize the JSON response
+        //             tableItemToken = std::make_shared<TableItemTokenMetadata>(TableItemTokenMetadata::FromJson(response.to_string()));
+        //             responseInfo.status = ResponseInfo::Status::Success;
+        //             responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+        //         }
+        //         else if (response.status_code() == web::http::status_codes::NotFound)
+        //         {
+        //             // Handle the case when the item is not found
+        //             responseInfo.status = ResponseInfo::Status::NotFound;
+        //             responseInfo.message = "Table item not found.";
+        //         }
+        //         else
+        //         {
+        //             // Deserialize the JSON response
+        //             tableItemToken = std::make_shared<TableItemTokenMetadata>(TableItemTokenMetadata::FromJson(response.to_string()));
+        //             responseInfo.status = ResponseInfo::Status::Success;
+        //             responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+        //         }
+        //     }
+        //     catch (const std::exception& e)
+        //     {
+        //         // Handle connection errors
+        //         responseInfo.status = ResponseInfo::Status::Failed;
+        //         responseInfo.message = e.what();
+        //     }
 
-            // Callback with the results
-            callback(tableItemToken, responseInfo); })
-            .wait();
+        //     // Callback with the results
+        //     callback(tableItemToken, responseInfo); })
+        //     .wait();
     }
 
     void RestClient::GetInfo(std::function<void(std::shared_ptr<AptosRESTModel::LedgerInfo>, AptosRESTModel::ResponseInfo)> callback)
     {
-        using namespace AptosRESTModel;
-        // Perform the HTTP request to get info
-        web::http::client::http_client client(endpoint);
-        web::uri_builder builder(U("/"));
+        // using namespace AptosRESTModel;
+        // // Perform the HTTP request to get info
+        // web::http::client::http_client client(endpoint);
+        // web::uri_builder builder(U("/"));
 
-        client.request(web::http::methods::GET, builder.to_string())
-            .then([=](pplx::task<web::http::http_response> task)
-                  {
-            ResponseInfo responseInfo;
-            std::shared_ptr<LedgerInfo> ledgerInfo = nullptr;
-            try
-            {
-                web::http::http_response response = task.get();
+        // client.request(web::http::methods::GET, builder.to_string())
+        //     .then([=](pplx::task<web::http::http_response> task)
+        //           {
+        //     ResponseInfo responseInfo;
+        //     std::shared_ptr<LedgerInfo> ledgerInfo = nullptr;
+        //     try
+        //     {
+        //         web::http::http_response response = task.get();
 
-                if (response.status_code() == web::http::status_codes::OK)
-                {
-                    // Deserialize the JSON response
-                    ledgerInfo = std::make_shared<LedgerInfo>(LedgerInfo::FromJson(response.to_string()));
-                    responseInfo.status = ResponseInfo::Status::Success;
-                    responseInfo.message = utility::conversions::to_utf8string(response.to_string());
-                }
-                else if (response.status_code() == web::http::status_codes::NotFound)
-                {
-                    // Handle the case when the resource is not found
-                    responseInfo.status = ResponseInfo::Status::NotFound;
-                    responseInfo.message = "Resource not found.";
-                }
-                else
-                {
-                    // Deserialize the JSON response
-                    ledgerInfo = std::make_shared<LedgerInfo>(LedgerInfo::FromJson(response.to_string()));
-                    responseInfo.status = ResponseInfo::Status::Success;
-                    responseInfo.message = utility::conversions::to_utf8string(response.to_string());
-                }
-            }
-            catch (const std::exception& e)
-            {
-                // Handle connection errors
-                responseInfo.status = ResponseInfo::Status::Failed;
-                responseInfo.message = e.what();
-            }
+        //         if (response.status_code() == web::http::status_codes::OK)
+        //         {
+        //             // Deserialize the JSON response
+        //             ledgerInfo = std::make_shared<LedgerInfo>(LedgerInfo::FromJson(response.to_string()));
+        //             responseInfo.status = ResponseInfo::Status::Success;
+        //             responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+        //         }
+        //         else if (response.status_code() == web::http::status_codes::NotFound)
+        //         {
+        //             // Handle the case when the resource is not found
+        //             responseInfo.status = ResponseInfo::Status::NotFound;
+        //             responseInfo.message = "Resource not found.";
+        //         }
+        //         else
+        //         {
+        //             // Deserialize the JSON response
+        //             ledgerInfo = std::make_shared<LedgerInfo>(LedgerInfo::FromJson(response.to_string()));
+        //             responseInfo.status = ResponseInfo::Status::Success;
+        //             responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+        //         }
+        //     }
+        //     catch (const std::exception& e)
+        //     {
+        //         // Handle connection errors
+        //         responseInfo.status = ResponseInfo::Status::Failed;
+        //         responseInfo.message = e.what();
+        //     }
 
-            // Callback with the results
-            callback(ledgerInfo, responseInfo); })
-            .wait();
+        //     // Callback with the results
+        //     callback(ledgerInfo, responseInfo); })
+        //     .wait();
     }
 
     void RestClient::SimulateTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback,
                                          RawTransaction transaction, std::vector<uint8_t> publicKey)
     {
-        using namespace AptosRESTModel;
-        CryptoPP::SecByteBlock byteBlock(Signature::SignatureLength);
-        std::memset(byteBlock.BytePtr(), 0, byteBlock.SizeInBytes());
-        Signature emptySignature(byteBlock);
-        Authenticator authenticator{std::make_shared<Ed25519Authenticator>(PublicKey(Aptos::Utils::ByteVectorToSecBlock(publicKey)), emptySignature)};
-        SignedTransaction signedTransaction(transaction, authenticator);
+        // using namespace AptosRESTModel;
+        // CryptoPP::SecByteBlock byteBlock(Signature::SignatureLength);
+        // std::memset(byteBlock.BytePtr(), 0, byteBlock.SizeInBytes());
+        // Signature emptySignature(byteBlock);
+        // Authenticator authenticator{std::make_shared<Ed25519Authenticator>(PublicKey(Aptos::Utils::ByteVectorToSecBlock(publicKey)), emptySignature)};
+        // SignedTransaction signedTransaction(transaction, authenticator);
 
-        // Perform the HTTP request to simulate a transaction
-        web::http::client::http_client client(web::uri_builder(endpoint).append(U("/transactions/simulate")).to_string());
-        web::http::http_request request(web::http::methods::POST);
+        // // Perform the HTTP request to simulate a transaction
+        // web::http::client::http_client client(web::uri_builder(endpoint).append(U("/transactions/simulate")).to_string());
+        // web::http::http_request request(web::http::methods::POST);
 
-        // Set the request body with the byte array
-        request.headers().set_content_type(U("application/x.aptos.signed_transaction+bcs"));
-        request.set_body(signedTransaction.Bytes());
-        client.request(request)
-            .then([=](pplx::task<web::http::http_response> task)
-                  {
-            ResponseInfo responseInfo;
-            std::string response;
-            try
-            {
-                web::http::http_response httpResponse = task.get();
-                if (httpResponse.status_code() == web::http::status_codes::OK)
-                {
-                    response = utility::conversions::to_utf8string(httpResponse.to_string());
-                    responseInfo.status = ResponseInfo::Status::Success;
-                    responseInfo.message = response;
-                }
-                else if (httpResponse.status_code() == web::http::status_codes::NotFound)
-                {
-                    responseInfo.status = ResponseInfo::Status::NotFound;
-                    responseInfo.message = "Endpoint not found.";
-                }
-                else
-                {
-                    responseInfo.status = ResponseInfo::Status::Failed;
-                    responseInfo.message = utility::conversions::to_utf8string(httpResponse.to_string());
-                }
-            }
-            catch (const std::exception& e)
-            {
-                responseInfo.status = ResponseInfo::Status::Failed;
-                responseInfo.message = e.what();
-            }
+        // // Set the request body with the byte array
+        // request.headers().set_content_type(U("application/x.aptos.signed_transaction+bcs"));
+        // request.set_body(signedTransaction.Bytes());
+        // client.request(request)
+        //     .then([=](pplx::task<web::http::http_response> task)
+        //           {
+        //     ResponseInfo responseInfo;
+        //     std::string response;
+        //     try
+        //     {
+        //         web::http::http_response httpResponse = task.get();
+        //         if (httpResponse.status_code() == web::http::status_codes::OK)
+        //         {
+        //             response = utility::conversions::to_utf8string(httpResponse.to_string());
+        //             responseInfo.status = ResponseInfo::Status::Success;
+        //             responseInfo.message = response;
+        //         }
+        //         else if (httpResponse.status_code() == web::http::status_codes::NotFound)
+        //         {
+        //             responseInfo.status = ResponseInfo::Status::NotFound;
+        //             responseInfo.message = "Endpoint not found.";
+        //         }
+        //         else
+        //         {
+        //             responseInfo.status = ResponseInfo::Status::Failed;
+        //             responseInfo.message = utility::conversions::to_utf8string(httpResponse.to_string());
+        //         }
+        //     }
+        //     catch (const std::exception& e)
+        //     {
+        //         responseInfo.status = ResponseInfo::Status::Failed;
+        //         responseInfo.message = e.what();
+        //     }
 
-            // Callback with the results
-            callback(response, responseInfo); })
-            .wait();
+        //     // Callback with the results
+        //     callback(response, responseInfo); })
+        //     .wait();
     }
 
     void RestClient::SubmitBCSTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const SignedTransaction &signedTransaction)
     {
-        using namespace AptosRESTModel;
-        // Create an HTTP client
-        web::http::client::http_client client(endpoint.to_string() + "/transactions");
-        // Create an HTTP request with method POST
-        web::http::http_request request(web::http::methods::POST);
-        // Set the "Content-Type" header
-        request.headers().set_content_type(U("application/x.aptos.signed_transaction+bcs"));
-        // Set the request body with the signed transaction bytes
-        request.set_body(signedTransaction.Bytes());
+        // using namespace AptosRESTModel;
+        // // Create an HTTP client
+        // web::http::client::http_client client(endpoint.to_string() + "/transactions");
+        // // Create an HTTP request with method POST
+        // web::http::http_request request(web::http::methods::POST);
+        // // Set the "Content-Type" header
+        // request.headers().set_content_type(U("application/x.aptos.signed_transaction+bcs"));
+        // // Set the request body with the signed transaction bytes
+        // request.set_body(signedTransaction.Bytes());
 
-        // Perform the request and handle the response
-        client.request(request).then([=](web::http::http_response response)
-                                     {
-                               ResponseInfo responseInfo;
-                               std::string responseStr;
-                               try {
-                                   if (response.status_code() == web::http::status_codes::OK) {
-                                       responseStr = utility::conversions::to_utf8string(response.to_string());
-                                       responseInfo.status = ResponseInfo::Status::Success;
-                                       responseInfo.message = responseStr;
-                                   } else if (response.status_code() == web::http::status_codes::NotFound) {
-                                       responseInfo.status = ResponseInfo::Status::NotFound;
-                                       responseInfo.message = "Endpoint for BCS transaction not found.";
-                                   } else {
-                                       responseInfo.status = ResponseInfo::Status::Failed;
-                                       responseInfo.message = utility::conversions::to_utf8string(response.to_string());
-                                   }
-                               } catch (const std::exception& e) {
-                                   responseInfo.status = ResponseInfo::Status::Failed;
-                                   responseInfo.message = e.what();
-                               }
-                               // Callback with the results
-                               callback(responseStr, responseInfo); })
-            .wait();
+        // // Perform the request and handle the response
+        // client.request(request).then([=](web::http::http_response response)
+        //                              {
+        //                        ResponseInfo responseInfo;
+        //                        std::string responseStr;
+        //                        try {
+        //                            if (response.status_code() == web::http::status_codes::OK) {
+        //                                responseStr = utility::conversions::to_utf8string(response.to_string());
+        //                                responseInfo.status = ResponseInfo::Status::Success;
+        //                                responseInfo.message = responseStr;
+        //                            } else if (response.status_code() == web::http::status_codes::NotFound) {
+        //                                responseInfo.status = ResponseInfo::Status::NotFound;
+        //                                responseInfo.message = "Endpoint for BCS transaction not found.";
+        //                            } else {
+        //                                responseInfo.status = ResponseInfo::Status::Failed;
+        //                                responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+        //                            }
+        //                        } catch (const std::exception& e) {
+        //                            responseInfo.status = ResponseInfo::Status::Failed;
+        //                            responseInfo.message = e.what();
+        //                        }
+        //                        // Callback with the results
+        //                        callback(responseStr, responseInfo); })
+        //     .wait();
     }
 
     void RestClient::View(std::function<void(std::vector<std::string>, AptosRESTModel::ResponseInfo)> callback,
                           const AptosRESTModel::ViewRequest &viewRequest)
     {
-        using namespace AptosRESTModel;
-        // Create an HTTP client
-        web::http::client::http_client client(endpoint.to_string() + U("/view"));
+        // using namespace AptosRESTModel;
+        // // Create an HTTP client
+        // web::http::client::http_client client(endpoint.to_string() + U("/view"));
 
-        // Create an HTTP request with method POST
-        web::http::http_request request(web::http::methods::POST);
+        // // Create an HTTP request with method POST
+        // web::http::http_request request(web::http::methods::POST);
 
-        // Set the request body with the serialized ViewRequest
-        request.headers().set_content_type(U("application/json"));
-        request.set_body(viewRequest.ToJson().dump());
+        // // Set the request body with the serialized ViewRequest
+        // request.headers().set_content_type(U("application/json"));
+        // request.set_body(viewRequest.ToJson().dump());
 
-        // Perform the request and handle the response
-        client.request(request).then([=](web::http::http_response response)
-                                     {
-                               ResponseInfo responseInfo;
-                               std::vector<std::string> values;
-                               try {
-                                   if (response.status_code() == web::http::status_codes::OK) {
-                                       responseInfo.status = ResponseInfo::Status::Success;
-                                       responseInfo.message = utility::conversions::to_utf8string(response.to_string());
-                                       values = nlohmann::json::parse(response.to_string()).get<std::vector<std::string>>();
-                                   } else {
-                                       responseInfo.status = ResponseInfo::Status::Failed;
-                                       responseInfo.message = utility::conversions::to_utf8string(response.to_string());
-                                   }
-                               } catch (const std::exception& e) {
-                                   responseInfo.status = ResponseInfo::Status::Failed;
-                                   responseInfo.message = e.what();
-                               }
+        // // Perform the request and handle the response
+        // client.request(request).then([=](web::http::http_response response)
+        //                              {
+        //                        ResponseInfo responseInfo;
+        //                        std::vector<std::string> values;
+        //                        try {
+        //                            if (response.status_code() == web::http::status_codes::OK) {
+        //                                responseInfo.status = ResponseInfo::Status::Success;
+        //                                responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+        //                                values = nlohmann::json::parse(response.to_string()).get<std::vector<std::string>>();
+        //                            } else {
+        //                                responseInfo.status = ResponseInfo::Status::Failed;
+        //                                responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+        //                            }
+        //                        } catch (const std::exception& e) {
+        //                            responseInfo.status = ResponseInfo::Status::Failed;
+        //                            responseInfo.message = e.what();
+        //                        }
 
-                               // Callback with the results
-                               callback(values, responseInfo); })
-            .wait();
+        //                        // Callback with the results
+        //                        callback(values, responseInfo); })
+        //     .wait();
     }
 
     void RestClient::SubmitTransaction(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback,
                                        Account sender, EntryFunction entryFunction)
     {
-        using namespace AptosRESTModel;
-        std::string sequenceNumber;
-        ResponseInfo responseInfo;
-        GetAccountSequenceNumber([&sequenceNumber, &responseInfo](std::string _sequenceNumber, ResponseInfo _responseInfo)
-                                 {
-        sequenceNumber = _sequenceNumber;
-        responseInfo = _responseInfo; },
-                                 sender.getAccountAddress()->ToString());
+        // using namespace AptosRESTModel;
+        // std::string sequenceNumber;
+        // ResponseInfo responseInfo;
+        // GetAccountSequenceNumber([&sequenceNumber, &responseInfo](std::string _sequenceNumber, ResponseInfo _responseInfo)
+        //                          {
+        // sequenceNumber = _sequenceNumber;
+        // responseInfo = _responseInfo; },
+        //                          sender.getAccountAddress()->ToString());
 
-        if (responseInfo.status != ResponseInfo::Status::Success)
-        {
-            callback(nullptr, responseInfo);
-            return;
-        }
-        std::time_t currentTimestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        std::time_t expirationTimestamp = currentTimestamp + ClientConfig::EXPIRATION_TTL;
+        // if (responseInfo.status != ResponseInfo::Status::Success)
+        // {
+        //     callback(nullptr, responseInfo);
+        //     return;
+        // }
+        // std::time_t currentTimestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        // std::time_t expirationTimestamp = currentTimestamp + ClientConfig::EXPIRATION_TTL;
 
-        // Convert expiration timestamp to a string
-        std::stringstream ss;
-        ss << expirationTimestamp;
-        std::string expirationTimestampStr = ss.str();
+        // // Convert expiration timestamp to a string
+        // std::stringstream ss;
+        // ss << expirationTimestamp;
+        // std::string expirationTimestampStr = ss.str();
 
-        TransactionRequest txnRequest;
-        txnRequest.setSender(sender.getAccountAddress()->ToString());
-        txnRequest.setSequenceNumber(sequenceNumber);
-        txnRequest.setMaxGasAmount(std::to_string(ClientConfig::MAX_GAS_AMOUNT));
-        txnRequest.setGasUnitPrice(std::to_string(ClientConfig::GAS_UNIT_PRICE));
-        txnRequest.setExpirationTimestampSecs(expirationTimestampStr);
-        auto txnRequestJson = txnRequest.ToJson();
-        std::string encodedSubmission;
-        EncodeSubmission([&encodedSubmission](const std::string &_encodedSubmission)
-                         { encodedSubmission = _encodedSubmission; },
-                         txnRequestJson.dump());
-        std::vector<uint8_t> toSign = Aptos::Utils::ByteArrayFromHexString(Aptos::Utils::trim(encodedSubmission, "\"").substr(2));
+        // TransactionRequest txnRequest;
+        // txnRequest.setSender(sender.getAccountAddress()->ToString());
+        // txnRequest.setSequenceNumber(sequenceNumber);
+        // txnRequest.setMaxGasAmount(std::to_string(ClientConfig::MAX_GAS_AMOUNT));
+        // txnRequest.setGasUnitPrice(std::to_string(ClientConfig::GAS_UNIT_PRICE));
+        // txnRequest.setExpirationTimestampSecs(expirationTimestampStr);
+        // auto txnRequestJson = txnRequest.ToJson();
+        // std::string encodedSubmission;
+        // EncodeSubmission([&encodedSubmission](const std::string &_encodedSubmission)
+        //                  { encodedSubmission = _encodedSubmission; },
+        //                  txnRequestJson.dump());
+        // std::vector<uint8_t> toSign = Aptos::Utils::ByteArrayFromHexString(Aptos::Utils::trim(encodedSubmission, "\"").substr(2));
 
-        Signature signature = sender.Sign(Aptos::Utils::ByteVectorToSecBlock(toSign));
+        // Signature signature = sender.Sign(Aptos::Utils::ByteVectorToSecBlock(toSign));
 
-        SignatureData sigData;
-        sigData.setType(Constants::ED25519_SIGNATURE);
-        sigData.setPublicKey(sender.getPublicKey()->ToString());
-        sigData.setSignature(signature.ToString());
-        txnRequest.setSignature(sigData);
-        txnRequestJson = txnRequest.ToJson();
+        // SignatureData sigData;
+        // sigData.setType(Constants::ED25519_SIGNATURE);
+        // sigData.setPublicKey(sender.getPublicKey()->ToString());
+        // sigData.setSignature(signature.ToString());
+        // txnRequest.setSignature(sigData);
+        // txnRequestJson = txnRequest.ToJson();
 
-        std::string transactionURL = endpoint.to_string() + "/transactions";
-        web::uri_builder builder(transactionURL);
-        web::http::client::http_client client(builder.to_uri());
+        // std::string transactionURL = endpoint.to_string() + "/transactions";
+        // web::uri_builder builder(transactionURL);
+        // web::http::client::http_client client(builder.to_uri());
 
-        web::http::http_request request(web::http::methods::POST);
-        request.headers().set_content_type("application/json");
-        request.set_body(txnRequestJson.dump());
+        // web::http::http_request request(web::http::methods::POST);
+        // request.headers().set_content_type("application/json");
+        // request.set_body(txnRequestJson.dump());
 
-        client.request(request).then([&](web::http::http_response response)
-                                     {
-                               if (response.status_code() == web::http::status_codes::OK || response.status_code() == web::http::status_codes::Accepted)
-                               {
-                                   return response.extract_string();
-                               }
-                               else
-                               {
-                                   responseInfo.status = ResponseInfo::Status::Failed;
-                                   responseInfo.message = "Error while submitting transaction. " + response.to_string();
-                                   callback(nullptr, responseInfo);
-                                   return pplx::task_from_result(std::string());
-                               } })
-            .then([&](pplx::task<std::string> previousTask)
-                  {
-            try
-            {
-                std::string response = previousTask.get();
-                auto transaction = std::make_shared<Transaction>(Transaction::FromJson(response));
+        // client.request(request).then([&](web::http::http_response response)
+        //                              {
+        //                        if (response.status_code() == web::http::status_codes::OK || response.status_code() == web::http::status_codes::Accepted)
+        //                        {
+        //                            return response.extract_string();
+        //                        }
+        //                        else
+        //                        {
+        //                            responseInfo.status = ResponseInfo::Status::Failed;
+        //                            responseInfo.message = "Error while submitting transaction. " + response.to_string();
+        //                            callback(nullptr, responseInfo);
+        //                            return pplx::task_from_result(std::string());
+        //                        } })
+        //     .then([&](pplx::task<std::string> previousTask)
+        //           {
+        //     try
+        //     {
+        //         std::string response = previousTask.get();
+        //         auto transaction = std::make_shared<Transaction>(Transaction::FromJson(response));
 
-                responseInfo.status = ResponseInfo::Status::Success;
-                responseInfo.message = response;
-                callback(transaction, responseInfo);
-            }
-            catch (const std::exception& e)
-            {
-                std::cerr << "Exception: " << e.what() << std::endl;
-                responseInfo.status = ResponseInfo::Status::Failed;
-                responseInfo.message = "Error in processing the response.";
-                callback(nullptr, responseInfo);
-            } })
-            .wait();
+        //         responseInfo.status = ResponseInfo::Status::Success;
+        //         responseInfo.message = response;
+        //         callback(transaction, responseInfo);
+        //     }
+        //     catch (const std::exception& e)
+        //     {
+        //         std::cerr << "Exception: " << e.what() << std::endl;
+        //         responseInfo.status = ResponseInfo::Status::Failed;
+        //         responseInfo.message = "Error in processing the response.";
+        //         callback(nullptr, responseInfo);
+        //     } })
+        //     .wait();
     }
 
     void RestClient::WaitForTransaction(std::function<void(bool, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash)
@@ -709,87 +711,87 @@ namespace Aptos::Rest
 
     void RestClient::TransactionPending(std::function<void(bool, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash)
     {
-        using namespace AptosRESTModel;
-        web::uri_builder builder(endpoint.to_string() + U("/transactions/by_hash/") + utility::conversions::to_string_t(txnHash));
-        web::http::client::http_client client(builder.to_uri());
+        // using namespace AptosRESTModel;
+        // web::uri_builder builder(endpoint.to_string() + U("/transactions/by_hash/") + utility::conversions::to_string_t(txnHash));
+        // web::http::client::http_client client(builder.to_uri());
 
-        try
-        {
-            web::http::http_response response = client.request(web::http::methods::GET).get();
+        // try
+        // {
+        //     web::http::http_response response = client.request(web::http::methods::GET).get();
 
-            ResponseInfo responseInfo;
+        //     ResponseInfo responseInfo;
 
-            if (response.status_code() == web::http::status_codes::OK)
-            {
-                auto transactionResult = Transaction::FromJson(response.to_string());
-                bool isPending = transactionResult.getType() == "pending_transaction";
+        //     if (response.status_code() == web::http::status_codes::OK)
+        //     {
+        //         auto transactionResult = Transaction::FromJson(response.to_string());
+        //         bool isPending = transactionResult.getType() == "pending_transaction";
 
-                responseInfo.status = ResponseInfo::Status::Success;
-                responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+        //         responseInfo.status = ResponseInfo::Status::Success;
+        //         responseInfo.message = utility::conversions::to_utf8string(response.to_string());
 
-                callback(isPending, responseInfo);
-            }
-            else if (response.status_code() == web::http::status_codes::NotFound)
-            {
-                responseInfo.status = ResponseInfo::Status::Failed;
-                responseInfo.message = "Transaction Not Found: " + std::to_string(response.status_code());
+        //         callback(isPending, responseInfo);
+        //     }
+        //     else if (response.status_code() == web::http::status_codes::NotFound)
+        //     {
+        //         responseInfo.status = ResponseInfo::Status::Failed;
+        //         responseInfo.message = "Transaction Not Found: " + std::to_string(response.status_code());
 
-                callback(true, responseInfo);
-            }
-            else
-            {
-                responseInfo.status = ResponseInfo::Status::Failed;
-                responseInfo.message = "Transaction Call Error: " + std::to_string(response.status_code()) + " : " +
-                                       utility::conversions::to_utf8string(response.to_string());
+        //         callback(true, responseInfo);
+        //     }
+        //     else
+        //     {
+        //         responseInfo.status = ResponseInfo::Status::Failed;
+        //         responseInfo.message = "Transaction Call Error: " + std::to_string(response.status_code()) + " : " +
+        //                                utility::conversions::to_utf8string(response.to_string());
 
-                callback(true, responseInfo);
-            }
-        }
-        catch (const std::exception &e)
-        {
-            std::cerr << "Exception: " << e.what() << std::endl;
-        }
+        //         callback(true, responseInfo);
+        //     }
+        // }
+        // catch (const std::exception &e)
+        // {
+        //     std::cerr << "Exception: " << e.what() << std::endl;
+        // }
     }
 
     void RestClient::TransactionByHash(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash)
     {
-        using namespace AptosRESTModel;
-        web::uri_builder builder(endpoint.to_string() + U("/transactions/by_hash/") + utility::conversions::to_string_t(txnHash));
-        web::http::client::http_client client(builder.to_uri());
+        // using namespace AptosRESTModel;
+        // web::uri_builder builder(endpoint.to_string() + U("/transactions/by_hash/") + utility::conversions::to_string_t(txnHash));
+        // web::http::client::http_client client(builder.to_uri());
 
-        try
-        {
-            web::http::http_response response = client.request(web::http::methods::GET).get();
+        // try
+        // {
+        //     web::http::http_response response = client.request(web::http::methods::GET).get();
 
-            ResponseInfo responseInfo;
+        //     ResponseInfo responseInfo;
 
-            if (response.status_code() == web::http::status_codes::OK)
-            {
-                auto transactionResult = Transaction::FromJson(response.to_string());
-                responseInfo.status = ResponseInfo::Status::Success;
-                responseInfo.message = utility::conversions::to_utf8string(response.to_string());
-                callback(transactionResult, responseInfo);
-            }
-            else if (response.status_code() == web::http::status_codes::NotFound)
-            {
-                responseInfo.status = ResponseInfo::Status::Failed;
-                responseInfo.message = "Transaction Not Found: " + std::to_string(response.status_code());
+        //     if (response.status_code() == web::http::status_codes::OK)
+        //     {
+        //         auto transactionResult = Transaction::FromJson(response.to_string());
+        //         responseInfo.status = ResponseInfo::Status::Success;
+        //         responseInfo.message = utility::conversions::to_utf8string(response.to_string());
+        //         callback(transactionResult, responseInfo);
+        //     }
+        //     else if (response.status_code() == web::http::status_codes::NotFound)
+        //     {
+        //         responseInfo.status = ResponseInfo::Status::Failed;
+        //         responseInfo.message = "Transaction Not Found: " + std::to_string(response.status_code());
 
-                callback({}, responseInfo);
-            }
-            else
-            {
-                responseInfo.status = ResponseInfo::Status::Failed;
-                responseInfo.message = "Transaction Call Error: " + std::to_string(response.status_code()) + " : " +
-                                       utility::conversions::to_utf8string(response.to_string());
+        //         callback({}, responseInfo);
+        //     }
+        //     else
+        //     {
+        //         responseInfo.status = ResponseInfo::Status::Failed;
+        //         responseInfo.message = "Transaction Call Error: " + std::to_string(response.status_code()) + " : " +
+        //                                utility::conversions::to_utf8string(response.to_string());
 
-                callback({}, responseInfo);
-            }
-        }
-        catch (const std::exception &e)
-        {
-            std::cerr << "Exception: " << e.what() << std::endl;
-        }
+        //         callback({}, responseInfo);
+        //     }
+        // }
+        // catch (const std::exception &e)
+        // {
+        //     std::cerr << "Exception: " << e.what() << std::endl;
+        // }
     }
 
     void RestClient::CreateBCSSignedTransaction(std::function<void(std::shared_ptr<SignedTransaction>)> Callback, Account Sender, TransactionPayload Payload)
@@ -907,32 +909,32 @@ namespace Aptos::Rest
 
     void RestClient::EncodeSubmission(const std::function<void(const std::string &)> &callback, const std::string &txnRequestJson)
     {
-        web::http::client::http_client client(endpoint.to_string() + "/transactions/encode_submission");
-        web::http::http_request request(web::http::methods::POST);
-        request.headers().set_content_type(U("application/json"));
-        request.set_body(txnRequestJson);
-        client.request(request).then([=](web::http::http_response response)
-                                     {
-                               if (response.status_code() == web::http::status_codes::OK) {
-                                   callback(response.to_string());
-                               } })
-            .wait();
+        // web::http::client::http_client client(endpoint.to_string() + "/transactions/encode_submission");
+        // web::http::http_request request(web::http::methods::POST);
+        // request.headers().set_content_type(U("application/json"));
+        // request.set_body(txnRequestJson);
+        // client.request(request).then([=](web::http::http_response response)
+        //                              {
+        //                        if (response.status_code() == web::http::status_codes::OK) {
+        //                            callback(response.to_string());
+        //                        } })
+        //     .wait();
     }
 
     void RestClient::EncodeSubmissionAsBytes(const std::function<void(const std::vector<uint8_t> &)> &callback, const std::string &txnRequestJson)
     {
-        web::http::client::http_client client(endpoint.to_string() + "/transactions/encode_submission");
-        web::http::http_request request(web::http::methods::POST);
-        request.headers().set_content_type(U("application/json"));
-        request.set_body(txnRequestJson);
-        client.request(request).then([=](web::http::http_response response)
-                                     {
-                               if (response.status_code() == web::http::status_codes::OK) {
-                                   std::string msg = response.to_string();
-                                   std::vector<uint8_t> byteVector(msg.begin(), msg.end());
-                                   callback(byteVector);
-                               } })
-            .wait();
+        // web::http::client::http_client client(endpoint.to_string() + "/transactions/encode_submission");
+        // web::http::http_request request(web::http::methods::POST);
+        // request.headers().set_content_type(U("application/json"));
+        // request.set_body(txnRequestJson);
+        // client.request(request).then([=](web::http::http_response response)
+        //                              {
+        //                        if (response.status_code() == web::http::status_codes::OK) {
+        //                            std::string msg = response.to_string();
+        //                            std::vector<uint8_t> byteVector(msg.begin(), msg.end());
+        //                            callback(byteVector);
+        //                        } })
+        //     .wait();
     }
 
     void RestClient::CreateCollection(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)> callback, Account sender, std::string collectionName, std::string collectionDescription, std::string uri)
@@ -1144,7 +1146,7 @@ namespace Aptos::Rest
         success = _success;
         responseCode = _responseCode;
         tokenStoreResourceResp = _returnResult; },
-                           ownerAddress.ToString(), "0x3::token::TokenStore");
+                           ownerAddress, "0x3::token::TokenStore");
 
         AptosRESTModel::ResponseInfo responseInfo;
 
@@ -1218,7 +1220,7 @@ namespace Aptos::Rest
         success = _success;
         responseCode = _responseCode;
         collectionResourceResp = _returnResult; },
-                           creator.ToString(), "0x3::token::Collections");
+                           creator, "0x3::token::Collections");
 
         AptosRESTModel::ResponseInfo responseInfo;
 
@@ -1260,7 +1262,7 @@ namespace Aptos::Rest
         success = _success;
         responseCode = _responseCode;
         collectionResourceResp = _returnResult; },
-                           creator.ToString(), "0x3::token::Collections");
+                           creator, "0x3::token::Collections");
 
         if (!success)
         {
@@ -1310,18 +1312,18 @@ namespace Aptos::Rest
         callback(submitBcsTxnJsonResponse, responseInfo);
     }
 
-    void RestClient::GetAccountResource(std::function<void(bool, long, std::string)> callback, AccountAddress accountAddress, std::string resourceType)
+    void RestClient::GetAccountResource(std::function<void(bool, long, std::string)> callback, AccountAddress &accountAddress, std::string resourceType)
     {
-        utility::string_t accountsURL = endpoint.to_string() + "/accounts/" + accountAddress.ToString() + "/resource/" + resourceType;
-        web::http::client::http_client client(accountsURL);
-        web::http::http_request request(web::http::methods::GET);
-        client.request(request).then([=](web::http::http_response response)
-                                     {
-                               if (response.status_code() == web::http::status_codes::OK) {
-                                   callback(true, response.status_code(), response.to_string());
-                               } else {
-                                   callback(false, response.status_code(), response.to_string());
-                               } })
-            .wait();
+        // utility::string_t accountsURL = endpoint.to_string() + "/accounts/" + accountAddress.ToString() + "/resource/" + resourceType;
+        // web::http::client::http_client client(accountsURL);
+        // web::http::http_request request(web::http::methods::GET);
+        // client.request(request).then([=](web::http::http_response response)
+        //                              {
+        //                        if (response.status_code() == web::http::status_codes::OK) {
+        //                            callback(true, response.status_code(), response.to_string());
+        //                        } else {
+        //                            callback(false, response.status_code(), response.to_string());
+        //                        } })
+        //     .wait();
     }
 }

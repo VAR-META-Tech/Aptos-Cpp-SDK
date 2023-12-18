@@ -41,17 +41,18 @@ namespace Aptos::HDWallet
         /// The method used for <see cref="SeedMode.Ed25519Bip32"/> key generation.
         /// </summary>
         std::unique_ptr<Ed25519Bip32> _ed25519Bip32;
-        bip3x::bytes_data _seed;
+        std::vector<uint8_t> _seed;
         SeedMode _seedMode;
         Account _account;
+
         std::vector<uint8_t> toVector(const bip3x::bytes_data& data);
 
     public:
-        bip3x::bytes_data DeriveMnemonicSeed();
+        std::vector<uint8_t> DeriveMnemonicSeed();
         void InitializeFirstAccount();
         Account GetDerivedAccount(int index);
         void InitializeSeed();
-        Wallet(const std::string &mnemonicWords,
+        Wallet(const std::string &mnemonicWords, const std::string &passphrase = "",
                SeedMode seedMode = SeedMode::Ed25519Bip32);
         Account account() const;
         std::string getMnemonicsKey() const;

@@ -108,7 +108,7 @@ void UIController::loadCurrentWalletBalance()
         {
             m_balance = std::stof(coin.value());
         }
-    }, m_wallet->GetDerivedAccount(m_currentAddressIndexKey).getAccountAddress()->ToString());
+    }, *m_wallet->GetDerivedAccount(m_currentAddressIndexKey).getAccountAddress());
 }
 
 void UIController::setNetwork(std::string _target)
@@ -153,12 +153,8 @@ void AptosUILogic_deleteUiController(void *controller)
 bool AptosUILogic_createNewWallet(void *controller)
 {
     auto ptr = static_cast<AptosUILogic::UIController*>(controller);
-    bc::data_chunk my_entropy(16);
-    bc::pseudo_random_fill(my_entropy);
-
-    bc::wallet::word_list my_word_list = bc::wallet::create_mnemonic(
-        my_entropy, bc::wallet::language::en);
-    ptr->setWallet(std::make_shared<Aptos::HDWallet::Wallet>(bc::join(my_word_list)));
+    bip3x::bip3x_mnemonic::mnemonic_result mnemonic = bip3x::bip3x_mnemonic::generate();
+    ptr->setWallet(std::make_shared<Aptos::HDWallet::Wallet>(mnemonic.raw));
     ptr->setCurrentAddressIndexKey(0);
     ptr->getWalletAddress();
     ptr->loadCurrentWalletBalance();
