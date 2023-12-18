@@ -40,8 +40,9 @@ endif()
 include_directories(Plugins/include)
 link_directories(Plugins/lib)
 include_directories(${httplib_INCLUDE_DIR})
+include_directories(${cryptopp_INCLUDE_DIRS_RELEASE})
 
-add_library(Aptos
+add_library(Aptos SHARED
         BCS/Deserialization.cpp
         BCS/Deserialization.h
         BCS/Serialization.cpp
@@ -190,7 +191,11 @@ add_library(Aptos
         Accounts/Ed25519Bip32.cpp
 )
 
-target_link_libraries(Aptos PRIVATE cryptopp::cryptopp nlohmann_json::nlohmann_json bip3x httplib::httplib OpenSSL::SSL OpenSSL::Crypto)
+target_link_libraries(Aptos PRIVATE 
+nlohmann_json::nlohmann_json bip3x httplib::httplib cryptopp::cryptopp
+${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a
+toolbox)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
@@ -203,11 +208,11 @@ add_executable(test_utils Test/test_utils.cpp)
 add_executable(test_wallet Test/test_wallet.cpp)
 add_executable(test_transaction_serialization Test/test_transaction_serialization.cpp)
 
-target_link_libraries(test_serialization GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
-target_link_libraries(test_account GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
-target_link_libraries(test_utils GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
-target_link_libraries(test_wallet GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
-target_link_libraries(test_transaction_serialization GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
+target_link_libraries(test_serialization GTest::gtest_main pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a)
+target_link_libraries(test_account GTest::gtest_main pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a)
+target_link_libraries(test_utils GTest::gtest_main pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a)
+target_link_libraries(test_wallet GTest::gtest_main pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a toolbox)
+target_link_libraries(test_transaction_serialization GTest::gtest_main pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a)
 
 add_test(NAME SerializationTest COMMAND test_serialization)
 add_test(NAME AccountTest COMMAND test_account)
@@ -225,7 +230,7 @@ add_executable(runAllTests
     Test/test_serialization.cpp
 )
 message(${cryptopp_LIB_DIRS_RELEASE})
-target_link_libraries(runAllTests PRIVATE GTest::gtest_main pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a)
+target_link_libraries(runAllTests PRIVATE GTest::gtest_main pthread Aptos toolbox ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a)
 
 if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_custom_target(coverage
@@ -236,15 +241,14 @@ if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   )
 endif()
 
-add_library(AptosUILogic
+add_library(AptosUILogic SHARED
     AptosUILogic/uicontrollerlogic.h
     AptosUILogic/uicontrollerlogic.cpp
 )
-target_link_libraries(AptosUILogic GTest::gtest_main pthread Aptos )
+target_link_libraries(AptosUILogic PRIVATE nlohmann_json::nlohmann_json cryptopp::cryptopp pthread Aptos bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a)
 
 add_executable(AptosUILogicTest
     AptosUILogic/main.cpp
 )
 
-target_link_libraries(AptosUILogicTest PRIVATE GTest::gtest_main Aptos AptosUILogic ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a  
-${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
+target_link_libraries(AptosUILogicTest PRIVATE Aptos AptosUILogic )

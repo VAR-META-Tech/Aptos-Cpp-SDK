@@ -14,32 +14,32 @@ public class AptosUI : ModuleRules
 		PrivateDependencyModuleNames.AddRange(new string[] { });
 		if (Target.Platform == UnrealTargetPlatform.Mac)
         {
-			string AptosUiLogicPath = Path.Combine(ModuleDirectory, "../../../build/", "libAptosUILogic.a");
+			string AptosUiLogicPath = Path.Combine(ModuleDirectory, "../../../build/", "libAptosUILogic.dylib");
 			string AptosLibPath = Path.Combine(ModuleDirectory, "../../../build/", "libAptos.dylib");
+			string Bip3xLibPath = Path.Combine(ModuleDirectory, "../../../Plugins/lib/", "libbip3x.dylib");
 			string destinationDirectory = Target.ProjectFile.Directory.FullName;
-			File.Copy(AptosUiLogicPath, Path.Combine(destinationDirectory, "libAptosUILogic.a"), true);
+			File.Copy(AptosUiLogicPath, Path.Combine(destinationDirectory, "libAptosUILogic.dylib"), true);
 			File.Copy(AptosLibPath, Path.Combine(destinationDirectory, "libAptos.dylib"), true);
+			File.Copy(Bip3xLibPath, Path.Combine(destinationDirectory, "libbip3x.dylib"), true);
 
 			PublicIncludePaths.AddRange(new string[] { Path.Combine(ModuleDirectory, "../../../") });
-			PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libAptosUILogic.a"));
 			PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libAptos.dylib"));
-			PublicAdditionalLibraries.Add("/opt/homebrew/lib/libbitcoin-system.0.dylib");
-			PublicAdditionalLibraries.Add("/opt/homebrew/lib/libcpprest.2.10.dylib");
-			PublicAdditionalLibraries.Add("/opt/homebrew/lib/libcrypto.3.dylib");
+			PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libAptosUILogic.dylib"));
+			PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libbip3x.dylib"));
         }
         else if (Target.Platform == UnrealTargetPlatform.Linux)
         {
-			string AptosUiLogicPath = Path.Combine(ModuleDirectory, "../../../build/", "libAptosUILogic.so");
-			string AptosLibPath = Path.Combine(ModuleDirectory, "../../../build/", "libAptos.so");
-			string destinationDirectory = Path.Combine(Target.ProjectFile.Directory.FullName, "Binaries/Linux/");
-			File.Copy(AptosUiLogicPath, Path.Combine(destinationDirectory, "libAptosUILogic.so"), true);
-			File.Copy(AptosLibPath, Path.Combine(destinationDirectory, "libAptos.so") , true);
+			// string AptosUiLogicPath = Path.Combine(ModuleDirectory, "../../../build/", "libAptosUILogic.so");
+			// string AptosLibPath = Path.Combine(ModuleDirectory, "../../../build/", "libAptos.so");
+			// string destinationDirectory = Path.Combine(Target.ProjectFile.Directory.FullName, "Binaries/Linux/");
+			// File.Copy(AptosUiLogicPath, Path.Combine(destinationDirectory, "libAptosUILogic.so"), true);
+			// File.Copy(AptosLibPath, Path.Combine(destinationDirectory, "libAptos.so") , true);
 
-			PublicIncludePaths.AddRange(new string[] { Path.Combine(ModuleDirectory, "../../../")});
-			PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libAptosUILogic.so"));
-			PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libAptos.so"));
-			PublicAdditionalLibraries.Add("/usr/local/lib/libbitcoin-system.so");
-			PublicAdditionalLibraries.Add("/usr/local/lib/libcpprest.so");
+			// PublicIncludePaths.AddRange(new string[] { Path.Combine(ModuleDirectory, "../../../")});
+			// PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libAptosUILogic.so"));
+			// PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libAptos.so"));
+			// PublicAdditionalLibraries.Add("/usr/local/lib/libbitcoin-system.so");
+			// PublicAdditionalLibraries.Add("/usr/local/lib/libcpprest.so");
 		}
 
 		PublicIncludePaths.AddRange(new string[] { "/usr/local/include/" });
