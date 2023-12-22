@@ -1,5 +1,6 @@
 #include "Ed25519Bip32.h"
 #include "../HDWallet/Utils/Utils.h"
+#include <netinet/in.h>
 #include <regex>
 
 namespace Aptos::Accounts
