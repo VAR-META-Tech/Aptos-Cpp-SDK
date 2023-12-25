@@ -5,7 +5,7 @@
 
 namespace Aptos::Accounts::Types
 {
-    MultiEd25519PublicKey::MultiEd25519PublicKey(std::vector<PublicKey> PublicKeys, int threshold)
+    MultiEd25519PublicKey::MultiEd25519PublicKey(std::vector<PublicKey> &PublicKeys, int threshold)
     {
         if (threshold > MAX_SIGNATURES_SUPPORTED)
             throw std::invalid_argument("Threshold cannot be larger than " + std::to_string(MAX_SIGNATURES_SUPPORTED));

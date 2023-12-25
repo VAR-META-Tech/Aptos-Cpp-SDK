@@ -11,9 +11,9 @@ namespace AptosRESTModel {
 /// </summary>
 class AccountData {
 public:
-    AccountData();
+    explicit AccountData();
 
-    AccountData(const std::string& sequenceNumber, const std::string& authenticationKey);
+    explicit AccountData(const std::string& sequenceNumber, const std::string& authenticationKey);
     // Serialize the object to JSON
     nlohmann::json ToJson() const;
     // Deserialize the JSON to an object

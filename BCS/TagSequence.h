@@ -14,7 +14,7 @@ namespace Aptos::BCS
         /// Creates a TagSequence objects from a list of serializable tags.
         /// </summary>
         /// <param name="serializableTags">A list of serializable tags.</param>
-        TagSequence(const std::vector<std::shared_ptr<ISerializableTag>> &serializableTags);
+        explicit TagSequence(const std::vector<std::shared_ptr<ISerializableTag>> &serializableTags);
 
         /// <inheritdoc/>
         void Serialize(Serialization &serializer) const override;

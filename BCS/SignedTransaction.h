@@ -14,7 +14,7 @@ namespace Aptos::BCS
     class SignedTransaction : public BCS::ISerializable
     {
     public:
-        SignedTransaction(const RawTransaction &transaction, const Authenticator &authenticator);
+        explicit SignedTransaction(const RawTransaction &transaction, const Authenticator &authenticator);
         std::vector<uint8_t> Bytes() const;
         bool Verify();
         void Serialize(Serialization &serializer) const override;

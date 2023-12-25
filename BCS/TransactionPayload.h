@@ -14,7 +14,7 @@ namespace Aptos::BCS
     class TransactionPayload : public ISerializable
     {
     public:
-        TransactionPayload(const std::shared_ptr<ISerializable> &payload);
+        explicit TransactionPayload(const std::shared_ptr<ISerializable> &payload);
         TransactionPayloadTypeTag Variant() const;
         void Serialize(Serialization &serializer) const override;
         static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);

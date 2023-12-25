@@ -27,7 +27,7 @@ namespace Aptos::BCS
         /// </summary>
         /// <param name="values">A dictionary mapping to values that are
         /// serializable.</param>
-        BCSMap(const std::map<BString, std::shared_ptr<ISerializable>> &values);
+        explicit BCSMap(const std::map<BString, std::shared_ptr<ISerializable>> &values);
 
         /// <summary>
         /// Maps (Key / Value Stores)

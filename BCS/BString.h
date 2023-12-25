@@ -26,7 +26,7 @@ namespace Aptos::BCS
         /// Creates a BString from a string.
         /// </summary>
         /// <param name="value">A string value.</param>
-        BString(const std::string &value);
+        explicit BString(const std::string &value);
 
         /// <summary>
         /// Serializes the BString object using the given Serializer.

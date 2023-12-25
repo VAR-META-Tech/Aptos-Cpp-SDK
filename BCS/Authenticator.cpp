@@ -3,7 +3,7 @@
 
 namespace Aptos::BCS
 {
-    Authenticator::Authenticator(const std::shared_ptr<IAuthenticator> &authenticator) : Variant(Authenticator::ED25519), m_authenticator(authenticator)
+    Authenticator::Authenticator(const std::shared_ptr<IAuthenticator> &authenticator): m_authenticator(authenticator)
     {
         if (std::dynamic_pointer_cast<Ed25519Authenticator>(authenticator))
         {
@@ -203,7 +203,7 @@ namespace Aptos::BCS
         std::vector<std::tuple<std::shared_ptr<AccountAddress>, std::shared_ptr<Authenticator>>> secondarySigners;
         for (size_t i = 0; i < secondaryAddressesSeq.size(); i++)
         {
-            secondarySigners.push_back(std::make_tuple(std::dynamic_pointer_cast<AccountAddress>(secondaryAddressesSeq[i]),
+            secondarySigners.emplace_back(std::make_tuple(std::dynamic_pointer_cast<AccountAddress>(secondaryAddressesSeq[i]),
                                                        std::dynamic_pointer_cast<Authenticator>(authenticatorsSeq[i])));
         }
 

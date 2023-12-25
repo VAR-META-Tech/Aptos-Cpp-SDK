@@ -28,7 +28,7 @@ namespace Aptos::BCS
     {
 
     public:
-        Sequence(const std::vector<std::shared_ptr<ISerializable>> &values);
+        explicit Sequence(const std::vector<std::shared_ptr<ISerializable>> &values);
 
         /// <summary>
         /// The length of the Sequence.

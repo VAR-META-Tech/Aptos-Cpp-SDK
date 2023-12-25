@@ -23,7 +23,7 @@ namespace Aptos::BCS
         /// <param name="typeArgs"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        EntryFunction(const ModuleId &module, const std::string &function,
+        explicit EntryFunction(const ModuleId &module, const std::string &function,
                       const TagSequence &typeArgs, const Sequence &args);
         static EntryFunction Natural(const ModuleId &module, const std::string &function,
                                      const TagSequence &typeArgs, const Sequence &args);
@@ -31,7 +31,7 @@ namespace Aptos::BCS
         static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
         bool Equals(const EntryFunction &other) const;
         std::string ToString() const override;
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
 
     private:
         ModuleId module;

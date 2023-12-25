@@ -47,11 +47,6 @@ namespace Aptos::Accounts
         return ToString() == other.ToString();
     }
 
-    bool Signature::operator!=(const Signature &other) const
-    {
-        return !(*this == other);
-    }
-
     std::string Signature::ToString() const
     {
         std::ostringstream stream;

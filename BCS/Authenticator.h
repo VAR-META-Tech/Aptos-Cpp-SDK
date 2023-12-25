@@ -43,7 +43,7 @@ namespace Aptos::BCS
         /// Creates an Authenticator from a given concrete authenticator.
         /// </summary>
         /// <param name="authenticator">A concrete authenticator.</param>
-        Authenticator(const std::shared_ptr<IAuthenticator> &authenticator);
+        explicit Authenticator(const std::shared_ptr<IAuthenticator> &authenticator);
 
         /// <summary>
         /// Returns that type of Authenticator.
@@ -74,7 +74,7 @@ namespace Aptos::BCS
         bool Equals(const Authenticator &other) const;
 
         /// <inheritdoc/>
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
 
         /// <inheritdoc/>
         std::string ToString() const override;
@@ -116,7 +116,7 @@ namespace Aptos::BCS
         bool Equals(const Ed25519Authenticator &other) const;
 
         /// <inheritdoc/>
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
 
         /// <inheritdoc/>
         std::string ToString() const override;

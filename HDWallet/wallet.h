@@ -52,7 +52,7 @@ namespace Aptos::HDWallet
         void InitializeFirstAccount();
         Account GetDerivedAccount(int index);
         void InitializeSeed();
-        Wallet(const std::string &mnemonicWords, const std::string &passphrase = "",
+        explicit Wallet(const std::string &mnemonicWords, const std::string &passphrase = "",
                SeedMode seedMode = SeedMode::Ed25519Bip32);
         Account account() const;
         std::string getMnemonicsKey() const;

@@ -6,7 +6,7 @@ namespace AptosRESTModel {
 class ResourceDataBase
 {
 public:
-    ResourceDataBase();
+    explicit ResourceDataBase();
     virtual ~ResourceDataBase();
 };
 }

@@ -9,7 +9,7 @@ namespace Aptos::BCS
     class TransactionArgument
     {
     public:
-        TransactionArgument(ISerializable *value, TypeTag encoderType);
+        explicit TransactionArgument(ISerializable *value, TypeTag encoderType);
         std::vector<uint8_t> Encode();
 
     private:

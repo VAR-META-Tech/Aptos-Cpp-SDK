@@ -6,8 +6,8 @@ namespace AptosRESTModel {
 
 class IResourceBase {
 public:
-    IResourceBase(const std::string& type);
-    IResourceBase();
+    explicit IResourceBase(const std::string& type);
+    explicit IResourceBase();
     nlohmann::json ToJson() const;
     static IResourceBase FromJson(const nlohmann::json& resourceJson);
 private:

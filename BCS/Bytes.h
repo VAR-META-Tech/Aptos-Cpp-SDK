@@ -25,7 +25,7 @@ namespace Aptos::BCS
         /// Creates a Bytes object from a given byte array.
         /// </summary>
         /// <param name="values">A list of bytes to serialize.</param>
-        Bytes(const std::vector<uint8_t> &values);
+        explicit Bytes(const std::vector<uint8_t> &values);
 
         /// <inheritdoc/>
         void Serialize(Serialization &serializer) const override;
@@ -46,7 +46,7 @@ namespace Aptos::BCS
         std::string ToString() const override;
 
         /// <inheritdoc/>
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
     };
 }
 #endif // APTOS_BYTES_H

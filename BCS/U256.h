@@ -22,7 +22,7 @@ namespace Aptos::BCS
         /// Creates a U256 object from a given BigInteger value.
         /// </summary>
         /// <param name="value">A BigInteger value to serialize as u256.</param>
-        U256(CryptoPP::Integer value);
+        explicit U256(CryptoPP::Integer value);
 
         /// <inheritdoc/>
         void Serialize(Serialization &serializer) const override;

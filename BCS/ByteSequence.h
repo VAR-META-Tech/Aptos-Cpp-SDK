@@ -24,7 +24,7 @@ namespace Aptos::BCS
         /// Creates a ByteSequence object from a list of a list of bytes.
         /// </summary>
         /// <param name="values">A lsit of a list of bytes.</param>
-        BytesSequence(const std::vector<std::vector<uint8_t>> &values);
+        explicit BytesSequence(const std::vector<std::vector<uint8_t>> &values);
 
         /// <inheritdoc/>
         void Serialize(Serialization &serializer) const override;
@@ -42,7 +42,7 @@ namespace Aptos::BCS
         std::string ToString() const override;
 
         /// <inheritdoc/>
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
     };
 }
 #endif // APTOS_BYTESEQUENCE_H

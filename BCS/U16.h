@@ -21,7 +21,7 @@ namespace Aptos::BCS
         /// Creates a U16 object from a given uint value.
         /// </summary>
         /// <param name="value">A uint value to serialize as u16.</param>
-        U16(uint16_t value);
+        explicit U16(uint16_t value);
 
         /// <inheritdoc/>
         void Serialize(Serialization &serializer) const override;
@@ -45,7 +45,7 @@ namespace Aptos::BCS
         std::string ToString() const override;
 
         /// <inheritdoc/>
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
     };
 }
 #endif // APTOS_U16_H

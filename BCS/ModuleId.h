@@ -14,13 +14,13 @@ namespace Aptos::BCS
     class ModuleId : public ISerializable
     {
     public:
-        ModuleId(const AccountAddress &address, const std::string &name);
+        explicit ModuleId(const AccountAddress &address, const std::string &name);
         void Serialize(Serialization &serializer) const override;
         static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
         bool Equals(const ModuleId &other) const;
         std::string ToString() const override;
         static ModuleId FromStr(const std::string &moduleId);
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
 
     private:
         AccountAddress address;

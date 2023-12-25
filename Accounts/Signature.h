@@ -33,7 +33,7 @@ namespace Aptos::Accounts
         /// Initialize the signature.
         /// </summary>
         /// <param name="signature">The raw signature in byte array format.</param>
-        Signature(const CryptoPP::SecByteBlock &signature);
+        explicit Signature(const CryptoPP::SecByteBlock &signature);
 
         /// <summary>
         /// The signature data in 64-bytes.
@@ -48,7 +48,6 @@ namespace Aptos::Accounts
         void Serialize(BCS::Serialization &serializer) const override;
         static std::shared_ptr<BCS::ISerializable> Deserialize(BCS::Deserialization &deserializer);
         bool operator==(const Signature &other) const;
-        bool operator!=(const Signature &other) const;
 
         /// <inheritdoc cref="ToString"/>
         std::string ToString() const override;

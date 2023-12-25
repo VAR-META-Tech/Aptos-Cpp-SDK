@@ -22,7 +22,7 @@ namespace Aptos::BCS
     class Deserialization
     {
     public:
-        Deserialization(const std::vector<uint8_t> &data);
+        explicit Deserialization(const std::vector<uint8_t> &data);
 
         std::size_t Remaining() const;
         bool DeserializeBool();

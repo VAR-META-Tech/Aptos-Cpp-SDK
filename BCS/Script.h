@@ -15,7 +15,7 @@ namespace Aptos::BCS
     class Script : public ISerializable
     {
     public:
-        Script(const std::vector<uint8_t> &code, const TagSequence &typeArgs, const Sequence &scriptArgs);
+        explicit Script(const std::vector<uint8_t> &code, const TagSequence &typeArgs, const Sequence &scriptArgs);
 
         void Serialize(Serialization &serializer) const override;
         static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);

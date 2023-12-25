@@ -16,7 +16,7 @@ namespace Aptos::BCS
     class RawTransaction : public ISerializable
     {
     public:
-        RawTransaction(const AccountAddress &sender, int sequenceNumber,
+        explicit RawTransaction(const AccountAddress &sender, int sequenceNumber,
                        const TransactionPayload &payload, int maxGasAmount,
                        int gasUnitPrice, uint64_t expirationTimestampsSecs, int chainId);
         std::vector<uint8_t> Prehash();

@@ -20,7 +20,7 @@ namespace Aptos::BCS
         /// Creates a U64 object from a given ulong value.
         /// </summary>
         /// <param name="value">A ulong value to serialize as u64.</param>
-        U64(uint64_t value);
+        explicit U64(uint64_t value);
 
         /// <inheritdoc/>
         void Serialize(Serialization &serializer) const override;
@@ -44,7 +44,7 @@ namespace Aptos::BCS
         std::string ToString() const override;
 
         /// <inheritdoc/>
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
     };
 }
 #endif // APTOS_U64_H

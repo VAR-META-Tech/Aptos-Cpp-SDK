@@ -22,7 +22,7 @@ namespace Aptos::BCS
         /// Creates a U128 objeect from a BigInteger value.
         /// </summary>
         /// <param name="value">A BigInteger value to serialize as u128.</param>
-        U128(CryptoPP::Integer value);
+        explicit U128(CryptoPP::Integer value);
 
         /// <inheritdoc/>
         void Serialize(Serialization &serializer) const override;
@@ -43,7 +43,7 @@ namespace Aptos::BCS
         bool Equals(const U128 &other) const;
 
         /// <inheritdoc/>
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
 
         /// <inheritdoc/>
         static CryptoPP::Integer Deserialize(const std::vector<uint8_t> &data);

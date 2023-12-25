@@ -34,7 +34,7 @@ public:
     /// </summary>
     /// <param name="PublicKeys">List of public keys used to create the multi-sig</param>
     /// <param name="threshold">The max number of keys accepted in the multi-sig.</param>
-    MultiEd25519PublicKey(std::vector<PublicKey> PublicKeys, int threshold);
+    MultiEd25519PublicKey(std::vector<PublicKey> &PublicKeys, int threshold);
 
     /// <summary>
     /// Converts a MultiEd25519PublicKey into bytes \n

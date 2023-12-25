@@ -24,7 +24,7 @@ namespace Aptos::BCS
         /// Creates a Bool object from a given boolean.
         /// </summary>
         /// <param name="value">A bolean value to serialize.</param>
-        Bool(bool value);
+        explicit Bool(bool value);
 
         /// <inheritdoc/>
         void Serialize(Serialization &serializer) const override;
@@ -45,7 +45,7 @@ namespace Aptos::BCS
         std::string ToString() const override;
 
         /// <inheritdoc/>
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
     };
 
     bool operator==(const Bool &lhs, const Bool &rhs);

@@ -12,7 +12,7 @@ namespace Aptos::BCS
     class MultiAgentRawTransaction
     {
     public:
-        MultiAgentRawTransaction(const RawTransaction &rawTransaction, const Sequence &secondarySigners);
+        explicit MultiAgentRawTransaction(const RawTransaction &rawTransaction, const Sequence &secondarySigners);
 
         RawTransaction Inner();
         std::vector<uint8_t> Prehash();

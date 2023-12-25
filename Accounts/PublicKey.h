@@ -92,7 +92,6 @@ namespace Aptos::Accounts
         bool Equals(const PublicKey &rhs) const;
 
         bool operator==(const PublicKey &rhs) const;
-        bool operator!=(const PublicKey &rhs) const;
     };
 }
 

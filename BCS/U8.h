@@ -18,7 +18,7 @@ namespace Aptos::BCS
         /// Creates a U8 object from a given byte.
         /// </summary>
         /// <param name="value">A byte value to serialize as u8.</param>
-        U8(uint8_t value);
+        explicit U8(uint8_t value);
 
         /// <inheritdoc/>
         void Serialize(Serialization &serializer) const override;
@@ -39,7 +39,7 @@ namespace Aptos::BCS
         std::string ToString() const override;
 
         /// <inheritdoc/>
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
     };
 }
 #endif // APTOS_U8_H

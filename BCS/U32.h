@@ -21,7 +21,7 @@ namespace Aptos::BCS
         /// Creates a U32 object from a uint value.
         /// </summary>
         /// <param name="value">A uint value to serialize as u32.</param>
-        U32(uint32_t value);
+        explicit U32(uint32_t value);
 
         /// <inheritdoc/>
         void Serialize(Serialization &serializer) const override;
@@ -45,7 +45,7 @@ namespace Aptos::BCS
         std::string ToString() const override;
 
         /// <inheritdoc/>
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
     };
 }
 #endif // APTOS_U32_H

@@ -9,21 +9,21 @@
 
 namespace Aptos::Accounts
 {
-    MultiSignature::MultiSignature(const MultiPublicKey &PublicKeyMulti, const std::vector<std::pair<PublicKey, Signature>> &SignatureMap)
+    MultiSignature::MultiSignature(const MultiPublicKey &PublicKeyMulti, const std::vector<std::pair<PublicKey, Signature>> &SignatureMap) 
+    : Signatures()
     {
-        Signatures = std::vector<Signature>();
         int bitmap = 0;
         auto keys = PublicKeyMulti.getKeys();
-        for (const auto &entry : SignatureMap)
+        for (const auto &[key, value] : SignatureMap)
         {
-            this->Signatures.push_back(entry.second);
-            int index = std::distance(keys.begin(), std::find(keys.begin(), keys.end(), entry.first));
+            this->Signatures.push_back(value);
+            int index = std::distance(keys.begin(), std::find(keys.begin(), keys.end(), key));
             int shift = 31 - index;
             bitmap = bitmap | (1 << shift);
         }
 
         uint32_t uBitmap = htobe32(static_cast<uint32_t>(bitmap));
-        this->Bitmap = std::vector<uint8_t>(reinterpret_cast<uint8_t *>(&uBitmap), reinterpret_cast<uint8_t *>(&uBitmap) + sizeof(uint32_t));
+        this->Bitmap = std::vector<uint8_t>(std::bit_cast<uint8_t *>(&uBitmap), std::bit_cast<uint8_t *>(&uBitmap) + sizeof(uint32_t));
     }
 
     std::vector<uint8_t> MultiSignature::ToBytes() const
