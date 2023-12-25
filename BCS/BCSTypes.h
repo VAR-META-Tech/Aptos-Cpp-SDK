@@ -51,7 +51,7 @@ namespace Aptos::BCS
         /// <param name="deserializer"></param>
         /// <returns></returns>
         static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
-        virtual std::size_t GetHashCode();
+        virtual std::size_t GetHashCode() const;
         ;
         virtual ~ISerializable() {}
         virtual std::string ToString() const = 0;

@@ -708,26 +708,6 @@ TEST(PublicKeyTest, GetHashCodeDifferentKeys)
     ASSERT_NE(hashCode1, hashCode2);
 }
 
-TEST(PublicKeyTest, NotEqualsOperatorWithIdenticalKeys)
-{
-    // Setup: Create two PublicKey instances with the same key
-    PublicKey key1("0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5");
-    PublicKey key2("0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5");
-
-    // Execute & Verify: Check if != operator returns false for identical keys
-    ASSERT_FALSE(key1 != key2);
-}
-
-TEST(PublicKeyTest, NotEqualsOperatorWithDifferentKeys)
-{
-    // Setup: Create two PublicKey instances with different keys
-    PublicKey key1("0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5");
-    PublicKey key2("0x9f628c43d1c1c0f54683cf5ccbd2b944608df4ff2649841053b1790a4d7c187d");
-
-    // Execute & Verify: Check if != operator returns true for different keys
-    ASSERT_TRUE(key1 != key2);
-}
-
 TEST(PublicKeyTest, ConstructorWithEmptyValue)
 {
     // Setup: Create an empty SecByteBlock

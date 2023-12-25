@@ -37,8 +37,8 @@ namespace Aptos::BCS
         std::vector<uint8_t> outputBytes = ser.GetBytes();
         std::vector<uint8_t> res(prehash.size() + outputBytes.size());
 
-        std::copy(prehash.begin(), prehash.end(), res.begin());
-        std::copy(outputBytes.begin(), outputBytes.end(), res.begin() + prehash.size());
+        std::ranges::copy(prehash.begin(), prehash.end(), res.begin());
+        std::ranges::copy(outputBytes.begin(), outputBytes.end(), res.begin() + prehash.size());
 
         return res;
     }

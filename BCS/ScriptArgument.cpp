@@ -159,7 +159,7 @@ namespace Aptos::BCS
         return "[" + std::to_string(static_cast<uint8_t>(this->variant)) + "] " + this->value->ToString();
     }
 
-    size_t ScriptArgument::GetHashCode()
+    size_t ScriptArgument::GetHashCode() const
     {
         size_t hash = 17;
         hash = hash * 23 + static_cast<size_t>(this->variant);

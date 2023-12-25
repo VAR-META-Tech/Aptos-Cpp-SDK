@@ -89,7 +89,7 @@ namespace Aptos::BCS
         return this->value->ToString();
     }
 
-    size_t TransactionPayload::GetHashCode()
+    size_t TransactionPayload::GetHashCode() const
     {
         size_t hash = 17;
         hash = hash * 23 + this->value->GetHashCode();

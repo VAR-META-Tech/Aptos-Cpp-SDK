@@ -20,7 +20,7 @@ namespace Aptos::BCS
         static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
         bool Equals(const TransactionPayload &other) const;
         std::string ToString() const override;
-        size_t GetHashCode() override;
+        size_t GetHashCode() const override;
 
     private:
         std::shared_ptr<ISerializable> value;

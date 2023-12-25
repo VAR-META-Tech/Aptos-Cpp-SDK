@@ -11,8 +11,6 @@
 #include "../BCS/Deserialization.h"
 #include "multipublickey.h"
 
-using namespace Aptos::BCS;
-
 namespace Aptos::Accounts
 {
     /// <summary>
@@ -162,7 +160,7 @@ namespace Aptos::Accounts
         /// <param name="keys">A MultiPublicKey instance representing the multiple public keys to create the AccountAddress instance from.</param>
         /// <returns>An AccountAddress instance created from the provided MultiPublicKey.</returns>
         static AccountAddress FromMultiEd25519(MultiPublicKey keys);
-        size_t GetHashCode() override;
+        size_t GetHashCode() const override;
 
         TypeTag Variant() const override;
 

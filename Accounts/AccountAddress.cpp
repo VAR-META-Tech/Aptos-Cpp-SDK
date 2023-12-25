@@ -112,7 +112,7 @@ namespace Aptos::Accounts
         serializer.SerializeFixedBytes(Utils::SecBlockToByteVector(_addressBytes));
     }
 
-    size_t AccountAddress::GetHashCode()
+    size_t AccountAddress::GetHashCode() const
     {
         return ISerializable::GetHashCode();
     }

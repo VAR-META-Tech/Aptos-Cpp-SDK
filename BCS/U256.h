@@ -43,7 +43,7 @@ namespace Aptos::BCS
         bool Equals(const U256 &other) const;
 
         /// <inheritdoc/>
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
 
         /// <inheritdoc/>
         static CryptoPP::Integer Deserialize(const std::vector<uint8_t> &data);

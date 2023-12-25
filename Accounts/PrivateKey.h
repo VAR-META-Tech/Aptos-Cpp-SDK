@@ -38,7 +38,7 @@ namespace Aptos::Accounts
         /// The key as a 32-byte hexadecimal string (64 characters).
         /// </summary>
         std::string Key();
-        void Key(std::string key);
+        void Key(std::string const &key);
 
         /// <summary>
         /// The 32-byte private key in bytes.
@@ -55,7 +55,7 @@ namespace Aptos::Accounts
         /// Note: To create a private key from a 32-byte string see <see cref="PrivateKey(string key)">PrivateKey(string key)</see>
         /// </summary>
         /// <param name="privateKey">64-byte array representation of the private key.</param>
-        PrivateKey(CryptoPP::SecByteBlock privateKey);
+        explicit PrivateKey(CryptoPP::SecByteBlock privateKey);
 
         /// <summary>
         /// Initializes the PrivateKey object with a 64 character (32-byte) ASCII representation of a private key.
@@ -64,13 +64,13 @@ namespace Aptos::Accounts
         /// </summary>
         /// <param name="key">The private key as an ASCII encoded string.
         /// Example: <c>0x64f57603b58af16907c18a866123286e1cbce89790613558dc1775abb3fc5c8c</c></param>
-        PrivateKey(std::string key);
+        explicit PrivateKey(std::string const &key);
 
         /// <summary>
         /// Initialize the PrivateKey object from the given string.
         /// </summary>
         /// <param name="key">The private key as a hex encoded byte array.</param>
-        PrivateKey(std::array<CryptoPP::byte, KeyLength> privateKey);
+        explicit PrivateKey(std::array<CryptoPP::byte, KeyLength> privateKey);
 
         /// <summary>
         /// Create a private key from a string literal.
@@ -94,7 +94,6 @@ namespace Aptos::Accounts
         /// <param name="rhs">Second private key in comparison.</param>
         /// <returns></returns>
         bool operator==(const PrivateKey &rhs) const;
-        bool operator!=(const PrivateKey &rhs) const;
 
         /// <summary>
         /// Sign a message using the extended private key.

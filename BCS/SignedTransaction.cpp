@@ -57,7 +57,7 @@ namespace Aptos::BCS
         return "Transaction: " + transaction.ToString() + "\n Authenticator: " + authenticator.ToString();
     }
 
-    size_t SignedTransaction::GetHashCode()
+    size_t SignedTransaction::GetHashCode() const 
     {
         size_t hash = 17;
         hash = hash * 23 + transaction.GetHashCode();

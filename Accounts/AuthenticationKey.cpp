@@ -21,7 +21,7 @@ namespace Aptos::Accounts
         CryptoPP::SecByteBlock pubKeyBytes = publicKey.ToBytes();
         CryptoPP::SecByteBlock bytes;
         bytes.resize(pubKeyBytes.size() + 1);
-        std::copy(pubKeyBytes.begin(), pubKeyBytes.end(), bytes.begin());
+        std::ranges::copy(pubKeyBytes.begin(), pubKeyBytes.end(), bytes.begin());
         bytes[pubKeyBytes.size()] = AuthenticationKey::MULTI_ED25519_SCHEME;
         sha3.Update(bytes.data(), bytes.size());
         CryptoPP::SecByteBlock result;
@@ -35,7 +35,7 @@ namespace Aptos::Accounts
         CryptoPP::SHA3_256 sha3;
         CryptoPP::SecByteBlock bytes;
         bytes.resize(CryptoPP::ed25519PublicKey::PUBLIC_KEYLENGTH + 1);
-        std::copy(publicKey.begin(), publicKey.end(), bytes.begin());
+        std::ranges::copy(publicKey.begin(), publicKey.end(), bytes.begin());
         bytes[CryptoPP::ed25519PublicKey::PUBLIC_KEYLENGTH] = AuthenticationKey::ED25519_SCHEME;
         sha3.Update(bytes.data(), bytes.size());
         CryptoPP::SecByteBlock result;

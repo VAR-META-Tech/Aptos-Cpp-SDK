@@ -33,7 +33,7 @@ namespace Aptos::Accounts
         {
             throw std::invalid_argument("Key cannot be null.");
         }
-        if (key.substr(0, 2) == "0x")
+        if (key.starts_with("0x"))
         {
             key = key.substr(2);
         }
@@ -107,7 +107,6 @@ namespace Aptos::Accounts
 
     bool PublicKey::IsOnCurve() const
     {
-        // todo
         return false;
     }
 
@@ -146,10 +145,5 @@ namespace Aptos::Accounts
     bool PublicKey::operator==(const PublicKey &rhs) const
     {
         return Equals(rhs);
-    }
-
-    bool PublicKey::operator!=(const PublicKey &rhs) const
-    {
-        return !Equals(rhs);
     }
 }

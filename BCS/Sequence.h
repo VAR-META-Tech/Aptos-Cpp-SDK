@@ -54,7 +54,7 @@ namespace Aptos::BCS
         std::string ToString() const override;
 
         /// <inheritdoc/>
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
 
         /// <inheritdoc/>
         const std::vector<std::shared_ptr<ISerializable>> &getValues() const;

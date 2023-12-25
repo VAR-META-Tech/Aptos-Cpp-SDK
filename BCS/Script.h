@@ -21,7 +21,7 @@ namespace Aptos::BCS
         static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
         bool Equals(const Script &other) const;
         std::string ToString();
-        size_t GetHashCode() override;
+        size_t GetHashCode() const override;
         std::string ToString() const override;
 
     private:

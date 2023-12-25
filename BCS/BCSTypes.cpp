@@ -96,7 +96,7 @@ namespace Aptos::BCS
         return nullptr;
     }
 
-    std::size_t ISerializable::GetHashCode()
+    std::size_t ISerializable::GetHashCode() const
     {
         // Your hash logic here. This is just a simple example.
         std::size_t seed = 0;

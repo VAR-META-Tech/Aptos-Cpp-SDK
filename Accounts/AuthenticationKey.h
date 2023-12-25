@@ -47,7 +47,7 @@ namespace Aptos::Accounts
         /// </summary>
         /// <param name="bytes">The raw byte array of the key itself.</param>
         /// <exception cref="ArgumentException"></exception>
-        AuthenticationKey(const CryptoPP::SecByteBlock &bytes);
+        explicit AuthenticationKey(const CryptoPP::SecByteBlock &bytes);
 
         /// <summary>
         /// Converts a K-of-N MultiEd25519PublicKey to AuthenticationKey with: \n

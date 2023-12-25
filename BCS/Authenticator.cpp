@@ -98,7 +98,7 @@ namespace Aptos::BCS
         return false;
     }
 
-    int Authenticator::GetHashCode() const
+    size_t Authenticator::GetHashCode() const
     {
         return m_authenticator->GetHashCode();
     }
@@ -134,7 +134,7 @@ namespace Aptos::BCS
         return m_publicKey.Equals(other.m_publicKey) && m_signature.Equals(other.m_signature);
     }
 
-    int Ed25519Authenticator::GetHashCode() const
+    size_t Ed25519Authenticator::GetHashCode() const
     {
         return 0;
         //    return m_publicKey.GetHashCode() + m_signature.GetHashCode();
@@ -236,7 +236,7 @@ namespace Aptos::BCS
         return (sender.Equals(other.sender) && areEqual);
     }
 
-    int MultiAgentAuthenticator::GetHashCode() const
+    size_t MultiAgentAuthenticator::GetHashCode() const
     {
         return 0; // You need to implement this
     }

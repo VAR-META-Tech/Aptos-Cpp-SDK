@@ -39,7 +39,7 @@ namespace Aptos::BCS
         return "<" + this->typeArgs.ToString() + ">(" + this->scriptArgs.ToString() + ")";
     }
 
-    size_t Script::GetHashCode()
+    size_t Script::GetHashCode() const
     {
         size_t hash = 17;
         for (uint8_t byte : this->code)

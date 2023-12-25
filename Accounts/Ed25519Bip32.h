@@ -47,7 +47,7 @@ namespace Aptos::Accounts
         static bool IsValidPath(const std::string &path);
 
     public:
-        Ed25519Bip32(const std::vector<uint8_t> &seed);
+        explicit Ed25519Bip32(const std::vector<uint8_t> &seed);
         std::pair<CryptoPP::SecByteBlock, CryptoPP::SecByteBlock> DerivePath(const std::string &path);
     };
 }

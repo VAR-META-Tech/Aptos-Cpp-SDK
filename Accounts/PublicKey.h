@@ -33,7 +33,7 @@ namespace Aptos::Accounts
         /// Initializes the PublicKey object with a given byte array.
         /// </summary>
         /// <param name="publicKey">The public key as byte array.</param>
-        PublicKey(const CryptoPP::SecByteBlock &publicKey);
+        explicit PublicKey(const CryptoPP::SecByteBlock &publicKey);
 
         /// <summary>
         /// Initializes the PublicKey object with a given hexadecimal representation of public .
@@ -41,7 +41,7 @@ namespace Aptos::Accounts
         /// <param name="key">The public key as a hexadecimal string.
         /// Example: <c>0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5</c>
         /// </param>
-        PublicKey(std::string key);
+        explicit PublicKey(std::string key);
 
         /// <summary>
         /// The key as a hexadecimal string
@@ -86,7 +86,7 @@ namespace Aptos::Accounts
         /// Value used as a hash
         /// </summary>
         /// <returns></returns>
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
 
         /// <inheritdoc cref="object.Equals(object)"/>
         bool Equals(const PublicKey &rhs) const;

@@ -74,7 +74,7 @@ namespace Aptos::BCS
         bool Equals(const Authenticator &other) const;
 
         /// <inheritdoc/>
-        int GetHashCode() const;
+        size_t GetHashCode() const;
 
         /// <inheritdoc/>
         std::string ToString() const override;
@@ -116,7 +116,7 @@ namespace Aptos::BCS
         bool Equals(const Ed25519Authenticator &other) const;
 
         /// <inheritdoc/>
-        int GetHashCode() const;
+        size_t GetHashCode() const;
 
         /// <inheritdoc/>
         std::string ToString() const override;
@@ -171,7 +171,7 @@ namespace Aptos::BCS
         bool Equals(const MultiAgentAuthenticator &other) const;
 
         /// <inheritdoc/>
-        int GetHashCode() const;
+        size_t GetHashCode() const override;
 
         /// <inheritdoc/>
         std::string ToString() const override;

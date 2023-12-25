@@ -41,12 +41,10 @@ namespace Aptos::Accounts
 
     bool Ed25519Bip32::IsValidPath(const std::string &path)
     {
-        std::regex regex("^m(\\/[0-9]+')+$");
-
-        if (!std::regex_match(path, regex)){
-        return false; 
+        if (std::regex regex("^m(\\/[0-9]+')+$"); !std::regex_match(path, regex))
+        {
+            return false;
         }
-
         return true;
     }
 
@@ -83,10 +81,10 @@ namespace Aptos::Accounts
         std::vector<uint8_t> buffer;
         buffer.push_back(0);
         buffer.insert(buffer.end(), key.begin(), key.end());
-        // buffer.insert(buffer.end(), reinterpret_cast<uint8_t*>(&index), reinterpret_cast<uint8_t*>(&index) + sizeof(index));
+       
         // Convert index to big-endian
         index = htonl(index);
-        uint8_t *indexPtr = reinterpret_cast<uint8_t *>(&index);
+        auto indexPtr = std::bit_cast<uint8_t*>(&index);
 
         // Insert index into buffer
         buffer.insert(buffer.end(), indexPtr, indexPtr + sizeof(index));

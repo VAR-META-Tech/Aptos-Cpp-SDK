@@ -29,7 +29,7 @@ namespace Aptos::BCS
         static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
         bool Equals(const ScriptArgument &other);
         std::string ToString() const override;
-        size_t GetHashCode() override;
+        size_t GetHashCode() const override;
 
     private:
         ScriptArgumentTypeTag variant;

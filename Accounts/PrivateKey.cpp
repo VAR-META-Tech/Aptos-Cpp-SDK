@@ -27,7 +27,7 @@ namespace Aptos::Accounts
         return _key;
     }
 
-    void PrivateKey::Key(std::string key)
+    void PrivateKey::Key(std::string const &key)
     {
         _key = key;
     }
@@ -37,7 +37,7 @@ namespace Aptos::Accounts
         if (_keyBytes.empty() && !_key.empty())
         {
             std::string key = _key;
-            if (key.substr(0, 2) == "0x")
+            if (key.starts_with("0x"))
             {
                 key = key.substr(2);
             }
@@ -64,7 +64,7 @@ namespace Aptos::Accounts
         _keyBytes = value;
     }
 
-    PrivateKey::PrivateKey(std::string key)
+    PrivateKey::PrivateKey(std::string const &key)
     {
         if (key.empty())
             throw std::invalid_argument("Key cannot be null.");
@@ -72,11 +72,6 @@ namespace Aptos::Accounts
             throw std::invalid_argument("Invalid key.");
         _key = key;
     }
-
-    // PrivateKey::PrivateKey(std::array<CryptoPP::byte, KeyLength> privateKey)
-    // {
-    //     // todo
-    // }
 
     PrivateKey PrivateKey::FromHex(std::string key)
     {
@@ -95,14 +90,8 @@ namespace Aptos::Accounts
         return PublicKey(publicKeyBytes);
     }
 
-    bool PrivateKey::operator!=(const PrivateKey &rhs) const
-    {
-        return !Equals(rhs);
-    }
-
     Signature PrivateKey::Sign(CryptoPP::SecByteBlock message)
     {
-        // CryptoPP::AutoSeededRandomPool prng;
         if (_keyBytes.empty())
         {
             KeyBytes();
@@ -116,7 +105,7 @@ namespace Aptos::Accounts
         signature.resize(siglen);
         CryptoPP::SecByteBlock signatureData;
         signatureData.resize(signature.size());
-        std::copy(signature.begin(), signature.end(), signatureData.begin());
+        std::ranges::copy(signature.begin(), signature.end(), signatureData.begin());
         return Signature(signatureData);
     }
 
