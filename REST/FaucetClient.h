@@ -4,7 +4,6 @@
 #define BOOST_ASIO_HAS_STD_INVOKE_RESULT
 #include <functional>
 #include <string>
-#include <cpprest/http_client.h>
 #include "Model/ResponseInfo.h"
 
 namespace Aptos::Rest

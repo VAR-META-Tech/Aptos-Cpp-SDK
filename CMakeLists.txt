@@ -7,11 +7,52 @@ set(CMAKE_BUILD_TYPE Debug)
 
 include(CTest)
 enable_testing()
-include(conan_toolchain.cmake)
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+    # include(${CMAKE_BINARY_DIR}/Release/generators/conan_toolchain.cmake)
+    include(FetchContent)
+    fetchcontent_declare(
+            toolbox
+            GIT_REPOSITORY https://github.com/edwardstock/toolbox.git
+            GIT_TAG 3.4.0
+    )
+    set(toolbox_BUILD_TESTS OFF)
+    set(toolbox_BUILD_SHARED_LIBS OFF)
+    fetchcontent_makeavailable(toolbox)
+
+    fetchcontent_declare(
+            bip3x
+            GIT_REPOSITORY https://github.com/edwardstock/bip3x.git
+            GIT_TAG 3.0.0
+    )
+    fetchcontent_makeavailable(bip3x)
+    if(TARGET toolbox)
+        target_compile_options(toolbox PRIVATE
+            -include cstdint
+        )
+    endif()
+    if(TARGET bip3x)
+        target_compile_options(bip3x PRIVATE
+            -include cstdint
+        )
+    endif()
+    find_library(CryptoPP_LIB NAMES libcryptopp.a PATHS /usr/local/lib)
+    if (NOT CryptoPP_LIB)
+        message(FATAL_ERROR "Crypto++ library not found")
+    endif()
+elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
+    include(conan_toolchain.cmake)
+    find_package(cryptopp REQUIRED)
+    find_library(CryptoPP_LIB NAMES libcryptopp.a PATHS ${cryptopp_LIB_DIRS_RELEASE})
+    if (NOT CryptoPP_LIB)
+        message(FATAL_ERROR "Crypto++ library not found")
+    endif()
+    find_package(httplib REQUIRED)
+endif()
 
 # Check for doxygen presence
+option(GEN_DOC "Enable generate document" OFF)
 find_package(Doxygen)
-if (DOXYGEN_FOUND)
+if (GEN_DOC AND DOXYGEN_FOUND)
     # Set the path to the Doxyfile
     set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile)
     set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/html)
@@ -22,13 +63,14 @@ if (DOXYGEN_FOUND)
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
         COMMENT "Generating API documentation with Doxygen"
         VERBATIM)
+    find_package(cryptopp REQUIRED)
+    find_package(httplib REQUIRED)
 endif(DOXYGEN_FOUND)
 
 find_package(nlohmann_json REQUIRED)
-find_package(cryptopp REQUIRED)
 find_package(GTest REQUIRED)
-find_package(httplib REQUIRED)
 find_package(OpenSSL REQUIRED)
+find_package(ZLIB REQUIRED)
 
 # Code coverage configuration
 option(CODE_COVERAGE "Enable coverage reporting" OFF)
@@ -191,11 +233,17 @@ add_library(Aptos SHARED
         Accounts/Ed25519Bip32.cpp
 )
 
-target_link_libraries(Aptos PRIVATE 
-nlohmann_json::nlohmann_json bip3x httplib::httplib cryptopp::cryptopp
-${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
-${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a
-toolbox)
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+  target_link_libraries(Aptos PRIVATE 
+  nlohmann_json::nlohmann_json bip3x ${CryptoPP_LIB}  ${OPENSSL_LIBRARIES} ${ZLIB_LIBRARIES}
+  toolbox)
+else()
+  target_link_libraries(Aptos PRIVATE 
+  nlohmann_json::nlohmann_json bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+  ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a
+  toolbox)
+endif()
+
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
@@ -208,11 +256,11 @@ add_executable(test_utils Test/test_utils.cpp)
 add_executable(test_wallet Test/test_wallet.cpp)
 add_executable(test_transaction_serialization Test/test_transaction_serialization.cpp)
 
-target_link_libraries(test_serialization GTest::gtest_main pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a)
-target_link_libraries(test_account GTest::gtest_main pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a)
-target_link_libraries(test_utils GTest::gtest_main pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a)
-target_link_libraries(test_wallet GTest::gtest_main pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a toolbox)
-target_link_libraries(test_transaction_serialization GTest::gtest_main pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a)
+target_link_libraries(test_serialization PRIVATE GTest::gtest GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
+target_link_libraries(test_account PRIVATE GTest::gtest GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
+target_link_libraries(test_utils PRIVATE GTest::gtest GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
+target_link_libraries(test_wallet PRIVATE GTest::gtest GTest::gtest_main pthread Aptos ${CryptoPP_LIB} toolbox)
+target_link_libraries(test_transaction_serialization PRIVATE GTest::gtest GTest::gtest_main pthread Aptos ${CryptoPP_LIB})
 
 add_test(NAME SerializationTest COMMAND test_serialization)
 add_test(NAME AccountTest COMMAND test_account)
@@ -229,8 +277,14 @@ add_executable(runAllTests
     Test/test_transaction_serialization.cpp 
     Test/test_serialization.cpp
 )
-message(${cryptopp_LIB_DIRS_RELEASE})
-target_link_libraries(runAllTests PRIVATE GTest::gtest_main pthread Aptos toolbox ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a)
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+  target_link_libraries(runAllTests PRIVATE GTest::gtest GTest::gtest_main pthread Aptos toolbox ${CryptoPP_LIB})
+else()
+  target_link_libraries(runAllTests PRIVATE GTest::gtest GTest::gtest_main pthread Aptos toolbox ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+  ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
+endif()
+
+
 
 if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_custom_target(coverage
@@ -245,7 +299,13 @@ add_library(AptosUILogic SHARED
     AptosUILogic/uicontrollerlogic.h
     AptosUILogic/uicontrollerlogic.cpp
 )
-target_link_libraries(AptosUILogic PRIVATE nlohmann_json::nlohmann_json cryptopp::cryptopp pthread Aptos bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a)
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+  target_link_libraries(AptosUILogic PRIVATE nlohmann_json::nlohmann_json pthread Aptos bip3x ${CryptoPP_LIB})
+else()
+  target_link_libraries(AptosUILogic PRIVATE nlohmann_json::nlohmann_json pthread Aptos bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+  ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
+endif()
+
 
 add_executable(AptosUILogicTest
     AptosUILogic/main.cpp
