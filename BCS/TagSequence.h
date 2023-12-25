@@ -35,7 +35,7 @@ namespace Aptos::BCS
         std::string ToString() const override;
 
         /// <inheritdoc/>
-        size_t GetHashCode() const;
+        size_t GetHashCode() const override;
 
     private:
         /// <summary>

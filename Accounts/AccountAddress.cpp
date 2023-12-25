@@ -107,7 +107,7 @@ namespace Aptos::Accounts
         return AccountAddress::FromKey(publicKey.KeyBytes());
     }
 
-    void AccountAddress::Serialize(Serialization &serializer) const
+    void AccountAddress::Serialize(BCS::Serialization &serializer) const
     {
         serializer.SerializeFixedBytes(Utils::SecBlockToByteVector(_addressBytes));
     }
@@ -117,12 +117,12 @@ namespace Aptos::Accounts
         return ISerializable::GetHashCode();
     }
 
-    TypeTag AccountAddress::Variant() const
+    BCS::TypeTag AccountAddress::Variant() const
     {
-        return TypeTag::ACCOUNT_ADDRESS;
+        return BCS::TypeTag::ACCOUNT_ADDRESS;
     }
 
-    std::shared_ptr<ISerializableTag> AccountAddress::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<BCS::ISerializableTag> AccountAddress::Deserialize(BCS::Deserialization &deserializer)
     {
         CryptoPP::SecByteBlock addressBytes = Utils::ByteVectorToSecBlock(deserializer.FixedBytes(AccountAddress::Length));
         return std::make_shared<AccountAddress>(addressBytes);

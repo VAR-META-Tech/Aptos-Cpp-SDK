@@ -11,7 +11,7 @@ namespace Aptos::Accounts
     /// <summary>
     /// The ED25519 Multi-Public Key implementation.
     /// </summary>
-    class MultiPublicKey : public ISerializable
+    class MultiPublicKey : public BCS::ISerializable
     {
     public:
         /// <summary>
@@ -56,7 +56,7 @@ namespace Aptos::Accounts
         /// <exception cref="Exception"></exception>
         static MultiPublicKey FromBytes(const std::vector<uint8_t> &keyBytes);
 
-        void Serialize(Serialization &serializer) const;
+        void Serialize(BCS::Serialization &serializer) const;
         std::string ToString() const;
 
         std::vector<PublicKey> getKeys() const;

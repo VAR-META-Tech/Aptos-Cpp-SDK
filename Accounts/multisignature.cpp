@@ -38,7 +38,7 @@ namespace Aptos::Accounts
         return concatenatedSignatures;
     }
 
-    void MultiSignature::Serialize(Serialization &serializer) const
+    void MultiSignature::Serialize(BCS::Serialization &serializer) const
     {
         std::vector<uint8_t> bytes = ToBytes();
         serializer.SerializeBytes(bytes);

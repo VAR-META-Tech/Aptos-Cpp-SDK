@@ -110,13 +110,13 @@ namespace Aptos::Accounts
         return false;
     }
 
-    void PublicKey::Serialize(Serialization &serializer) const
+    void PublicKey::Serialize(BCS::Serialization &serializer) const
     {
         std::vector<uint8_t> byteArray = Utils::SecBlockToByteVector(_keyBytes);
         serializer.SerializeBytes(byteArray);
     }
 
-    std::shared_ptr<ISerializable> PublicKey::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<BCS::ISerializable> PublicKey::Deserialize(BCS::Deserialization &deserializer)
     {
         auto bytes = deserializer.ToBytes();
         CryptoPP::SecByteBlock keyBytes = Utils::ByteVectorToSecBlock(bytes);

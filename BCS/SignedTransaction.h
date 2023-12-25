@@ -11,7 +11,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Signed transaction implementation.
     /// </summary>
-    class SignedTransaction : public ISerializable
+    class SignedTransaction : public BCS::ISerializable
     {
     public:
         SignedTransaction(const RawTransaction &transaction, const Authenticator &authenticator);

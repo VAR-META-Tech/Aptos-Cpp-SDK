@@ -267,14 +267,14 @@ namespace Aptos::Rest
         void GetInfo(std::function<void(std::shared_ptr<AptosRESTModel::LedgerInfo>, AptosRESTModel::ResponseInfo)> callback);
 
         void SimulateTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback,
-                                 RawTransaction transaction, std::vector<uint8_t> publicKey);
+                                 BCS::RawTransaction transaction, std::vector<uint8_t> publicKey);
         /// <summary>
         /// Submits a BCS transaction.
         /// </summary>
         /// <param name="callback">Callback function used after response is received with the JSON response.</param>
         /// <param name="SignedTransaction">The signed transaction.</param>
         /// <returns></returns>
-        void SubmitBCSTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const SignedTransaction &signedTransaction);
+        void SubmitBCSTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const BCS::SignedTransaction &signedTransaction);
         /// <summary>
         /// Execute the Move view function with the given parameters and return its execution result.
         ///
@@ -318,7 +318,7 @@ namespace Aptos::Rest
         /// </returns>
         void SubmitTransaction(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback,
                                Account sender,
-                               EntryFunction entryFunction);
+                               BCS::EntryFunction entryFunction);
         /// <summary>
         /// A Coroutine that polls for a transaction hash until it is confimred in the blockchain
         /// Times out if the transaction hash is not found after querying for N times.
@@ -354,8 +354,8 @@ namespace Aptos::Rest
         /// </returns>
         void TransactionPending(std::function<void(bool, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash);
         void TransactionByHash(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash);
-        void CreateBCSSignedTransaction(std::function<void(std::shared_ptr<SignedTransaction>)> Callback, Account Sender, TransactionPayload Payload);
-        void CreateBCSTransaction(std::function<void(std::shared_ptr<RawTransaction>)> Callback, Account Sender, TransactionPayload payload);
+        void CreateBCSSignedTransaction(std::function<void(std::shared_ptr<BCS::SignedTransaction>)> Callback, Account Sender, BCS::TransactionPayload Payload);
+        void CreateBCSTransaction(std::function<void(std::shared_ptr<BCS::RawTransaction>)> Callback, Account Sender, BCS::TransactionPayload payload);
         /// <summary>
         /// Transfer a given coin amount from a given Account to the recipient's account Address.
         /// Returns the sequence number of the transaction used to transfer.

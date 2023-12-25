@@ -152,25 +152,25 @@ namespace Aptos::Rest
         return "Token[collection: " + Collection.ToString() + ", index: " + std::to_string(Index) + ", description: " + Description + ", name: " + Name + ", uri: " + Uri + "]";
     }
 
-    const BString &Property::getName() const
+    const BCS::BString &Property::getName() const
     {
         return Name;
     }
 
-    const BString &Property::getPropertyType() const
+    const BCS::BString &Property::getPropertyType() const
     {
         return PropertyType;
     }
 
-    const std::shared_ptr<ISerializable> &Property::getValue() const
+    const std::shared_ptr<BCS::ISerializable> &Property::getValue() const
     {
         return Value;
     }
 
-    Property::Property(const std::string &name, const std::string &propertyType, std::shared_ptr<ISerializable> value)
+    Property::Property(const std::string &name, const std::string &propertyType, std::shared_ptr<BCS::ISerializable> value)
         : Name(name), PropertyType(propertyType), Value(value) {}
 
-    Property::Property(const BString &name, const BString &propertyType, std::shared_ptr<ISerializable> value)
+    Property::Property(const BCS::BString &name, const BCS::BString &propertyType, std::shared_ptr<BCS::ISerializable> value)
         : Name(name), PropertyType(propertyType), Value(value) {}
 
     std::string Property::ToString() const
@@ -180,64 +180,64 @@ namespace Aptos::Rest
 
     std::vector<uint8_t> Property::SerializeValue() const
     {
-        Serialization ser;
-        if (PropertyType == BString("bool"))
+        BCS::Serialization ser;
+        if (PropertyType == BCS::BString("bool"))
         {
-            auto boolValue = std::dynamic_pointer_cast<Bool>(Value);
+            auto boolValue = std::dynamic_pointer_cast<BCS::Bool>(Value);
             if (boolValue != nullptr)
             {
                 boolValue->Serialize(ser);
             }
         }
-        else if (PropertyType == BString("u8"))
+        else if (PropertyType == BCS::BString("u8"))
         {
-            auto u8Value = std::dynamic_pointer_cast<U8>(Value);
+            auto u8Value = std::dynamic_pointer_cast<BCS::U8>(Value);
             if (u8Value != nullptr)
             {
                 u8Value->Serialize(ser);
             }
         }
-        else if (PropertyType == BString("u16"))
+        else if (PropertyType == BCS::BString("u16"))
         {
-            auto u16Value = std::dynamic_pointer_cast<U16>(Value);
+            auto u16Value = std::dynamic_pointer_cast<BCS::U16>(Value);
             if (u16Value != nullptr)
             {
                 u16Value->Serialize(ser);
             }
         }
-        else if (PropertyType == BString("u32"))
+        else if (PropertyType == BCS::BString("u32"))
         {
-            auto u32Value = std::dynamic_pointer_cast<U32>(Value);
+            auto u32Value = std::dynamic_pointer_cast<BCS::U32>(Value);
             if (u32Value != nullptr)
             {
                 u32Value->Serialize(ser);
             }
         }
-        else if (PropertyType == BString("u64"))
+        else if (PropertyType == BCS::BString("u64"))
         {
-            auto u64Value = std::dynamic_pointer_cast<U64>(Value);
+            auto u64Value = std::dynamic_pointer_cast<BCS::U64>(Value);
             if (u64Value != nullptr)
             {
                 u64Value->Serialize(ser);
             }
         }
-        else if (PropertyType == BString("u128"))
+        else if (PropertyType == BCS::BString("u128"))
         {
-            auto u128Value = std::dynamic_pointer_cast<U128>(Value);
+            auto u128Value = std::dynamic_pointer_cast<BCS::U128>(Value);
             if (u128Value != nullptr)
             {
                 u128Value->Serialize(ser);
             }
         }
-        else if (PropertyType == BString("u256"))
+        else if (PropertyType == BCS::BString("u256"))
         {
-            auto u256Value = std::dynamic_pointer_cast<U256>(Value);
+            auto u256Value = std::dynamic_pointer_cast<BCS::U256>(Value);
             if (u256Value != nullptr)
             {
                 u256Value->Serialize(ser);
             }
         }
-        else if (PropertyType == BString("address"))
+        else if (PropertyType == BCS::BString("address"))
         {
             auto accountAddress = std::dynamic_pointer_cast<AccountAddress>(Value);
             if (accountAddress != nullptr)
@@ -245,17 +245,17 @@ namespace Aptos::Rest
                 accountAddress->Serialize(ser);
             }
         }
-        else if (PropertyType == BString("0x1::string::String"))
+        else if (PropertyType == BCS::BString("0x1::string::String"))
         {
-            auto bStringValue = std::dynamic_pointer_cast<BString>(Value);
+            auto bStringValue = std::dynamic_pointer_cast<BCS::BString>(Value);
             if (bStringValue != nullptr)
             {
                 bStringValue->Serialize(ser);
             }
         }
-        else if (PropertyType == BString("vector<u8>"))
+        else if (PropertyType == BCS::BString("vector<BCS::U8>"))
         {
-            auto sequenceVectorValue = std::dynamic_pointer_cast<Bytes>(Value);
+            auto sequenceVectorValue = std::dynamic_pointer_cast<BCS::Bytes>(Value);
             if (sequenceVectorValue != nullptr)
             {
                 sequenceVectorValue->Serialize(ser);
@@ -269,48 +269,48 @@ namespace Aptos::Rest
         return ser.GetBytes();
     }
 
-    std::vector<std::shared_ptr<ISerializable>> Property::ToTransactionArguments()
+    std::vector<std::shared_ptr<BCS::ISerializable>> Property::ToTransactionArguments()
     {
-        std::vector<std::shared_ptr<ISerializable>> args;
-        args.push_back(std::make_shared<BString>(Name));
-        args.push_back(std::make_shared<BString>(PropertyType));
+        std::vector<std::shared_ptr<BCS::ISerializable>> args;
+        args.push_back(std::make_shared<BCS::BString>(Name));
+        args.push_back(std::make_shared<BCS::BString>(PropertyType));
         std::vector<uint8_t> serializedValue = SerializeValue();
-        args.push_back(std::make_shared<Bytes>(serializedValue));
+        args.push_back(std::make_shared<BCS::Bytes>(serializedValue));
 
         return args;
     }
 
-    Property Property::Parse(const std::string &Name, int PropertyType, const Bytes &Value)
+    Property Property::Parse(const std::string &Name, int PropertyType, const BCS::Bytes &Value)
     {
-        Deserialization deser(Value.getValue());
+        BCS::Deserialization deser(Value.getValue());
 
         if (PropertyType == BOOLTYPE)
         {
-            return Property(Name, "bool", std::make_shared<Bool>(deser.DeserializeBool()));
+            return Property(Name, "bool", std::make_shared<BCS::Bool>(deser.DeserializeBool()));
         }
         else if (PropertyType == U8TYPE)
         {
-            return Property(Name, "u8", std::make_shared<U8>(deser.DeserializeU8()));
+            return Property(Name, "u8", std::make_shared<BCS::U8>(deser.DeserializeU8()));
         }
         else if (PropertyType == U16TYPE)
         {
-            return Property(Name, "u16", std::make_shared<U16>(deser.DeserializeU16()));
+            return Property(Name, "u16", std::make_shared<BCS::U16>(deser.DeserializeU16()));
         }
         else if (PropertyType == U32TYPE)
         {
-            return Property(Name, "u32", std::make_shared<U32>(deser.DeserializeU32()));
+            return Property(Name, "u32", std::make_shared<BCS::U32>(deser.DeserializeU32()));
         }
         else if (PropertyType == U64TYPE)
         {
-            return Property(Name, "u64", std::make_shared<U64>(deser.DeserializeU64()));
+            return Property(Name, "u64", std::make_shared<BCS::U64>(deser.DeserializeU64()));
         }
         else if (PropertyType == U128TYPE)
         {
-            return Property(Name, "u128", std::make_shared<U128>(deser.DeserializeU128()));
+            return Property(Name, "u128", std::make_shared<BCS::U128>(deser.DeserializeU128()));
         }
         else if (PropertyType == U256TYPE)
         {
-            return Property(Name, "u256", std::make_shared<U256>(deser.DeserializeU256()));
+            return Property(Name, "u256", std::make_shared<BCS::U256>(deser.DeserializeU256()));
         }
         else if (PropertyType == ADDRESSTYPE)
         {
@@ -318,11 +318,11 @@ namespace Aptos::Rest
         }
         else if (PropertyType == STRINGTYPE)
         {
-            return Property(Name, "0x1::string::String", std::make_shared<BString>(deser.DeserializeString()));
+            return Property(Name, "0x1::string::String", std::make_shared<BCS::BString>(deser.DeserializeString()));
         }
         else if (PropertyType == BYTE_VECTORTYPE)
         {
-            return Property(Name, "vector<u8>", std::make_shared<Bytes>(deser.ToBytes()));
+            return Property(Name, "vector<BCS::U8>", std::make_shared<BCS::Bytes>(deser.ToBytes()));
         }
         else
         {
@@ -332,36 +332,36 @@ namespace Aptos::Rest
 
     Property Property::BoolProp(const std::string &Name, bool Value)
     {
-        return Property(Name, "bool", std::make_shared<Bool>(Value));
+        return Property(Name, "bool", std::make_shared<BCS::Bool>(Value));
     }
 
     Property Property::U8Prop(const std::string &Name, uint8_t Value)
     {
-        return Property(Name, "u8", std::make_shared<U8>(Value));
+        return Property(Name, "u8", std::make_shared<BCS::U8>(Value));
     }
 
     Property Property::U32Prop(const std::string &Name, uint32_t Value)
     {
-        return Property(Name, "u32", std::make_shared<U32>(Value));
+        return Property(Name, "u32", std::make_shared<BCS::U32>(Value));
     }
 
     Property Property::U64Prop(const std::string &Name, uint64_t Value)
     {
-        return Property(Name, "u64", std::make_shared<U64>(Value));
+        return Property(Name, "u64", std::make_shared<BCS::U64>(Value));
     }
 
     // Property Property::U128Prop(const std::string &Name, uint128_t Value) {
-    //     return Property(Name, "u128", std::make_shared<U128>(Value));
+    //     return Property(Name, "u128", std::make_shared<BCS::U128>(Value));
     // }
 
     Property Property::StringProp(const std::string &Name, const std::string &Value)
     {
-        return Property(Name, "0x1::string::String", std::make_shared<BString>(Value));
+        return Property(Name, "0x1::string::String", std::make_shared<BCS::BString>(Value));
     }
 
     Property Property::BytesProp(const std::string &Name, const std::vector<uint8_t> &Value)
     {
-        return Property(Name, "vector<u8>", std::make_shared<Bytes>(Value));
+        return Property(Name, "vector<BCS::U8>", std::make_shared<BCS::Bytes>(Value));
     }
 
     PropertyMap::PropertyMap(const std::vector<Property> &Properties)
@@ -379,10 +379,10 @@ namespace Aptos::Rest
         return response;
     }
 
-    std::tuple<std::vector<BString>, std::vector<BString>, std::vector<std::vector<uint8_t>>> PropertyMap::ToTuple()
+    std::tuple<std::vector<BCS::BString>, std::vector<BCS::BString>, std::vector<std::vector<uint8_t>>> PropertyMap::ToTuple()
     {
-        std::vector<BString> names;
-        std::vector<BString> types;
+        std::vector<BCS::BString> names;
+        std::vector<BCS::BString> types;
         std::vector<std::vector<uint8_t>> values;
 
         for (const Property &prop : Properties)
@@ -408,7 +408,7 @@ namespace Aptos::Rest
             properties.push_back(Property::Parse(
                 prop.getKey(),
                 std::stoi(prop.getValue().getType()),
-                Bytes(Aptos::Utils::ByteArrayFromHexString(prop.getValue().getValue()))));
+                BCS::Bytes(Aptos::Utils::ByteArrayFromHexString(prop.getValue().getValue()))));
         }
 
         return std::make_shared<PropertyMap>(properties);

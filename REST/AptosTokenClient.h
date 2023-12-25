@@ -106,9 +106,9 @@ namespace Aptos::Rest
     class Property
     {
     private:
-        BString Name;
-        BString PropertyType;
-        std::shared_ptr<ISerializable> Value;
+        BCS::BString Name;
+        BCS::BString PropertyType;
+        std::shared_ptr<BCS::ISerializable> Value;
 
     public:
         static const int BOOLTYPE = 0;
@@ -122,12 +122,12 @@ namespace Aptos::Rest
         static const int BYTE_VECTORTYPE = 8;
         static const int STRINGTYPE = 9;
 
-        Property(const std::string &name, const std::string &propertyType, std::shared_ptr<ISerializable> value);
-        Property(const BString &name, const BString &propertyType, std::shared_ptr<ISerializable> value);
+        Property(const std::string &name, const std::string &propertyType, std::shared_ptr<BCS::ISerializable> value);
+        Property(const BCS::BString &name, const BCS::BString &propertyType, std::shared_ptr<BCS::ISerializable> value);
         std::string ToString() const;
         std::vector<uint8_t> SerializeValue() const;
-        std::vector<std::shared_ptr<ISerializable>> ToTransactionArguments();
-        static Property Parse(const std::string &Name, int PropertyType, const Bytes &Value);
+        std::vector<std::shared_ptr<BCS::ISerializable>> ToTransactionArguments();
+        static Property Parse(const std::string &Name, int PropertyType, const BCS::Bytes &Value);
         static Property BoolProp(const std::string &Name, bool Value);
         static Property U8Prop(const std::string &Name, uint8_t Value);
         static Property U32Prop(const std::string &Name, uint32_t Value);
@@ -135,9 +135,9 @@ namespace Aptos::Rest
         //    static Property U128Prop(const std::string& Name, std::uint128_t Value);
         static Property StringProp(const std::string &Name, const std::string &Value);
         static Property BytesProp(const std::string &Name, const std::vector<uint8_t> &Value);
-        const BString &getName() const;
-        const BString &getPropertyType() const;
-        const std::shared_ptr<ISerializable> &getValue() const;
+        const BCS::BString &getName() const;
+        const BCS::BString &getPropertyType() const;
+        const std::shared_ptr<BCS::ISerializable> &getValue() const;
     };
 
     class PropertyMap : public IResource
@@ -149,7 +149,7 @@ namespace Aptos::Rest
         static const std::string StructTag;
         PropertyMap(const std::vector<Property> &Properties);
         std::string ToString() const override;
-        std::tuple<std::vector<BString>, std::vector<BString>, std::vector<std::vector<uint8_t>>> ToTuple();
+        std::tuple<std::vector<BCS::BString>, std::vector<BCS::BString>, std::vector<std::vector<uint8_t>>> ToTuple();
         static std::shared_ptr<IResource> Parse(std::shared_ptr<AptosRESTModel::ResourceDataBase> resource);
         std::string GetStructTag() const override;
     };

@@ -17,6 +17,8 @@
 #include "Model/AccountResourceTokenStore.h"
 #include "RequestClient.h"
 
+using namespace Aptos::BCS;
+using namespace Aptos::Accounts;
 namespace Aptos::Rest
 {
     void RestClient::SetEndpoint(const std::string &url)
@@ -324,14 +326,14 @@ namespace Aptos::Rest
     }
 
     void RestClient::SimulateTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback,
-                                         RawTransaction transaction, std::vector<uint8_t> publicKey)
+                                         BCS::RawTransaction transaction, std::vector<uint8_t> publicKey)
     {
         using namespace AptosRESTModel;
         CryptoPP::SecByteBlock byteBlock(Signature::SignatureLength);
         std::memset(byteBlock.BytePtr(), 0, byteBlock.SizeInBytes());
         Signature emptySignature(byteBlock);
-        Authenticator authenticator{std::make_shared<Ed25519Authenticator>(PublicKey(Aptos::Utils::ByteVectorToSecBlock(publicKey)), emptySignature)};
-        SignedTransaction signedTransaction(transaction, authenticator);
+        BCS::Authenticator authenticator{std::make_shared<BCS::Ed25519Authenticator>(PublicKey(Aptos::Utils::ByteVectorToSecBlock(publicKey)), emptySignature)};
+        BCS::SignedTransaction signedTransaction(transaction, authenticator);
 
         // Perform the HTTP request to simulate a transaction
         std::string uri = "/v1/transactions/simulate";
@@ -356,7 +358,7 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::SubmitBCSTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const SignedTransaction &signedTransaction)
+    void RestClient::SubmitBCSTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const BCS::SignedTransaction &signedTransaction)
     {
         using namespace AptosRESTModel;
         std::string uri = "/v1/transactions";
@@ -406,7 +408,7 @@ namespace Aptos::Rest
     }
 
     void RestClient::SubmitTransaction(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback,
-                                       Account sender, EntryFunction entryFunction)
+                                       Account sender, BCS::EntryFunction entryFunction)
     {
         using namespace AptosRESTModel;
         std::string sequenceNumber;
@@ -577,20 +579,20 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::CreateBCSSignedTransaction(std::function<void(std::shared_ptr<SignedTransaction>)> Callback, Account Sender, TransactionPayload Payload)
+    void RestClient::CreateBCSSignedTransaction(std::function<void(std::shared_ptr<BCS::SignedTransaction>)> Callback, Account Sender, BCS::TransactionPayload Payload)
     {
-        std::shared_ptr<RawTransaction> rawTransaction;
-        CreateBCSTransaction([&rawTransaction](std::shared_ptr<RawTransaction> _rawTransaction)
+        std::shared_ptr<BCS::RawTransaction> rawTransaction;
+        CreateBCSTransaction([&rawTransaction](std::shared_ptr<BCS::RawTransaction> _rawTransaction)
                              { rawTransaction = _rawTransaction; },
                              Sender, Payload);
 
         Signature signature = Sender.Sign(Aptos::Utils::ByteVectorToSecBlock(rawTransaction->Keyed()));
-        Authenticator authenticator(std::make_shared<Ed25519Authenticator>(*Sender.getPublicKey(), signature));
+        BCS::Authenticator authenticator(std::make_shared<BCS::Ed25519Authenticator>(*Sender.getPublicKey(), signature));
 
-        Callback(std::make_shared<SignedTransaction>(*rawTransaction, authenticator));
+        Callback(std::make_shared<BCS::SignedTransaction>(*rawTransaction, authenticator));
     }
 
-    void RestClient::CreateBCSTransaction(std::function<void(std::shared_ptr<RawTransaction>)> Callback, Account Sender, TransactionPayload payload)
+    void RestClient::CreateBCSTransaction(std::function<void(std::shared_ptr<BCS::RawTransaction>)> Callback, Account Sender, BCS::TransactionPayload payload)
     {
         using namespace AptosRESTModel;
         std::string sequenceNumber = "";
@@ -633,7 +635,7 @@ namespace Aptos::Rest
             callback(nullptr, responseInfo);
             return;
         }
-        std::vector<std::shared_ptr<ISerializable>> sqD;
+        std::vector<std::shared_ptr<BCS::ISerializable>> sqD;
         sqD.push_back(std::make_shared<AccountAddress>(AccountAddress::FromHex(to)));
         sqD.push_back(std::make_shared<U64>(amount));
 
@@ -664,7 +666,7 @@ namespace Aptos::Rest
 
     void RestClient::BCSTransfer(std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback, Account Sender, AccountAddress Recipient, int Amount)
     {
-        std::vector<std::shared_ptr<ISerializable>> transactionArguments;
+        std::vector<std::shared_ptr<BCS::ISerializable>> transactionArguments;
         transactionArguments.push_back(std::make_shared<AccountAddress>(Recipient));
         transactionArguments.push_back(std::make_shared<U64>(Amount));
 
@@ -677,7 +679,7 @@ namespace Aptos::Rest
         std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
         CreateBCSSignedTransaction([&signedTransaction](std::shared_ptr<SignedTransaction> _signedTransaction)
                                    { signedTransaction = _signedTransaction; },
-                                   Sender, TransactionPayload(std::make_shared<EntryFunction>(payload)));
+                                   Sender, BCS::TransactionPayload(std::make_shared<EntryFunction>(payload)));
 
         AptosRESTModel::ResponseInfo responseInfo;
         std::string submitBcsTxnJsonResponse = "";
@@ -717,12 +719,12 @@ namespace Aptos::Rest
 
     void RestClient::CreateCollection(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)> callback, Account sender, std::string collectionName, std::string collectionDescription, std::string uri)
     {
-        std::vector<std::shared_ptr<ISerializable>> transactionArguments;
+        std::vector<std::shared_ptr<BCS::ISerializable>> transactionArguments;
         transactionArguments.push_back(std::make_shared<BString>(collectionName));
         transactionArguments.push_back(std::make_shared<BString>(collectionDescription));
         transactionArguments.push_back(std::make_shared<BString>(uri));
         transactionArguments.push_back(std::make_shared<U64>(18446744073709551615UL));
-        std::vector<std::shared_ptr<ISerializable>> t2;
+        std::vector<std::shared_ptr<BCS::ISerializable>> t2;
         t2.push_back(std::make_shared<Bool>(false));
         t2.push_back(std::make_shared<Bool>(false));
         t2.push_back(std::make_shared<Bool>(false));
@@ -734,7 +736,7 @@ namespace Aptos::Rest
             TagSequence({}),
             Sequence(transactionArguments));
 
-        TransactionPayload txnPayload(std::make_shared<EntryFunction>(payload));
+        BCS::TransactionPayload txnPayload(std::make_shared<EntryFunction>(payload));
 
         std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
 
@@ -757,7 +759,7 @@ namespace Aptos::Rest
 
     void RestClient::CreateToken(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)> callback, Account senderRoyaltyPayeeAddress, std::string collectionName, std::string tokenName, std::string description, int supply, int max, std::string uri, int royaltyPointsPerMillion)
     {
-        std::vector<std::shared_ptr<ISerializable>> transactionArguments;
+        std::vector<std::shared_ptr<BCS::ISerializable>> transactionArguments;
         transactionArguments.push_back(std::make_shared<BString>(collectionName));
         transactionArguments.push_back(std::make_shared<BString>(tokenName));
         transactionArguments.push_back(std::make_shared<BString>(description));
@@ -767,16 +769,16 @@ namespace Aptos::Rest
         transactionArguments.push_back(senderRoyaltyPayeeAddress.getAccountAddress());
         transactionArguments.push_back(std::make_shared<U64>(1000000));
         transactionArguments.push_back(std::make_shared<U64>(royaltyPointsPerMillion));
-        std::vector<std::shared_ptr<ISerializable>> t2;
+        std::vector<std::shared_ptr<BCS::ISerializable>> t2;
         t2.push_back(std::make_shared<Bool>(false));
         t2.push_back(std::make_shared<Bool>(false));
         t2.push_back(std::make_shared<Bool>(false));
         t2.push_back(std::make_shared<Bool>(false));
         t2.push_back(std::make_shared<Bool>(false));
         transactionArguments.push_back(std::make_shared<Sequence>(t2));
-        std::vector<std::shared_ptr<ISerializable>> t3;
-        std::vector<std::shared_ptr<ISerializable>> t4;
-        std::vector<std::shared_ptr<ISerializable>> t5;
+        std::vector<std::shared_ptr<BCS::ISerializable>> t3;
+        std::vector<std::shared_ptr<BCS::ISerializable>> t4;
+        std::vector<std::shared_ptr<BCS::ISerializable>> t5;
         transactionArguments.push_back(std::make_shared<Sequence>(t3));
         transactionArguments.push_back(std::make_shared<Sequence>(t4));
         transactionArguments.push_back(std::make_shared<Sequence>(t5));
@@ -787,7 +789,7 @@ namespace Aptos::Rest
             TagSequence({}),
             Sequence(transactionArguments));
 
-        TransactionPayload txnPayload(std::make_shared<EntryFunction>(payload));
+        BCS::TransactionPayload txnPayload(std::make_shared<EntryFunction>(payload));
 
         std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
 
@@ -826,7 +828,7 @@ namespace Aptos::Rest
             callback(nullptr, responseInfo);
             return;
         }
-        std::vector<std::shared_ptr<ISerializable>> transactionArguments;
+        std::vector<std::shared_ptr<BCS::ISerializable>> transactionArguments;
         transactionArguments.push_back(std::make_shared<AccountAddress>(receiver));
         transactionArguments.push_back(std::make_shared<AccountAddress>(creator));
         transactionArguments.push_back(std::make_shared<BString>(collectionName));
@@ -840,7 +842,7 @@ namespace Aptos::Rest
             TagSequence({}),
             Sequence(transactionArguments));
 
-        TransactionPayload txnPayload(std::make_shared<EntryFunction>(payload));
+        BCS::TransactionPayload txnPayload(std::make_shared<EntryFunction>(payload));
 
         std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
 
@@ -879,7 +881,7 @@ namespace Aptos::Rest
             return;
         }
 
-        std::vector<std::shared_ptr<ISerializable>> transactionArguments;
+        std::vector<std::shared_ptr<BCS::ISerializable>> transactionArguments;
         transactionArguments.push_back(std::make_shared<AccountAddress>(sender));
         transactionArguments.push_back(std::make_shared<AccountAddress>(creator));
         transactionArguments.push_back(std::make_shared<BString>(collectionName));
@@ -892,7 +894,7 @@ namespace Aptos::Rest
             TagSequence({}),
             Sequence(transactionArguments));
 
-        TransactionPayload txnPayload(std::make_shared<EntryFunction>(payload));
+        BCS::TransactionPayload txnPayload(std::make_shared<EntryFunction>(payload));
 
         std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
 
@@ -1062,7 +1064,7 @@ namespace Aptos::Rest
 
     void RestClient::TransferObject(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, Account Owner, AccountAddress Object, AccountAddress To)
     {
-        std::vector<std::shared_ptr<ISerializable>> transactionArguments;
+        std::vector<std::shared_ptr<BCS::ISerializable>> transactionArguments;
         transactionArguments.push_back(std::make_shared<AccountAddress>(Object));
         transactionArguments.push_back(std::make_shared<AccountAddress>(To));
 
@@ -1074,7 +1076,7 @@ namespace Aptos::Rest
 
         std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
         AptosRESTModel::ResponseInfo responseInfo;
-        TransactionPayload txnPayload(std::make_shared<EntryFunction>(payload));
+        BCS::TransactionPayload txnPayload(std::make_shared<EntryFunction>(payload));
 
         CreateBCSSignedTransaction([&signedTransaction](std::shared_ptr<SignedTransaction> _signedTransaction)
                                    { signedTransaction = _signedTransaction; },

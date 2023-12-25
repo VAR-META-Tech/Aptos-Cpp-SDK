@@ -21,6 +21,7 @@
 #include <boost/endian/conversion.hpp>
 #include "../HDWallet/Utils/Utils.h"
 
+using namespace Aptos::BCS;
 
 TEST(SerializationTest, BoolSerialize) {
     Serialization s;

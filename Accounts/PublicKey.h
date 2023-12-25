@@ -14,7 +14,7 @@ namespace Aptos::Accounts
     /// <summary>
     /// Represents a 32-byte public key.
     /// </summary>
-    class PublicKey : public ISerializable
+    class PublicKey : public BCS::ISerializable
     {
         /// <summary>
         /// Public key length.
@@ -73,8 +73,8 @@ namespace Aptos::Accounts
         /// Serialize public key
         /// </summary>
         /// <param name="serializer">Serializer object</param>
-        void Serialize(Serialization &serializer) const override;
-        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
+        void Serialize(BCS::Serialization &serializer) const override;
+        static std::shared_ptr<BCS::ISerializable> Deserialize(BCS::Deserialization &deserializer);
 
         /// <summary>
         /// ToString implementation return the key as a hex string.

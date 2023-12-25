@@ -11,8 +11,6 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
-
-using namespace Aptos::BCS;
 namespace Aptos::Accounts
 {
     Signature::Signature(const CryptoPP::SecByteBlock &signature)
@@ -28,13 +26,13 @@ namespace Aptos::Accounts
         return _signatureBytes;
     }
 
-    void Signature::Serialize(Serialization &serializer) const
+    void Signature::Serialize(BCS::Serialization &serializer) const
     {
         auto bytes = Utils::SecBlockToByteVector(_signatureBytes);
         serializer.SerializeBytes(bytes);
     }
 
-    std::shared_ptr<ISerializable> Signature::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<BCS::ISerializable> Signature::Deserialize(BCS::Deserialization &deserializer)
     {
         CryptoPP::SecByteBlock sigBytes = Utils::ByteVectorToSecBlock(deserializer.ToBytes());
         if (sigBytes.size() != SignatureLength)

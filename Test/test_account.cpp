@@ -18,6 +18,7 @@
 #include "../Accounts/Types/MultiEd25519PublicKey.h"
 #include "../Accounts/Ed25519Bip32.h"
 
+using namespace Aptos::BCS;
 using namespace Aptos::Accounts;
 using namespace Aptos;
 // Extended PrivateKey for reference

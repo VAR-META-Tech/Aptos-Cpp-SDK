@@ -49,7 +49,7 @@ namespace Aptos::Accounts
     /// Represents an Aptos account address.
     /// More details can her found <see cref="https://aptos.dev/concepts/accounts">here</see>.
     /// </summary>
-    class AccountAddress : public ISerializableTag
+    class AccountAddress : public BCS::ISerializableTag
     {
     private:
         CryptoPP::SecByteBlock _addressBytes;
@@ -98,8 +98,8 @@ namespace Aptos::Accounts
         /// BCS is not a self-describing format.As such, in order to deserialize a message,
         /// one must know the message type and layout ahead of time.
         /// </summary>
-        void Serialize(Serialization &serializer) const override;
-        static std::shared_ptr<ISerializableTag> Deserialize(Deserialization &deserializer);
+        void Serialize(BCS::Serialization &serializer) const override;
+        static std::shared_ptr<BCS::ISerializableTag> Deserialize(BCS::Deserialization &deserializer);
 
         /// <summary>
         /// Create an AccountAddress instance for a named object.
@@ -162,7 +162,7 @@ namespace Aptos::Accounts
         static AccountAddress FromMultiEd25519(MultiPublicKey keys);
         size_t GetHashCode() const override;
 
-        TypeTag Variant() const override;
+        BCS::TypeTag Variant() const override;
 
         /// <summary>
         /// The address data itself represented in byte array formatting.

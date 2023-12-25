@@ -58,7 +58,7 @@ namespace Aptos::Accounts
         return MultiPublicKey(keys, threshold);
     }
 
-    void MultiPublicKey::Serialize(Serialization &serializer) const
+    void MultiPublicKey::Serialize(BCS::Serialization &serializer) const
     {
         auto bytes = this->ToBytes();
         serializer.SerializeBytes(bytes);

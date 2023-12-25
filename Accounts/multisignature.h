@@ -7,13 +7,12 @@
 #include "multipublickey.h"
 #include "../BCS/BCSTypes.h"
 
-using namespace Aptos::BCS;
 namespace Aptos::Accounts
 {
     /// <summary>
     /// The ED25519 Multi-Signature Implementation.
     /// </summary>
-    class MultiSignature : public ISerializable
+    class MultiSignature : public BCS::ISerializable
     {
     public:
         /// <summary>
@@ -31,7 +30,7 @@ namespace Aptos::Accounts
         /// <returns>A byte list containing the serialized concatenated signatures and bitmap.</returns>
         std::vector<uint8_t> ToBytes() const;
 
-        void Serialize(Serialization &serializer) const override;
+        void Serialize(BCS::Serialization &serializer) const override;
         std::string ToString() const override;
 
     private:

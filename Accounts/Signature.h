@@ -9,14 +9,12 @@
 #include <string>
 #include "../BCS/Serialization.h"
 #include "../BCS/Deserialization.h"
-
-using namespace Aptos::BCS;
 namespace Aptos::Accounts
 {
     /// <summary>
     /// Representation of a ED25519 signature
     /// </summary>
-    class Signature : public ISerializable
+    class Signature : public BCS::ISerializable
     {
     public:
         /// <summary>
@@ -47,8 +45,8 @@ namespace Aptos::Accounts
         /// Serialize signature
         /// </summary>
         /// <param name="serializer">Serializer object</param>
-        void Serialize(Serialization &serializer) const override;
-        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
+        void Serialize(BCS::Serialization &serializer) const override;
+        static std::shared_ptr<BCS::ISerializable> Deserialize(BCS::Deserialization &deserializer);
         bool operator==(const Signature &other) const;
         bool operator!=(const Signature &other) const;
 

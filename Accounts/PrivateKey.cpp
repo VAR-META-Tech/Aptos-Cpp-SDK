@@ -109,7 +109,7 @@ namespace Aptos::Accounts
         return Signature(signatureData);
     }
 
-    void PrivateKey::Serialize(Serialization &serializer)
+    void PrivateKey::Serialize(BCS::Serialization &serializer)
     {
         if (_keyBytes.empty())
         {

@@ -106,7 +106,7 @@ namespace Aptos::Accounts
         /// Serialize private key
         /// </summary>
         /// <param name="serializer">Serializer object</param>
-        void Serialize(Serialization &serializer);
+        void Serialize(BCS::Serialization &serializer);
 
         /// <inheritdoc cref="Equals(object)"/>
         bool Equals(const PrivateKey &rhs) const;
