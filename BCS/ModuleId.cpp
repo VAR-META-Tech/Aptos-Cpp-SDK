@@ -1,5 +1,6 @@
 #include "ModuleId.h"
 
+using namespace Aptos::Accounts;
 namespace Aptos::BCS
 {
     ModuleId::ModuleId(const AccountAddress &address, const std::string &name)

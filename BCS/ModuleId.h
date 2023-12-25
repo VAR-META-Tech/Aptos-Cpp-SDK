@@ -4,8 +4,6 @@
 #include <string>
 #include <stdexcept>
 #include "../Accounts/AccountAddress.h"
-
-using namespace Aptos::Accounts;
 namespace Aptos::BCS
 {
     /// <summary>
@@ -14,7 +12,7 @@ namespace Aptos::BCS
     class ModuleId : public ISerializable
     {
     public:
-        explicit ModuleId(const AccountAddress &address, const std::string &name);
+        explicit ModuleId(const Accounts::AccountAddress &address, const std::string &name);
         void Serialize(Serialization &serializer) const override;
         static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
         bool Equals(const ModuleId &other) const;
@@ -23,7 +21,7 @@ namespace Aptos::BCS
         size_t GetHashCode() const override;
 
     private:
-        AccountAddress address;
+        Accounts::AccountAddress address;
         std::string name;
     };
 

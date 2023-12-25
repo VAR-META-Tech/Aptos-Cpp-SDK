@@ -8,7 +8,7 @@
 
 #include <memory>
 namespace AptosUILogic {
-int accountNumLimit = 10;
+const int accountNumLimit = 10;
 char* stringToChar(const std::string& str) {
     char* charArray = new char[str.length() + 1];
     strcpy(charArray, str.c_str());
@@ -22,7 +22,7 @@ std::string charToString(const char* str) {
 class UIController
 {
 public:
-    UIController();
+    UIController() = default;;
     void setWallet(const std::shared_ptr<Aptos::HDWallet::Wallet> &newWallet);
     std::string getMnemonicsKey() const;
     int currentAddressIndexKey() const;
@@ -43,9 +43,6 @@ private:
     Aptos::Rest::RestClient m_restClient;
     float m_balance;
 };
-
-
-UIController::UIController() {}
 
 void UIController::setWallet(const std::shared_ptr<Aptos::HDWallet::Wallet> &newWallet)
 {
@@ -218,7 +215,7 @@ char** AptosUILogic_getWalletAddress(void *controller, size_t *size)
     auto ptr = static_cast<AptosUILogic::UIController*>(controller);
     auto addressList = ptr->getWalletAddress();
     *size = addressList.size();
-    if (size == 0) {
+    if (*size == 0) {
         return nullptr;
     }
     char** ret = new char*[*size];
