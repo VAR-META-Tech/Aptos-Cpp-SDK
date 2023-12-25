@@ -50,8 +50,9 @@ elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
 endif()
 
 # Check for doxygen presence
+option(GEN_DOC "Enable generate document" OFF)
 find_package(Doxygen)
-if (DOXYGEN_FOUND)
+if (GEN_DOC AND DOXYGEN_FOUND)
     # Set the path to the Doxyfile
     set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile)
     set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/html)
@@ -232,9 +233,17 @@ add_library(Aptos SHARED
         Accounts/Ed25519Bip32.cpp
 )
 
-target_link_libraries(Aptos PRIVATE 
-nlohmann_json::nlohmann_json bip3x ${CryptoPP_LIB}  ${OPENSSL_LIBRARIES} ${ZLIB_LIBRARIES}
-toolbox)
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+  target_link_libraries(Aptos PRIVATE 
+  nlohmann_json::nlohmann_json bip3x ${CryptoPP_LIB}  ${OPENSSL_LIBRARIES} ${ZLIB_LIBRARIES}
+  toolbox)
+else()
+  target_link_libraries(Aptos PRIVATE 
+  nlohmann_json::nlohmann_json bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+  ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a
+  toolbox)
+endif()
+
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
@@ -268,7 +277,15 @@ add_executable(runAllTests
     Test/test_transaction_serialization.cpp 
     Test/test_serialization.cpp
 )
-target_link_libraries(runAllTests PRIVATE GTest::gtest GTest::gtest_main pthread Aptos toolbox ${CryptoPP_LIB})
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+  target_link_libraries(runAllTests PRIVATE GTest::gtest GTest::gtest_main pthread Aptos toolbox ${CryptoPP_LIB})
+else()
+  target_link_libraries(runAllTests PRIVATE GTest::gtest GTest::gtest_main pthread Aptos toolbox ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+  ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
+endif()
+
+
+
 if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_custom_target(coverage
     COMMAND xcrun ${CMAKE_CURRENT_BINARY_DIR}/runAllTests
@@ -282,7 +299,13 @@ add_library(AptosUILogic SHARED
     AptosUILogic/uicontrollerlogic.h
     AptosUILogic/uicontrollerlogic.cpp
 )
-target_link_libraries(AptosUILogic PRIVATE nlohmann_json::nlohmann_json pthread Aptos bip3x ${CryptoPP_LIB})
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+  target_link_libraries(AptosUILogic PRIVATE nlohmann_json::nlohmann_json pthread Aptos bip3x ${CryptoPP_LIB})
+else()
+  target_link_libraries(AptosUILogic PRIVATE nlohmann_json::nlohmann_json pthread Aptos bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+  ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
+endif()
+
 
 add_executable(AptosUILogicTest
     AptosUILogic/main.cpp
