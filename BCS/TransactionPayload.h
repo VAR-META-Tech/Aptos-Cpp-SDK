@@ -11,6 +11,9 @@ namespace Aptos::BCS
         SCRIPT_FUNCTION
     };
 
+    /// <summary>
+    /// Representation of a transaction's payload.
+    /// </summary>
     class TransactionPayload : public ISerializable
     {
     public:

@@ -42,6 +42,11 @@ namespace Aptos::BCS
 
         /// <inheritdoc/>
         std::string ToString() const override;
+
+        /// <summary>
+        /// Gets the internal dictionary of a BCSMap.
+        /// </summary>
+        /// <returns></returns>
         std::map<BString, std::shared_ptr<ISerializable>> getValues() const;
     };
 }

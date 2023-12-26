@@ -39,6 +39,7 @@ namespace Aptos::Utils
     /// <returns></returns>
     std::string HexStringFromByteArray(const std::vector<uint8_t> &input);
 
+    template <typename TKey, typename TValue>
     /// <summary>
     /// Adds or replaces a value in a dictionary.
     /// </summary>
@@ -47,9 +48,9 @@ namespace Aptos::Utils
     /// <param name="value">The value.</param>
     /// <typeparam name="TKey">The type of the key.</typeparam>
     /// <typeparam name="TValue">The type of the value.</typeparam>
-    template <typename TKey, typename TValue>
     void AddOrReplace(std::map<TKey, TValue> &dictionary, TKey key, TValue value);
 
+    template <typename TKey, typename TValue>
     /// <summary>
     /// Attempts to get a value from a dictionary.
     /// </summary>
@@ -58,9 +59,9 @@ namespace Aptos::Utils
     /// <typeparam name="TKey">The type of the key.</typeparam>
     /// <typeparam name="TValue">The type of the value.</typeparam>
     /// <returns>The value.</returns>
-    template <typename TKey, typename TValue>
     TValue TryGet(const std::map<TKey, TValue> &dictionary, TKey key);
 
+    template <typename T>
     /// <summary>
     /// Slices the array, returning a new array starting at <c>start</c> index and ending at <c>end</c> index.
     /// </summary>
@@ -69,9 +70,9 @@ namespace Aptos::Utils
     /// <param name="end">The ending index of the slicing.</param>
     /// <typeparam name="T">The array type.</typeparam>
     /// <returns>The sliced array.</returns>
-    template <typename T>
     std::vector<T> Slice(std::vector<T> source, int start, int end);
 
+    template <typename T>
     /// <summary>
     /// Slices the array, returning a new array starting at <c>start</c>.
     /// </summary>
@@ -79,7 +80,6 @@ namespace Aptos::Utils
     /// <param name="start">The starting index of the slicing.</param>
     /// <typeparam name="T">The array type.</typeparam>
     /// <returns>The sliced array.</returns>
-    template <typename T>
     std::vector<T> Slice(std::vector<T> source, int start);
 
     /// <summary>
