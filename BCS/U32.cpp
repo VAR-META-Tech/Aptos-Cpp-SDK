@@ -1,8 +1,9 @@
 #include "U32.h"
 #include "Serialization.h"
 #include "Deserialization.h"
-#include <boost/endian/conversion.hpp>
 #include <sstream>
+#include <stdexcept>
+#include <bit>
 
 namespace Aptos::BCS
 {
@@ -59,6 +60,19 @@ namespace Aptos::BCS
 
         uint32_t res;
         std::memcpy(&res, data.data(), sizeof(uint32_t));
-        return boost::endian::little_to_native(res);
+        if constexpr (std::endian::native == std::endian::little)
+        {
+            // The native endianness is little endian, no conversion needed.
+            return res;
+        }
+        else if constexpr (std::endian::native == std::endian::big)
+        {
+            // The native endianness is big endian, conversion needed.
+            // Since there is no std::byteswap in C++20, we use inline byte swap logic.
+            return (res >> 24) |
+                   ((res & 0x00FF0000) >> 8) |
+                   ((res & 0x0000FF00) << 8) |
+                   (res << 24);
+        }
     }
 }

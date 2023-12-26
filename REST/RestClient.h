@@ -1,7 +1,6 @@
 #ifndef RESTCLIENT_H
 #define RESTCLIENT_H
 
-#define BOOST_ASIO_HAS_STD_INVOKE_RESULT
 #include <memory>
 #include "Model/AccountData.h"
 #include "Model/LedgerInfo.h"

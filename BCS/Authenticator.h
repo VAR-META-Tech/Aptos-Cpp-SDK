@@ -9,8 +9,6 @@
 #include "../Accounts/AccountAddress.h"
 #include "../Accounts/multisignature.h"
 
-using namespace Aptos::Accounts;
-
 namespace Aptos::BCS
 {
     /// <summary>
@@ -97,7 +95,7 @@ namespace Aptos::BCS
         /// </summary>
         /// <param name="publicKey"></param>
         /// <param name="signature"></param>
-        Ed25519Authenticator(PublicKey publicKey, Signature signature);
+        Ed25519Authenticator(Accounts::PublicKey publicKey, Accounts::Signature signature);
 
         /// <summary>
         /// Verifies the data with the signature.
@@ -125,12 +123,12 @@ namespace Aptos::BCS
         /// <summary>
         /// The authenticators public key.
         /// </summary>
-        PublicKey m_publicKey;
+        Accounts::PublicKey m_publicKey;
 
         /// <summary>
         /// The authenticator's public key.
         /// </summary>
-        Signature m_signature;
+        Accounts::Signature m_signature;
     };
 
     /// <summary>
@@ -146,7 +144,7 @@ namespace Aptos::BCS
         /// <param name="sender"></param>
         /// <param name="secondarySigners"></param>
         MultiAgentAuthenticator(Authenticator sender,
-                                const std::vector<std::tuple<std::shared_ptr<AccountAddress>, std::shared_ptr<Authenticator>>> &secondarySigners);
+                                const std::vector<std::tuple<std::shared_ptr<Accounts::AccountAddress>, std::shared_ptr<Authenticator>>> &secondarySigners);
 
         /// <summary>
         /// Returns the list (Sequence) of corresponding account addresses.
@@ -185,7 +183,7 @@ namespace Aptos::BCS
         /// <summary>
         /// A list of acount address to authenticator tuples.
         /// </summary>
-        std::vector<std::tuple<std::shared_ptr<AccountAddress>, std::shared_ptr<Authenticator>>> secondarySigners;
+        std::vector<std::tuple<std::shared_ptr<Accounts::AccountAddress>, std::shared_ptr<Authenticator>>> secondarySigners;
     };
 
     /// <summary>
@@ -200,7 +198,7 @@ namespace Aptos::BCS
         /// </summary>
         /// <param name="publicKey"></param>
         /// <param name="signature"></param>
-        MultiEd25519Authenticator(MultiPublicKey publicKey, MultiSignature signature);
+        MultiEd25519Authenticator(Accounts::MultiPublicKey publicKey, Accounts::MultiSignature signature);
 
         /// <inheritdoc/>
         bool Verify(const CryptoPP::SecByteBlock &data) override;
@@ -218,12 +216,12 @@ namespace Aptos::BCS
         /// <summary>
         /// The authenticator's multi-public key.
         /// </summary>
-        MultiPublicKey m_publicKey;
+        Accounts::MultiPublicKey m_publicKey;
 
         /// <summary>
         /// The authenticator's multi-signature.
         /// </summary>
-        MultiSignature m_signature;
+        Accounts::MultiSignature m_signature;
     };
 }
 #endif // AUTHENTICATOR_H

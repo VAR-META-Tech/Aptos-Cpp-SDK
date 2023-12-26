@@ -18,7 +18,6 @@
 #include "../BCS/U64.h"
 #include "../BCS/U128.h"
 #include "../BCS/U256.h"
-#include <boost/endian/conversion.hpp>
 #include "../HDWallet/Utils/Utils.h"
 
 using namespace Aptos::BCS;
@@ -1041,9 +1040,25 @@ TEST(U64Test, GetHashCode) {
 TEST(U64Test, Deserialize) {
     // Create a known uint64_t value
     uint64_t known_value = 1234567890123456789;
+    uint64_t little_endian_value;
 
-    // Convert the known_value to little-endian byte order
-    uint64_t little_endian_value = boost::endian::native_to_little(known_value);
+    if constexpr (std::endian::native == std::endian::little)
+    {
+        little_endian_value = known_value;
+    }
+    else
+    {
+        // Convert the known_value to little-endian byte order
+        little_endian_value = (static_cast<uint64_t>(known_value) << 56) |
+                                       ((static_cast<uint64_t>(known_value) & 0x000000000000FF00) << 40) |
+                                       ((static_cast<uint64_t>(known_value) & 0x0000000000FF0000) << 24) |
+                                       ((static_cast<uint64_t>(known_value) & 0x00000000FF000000) << 8) |
+                                       ((static_cast<uint64_t>(known_value) & 0x000000FF00000000) >> 8) |
+                                       ((static_cast<uint64_t>(known_value) & 0x0000FF0000000000) >> 24) |
+                                       ((static_cast<uint64_t>(known_value) & 0x00FF000000000000) >> 40) |
+                                       (static_cast<uint64_t>(known_value) >> 56);
+        ;
+    }
 
     // Prepare the byte data
     std::vector<uint8_t> data(sizeof(uint64_t));
@@ -1145,9 +1160,17 @@ TEST(U16Test, GetHashCode) {
 TEST(U16Test, Deserialize) {
     // Create a known uint64_t value
     uint16_t known_value = 1234567890123456789;
+    uint16_t little_endian_value;
 
-    // Convert the known_value to little-endian byte order
-    uint16_t little_endian_value = boost::endian::native_to_little(known_value);
+    if constexpr (std::endian::native == std::endian::little)
+    {
+        little_endian_value = known_value;
+    }
+    else
+    {
+        // Convert the known_value to little-endian byte order
+        little_endian_value = (known_value >> 8) | (known_value << 8);
+    }
 
     // Prepare the byte data
     std::vector<uint8_t> data(sizeof(uint16_t));
