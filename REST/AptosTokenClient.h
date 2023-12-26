@@ -7,7 +7,6 @@
 #include "../BCS/BString.h"
 #include "../BCS/Bytes.h"
 
-using namespace Aptos::Accounts;
 namespace Aptos::Rest
 {
     /// <summary>
@@ -29,11 +28,11 @@ namespace Aptos::Rest
     {
     private:
         bool AllowUngatedTransfer;
-        AccountAddress Owner;
+        Accounts::AccountAddress Owner;
 
     public:
         static const std::string StructTag;
-        Object(bool allowUngatedTransfer, AccountAddress owner);
+        Object(bool allowUngatedTransfer, Accounts::AccountAddress owner);
 
         /// <summary>
         /// Parses a JSON string representation of a resource into an Object.
@@ -51,7 +50,7 @@ namespace Aptos::Rest
     class Collection : public IResource
     {
     private:
-        AccountAddress Creator;
+        Accounts::AccountAddress Creator;
         std::string Description;
         std::string Name;
         std::string Uri;
@@ -59,7 +58,7 @@ namespace Aptos::Rest
     public:
         static const std::string StructTag;
 
-        Collection(AccountAddress creator, const std::string &description, const std::string &name, const std::string &uri);
+        Collection(Accounts::AccountAddress creator, const std::string &description, const std::string &name, const std::string &uri);
 
         static std::shared_ptr<IResource> Parse(std::shared_ptr<AptosRESTModel::ResourceDataBase> resource);
 
@@ -72,12 +71,12 @@ namespace Aptos::Rest
     private:
         int Numerator;
         int Denominator;
-        AccountAddress PayeeAddress;
+        Accounts::AccountAddress PayeeAddress;
 
     public:
         static const std::string StructTag;
 
-        Royalty(int numerator, int denominator, const AccountAddress &payeeAddress);
+        Royalty(int numerator, int denominator, const Accounts::AccountAddress &payeeAddress);
         static std::shared_ptr<IResource> Parse(std::shared_ptr<AptosRESTModel::ResourceDataBase> resource);
         std::string GetStructTag() const override;
         std::string ToString() const override;
@@ -89,7 +88,7 @@ namespace Aptos::Rest
     class Token : public IResource
     {
     private:
-        AccountAddress Collection;
+        Accounts::AccountAddress Collection;
         int Index;
         std::string Description;
         std::string Name;
@@ -97,7 +96,7 @@ namespace Aptos::Rest
 
     public:
         static const std::string StructTag;
-        Token(const AccountAddress &collection, int index, const std::string &description, const std::string &name, const std::string &uri);
+        Token(const Accounts::AccountAddress &collection, int index, const std::string &description, const std::string &name, const std::string &uri);
         static std::shared_ptr<IResource> Parse(std::shared_ptr<AptosRESTModel::ResourceDataBase> resource);
         std::string GetStructTag() const override;
         std::string ToString() const override;
@@ -147,7 +146,7 @@ namespace Aptos::Rest
 
     public:
         static const std::string StructTag;
-        PropertyMap(const std::vector<Property> &Properties);
+        explicit PropertyMap(const std::vector<Property> &Properties);
         std::string ToString() const override;
         std::tuple<std::vector<BCS::BString>, std::vector<BCS::BString>, std::vector<std::vector<uint8_t>>> ToTuple();
         static std::shared_ptr<IResource> Parse(std::shared_ptr<AptosRESTModel::ResourceDataBase> resource);
@@ -159,7 +158,7 @@ namespace Aptos::Rest
     public:
         using FuncValue = std::shared_ptr<IResource>(std::shared_ptr<AptosRESTModel::ResourceDataBase>);
         static std::map<std::string, FuncValue *> ResourceMap;
-        ReadObject(const std::unordered_map<std::string, std::shared_ptr<IResource>> &Resources);
+        explicit ReadObject(const std::unordered_map<std::string, std::shared_ptr<IResource>> &Resources);
         std::string ToString() const;
 
     private:

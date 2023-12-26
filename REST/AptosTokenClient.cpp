@@ -15,6 +15,8 @@
 #include "../BCS/U8.h"
 #include "../HDWallet/Utils/Utils.h"
 
+using namespace Aptos::Accounts;
+
 namespace Aptos::Rest
 {
     const std::string Object::StructTag = "0x1::object::ObjectCore";
