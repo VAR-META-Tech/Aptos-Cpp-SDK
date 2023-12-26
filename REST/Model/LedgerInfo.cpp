@@ -36,4 +36,9 @@ LedgerInfo LedgerInfo::FromJson(const std::string &jsonStr) {
     return ledgerInfo;
 }
 
+int LedgerInfo::getChainId() const
+{
+    return ChainId;
+}
+
 }

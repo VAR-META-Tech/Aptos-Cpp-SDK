@@ -24,7 +24,22 @@ namespace Aptos::Rest
         endpoint = url;
     }
 
-    RestClient::RestClient() {}
+    RestClient::RestClient() {
+        using namespace AptosRESTModel;
+        std::shared_ptr<AptosRESTModel::LedgerInfo> ledgerInfo;
+        ResponseInfo responseInfo;
+        GetInfo([&](std::shared_ptr<AptosRESTModel::LedgerInfo> _ledgerInfo, ResponseInfo _responseInfo)
+                {
+                    ledgerInfo = _ledgerInfo;
+                    responseInfo = _responseInfo;
+                    std::cerr << responseInfo.message << std::endl;
+                });
+        if (ledgerInfo) {
+            m_ChainId = ledgerInfo->getChainId();
+        } else {
+            m_ChainId = 0;
+        }
+    }
 
     void RestClient::GetAccount(std::function<void(std::shared_ptr<AptosRESTModel::AccountData>, AptosRESTModel::ResponseInfo)> callback, const AccountAddress &accountAddress)
     {
@@ -308,6 +323,7 @@ namespace Aptos::Rest
         {
             ResponseInfo responseInfo;
             std::shared_ptr<LedgerInfo> ledgerInfo = nullptr;
+
             if (response->status == 200) {
                 ledgerInfo = std::make_shared<LedgerInfo>(LedgerInfo::FromJson(response->body));
                 responseInfo.status = ResponseInfo::Status::Success;
@@ -606,20 +622,25 @@ namespace Aptos::Rest
             throw std::runtime_error("Unable to get sequence number for: " + Sender.getAccountAddress()->ToString() + ".\n" + responseInfo.message);
         }
 
+        auto currentTimePoint = std::chrono::system_clock::now();
 
-        // ulong expirationTimestamp = static_cast<ulong>(DateTime::ToUnixTimestamp() + Constants::EXPIRATION_TTL);
+        // Convert the time point to the duration since the epoch
+        auto durationSinceEpoch = currentTimePoint.time_since_epoch();
+        auto seconds = std::chrono::duration_cast<std::chrono::seconds>(durationSinceEpoch);
+        std::time_t currentTime = seconds.count();
+        ulong expirationTimestamp = static_cast<ulong>(currentTime + Constants::EXPIRATION_TTL);
 
-        // RawTransaction rawTxn(
-        //     Sender.getAccountAddress(),
-        //     std::stoi(sequenceNumber),
-        //     payload,
-        //     ClientConfig::MAX_GAS_AMOUNT,
-        //     ClientConfig::GAS_UNIT_PRICE,
-        //     expirationTimestamp,
-        //     static_cast<int>(ChainId)
-        //     );
+        auto rawTxn = std::make_shared<RawTransaction>(
+            *Sender.getAccountAddress(),
+            std::stoi(sequenceNumber),
+            payload,
+            ClientConfig::MAX_GAS_AMOUNT,
+            ClientConfig::GAS_UNIT_PRICE,
+            expirationTimestamp,
+            m_ChainId
+            );
 
-        // Callback(rawTxn);
+        Callback(rawTxn);
     }
 
     void RestClient::Transfer(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback, Account sender, const std::string &to, long amount)

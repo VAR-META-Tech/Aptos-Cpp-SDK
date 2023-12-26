@@ -99,6 +99,8 @@ public:
     bool getSuccess() const;
     void setSuccess(bool newSuccess);
 
+    std::string getHash() const;
+
 private:
     std::string Type;
     std::string Version;

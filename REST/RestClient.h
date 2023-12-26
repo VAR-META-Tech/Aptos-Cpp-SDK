@@ -604,6 +604,7 @@ namespace Aptos::Rest
 
     private:
        std::string endpoint;
+       int m_ChainId;
     };
 }
 #endif // RESTCLIENT_H

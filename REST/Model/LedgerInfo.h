@@ -14,6 +14,8 @@ public:
     nlohmann::json ToJson() const;
     static LedgerInfo FromJson(const std::string& jsonStr);
 
+    int getChainId() const;
+
 private:
     int ChainId;
     std::string Epoch;
