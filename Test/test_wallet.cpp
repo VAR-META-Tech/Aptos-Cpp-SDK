@@ -8,6 +8,7 @@
 
 using namespace Aptos;
 using namespace Aptos::HDWallet;
+using namespace Aptos::Accounts;
 static const std::string mnemo = "stadium valid laundry unknown tuition train december camera fiber vault sniff ripple";
 static const std::string Message = "WELCOME TO APTOS!";
 

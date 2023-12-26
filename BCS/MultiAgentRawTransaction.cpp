@@ -3,6 +3,7 @@
 #include "../HDWallet/Utils/Utils.h"
 #include <cryptopp/sha3.h>
 
+using namespace Aptos::Accounts;
 namespace Aptos::BCS
 {
     MultiAgentRawTransaction::MultiAgentRawTransaction(const RawTransaction &rawTransaction, const Sequence &secondarySigners)

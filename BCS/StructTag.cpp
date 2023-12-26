@@ -1,5 +1,6 @@
 #include "StructTag.h"
 
+using namespace Aptos::Accounts;
 namespace Aptos::BCS
 {
     StructTag::StructTag(AccountAddress address, std::string module, std::string name,

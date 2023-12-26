@@ -5,7 +5,6 @@
 #include "BCSTypes.h"
 #include "../Accounts/AccountAddress.h"
 
-using namespace Aptos::Accounts;
 namespace Aptos::BCS
 {
     /// <summary>
@@ -22,7 +21,7 @@ namespace Aptos::BCS
         /// <param name="module">The module name.</param>
         /// <param name="name">The function name.</param>
         /// <param name="typeArgs">A list of type arguments.</param>
-        explicit StructTag(AccountAddress address, std::string module, std::string name,
+        explicit StructTag(Accounts::AccountAddress address, std::string module, std::string name,
                   const std::vector<std::shared_ptr<ISerializableTag>> &typeArgs);
 
         /// <inheritdoc/>
@@ -47,7 +46,7 @@ namespace Aptos::BCS
         /// <summary>
         /// The account address of the struct tag.
         /// </summary>
-        AccountAddress address;
+        Accounts::AccountAddress address;
 
         /// <summary>
         /// The module name of the struct tag.

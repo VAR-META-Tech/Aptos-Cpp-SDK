@@ -7,7 +7,6 @@
 #include "TransactionPayload.h"
 #include "../Accounts/PrivateKey.h"
 
-using namespace Aptos::Accounts;
 namespace Aptos::BCS
 {
     /// <summary>
@@ -16,20 +15,20 @@ namespace Aptos::BCS
     class RawTransaction : public ISerializable
     {
     public:
-        explicit RawTransaction(const AccountAddress &sender, int sequenceNumber,
+        explicit RawTransaction(const Accounts::AccountAddress &sender, int sequenceNumber,
                        const TransactionPayload &payload, int maxGasAmount,
                        int gasUnitPrice, uint64_t expirationTimestampsSecs, int chainId);
         std::vector<uint8_t> Prehash();
         std::vector<uint8_t> Keyed();
-        Signature Sign(PrivateKey key);
-        bool Verify(PublicKey key, const Signature &signature);
+        Accounts::Signature Sign(Accounts::PrivateKey key);
+        bool Verify(Accounts::PublicKey key, const Accounts::Signature &signature);
         void Serialize(Serialization &serializer) const override;
         static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
         std::string ToString() const override;
         bool Equals(const RawTransaction &other) const;
 
     private:
-        AccountAddress sender;
+        Accounts::AccountAddress sender;
         int sequenceNumber;
         TransactionPayload payload;
         int maxGasAmount;

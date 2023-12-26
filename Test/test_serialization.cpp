@@ -21,6 +21,7 @@
 #include "../HDWallet/Utils/Utils.h"
 
 using namespace Aptos::BCS;
+using namespace Aptos::Accounts;
 
 TEST(SerializationTest, BoolSerialize) {
     Serialization s;

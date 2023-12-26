@@ -7,7 +7,6 @@
 #include "bip3x/bip3x_hdkey_encoder.h"
 #include <memory>
 
-using namespace Aptos::Accounts;
 namespace Aptos::HDWallet
 {
     /// <summary>
@@ -40,21 +39,21 @@ namespace Aptos::HDWallet
         /// <summary>
         /// The method used for <see cref="SeedMode.Ed25519Bip32"/> key generation.
         /// </summary>
-        std::unique_ptr<Ed25519Bip32> _ed25519Bip32;
+        std::unique_ptr<Accounts::Ed25519Bip32> _ed25519Bip32;
         std::vector<uint8_t> _seed;
         SeedMode _seedMode;
-        Account _account;
+        Accounts::Account _account;
 
         std::vector<uint8_t> toVector(const bip3x::bytes_data& data);
 
     public:
         std::vector<uint8_t> DeriveMnemonicSeed();
         void InitializeFirstAccount();
-        Account GetDerivedAccount(int index);
+        Accounts::Account GetDerivedAccount(int index);
         void InitializeSeed();
         explicit Wallet(const std::string &mnemonicWords, const std::string &passphrase = "",
                SeedMode seedMode = SeedMode::Ed25519Bip32);
-        Account account() const;
+        Accounts::Account account() const;
         std::string getMnemonicsKey() const;
     };
 }

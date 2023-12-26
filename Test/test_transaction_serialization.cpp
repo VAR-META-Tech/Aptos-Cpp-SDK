@@ -36,6 +36,7 @@
 using CryptoPP::byte;
 using namespace Aptos;
 using namespace Aptos::BCS;
+using namespace Aptos::Accounts;
 
 AccountAddress testAddress()
 {

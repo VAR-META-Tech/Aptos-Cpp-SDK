@@ -1,6 +1,7 @@
 #include "wallet.h"
 #include "Utils/Utils.h"
 
+using namespace Aptos::Accounts;
 namespace Aptos::HDWallet
 {
     const std::string Wallet::DerivationPath = "m/44'/637'/x'/0'/0'";
