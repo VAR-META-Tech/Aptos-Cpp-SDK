@@ -84,7 +84,9 @@ void UUIController::CopyMnemonicWords()
 {
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCopyMnemonicWordsClicked"));
     char *mnemonic = AptosUILogic_getMnemonicsKey(m_controller);
-    //TODO copy to clipboard
+    FString mnemonicUI = mnemonic;
+    // TODO copy to clipboard
+    FPlatformMisc::ClipboardCopy(*mnemonicUI);
     AptosUILogic_deleteString(mnemonic);
 }
 
@@ -92,54 +94,86 @@ void UUIController::CopyPrivateKey()
 {
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCopyPrivateKeyClicked"));
     char *privateKey = AptosUILogic_getPrivateKey(m_controller);
-    //TODO copy to clipboard
-    AptosUILogic_deleteString(mnemonic);
-
+    FString privateKeyUI = privateKey;
+    // TODO copy to clipboard
+    FPlatformMisc::ClipboardCopy(*privateKeyUI);
+    AptosUILogic_deleteString(privateKey);
 }
 
-void UUIController::Airdrop(int _amount)
+void UUIController::Airdrop(FString &balance_return)
 {
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnAirdropClicked"));
-    AptosUILogic_airdrop(controller, _amount);
+    int _amount = 1;
+    AptosUILogic_airdrop(m_controller, _amount);
+    char *balance = AptosUILogic_getCurrentWalletBalanceText(m_controller);
+    balance_return = balance;
+    AptosUILogic_deleteString(balance);
 }
 
 void UUIController::Logout()
 {
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnLogoutClicked"));
-    AptosUILogic_deleteUiController(controller);
-    m_controller = AptosUILogic_createUiController()
+    AptosUILogic_deleteUiController(m_controller);
+    m_controller = AptosUILogic_createUiController();
 }
 
-void UUIController::SendToken(string _targetAddress, long _amount)
+void UUIController::SendToken(FString targetAddress, int amount, bool &IsSendTokenOk)
 {
+    std::string _targetAddress(TCHAR_TO_UTF8(*targetAddress));
+    long _amount = amount;
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnSendTokenClicked"));
-    bool success = AptosUILogic_sendToken(controller, _targetAddress.c_str(), _amount)
-    if (success) {
-        //notification
-    } else {
-        //notification
+    bool success = AptosUILogic_sendToken(m_controller, _targetAddress.c_str(), _amount);
+    if (success)
+    {
+        // notification
+        IsSendTokenOk = true;
+    }
+    else
+    {
+        // notification
+        IsSendTokenOk = false;
     }
 }
 
-void UUIController::CreateCollection(string _collectionName, string _collectionDescription, string _collectionUri)
+void UUIController::CreateCollection(FString collectionName, FString collectionDescription, FString collectionUri, bool &IsCreateCollectionOk)
 {
+    std::string _collectionName(TCHAR_TO_UTF8(*collectionName));
+    std::string _collectionDescription(TCHAR_TO_UTF8(*collectionName));
+    std::string _collectionUri(TCHAR_TO_UTF8(*collectionName));
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCreateCollectionClicked"));
-    bool success = AptosUILogic_createCollection(controller, _collectionName.c_str(), _collectionDescription.c_str(), _collectionUri.c_str())
-    if (success) {
-        //notification
-    } else {
-        //notification
+    bool success = AptosUILogic_createCollection(m_controller, _collectionName.c_str(), _collectionDescription.c_str(), _collectionUri.c_str());
+    if (success)
+    {
+        // notification
+        IsCreateCollectionOk = true;
+    }
+    else
+    {
+        // notification
+        IsCreateCollectionOk = false;
     }
 }
 
-void UUIController::CreateNFT(string _collectionName, string _tokenName, string _tokenDescription, int _supply, int _max, string _uri, int _royaltyPointsPerMillion)
+void UUIController::CreateNFT(FString collectionName, FString tokenName, FString tokenDescription, int supply, int max, FString uri, int royaltyPointsPerMillion, bool &IsCreateNFTOk)
 {
-    UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCreateNFTClicked"));
-        bool success = AptosUILogic_createNFT(_collectionName.c_str(), _tokenName.c_str(), _tokenDescription.c_str(), int _supply, int _max, _uri.c_str(), int _royaltyPointsPerMillion)
-    if (success) {
-        //notification
-    } else {
-        //notification
-    }
 
+    UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCreateNFTClicked"));
+    std::string _collectionName(TCHAR_TO_UTF8(*collectionName));
+    std::string _tokenName(TCHAR_TO_UTF8(*tokenName));
+    std::string _tokenDescription(TCHAR_TO_UTF8(*tokenDescription));
+    int _supply = supply;
+    int _max = max;
+    std::string _uri(TCHAR_TO_UTF8(*uri));
+    int _royaltyPointsPerMillion = royaltyPointsPerMillion;
+    bool success = AptosUILogic_createNFT(m_controller, _collectionName.c_str(), _tokenName.c_str(), _tokenDescription.c_str(), _supply, _max, _uri.c_str(), _royaltyPointsPerMillion);
+    if (success)
+    {
+        // notification
+        IsCreateNFTOk = true;
+    }
+    else
+    {
+        // notification
+        IsCreateNFTOk = false;
+    }
 }

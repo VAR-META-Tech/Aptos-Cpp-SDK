@@ -628,7 +628,7 @@ namespace Aptos::Rest
         auto durationSinceEpoch = currentTimePoint.time_since_epoch();
         auto seconds = std::chrono::duration_cast<std::chrono::seconds>(durationSinceEpoch);
         std::time_t currentTime = seconds.count();
-        ulong expirationTimestamp = static_cast<ulong>(currentTime + Constants::EXPIRATION_TTL);
+        unsigned long expirationTimestamp = static_cast<unsigned long>(currentTime + Constants::EXPIRATION_TTL);
 
         auto rawTxn = std::make_shared<RawTransaction>(
             *Sender.getAccountAddress(),

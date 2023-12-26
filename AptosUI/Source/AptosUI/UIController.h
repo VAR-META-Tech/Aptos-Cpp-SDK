@@ -40,15 +40,15 @@ class APTOSUI_API UUIController : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnCopyPrivateKey Clicked"), Category = "UIController")
 	static void CopyPrivateKey();
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnAirdrop Clicked"), Category = "UIController")
-	static void Airdrop();
+	static void Airdrop(FString &balance_return);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnLogout Clicked"), Category = "UIController")
 	static void Logout();
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "On SendTransaction Clicked"), Category = "UIController")
-	static void SendToken();
+	static void SendToken(FString targetAddress, int amount, bool &IsSendTokenOk);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnCreateCollection Clicked"), Category = "UIController")
-	static void CreateCollection();
+	static void CreateCollection(FString collectionName, FString collectionDescription, FString collectionUri, bool &IsCreateCollectionOk);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnCreateNFT Clicked"), Category = "UIController")
-	static void CreateNFT();
+	static void CreateNFT(FString collectionName, FString tokenName, FString tokenDescription, int supply, int max, FString uri, int royaltyPointsPerMillion, bool &IsCreateNFTOk);
 
 private:
 	static void *m_controller;
