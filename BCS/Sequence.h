@@ -28,6 +28,11 @@ namespace Aptos::BCS
     {
 
     public:
+        /// <summary>
+        /// Creates a Sequence object from a list of serializable objects,
+        /// e.g. U8, AccountAddress.
+        /// </summary>
+        /// <param name="serializable">A list of serializable objects.</param>
         explicit Sequence(const std::vector<std::shared_ptr<ISerializable>> &values);
 
         /// <summary>

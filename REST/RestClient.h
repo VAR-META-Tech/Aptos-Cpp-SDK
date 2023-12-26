@@ -28,11 +28,23 @@ namespace Aptos::Rest
         static constexpr int TRANSACTION_WAIT_IN_SECONDS = 20; // Amount of seconds to wait during each polling cycle.
     };
 
+    /// <summary>
+    /// The Aptos REST Client contains a set of [standalone] Coroutines
+    /// that can started within any Unity script.
+    ///
+    /// Consideration must be placed into the wait time required
+    /// for a transaction to be committed into the blockchain.
+    /// </summary>
     class RestClient
     {
     public:
+        /// <summary>
+        /// Set Endpoint for RPC / REST call.
+        /// </summary>
+        /// <param name="url">Base URL for REST API.</param>
         void SetEndpoint(const std::string &url);
         explicit RestClient();
+
         /// <summary>
         /// Get Account Details.
         /// Return the authentication key and the sequence number for an account address. Optionally, a ledger version can be specified.
@@ -51,6 +63,7 @@ namespace Aptos::Rest
         /// </returns>
         void GetAccount(std::function<void(std::shared_ptr<AptosRESTModel::AccountData>, AptosRESTModel::ResponseInfo)> callback,
                         const AccountAddress &accountAddress);
+
         /// <summary>
         /// Get an account's balance.
         ///
@@ -103,6 +116,7 @@ namespace Aptos::Rest
         /// A representation of the coin, and an object containing the response details.</returns>
         void GetAccountBalance(std::function<void(AptosRESTModel::AccountResourceCoin::Coin, AptosRESTModel::ResponseInfo)> callback,
                                const AccountAddress &accountAddress);
+
         /// <summary>
         /// Get a resource of a given type from an account.
         /// NOTE: The response is a complex object of types only known to the developer writing the contracts.
@@ -120,6 +134,7 @@ namespace Aptos::Rest
                                 const AccountAddress &accountAddress,
                                 const std::string &resourceType = "",
                                 const std::string &ledgerVersion = "");
+
         /// <summary>
         /// Get resources (in a JSON format) from a given account.
         /// </summary>
@@ -130,6 +145,7 @@ namespace Aptos::Rest
         void GetAccountResources(std::function<void(bool, long, std::string)> callback,
                                  const AccountAddress &accountAddress,
                                  const std::string &ledgerVersion = "");
+
         /// <summary>
         /// Get Account Resource
         /// </summary>
@@ -141,6 +157,7 @@ namespace Aptos::Rest
         void GetAccountResourceCollection(std::function<void(std::shared_ptr<AptosRESTModel::ResourceCollection>, AptosRESTModel::ResponseInfo)> callback,
                                           const AccountAddress &accountAddress,
                                           const std::string &resourceType);
+
         /// <summary>
         /// Gets table item that represents a coin resource
         /// See <see cref="GetTableItem(Action{string}, string, string, string, string)">GetTableItem</see>
@@ -157,6 +174,7 @@ namespace Aptos::Rest
                               const std::string &keyType,
                               const std::string &valueType,
                               const std::string &key);
+
         /// <summary>
         /// Get a  table item at a specific ledger version from the table identified
         /// by the handle {table_handle} in the path and a [simple] "key" (TableItemRequest)
@@ -175,6 +193,7 @@ namespace Aptos::Rest
                           const std::string &keyType,
                           const std::string &valueType,
                           const std::string &key);
+
         /// <summary>
         /// Get a  table item for a NFT from the table identified
         /// by the handle {table_handle} in the path and a complex key provided by the request body.
@@ -205,6 +224,7 @@ namespace Aptos::Rest
                              const std::string &keyType,
                              const std::string &valueType,
                              AptosRESTModel::TokenIdRequest key);
+
         /// <summary>
         /// Get a table item that contains a token's (NFT) metadata.
         /// In this case we are using a complex key to retrieve the table item.
@@ -257,6 +277,7 @@ namespace Aptos::Rest
                                    const std::string &keyType,
                                    const std::string &valueType,
                                    AptosRESTModel::TokenDataId key);
+
         /// <summary>
         /// Get the latest ledger information, including data such as chain ID, role type, ledger versions, epoch, etc.
         /// </summary>
@@ -267,6 +288,7 @@ namespace Aptos::Rest
 
         void SimulateTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback,
                                  BCS::RawTransaction transaction, std::vector<uint8_t> publicKey);
+
         /// <summary>
         /// Submits a BCS transaction.
         /// </summary>
@@ -274,6 +296,7 @@ namespace Aptos::Rest
         /// <param name="SignedTransaction">The signed transaction.</param>
         /// <returns></returns>
         void SubmitBCSTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const BCS::SignedTransaction &signedTransaction);
+
         /// <summary>
         /// Execute the Move view function with the given parameters and return its execution result.
         ///
@@ -303,6 +326,7 @@ namespace Aptos::Rest
         /// <param name="viewRequest">The payload for the view function</param>
         /// <returns>A vec containing the values returned from the view functions.</returns>
         void View(std::function<void(std::vector<std::string>, AptosRESTModel::ResponseInfo)> callback, const AptosRESTModel::ViewRequest &viewRequest);
+
         /// <summary>
         /// 1) Generates a transaction request \n
         /// 2) submits that to produce a raw transaction \n
@@ -318,6 +342,7 @@ namespace Aptos::Rest
         void SubmitTransaction(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback,
                                Account sender,
                                BCS::EntryFunction entryFunction);
+
         /// <summary>
         /// A Coroutine that polls for a transaction hash until it is confimred in the blockchain
         /// Times out if the transaction hash is not found after querying for N times.
@@ -337,6 +362,7 @@ namespace Aptos::Rest
         /// A response object that contains the response details.
         /// </returns>
         void WaitForTransaction(std::function<void(bool, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash);
+
         /// <summary>
         /// Query to see if transaction has been 'confirmed' in the blockchain by using the transaction hash.
         /// A 404 error will be returned if the transaction hasn't been confirmed.
@@ -355,6 +381,7 @@ namespace Aptos::Rest
         void TransactionByHash(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash);
         void CreateBCSSignedTransaction(std::function<void(std::shared_ptr<BCS::SignedTransaction>)> Callback, Account Sender, BCS::TransactionPayload Payload);
         void CreateBCSTransaction(std::function<void(std::shared_ptr<BCS::RawTransaction>)> Callback, Account Sender, BCS::TransactionPayload payload);
+
         /// <summary>
         /// Transfer a given coin amount from a given Account to the recipient's account Address.
         /// Returns the sequence number of the transaction used to transfer.
@@ -370,6 +397,7 @@ namespace Aptos::Rest
         /// </returns>
         void Transfer(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback, Account sender, const std::string &to, long amount);
         void BCSTransfer(std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback, Account Sender, AccountAddress Recipient, int Amount);
+
         /// <summary>
         /// Encodes submission.
         /// This endpoint accepts an EncodeSubmissionRequest, which internally is a UserTransactionRequestInner
@@ -392,6 +420,7 @@ namespace Aptos::Rest
         /// Example: <code>0x88fbd33f54e1126269769780feb24480428179f552e2313fbe571b72e62a1ca1</code>
         /// </returns>
         void EncodeSubmission(const std::function<void(const std::string &)> &callback, const std::string &txnRequestJson);
+
         /// <summary>
         /// Encodes submission. See <see cref="EncodeSubmission(Action{string}, string)">EncodeSubmission</see>.
         /// </summary>
@@ -399,6 +428,7 @@ namespace Aptos::Rest
         /// <param name="txnRequestJson">Transaction request in JSON format.</param>
         /// <returns>Calls <c>callback</c>function with a byte array representing the encoded submission.</returns>
         void EncodeSubmissionAsBytes(const std::function<void(const std::vector<uint8_t> &)> &callback, const std::string &txnRequestJson);
+
         /// <summary>
         /// Create a NFT collection
         /// </summary>
@@ -416,6 +446,7 @@ namespace Aptos::Rest
             std::string collectionName,
             std::string collectionDescription,
             std::string uri);
+
         /// <summary>
         /// Create Non-Fungible Token (NFT)
         /// See token <see cref="https://github.com/aptos-labs/aptos-core/blob/main/aptos-move/framework/aptos-token/sources/token.move#L365">reference.</see>
@@ -442,6 +473,7 @@ namespace Aptos::Rest
             int max,
             std::string uri,
             int royaltyPointsPerMillion);
+
         /// <summary>
         /// Offer a token to a given address.
         /// </summary>
@@ -465,6 +497,7 @@ namespace Aptos::Rest
             std::string tokenName,
             int amount,
             int propertyVersion);
+
         /// <summary>
         /// Claim a token that was offered by <paramref name="sender"/>
         /// </summary>
@@ -485,6 +518,7 @@ namespace Aptos::Rest
                         std::string collectionName,
                         std::string tokenName,
                         int propertyVersion);
+
         /// <summary>
         /// Get token information.
         /// </summary>
@@ -504,6 +538,7 @@ namespace Aptos::Rest
             std::string collectionName,
             std::string tokenName,
             int propertyVersion);
+
         /// <summary>
         /// Get balance for a given non-fungible token (NFT).
         /// </summary>
@@ -521,6 +556,7 @@ namespace Aptos::Rest
             std::string collectionName,
             std::string tokenName,
             int propertyVersion);
+
         /// <summary>
         /// Read Collection's token data table.
         /// An example
@@ -566,6 +602,7 @@ namespace Aptos::Rest
             std::string collectionName,
             std::string tokenName,
             int propertyVersion);
+
         /// <summary>
         /// Get collection information.
         /// This return a JSON representation that will be parsed by the developer that know the specific return types.
@@ -583,6 +620,7 @@ namespace Aptos::Rest
             Account Owner,
             AccountAddress Object,
             AccountAddress To);
+
         /// <summary>
         /// Get a resource of a given type from an account.
         /// NOTE: The response is a complex object of types only known to the developer writing the contracts.
@@ -602,7 +640,7 @@ namespace Aptos::Rest
             std::string resourceType);
 
     private:
-       std::string endpoint;
+        std::string endpoint;
     };
 }
 #endif // RESTCLIENT_H

@@ -5,6 +5,9 @@
 
 namespace Aptos::BCS
 {
+    /// <summary>
+    /// Representation of U8.
+    /// </summary>
     class U8 : public ISerializableTag
     {
     private:
