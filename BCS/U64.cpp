@@ -1,8 +1,10 @@
 #include "U64.h"
 #include "Serialization.h"
 #include "Deserialization.h"
-#include <boost/endian/conversion.hpp>
 #include <sstream>
+#include <stdexcept>
+#include <bit>
+
 
 namespace Aptos::BCS
 {
@@ -59,6 +61,19 @@ namespace Aptos::BCS
 
         uint64_t res;
         std::memcpy(&res, data.data(), sizeof(uint64_t));
-        return boost::endian::little_to_native(res);
+       if constexpr (std::endian::native == std::endian::little) {
+            // The native endianness is little endian, no conversion needed.
+            return res;
+        } else if constexpr (std::endian::native == std::endian::big) {
+            // The native endianness is big endian, conversion needed.
+            return (static_cast<uint64_t>(res) << 56) |
+                   ((static_cast<uint64_t>(res) & 0x000000000000FF00) << 40) |
+                   ((static_cast<uint64_t>(res) & 0x0000000000FF0000) << 24) |
+                   ((static_cast<uint64_t>(res) & 0x00000000FF000000) << 8) |
+                   ((static_cast<uint64_t>(res) & 0x000000FF00000000) >> 8) |
+                   ((static_cast<uint64_t>(res) & 0x0000FF0000000000) >> 24) |
+                   ((static_cast<uint64_t>(res) & 0x00FF000000000000) >> 40) |
+                   (static_cast<uint64_t>(res) >> 56);
+        }
     }
 }

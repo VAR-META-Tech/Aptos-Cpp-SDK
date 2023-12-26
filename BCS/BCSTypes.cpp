@@ -98,10 +98,7 @@ namespace Aptos::BCS
 
     std::size_t ISerializable::GetHashCode()
     {
-        // Your hash logic here. This is just a simple example.
         std::size_t seed = 0;
-        // boost::hash_combine(seed, int_member);
-        // boost::hash_combine(seed, boost::hash_value(string_member));
         return seed;
     }
 }

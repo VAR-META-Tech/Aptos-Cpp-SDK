@@ -1,8 +1,9 @@
 #include "U16.h"
 #include "Serialization.h"
 #include "Deserialization.h"
-#include <boost/endian/conversion.hpp>
 #include <sstream>
+#include <bit>
+#include <stdexcept>
 
 namespace Aptos::BCS
 {
@@ -59,6 +60,12 @@ namespace Aptos::BCS
 
         uint16_t res;
         std::memcpy(&res, data.data(), sizeof(uint16_t));
-        return boost::endian::little_to_native(res);
+        if constexpr (std::endian::native == std::endian::little) {
+            // The native endianness is little endian, no conversion needed.
+            return res;
+        } else if constexpr (std::endian::native == std::endian::big) {
+            // The native endianness is big endian, conversion needed.
+            return (res >> 8) | (res << 8);
+        }
     }
 }

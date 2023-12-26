@@ -1,6 +1,7 @@
 #include "Authenticator.h"
 #include "Sequence.h"
 
+using namespace Aptos::Accounts;
 namespace Aptos::BCS
 {
     Authenticator::Authenticator(const std::shared_ptr<IAuthenticator> &authenticator) : Variant(Authenticator::ED25519), m_authenticator(authenticator)
