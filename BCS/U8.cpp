@@ -5,9 +5,8 @@
 
 namespace Aptos::BCS
 {
-    U8::U8(uint8_t value)
+    U8::U8(uint8_t value): value(value)
     {
-        this->value = value;
     }
 
     void U8::Serialize(Serialization &serializer) const

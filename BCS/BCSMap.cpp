@@ -22,7 +22,7 @@ namespace Aptos::BCS
     void BCSMap::Serialize(Serialization &serializer) const
     {
         Serialization mapSerializer;
-        std::map<std::string, std::pair<std::vector<uint8_t>, std::vector<uint8_t>>> byteMap;
+        std::map<std::string, std::pair<std::vector<uint8_t>, std::vector<uint8_t>>, std::less<>> byteMap;
 
         for (const auto &entry : this->values)
         {

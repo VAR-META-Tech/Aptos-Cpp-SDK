@@ -4,7 +4,7 @@
 
 namespace Aptos::Rest
 {
-    void FaucetClient::FundAccount(std::function<void(bool, AptosRESTModel::ResponseInfo&)> callback,
+    void FaucetClient::FundAccount(std::function<void(bool, AptosRESTModel::ResponseInfo)> callback,
                                    const std::string &address, int amount, const std::string &endpoint)
     {
         // using namespace AptosRESTModel;

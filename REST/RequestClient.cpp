@@ -3,7 +3,7 @@
 
 namespace Aptos::Rest
 {
-    httplib::Client RequestClient::GetWebClient(std::string uri)
+    httplib::Client RequestClient::GetWebClient(std::string &uri)
     {
         httplib::Client cli(uri);
         cli.enable_server_certificate_verification(false);

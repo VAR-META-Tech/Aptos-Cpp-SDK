@@ -120,7 +120,7 @@ namespace Aptos::BCS
         // Read the number of key-value pairs
         uint32_t numPairs = this->DeserializeUleb128();
 
-        std::map<std::string, std::shared_ptr<ISerializable>> sortedMap;
+        std::map<std::string, std::shared_ptr<ISerializable>, std::less<>> sortedMap;
 
         // Deserialize each key-value pair
         for (uint32_t i = 0; i < numPairs; i++)

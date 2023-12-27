@@ -16,7 +16,7 @@ namespace Aptos::Rest
         /// </summary>
         /// <param name="uri">endpoint uri</param>
         /// <returns>httplib::Client object</returns>
-        static httplib::Client GetWebClient(std::string uri);
+        static httplib::Client GetWebClient(std::string &uri);
 
         /// <summary>
         /// Get the default Aptos header value

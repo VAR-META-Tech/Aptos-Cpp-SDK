@@ -26,7 +26,7 @@ namespace Aptos::Rest
         endpoint = url;
     }
 
-    void RestClient::GetAccount(std::function<void(std::shared_ptr<AptosRESTModel::AccountData>, AptosRESTModel::ResponseInfo)> callback, const AccountAddress &accountAddress)
+    void RestClient::GetAccount(std::function<void(std::shared_ptr<AptosRESTModel::AccountData>, AptosRESTModel::ResponseInfo&)> callback, const AccountAddress &accountAddress)
     {
         using namespace AptosRESTModel;
 
@@ -63,7 +63,7 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::GetAccountSequenceNumber(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const AccountAddress &accountAddress)
+    void RestClient::GetAccountSequenceNumber(std::function<void(std::string, AptosRESTModel::ResponseInfo&)> callback, const AccountAddress &accountAddress)
     {
         using namespace AptosRESTModel;
         std::shared_ptr<AccountData> accountData;
@@ -85,7 +85,7 @@ namespace Aptos::Rest
         callback(sequenceNumber, responseInfo);
     }
 
-    void RestClient::GetAccountBalance(std::function<void(AptosRESTModel::AccountResourceCoin::Coin, AptosRESTModel::ResponseInfo)> callback,
+    void RestClient::GetAccountBalance(std::function<void(AptosRESTModel::AccountResourceCoin::Coin, AptosRESTModel::ResponseInfo&)> callback,
                                        const AccountAddress &accountAddress)
     {
         using namespace AptosRESTModel;
@@ -157,7 +157,7 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::GetAccountResourceCollection(std::function<void(std::shared_ptr<AptosRESTModel::ResourceCollection>, AptosRESTModel::ResponseInfo)> callback,
+    void RestClient::GetAccountResourceCollection(std::function<void(std::shared_ptr<AptosRESTModel::ResourceCollection>, AptosRESTModel::ResponseInfo&)> callback,
                                                   const AccountAddress &accountAddress,
                                                   const std::string &resourceType)
     {
@@ -183,7 +183,7 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::GetTableItemCoin(std::function<void(std::shared_ptr<AptosRESTModel::AccountResourceCoin>, AptosRESTModel::ResponseInfo)> callback, const std::string &handle, const std::string &keyType, const std::string &valueType, const std::string &key)
+    void RestClient::GetTableItemCoin(std::function<void(std::shared_ptr<AptosRESTModel::AccountResourceCoin>, AptosRESTModel::ResponseInfo&)> callback, const std::string &handle, const std::string &keyType, const std::string &valueType, const std::string &key)
     {
         using namespace AptosRESTModel;
         std::string uri = "/v1/tables/" + handle + "/item/";
@@ -225,11 +225,11 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::GetTableItemNFT(std::function<void(std::shared_ptr<AptosRESTModel::TableItemToken>, AptosRESTModel::ResponseInfo)> callback,
+    void RestClient::GetTableItemNFT(std::function<void(std::shared_ptr<AptosRESTModel::TableItemToken>, AptosRESTModel::ResponseInfo&)> callback,
                                      const std::string &handle,
                                      const std::string &keyType,
                                      const std::string &valueType,
-                                     AptosRESTModel::TokenIdRequest key)
+                                     AptosRESTModel::TokenIdRequest &key)
     {
         using namespace AptosRESTModel;
         TableItemRequestNFT tableItemRequest;
@@ -266,7 +266,7 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::GetTableItemTokenData(std::function<void(std::shared_ptr<AptosRESTModel::TableItemTokenMetadata>, AptosRESTModel::ResponseInfo)> callback, const std::string &handle, const std::string &keyType, const std::string &valueType, AptosRESTModel::TokenDataId key)
+    void RestClient::GetTableItemTokenData(std::function<void(std::shared_ptr<AptosRESTModel::TableItemTokenMetadata>, AptosRESTModel::ResponseInfo&)> callback, const std::string &handle, const std::string &keyType, const std::string &valueType, AptosRESTModel::TokenDataId &key)
     {
         using namespace AptosRESTModel;
         TableItemRequestTokenData tableItemRequest;
@@ -299,7 +299,7 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::GetInfo(std::function<void(std::shared_ptr<AptosRESTModel::LedgerInfo>, AptosRESTModel::ResponseInfo)> callback)
+    void RestClient::GetInfo(std::function<void(std::shared_ptr<AptosRESTModel::LedgerInfo>, AptosRESTModel::ResponseInfo&)> callback)
     {
         using namespace AptosRESTModel;
         // Perform the HTTP request to get info
@@ -323,7 +323,7 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::SimulateTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback,
+    void RestClient::SimulateTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo&)> callback,
                                          BCS::RawTransaction transaction, std::vector<uint8_t> publicKey)
     {
         using namespace AptosRESTModel;
@@ -356,7 +356,7 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::SubmitBCSTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const BCS::SignedTransaction &signedTransaction)
+    void RestClient::SubmitBCSTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo&)> callback, const BCS::SignedTransaction &signedTransaction)
     {
         using namespace AptosRESTModel;
         std::string uri = "/v1/transactions";
@@ -383,7 +383,7 @@ namespace Aptos::Rest
 
     }
 
-    void RestClient::View(std::function<void(std::vector<std::string>, AptosRESTModel::ResponseInfo)> callback,
+    void RestClient::View(std::function<void(std::vector<std::string>, AptosRESTModel::ResponseInfo&)> callback,
                           const AptosRESTModel::ViewRequest &viewRequest)
     {
         using namespace AptosRESTModel;
@@ -405,7 +405,7 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::SubmitTransaction(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback,
+    void RestClient::SubmitTransaction(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo&)> callback,
                                        Account sender, BCS::EntryFunction entryFunction)
     {
         using namespace AptosRESTModel;
@@ -456,22 +456,22 @@ namespace Aptos::Rest
         // Perform the request and handle the response
         if (auto response = RequestClient::GetWebClient(endpoint).Post(uri, txnRequestJson.dump(), "application/json"))
         {
-            ResponseInfo responseInfo;
+            ResponseInfo responseInfoData;
             std::vector<std::string> values;
             if (response->status == 200) {
                 auto transaction = std::make_shared<Transaction>(Transaction::FromJson(response->body));
-                responseInfo.status = ResponseInfo::Status::Success;
+                responseInfoData.status = ResponseInfo::Status::Success;
                 responseInfo.message = response->body;
-                callback(transaction, responseInfo);
+                callback(transaction, responseInfoData);
             }  else {
-                responseInfo.status = ResponseInfo::Status::Failed;
-                responseInfo.message = "Error in processing the response.";
-                callback(nullptr, responseInfo);
+                responseInfoData.status = ResponseInfo::Status::Failed;
+                responseInfoData.message = "Error in processing the response.";
+                callback(nullptr, responseInfoData);
             }
         }
     }
 
-    void RestClient::WaitForTransaction(std::function<void(bool, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash)
+    void RestClient::WaitForTransaction(std::function<void(bool, AptosRESTModel::ResponseInfo&)> callback, const std::string &txnHash)
     {
         using namespace AptosRESTModel;
         int count = 0;            // Current attempt at querying for hash
@@ -530,7 +530,7 @@ namespace Aptos::Rest
         callback(isTxnSuccessful, responseInfo);
     }
 
-    void RestClient::TransactionPending(std::function<void(bool, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash)
+    void RestClient::TransactionPending(std::function<void(bool, AptosRESTModel::ResponseInfo&)> callback, const std::string &txnHash)
     {
         using namespace AptosRESTModel;
         std::string uri = "/v1/transactions/by_hash/" + txnHash;
@@ -555,7 +555,7 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::TransactionByHash(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash)
+    void RestClient::TransactionByHash(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo&)> callback, const std::string &txnHash)
     {
         using namespace AptosRESTModel;
         std::string uri = "/v1/transactions/by_hash/" + txnHash;
@@ -622,7 +622,7 @@ namespace Aptos::Rest
         // Callback(rawTxn);
     }
 
-    void RestClient::Transfer(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback, Account sender, const std::string &to, long amount)
+    void RestClient::Transfer(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo&)> callback, Account sender, const std::string &to, long amount)
     {
         using namespace AptosRESTModel;
         if (!Aptos::Utils::IsValidAddress(to))
@@ -662,7 +662,7 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::BCSTransfer(std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback, Account Sender, AccountAddress Recipient, int Amount)
+    void RestClient::BCSTransfer(std::function<void(std::string, AptosRESTModel::ResponseInfo&)> Callback, Account Sender, AccountAddress Recipient, int Amount)
     {
         std::vector<std::shared_ptr<BCS::ISerializable>> transactionArguments;
         transactionArguments.push_back(std::make_shared<AccountAddress>(Recipient));
@@ -715,7 +715,7 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::CreateCollection(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)> callback, Account sender, std::string collectionName, std::string collectionDescription, std::string uri)
+    void RestClient::CreateCollection(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo&)> callback, Account sender, std::string collectionName, std::string collectionDescription, std::string uri)
     {
         std::vector<std::shared_ptr<BCS::ISerializable>> transactionArguments;
         transactionArguments.push_back(std::make_shared<BString>(collectionName));
@@ -755,7 +755,7 @@ namespace Aptos::Rest
         callback(createCollectionTxn, responseInfo);
     }
 
-    void RestClient::CreateToken(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)> callback, Account senderRoyaltyPayeeAddress, std::string collectionName, std::string tokenName, std::string description, int supply, int max, std::string uri, int royaltyPointsPerMillion)
+    void RestClient::CreateToken(std::function<void(AptosRESTModel::Transaction&, AptosRESTModel::ResponseInfo&)> callback, Account senderRoyaltyPayeeAddress, std::string collectionName, std::string tokenName, std::string description, int supply, int max, std::string uri, int royaltyPointsPerMillion)
     {
         std::vector<std::shared_ptr<BCS::ISerializable>> transactionArguments;
         transactionArguments.push_back(std::make_shared<BString>(collectionName));
@@ -809,7 +809,7 @@ namespace Aptos::Rest
         callback(createTokenTxn, responseInfo);
     }
 
-    void RestClient::OfferToken(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback, Account account, AccountAddress receiver, AccountAddress creator, std::string collectionName, std::string tokenName, int amount, int propertyVersion)
+    void RestClient::OfferToken(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo&)> callback, Account account, AccountAddress receiver, AccountAddress creator, std::string collectionName, std::string tokenName, int amount, int propertyVersion)
     {
         AptosRESTModel::ResponseInfo responseInfo;
         if (!Aptos::Utils::IsValidAddress(receiver.ToString()))
@@ -861,7 +861,7 @@ namespace Aptos::Rest
         callback(std::make_shared<AptosRESTModel::Transaction>(offerTokenTxn), responseInfo);
     }
 
-    void RestClient::ClaimToken(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback, Account account, AccountAddress sender, AccountAddress creator, std::string collectionName, std::string tokenName, int propertyVersion)
+    void RestClient::ClaimToken(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo&)> callback, Account account, AccountAddress sender, AccountAddress creator, std::string collectionName, std::string tokenName, int propertyVersion)
     {
         AptosRESTModel::ResponseInfo responseInfo;
         if (!Aptos::Utils::IsValidAddress(sender.ToString()))
@@ -913,7 +913,7 @@ namespace Aptos::Rest
         callback(std::make_shared<AptosRESTModel::Transaction>(claimTokenTxn), responseInfo);
     }
 
-    void RestClient::GetToken(std::function<void(AptosRESTModel::TableItemToken, AptosRESTModel::ResponseInfo)> callback, AccountAddress ownerAddress, AccountAddress creatorAddress, std::string collectionName, std::string tokenName, int propertyVersion)
+    void RestClient::GetToken(std::function<void(AptosRESTModel::TableItemToken, AptosRESTModel::ResponseInfo&)> callback, AccountAddress ownerAddress, AccountAddress creatorAddress, std::string collectionName, std::string tokenName, int propertyVersion)
     {
         bool success = false;
         long responseCode = 0;
@@ -987,7 +987,7 @@ namespace Aptos::Rest
         }
     }
 
-    void RestClient::GetTokenData(std::function<void(AptosRESTModel::TableItemTokenMetadata, AptosRESTModel::ResponseInfo)> callback, AccountAddress creator, std::string collectionName, std::string tokenName, int propertyVersion)
+    void RestClient::GetTokenData(std::function<void(AptosRESTModel::TableItemTokenMetadata, AptosRESTModel::ResponseInfo&)> callback, AccountAddress creator, std::string collectionName, std::string tokenName, int propertyVersion)
     {
         bool success = false;
         long responseCode = 0;
@@ -1060,7 +1060,7 @@ namespace Aptos::Rest
         callback(tableItemResp);
     }
 
-    void RestClient::TransferObject(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, Account Owner, AccountAddress Object, AccountAddress To)
+    void RestClient::TransferObject(std::function<void(std::string, AptosRESTModel::ResponseInfo&)> callback, Account Owner, AccountAddress Object, AccountAddress To)
     {
         std::vector<std::shared_ptr<BCS::ISerializable>> transactionArguments;
         transactionArguments.push_back(std::make_shared<AccountAddress>(Object));
