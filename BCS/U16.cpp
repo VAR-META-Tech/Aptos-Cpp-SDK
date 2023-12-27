@@ -7,9 +7,8 @@
 
 namespace Aptos::BCS
 {
-    U16::U16(uint16_t value)
+    U16::U16(uint16_t value): value(value)
     {
-        this->value = value;
     }
 
     void U16::Serialize(Serialization &serializer) const

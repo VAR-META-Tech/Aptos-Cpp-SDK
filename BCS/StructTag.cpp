@@ -3,9 +3,9 @@
 using namespace Aptos::Accounts;
 namespace Aptos::BCS
 {
-    StructTag::StructTag(AccountAddress address, std::string module, std::string name,
+    StructTag::StructTag(AccountAddress address, std::string moduleName, std::string name,
                          const std::vector<std::shared_ptr<ISerializableTag>> &typeArgs)
-        : address(address), moduleName(module), name(name), typeArgs(typeArgs) {}
+        : address(address), moduleName(moduleName), name(name), typeArgs(typeArgs) {}
 
     TypeTag StructTag::Variant() const { return TypeTag::STRUCT; }
 

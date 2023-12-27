@@ -11,9 +11,8 @@
 
 namespace Aptos::BCS
 {
-    Sequence::Sequence(const std::vector<std::shared_ptr<ISerializable>> &values)
+    Sequence::Sequence(const std::vector<std::shared_ptr<ISerializable>> &values): values(values)
     {
-        this->values = values;
     }
 
     int Sequence::Length() const

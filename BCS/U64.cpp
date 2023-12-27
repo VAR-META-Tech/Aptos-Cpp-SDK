@@ -8,9 +8,8 @@
 
 namespace Aptos::BCS
 {
-    U64::U64(uint64_t value)
+    U64::U64(uint64_t value): value(value)
     {
-        this->value = value;
     }
 
     void U64::Serialize(Serialization &serializer) const

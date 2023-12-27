@@ -381,7 +381,7 @@ namespace Aptos::Rest
         return response;
     }
 
-    std::tuple<std::vector<BCS::BString>, std::vector<BCS::BString>, std::vector<std::vector<uint8_t>>> PropertyMap::ToTuple()
+    std::tuple<std::vector<BCS::BString>, std::vector<BCS::BString>, std::vector<std::vector<uint8_t>>> PropertyMap::ToTuple() const
     {
         std::vector<BCS::BString> names;
         std::vector<BCS::BString> types;

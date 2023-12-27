@@ -197,7 +197,7 @@ namespace Aptos::BCS
 
     Serialization &Serialization::Serialize(const Sequence &args)
     {
-        auto vl = args.getValues();
+        const auto& vl= args.getValues();
         SerializeU32AsUleb128(static_cast<uint32_t>(vl.size()));
         for (auto &element : vl)
         {

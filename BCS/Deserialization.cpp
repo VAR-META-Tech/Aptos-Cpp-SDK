@@ -15,7 +15,7 @@
 
 namespace Aptos::BCS
 {
-    Deserialization::Deserialization(const std::vector<uint8_t> &data) : buffer(data), position(0)
+    Deserialization::Deserialization(const std::vector<uint8_t> &data) : buffer(data)
     {
     }
 

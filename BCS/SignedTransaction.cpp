@@ -22,9 +22,9 @@ namespace Aptos::BCS
         {
             const std::shared_ptr<MultiAgentAuthenticator> multiAgentAuthenticator = std::dynamic_pointer_cast<MultiAgentAuthenticator>(authenticator.GetAuthenticator());
 
-            MultiAgentRawTransaction transaction(this->transaction, multiAgentAuthenticator->SecondaryAddresses());
+            MultiAgentRawTransaction multiAgentTransaction(this->transaction, multiAgentAuthenticator->SecondaryAddresses());
 
-            keyed = transaction.Keyed();
+            keyed = multiAgentTransaction.Keyed();
         }
         else
         {

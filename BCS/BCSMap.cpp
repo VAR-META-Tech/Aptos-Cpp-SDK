@@ -34,7 +34,7 @@ namespace Aptos::BCS
             entry.second->Serialize(valSerializer);
             std::vector<uint8_t> bValue = valSerializer.GetBytes();
 
-            byteMap.insert({entry.first.GetValue(), {bKey, bValue}});
+            byteMap.try_emplace(entry.first.GetValue(), std::make_pair(bKey, bValue));
         }
         mapSerializer.SerializeU32AsUleb128(byteMap.size());
 

@@ -1,7 +1,6 @@
 #ifndef FAUCETCLIENT_H
 #define FAUCETCLIENT_H
 
-#define BOOST_ASIO_HAS_STD_INVOKE_RESULT
 #include <functional>
 #include <string>
 #include "Model/ResponseInfo.h"
@@ -24,7 +23,7 @@ namespace Aptos::Rest
         /// <param name="endpoint">Base URL for faucet.</param>
         /// <returns>Calls <c>callback</c> function with <c>(bool, ResponsiveInfo)</c>: \n
         /// A boolean stating that the request for funding was successful, and an object containg the response details</returns>
-        static void FundAccount(std::function<void(bool, AptosRESTModel::ResponseInfo)> callback,
+        static void FundAccount(std::function<void(bool, AptosRESTModel::ResponseInfo&)> callback,
                                 const std::string &address, int amount, const std::string &endpoint);
     };
 

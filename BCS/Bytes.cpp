@@ -13,9 +13,8 @@
 
 namespace Aptos::BCS
 {
-    Bytes::Bytes(const std::vector<uint8_t> &values)
+    Bytes::Bytes(const std::vector<uint8_t> &values): values(values)
     {
-        this->values = values;
     }
 
     void Bytes::Serialize(Serialization &serializer) const

@@ -9,8 +9,7 @@
 
 namespace Aptos::Accounts
 {
-    MultiSignature::MultiSignature(const MultiPublicKey &PublicKeyMulti, const std::vector<std::pair<PublicKey, Signature>> &SignatureMap) 
-    : Signatures()
+    MultiSignature::MultiSignature(const MultiPublicKey &PublicKeyMulti, const std::vector<std::pair<PublicKey, Signature>> &SignatureMap)
     {
         int bitmap = 0;
         auto keys = PublicKeyMulti.getKeys();

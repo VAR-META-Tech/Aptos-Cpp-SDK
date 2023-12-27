@@ -204,8 +204,10 @@ namespace Aptos::BCS
         std::vector<std::tuple<std::shared_ptr<AccountAddress>, std::shared_ptr<Authenticator>>> secondarySigners;
         for (size_t i = 0; i < secondaryAddressesSeq.size(); i++)
         {
-            secondarySigners.emplace_back(std::make_tuple(std::dynamic_pointer_cast<AccountAddress>(secondaryAddressesSeq[i]),
-                                                       std::dynamic_pointer_cast<Authenticator>(authenticatorsSeq[i])));
+            // Assuming secondarySigners is a vector of tuples and the casts are valid.
+            secondarySigners.emplace_back(
+                std::dynamic_pointer_cast<AccountAddress>(secondaryAddressesSeq[i]),
+                std::dynamic_pointer_cast<Authenticator>(authenticatorsSeq[i]));
         }
 
         return std::make_shared<MultiAgentAuthenticator>(*sender, secondarySigners);

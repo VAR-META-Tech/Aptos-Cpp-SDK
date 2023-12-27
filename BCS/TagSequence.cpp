@@ -7,8 +7,8 @@
 namespace Aptos::BCS
 {
     TagSequence::TagSequence(const std::vector<std::shared_ptr<ISerializableTag>> &serializableTags)
+    : serializableTags(serializableTags)
     {
-        this->serializableTags = serializableTags;
     }
 
     void TagSequence::Serialize(Serialization &serializer) const

@@ -7,9 +7,8 @@
 
 namespace Aptos::BCS
 {
-    U32::U32(uint32_t value)
+    U32::U32(uint32_t value): value(value)
     {
-        this->value = value;
     }
 
     void U32::Serialize(Serialization &serializer) const

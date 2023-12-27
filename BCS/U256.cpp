@@ -10,9 +10,8 @@
 using namespace CryptoPP;
 namespace Aptos::BCS
 {
-    U256::U256(CryptoPP::Integer value)
+    U256::U256(CryptoPP::Integer value): value(value)
     {
-        this->value = value;
     }
 
     void U256::Serialize(Serialization &serializer) const

@@ -54,7 +54,7 @@ namespace Aptos::BCS
         std::vector<uint8_t> Read(std::size_t length);
         uint8_t ReadInt(std::size_t length);
         std::vector<uint8_t> buffer;
-        std::size_t position;
+        std::size_t position = 0;
     };
 }
 #endif // APTOS_DESERIALIZATION_H

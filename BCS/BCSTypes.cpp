@@ -19,7 +19,7 @@ namespace Aptos::BCS
 {
     std::shared_ptr<ISerializableTag> ISerializableTag::DeserializeTag(Deserialization &deserializer)
     {
-        TypeTag variant = static_cast<TypeTag>(deserializer.DeserializeUleb128());
+        auto variant = static_cast<TypeTag>(deserializer.DeserializeUleb128());
 
         switch (variant)
         {

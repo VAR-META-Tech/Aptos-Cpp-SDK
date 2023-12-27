@@ -8,9 +8,8 @@
 
 namespace Aptos::BCS
 {
-    Bool::Bool(bool value)
+    Bool::Bool(bool value): value(value)
     {
-        this->value = value;
     }
 
     void Bool::Serialize(Serialization &serializer) const

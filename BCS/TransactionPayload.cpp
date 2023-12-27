@@ -35,7 +35,7 @@ namespace Aptos::BCS
 
     std::shared_ptr<ISerializable> TransactionPayload::Deserialize(Deserialization &deserializer)
     {
-        TransactionPayloadTypeTag variant = static_cast<TransactionPayloadTypeTag>(deserializer.DeserializeUleb128());
+        auto variant = static_cast<TransactionPayloadTypeTag>(deserializer.DeserializeUleb128());
         std::shared_ptr<ISerializable> payload = nullptr;
         if (variant == TransactionPayloadTypeTag::SCRIPT)
         {

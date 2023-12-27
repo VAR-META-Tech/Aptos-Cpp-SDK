@@ -148,7 +148,7 @@ namespace Aptos::Rest
         static const std::string StructTag;
         explicit PropertyMap(const std::vector<Property> &Properties);
         std::string ToString() const override;
-        std::tuple<std::vector<BCS::BString>, std::vector<BCS::BString>, std::vector<std::vector<uint8_t>>> ToTuple();
+        std::tuple<std::vector<BCS::BString>, std::vector<BCS::BString>, std::vector<std::vector<uint8_t>>> ToTuple() const;
         static std::shared_ptr<IResource> Parse(std::shared_ptr<AptosRESTModel::ResourceDataBase> resource);
         std::string GetStructTag() const override;
     };

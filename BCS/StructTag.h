@@ -21,7 +21,7 @@ namespace Aptos::BCS
         /// <param name="module">The module name.</param>
         /// <param name="name">The function name.</param>
         /// <param name="typeArgs">A list of type arguments.</param>
-        explicit StructTag(Accounts::AccountAddress address, std::string module, std::string name,
+        explicit StructTag(Accounts::AccountAddress address, std::string moduleName, std::string name,
                   const std::vector<std::shared_ptr<ISerializableTag>> &typeArgs);
 
         /// <inheritdoc/>

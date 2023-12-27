@@ -13,7 +13,7 @@ namespace Aptos::Utils
 {
     bool IsValidAddress(std::string walletAddress)
     {
-        if (walletAddress.substr(0, 2) == "0x")
+        if (walletAddress.starts_with("0x"))
             walletAddress = walletAddress.substr(2);
 
         std::regex pattern("[a-fA-F0-9]{64}$");
@@ -22,7 +22,7 @@ namespace Aptos::Utils
 
     std::vector<uint8_t> ByteArrayFromHexString(std::string input)
     {
-        if (input.substr(0, 2) == "0x")
+        if (input.starts_with("0x"))
             input = input.substr(2);
 
         size_t outputLength = input.length() / 2;
@@ -126,14 +126,14 @@ namespace Aptos::Utils
 
     std::string ltrim(const std::string &s, const std::string &charsToTrim)
     {
-        auto it = std::find_if(s.begin(), s.end(), [charsToTrim](char c)
+        auto it = std::find_if(s.begin(), s.end(), [&charsToTrim](char c)
                                { return charsToTrim.find(c) == std::string::npos; });
         return std::string(it, s.end());
     }
 
     std::string rtrim(const std::string &s, const std::string &charsToTrim)
     {
-        auto it = std::find_if(s.rbegin(), s.rend(), [charsToTrim](char c)
+        auto it = std::find_if(s.rbegin(), s.rend(), [&charsToTrim](char c)
                                { return charsToTrim.find(c) == std::string::npos; });
         return std::string(s.begin(), it.base());
     }
