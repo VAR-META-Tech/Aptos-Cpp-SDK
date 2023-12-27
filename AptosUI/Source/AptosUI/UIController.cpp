@@ -100,13 +100,16 @@ void UUIController::CopyPrivateKey()
     AptosUILogic_deleteString(privateKey);
 }
 
-void UUIController::Airdrop(FString &balance_return)
+void UUIController::Airdrop(FString &balance_return, bool &IsAirdropOk, FString &Notification)
 {
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnAirdropClicked"));
     int _amount = 1;
     AptosUILogic_airdrop(m_controller, _amount);
     char *balance = AptosUILogic_getCurrentWalletBalanceText(m_controller);
     balance_return = balance;
+    Notification = FString::Printf(TEXT("Successfully Get Airdrop of %d APT"), _amount);
+    IsAirdropOk = true;
+
     AptosUILogic_deleteString(balance);
 }
 
@@ -117,7 +120,7 @@ void UUIController::Logout()
     m_controller = AptosUILogic_createUiController();
 }
 
-void UUIController::SendToken(FString targetAddress, int amount, bool &IsSendTokenOk)
+void UUIController::SendToken(FString targetAddress, int amount, bool &IsSendTokenOk, FString &Notification)
 {
     std::string _targetAddress(TCHAR_TO_UTF8(*targetAddress));
     long _amount = amount;
@@ -127,15 +130,17 @@ void UUIController::SendToken(FString targetAddress, int amount, bool &IsSendTok
     {
         // notification
         IsSendTokenOk = true;
+        Notification = FString::Printf(TEXT("Successfully send %.4f APT to %s "), (float)_amount, _targetAddress.c_str());
     }
     else
     {
         // notification
         IsSendTokenOk = false;
+        Notification = FString::Printf(TEXT("Send Token Transaction Failed"));
     }
 }
 
-void UUIController::CreateCollection(FString collectionName, FString collectionDescription, FString collectionUri, bool &IsCreateCollectionOk)
+void UUIController::CreateCollection(FString collectionName, FString collectionDescription, FString collectionUri, bool &IsCreateCollectionOk, FString &Notification)
 {
     std::string _collectionName(TCHAR_TO_UTF8(*collectionName));
     std::string _collectionDescription(TCHAR_TO_UTF8(*collectionName));
@@ -146,15 +151,17 @@ void UUIController::CreateCollection(FString collectionName, FString collectionD
     {
         // notification
         IsCreateCollectionOk = true;
+        Notification = FString::Printf(TEXT("Successfully Create Collection: %s "), _collectionName.c_str());
     }
     else
     {
         // notification
         IsCreateCollectionOk = false;
+        Notification = FString::Printf(TEXT("Failed to Create Collection: %s "), _collectionName.c_str());
     }
 }
 
-void UUIController::CreateNFT(FString collectionName, FString tokenName, FString tokenDescription, int supply, int max, FString uri, int royaltyPointsPerMillion, bool &IsCreateNFTOk)
+void UUIController::CreateNFT(FString collectionName, FString tokenName, FString tokenDescription, int supply, int max, FString uri, int royaltyPointsPerMillion, bool &IsCreateNFTOk, FString &Notification)
 {
 
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCreateNFTClicked"));
@@ -170,10 +177,12 @@ void UUIController::CreateNFT(FString collectionName, FString tokenName, FString
     {
         // notification
         IsCreateNFTOk = true;
+        Notification = FString::Printf(TEXT("Successfully Create NFT: %s "), _tokenName.c_str());
     }
     else
     {
         // notification
         IsCreateNFTOk = false;
+        Notification = FString::Printf(TEXT("Failed to Create NFT: %s "), _tokenName.c_str());
     }
 }

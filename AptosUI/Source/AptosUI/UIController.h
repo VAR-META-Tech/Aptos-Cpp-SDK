@@ -40,15 +40,15 @@ class APTOSUI_API UUIController : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnCopyPrivateKey Clicked"), Category = "UIController")
 	static void CopyPrivateKey();
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnAirdrop Clicked"), Category = "UIController")
-	static void Airdrop(FString &balance_return);
+	static void Airdrop(FString &balance_return, bool &IsAirdropOk, FString &Notification);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnLogout Clicked"), Category = "UIController")
 	static void Logout();
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "On SendTransaction Clicked"), Category = "UIController")
-	static void SendToken(FString targetAddress, int amount, bool &IsSendTokenOk);
+	static void SendToken(FString targetAddress, int amount, bool &IsSendTokenOk, FString &Notification);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnCreateCollection Clicked"), Category = "UIController")
-	static void CreateCollection(FString collectionName, FString collectionDescription, FString collectionUri, bool &IsCreateCollectionOk);
+	static void CreateCollection(FString collectionName, FString collectionDescription, FString collectionUri, bool &IsCreateCollectionOk, FString &Notification);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnCreateNFT Clicked"), Category = "UIController")
-	static void CreateNFT(FString collectionName, FString tokenName, FString tokenDescription, int supply, int max, FString uri, int royaltyPointsPerMillion, bool &IsCreateNFTOk);
+	static void CreateNFT(FString collectionName, FString tokenName, FString tokenDescription, int supply, int max, FString uri, int royaltyPointsPerMillion, bool &IsCreateNFTOk, FString &Notification);
 
 private:
 	static void *m_controller;
