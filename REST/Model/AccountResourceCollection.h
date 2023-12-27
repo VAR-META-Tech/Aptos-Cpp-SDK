@@ -65,7 +65,7 @@ public:
         TokenData TokenDataProp;
     };
 
-    ResourceCollectionOLD();
+    ResourceCollectionOLD() = default;
     nlohmann::json ToJson() const;
     static ResourceCollectionOLD FromJson(const std::string& jsonStr);
 

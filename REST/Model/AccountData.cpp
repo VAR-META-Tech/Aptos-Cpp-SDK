@@ -3,11 +3,6 @@
 
 namespace AptosRESTModel {
 
-AccountData::AccountData()
-{
-
-}
-
 AccountData::AccountData(const std::string &sequenceNumber, const std::string &authenticationKey)
     : SequenceNumber(sequenceNumber), AuthenticationKey(authenticationKey) {}
 

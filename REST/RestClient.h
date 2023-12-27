@@ -43,7 +43,7 @@ namespace Aptos::Rest
         /// </summary>
         /// <param name="url">Base URL for REST API.</param>
         void SetEndpoint(const std::string &url);
-        explicit RestClient();
+        explicit RestClient() = default;
 
         /// <summary>
         /// Get Accounts::Account Details.

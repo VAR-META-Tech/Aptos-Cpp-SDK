@@ -42,7 +42,7 @@ private:
 
 class Change {
 public:
-    nlohmann::json ToJson() const;
+    virtual nlohmann::json ToJson() const;
     static Change FromJson(const nlohmann::json& changeJson);
 protected:
     std::string Type;
@@ -50,7 +50,7 @@ protected:
 
 class ChangeWriteResource : public Change {
 public:
-    nlohmann::json ToJson() const;
+    virtual nlohmann::json ToJson() const;
     static ChangeWriteResource FromJson(const nlohmann::json& changeWriteResourceJson);
 protected:
     std::string Address;
@@ -88,7 +88,7 @@ private:
 /// </summary>
 class Transaction : public TransactionRequest {
 public:
-    Transaction(const TransactionRequest& transactionRequest);
+    explicit Transaction(const TransactionRequest& transactionRequest);
     Transaction();
     static Transaction FromJson(const nlohmann::json& j);
     nlohmann::json ToJson() const;

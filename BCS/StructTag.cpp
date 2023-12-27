@@ -5,7 +5,7 @@ namespace Aptos::BCS
 {
     StructTag::StructTag(AccountAddress address, std::string module, std::string name,
                          const std::vector<std::shared_ptr<ISerializableTag>> &typeArgs)
-        : address(address), module(module), name(name), typeArgs(typeArgs) {}
+        : address(address), moduleName(module), name(name), typeArgs(typeArgs) {}
 
     TypeTag StructTag::Variant() const { return TypeTag::STRUCT; }
 
@@ -13,7 +13,7 @@ namespace Aptos::BCS
     {
         serializer.SerializeU32AsUleb128(static_cast<uint32_t>(Variant()));
         address.Serialize(serializer);
-        serializer.Serialize(module);
+        serializer.Serialize(moduleName);
         serializer.Serialize(name);
         serializer.SerializeU32AsUleb128(static_cast<uint32_t>(typeArgs.size()));
 
@@ -26,7 +26,7 @@ namespace Aptos::BCS
     std::shared_ptr<ISerializableTag> StructTag::Deserialize(Deserialization &deserializer)
     {
         auto address = std::dynamic_pointer_cast<AccountAddress>(AccountAddress::Deserialize(deserializer));
-        std::string module = deserializer.DeserializeString();
+        std::string moduleName = deserializer.DeserializeString();
         std::string name = deserializer.DeserializeString();
 
         uint32_t length = deserializer.DeserializeUleb128();
@@ -38,20 +38,20 @@ namespace Aptos::BCS
             typeArgsList.push_back(val);
         }
 
-        return std::make_shared<StructTag>(*address, module, name, typeArgsList);
+        return std::make_shared<StructTag>(*address, moduleName, name, typeArgsList);
     }
 
     bool StructTag::Equals(const StructTag &other) const
     {
         return (address == other.address &&
-                module == other.module &&
+                moduleName == other.moduleName &&
                 name == other.name &&
                 typeArgs == other.typeArgs);
     }
 
     std::string StructTag::ToString() const
     {
-        std::string value = address.ToString() + "::" + module + "::" + name;
+        std::string value = address.ToString() + "::" + moduleName + "::" + name;
 
         if (!typeArgs.empty())
         {

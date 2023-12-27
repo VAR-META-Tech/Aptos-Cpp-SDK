@@ -11,7 +11,7 @@ namespace AptosRESTModel {
 /// </summary>
 class AccountData {
 public:
-    explicit AccountData();
+    explicit AccountData() = default;
 
     explicit AccountData(const std::string& sequenceNumber, const std::string& authenticationKey);
     // Serialize the object to JSON

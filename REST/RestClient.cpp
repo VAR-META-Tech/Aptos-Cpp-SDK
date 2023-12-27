@@ -26,8 +26,6 @@ namespace Aptos::Rest
         endpoint = url;
     }
 
-    RestClient::RestClient() {}
-
     void RestClient::GetAccount(std::function<void(std::shared_ptr<AptosRESTModel::AccountData>, AptosRESTModel::ResponseInfo)> callback, const AccountAddress &accountAddress)
     {
         using namespace AptosRESTModel;

@@ -51,7 +51,7 @@ namespace Aptos::BCS
         /// <summary>
         /// The module name of the struct tag.
         /// </summary>
-        std::string module;
+        std::string moduleName;
 
         /// <summary>
         /// The function name of the struct tag.

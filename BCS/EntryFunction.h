@@ -15,7 +15,7 @@ namespace Aptos::BCS
     class EntryFunction : public ISerializable
     {
     public:
-        explicit EntryFunction(const ModuleId &module, const std::string &function,
+        explicit EntryFunction(const ModuleId &moduleId, const std::string &function,
                                const TagSequence &typeArgs, const Sequence &args);
         /// <summary>
         /// Converts a Sequence of ISerializable objects and converts it to a Sequence of Bytes objects
@@ -25,7 +25,7 @@ namespace Aptos::BCS
         /// <param name="typeArgs"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        static EntryFunction Natural(const ModuleId &module, const std::string &function,
+        static EntryFunction Natural(const ModuleId &moduleId, const std::string &function,
                                      const TagSequence &typeArgs, const Sequence &args);
         void Serialize(Serialization &serializer) const override;
         static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
@@ -34,7 +34,7 @@ namespace Aptos::BCS
         size_t GetHashCode() const override;
 
     private:
-        ModuleId module;
+        ModuleId moduleId;
         std::string function;
         TagSequence typeArgs;
         Sequence args;

@@ -8,7 +8,7 @@ class IResourceBase {
 public:
     explicit IResourceBase(const std::string& type);
     explicit IResourceBase();
-    nlohmann::json ToJson() const;
+    virtual nlohmann::json ToJson() const;
     static IResourceBase FromJson(const nlohmann::json& resourceJson);
 private:
     std::string Type;

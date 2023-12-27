@@ -29,7 +29,7 @@ private:
 /// </summary>
 class TransactionRequest {
 public:
-    nlohmann::json ToJson() const;
+    virtual nlohmann::json ToJson() const;
     static TransactionRequest FromJson(const nlohmann::json& requestJson);
     std::string getSender() const;
     void setSender(const std::string &newSender);
