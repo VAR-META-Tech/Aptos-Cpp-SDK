@@ -5,7 +5,7 @@
 #include <iostream>
 
 void *UUIController::m_controller = AptosUILogic_createUiController();
-
+int curindex = 0;
 void UUIController::OnCreateWalletClicked(class UWidget *TargetComboBox, FString netWork, FString &balance_return, FString &mnemonic_key_return, bool &IsCreateOk)
 {
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCreateWalletClicked"));
@@ -73,6 +73,7 @@ void UUIController::OnImportWalletClicked(FString mnemonic_key_import, bool &IsI
 
 void UUIController::OnWalletListDropdownValueChanged(int index, FString &balance_return)
 {
+    curindex = index;
     char *curAddress = AptosUILogic_onWalletListDropdownValueChanged(m_controller, index);
     char *balance = AptosUILogic_getCurrentWalletBalanceText(m_controller);
     balance_return = balance;
@@ -93,7 +94,8 @@ void UUIController::CopyMnemonicWords()
 void UUIController::CopyPrivateKey()
 {
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCopyPrivateKeyClicked"));
-    char *privateKey = AptosUILogic_getPrivateKey(m_controller);
+    char *privateKey = AptosUILogic_onWalletListDropdownValueChanged(m_controller, curindex);
+    // char *privateKey = AptosUILogic_getPrivateKey(m_controller);
     FString privateKeyUI = privateKey;
     // TODO copy to clipboard
     FPlatformMisc::ClipboardCopy(*privateKeyUI);
