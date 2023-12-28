@@ -17,13 +17,15 @@ namespace Aptos::HDWallet
         return out;
     }
 
-    std::vector<uint8_t> Wallet::toVector(const bip3x::bytes_data& data) {
+    std::vector<uint8_t> Wallet::toVector(const bip3x::bytes_data &data)
+    {
 
         std::vector<uint8_t> result;
         result.reserve(data.size());
 
-        for(size_t i = 0; i < data.size(); i++) {
-            result.push_back(data[i]); 
+        for (size_t i = 0; i < data.size(); i++)
+        {
+            result.push_back(data[i]);
         }
 
         return result;
@@ -66,7 +68,8 @@ namespace Aptos::HDWallet
         InitializeSeed();
     }
 
-    std::string Wallet::getMnemonicsKey() const {
+    std::string Wallet::getMnemonicsKey() const
+    {
         return wordList;
     }
 }

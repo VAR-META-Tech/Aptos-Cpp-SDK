@@ -94,8 +94,8 @@ void UUIController::CopyMnemonicWords()
 void UUIController::CopyPrivateKey()
 {
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCopyPrivateKeyClicked"));
-    char *privateKey = AptosUILogic_onWalletListDropdownValueChanged(m_controller, curindex);
-    // char *privateKey = AptosUILogic_getPrivateKey(m_controller);
+    // char *privateKey = AptosUILogic_onWalletListDropdownValueChanged(m_controller, curindex);
+    char *privateKey = AptosUILogic_getPrivateKey(m_controller);
     FString privateKeyUI = privateKey;
     // TODO copy to clipboard
     FPlatformMisc::ClipboardCopy(*privateKeyUI);
