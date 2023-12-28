@@ -127,18 +127,27 @@ void UUIController::SendToken(FString targetAddress, int amount, bool &IsSendTok
     std::string _targetAddress(TCHAR_TO_UTF8(*targetAddress));
     long _amount = amount;
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnSendTokenClicked"));
-    bool success = AptosUILogic_sendToken(m_controller, _targetAddress.c_str(), _amount);
-    if (success)
-    {
-        // notification
-        IsSendTokenOk = true;
-        Notification = FString::Printf(TEXT("Successfully send %.4f APT to %s "), (float)_amount, _targetAddress.c_str());
-    }
-    else
+    if (targetAddress.IsEmpty())
     {
         // notification
         IsSendTokenOk = false;
-        Notification = FString::Printf(TEXT("Send Token Transaction Failed"));
+        Notification = FString::Printf(TEXT("Please Fill Out All Required Fields"));
+    }
+    else
+    {
+        bool success = AptosUILogic_sendToken(m_controller, _targetAddress.c_str(), _amount);
+        if (success)
+        {
+            // notification
+            IsSendTokenOk = true;
+            Notification = FString::Printf(TEXT("Successfully send %.4f APT to %s "), (float)_amount, _targetAddress.c_str());
+        }
+        else
+        {
+            // notification
+            IsSendTokenOk = false;
+            Notification = FString::Printf(TEXT("Send Token Transaction Failed"));
+        }
     }
 }
 
@@ -148,22 +157,32 @@ void UUIController::CreateCollection(FString collectionName, FString collectionD
     std::string _collectionDescription(TCHAR_TO_UTF8(*collectionName));
     std::string _collectionUri(TCHAR_TO_UTF8(*collectionName));
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCreateCollectionClicked"));
-    bool success = AptosUILogic_createCollection(m_controller, _collectionName.c_str(), _collectionDescription.c_str(), _collectionUri.c_str());
-    if (success)
-    {
-        // notification
-        IsCreateCollectionOk = true;
-        Notification = FString::Printf(TEXT("Successfully Create Collection: %s "), _collectionName.c_str());
-    }
-    else
+    if (collectionName.IsEmpty() || collectionDescription.IsEmpty() || collectionUri.IsEmpty())
     {
         // notification
         IsCreateCollectionOk = false;
-        Notification = FString::Printf(TEXT("Failed to Create Collection: %s "), _collectionName.c_str());
+        Notification = FString::Printf(TEXT("Please Fill Out All Required Fields"));
+    }
+    else
+    {
+
+        bool success = AptosUILogic_createCollection(m_controller, _collectionName.c_str(), _collectionDescription.c_str(), _collectionUri.c_str());
+        if (success)
+        {
+            // notification
+            IsCreateCollectionOk = true;
+            Notification = FString::Printf(TEXT("Successfully Create Collection: %s "), _collectionName.c_str());
+        }
+        else
+        {
+            // notification
+            IsCreateCollectionOk = false;
+            Notification = FString::Printf(TEXT("Failed to Create Collection: %s "), _collectionName.c_str());
+        }
     }
 }
 
-void UUIController::CreateNFT(FString collectionName, FString tokenName, FString tokenDescription, int supply, int max, FString uri, int royaltyPointsPerMillion, bool &IsCreateNFTOk, FString &Notification)
+void UUIController::CreateNFT(FString collectionName, FString tokenName, FString tokenDescription, int supply, int max, FString url, int royaltyPointsPerMillion, bool &IsCreateNFTOk, FString &Notification)
 {
 
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCreateNFTClicked"));
@@ -172,19 +191,28 @@ void UUIController::CreateNFT(FString collectionName, FString tokenName, FString
     std::string _tokenDescription(TCHAR_TO_UTF8(*tokenDescription));
     int _supply = supply;
     int _max = max;
-    std::string _uri(TCHAR_TO_UTF8(*uri));
+    std::string _uri(TCHAR_TO_UTF8(*url));
     int _royaltyPointsPerMillion = royaltyPointsPerMillion;
-    bool success = AptosUILogic_createNFT(m_controller, _collectionName.c_str(), _tokenName.c_str(), _tokenDescription.c_str(), _supply, _max, _uri.c_str(), _royaltyPointsPerMillion);
-    if (success)
-    {
-        // notification
-        IsCreateNFTOk = true;
-        Notification = FString::Printf(TEXT("Successfully Create NFT: %s "), _tokenName.c_str());
-    }
-    else
+    if (collectionName.IsEmpty() || tokenName.IsEmpty() || tokenDescription.IsEmpty())
     {
         // notification
         IsCreateNFTOk = false;
-        Notification = FString::Printf(TEXT("Failed to Create NFT: %s "), _tokenName.c_str());
+        Notification = FString::Printf(TEXT("Please Fill Out All Required Fields"));
+    }
+    else
+    {
+        bool success = AptosUILogic_createNFT(m_controller, _collectionName.c_str(), _tokenName.c_str(), _tokenDescription.c_str(), _supply, _max, _uri.c_str(), _royaltyPointsPerMillion);
+        if (success)
+        {
+            // notification
+            IsCreateNFTOk = true;
+            Notification = FString::Printf(TEXT("Successfully Create NFT: %s "), _tokenName.c_str());
+        }
+        else
+        {
+            // notification
+            IsCreateNFTOk = false;
+            Notification = FString::Printf(TEXT("Failed to Create NFT: %s "), _tokenName.c_str());
+        }
     }
 }
