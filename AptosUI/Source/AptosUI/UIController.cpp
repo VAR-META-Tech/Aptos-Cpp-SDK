@@ -57,12 +57,38 @@ void UUIController::OnCreateWalletClicked(class UWidget *TargetComboBox, FString
     }
 }
 
-void UUIController::OnImportWalletClicked(FString mnemonic_key_import, bool &IsImportOk)
+void UUIController::OnImportWalletClicked(class UWidget *TargetComboBox, FString mnemonic_key_import, FString &balance_return, bool &IsImportOk)
 {
     std::string MyStdString(TCHAR_TO_UTF8(*mnemonic_key_import));
     const char *mnemonic_key = MyStdString.c_str();
     if (AptosUILogic_restoreWallet(m_controller, mnemonic_key))
     {
+        char *balance = AptosUILogic_getCurrentWalletBalanceText(m_controller);
+        balance_return = balance;
+        std::cout << balance << std::endl;
+
+        size_t size = 0;
+        char **addressList = AptosUILogic_getWalletAddress(m_controller, &size);
+        UComboBoxString *MyCombobox = Cast<UComboBoxString>(TargetComboBox);
+        if (MyCombobox)
+        {
+            // Clear existing options
+            MyCombobox->ClearOptions();
+            for (std::size_t i = 0; i < size; ++i)
+            {
+                MyCombobox->AddOption(FString(addressList[i]));
+                std::cout << addressList[i] << std::endl;
+            }
+            MyCombobox->SetSelectedIndex(0);
+        }
+        else
+        {
+            IsImportOk = false;
+        }
+        // std::cout << "Address list:" << std::endl;
+
+        AptosUILogic_deleteStringArray(addressList, size);
+        AptosUILogic_deleteString(balance);
         IsImportOk = true;
     }
     else
@@ -105,11 +131,11 @@ void UUIController::CopyPrivateKey()
 void UUIController::Airdrop(FString &balance_return, bool &IsAirdropOk, FString &Notification)
 {
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnAirdropClicked"));
-    int _amount = 1;
-    AptosUILogic_airdrop(m_controller, _amount);
+    int _amount = 100000000;
+    AptosUILogic_airdrop(m_controller, 100000000);
     char *balance = AptosUILogic_getCurrentWalletBalanceText(m_controller);
     balance_return = balance;
-    Notification = FString::Printf(TEXT("Successfully Get Airdrop of %d APT"), _amount);
+    Notification = FString::Printf(TEXT("Successfully Get Airdrop of %d APT"), 1);
     IsAirdropOk = true;
 
     AptosUILogic_deleteString(balance);
@@ -125,7 +151,7 @@ void UUIController::Logout()
 void UUIController::SendToken(FString targetAddress, int amount, bool &IsSendTokenOk, FString &Notification)
 {
     std::string _targetAddress(TCHAR_TO_UTF8(*targetAddress));
-    long _amount = amount;
+    long _amount = amount * 100000000;
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnSendTokenClicked"));
     if (targetAddress.IsEmpty())
     {
