@@ -12,6 +12,10 @@ namespace Aptos::HDWallet
     std::vector<uint8_t> Wallet::DeriveMnemonicSeed()
     {
         std::vector<uint8_t> out;
+        auto res = bip3x::bip3x_mnemonic::validate_words("en", wordList.c_str());
+        if (!res) {
+            throw std::runtime_error("Wrong wallet mnemonic seed");
+        }
         bip3x::bytes_64 seed = bip3x::bip3x_hdkey_encoder::make_bip39_seed(wordList);
         out = toVector(seed);
         return out;

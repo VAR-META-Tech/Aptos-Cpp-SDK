@@ -21,6 +21,15 @@ int main() {
     }
     char* balance2 = AptosUILogic_getCurrentWalletBalanceText(controller);
     std::cout << balance2 << std::endl;
+    AptosUILogic_deleteString(balance2);
+
+    AptosUILogic_airdrop(controller, 100000000);
+    char* balance3 = AptosUILogic_getCurrentWalletBalanceText(controller);
+    std::cout << balance3 << std::endl;
+    AptosUILogic_deleteString(balance3);
+
+    std::cout << std::boolalpha << AptosUILogic_restoreWallet(controller, "wine evoke") << std::endl;
+
     AptosUILogic_deleteStringArray(addressList, size);
     AptosUILogic_deleteUiController(controller);
 }

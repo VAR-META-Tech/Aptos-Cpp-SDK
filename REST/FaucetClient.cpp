@@ -26,6 +26,10 @@ namespace Aptos::Rest
                 std::this_thread::sleep_for(std::chrono::seconds(2));
                 callback(true, responseInfo);
             }
+        } else {
+            responseInfo.status = ResponseInfo::Status::Failed;
+            responseInfo.message = "Request Failed";
+            callback(false, responseInfo);
         }
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
