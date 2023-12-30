@@ -28,25 +28,13 @@ namespace Aptos::Rest
         static constexpr int TRANSACTION_WAIT_IN_SECONDS = 20; // Amount of seconds to wait during each polling cycle.
     };
 
-    /// <summary>
-    /// The Aptos REST Client contains a set of [standalone] Coroutines
-    /// that can started within any Unity script.
-    ///
-    /// Consideration must be placed into the wait time required
-    /// for a transaction to be committed into the blockchain.
-    /// </summary>
     class RestClient
     {
     public:
-        /// <summary>
-        /// Set Endpoint for RPC / REST call.
-        /// </summary>
-        /// <param name="url">Base URL for REST API.</param>
         void SetEndpoint(const std::string &url);
-        explicit RestClient() = default;
-
+        RestClient();
         /// <summary>
-        /// Get Accounts::Account Details.
+        /// Get Account Details.
         /// Return the authentication key and the sequence number for an account address. Optionally, a ledger version can be specified.
         /// If the ledger version is not specified in the request, the latest ledger version is used.
         /// </summary>
@@ -61,19 +49,19 @@ namespace Aptos::Rest
         /// Example: <code>0x88fbd33f54e1126269769780feb24480428179f552e2313fbe571b72e62a1ca1</code>, it is null if the request fails \n
         /// and a response object that contains the response details.
         /// </returns>
-        void GetAccount(std::function<void(std::shared_ptr<AptosRESTModel::AccountData>, AptosRESTModel::ResponseInfo&)> callback,
-                        const Accounts::AccountAddress &accountAddress);
+        void GetAccount(std::function<void(std::shared_ptr<AptosRESTModel::AccountData>, AptosRESTModel::ResponseInfo)> callback,
+                        const AccountAddress &accountAddress);
         /// <summary>
         /// Get an account's balance.
         ///
         /// The <c>/account</{address}/resource/{coin_type}</c> endpoint for AptosCoin returns the following response:
-        /// Gets Accounts::Account Sequence Number
+        /// Gets Account Sequence Number
         /// </summary>
         /// <param name="callback">Callback function used after response is received.</param>
         /// <param name="accountAddress">Address of the account.</param>
         /// <returns>Calls <c>callback</c> function with <c>(string, ResponseInfo)</c>: \n
         /// A Sequence number as a string - null if the request fails, and a response object containing the response details. </returns>
-        void GetAccountSequenceNumber(std::function<void(std::string, AptosRESTModel::ResponseInfo&)> callback, const Accounts::AccountAddress &accountAddress);
+        void GetAccountSequenceNumber(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const AccountAddress &accountAddress);
 
         /// <summary>
         /// Get an account's balance.
@@ -113,13 +101,13 @@ namespace Aptos::Rest
         /// <param name="accountAddress">Address of the account.</param>
         /// <returns>Calls <c>callback</c> function with <c>(AccountResourceCoin.Coin, ResponseInfo)</c>: \n
         /// A representation of the coin, and an object containing the response details.</returns>
-        void GetAccountBalance(std::function<void(AptosRESTModel::AccountResourceCoin::Coin, AptosRESTModel::ResponseInfo&)> callback,
-                               const Accounts::AccountAddress &accountAddress);
+        void GetAccountBalance(std::function<void(AptosRESTModel::AccountResourceCoin::Coin, AptosRESTModel::ResponseInfo)> callback,
+                               const AccountAddress &accountAddress);
         /// <summary>
         /// Get a resource of a given type from an account.
         /// NOTE: The response is a complex object of types only known to the developer writing the contracts.
         /// This function return a string and expect the developer to deserialize it into an object.
-        /// See <see cref="GetAccountResourceCollection(Action{ResourceCollection, ResponseInfo}, Accounts::AccountAddress, string)">GetAccountResourceCollection</see> for an example.
+        /// See <see cref="GetAccountResourceCollection(Action{ResourceCollection, ResponseInfo}, AccountAddress, string)">GetAccountResourceCollection</see> for an example.
         /// </summary>
         /// <param name="callback">Callback function used when response is received.</param>
         /// <param name="accountAddress">Address of the account.</param>
@@ -129,10 +117,9 @@ namespace Aptos::Rest
         /// -- long: - error code, string - JSON response to be deserialized by the consumer of the function\n
         /// -- string: - the response which may contain the resource details</returns>
         void GetAccountResource(std::function<void(bool, long, std::string)> callback,
-                                const Accounts::AccountAddress &accountAddress,
+                                const AccountAddress &accountAddress,
                                 const std::string &resourceType = "",
                                 const std::string &ledgerVersion = "");
-
         /// <summary>
         /// Get resources (in a JSON format) from a given account.
         /// </summary>
@@ -141,21 +128,19 @@ namespace Aptos::Rest
         /// <param name="ledgerVersion">Type of resource being queried for.</param>
         /// <returns></returns>
         void GetAccountResources(std::function<void(bool, long, std::string)> callback,
-                                 const Accounts::AccountAddress &accountAddress,
+                                 const AccountAddress &accountAddress,
                                  const std::string &ledgerVersion = "");
-
         /// <summary>
-        /// Get Accounts::Account Resource
+        /// Get Account Resource
         /// </summary>
         /// <param name="callback">Callback function used after response is received.</param>
         /// <param name="accountAddress">Address of the account.</param>
         /// <param name="resourceType">Type of resource being queried for.</param>
         /// <returns>Calls <c>callback</c> function with <c>(ResourceCollection, ResponseInfo)</c>:\n
         /// An object representing a collection resource - null if the request fails, and a response object contains the response details.</returns>
-        void GetAccountResourceCollection(std::function<void(std::shared_ptr<AptosRESTModel::ResourceCollection>, AptosRESTModel::ResponseInfo&)> callback,
-                                          const Accounts::AccountAddress &accountAddress,
+        void GetAccountResourceCollection(std::function<void(std::shared_ptr<AptosRESTModel::ResourceCollection>, AptosRESTModel::ResponseInfo)> callback,
+                                          const AccountAddress &accountAddress,
                                           const std::string &resourceType);
-
         /// <summary>
         /// Gets table item that represents a coin resource
         /// See <see cref="GetTableItem(Action{string}, string, string, string, string)">GetTableItem</see>
@@ -167,12 +152,11 @@ namespace Aptos::Rest
         /// <param name="key">The value of the table item's key, e.g. the name of a collection</param>
         /// <returns>Calls <c>callback</c> function with <c>(AccountResourceCoing, ResponseInfo)</c>:\n
         /// An object representing the account resource that holds the coin's information - null if the request fails, and a response object the contains the response details.</returns>
-        void GetTableItemCoin(std::function<void(std::shared_ptr<AptosRESTModel::AccountResourceCoin>, AptosRESTModel::ResponseInfo&)> callback,
+        void GetTableItemCoin(std::function<void(std::shared_ptr<AptosRESTModel::AccountResourceCoin>, AptosRESTModel::ResponseInfo)> callback,
                               const std::string &handle,
                               const std::string &keyType,
                               const std::string &valueType,
                               const std::string &key);
-
         /// <summary>
         /// Get a  table item at a specific ledger version from the table identified
         /// by the handle {table_handle} in the path and a [simple] "key" (TableItemRequest)
@@ -191,7 +175,6 @@ namespace Aptos::Rest
                           const std::string &keyType,
                           const std::string &valueType,
                           const std::string &key);
-
         /// <summary>
         /// Get a  table item for a NFT from the table identified
         /// by the handle {table_handle} in the path and a complex key provided by the request body.
@@ -217,12 +200,11 @@ namespace Aptos::Rest
         /// <returns>Calls <c>callback</c> function with <c>(TableItemToken, ResponseInfo)</c>: \n
         /// An object containing the details of the token - null if the request fails, and a response object containing the response details.
         /// </returns>
-        void GetTableItemNFT(std::function<void(std::shared_ptr<AptosRESTModel::TableItemToken>, AptosRESTModel::ResponseInfo&)> callback,
+        void GetTableItemNFT(std::function<void(std::shared_ptr<AptosRESTModel::TableItemToken>, AptosRESTModel::ResponseInfo)> callback,
                              const std::string &handle,
                              const std::string &keyType,
                              const std::string &valueType,
-                             AptosRESTModel::TokenIdRequest &key);
-
+                             AptosRESTModel::TokenIdRequest key);
         /// <summary>
         /// Get a table item that contains a token's (NFT) metadata.
         /// In this case we are using a complex key to retrieve the table item.
@@ -270,31 +252,28 @@ namespace Aptos::Rest
         /// <returns>Calls <c>callback</c> function with <c>(TableItemTokenMetadata, ResponseInfo)</c>: \n
         /// An object that represent the NFT's metadata - null if the request fails, and a response object with the response details.
         /// </returns>
-        void GetTableItemTokenData(std::function<void(std::shared_ptr<AptosRESTModel::TableItemTokenMetadata>, AptosRESTModel::ResponseInfo&)> callback,
+        void GetTableItemTokenData(std::function<void(std::shared_ptr<AptosRESTModel::TableItemTokenMetadata>, AptosRESTModel::ResponseInfo)> callback,
                                    const std::string &handle,
                                    const std::string &keyType,
                                    const std::string &valueType,
-                                   AptosRESTModel::TokenDataId &key);
-
+                                   AptosRESTModel::TokenDataId key);
         /// <summary>
         /// Get the latest ledger information, including data such as chain ID, role type, ledger versions, epoch, etc.
         /// </summary>
         /// <param name="callback">Callback function used after response is received.</param>
         /// <returns>Calls <c>callback</c>function with <c>(LedgerInfo, response)</c>: \n
         /// An object that contains the chain details - null if the request fails, and a response object that contains the response details. </returns>
-        void GetInfo(std::function<void(std::shared_ptr<AptosRESTModel::LedgerInfo>, AptosRESTModel::ResponseInfo&)> callback);
+        void GetInfo(std::function<void(std::shared_ptr<AptosRESTModel::LedgerInfo>, AptosRESTModel::ResponseInfo)> callback);
 
-        void SimulateTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo&)> callback,
-                                 BCS::RawTransaction transaction, std::vector<uint8_t> publicKey);
-
+        void SimulateTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback,
+                                 RawTransaction transaction, std::vector<uint8_t> publicKey);
         /// <summary>
         /// Submits a BCS transaction.
         /// </summary>
         /// <param name="callback">Callback function used after response is received with the JSON response.</param>
         /// <param name="SignedTransaction">The signed transaction.</param>
         /// <returns></returns>
-        void SubmitBCSTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo&)> callback, const BCS::SignedTransaction &signedTransaction);
-
+        void SubmitBCSTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const SignedTransaction &signedTransaction);
         /// <summary>
         /// Execute the Move view function with the given parameters and return its execution result.
         ///
@@ -323,8 +302,7 @@ namespace Aptos::Rest
         /// <param name="callback">Callback function used after response is received.</param>
         /// <param name="viewRequest">The payload for the view function</param>
         /// <returns>A vec containing the values returned from the view functions.</returns>
-        void View(std::function<void(std::vector<std::string>, AptosRESTModel::ResponseInfo&)> callback, const AptosRESTModel::ViewRequest &viewRequest);
-
+        void View(std::function<void(std::vector<std::string>, AptosRESTModel::ResponseInfo)> callback, const AptosRESTModel::ViewRequest &viewRequest);
         /// <summary>
         /// 1) Generates a transaction request \n
         /// 2) submits that to produce a raw transaction \n
@@ -332,15 +310,14 @@ namespace Aptos::Rest
         /// 4) submits the signed transaction \n
         /// </summary>
         /// <param name="callback">Callback function used when response is received.</param>
-        /// <param name="sender">Accounts::Account submitting the transaction.</param>
+        /// <param name="sender">Account submitting the transaction.</param>
         /// <param name="payload">Transaction payload.</param>
         /// <returns>Calls <c>callback</c>function with <c>(Transaction, ResponseInfo)</c>:\n
         /// An object that represents the transaction submitted - null if the transaction fails, and a response object with the response detials.
         /// </returns>
-        void SubmitTransaction(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo&)> callback,
-                               Accounts::Account sender,
-                               BCS::EntryFunction entryFunction);
-
+        void SubmitTransaction(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback,
+                               Account sender,
+                               EntryFunction entryFunction);
         /// <summary>
         /// A Coroutine that polls for a transaction hash until it is confimred in the blockchain
         /// Times out if the transaction hash is not found after querying for N times.
@@ -359,8 +336,7 @@ namespace Aptos::Rest
         ///
         /// A response object that contains the response details.
         /// </returns>
-        void WaitForTransaction(std::function<void(bool, AptosRESTModel::ResponseInfo&)> callback, const std::string &txnHash);
-
+        void WaitForTransaction(std::function<void(bool, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash);
         /// <summary>
         /// Query to see if transaction has been 'confirmed' in the blockchain by using the transaction hash.
         /// A 404 error will be returned if the transaction hasn't been confirmed.
@@ -375,25 +351,25 @@ namespace Aptos::Rest
         ///
         /// A response object that contains the response details.
         /// </returns>
-        void TransactionPending(std::function<void(bool, AptosRESTModel::ResponseInfo&)> callback, const std::string &txnHash);
-        void TransactionByHash(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo&)> callback, const std::string &txnHash);
-        void CreateBCSSignedTransaction(std::function<void(std::shared_ptr<BCS::SignedTransaction>)> Callback, Accounts::Account Sender, BCS::TransactionPayload Payload);
-        void CreateBCSTransaction(std::function<void(std::shared_ptr<BCS::RawTransaction>)> Callback, Accounts::Account Sender, BCS::TransactionPayload payload);
+        void TransactionPending(std::function<void(bool, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash);
+        void TransactionByHash(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash);
+        void CreateBCSSignedTransaction(std::function<void(std::shared_ptr<SignedTransaction>)> Callback, Account Sender, TransactionPayload Payload);
+        void CreateBCSTransaction(std::function<void(std::shared_ptr<RawTransaction>)> Callback, Account Sender, TransactionPayload payload);
         /// <summary>
-        /// Transfer a given coin amount from a given Accounts::Account to the recipient's account Address.
+        /// Transfer a given coin amount from a given Account to the recipient's account Address.
         /// Returns the sequence number of the transaction used to transfer.
         ///
         /// NOTE: Recipient address must hold APT before hand, and or have been airdrop APT if testing on devnet.
         /// </summary>
         /// <param name="callback">Callback function used when response is received.</param>
-        /// <param name="sender">Accounts::Account executing the transfer.</param>
+        /// <param name="sender">Account executing the transfer.</param>
         /// <param name="to">Address of recipient.</param>
         /// <param name="amount">Amount of tokens.</param>
         /// <returns>Calls <c>callback</c>function with <c>(Transaction, ResponseInfo)</c>: \n
         /// An object the represents the transaction submitted - null if the transfer failed, and a response object that contains the response details.
         /// </returns>
-        void Transfer(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo&)> callback, Accounts::Account sender, const std::string &to, long amount);
-        void BCSTransfer(std::function<void(std::string, AptosRESTModel::ResponseInfo&)> Callback, Accounts::Account Sender, Accounts::AccountAddress Recipient, int Amount);
+        void Transfer(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback, Account sender, const std::string &to, long amount);
+        void BCSTransfer(std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback, Account Sender, AccountAddress Recipient, int Amount);
         /// <summary>
         /// Encodes submission.
         /// This endpoint accepts an EncodeSubmissionRequest, which internally is a UserTransactionRequestInner
@@ -416,7 +392,6 @@ namespace Aptos::Rest
         /// Example: <code>0x88fbd33f54e1126269769780feb24480428179f552e2313fbe571b72e62a1ca1</code>
         /// </returns>
         void EncodeSubmission(const std::function<void(const std::string &)> &callback, const std::string &txnRequestJson);
-
         /// <summary>
         /// Encodes submission. See <see cref="EncodeSubmission(Action{string}, string)">EncodeSubmission</see>.
         /// </summary>
@@ -424,7 +399,6 @@ namespace Aptos::Rest
         /// <param name="txnRequestJson">Transaction request in JSON format.</param>
         /// <returns>Calls <c>callback</c>function with a byte array representing the encoded submission.</returns>
         void EncodeSubmissionAsBytes(const std::function<void(const std::vector<uint8_t> &)> &callback, const std::string &txnRequestJson);
-
         /// <summary>
         /// Create a NFT collection
         /// </summary>
@@ -437,12 +411,11 @@ namespace Aptos::Rest
         /// An object the represents the transaction submitted - null if the transaction to create a collection failed, and a response object that contains the response details.
         /// </returns>
         void CreateCollection(
-            std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo&)> callback,
-            Accounts::Account sender,
+            std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)> callback,
+            Account sender,
             std::string collectionName,
             std::string collectionDescription,
             std::string uri);
-
         /// <summary>
         /// Create Non-Fungible Token (NFT)
         /// See token <see cref="https://github.com/aptos-labs/aptos-core/blob/main/aptos-move/framework/aptos-token/sources/token.move#L365">reference.</see>
@@ -460,8 +433,8 @@ namespace Aptos::Rest
         /// An object the represents the transaction submitted - null if the transaction to create a token failed, and a response object that contains the response details.
         /// </returns>
         void CreateToken(
-            std::function<void(AptosRESTModel::Transaction&, AptosRESTModel::ResponseInfo&)> callback,
-            Accounts::Account senderRoyaltyPayeeAddress,
+            std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)> callback,
+            Account senderRoyaltyPayeeAddress,
             std::string collectionName,
             std::string tokenName,
             std::string description,
@@ -469,12 +442,11 @@ namespace Aptos::Rest
             int max,
             std::string uri,
             int royaltyPointsPerMillion);
-
         /// <summary>
         /// Offer a token to a given address.
         /// </summary>
         /// <param name="callback">Callback function used when response is received.</param>
-        /// <param name="account">Accounts::Account offering the token.</param>
+        /// <param name="account">Account offering the token.</param>
         /// <param name="receiver">Address of recipient.</param>
         /// <param name="creator">Address of token creator.</param>
         /// <param name="collectionName">Name of the collection.</param>
@@ -485,20 +457,19 @@ namespace Aptos::Rest
         /// An object the represents the transaction submitted - null if the transaction to offer a token failed, and a response object that contains the response details.
         /// </returns>
         void OfferToken(
-            std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo&)> callback,
-            Accounts::Account account,
-            Accounts::AccountAddress receiver,
-            Accounts::AccountAddress creator,
+            std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback,
+            Account account,
+            AccountAddress receiver,
+            AccountAddress creator,
             std::string collectionName,
             std::string tokenName,
             int amount,
             int propertyVersion);
-
         /// <summary>
         /// Claim a token that was offered by <paramref name="sender"/>
         /// </summary>
         /// <param name="callback">Callback function used when response is received.</param>
-        /// <param name="account">Accounts::Account making the claim</param>
+        /// <param name="account">Account making the claim</param>
         /// <param name="sender">Address of the sender of the non-fungible token (NFT)</param>
         /// <param name="creator">Address of the creator of the token (NFT)</param>
         /// <param name="collectionName">Name of the NFT collection</param>
@@ -507,14 +478,13 @@ namespace Aptos::Rest
         /// <returns>Calls <c>callback</c>function with <c>(Transaction, ResponseInfo)</c>: \n
         /// An object the represents the transaction submitted - null if the transaction to claim a token failed, and a response object that contains the response details.
         /// </returns>
-        void ClaimToken(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo&)> callback,
-                        Accounts::Account account,
-                        Accounts::AccountAddress sender,
-                        Accounts::AccountAddress creator,
+        void ClaimToken(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback,
+                        Account account,
+                        AccountAddress sender,
+                        AccountAddress creator,
                         std::string collectionName,
                         std::string tokenName,
                         int propertyVersion);
-
         /// <summary>
         /// Get token information.
         /// </summary>
@@ -528,13 +498,12 @@ namespace Aptos::Rest
         /// An object the represents the transaction submitted - null if the transaction to get a token failed, and a response object that contains the response details.
         /// </returns>
         void GetToken(
-            std::function<void(AptosRESTModel::TableItemToken, AptosRESTModel::ResponseInfo&)> callback,
-            Accounts::AccountAddress ownerAddress,
-            Accounts::AccountAddress creatorAddress,
+            std::function<void(AptosRESTModel::TableItemToken, AptosRESTModel::ResponseInfo)> callback,
+            AccountAddress ownerAddress,
+            AccountAddress creatorAddress,
             std::string collectionName,
             std::string tokenName,
             int propertyVersion);
-
         /// <summary>
         /// Get balance for a given non-fungible token (NFT).
         /// </summary>
@@ -547,12 +516,11 @@ namespace Aptos::Rest
         /// <returns>Token balance as a string.</returns>
         void GetTokenBalance(
             std::function<void(std::string)> callback,
-            Accounts::AccountAddress ownerAddress,
-            Accounts::AccountAddress creatorAddress,
+            AccountAddress ownerAddress,
+            AccountAddress creatorAddress,
             std::string collectionName,
             std::string tokenName,
             int propertyVersion);
-
         /// <summary>
         /// Read Collection's token data table.
         /// An example
@@ -593,12 +561,11 @@ namespace Aptos::Rest
         /// An object the represents the NFT's token metadata - null if the transaction to get a token failed, and a response object that contains the response details.
         /// </returns>
         void GetTokenData(
-            std::function<void(AptosRESTModel::TableItemTokenMetadata, AptosRESTModel::ResponseInfo&)> callback,
-            Accounts::AccountAddress creator,
+            std::function<void(AptosRESTModel::TableItemTokenMetadata, AptosRESTModel::ResponseInfo)> callback,
+            AccountAddress creator,
             std::string collectionName,
             std::string tokenName,
             int propertyVersion);
-
         /// <summary>
         /// Get collection information.
         /// This return a JSON representation that will be parsed by the developer that know the specific return types.
@@ -609,18 +576,18 @@ namespace Aptos::Rest
         /// <returns>A JSON string representation of the collection information - null if the request fails.</returns>
         void GetCollection(
             std::function<void(std::string)> callback,
-            Accounts::AccountAddress creator,
+            AccountAddress creator,
             std::string collectionName);
         void TransferObject(
-            std::function<void(std::string, AptosRESTModel::ResponseInfo&)> callback,
-            Accounts::Account Owner,
-            Accounts::AccountAddress Object,
-            Accounts::AccountAddress To);
+            std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback,
+            Account Owner,
+            AccountAddress Object,
+            AccountAddress To);
         /// <summary>
         /// Get a resource of a given type from an account.
         /// NOTE: The response is a complex object of types only known to the developer writing the contracts.
         /// This function return a string and expect the developer to deserialize it into an object.
-        /// See <see cref="GetAccountResourceCollection(Action{ResourceCollection, ResponseInfo}, Accounts::AccountAddress, string)">GetAccountResourceCollection</see> for an example.
+        /// See <see cref="GetAccountResourceCollection(Action{ResourceCollection, ResponseInfo}, AccountAddress, string)">GetAccountResourceCollection</see> for an example.
         /// </summary>
         /// <param name="callback">Callback function used when response is received.</param>
         /// <param name="accountAddress">Address of the account.</param>
@@ -631,11 +598,12 @@ namespace Aptos::Rest
         /// -- string: - the response which may contain the resource details</returns>
         void GetAccountResource(
             std::function<void(bool, long, std::string)> callback,
-            Accounts::AccountAddress &accountAddress,
+            AccountAddress &accountAddress,
             std::string resourceType);
 
     private:
-        std::string endpoint;
+       std::string endpoint;
+       int m_ChainId;
     };
 }
 #endif // RESTCLIENT_H

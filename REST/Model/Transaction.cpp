@@ -137,6 +137,11 @@ void Transaction::setSuccess(bool newSuccess)
     Success = newSuccess;
 }
 
+std::string Transaction::getHash() const
+{
+    return Hash;
+}
+
 nlohmann::json ChangeWriteResourceWriteTableItem::ToJson() const {
     nlohmann::json changeWriteResourceWriteTableItemJson = Change::ToJson();
     changeWriteResourceWriteTableItemJson["state_key_hash"] = StateKeyHash;

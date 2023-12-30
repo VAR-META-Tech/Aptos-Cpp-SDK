@@ -13,18 +13,24 @@ namespace Aptos::HDWallet
     std::vector<uint8_t> Wallet::DeriveMnemonicSeed()
     {
         std::vector<uint8_t> out;
+        auto res = bip3x::bip3x_mnemonic::validate_words("en", wordList.c_str());
+        if (!res) {
+            throw std::runtime_error("Wrong wallet mnemonic seed");
+        }
         bip3x::bytes_64 seed = bip3x::bip3x_hdkey_encoder::make_bip39_seed(wordList);
         out = toVector(seed);
         return out;
     }
 
-    std::vector<uint8_t> Wallet::toVector(const bip3x::bytes_data& data) {
+    std::vector<uint8_t> Wallet::toVector(const bip3x::bytes_data &data)
+    {
 
         std::vector<uint8_t> result;
         result.reserve(data.size());
 
-        for(size_t i = 0; i < data.size(); i++) {
-            result.push_back(data[i]); 
+        for (size_t i = 0; i < data.size(); i++)
+        {
+            result.push_back(data[i]);
         }
 
         return result;
@@ -67,7 +73,8 @@ namespace Aptos::HDWallet
         InitializeSeed();
     }
 
-    std::string Wallet::getMnemonicsKey() const {
+    std::string Wallet::getMnemonicsKey() const
+    {
         return wordList;
     }
 }
