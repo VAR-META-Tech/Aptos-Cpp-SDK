@@ -6,7 +6,7 @@
 namespace Aptos::Rest
 {
     void FaucetClient::FundAccount(std::function<void(bool, AptosRESTModel::ResponseInfo)> callback,
-                                   const std::string &address, int amount, const std::string &endpoint)
+                                   const std::string &address, int amount, std::string &endpoint)
     {
         using namespace AptosRESTModel;
         std::string uri = "/mint?amount=" + std::to_string(amount) + "&address=" + address;

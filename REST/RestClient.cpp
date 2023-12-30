@@ -17,6 +17,9 @@
 #include "Model/AccountResourceTokenStore.h"
 #include "RequestClient.h"
 
+using namespace Aptos::Accounts;
+using namespace Aptos::BCS;
+
 namespace Aptos::Rest
 {
     void RestClient::SetEndpoint(const std::string &url)

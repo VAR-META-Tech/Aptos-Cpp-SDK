@@ -24,7 +24,7 @@ namespace Aptos::Rest
         /// <returns>Calls <c>callback</c> function with <c>(bool, ResponsiveInfo)</c>: \n
         /// A boolean stating that the request for funding was successful, and an object containg the response details</returns>
         static void FundAccount(std::function<void(bool, AptosRESTModel::ResponseInfo)> callback,
-                                const std::string &address, int amount, const std::string &endpoint);
+                                const std::string &address, int amount, std::string &endpoint);
     };
 
 }
