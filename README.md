@@ -12,7 +12,6 @@ Aptos-Cpp-SDK is a cpp package written in C++ to help developers integrate Aptos
   - [FaucetClient](#faucetclient)
   - [TokenClient](#tokenclient)
   - [EntryFunction](#entryfunction)
-  - [Account](#account)
   - [Wallet](#wallet)
 - [Examples](#examples)
 - [License](#license)
@@ -128,14 +127,77 @@ public class AptosUI : ModuleRules
 There are three core client classes:
 - **FaucetClient** - used to request for airdrops
 - **RESTClient** - used to query the aptos blockchain
-- **AptosClient** - a REST client wrapper used to interact with Aptos tokens
 
 Let's go over each of the classes, along with examples for each to demonstrate their power and flexibility.
 #### RestClient ####
+The REST Client provides you with the fundamental transaction endpoints needed for interacting with the Aptos Blockchain. The following showcases how to initialize the `RestClient` and `AptosTokenClient`.
+```cpp
+RestClient restClient;
+restClient.SetEndpoint(Constants::DEVNET_BASE_URL);
+```
+As shown before, it only take a few lines of code to initialize a transfer for Aptos coins. This is the main class developers will be leveraging to interact directly with the Aptos Blockchain via REST Client calls.
+```cpp
+AptosRESTModel::Transaction createCollectionTxn;
+AptosRESTModel::ResponseInfo responseInfo;
+m_restClient.CreateCollection([&](AptosRESTModel::Transaction _createCollectionTxn, AptosRESTModel::ResponseInfo _responseInfo)
+                              {
+                                  createCollectionTxn = _createCollectionTxn;
+                                  responseInfo = _responseInfo; },
+                              wallet->Account(),
+                              _collectionName, _collectionDescription, _collectionUri);
+bool success = false;
+if (responseInfo.status == AptosRESTModel::ResponseInfo::Status::Success)
+{
+    success = true;
+}
+else
+{
+    success = false;
+}
+```
+
 #### FaucetClient ####
+The Faucet Client allows the developer to leverage the ability to fund wallets on any of the non-main networks within the Aptos Blockchain. This can easily speed up development times through automating the process of funding wallets. Here's an example on how to use the Faucet Client:
+```cpp
+std::string faucetEndpoint = "https://faucet.devnet.aptoslabs.com";
+Aptos::Rest::FaucetClient::FundAccount([amount](bool success, AptosRESTModel::ResponseInfo)
+                                       {
+                                           if (success) {
+                                               std::cout << "Successfully Get Airdrop of " << (float)amount << " APT" << std::endl;
+                                           } else {
+                                               std::cout << "airdrop failed" << std::endl;
+                                           } },
+                                       wallet->Account().getAccountAddress()->ToString(),
+                                       amount,
+                                       faucetEndpoint);
+```
+
 #### TokenClient ####
 #### EntryFunction ####
-#### Account ####
+If a developer needs more flexibility with how they want to shape their transactions, e.g., arbitrary, generic, custom, using EntryFunction is the key class, along with the usage of the REST Client, to submit those types of transactions that aren't defined already. This is how the developer would initialize the transaction arguments, create the EntryFunction payload, and submit the transaction using BCS:
+```cpp
+std::vector<std::shared_ptr<ISerializable>> transactionArguments;
+transactionArguments.push_back(std::make_shared<AccountAddress>(Recipient));
+transactionArguments.push_back(std::make_shared<U64>(Amount));
+EntryFunction payload = EntryFunction::Natural(
+    ModuleId(AccountAddress::FromHex("0x1"), "aptos_account"),
+    "transfer",
+    TagSequence({}),
+    Sequence(transactionArguments));
+std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
+CreateBCSSignedTransaction([&signedTransaction](std::shared_ptr<SignedTransaction> _signedTransaction)
+                           { signedTransaction = _signedTransaction; },
+                           Sender, TransactionPayload(std::make_shared<EntryFunction>(payload)));
+AptosRESTModel::ResponseInfo responseInfo;
+std::string submitBcsTxnJsonResponse = "";
+SubmitBCSTransaction([&responseInfo, &submitBcsTxnJsonResponse](std::string _responseJson,
+                                                                AptosRESTModel::ResponseInfo _responseInfo)
+                     {
+submitBcsTxnJsonResponse = _responseJson;
+responseInfo = _responseInfo; },
+                     *signedTransaction);
+```
+
 #### Wallet ####
 Wallets will be the primary method of accessing accounts on the Aptos Blockchain via Mnemonic Keys, since they'll allow you to generate multiple accounts with ease. Here's an example on how to initialize a wallet using a mnemonic key:
 ```cpp
