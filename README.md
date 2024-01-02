@@ -137,6 +137,41 @@ Let's go over each of the classes, along with examples for each to demonstrate t
 #### EntryFunction ####
 #### Account ####
 #### Wallet ####
+Wallets will be the primary method of accessing accounts on the Aptos Blockchain via Mnemonic Keys, since they'll allow you to generate multiple accounts with ease. Here's an example on how to initialize a wallet using a mnemonic key:
+```cpp
+// Initializing Wallet.
+std::string mnemo = "stadium valid laundry unknown tuition train december camera fiber vault sniff ripple";
+Wallet* wallet = new Wallet(mnemo);
+
+// Initialize A Random Wallet.
+bip3x::bip3x_mnemonic::mnemonic_result mnemonic = bip3x::bip3x_mnemonic::generate();
+Wallet* wallet = new Wallet(mnemonic.raw);
+```
+This provides the developer with what's known as an [HD Wallet](https://www.investopedia.com/terms/h/hd-wallet-hierarchical-deterministic-wallet.asp) (Hierarchical Deterministic Wallet), which is what will enable to generate as many private keys from the wallet as they want. Here's different ways on how to retrieve the account(s) from the Wallet, along with deriving the mnemonic seed from the Wallet; which is the seed that's derived from the input mnemonic phrase and is what allows the developer to generate a number accounts from the Wallet:
+
+```cpp
+// Get the Initial Main Account.
+auto mainAccount = wallet->Account();
+
+// Get Any Other Accounts Created / Derived From the Wallet (i represents the index from 0).
+auto account = wallet->GetDerivedAccount(i);
+
+// Derive Mnemonic Seed from Wallet.
+auto seed = wallet->DeriveMnemonicSeed();
+```
+
+The Wallet object can also allow the main account to sign and verify data, as shown here:
+
+```cpp
+// Initialize a Signature Object.
+static const std::vector<uint8_t> MessageUt8Bytes = {
+    87, 69, 76, 67, 79, 77, 69, 32,
+    84, 79, 32, 65, 80, 84, 79, 83, 33 };
+auto acct = wallet->Account();
+Signature signature = acct.Sign(Utils::ByteVectorToSecBlock(MessageUt8Bytes));
+
+// Initialize a Boolean Verified.
+bool verified = acct.Verify(MessageUt8Bytes, signature);
 
 ### Examples ###
 
