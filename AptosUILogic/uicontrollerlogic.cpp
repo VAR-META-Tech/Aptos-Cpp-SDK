@@ -65,6 +65,7 @@ std::string UIController::getMnemonicsKey() const
     if (m_wallet)
     {
         return m_wallet->getMnemonicsKey();
+        m_wallet->Account();
     }
     return {};
 }
@@ -73,7 +74,7 @@ std::string UIController::getPrivateKey() const
 {
     if (m_wallet)
     {
-        return m_wallet->account().getPrivateKey()->ToString();
+        return m_wallet->Account().getPrivateKey()->ToString();
     }
     return {};
 }
@@ -124,7 +125,7 @@ void UIController::loadCurrentWalletBalance()
                                        {
                                            m_balance = std::stof(coin.value());
                                        } },
-                                   *m_wallet->account().getAccountAddress());
+                                   *m_wallet->Account().getAccountAddress());
 }
 
 void UIController::setNetwork(std::string _target)
@@ -173,7 +174,7 @@ void UIController::airdrop(int amount)
                                                } else {
                                                    std::cout << "airdrop failed" << std::endl;
                                                } },
-                                           m_wallet->account().getAccountAddress()->ToString(),
+                                           m_wallet->Account().getAccountAddress()->ToString(),
                                            amount,
                                            faucetEndpoint);
     std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -190,7 +191,7 @@ bool UIController::sendToken(std::string _targetAddress, long _amount)
                           {
                               transferTxn = _transferTxn;
                               responseInfo = _responseInfo; },
-                          m_wallet->account(), _targetAddress, _amount);
+                          m_wallet->Account(), _targetAddress, _amount);
 
     if (responseInfo.status == AptosRESTModel::ResponseInfo::Status::Success)
     {
@@ -218,7 +219,7 @@ bool UIController::createCollection(std::string _collectionName, std::string _co
                                   {
                                       createCollectionTxn = _createCollectionTxn;
                                       responseInfo = _responseInfo; },
-                                  m_wallet->account(),
+                                  m_wallet->Account(),
                                   _collectionName, _collectionDescription, _collectionUri);
     bool success = false;
     if (responseInfo.status == AptosRESTModel::ResponseInfo::Status::Success)
@@ -243,7 +244,7 @@ bool UIController::createNFT(std::string _collectionName, std::string _tokenName
                              {
                                  createTokenTxn = _createTokenTxn;
                                  responseInfo = _responseInfo; },
-                             m_wallet->account(),
+                             m_wallet->Account(),
                              _collectionName,
                              _tokenName,
                              _tokenDescription,

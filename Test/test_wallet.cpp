@@ -44,7 +44,7 @@ TEST(WalletTest, CreateWallet) {
 TEST(WalletTest, SignMessage) {
     Signature signatureObject = Signature(Utils::ByteVectorToSecBlock(SignatureBytes));
     Wallet wallet = Wallet(mnemo);
-    Account acct = wallet.account();
+    Account acct = wallet.Account();
     Signature signature = acct.Sign(Utils::ByteVectorToSecBlock(MessageUt8Bytes));
     EXPECT_EQ(signatureObject, signature);
 }
@@ -52,7 +52,7 @@ TEST(WalletTest, SignMessage) {
 TEST(WalletTest, VerifySignature) {
     Signature signatureObject = Signature(Utils::ByteVectorToSecBlock(SignatureBytes));
     Wallet wallet = Wallet(mnemo);
-    Account acct = wallet.account();
+    Account acct = wallet.Account();
     bool verify = acct.Verify(Utils::ByteVectorToSecBlock(MessageUt8Bytes), signatureObject);
     EXPECT_TRUE(verify);
 }

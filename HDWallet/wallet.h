@@ -86,7 +86,7 @@ namespace Aptos::HDWallet
         /// <param name="seedMode">The seed generation mode.</param>
         explicit Wallet(const std::string &mnemonicWords, const std::string &passphrase = "",
                SeedMode seedMode = SeedMode::Ed25519Bip32);
-        Accounts::Account account() const;
+        Accounts::Account Account() const;
         std::string getMnemonicsKey() const;
     };
 }

@@ -5,7 +5,7 @@ using namespace Aptos::Accounts;
 namespace Aptos::HDWallet
 {
     const std::string Wallet::DerivationPath = "m/44'/637'/x'/0'/0'";
-    Account Wallet::account() const
+    Account Wallet::Account() const
     {
         return _account;
     }
@@ -58,7 +58,7 @@ namespace Aptos::HDWallet
         std::pair<CryptoPP::SecByteBlock, CryptoPP::SecByteBlock> account = _ed25519Bip32->DerivePath(path);
         std::pair<CryptoPP::SecByteBlock, CryptoPP::SecByteBlock> keyPair = Utils::EdKeyPairFromSeed(account.first);
 
-        return Account(keyPair.first, keyPair.second);
+        return Accounts::Account(keyPair.first, keyPair.second);
     }
 
     void Wallet::InitializeSeed()
