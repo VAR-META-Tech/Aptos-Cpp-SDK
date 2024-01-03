@@ -11,6 +11,11 @@ namespace Aptos::BCS
         this->serializableTags = serializableTags;
     }
 
+    TagSequence::TagSequence()
+    {
+
+    }
+
     void TagSequence::Serialize(Serialization &serializer) const
     {
         serializer.SerializeU32AsUleb128(this->serializableTags.size());

@@ -16,6 +16,26 @@ CollectionResource CollectionResource::FromJson(const nlohmann::json &collection
     return collectionResource;
 }
 
+CollectionResourceData CollectionResource::getData() const
+{
+    return Data;
+}
+
+void CollectionResource::setData(const CollectionResourceData &newData)
+{
+    Data = newData;
+}
+
+std::string CollectionResource::getType() const
+{
+    return Type;
+}
+
+void CollectionResource::setType(const std::string &newType)
+{
+    Type = newType;
+}
+
 nlohmann::json CollectionResourceData::ToJson() const {
     nlohmann::json collectionDataJson;
     collectionDataJson["creator"] = Creator;

@@ -14,6 +14,7 @@ namespace Aptos::BCS
     class ModuleId : public ISerializable
     {
     public:
+        ModuleId();
         ModuleId(const AccountAddress &address, const std::string &name);
         void Serialize(Serialization &serializer) const override;
         static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);

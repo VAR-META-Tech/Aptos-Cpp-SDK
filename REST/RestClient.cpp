@@ -16,15 +16,27 @@
 #include "../BCS/Bytes.h"
 #include "Model/AccountResourceTokenStore.h"
 #include "RequestClient.h"
+#include "Model/TransactionRequestConverter.h"
 
 namespace Aptos::Rest
 {
     void RestClient::SetEndpoint(const std::string &url)
     {
         endpoint = url;
+        SetUp();
     }
 
-    RestClient::RestClient() {
+    RestClient::RestClient(const std::string &url) {
+        SetEndpoint(url);
+    }
+
+    RestClient::RestClient()
+    {
+
+    }
+
+    void RestClient::SetUp()
+    {
         using namespace AptosRESTModel;
         std::shared_ptr<AptosRESTModel::LedgerInfo> ledgerInfo;
         ResponseInfo responseInfo;
@@ -53,7 +65,7 @@ namespace Aptos::Rest
             {
                 responseInfo.status = ResponseInfo::Status::Success;
                 responseInfo.message = response->body;
-                AccountData accountData = AccountData::FromJson(response->body);
+                AccountData accountData = AccountData::FromJson(nlohmann::json::parse(response->body));
 
                 callback(std::make_shared<AccountData>(accountData), responseInfo);
             }
@@ -114,7 +126,7 @@ namespace Aptos::Rest
                 responseInfo.message = response->body;
 
                 // Parse the response and fill the Coin object accordingly
-                AccountResourceCoin acctResourceCoin = AccountResourceCoin::FromJson(response->body);\
+                AccountResourceCoin acctResourceCoin = AccountResourceCoin::FromJson(nlohmann::json::parse(response->body));\
 
                 callback(acctResourceCoin.dataProp().coinProp(), responseInfo);
             }
@@ -182,7 +194,7 @@ namespace Aptos::Rest
         {
             ResponseInfo responseInfo;
             if (response->status == 200) {
-                ResourceCollection acctResource = ResourceCollection::FromJson(response->body);
+                ResourceCollection acctResource = ResourceCollection::FromJson(nlohmann::json::parse(response->body));
                 responseInfo.status = ResponseInfo::Status::Success;
                 responseInfo.message = response->body;
                 callback(std::make_shared<ResourceCollection>(acctResource), responseInfo);
@@ -206,7 +218,7 @@ namespace Aptos::Rest
         {
             ResponseInfo responseInfo;
             if (response->status == 200) {
-                AccountResourceCoin acctResource = AccountResourceCoin::FromJson(response->body);
+                AccountResourceCoin acctResource = AccountResourceCoin::FromJson(nlohmann::json::parse(response->body));
                 responseInfo.status = ResponseInfo::Status::Success;
                 responseInfo.message = response->body;
                 callback(std::make_shared<AccountResourceCoin>(acctResource), responseInfo);
@@ -260,7 +272,7 @@ namespace Aptos::Rest
             ResponseInfo responseInfo;
             TableItemToken tableItemToken;
             if (response->status == 200) {
-                tableItemToken = TableItemToken::FromJson(response->body);
+                tableItemToken = TableItemToken::FromJson(nlohmann::json::parse(response->body));
                 responseInfo.status = ResponseInfo::Status::Success;
                 responseInfo.message = response->body;
                 callback(std::make_shared<TableItemToken>(tableItemToken), responseInfo);
@@ -300,7 +312,7 @@ namespace Aptos::Rest
             ResponseInfo responseInfo;
             std::shared_ptr<TableItemTokenMetadata> tableItemToken = nullptr;
             if (response->status == 200) {
-                tableItemToken = std::make_shared<TableItemTokenMetadata>(TableItemTokenMetadata::FromJson(response->body));
+                tableItemToken = std::make_shared<TableItemTokenMetadata>(TableItemTokenMetadata::FromJson(nlohmann::json::parse(response->body)));
                 responseInfo.status = ResponseInfo::Status::Success;
                 responseInfo.message = response->body;
             }  else if (response->status >= 400) {
@@ -325,7 +337,7 @@ namespace Aptos::Rest
             std::shared_ptr<LedgerInfo> ledgerInfo = nullptr;
 
             if (response->status == 200) {
-                ledgerInfo = std::make_shared<LedgerInfo>(LedgerInfo::FromJson(response->body));
+                ledgerInfo = std::make_shared<LedgerInfo>(LedgerInfo::FromJson(nlohmann::json::parse(response->body)));
                 responseInfo.status = ResponseInfo::Status::Success;
                 responseInfo.message = response->body;
             }  else if (response->status >= 400) {
@@ -452,7 +464,7 @@ namespace Aptos::Rest
         txnRequest.setMaxGasAmount(std::to_string(ClientConfig::MAX_GAS_AMOUNT));
         txnRequest.setGasUnitPrice(std::to_string(ClientConfig::GAS_UNIT_PRICE));
         txnRequest.setExpirationTimestampSecs(expirationTimestampStr);
-        auto txnRequestJson = txnRequest.ToJson();
+        auto txnRequestJson = TransactionRequestConverter::WriteJson(txnRequest);
         std::string encodedSubmission;
         EncodeSubmission([&encodedSubmission](const std::string &_encodedSubmission)
                          { encodedSubmission = _encodedSubmission; },
@@ -466,7 +478,7 @@ namespace Aptos::Rest
         sigData.setPublicKey(sender.getPublicKey()->ToString());
         sigData.setSignature(signature.ToString());
         txnRequest.setSignature(sigData);
-        txnRequestJson = txnRequest.ToJson();
+        txnRequestJson = txnRequestJson = TransactionRequestConverter::WriteJson(txnRequest);
 
         std::string uri = "/v1/transactions";
         // Perform the request and handle the response
@@ -475,7 +487,7 @@ namespace Aptos::Rest
             ResponseInfo responseInfo;
             std::vector<std::string> values;
             if (response->status == 200) {
-                auto transaction = std::make_shared<Transaction>(Transaction::FromJson(response->body));
+                auto transaction = std::make_shared<Transaction>(Transaction::FromJson(nlohmann::json::parse(response->body)));
                 responseInfo.status = ResponseInfo::Status::Success;
                 responseInfo.message = response->body;
                 callback(transaction, responseInfo);
@@ -554,7 +566,7 @@ namespace Aptos::Rest
         {
             ResponseInfo responseInfo;
             if (response->status == 200) {
-                auto transactionResult = Transaction::FromJson(response->body);
+                auto transactionResult = Transaction::FromJson(nlohmann::json::parse(response->body));
                 bool isPending = transactionResult.getType() == "pending_transaction";
 
                 responseInfo.status = ResponseInfo::Status::Success;
@@ -579,7 +591,7 @@ namespace Aptos::Rest
         {
             ResponseInfo responseInfo;
             if (response->status == 200) {
-                auto transactionResult = Transaction::FromJson(response->body);
+                auto transactionResult = Transaction::FromJson(nlohmann::json::parse(response->body));
                 responseInfo.status = ResponseInfo::Status::Success;
                 responseInfo.message = response->body;
                 callback(transactionResult, responseInfo);
@@ -661,7 +673,7 @@ namespace Aptos::Rest
         EntryFunction payload(
             ModuleId(AccountAddress::FromHex("0x1"), "aptos_account"),
             "transfer",
-            TagSequence({}),
+            TagSequence(),
             Sequence(sqD));
 
         std::shared_ptr<Transaction> submitTxn;
@@ -692,7 +704,7 @@ namespace Aptos::Rest
         EntryFunction payload = EntryFunction::Natural(
             ModuleId(AccountAddress::FromHex("0x1"), "aptos_account"),
             "transfer",
-            TagSequence({}),
+            TagSequence(),
             Sequence(transactionArguments));
 
         std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
@@ -719,6 +731,8 @@ namespace Aptos::Rest
         {
             if (response->status == 200) {
                 callback(response->body);
+            } else {
+                std::cerr << "Error encode submission " << response->status << " body " << response->body << std::endl;
             }
         }
     }
@@ -752,7 +766,7 @@ namespace Aptos::Rest
         EntryFunction payload = EntryFunction::Natural(
             ModuleId(AccountAddress::FromHex("0x3"), "token"),
             "create_collection_script",
-            TagSequence({}),
+            TagSequence(),
             Sequence(transactionArguments));
 
         TransactionPayload txnPayload(std::make_shared<EntryFunction>(payload));
@@ -805,7 +819,7 @@ namespace Aptos::Rest
         EntryFunction payload = EntryFunction::Natural(
             ModuleId(AccountAddress::FromHex("0x3"), "token"),
             "create_token_script",
-            TagSequence({}),
+            TagSequence(),
             Sequence(transactionArguments));
 
         TransactionPayload txnPayload(std::make_shared<EntryFunction>(payload));
@@ -858,7 +872,7 @@ namespace Aptos::Rest
         EntryFunction payload = EntryFunction::Natural(
             ModuleId(AccountAddress::FromHex("0x3"), "token_transfers"),
             "offer_script",
-            TagSequence({}),
+            TagSequence(),
             Sequence(transactionArguments));
 
         TransactionPayload txnPayload(std::make_shared<EntryFunction>(payload));
@@ -910,7 +924,7 @@ namespace Aptos::Rest
         EntryFunction payload = EntryFunction::Natural(
             ModuleId(AccountAddress::FromHex("0x3"), "token_transfers"),
             "claim_script",
-            TagSequence({}),
+            TagSequence(),
             Sequence(transactionArguments));
 
         TransactionPayload txnPayload(std::make_shared<EntryFunction>(payload));
@@ -1090,7 +1104,7 @@ namespace Aptos::Rest
         EntryFunction payload = EntryFunction::Natural(
             ModuleId(AccountAddress::FromHex("0x1"), "object"),
             Constants::APTOS_TRANSFER_CALL,
-            TagSequence({}),
+            TagSequence(),
             Sequence(transactionArguments));
 
         std::shared_ptr<SignedTransaction> signedTransaction = nullptr;

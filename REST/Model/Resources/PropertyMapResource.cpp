@@ -16,6 +16,26 @@ PropertyMapResource PropertyMapResource::FromJson(const nlohmann::json &property
     return propertyMapResource;
 }
 
+std::string PropertyMapResource::getType() const
+{
+    return Type;
+}
+
+void PropertyMapResource::setType(const std::string &newType)
+{
+    Type = newType;
+}
+
+PropertyMapResourceData PropertyMapResource::getData() const
+{
+    return Data;
+}
+
+void PropertyMapResource::setData(const PropertyMapResourceData &newData)
+{
+    Data = newData;
+}
+
 nlohmann::json PropertyMapResourceData::ToJson() const {
     nlohmann::json propertyMapDataJson;
     propertyMapDataJson["inner"] = InnerData.ToJson();

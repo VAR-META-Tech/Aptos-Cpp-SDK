@@ -4,7 +4,12 @@
 
 namespace Aptos::BCS
 {
-    EntryFunction::EntryFunction(const ModuleId &module, const std::string &function, const TagSequence &typeArgs, const Sequence &args)
+EntryFunction::EntryFunction()
+{
+
+}
+
+EntryFunction::EntryFunction(const ModuleId &module, const std::string &function, const TagSequence &typeArgs, const Sequence &args)
         : module(module), function(function), typeArgs(typeArgs), args(args) {}
 
     EntryFunction EntryFunction::Natural(const ModuleId &module, const std::string &function, const TagSequence &typeArgs, const Sequence &args)
@@ -76,5 +81,45 @@ namespace Aptos::BCS
         hash = hash * 23 + typeArgs.GetHashCode();
         hash = hash * 23 + args.GetHashCode();
         return hash;
+    }
+
+    ModuleId EntryFunction::getModule() const
+    {
+        return module;
+    }
+
+    void EntryFunction::setModule(const ModuleId &newModule)
+    {
+        module = newModule;
+    }
+
+    std::string EntryFunction::getFunction() const
+    {
+        return function;
+    }
+
+    void EntryFunction::setFunction(const std::string &newFunction)
+    {
+        function = newFunction;
+    }
+
+    TagSequence EntryFunction::getTypeArgs() const
+    {
+        return typeArgs;
+    }
+
+    void EntryFunction::setTypeArgs(const TagSequence &newTypeArgs)
+    {
+        typeArgs = newTypeArgs;
+    }
+
+    Sequence EntryFunction::getArgs() const
+    {
+        return args;
+    }
+
+    void EntryFunction::setArgs(const Sequence &newArgs)
+    {
+        args = newArgs;
     }
 }

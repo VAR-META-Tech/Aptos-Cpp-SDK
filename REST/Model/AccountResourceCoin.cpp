@@ -21,11 +21,9 @@ nlohmann::json AccountResourceCoin::Id::ToJson() const {
 
 AccountResourceCoin::AccountResourceCoin() {}
 
-AccountResourceCoin AccountResourceCoin::FromJson(const std::string &jsonStr) {
+AccountResourceCoin AccountResourceCoin::FromJson(const nlohmann::json &jsonData) {
     AccountResourceCoin accountResource;
-
     try {
-        nlohmann::json jsonData = nlohmann::json::parse(jsonStr);
         accountResource.m_type = jsonData["type"];
         accountResource.m_dataProp = Data::FromJson(jsonData["data"]);
     } catch (const nlohmann::json::exception& e) {

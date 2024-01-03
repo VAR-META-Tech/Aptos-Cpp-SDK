@@ -25,6 +25,12 @@ class RoyaltyResource : public IResourceBase {
 public:
     nlohmann::json ToJson() const;
     static RoyaltyResource FromJson(const nlohmann::json& royaltyResourceJson);
+    std::string getType() const;
+    void setType(const std::string &newType);
+
+    RoyaltyResourceData getData() const;
+    void setData(const RoyaltyResourceData &newData);
+
 private:
     std::string Type;
     RoyaltyResourceData Data;

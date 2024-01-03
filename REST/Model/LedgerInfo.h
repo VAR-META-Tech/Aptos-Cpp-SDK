@@ -12,7 +12,7 @@ namespace AptosRESTModel {
 class LedgerInfo {
 public:
     nlohmann::json ToJson() const;
-    static LedgerInfo FromJson(const std::string& jsonStr);
+    static LedgerInfo FromJson(const nlohmann::json &jsonData);
 
     int getChainId() const;
 

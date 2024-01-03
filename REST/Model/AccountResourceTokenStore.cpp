@@ -10,10 +10,9 @@ nlohmann::json AccountResourceTokenStore::ToJson() const {
     };
 }
 
-AccountResourceTokenStore AccountResourceTokenStore::FromJson(const std::string &jsonStr) {
+AccountResourceTokenStore AccountResourceTokenStore::FromJson(const nlohmann::json &jsonData) {
     AccountResourceTokenStore resourceTokenStore;
     try {
-        nlohmann::json jsonData = nlohmann::json::parse(jsonStr);
         resourceTokenStore.Type = jsonData["type"];
         resourceTokenStore.DataProp = Data::FromJson(jsonData["data"]);
     } catch (const nlohmann::json::exception& e) {

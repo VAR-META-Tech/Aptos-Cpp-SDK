@@ -9,8 +9,7 @@ nlohmann::json ResourceCollection::ToJson() const {
     };
 }
 
-ResourceCollection ResourceCollection::FromJson(const std::string &jsonStr) {
-    nlohmann::json jsonData = nlohmann::json::parse(jsonStr);
+ResourceCollection ResourceCollection::FromJson(const nlohmann::json &jsonData) {
     ResourceCollection resourceCollection;
     resourceCollection.Type = jsonData["type"].get<std::string>();
     resourceCollection.DataProp = Data::FromJson(jsonData["data"]);

@@ -32,7 +32,9 @@ namespace Aptos::Rest
     {
     public:
         void SetEndpoint(const std::string &url);
+        RestClient(const std::string &url);
         RestClient();
+        void SetUp();
         /// <summary>
         /// Get Account Details.
         /// Return the authentication key and the sequence number for an account address. Optionally, a ledger version can be specified.

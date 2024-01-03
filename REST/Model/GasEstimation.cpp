@@ -10,11 +10,10 @@ nlohmann::json GasEstimation::ToJson() const {
     };
 }
 
-GasEstimation GasEstimation::FromJson(const std::string &jsonStr) {
+GasEstimation GasEstimation::FromJson(const nlohmann::json &jsonData) {
     GasEstimation gasEstimation;
 
     try {
-        nlohmann::json jsonData = nlohmann::json::parse(jsonStr);
         gasEstimation.DeprioritizedGasEstimate = jsonData["deprioritized_gas_estimate"];
         gasEstimation.GasEstimate = jsonData["gas_estimate"];
         gasEstimation.PrioritizedGasEstimate = jsonData.value("prioritized_gas_estimate", 0);

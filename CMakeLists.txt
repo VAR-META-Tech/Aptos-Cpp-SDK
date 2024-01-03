@@ -221,6 +221,10 @@ add_library(Aptos SHARED
         REST/Model/TableItemToken/TableItemToken.cpp
         REST/Model/TableItemToken/TableItemTokenMetadata.h
         REST/Model/TableItemToken/TableItemTokenMetadata.cpp
+        REST/Model/Resources/Base/ResourceBaseListConverter.h
+        REST/Model/Resources/Base/ResourceBaseListConverter.cpp
+        REST/Model/TransactionRequestConverter.h
+        REST/Model/TransactionRequestConverter.cpp
         REST/FaucetClient.h
         REST/FaucetClient.cpp
         REST/RequestClient.h
@@ -312,3 +316,31 @@ add_executable(AptosUILogicTest
 )
 
 target_link_libraries(AptosUILogicTest PRIVATE Aptos AptosUILogic )
+
+add_executable(AptosSDKDemo
+    AptosSDKDemo/AptosToken/Model/AddTokenPropertyResponse.h
+    AptosSDKDemo/AptosToken/Model/AddTokenPropertyResponse.cpp
+    AptosSDKDemo/AptosToken/Model/CreateCollectionResponse.h
+    AptosSDKDemo/AptosToken/Model/CreateCollectionResponse.cpp
+    AptosSDKDemo/AptosToken/Model/CreateTokenResponse.h
+    AptosSDKDemo/AptosToken/Model/CreateTokenResponse.cpp
+    AptosSDKDemo/AptosToken/Model/MintTokenResponse.h
+    AptosSDKDemo/AptosToken/Model/MintTokenResponse.cpp
+    AptosSDKDemo/AptosToken/Model/TransferObjectResponse.h
+    AptosSDKDemo/AptosToken/Model/TransferObjectResponse.cpp
+    AptosSDKDemo/AptosToken/Model/UpdateTokenResponse.h
+    AptosSDKDemo/AptosToken/Model/UpdateTokenResponse.cpp
+    AptosSDKDemo/Multisig/Model/MultisigTransferBcsTransactionResponse.h
+    AptosSDKDemo/Multisig/Model/MultisigTransferBcsTransactionResponse.cpp
+    AptosSDKDemo/Multisig/Model/RotateKeyBcsTransactionResponse.h
+    AptosSDKDemo/Multisig/Model/RotateKeyBcsTransactionResponse.cpp
+    AptosSDKDemo/TransferCoin/Model/TransferCoinBCSResponse.h
+    AptosSDKDemo/TransferCoin/Model/TransferCoinBCSResponse.cpp
+    AptosSDKDemo/AptosToken/AptosToken.h
+    AptosSDKDemo/AptosToken/AptosToken.cpp
+    AptosSDKDemo/main.cpp
+    AptosSDKDemo/TransferCoin/TransferCoinExample.h
+    AptosSDKDemo/TransferCoin/TransferCoinExample.cpp
+)
+
+target_link_libraries(AptosSDKDemo PRIVATE Aptos )

@@ -44,6 +44,12 @@ class ObjectResource : public IResourceBase{
 public:
     nlohmann::json ToJson() const;
     static ObjectResource FromJson(const nlohmann::json& objectResourceJson);
+    std::string getType() const;
+    void setType(const std::string &newType);
+
+    ObjectResourceData getData() const;
+    void setData(const ObjectResourceData &newData);
+
 private:
     std::string Type;
     ObjectResourceData Data;

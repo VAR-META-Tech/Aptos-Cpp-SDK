@@ -57,6 +57,12 @@ class PropertyMapResource : public IResourceBase {
 public:
     nlohmann::json ToJson() const;
     static PropertyMapResource FromJson(const nlohmann::json& propertyMapResourceJson);
+    std::string getType() const;
+    void setType(const std::string &newType);
+
+    PropertyMapResourceData getData() const;
+    void setData(const PropertyMapResourceData &newData);
+
 private:
     std::string Type;
     PropertyMapResourceData Data;

@@ -6,6 +6,7 @@
 #include "../Accounts/AccountAddress.h"
 #include "../BCS/BString.h"
 #include "../BCS/Bytes.h"
+#include "RestClient.h"
 
 using namespace Aptos::Accounts;
 namespace Aptos::Rest
@@ -159,11 +160,19 @@ namespace Aptos::Rest
     public:
         using FuncValue = std::shared_ptr<IResource>(std::shared_ptr<AptosRESTModel::ResourceDataBase>);
         static std::map<std::string, FuncValue *> ResourceMap;
-        ReadObject(const std::unordered_map<std::string, std::shared_ptr<IResource>> &Resources);
+        ReadObject(const std::unordered_map<std::string, std::shared_ptr<IResource>> &R1);
         std::string ToString() const;
 
     private:
         std::unordered_map<std::string, std::shared_ptr<IResource>> Resources;
+    };
+
+    class AptosTokenClient
+    {
+        AptosTokenClient(RestClient& client);
+        void ReadObject(std::function<void (Aptos::Rest::ReadObject,  AptosRESTModel::ResponseInfo)> callback, const AccountAddress& address);
+    private:
+        RestClient& m_restClient;
     };
 }
 #endif // APTOSTOKENCLIENT_H

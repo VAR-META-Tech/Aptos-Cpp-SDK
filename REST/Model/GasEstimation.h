@@ -12,7 +12,7 @@ namespace AptosRESTModel {
 class GasEstimation {
 public:
     nlohmann::json ToJson() const;
-    static GasEstimation FromJson(const std::string& jsonStr);
+    static GasEstimation FromJson(const nlohmann::json &jsonData);
 
 private:
     int DeprioritizedGasEstimate;

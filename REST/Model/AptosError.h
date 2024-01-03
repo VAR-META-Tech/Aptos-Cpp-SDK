@@ -11,7 +11,7 @@ namespace AptosRESTModel {
 class AptosError {
 public:
     nlohmann::json ToJson() const;
-    static AptosError FromJson(const std::string& jsonStr);
+    static AptosError FromJson(const nlohmann::json &jsonData);
 
 private:
     std::string Message;

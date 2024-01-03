@@ -23,6 +23,7 @@ namespace Aptos::BCS
         /// <param name="typeArgs"></param>
         /// <param name="args"></param>
         /// <returns></returns>
+        EntryFunction();
         EntryFunction(const ModuleId &module, const std::string &function,
                       const TagSequence &typeArgs, const Sequence &args);
         static EntryFunction Natural(const ModuleId &module, const std::string &function,
@@ -32,6 +33,18 @@ namespace Aptos::BCS
         bool Equals(const EntryFunction &other) const;
         std::string ToString() const override;
         size_t GetHashCode() const;
+
+        ModuleId getModule() const;
+        void setModule(const ModuleId &newModule);
+
+        std::string getFunction() const;
+        void setFunction(const std::string &newFunction);
+
+        TagSequence getTypeArgs() const;
+        void setTypeArgs(const TagSequence &newTypeArgs);
+
+        Sequence getArgs() const;
+        void setArgs(const Sequence &newArgs);
 
     private:
         ModuleId module;

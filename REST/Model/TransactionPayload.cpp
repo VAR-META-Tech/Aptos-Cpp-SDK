@@ -20,6 +20,46 @@ TransactionPayload TransactionPayload::FromJson(const nlohmann::json &payloadJso
     return payload;
 }
 
+std::string TransactionPayload::getType() const
+{
+    return Type;
+}
+
+void TransactionPayload::setType(const std::string &newType)
+{
+    Type = newType;
+}
+
+std::string TransactionPayload::getFunction() const
+{
+    return Function;
+}
+
+void TransactionPayload::setFunction(const std::string &newFunction)
+{
+    Function = newFunction;
+}
+
+std::vector<std::string> TransactionPayload::getTypeArguments() const
+{
+    return TypeArguments;
+}
+
+void TransactionPayload::setTypeArguments(const std::vector<std::string> &newTypeArguments)
+{
+    TypeArguments = newTypeArguments;
+}
+
+Arguments TransactionPayload::getArgumentsProp() const
+{
+    return ArgumentsProp;
+}
+
+void TransactionPayload::setArgumentsProp(const Arguments &newArgumentsProp)
+{
+    ArgumentsProp = newArgumentsProp;
+}
+
 nlohmann::json Arguments::ToJson() const {
     nlohmann::json argsJson;
     argsJson["argument_strings"] = ArgumentStrings;
@@ -38,6 +78,26 @@ Arguments Arguments::FromJson(const nlohmann::json &argsJson) {
     args.PropertyValues = argsJson["property_values"].get<std::vector<int>>();
     args.PropertyTypes = argsJson["property_types"].get<std::vector<std::string>>();
     return args;
+}
+
+std::vector<std::string> Arguments::getArgumentStrings() const
+{
+    return ArgumentStrings;
+}
+
+void Arguments::setArgumentStrings(const std::vector<std::string> &newArgumentStrings)
+{
+    ArgumentStrings = newArgumentStrings;
+}
+
+std::vector<bool> Arguments::getMutateSettings() const
+{
+    return MutateSettings;
+}
+
+void Arguments::setMutateSettings(const std::vector<bool> &newMutateSettings)
+{
+    MutateSettings = newMutateSettings;
 }
 
 }

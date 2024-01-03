@@ -16,6 +16,26 @@ ObjectResource ObjectResource::FromJson(const nlohmann::json &objectResourceJson
     return objectResource;
 }
 
+std::string ObjectResource::getType() const
+{
+    return Type;
+}
+
+void ObjectResource::setType(const std::string &newType)
+{
+    Type = newType;
+}
+
+ObjectResourceData ObjectResource::getData() const
+{
+    return Data;
+}
+
+void ObjectResource::setData(const ObjectResourceData &newData)
+{
+    Data = newData;
+}
+
 nlohmann::json ObjectResourceData::ToJson() const {
     nlohmann::json objectDataJson;
     objectDataJson["allow_ungated_transfer"] = AllowUngatedTransfer;

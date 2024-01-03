@@ -16,6 +16,11 @@ namespace Aptos::BCS
         this->values = values;
     }
 
+    Sequence::Sequence()
+    {
+
+    }
+
     int Sequence::Length() const
     {
         return this->values.size();

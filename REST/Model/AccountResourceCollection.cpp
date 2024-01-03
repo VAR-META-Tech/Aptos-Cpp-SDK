@@ -12,11 +12,9 @@ nlohmann::json ResourceCollectionOLD::ToJson() const {
     };
 }
 
-ResourceCollectionOLD ResourceCollectionOLD::FromJson(const std::string &jsonStr) {
+ResourceCollectionOLD ResourceCollectionOLD::FromJson(const nlohmann::json &jsonData) {
     ResourceCollectionOLD resourceCollection;
-
     try {
-        nlohmann::json jsonData = nlohmann::json::parse(jsonStr);
         resourceCollection.Type = jsonData["type"];
         resourceCollection.DataProp = Data::FromJson(jsonData["data"]);
     } catch (const nlohmann::json::exception& e) {

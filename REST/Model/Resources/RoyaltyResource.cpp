@@ -16,6 +16,26 @@ RoyaltyResource RoyaltyResource::FromJson(const nlohmann::json &royaltyResourceJ
     return royaltyResource;
 }
 
+std::string RoyaltyResource::getType() const
+{
+    return Type;
+}
+
+void RoyaltyResource::setType(const std::string &newType)
+{
+    Type = newType;
+}
+
+RoyaltyResourceData RoyaltyResource::getData() const
+{
+    return Data;
+}
+
+void RoyaltyResource::setData(const RoyaltyResourceData &newData)
+{
+    Data = newData;
+}
+
 nlohmann::json RoyaltyResourceData::ToJson() const {
     nlohmann::json royaltyDataJson;
     royaltyDataJson["denominator"] = Denominator;

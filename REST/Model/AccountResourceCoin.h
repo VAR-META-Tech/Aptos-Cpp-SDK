@@ -76,7 +76,7 @@ public:
     };
 
     AccountResourceCoin();
-    static AccountResourceCoin FromJson(const std::string& jsonStr);
+    static AccountResourceCoin FromJson(const nlohmann::json &jsonData);
     nlohmann::json ToJson() const;
     AccountResourceCoin::Data dataProp() const;
 private:

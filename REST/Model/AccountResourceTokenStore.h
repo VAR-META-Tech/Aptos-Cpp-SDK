@@ -92,7 +92,7 @@ public:
 
     AccountResourceTokenStore();
     nlohmann::json ToJson() const;
-    static AccountResourceTokenStore FromJson(const std::string& jsonStr);
+    static AccountResourceTokenStore FromJson(const nlohmann::json &jsonData);
     Data getDataProp() const;
 
 private:

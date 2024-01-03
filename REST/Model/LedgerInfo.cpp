@@ -15,11 +15,10 @@ nlohmann::json LedgerInfo::ToJson() const {
     };
 }
 
-LedgerInfo LedgerInfo::FromJson(const std::string &jsonStr) {
+LedgerInfo LedgerInfo::FromJson(const nlohmann::json &jsonData) {
     LedgerInfo ledgerInfo;
 
     try {
-        nlohmann::json jsonData = nlohmann::json::parse(jsonStr);
         ledgerInfo.ChainId = jsonData["chain_id"];
         ledgerInfo.Epoch = jsonData["epoch"];
         ledgerInfo.LedgerVersion = jsonData["ledger_version"];

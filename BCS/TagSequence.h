@@ -15,7 +15,7 @@ namespace Aptos::BCS
         /// </summary>
         /// <param name="serializableTags">A list of serializable tags.</param>
         TagSequence(const std::vector<std::shared_ptr<ISerializableTag>> &serializableTags);
-
+        TagSequence();
         /// <inheritdoc/>
         void Serialize(Serialization &serializer) const override;
 

@@ -67,7 +67,7 @@ public:
 
     ResourceCollectionOLD();
     nlohmann::json ToJson() const;
-    static ResourceCollectionOLD FromJson(const std::string& jsonStr);
+    static ResourceCollectionOLD FromJson(const nlohmann::json &jsonData);
 
 private:
     std::string Type;
