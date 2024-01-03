@@ -1,0 +1,93 @@
+\doxysection{Aptos\+::Rest\+::Object Class Reference}
+\hypertarget{class_aptos_1_1_rest_1_1_object}{}\label{class_aptos_1_1_rest_1_1_object}\index{Aptos::Rest::Object@{Aptos::Rest::Object}}
+
+
+Represents an \doxylink{class_aptos_1_1_rest_1_1_object}{Object} resource.  
+
+
+
+
+{\ttfamily \#include $<$Aptos\+Token\+Client.\+h$>$}
+
+Inheritance diagram for Aptos\+::Rest\+::Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_aptos_1_1_rest_1_1_object}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_object_ad782eaa68abd6b49fcddf6a4c47a2eb5}\label{class_aptos_1_1_rest_1_1_object_ad782eaa68abd6b49fcddf6a4c47a2eb5} 
+{\bfseries Object} (bool allow\+Ungated\+Transfer, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} owner)
+\item 
+std\+::string \mbox{\hyperlink{class_aptos_1_1_rest_1_1_object_aa055058be241e9eb0c77afc7869b4ed0}{Get\+Struct\+Tag}} () const override
+\item 
+std\+::string \mbox{\hyperlink{class_aptos_1_1_rest_1_1_object_ad83535ccc71226bc5c42c3dad313ab26}{To\+String}} () const override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{IResource}} $>$ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_object_a303cf9ae7397f1290330b7eab1966edd}{Parse}} (std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Resource\+Data\+Base $>$ resource)
+\begin{DoxyCompactList}\small\item\em Parses a JSON string representation of a resource into an \doxylink{class_aptos_1_1_rest_1_1_object}{Object}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{Aptos\+::\+Rest\+::\+IResource}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{IResource}} $>$ {\bfseries Parse} (std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Resource\+Data\+Base $>$ resource)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_object_a2a98a155e165cec2be3c509ab254522d}\label{class_aptos_1_1_rest_1_1_object_a2a98a155e165cec2be3c509ab254522d} 
+static const std\+::string {\bfseries Struct\+Tag} = "{}0x1\+::object\+::\+Object\+Core"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an \doxylink{class_aptos_1_1_rest_1_1_object}{Object} resource. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_rest_1_1_object_aa055058be241e9eb0c77afc7869b4ed0}\label{class_aptos_1_1_rest_1_1_object_aa055058be241e9eb0c77afc7869b4ed0} 
+\index{Aptos::Rest::Object@{Aptos::Rest::Object}!GetStructTag@{GetStructTag}}
+\index{GetStructTag@{GetStructTag}!Aptos::Rest::Object@{Aptos::Rest::Object}}
+\doxysubsubsection{\texorpdfstring{GetStructTag()}{GetStructTag()}}
+{\footnotesize\ttfamily std\+::string Aptos\+::\+Rest\+::\+Object\+::\+Get\+Struct\+Tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{Aptos\+::\+Rest\+::\+IResource}}.
+
+\Hypertarget{class_aptos_1_1_rest_1_1_object_a303cf9ae7397f1290330b7eab1966edd}\label{class_aptos_1_1_rest_1_1_object_a303cf9ae7397f1290330b7eab1966edd} 
+\index{Aptos::Rest::Object@{Aptos::Rest::Object}!Parse@{Parse}}
+\index{Parse@{Parse}!Aptos::Rest::Object@{Aptos::Rest::Object}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{IResource}} $>$ Aptos\+::\+Rest\+::\+Object\+::\+Parse (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Resource\+Data\+Base $>$}]{resource }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Parses a JSON string representation of a resource into an \doxylink{class_aptos_1_1_rest_1_1_object}{Object}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em resource\+Json} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_aptos_1_1_rest_1_1_object_ad83535ccc71226bc5c42c3dad313ab26}\label{class_aptos_1_1_rest_1_1_object_ad83535ccc71226bc5c42c3dad313ab26} 
+\index{Aptos::Rest::Object@{Aptos::Rest::Object}!ToString@{ToString}}
+\index{ToString@{ToString}!Aptos::Rest::Object@{Aptos::Rest::Object}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Aptos\+::\+Rest\+::\+Object\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{Aptos\+::\+Rest\+::\+IResource}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+REST/Aptos\+Token\+Client.\+h\item 
+REST/Aptos\+Token\+Client.\+cpp\end{DoxyCompactItemize}

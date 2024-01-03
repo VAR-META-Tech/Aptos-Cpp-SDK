@@ -1,0 +1,163 @@
+\doxysection{Aptos\+::BCS\+::Ed25519\+Authenticator Class Reference}
+\hypertarget{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator}{}\label{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator}\index{Aptos::BCS::Ed25519Authenticator@{Aptos::BCS::Ed25519Authenticator}}
+
+
+ED25519 \doxylink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator}.  
+
+
+
+
+{\ttfamily \#include $<$Authenticator.\+h$>$}
+
+Inheritance diagram for Aptos\+::BCS\+::Ed25519\+Authenticator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_adc45145585b676eded84451fec205d4c}{Ed25519\+Authenticator}} (\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_public_key}{Accounts\+::\+Public\+Key}} public\+Key, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature}{Accounts\+::\+Signature}} signature)
+\begin{DoxyCompactList}\small\item\em Creates an \doxylink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator}{Ed25519\+Authenticator} using a given public key and signature. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a9fb86454de4eb626e9b06ef5e654c33b}{Verify}} (const Crypto\+PP\+::\+Sec\+Byte\+Block \&data) override
+\begin{DoxyCompactList}\small\item\em Verifies the data with the signature. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a6ab888a2e5afcb3a0e8d3c7c01ee0836}{Serialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_ae0a798dbdfb62e3afe967ebc0cec42ae}\label{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_ae0a798dbdfb62e3afe967ebc0cec42ae} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator}{Ed25519\+Authenticator}} \&other) const
+\item 
+size\+\_\+t \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a62a4ce89b56e551c8e839e63811a1046}{Get\+Hash\+Code}} () const override
+\item 
+std\+::string \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a2ddb6d992dff3b99c7cfb5705a709493}{To\+String}} () const override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_ac77e239d3b6e0c5c85a019e567b9fa91}\label{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_ac77e239d3b6e0c5c85a019e567b9fa91} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_aa692ec6a618d04663c1e5d3cf83f59d7}{Deserialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a9f97e86f0b332e907775b91ed5193118}\label{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a9f97e86f0b332e907775b91ed5193118} 
+\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_public_key}{Accounts\+::\+Public\+Key}} {\bfseries m\+\_\+public\+Key}
+\begin{DoxyCompactList}\small\item\em The authenticators public key. \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a49eae3fb97845a3d94466e5c2b2b63ff}\label{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a49eae3fb97845a3d94466e5c2b2b63ff} 
+\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature}{Accounts\+::\+Signature}} {\bfseries m\+\_\+signature}
+\begin{DoxyCompactList}\small\item\em The authenticator\textquotesingle{}s public key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+ED25519 \doxylink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_adc45145585b676eded84451fec205d4c}\label{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_adc45145585b676eded84451fec205d4c} 
+\index{Aptos::BCS::Ed25519Authenticator@{Aptos::BCS::Ed25519Authenticator}!Ed25519Authenticator@{Ed25519Authenticator}}
+\index{Ed25519Authenticator@{Ed25519Authenticator}!Aptos::BCS::Ed25519Authenticator@{Aptos::BCS::Ed25519Authenticator}}
+\doxysubsubsection{\texorpdfstring{Ed25519Authenticator()}{Ed25519Authenticator()}}
+{\footnotesize\ttfamily Aptos\+::\+BCS\+::\+Ed25519\+Authenticator\+::\+Ed25519\+Authenticator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_public_key}{Accounts\+::\+Public\+Key}}}]{public\+Key,  }\item[{\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature}{Accounts\+::\+Signature}}}]{signature }\end{DoxyParamCaption})}
+
+
+
+Creates an \doxylink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator}{Ed25519\+Authenticator} using a given public key and signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Key} & \\
+\hline
+{\em signature} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a62a4ce89b56e551c8e839e63811a1046}\label{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a62a4ce89b56e551c8e839e63811a1046} 
+\index{Aptos::BCS::Ed25519Authenticator@{Aptos::BCS::Ed25519Authenticator}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!Aptos::BCS::Ed25519Authenticator@{Aptos::BCS::Ed25519Authenticator}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}}
+{\footnotesize\ttfamily size\+\_\+t Aptos\+::\+BCS\+::\+Ed25519\+Authenticator\+::\+Get\+Hash\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Reimplemented from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a6ab888a2e5afcb3a0e8d3c7c01ee0836}\label{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a6ab888a2e5afcb3a0e8d3c7c01ee0836} 
+\index{Aptos::BCS::Ed25519Authenticator@{Aptos::BCS::Ed25519Authenticator}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Aptos::BCS::Ed25519Authenticator@{Aptos::BCS::Ed25519Authenticator}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Aptos\+::\+BCS\+::\+Ed25519\+Authenticator\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_a69bdbb0faf3fda49df818174878938b1}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a2ddb6d992dff3b99c7cfb5705a709493}\label{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a2ddb6d992dff3b99c7cfb5705a709493} 
+\index{Aptos::BCS::Ed25519Authenticator@{Aptos::BCS::Ed25519Authenticator}!ToString@{ToString}}
+\index{ToString@{ToString}!Aptos::BCS::Ed25519Authenticator@{Aptos::BCS::Ed25519Authenticator}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Aptos\+::\+BCS\+::\+Ed25519\+Authenticator\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a9fb86454de4eb626e9b06ef5e654c33b}\label{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a9fb86454de4eb626e9b06ef5e654c33b} 
+\index{Aptos::BCS::Ed25519Authenticator@{Aptos::BCS::Ed25519Authenticator}!Verify@{Verify}}
+\index{Verify@{Verify}!Aptos::BCS::Ed25519Authenticator@{Aptos::BCS::Ed25519Authenticator}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily bool Aptos\+::\+BCS\+::\+Ed25519\+Authenticator\+::\+Verify (\begin{DoxyParamCaption}\item[{const Crypto\+PP\+::\+Sec\+Byte\+Block \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Verifies the data with the signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_authenticator}{Aptos\+::\+BCS\+::\+IAuthenticator}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Authenticator.\+h\item 
+BCS/Authenticator.\+cpp\end{DoxyCompactItemize}

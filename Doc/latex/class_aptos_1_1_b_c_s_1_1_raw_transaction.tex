@@ -1,0 +1,99 @@
+\doxysection{Aptos\+::BCS\+::Raw\+Transaction Class Reference}
+\hypertarget{class_aptos_1_1_b_c_s_1_1_raw_transaction}{}\label{class_aptos_1_1_b_c_s_1_1_raw_transaction}\index{Aptos::BCS::RawTransaction@{Aptos::BCS::RawTransaction}}
+
+
+Representation of a raw transaction.  
+
+
+
+
+{\ttfamily \#include $<$rawtransaction.\+h$>$}
+
+Inheritance diagram for Aptos\+::BCS\+::Raw\+Transaction\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_aptos_1_1_b_c_s_1_1_raw_transaction}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_raw_transaction_a1aaed303e725529b00bab87816902c39}\label{class_aptos_1_1_b_c_s_1_1_raw_transaction_a1aaed303e725529b00bab87816902c39} 
+{\bfseries Raw\+Transaction} (const \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} \&sender, int sequence\+Number, const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload}{Transaction\+Payload}} \&payload, int max\+Gas\+Amount, int gas\+Unit\+Price, uint64\+\_\+t expiration\+Timestamps\+Secs, int chain\+Id)
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_raw_transaction_a83eb230883982d83e868bbe556f702fe}\label{class_aptos_1_1_b_c_s_1_1_raw_transaction_a83eb230883982d83e868bbe556f702fe} 
+std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries Prehash} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_raw_transaction_a10384ad68f5533a15997db54ac2a442f}\label{class_aptos_1_1_b_c_s_1_1_raw_transaction_a10384ad68f5533a15997db54ac2a442f} 
+std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries Keyed} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_raw_transaction_a38ac0cea31582c96caf01198506cf930}\label{class_aptos_1_1_b_c_s_1_1_raw_transaction_a38ac0cea31582c96caf01198506cf930} 
+\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature}{Accounts\+::\+Signature}} {\bfseries Sign} (\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_private_key}{Accounts\+::\+Private\+Key}} key)
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_raw_transaction_a06ea36c6ce1b03af590a4f920adee785}\label{class_aptos_1_1_b_c_s_1_1_raw_transaction_a06ea36c6ce1b03af590a4f920adee785} 
+bool {\bfseries Verify} (\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_public_key}{Accounts\+::\+Public\+Key}} key, const \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature}{Accounts\+::\+Signature}} \&signature)
+\item 
+void \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_raw_transaction_ae01b43ca8154808393bc6b4e9680b9dd}{Serialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_raw_transaction_a8d391ac26b35c544d47a63d6f6e49cfe}{To\+String}} () const override
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_raw_transaction_abc710138db44a5ff9e80c0a71f87c7fb}\label{class_aptos_1_1_b_c_s_1_1_raw_transaction_abc710138db44a5ff9e80c0a71f87c7fb} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_raw_transaction}{Raw\+Transaction}} \&other) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_ad57058ced27d57185e77f7e31df68b36}{Get\+Hash\+Code}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_raw_transaction_a18ec6d97a8d8865d3418121f95079254}\label{class_aptos_1_1_b_c_s_1_1_raw_transaction_a18ec6d97a8d8865d3418121f95079254} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_aa692ec6a618d04663c1e5d3cf83f59d7}{Deserialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of a raw transaction. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_raw_transaction_ae01b43ca8154808393bc6b4e9680b9dd}\label{class_aptos_1_1_b_c_s_1_1_raw_transaction_ae01b43ca8154808393bc6b4e9680b9dd} 
+\index{Aptos::BCS::RawTransaction@{Aptos::BCS::RawTransaction}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Aptos::BCS::RawTransaction@{Aptos::BCS::RawTransaction}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Aptos\+::\+BCS\+::\+Raw\+Transaction\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_a69bdbb0faf3fda49df818174878938b1}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_raw_transaction_a8d391ac26b35c544d47a63d6f6e49cfe}\label{class_aptos_1_1_b_c_s_1_1_raw_transaction_a8d391ac26b35c544d47a63d6f6e49cfe} 
+\index{Aptos::BCS::RawTransaction@{Aptos::BCS::RawTransaction}!ToString@{ToString}}
+\index{ToString@{ToString}!Aptos::BCS::RawTransaction@{Aptos::BCS::RawTransaction}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Aptos\+::\+BCS\+::\+Raw\+Transaction\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/rawtransaction.\+h\item 
+BCS/rawtransaction.\+cpp\end{DoxyCompactItemize}

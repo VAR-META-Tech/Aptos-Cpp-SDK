@@ -1,0 +1,38 @@
+\doxysection{Transaction\+Payload.\+h}
+\hypertarget{_transaction_payload_8h_source}{}\label{_transaction_payload_8h_source}\index{BCS/TransactionPayload.h@{BCS/TransactionPayload.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TRANSACTIONPAYLOAD\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TRANSACTIONPAYLOAD\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}BCSTypes.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }Aptos::BCS}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{enum\ class}\ TransactionPayloadTypeTag}
+\DoxyCodeLine{00008\ \ \ \ \ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ SCRIPT,}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ MODULE\_BUNDLE,}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ SCRIPT\_FUNCTION}
+\DoxyCodeLine{00012\ \ \ \ \ \};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload}{TransactionPayload}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}}}
+\DoxyCodeLine{00018\ \ \ \ \ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload}{TransactionPayload}}(\textcolor{keyword}{const}\ std::shared\_ptr<ISerializable>\ \&payload);}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ TransactionPayloadTypeTag\ Variant()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload_ac5b8e1aac4b088b35cace3c75a018105}{Serialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&serializer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<ISerializable>\ Deserialize(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}\ \&deserializer);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ Equals(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload}{TransactionPayload}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ GetHashCode()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ std::shared\_ptr<ISerializable>\ value;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ TransactionPayloadTypeTag\ variant;}
+\DoxyCodeLine{00031\ \ \ \ \ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload}{TransactionPayload}}\ \&lhs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload}{TransactionPayload}}\ \&rhs);}
+\DoxyCodeLine{00034\ \}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TRANSACTIONPAYLOAD\_H}}
+
+\end{DoxyCode}

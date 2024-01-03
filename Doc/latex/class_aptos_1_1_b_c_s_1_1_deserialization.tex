@@ -1,0 +1,88 @@
+\doxysection{Aptos\+::BCS\+::Deserialization Class Reference}
+\hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization}{}\label{class_aptos_1_1_b_c_s_1_1_deserialization}\index{Aptos::BCS::Deserialization@{Aptos::BCS::Deserialization}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_a4397e91c72eb7833b38ac87fc194ebab}\label{class_aptos_1_1_b_c_s_1_1_deserialization_a4397e91c72eb7833b38ac87fc194ebab} 
+{\bfseries Deserialization} (const std\+::vector$<$ uint8\+\_\+t $>$ \&data)
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_a9c38990759f1aaa379637d076164bdae}\label{class_aptos_1_1_b_c_s_1_1_deserialization_a9c38990759f1aaa379637d076164bdae} 
+std\+::size\+\_\+t {\bfseries Remaining} () const
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_a58c1b095f2e007002683d9cebbb9f9f0}\label{class_aptos_1_1_b_c_s_1_1_deserialization_a58c1b095f2e007002683d9cebbb9f9f0} 
+bool {\bfseries Deserialize\+Bool} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_ab489db7ae305953110c8aedc6c6f0c91}\label{class_aptos_1_1_b_c_s_1_1_deserialization_ab489db7ae305953110c8aedc6c6f0c91} 
+std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries To\+Bytes} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_a7560ae1d34b120dda2d429d65eb94da0}\label{class_aptos_1_1_b_c_s_1_1_deserialization_a7560ae1d34b120dda2d429d65eb94da0} 
+std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries Fixed\+Bytes} (std\+::size\+\_\+t length)
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_a43ad2e4813409c962376320b5f8bcaa5}\label{class_aptos_1_1_b_c_s_1_1_deserialization_a43ad2e4813409c962376320b5f8bcaa5} 
+\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_b_c_s_map}{BCSMap}} {\bfseries Deserialize\+Map} (std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&)$>$ deserialize\+Func)
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization_a950a5b2c9b32ad5c086bb1c0908818d8}{Deserialize\+Sequence}} (std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&)$>$ deserialize\+Func)
+\begin{DoxyCompactList}\small\item\em Deserializes a list of objects of same type. \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_a1c5ba91513db1e0082eb38f73776d1e3}\label{class_aptos_1_1_b_c_s_1_1_deserialization_a1c5ba91513db1e0082eb38f73776d1e3} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{Tag\+Sequence}} $>$ {\bfseries Deserialize\+Tag\+Sequence} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_accf5ac3babbd34443ca901ed6deb774a}\label{class_aptos_1_1_b_c_s_1_1_deserialization_accf5ac3babbd34443ca901ed6deb774a} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}} $>$ {\bfseries Deserialize\+Script\+Arg\+Sequence} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_a833297287ea79667b1dae55c15807ebb}\label{class_aptos_1_1_b_c_s_1_1_deserialization_a833297287ea79667b1dae55c15807ebb} 
+std\+::vector$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}} $>$ {\bfseries Deserialize\+Arg\+Sequence} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_a4cea15342db9f707de58d44b5d12417b}\label{class_aptos_1_1_b_c_s_1_1_deserialization_a4cea15342db9f707de58d44b5d12417b} 
+std\+::string {\bfseries Deserialize\+String} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_aea309f1c5266ef94d14f32d44c4dc327}\label{class_aptos_1_1_b_c_s_1_1_deserialization_aea309f1c5266ef94d14f32d44c4dc327} 
+\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} {\bfseries Deserialize\+Struct} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_a131bd4050a43df6a12d0f4969ba9bd48}\label{class_aptos_1_1_b_c_s_1_1_deserialization_a131bd4050a43df6a12d0f4969ba9bd48} 
+uint8\+\_\+t {\bfseries Deserialize\+U8} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_ae9945c6aec931f5e3e47c0b7f209e4a4}\label{class_aptos_1_1_b_c_s_1_1_deserialization_ae9945c6aec931f5e3e47c0b7f209e4a4} 
+uint16\+\_\+t {\bfseries Deserialize\+U16} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_a4c5e0a8166fac1d6f994c65c7ef0ac58}\label{class_aptos_1_1_b_c_s_1_1_deserialization_a4c5e0a8166fac1d6f994c65c7ef0ac58} 
+uint32\+\_\+t {\bfseries Deserialize\+U32} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_a4e7e4f4b4d42733a5f48e71e52ce9fcf}\label{class_aptos_1_1_b_c_s_1_1_deserialization_a4e7e4f4b4d42733a5f48e71e52ce9fcf} 
+uint64\+\_\+t {\bfseries Deserialize\+U64} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_ab62af7b1fd102f8cf506a57f60ab2e85}\label{class_aptos_1_1_b_c_s_1_1_deserialization_ab62af7b1fd102f8cf506a57f60ab2e85} 
+Crypto\+PP\+::\+Integer {\bfseries Deserialize\+U128} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_a93eed931cb94da2e6af7006add8f9d0c}\label{class_aptos_1_1_b_c_s_1_1_deserialization_a93eed931cb94da2e6af7006add8f9d0c} 
+Crypto\+PP\+::\+Integer {\bfseries Deserialize\+U256} ()
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_ad09ee0ab9daaac72021076a8716afe5c}\label{class_aptos_1_1_b_c_s_1_1_deserialization_ad09ee0ab9daaac72021076a8716afe5c} 
+std\+::size\+\_\+t {\bfseries Deserialize\+Uleb128} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_deserialization_a950a5b2c9b32ad5c086bb1c0908818d8}\label{class_aptos_1_1_b_c_s_1_1_deserialization_a950a5b2c9b32ad5c086bb1c0908818d8} 
+\index{Aptos::BCS::Deserialization@{Aptos::BCS::Deserialization}!DeserializeSequence@{DeserializeSequence}}
+\index{DeserializeSequence@{DeserializeSequence}!Aptos::BCS::Deserialization@{Aptos::BCS::Deserialization}}
+\doxysubsubsection{\texorpdfstring{DeserializeSequence()}{DeserializeSequence()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ $>$ Aptos\+::\+BCS\+::\+Deserialization\+::\+Deserialize\+Sequence (\begin{DoxyParamCaption}\item[{std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&)$>$}]{deserialize\+Func }\end{DoxyParamCaption})}
+
+
+
+Deserializes a list of objects of same type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value\+Decoder\+Type} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Deserialization.\+h\item 
+BCS/Deserialization.\+cpp\end{DoxyCompactItemize}

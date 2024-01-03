@@ -1,0 +1,156 @@
+\doxysection{Aptos\+Token\+Client.\+h}
+\hypertarget{_aptos_token_client_8h_source}{}\label{_aptos_token_client_8h_source}\index{REST/AptosTokenClient.h@{REST/AptosTokenClient.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ APTOSTOKENCLIENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ APTOSTOKENCLIENT\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Model/Resources/Base/ResourceDataBase.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../Accounts/AccountAddress.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../BCS/BString.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../BCS/Bytes.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }Aptos::Rest}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{IResource}}}
+\DoxyCodeLine{00017\ \ \ \ \ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ GetStructTag()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IResource>\ Parse(std::shared\_ptr<AptosRESTModel::ResourceDataBase>\ resource);}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ ToString()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00022\ \ \ \ \ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_object}{Object}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{IResource}}}
+\DoxyCodeLine{00028\ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ AllowUngatedTransfer;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ Owner;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\ StructTag;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_object}{Object}}(\textcolor{keywordtype}{bool}\ allowUngatedTransfer,\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ owner);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IResource>\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_object_a303cf9ae7397f1290330b7eab1966edd}{Parse}}(std::shared\_ptr<AptosRESTModel::ResourceDataBase>\ resource);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ std::string\ GetStructTag()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00045\ \ \ \ \ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_collection}{Collection}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{IResource}}}
+\DoxyCodeLine{00051\ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ Creator;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ std::string\ Description;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ std::string\ Name;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ std::string\ Uri;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\ StructTag;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_collection}{Collection}}(\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ creator,\ \textcolor{keyword}{const}\ std::string\ \&description,\ \textcolor{keyword}{const}\ std::string\ \&name,\ \textcolor{keyword}{const}\ std::string\ \&uri);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IResource>\ Parse(std::shared\_ptr<AptosRESTModel::ResourceDataBase>\ resource);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ std::string\ GetStructTag()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00067\ \ \ \ \ \};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_royalty}{Royalty}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{IResource}}}
+\DoxyCodeLine{00070\ \ \ \ \ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ Numerator;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ Denominator;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ PayeeAddress;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\ StructTag;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_royalty}{Royalty}}(\textcolor{keywordtype}{int}\ numerator,\ \textcolor{keywordtype}{int}\ denominator,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ \&payeeAddress);}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IResource>\ Parse(std::shared\_ptr<AptosRESTModel::ResourceDataBase>\ resource);}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ std::string\ GetStructTag()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00083\ \ \ \ \ \};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{IResource}}}
+\DoxyCodeLine{00089\ \ \ \ \ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_collection}{Collection}};}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ Index;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ std::string\ Description;}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ std::string\ Name;}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ std::string\ Uri;}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\ StructTag;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ \&collection,\ \textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ std::string\ \&description,\ \textcolor{keyword}{const}\ std::string\ \&name,\ \textcolor{keyword}{const}\ std::string\ \&uri);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IResource>\ Parse(std::shared\_ptr<AptosRESTModel::ResourceDataBase>\ resource);}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ std::string\ GetStructTag()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00103\ \ \ \ \ \};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_property}{Property}}}
+\DoxyCodeLine{00106\ \ \ \ \ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_b_string}{BCS::BString}}\ Name;}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_b_string}{BCS::BString}}\ PropertyType;}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ std::shared\_ptr<BCS::ISerializable>\ Value;}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ BOOLTYPE\ =\ 0;}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ U8TYPE\ =\ 1;}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ U16TYPE\ =\ 2;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ U32TYPE\ =\ 3;}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ U64TYPE\ =\ 4;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ U128TYPE\ =\ 5;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ U256TYPE\ =\ 6;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ ADDRESSTYPE\ =\ 7;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ BYTE\_VECTORTYPE\ =\ 8;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ STRINGTYPE\ =\ 9;}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property}{Property}}(\textcolor{keyword}{const}\ std::string\ \&name,\ \textcolor{keyword}{const}\ std::string\ \&propertyType,\ std::shared\_ptr<BCS::ISerializable>\ value);}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property}{Property}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_b_string}{BCS::BString}}\ \&name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_b_string}{BCS::BString}}\ \&propertyType,\ std::shared\_ptr<BCS::ISerializable>\ value);}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ SerializeValue()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<BCS::ISerializable>>\ ToTransactionArguments();}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property}{Property}}\ Parse(\textcolor{keyword}{const}\ std::string\ \&Name,\ \textcolor{keywordtype}{int}\ PropertyType,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes}{BCS::Bytes}}\ \&Value);}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property}{Property}}\ BoolProp(\textcolor{keyword}{const}\ std::string\ \&Name,\ \textcolor{keywordtype}{bool}\ Value);}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property}{Property}}\ U8Prop(\textcolor{keyword}{const}\ std::string\ \&Name,\ uint8\_t\ Value);}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property}{Property}}\ U32Prop(\textcolor{keyword}{const}\ std::string\ \&Name,\ uint32\_t\ Value);}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property}{Property}}\ U64Prop(\textcolor{keyword}{const}\ std::string\ \&Name,\ uint64\_t\ Value);}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ static\ Property\ U128Prop(const\ std::string\&\ Name,\ std::uint128\_t\ Value);}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property}{Property}}\ StringProp(\textcolor{keyword}{const}\ std::string\ \&Name,\ \textcolor{keyword}{const}\ std::string\ \&Value);}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property}{Property}}\ BytesProp(\textcolor{keyword}{const}\ std::string\ \&Name,\ \textcolor{keyword}{const}\ std::vector<uint8\_t>\ \&Value);}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_b_string}{BCS::BString}}\ \&getName()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_b_string}{BCS::BString}}\ \&getPropertyType()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::shared\_ptr<BCS::ISerializable>\ \&getValue()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00140\ \ \ \ \ \};}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_property_map}{PropertyMap}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{IResource}}}
+\DoxyCodeLine{00143\ \ \ \ \ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ std::vector<Property>\ Properties;}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\ StructTag;}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property_map}{PropertyMap}}(\textcolor{keyword}{const}\ std::vector<Property>\ \&Properties);}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ std::tuple<std::vector<BCS::BString>,\ std::vector<BCS::BString>,\ std::vector<std::vector<uint8\_t>>>\ ToTuple()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IResource>\ Parse(std::shared\_ptr<AptosRESTModel::ResourceDataBase>\ resource);}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ std::string\ GetStructTag()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00154\ \ \ \ \ \};}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_read_object}{ReadObject}}}
+\DoxyCodeLine{00157\ \ \ \ \ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }FuncValue\ =\ std::shared\_ptr<IResource>(std::shared\_ptr<AptosRESTModel::ResourceDataBase>);}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::map<std::string,\ FuncValue\ *>\ ResourceMap;}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_read_object}{ReadObject}}(\textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::shared\_ptr<IResource>>\ \&Resources);}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ std::unordered\_map<std::string,\ std::shared\_ptr<IResource>>\ Resources;}
+\DoxyCodeLine{00166\ \ \ \ \ \};}
+\DoxyCodeLine{00167\ \}}
+\DoxyCodeLine{00168\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ APTOSTOKENCLIENT\_H}}
+
+\end{DoxyCode}

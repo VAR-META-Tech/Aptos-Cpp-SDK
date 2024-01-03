@@ -1,0 +1,71 @@
+\doxysection{Aptos\+::Accounts\+::Ed25519\+Bip32 Class Reference}
+\hypertarget{class_aptos_1_1_accounts_1_1_ed25519_bip32}{}\label{class_aptos_1_1_accounts_1_1_ed25519_bip32}\index{Aptos::Accounts::Ed25519Bip32@{Aptos::Accounts::Ed25519Bip32}}
+
+
+An implementation of Ed25519 based BIP32 key generation.  
+
+
+
+
+{\ttfamily \#include $<$Ed25519\+Bip32.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_ed25519_bip32_a6e732a9b37d135eb16f625a721f6cb72}{Ed25519\+Bip32}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&seed)
+\begin{DoxyCompactList}\small\item\em Initialize the ed25519 based bip32 key generator with the passed seed. \end{DoxyCompactList}\item 
+std\+::pair$<$ Crypto\+PP\+::\+Sec\+Byte\+Block, Crypto\+PP\+::\+Sec\+Byte\+Block $>$ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_ed25519_bip32_a94e9c60b27de1b193e3b451b72dbe253}{Derive\+Path}} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Derives a child key from the passed derivation path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An implementation of Ed25519 based BIP32 key generation. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_aptos_1_1_accounts_1_1_ed25519_bip32_a6e732a9b37d135eb16f625a721f6cb72}\label{class_aptos_1_1_accounts_1_1_ed25519_bip32_a6e732a9b37d135eb16f625a721f6cb72} 
+\index{Aptos::Accounts::Ed25519Bip32@{Aptos::Accounts::Ed25519Bip32}!Ed25519Bip32@{Ed25519Bip32}}
+\index{Ed25519Bip32@{Ed25519Bip32}!Aptos::Accounts::Ed25519Bip32@{Aptos::Accounts::Ed25519Bip32}}
+\doxysubsubsection{\texorpdfstring{Ed25519Bip32()}{Ed25519Bip32()}}
+{\footnotesize\ttfamily Aptos\+::\+Accounts\+::\+Ed25519\+Bip32\+::\+Ed25519\+Bip32 (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{seed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Initialize the ed25519 based bip32 key generator with the passed seed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seed} & The seed.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_accounts_1_1_ed25519_bip32_a94e9c60b27de1b193e3b451b72dbe253}\label{class_aptos_1_1_accounts_1_1_ed25519_bip32_a94e9c60b27de1b193e3b451b72dbe253} 
+\index{Aptos::Accounts::Ed25519Bip32@{Aptos::Accounts::Ed25519Bip32}!DerivePath@{DerivePath}}
+\index{DerivePath@{DerivePath}!Aptos::Accounts::Ed25519Bip32@{Aptos::Accounts::Ed25519Bip32}}
+\doxysubsubsection{\texorpdfstring{DerivePath()}{DerivePath()}}
+{\footnotesize\ttfamily std\+::pair$<$ Crypto\+PP\+::\+Sec\+Byte\+Block, Crypto\+PP\+::\+Sec\+Byte\+Block $>$ Aptos\+::\+Accounts\+::\+Ed25519\+Bip32\+::\+Derive\+Path (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Derives a child key from the passed derivation path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The derivation path.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The key and chaincode.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Format\+Exception} & Thrown when the passed derivation path is invalid.\\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Accounts/Ed25519\+Bip32.\+h\item 
+Accounts/Ed25519\+Bip32.\+cpp\end{DoxyCompactItemize}

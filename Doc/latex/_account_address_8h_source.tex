@@ -1,0 +1,79 @@
+\doxysection{Account\+Address.\+h}
+\hypertarget{_account_address_8h_source}{}\label{_account_address_8h_source}\index{Accounts/AccountAddress.h@{Accounts/AccountAddress.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Anh\ NPH\ on\ 28/09/2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ APTOS\_ACCOUNTADDRESS\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ APTOS\_ACCOUNTADDRESS\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../BCS/BCSTypes.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cryptopp/xed25519.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../BCS/Serialization.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}../BCS/Deserialization.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}multipublickey.h"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }Aptos::Accounts}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_aptos_1_1_accounts_1_1_auth_key_scheme}{AuthKeyScheme}}}
+\DoxyCodeLine{00020\ \ \ \ \ \{}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ CryptoPP::byte\ \mbox{\hyperlink{struct_aptos_1_1_accounts_1_1_auth_key_scheme_a5bc316c097561b098c5af5ae8a67875b}{Ed25519}}\ =\ 0x00;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ CryptoPP::byte\ \mbox{\hyperlink{struct_aptos_1_1_accounts_1_1_auth_key_scheme_ab12759e6dccdd5377a1322240eb2c94e}{MultiEd25519}}\ =\ 0x01;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ CryptoPP::byte\ \mbox{\hyperlink{struct_aptos_1_1_accounts_1_1_auth_key_scheme_a8693f4a019d0ea95d1ea54287811daa5}{DeriveObjectAddressFromGuid}}\ =\ 0xFD;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ CryptoPP::byte\ \mbox{\hyperlink{struct_aptos_1_1_accounts_1_1_auth_key_scheme_a1acc56dbcaac39ea9dd576f2b7da33cc}{DeriveObjectAddressFromSeed}}\ =\ 0xFE;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ CryptoPP::byte\ \mbox{\hyperlink{struct_aptos_1_1_accounts_1_1_auth_key_scheme_af0b719f6fca5bb95cc5a266fb4b211e8}{DeriveResourceAccountAddress}}\ =\ 0xFF;}
+\DoxyCodeLine{00046\ \ \ \ \ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_tag}{BCS::ISerializableTag}}}
+\DoxyCodeLine{00053\ \ \ \ \ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ CryptoPP::SecByteBlock\ \_addressBytes;}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_a9804533d1609342e6de7215f27524728}{Length}}\ =\ 32;}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}(\textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_a3ef5783e09ef5d193cc737059c878007}{addressBytes}});}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_a7dd2b1bc464f605626133d61dcf1ec3e}{ToString}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_a912af84aca30a0414c0cf3c5f4e53653}{FromHex}}(std::string\ address);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_ac8dbb4e6fe16e31603a4f537edc33243}{FromKey}}(\textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&publicKey);}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_ac8dbb4e6fe16e31603a4f537edc33243}{FromKey}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_public_key}{PublicKey}}\ \&publicKey);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_a822362c3a0e4dc100dd44368456b6963}{Serialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{BCS::Serialization}}\ \&serializer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<BCS::ISerializableTag>\ Deserialize(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{BCS::Deserialization}}\ \&deserializer);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_a83d4cd962997ea0740cf7f467d154c0f}{ForNamedObject}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ \&creator,\ \textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&seed);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_a141eaee49bb59baa9d39e73cb567e91b}{ForNamedToken}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ \&creator,}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&collectionName,}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&tokenName);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_a8ea49d5285ea8e928aef741d362aad9f}{ForNamedCollection}}(\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ creator,\ std::string\ collectionName);}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_aae8f4e3500c99788ea38193c2d96d255}{ForResourceAccount}}(\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ creator,\ \textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&seed);}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_a6246f062b901fc82838270ef2aba7e26}{FromMultiEd25519}}(\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_public_key}{MultiPublicKey}}\ keys);}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ GetHashCode()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ BCS::TypeTag\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_ac4f0d811e0b022e02e647ea4538ebbba}{Variant}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ CryptoPP::SecByteBlock\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_a3ef5783e09ef5d193cc737059c878007}{addressBytes}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsSpecial()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00186\ \ \ \ \ \};}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ \&lhs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ \&rhs);}
+\DoxyCodeLine{00189\ \}}
+\DoxyCodeLine{00190\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ APTOS\_ACCOUNTADDRESS\_H}}
+
+\end{DoxyCode}

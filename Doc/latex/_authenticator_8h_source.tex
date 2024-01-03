@@ -1,0 +1,129 @@
+\doxysection{Authenticator.\+h}
+\hypertarget{_authenticator_8h_source}{}\label{_authenticator_8h_source}\index{BCS/Authenticator.h@{BCS/Authenticator.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ AUTHENTICATOR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ AUTHENTICATOR\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}BCSTypes.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Serialization.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../Accounts/Signature.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../Accounts/PublicKey.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Sequence.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}../Accounts/AccountAddress.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../Accounts/multisignature.h"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }Aptos::BCS}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_authenticator}{IAuthenticator}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}}}
+\DoxyCodeLine{00022\ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ Verify(\textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&data)\ =\ 0;}
+\DoxyCodeLine{00025\ \ \ \ \ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_authenticator}{IAuthenticator}}}
+\DoxyCodeLine{00031\ \ \ \ \ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum}\ VariantType}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ ED25519\ =\ 0,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ MULTI\_ED25519\ =\ 1,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ MULTI\_AGENT\ =\ 2}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator}}(\textcolor{keyword}{const}\ std::shared\_ptr<IAuthenticator>\ \&authenticator);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ VariantType\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator_aaf83819aa3f8e5dae33d6b6cb46c7471}{GetVariant}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ std::shared\_ptr<IAuthenticator>\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator_acd0029efb59612bb3b738aaba8eca1b2}{GetAuthenticator}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator_aed8b458a7c24a539e0d9d632a01f452a}{Verify}}(\textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&data)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator_a94f30cefb61799d92fbd2ed76cbe3aab}{Serialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&serializer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<ISerializable>\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator_a8beca210cb153bfc459dc2434b6bb4d0}{Deserialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}\ \&deserializer);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator_a2bd5fdc844bf373134a667560d358224}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator_a640f6a9a6dd1f8ea339edaaa51b6cac9}{GetHashCode}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator_affda51d5467ededd40a50733f98d0b46}{ToString}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ VariantType\ Variant;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ std::shared\_ptr<IAuthenticator>\ m\_authenticator;}
+\DoxyCodeLine{00083\ \ \ \ \ \};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator}}\ \&lhs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator}}\ \&rhs);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator}{Ed25519Authenticator}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_authenticator}{IAuthenticator}}}
+\DoxyCodeLine{00091\ \ \ \ \ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator}{Ed25519Authenticator}}(\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_public_key}{Accounts::PublicKey}}\ publicKey,\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature}{Accounts::Signature}}\ signature);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a9fb86454de4eb626e9b06ef5e654c33b}{Verify}}(\textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&data)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a6ab888a2e5afcb3a0e8d3c7c01ee0836}{Serialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&serializer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<ISerializable>\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_ac77e239d3b6e0c5c85a019e567b9fa91}{Deserialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}\ \&deserializer);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_ae0a798dbdfb62e3afe967ebc0cec42ae}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator}{Ed25519Authenticator}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a62a4ce89b56e551c8e839e63811a1046}{GetHashCode}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a2ddb6d992dff3b99c7cfb5705a709493}{ToString}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_public_key}{Accounts::PublicKey}}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a9f97e86f0b332e907775b91ed5193118}{m\_publicKey}};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature}{Accounts::Signature}}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a49eae3fb97845a3d94466e5c2b2b63ff}{m\_signature}};}
+\DoxyCodeLine{00132\ \ \ \ \ \};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator}{MultiAgentAuthenticator}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_authenticator}{IAuthenticator}}}
+\DoxyCodeLine{00138\ \ \ \ \ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator}{MultiAgentAuthenticator}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator}}\ sender,}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::tuple<std::shared\_ptr<Accounts::AccountAddress>,\ std::shared\_ptr<Authenticator>>>\ \&secondarySigners);}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a219e5466fa1c63311808d57eb275cb00}{SecondaryAddresses}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_ad215aa161de0567a0d220d4ff82de389}{Verify}}(\textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&data)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_aed37c62ac54ad1731381d00d79fc3c56}{Serialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&serializer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<ISerializable>\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_ae03a8287722cd32c0f7a46aadbc32f7a}{Deserialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}\ \&deserializer);}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a8def5290f56efaa8dcef2b233583ee04}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator}{MultiAgentAuthenticator}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a155bae249c81bce52cd35598f1c72a14}{GetHashCode}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a26efd7f152aa0a1fcdf3b9a81e93d358}{ToString}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator}{Authenticator}}\ sender;}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ std::vector<std::tuple<std::shared\_ptr<Accounts::AccountAddress>,\ std::shared\_ptr<Authenticator>>>\ secondarySigners;}
+\DoxyCodeLine{00187\ \ \ \ \ \};}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_ed25519_authenticator}{MultiEd25519Authenticator}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_authenticator}{IAuthenticator}}}
+\DoxyCodeLine{00193\ \ \ \ \ \{}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_ed25519_authenticator}{MultiEd25519Authenticator}}(\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_public_key}{Accounts::MultiPublicKey}}\ publicKey,\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_signature}{Accounts::MultiSignature}}\ signature);}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_ed25519_authenticator_afef6e4d4a18598a9749655af9ec476ba}{Verify}}(\textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&data)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_ed25519_authenticator_afa56f341d7cf30a87f1e90ccc015e6ea}{Serialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&serializer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_ed25519_authenticator_a83ede5624f30e73f291b6e217dac8315}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator}{MultiAgentAuthenticator}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<ISerializable>\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_ed25519_authenticator_aeebb9cece635e55d3d5076080de68908}{Deserialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}\ \&deserializer);}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_public_key}{Accounts::MultiPublicKey}}\ m\_publicKey;}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_signature}{Accounts::MultiSignature}}\ m\_signature;}
+\DoxyCodeLine{00225\ \ \ \ \ \};}
+\DoxyCodeLine{00226\ \}}
+\DoxyCodeLine{00227\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ AUTHENTICATOR\_H}}
+
+\end{DoxyCode}

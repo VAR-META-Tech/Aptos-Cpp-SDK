@@ -1,0 +1,22 @@
+\doxysection{Request\+Client.\+h}
+\hypertarget{_request_client_8h_source}{}\label{_request_client_8h_source}\index{REST/RequestClient.h@{REST/RequestClient.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ REQUESTCLIENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ REQUESTCLIENT\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ CPPHTTPLIB\_OPENSSL\_SUPPORT}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <httplib.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }Aptos::Rest}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_request_client}{RequestClient}}}
+\DoxyCodeLine{00012\ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ httplib::Client\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_request_client_a152dc962cf1f8293822cf4b104341b00}{GetWebClient}}(std::string\ \&uri);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_request_client_af0f0151d3c5a497ab7df3f159dbd9d75}{GetAptosHeaderValue}}();}
+\DoxyCodeLine{00026\ \ \ \ \ \};}
+\DoxyCodeLine{00027\ \}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ REQUESTCLIENT\_H}}
+
+\end{DoxyCode}

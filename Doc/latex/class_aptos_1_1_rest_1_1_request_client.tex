@@ -1,0 +1,61 @@
+\doxysection{Aptos\+::Rest\+::Request\+Client Class Reference}
+\hypertarget{class_aptos_1_1_rest_1_1_request_client}{}\label{class_aptos_1_1_rest_1_1_request_client}\index{Aptos::Rest::RequestClient@{Aptos::Rest::RequestClient}}
+
+
+Unity\+Web\+Request wrapper client.  
+
+
+
+
+{\ttfamily \#include $<$Request\+Client.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static httplib\+::\+Client \mbox{\hyperlink{class_aptos_1_1_rest_1_1_request_client_a152dc962cf1f8293822cf4b104341b00}{Get\+Web\+Client}} (std\+::string \&uri)
+\begin{DoxyCompactList}\small\item\em Get the Client object for the given path, default to GET method. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{class_aptos_1_1_rest_1_1_request_client_af0f0151d3c5a497ab7df3f159dbd9d75}{Get\+Aptos\+Header\+Value}} ()
+\begin{DoxyCompactList}\small\item\em Get the default Aptos header value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Unity\+Web\+Request wrapper client. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_rest_1_1_request_client_af0f0151d3c5a497ab7df3f159dbd9d75}\label{class_aptos_1_1_rest_1_1_request_client_af0f0151d3c5a497ab7df3f159dbd9d75} 
+\index{Aptos::Rest::RequestClient@{Aptos::Rest::RequestClient}!GetAptosHeaderValue@{GetAptosHeaderValue}}
+\index{GetAptosHeaderValue@{GetAptosHeaderValue}!Aptos::Rest::RequestClient@{Aptos::Rest::RequestClient}}
+\doxysubsubsection{\texorpdfstring{GetAptosHeaderValue()}{GetAptosHeaderValue()}}
+{\footnotesize\ttfamily std\+::string Aptos\+::\+Rest\+::\+Request\+Client\+::\+Get\+Aptos\+Header\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the default Aptos header value. 
+
+\begin{DoxyReturn}{Returns}
+String with the default Aptos header value
+\end{DoxyReturn}
+\Hypertarget{class_aptos_1_1_rest_1_1_request_client_a152dc962cf1f8293822cf4b104341b00}\label{class_aptos_1_1_rest_1_1_request_client_a152dc962cf1f8293822cf4b104341b00} 
+\index{Aptos::Rest::RequestClient@{Aptos::Rest::RequestClient}!GetWebClient@{GetWebClient}}
+\index{GetWebClient@{GetWebClient}!Aptos::Rest::RequestClient@{Aptos::Rest::RequestClient}}
+\doxysubsubsection{\texorpdfstring{GetWebClient()}{GetWebClient()}}
+{\footnotesize\ttfamily httplib\+::\+Client Aptos\+::\+Rest\+::\+Request\+Client\+::\+Get\+Web\+Client (\begin{DoxyParamCaption}\item[{std\+::string \&}]{uri }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the Client object for the given path, default to GET method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uri} & endpoint uri\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+httplib\+::\+Client object
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+REST/Request\+Client.\+h\item 
+REST/Request\+Client.\+cpp\end{DoxyCompactItemize}

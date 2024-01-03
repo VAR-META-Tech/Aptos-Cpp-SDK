@@ -1,0 +1,100 @@
+\doxysection{Aptos\+::BCS\+::ISerializable Class Reference}
+\hypertarget{class_aptos_1_1_b_c_s_1_1_i_serializable}{}\label{class_aptos_1_1_b_c_s_1_1_i_serializable}\index{Aptos::BCS::ISerializable@{Aptos::BCS::ISerializable}}
+
+
+An interfaces that enforces types to implement a serialization method.  
+
+
+
+
+{\ttfamily \#include $<$BCSTypes.\+h$>$}
+
+Inheritance diagram for Aptos\+::BCS\+::ISerializable\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{class_aptos_1_1_b_c_s_1_1_i_serializable}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_a69bdbb0faf3fda49df818174878938b1}{Serialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&serializer) const =0
+\begin{DoxyCompactList}\small\item\em Serialize the object. \end{DoxyCompactList}\item 
+virtual std\+::size\+\_\+t \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_ad57058ced27d57185e77f7e31df68b36}{Get\+Hash\+Code}} () const
+\item 
+virtual std\+::string \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_a4f717925af19b4c7807fd39dfdbb825e}{To\+String}} () const =0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_aa692ec6a618d04663c1e5d3cf83f59d7}{Deserialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An interfaces that enforces types to implement a serialization method. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_i_serializable_aa692ec6a618d04663c1e5d3cf83f59d7}\label{class_aptos_1_1_b_c_s_1_1_i_serializable_aa692ec6a618d04663c1e5d3cf83f59d7} 
+\index{Aptos::BCS::ISerializable@{Aptos::BCS::ISerializable}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!Aptos::BCS::ISerializable@{Aptos::BCS::ISerializable}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ Aptos\+::\+BCS\+::\+ISerializable\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&}]{deserializer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Deserializes a byte array hosted inside the Deserializer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em deserializer} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_i_serializable_ad57058ced27d57185e77f7e31df68b36}\label{class_aptos_1_1_b_c_s_1_1_i_serializable_ad57058ced27d57185e77f7e31df68b36} 
+\index{Aptos::BCS::ISerializable@{Aptos::BCS::ISerializable}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!Aptos::BCS::ISerializable@{Aptos::BCS::ISerializable}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Aptos\+::\+BCS\+::\+ISerializable\+::\+Get\+Hash\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_public_key_a646c1c121c1a79c30142eaa3c20309c2}{Aptos\+::\+Accounts\+::\+Public\+Key}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator_a640f6a9a6dd1f8ea339edaaa51b6cac9}{Aptos\+::\+BCS\+::\+Authenticator}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a62a4ce89b56e551c8e839e63811a1046}{Aptos\+::\+BCS\+::\+Ed25519\+Authenticator}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a155bae249c81bce52cd35598f1c72a14}{Aptos\+::\+BCS\+::\+Multi\+Agent\+Authenticator}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bool_a9c1fe36aa6e4185107d5c3b79ddc5741}{Aptos\+::\+BCS\+::\+Bool}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_b_string_ab433514fe29dc991e9452762caa6cca7}{Aptos\+::\+BCS\+::\+BString}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_a5d5a8ce8f2e5bd04bb30b68dcace097b}{Aptos\+::\+BCS\+::\+Bytes}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_sequence_a02389c5feb834edb8f8c5bc3bef63aec}{Aptos\+::\+BCS\+::\+Bytes\+Sequence}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence_af66a35f9fe8135fa1cf611f848fc222a}{Aptos\+::\+BCS\+::\+Sequence}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence_a8a4b235a73d953acda959973c77175e5}{Aptos\+::\+BCS\+::\+Tag\+Sequence}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u128_a3c85e612312e7350675ae1fc84738e63}{Aptos\+::\+BCS\+::\+U128}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u16_af3b3b9c5099235237aaf5508defdbb6f}{Aptos\+::\+BCS\+::\+U16}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u256_ad97246f6cf9651c32dfb9dc7dec92c3c}{Aptos\+::\+BCS\+::\+U256}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u32_a230e519d767a2d67c0409e2d318206dc}{Aptos\+::\+BCS\+::\+U32}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u64_a290757fcd2fdf3bb04e5b6ed6a516d95}{Aptos\+::\+BCS\+::\+U64}}, and \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u8_a38239458e59d05806800e6464f433575}{Aptos\+::\+BCS\+::\+U8}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_i_serializable_a69bdbb0faf3fda49df818174878938b1}\label{class_aptos_1_1_b_c_s_1_1_i_serializable_a69bdbb0faf3fda49df818174878938b1} 
+\index{Aptos::BCS::ISerializable@{Aptos::BCS::ISerializable}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Aptos::BCS::ISerializable@{Aptos::BCS::ISerializable}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily virtual void Aptos\+::\+BCS\+::\+ISerializable\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Serialize the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_public_key_a6dba8211e86f7c834ca1ce8b52b68aed}{Aptos\+::\+Accounts\+::\+Multi\+Public\+Key}}, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_a822362c3a0e4dc100dd44368456b6963}{Aptos\+::\+Accounts\+::\+Account\+Address}}, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_multi_signature_a6119fb2b24a039af09d403ddd57193d9}{Aptos\+::\+Accounts\+::\+Multi\+Signature}}, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_public_key_a170593591e1e685aba85afa60188804d}{Aptos\+::\+Accounts\+::\+Public\+Key}}, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature_ae4f91808a769c993eacc4c26e13bca00}{Aptos\+::\+Accounts\+::\+Signature}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator_a94f30cefb61799d92fbd2ed76cbe3aab}{Aptos\+::\+BCS\+::\+Authenticator}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a6ab888a2e5afcb3a0e8d3c7c01ee0836}{Aptos\+::\+BCS\+::\+Ed25519\+Authenticator}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_aed37c62ac54ad1731381d00d79fc3c56}{Aptos\+::\+BCS\+::\+Multi\+Agent\+Authenticator}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_ed25519_authenticator_afa56f341d7cf30a87f1e90ccc015e6ea}{Aptos\+::\+BCS\+::\+Multi\+Ed25519\+Authenticator}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_b_c_s_map_ab6c6e343a07b3ec0242b212b5c33f177}{Aptos\+::\+BCS\+::\+BCSMap}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bool_adcfef36521aea9319f22fdf12f17c499}{Aptos\+::\+BCS\+::\+Bool}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_b_string_a1c14f1f485200c8330dc47a0ed98aa6a}{Aptos\+::\+BCS\+::\+BString}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_a8c7b8f635c88b9a2a2681c1cf245a1da}{Aptos\+::\+BCS\+::\+Bytes}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_sequence_ae39fce7693f8facb6395db1b4ee236ab}{Aptos\+::\+BCS\+::\+Bytes\+Sequence}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function_afe9b19a83bcefcf155123387f9cf7326}{Aptos\+::\+BCS\+::\+Entry\+Function}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id_acb37ae3eb358c7636179a813634e965a}{Aptos\+::\+BCS\+::\+Module\+Id}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_raw_transaction_ae01b43ca8154808393bc6b4e9680b9dd}{Aptos\+::\+BCS\+::\+Raw\+Transaction}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_script_a1b60d7336ae230c88a68de6a849f6151}{Aptos\+::\+BCS\+::\+Script}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_script_argument_af97140b17168fef6dc1104d4a6aa84f4}{Aptos\+::\+BCS\+::\+Script\+Argument}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence_aba289d4ffd7f82d9d0356cce704348bb}{Aptos\+::\+BCS\+::\+Sequence}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_signed_transaction_a00bb37e7c2dc11b9cc85a458657da2c9}{Aptos\+::\+BCS\+::\+Signed\+Transaction}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag_ad2b807cb21f4d62aa58473cfcc6f4d13}{Aptos\+::\+BCS\+::\+Struct\+Tag}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence_ac6cef0e3e679c90b5f2266e4fbb9103b}{Aptos\+::\+BCS\+::\+Tag\+Sequence}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_transaction_payload_ac5b8e1aac4b088b35cace3c75a018105}{Aptos\+::\+BCS\+::\+Transaction\+Payload}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u128_a96c5407fe7e91ebdbb8a527d2e0e10dc}{Aptos\+::\+BCS\+::\+U128}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u16_a914da966e77013bc9ec8232cd3ddca77}{Aptos\+::\+BCS\+::\+U16}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u256_acf3360ec66a097da74aa10a37d7e9efe}{Aptos\+::\+BCS\+::\+U256}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u32_aace34e689f69ef6070aaa7db08f333bd}{Aptos\+::\+BCS\+::\+U32}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u64_aa203ef35cea15c2b6ea57f795410c917}{Aptos\+::\+BCS\+::\+U64}}, and \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u8_a76f68c87b49310f30c38209cba330086}{Aptos\+::\+BCS\+::\+U8}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_i_serializable_a4f717925af19b4c7807fd39dfdbb825e}\label{class_aptos_1_1_b_c_s_1_1_i_serializable_a4f717925af19b4c7807fd39dfdbb825e} 
+\index{Aptos::BCS::ISerializable@{Aptos::BCS::ISerializable}!ToString@{ToString}}
+\index{ToString@{ToString}!Aptos::BCS::ISerializable@{Aptos::BCS::ISerializable}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily virtual std\+::string Aptos\+::\+BCS\+::\+ISerializable\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_a7dd2b1bc464f605626133d61dcf1ec3e}{Aptos\+::\+Accounts\+::\+Account\+Address}}, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_public_key_a851fa9fd6f32e9bb5b596a463422773d}{Aptos\+::\+Accounts\+::\+Public\+Key}}, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature_ad9d26326f1680110c390298cb4b29148}{Aptos\+::\+Accounts\+::\+Signature}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator_affda51d5467ededd40a50733f98d0b46}{Aptos\+::\+BCS\+::\+Authenticator}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a2ddb6d992dff3b99c7cfb5705a709493}{Aptos\+::\+BCS\+::\+Ed25519\+Authenticator}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_a26efd7f152aa0a1fcdf3b9a81e93d358}{Aptos\+::\+BCS\+::\+Multi\+Agent\+Authenticator}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_b_c_s_map_afabf0318b0902eec922868536bf5e886}{Aptos\+::\+BCS\+::\+BCSMap}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bool_a2b362f4f72a2d1c2af3e99e82a1526da}{Aptos\+::\+BCS\+::\+Bool}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_b_string_ac1fde984127f5cd66097a5249c80dfbd}{Aptos\+::\+BCS\+::\+BString}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_ab9f465d76e98a0c438c6660905a02143}{Aptos\+::\+BCS\+::\+Bytes}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_sequence_adfcf97e0db6d236b98fc3b888503814e}{Aptos\+::\+BCS\+::\+Bytes\+Sequence}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence_a536afb736da3c2bf7c024d0436e172b2}{Aptos\+::\+BCS\+::\+Sequence}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_struct_tag_a8dbdb4ed8ac9acdd5f35d703fa882f4f}{Aptos\+::\+BCS\+::\+Struct\+Tag}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence_a0448e101dc80ea28e2e87e6c915945c1}{Aptos\+::\+BCS\+::\+Tag\+Sequence}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u128_a6b4b728c8ece2e8747bca9341a254e69}{Aptos\+::\+BCS\+::\+U128}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u16_a89ee953ed2a912c6c78ef0a3434a774c}{Aptos\+::\+BCS\+::\+U16}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u256_a89351a4e79b1759a20aa5fefee34e9e3}{Aptos\+::\+BCS\+::\+U256}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u32_a57e7e2f99f93879d00873ec7ee621180}{Aptos\+::\+BCS\+::\+U32}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u64_ac93d07f81704d0e6c6ed333f496da0af}{Aptos\+::\+BCS\+::\+U64}}, and \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_u8_a06d991d4aa195830a74744306e7c1674}{Aptos\+::\+BCS\+::\+U8}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/BCSTypes.\+h\item 
+BCS/BCSTypes.\+cpp\end{DoxyCompactItemize}

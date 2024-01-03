@@ -1,0 +1,58 @@
+\doxysection{Aptos\+::BCS\+::IAuthenticator Class Reference}
+\hypertarget{class_aptos_1_1_b_c_s_1_1_i_authenticator}{}\label{class_aptos_1_1_b_c_s_1_1_i_authenticator}\index{Aptos::BCS::IAuthenticator@{Aptos::BCS::IAuthenticator}}
+
+
+Each transaction submitted to the Aptos blockchain contains a {\ttfamily Transaction\+Authenticator}. During transaction execution, the executor will check if every {\ttfamily Account\+Authenticator}\textquotesingle{}s signature on the transaction hash is well-\/formed and whether the sha3 hash of the {\ttfamily Account\+Authenticator}\textquotesingle{}s {\ttfamily Authentication\+Key\+Preimage} matches the {\ttfamily Authentication\+Key} stored under the participating signer\textquotesingle{}s account address.  
+
+
+
+
+{\ttfamily \#include $<$Authenticator.\+h$>$}
+
+Inheritance diagram for Aptos\+::BCS\+::IAuthenticator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.742738cm]{class_aptos_1_1_b_c_s_1_1_i_authenticator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_authenticator_a9c1f878b91a0111acf5340a76c15fb8e}{Verify}} (const Crypto\+PP\+::\+Sec\+Byte\+Block \&data)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_a69bdbb0faf3fda49df818174878938b1}{Serialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&serializer) const =0
+\begin{DoxyCompactList}\small\item\em Serialize the object. \end{DoxyCompactList}\item 
+virtual std\+::size\+\_\+t \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_ad57058ced27d57185e77f7e31df68b36}{Get\+Hash\+Code}} () const
+\item 
+virtual std\+::string \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_a4f717925af19b4c7807fd39dfdbb825e}{To\+String}} () const =0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_aa692ec6a618d04663c1e5d3cf83f59d7}{Deserialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Each transaction submitted to the Aptos blockchain contains a {\ttfamily Transaction\+Authenticator}. During transaction execution, the executor will check if every {\ttfamily Account\+Authenticator}\textquotesingle{}s signature on the transaction hash is well-\/formed and whether the sha3 hash of the {\ttfamily Account\+Authenticator}\textquotesingle{}s {\ttfamily Authentication\+Key\+Preimage} matches the {\ttfamily Authentication\+Key} stored under the participating signer\textquotesingle{}s account address. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_i_authenticator_a9c1f878b91a0111acf5340a76c15fb8e}\label{class_aptos_1_1_b_c_s_1_1_i_authenticator_a9c1f878b91a0111acf5340a76c15fb8e} 
+\index{Aptos::BCS::IAuthenticator@{Aptos::BCS::IAuthenticator}!Verify@{Verify}}
+\index{Verify@{Verify}!Aptos::BCS::IAuthenticator@{Aptos::BCS::IAuthenticator}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily virtual bool Aptos\+::\+BCS\+::\+IAuthenticator\+::\+Verify (\begin{DoxyParamCaption}\item[{const Crypto\+PP\+::\+Sec\+Byte\+Block \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_authenticator_aed8b458a7c24a539e0d9d632a01f452a}{Aptos\+::\+BCS\+::\+Authenticator}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_ed25519_authenticator_a9fb86454de4eb626e9b06ef5e654c33b}{Aptos\+::\+BCS\+::\+Ed25519\+Authenticator}}, \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_agent_authenticator_ad215aa161de0567a0d220d4ff82de389}{Aptos\+::\+BCS\+::\+Multi\+Agent\+Authenticator}}, and \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_multi_ed25519_authenticator_afef6e4d4a18598a9749655af9ec476ba}{Aptos\+::\+BCS\+::\+Multi\+Ed25519\+Authenticator}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Authenticator.\+h\end{DoxyCompactItemize}

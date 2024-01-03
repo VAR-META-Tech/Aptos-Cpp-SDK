@@ -1,0 +1,66 @@
+\doxysection{Ed25519\+Bip32.\+h}
+\hypertarget{_ed25519_bip32_8h_source}{}\label{_ed25519_bip32_8h_source}\index{Accounts/Ed25519Bip32.h@{Accounts/Ed25519Bip32.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ED25519BIP32\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ED25519BIP32\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#if\ defined(\_\_APPLE\_\_)}}
+\DoxyCodeLine{00004\ \textcolor{keyword}{namespace\ }std}
+\DoxyCodeLine{00005\ \{}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ Arg,\ \textcolor{keyword}{class}\ Result>}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{struct\ }unary\_function}
+\DoxyCodeLine{00008\ \ \ \ \ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ Arg\ argument\_type;}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ Result\ result\_type;}
+\DoxyCodeLine{00011\ \ \ \ \ \};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ Arg1,\ \textcolor{keyword}{class}\ Arg2,\ \textcolor{keyword}{class}\ Result>}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{struct\ }binary\_function}
+\DoxyCodeLine{00015\ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ Arg1\ first\_argument\_type;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ Arg2\ second\_argument\_type;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ Result\ result\_type;}
+\DoxyCodeLine{00019\ \ \ \ \ \};}
+\DoxyCodeLine{00020\ \}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <cryptopp/hmac.h>}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <cryptopp/sha.h>}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ <cryptopp/filters.h>}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{namespace\ }Aptos::Accounts}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_ed25519_bip32}{Ed25519Bip32}}}
+\DoxyCodeLine{00036\ \ \ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\ Curve;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint32\_t\ HardenedOffset;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ CryptoPP::SecByteBlock\ \_masterKey;}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ CryptoPP::SecByteBlock\ \_chainCode;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::pair<CryptoPP::SecByteBlock,\ CryptoPP::SecByteBlock>\ GetMasterKeyFromSeed(\textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&seed);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::pair<CryptoPP::SecByteBlock,\ CryptoPP::SecByteBlock>\ GetChildKeyDerivation(\textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&key,}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&chainCode,}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ index);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::pair<CryptoPP::SecByteBlock,\ CryptoPP::SecByteBlock>\ HmacSha512(\textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&keyBuffer,}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ CryptoPP::SecByteBlock\ \&data);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ IsValidPath(\textcolor{keyword}{const}\ std::string\ \&path);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_ed25519_bip32}{Ed25519Bip32}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\ \&seed);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ std::pair<CryptoPP::SecByteBlock,\ CryptoPP::SecByteBlock>\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_ed25519_bip32_a94e9c60b27de1b193e3b451b72dbe253}{DerivePath}}(\textcolor{keyword}{const}\ std::string\ \&path);}
+\DoxyCodeLine{00107\ \ \ \ \ \};}
+\DoxyCodeLine{00108\ \}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ED25519BIP32\_H}}
+
+\end{DoxyCode}

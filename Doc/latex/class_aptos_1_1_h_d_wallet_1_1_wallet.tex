@@ -1,0 +1,80 @@
+\doxysection{Aptos\+::HDWallet\+::Wallet Class Reference}
+\hypertarget{class_aptos_1_1_h_d_wallet_1_1_wallet}{}\label{class_aptos_1_1_h_d_wallet_1_1_wallet}\index{Aptos::HDWallet::Wallet@{Aptos::HDWallet::Wallet}}
+
+
+Represents an Aptos wallet.  
+
+
+
+
+{\ttfamily \#include $<$wallet.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{class_aptos_1_1_h_d_wallet_1_1_wallet_a3aa3df9e3654f2429f1aeaeb1d8b959d}{Derive\+Mnemonic\+Seed}} ()
+\begin{DoxyCompactList}\small\item\em Derive a seed from the passed mnemonic and/or passphrase, depending on Seed\+Mode. \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_h_d_wallet_1_1_wallet_a3eae8016adc07ec2585dc69ce7271db7}\label{class_aptos_1_1_h_d_wallet_1_1_wallet_a3eae8016adc07ec2585dc69ce7271db7} 
+void {\bfseries Initialize\+First\+Account} ()
+\begin{DoxyCompactList}\small\item\em Initializes the first account with a key pair derived from the initialized seed. \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_h_d_wallet_1_1_wallet_a06807f9c4687136b3120d03bce0782f7}\label{class_aptos_1_1_h_d_wallet_1_1_wallet_a06807f9c4687136b3120d03bce0782f7} 
+\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} {\bfseries Get\+Derived\+Account} (int index)
+\item 
+\Hypertarget{class_aptos_1_1_h_d_wallet_1_1_wallet_a5af73e1c2936a7c7bbc24dcc0e690ec2}\label{class_aptos_1_1_h_d_wallet_1_1_wallet_a5af73e1c2936a7c7bbc24dcc0e690ec2} 
+void {\bfseries Initialize\+Seed} ()
+\item 
+\mbox{\hyperlink{class_aptos_1_1_h_d_wallet_1_1_wallet_a2f905436a2ab0674e9266ae8aa38272c}{Wallet}} (const std\+::string \&mnemonic\+Words, const std\+::string \&passphrase="{}"{}, Seed\+Mode seed\+Mode=Seed\+Mode\+::\+Ed25519\+Bip32)
+\begin{DoxyCompactList}\small\item\em Initialize a wallet from the passed mnemonic and passphrase. \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_h_d_wallet_1_1_wallet_ab6e598f6985508d3296a1561bb97c44c}\label{class_aptos_1_1_h_d_wallet_1_1_wallet_ab6e598f6985508d3296a1561bb97c44c} 
+\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} {\bfseries Account} () const
+\item 
+\Hypertarget{class_aptos_1_1_h_d_wallet_1_1_wallet_a86b216677f689c887d0040c21a5a252d}\label{class_aptos_1_1_h_d_wallet_1_1_wallet_a86b216677f689c887d0040c21a5a252d} 
+std\+::string {\bfseries get\+Mnemonics\+Key} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an Aptos wallet. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_aptos_1_1_h_d_wallet_1_1_wallet_a2f905436a2ab0674e9266ae8aa38272c}\label{class_aptos_1_1_h_d_wallet_1_1_wallet_a2f905436a2ab0674e9266ae8aa38272c} 
+\index{Aptos::HDWallet::Wallet@{Aptos::HDWallet::Wallet}!Wallet@{Wallet}}
+\index{Wallet@{Wallet}!Aptos::HDWallet::Wallet@{Aptos::HDWallet::Wallet}}
+\doxysubsubsection{\texorpdfstring{Wallet()}{Wallet()}}
+{\footnotesize\ttfamily Aptos\+::\+HDWallet\+::\+Wallet\+::\+Wallet (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{mnemonic\+Words,  }\item[{const std\+::string \&}]{passphrase = {\ttfamily "{}"{}},  }\item[{Seed\+Mode}]{seed\+Mode = {\ttfamily SeedMode\+:\+:Ed25519Bip32} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Initialize a wallet from the passed mnemonic and passphrase. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mnemonic} & The mnemonic.\\
+\hline
+{\em passphrase} & The passphrase.\\
+\hline
+{\em seed\+Mode} & The seed generation mode.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_h_d_wallet_1_1_wallet_a3aa3df9e3654f2429f1aeaeb1d8b959d}\label{class_aptos_1_1_h_d_wallet_1_1_wallet_a3aa3df9e3654f2429f1aeaeb1d8b959d} 
+\index{Aptos::HDWallet::Wallet@{Aptos::HDWallet::Wallet}!DeriveMnemonicSeed@{DeriveMnemonicSeed}}
+\index{DeriveMnemonicSeed@{DeriveMnemonicSeed}!Aptos::HDWallet::Wallet@{Aptos::HDWallet::Wallet}}
+\doxysubsubsection{\texorpdfstring{DeriveMnemonicSeed()}{DeriveMnemonicSeed()}}
+{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Aptos\+::\+HDWallet\+::\+Wallet\+::\+Derive\+Mnemonic\+Seed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Derive a seed from the passed mnemonic and/or passphrase, depending on Seed\+Mode. 
+
+\begin{DoxyReturn}{Returns}
+The seed.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+HDWallet/wallet.\+h\item 
+HDWallet/wallet.\+cpp\end{DoxyCompactItemize}

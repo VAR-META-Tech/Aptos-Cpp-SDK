@@ -1,0 +1,61 @@
+\doxysection{Deserialization.\+h}
+\hypertarget{_deserialization_8h_source}{}\label{_deserialization_8h_source}\index{BCS/Deserialization.h@{BCS/Deserialization.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Anh\ NPH\ on\ 18/09/2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ APTOS\_DESERIALIZATION\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ APTOS\_DESERIALIZATION\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ Deserialization.h}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}BCSTypes.h"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}BCSMap.h"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <cryptopp/integer.h>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}Sequence.h"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}TagSequence.h"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }Aptos::BCS}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}}
+\DoxyCodeLine{00023\ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\ \&data);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ std::size\_t\ Remaining()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ DeserializeBool();}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ ToBytes();}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ FixedBytes(std::size\_t\ length);}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_b_c_s_map}{BCSMap}}\ DeserializeMap(std::function<std::shared\_ptr<ISerializable>(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}\ \&)>\ deserializeFunc);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<ISerializable>>\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization_a950a5b2c9b32ad5c086bb1c0908818d8}{DeserializeSequence}}(}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<std::shared\_ptr<ISerializable>(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}\ \&)>\ deserializeFunc);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ std::shared\_ptr<TagSequence>\ DeserializeTagSequence();}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ std::shared\_ptr<Sequence>\ DeserializeScriptArgSequence();}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ std::vector<Sequence>\ DeserializeArgSequence();}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ std::string\ DeserializeString();}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}}\ DeserializeStruct();}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ uint8\_t\ DeserializeU8();}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ uint16\_t\ DeserializeU16();}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ uint32\_t\ DeserializeU32();}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ uint64\_t\ DeserializeU64();}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ CryptoPP::Integer\ DeserializeU128();}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ CryptoPP::Integer\ DeserializeU256();}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ std::size\_t\ DeserializeUleb128();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ Read(std::size\_t\ length);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ uint8\_t\ ReadInt(std::size\_t\ length);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ buffer;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ std::size\_t\ position\ =\ 0;}
+\DoxyCodeLine{00058\ \ \ \ \ \};}
+\DoxyCodeLine{00059\ \}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ APTOS\_DESERIALIZATION\_H}}
+
+\end{DoxyCode}

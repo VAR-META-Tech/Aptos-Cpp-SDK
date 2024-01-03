@@ -1,0 +1,143 @@
+\doxysection{Aptos\+::BCS\+::Bytes Class Reference}
+\hypertarget{class_aptos_1_1_b_c_s_1_1_bytes}{}\label{class_aptos_1_1_b_c_s_1_1_bytes}\index{Aptos::BCS::Bytes@{Aptos::BCS::Bytes}}
+
+
+Representation of \doxylink{class_aptos_1_1_b_c_s_1_1_bytes}{Bytes} in BCS.  
+
+
+
+
+{\ttfamily \#include $<$Bytes.\+h$>$}
+
+Inheritance diagram for Aptos\+::BCS\+::Bytes\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_aptos_1_1_b_c_s_1_1_bytes}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_afe9eb4e1f1b43f79d2f7482bde65b822}{Bytes}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&values)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{class_aptos_1_1_b_c_s_1_1_bytes}{Bytes} object from a given byte array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_a8c7b8f635c88b9a2a2681c1cf245a1da}{Serialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_ad91e976a38a54eed3fb5cc3e7ea02e99}{get\+Value}} () const
+\begin{DoxyCompactList}\small\item\em Gets the byte array containes within the \doxylink{class_aptos_1_1_b_c_s_1_1_bytes}{Bytes} object. \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_bytes_a4484922f86fa4820885cf5934ce9970c}\label{class_aptos_1_1_b_c_s_1_1_bytes_a4484922f86fa4820885cf5934ce9970c} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes}{Bytes}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_ab9f465d76e98a0c438c6660905a02143}{To\+String}} () const override
+\item 
+size\+\_\+t \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes_a5d5a8ce8f2e5bd04bb30b68dcace097b}{Get\+Hash\+Code}} () const override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_bytes_ac9c7b9bfae360d72236c914a4c43bd1f}\label{class_aptos_1_1_b_c_s_1_1_bytes_ac9c7b9bfae360d72236c914a4c43bd1f} 
+static \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_bytes}{Bytes}} \texorpdfstring{$\ast$}{*} {\bfseries Deserialize} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_aa692ec6a618d04663c1e5d3cf83f59d7}{Deserialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of \doxylink{class_aptos_1_1_b_c_s_1_1_bytes}{Bytes} in BCS. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_bytes_afe9eb4e1f1b43f79d2f7482bde65b822}\label{class_aptos_1_1_b_c_s_1_1_bytes_afe9eb4e1f1b43f79d2f7482bde65b822} 
+\index{Aptos::BCS::Bytes@{Aptos::BCS::Bytes}!Bytes@{Bytes}}
+\index{Bytes@{Bytes}!Aptos::BCS::Bytes@{Aptos::BCS::Bytes}}
+\doxysubsubsection{\texorpdfstring{Bytes()}{Bytes()}}
+{\footnotesize\ttfamily Aptos\+::\+BCS\+::\+Bytes\+::\+Bytes (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Creates a \doxylink{class_aptos_1_1_b_c_s_1_1_bytes}{Bytes} object from a given byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & A list of bytes to serialize.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_bytes_a5d5a8ce8f2e5bd04bb30b68dcace097b}\label{class_aptos_1_1_b_c_s_1_1_bytes_a5d5a8ce8f2e5bd04bb30b68dcace097b} 
+\index{Aptos::BCS::Bytes@{Aptos::BCS::Bytes}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!Aptos::BCS::Bytes@{Aptos::BCS::Bytes}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}}
+{\footnotesize\ttfamily size\+\_\+t Aptos\+::\+BCS\+::\+Bytes\+::\+Get\+Hash\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Reimplemented from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_bytes_ad91e976a38a54eed3fb5cc3e7ea02e99}\label{class_aptos_1_1_b_c_s_1_1_bytes_ad91e976a38a54eed3fb5cc3e7ea02e99} 
+\index{Aptos::BCS::Bytes@{Aptos::BCS::Bytes}!getValue@{getValue}}
+\index{getValue@{getValue}!Aptos::BCS::Bytes@{Aptos::BCS::Bytes}}
+\doxysubsubsection{\texorpdfstring{getValue()}{getValue()}}
+{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Aptos\+::\+BCS\+::\+Bytes\+::get\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the byte array containes within the \doxylink{class_aptos_1_1_b_c_s_1_1_bytes}{Bytes} object. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_bytes_a8c7b8f635c88b9a2a2681c1cf245a1da}\label{class_aptos_1_1_b_c_s_1_1_bytes_a8c7b8f635c88b9a2a2681c1cf245a1da} 
+\index{Aptos::BCS::Bytes@{Aptos::BCS::Bytes}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Aptos::BCS::Bytes@{Aptos::BCS::Bytes}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Aptos\+::\+BCS\+::\+Bytes\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & \\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_a69bdbb0faf3fda49df818174878938b1}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_bytes_ab9f465d76e98a0c438c6660905a02143}\label{class_aptos_1_1_b_c_s_1_1_bytes_ab9f465d76e98a0c438c6660905a02143} 
+\index{Aptos::BCS::Bytes@{Aptos::BCS::Bytes}!ToString@{ToString}}
+\index{ToString@{ToString}!Aptos::BCS::Bytes@{Aptos::BCS::Bytes}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Aptos\+::\+BCS\+::\+Bytes\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+BCS/Bytes.\+h\item 
+BCS/Bytes.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,132 @@
+\doxysection{Aptos\+::Accounts\+::Signature Class Reference}
+\hypertarget{class_aptos_1_1_accounts_1_1_signature}{}\label{class_aptos_1_1_accounts_1_1_signature}\index{Aptos::Accounts::Signature@{Aptos::Accounts::Signature}}
+
+
+Representation of a ED25519 signature.  
+
+
+
+
+{\ttfamily \#include $<$Signature.\+h$>$}
+
+Inheritance diagram for Aptos\+::Accounts\+::Signature\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_aptos_1_1_accounts_1_1_signature}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature_a74733bb5be17934bc6b0684761bef41e}{Signature}} (const Crypto\+PP\+::\+Sec\+Byte\+Block \&signature)
+\begin{DoxyCompactList}\small\item\em Initialize the signature. \end{DoxyCompactList}\item 
+Crypto\+PP\+::\+Sec\+Byte\+Block \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature_ac61f2594d1770720c93938ce01bfe9a8}{Data}} () const
+\begin{DoxyCompactList}\small\item\em The signature data in 64-\/bytes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature_ae4f91808a769c993eacc4c26e13bca00}{Serialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{BCS\+::\+Serialization}} \&serializer) const override
+\begin{DoxyCompactList}\small\item\em Serialize signature. \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_accounts_1_1_signature_a6d8b16ea034f28e9e3e4aabf45c3ec94}\label{class_aptos_1_1_accounts_1_1_signature_a6d8b16ea034f28e9e3e4aabf45c3ec94} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature}{Signature}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature_ad9d26326f1680110c390298cb4b29148}{To\+String}} () const override
+\item 
+\Hypertarget{class_aptos_1_1_accounts_1_1_signature_ae090c1acf6e66ae7522819a7ff5c10e8}\label{class_aptos_1_1_accounts_1_1_signature_ae090c1acf6e66ae7522819a7ff5c10e8} 
+bool {\bfseries Equals} (const \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_signature}{Signature}} \&rhs) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::size\+\_\+t \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_ad57058ced27d57185e77f7e31df68b36}{Get\+Hash\+Code}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_accounts_1_1_signature_a3c5b28eddda59d5a16c78817ff3b3bc0}\label{class_aptos_1_1_accounts_1_1_signature_a3c5b28eddda59d5a16c78817ff3b3bc0} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{BCS\+::\+ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{BCS\+::\+Deserialization}} \&deserializer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_aa692ec6a618d04663c1e5d3cf83f59d7}{Deserialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
+\begin{DoxyCompactList}\small\item\em Deserializes a byte array hosted inside the Deserializer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_accounts_1_1_signature_a2d76429be20b5331cf501bbb53d0a104}\label{class_aptos_1_1_accounts_1_1_signature_a2d76429be20b5331cf501bbb53d0a104} 
+static const int {\bfseries Signature\+Length} = 64
+\begin{DoxyCompactList}\small\item\em \doxylink{class_aptos_1_1_accounts_1_1_signature}{Signature} length. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of a ED25519 signature. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_aptos_1_1_accounts_1_1_signature_a74733bb5be17934bc6b0684761bef41e}\label{class_aptos_1_1_accounts_1_1_signature_a74733bb5be17934bc6b0684761bef41e} 
+\index{Aptos::Accounts::Signature@{Aptos::Accounts::Signature}!Signature@{Signature}}
+\index{Signature@{Signature}!Aptos::Accounts::Signature@{Aptos::Accounts::Signature}}
+\doxysubsubsection{\texorpdfstring{Signature()}{Signature()}}
+{\footnotesize\ttfamily Aptos\+::\+Accounts\+::\+Signature\+::\+Signature (\begin{DoxyParamCaption}\item[{const Crypto\+PP\+::\+Sec\+Byte\+Block \&}]{signature }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Initialize the signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em signature} & The raw signature in byte array format.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_accounts_1_1_signature_ac61f2594d1770720c93938ce01bfe9a8}\label{class_aptos_1_1_accounts_1_1_signature_ac61f2594d1770720c93938ce01bfe9a8} 
+\index{Aptos::Accounts::Signature@{Aptos::Accounts::Signature}!Data@{Data}}
+\index{Data@{Data}!Aptos::Accounts::Signature@{Aptos::Accounts::Signature}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}}
+{\footnotesize\ttfamily Crypto\+PP\+::\+Sec\+Byte\+Block Aptos\+::\+Accounts\+::\+Signature\+::\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+The signature data in 64-\/bytes. 
+
+\begin{DoxyReturn}{Returns}
+64-\/byte array representing the signature data
+\end{DoxyReturn}
+\Hypertarget{class_aptos_1_1_accounts_1_1_signature_ae4f91808a769c993eacc4c26e13bca00}\label{class_aptos_1_1_accounts_1_1_signature_ae4f91808a769c993eacc4c26e13bca00} 
+\index{Aptos::Accounts::Signature@{Aptos::Accounts::Signature}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Aptos::Accounts::Signature@{Aptos::Accounts::Signature}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily void Aptos\+::\+Accounts\+::\+Signature\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{BCS\+::\+Serialization}} \&}]{serializer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em serializer} & Serializer object\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable_a69bdbb0faf3fda49df818174878938b1}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+\Hypertarget{class_aptos_1_1_accounts_1_1_signature_ad9d26326f1680110c390298cb4b29148}\label{class_aptos_1_1_accounts_1_1_signature_ad9d26326f1680110c390298cb4b29148} 
+\index{Aptos::Accounts::Signature@{Aptos::Accounts::Signature}!ToString@{ToString}}
+\index{ToString@{ToString}!Aptos::Accounts::Signature@{Aptos::Accounts::Signature}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily std\+::string Aptos\+::\+Accounts\+::\+Signature\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+
+
+Implements \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Accounts/Signature.\+h\item 
+Accounts/Signature.\+cpp\end{DoxyCompactItemize}
