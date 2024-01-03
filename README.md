@@ -1,4 +1,9 @@
-# Aptos-Cpp-SDK
+<p align="center">
+	<img src="./Resource/aptosLogo.webp" alt="AptosUnitySDKLogo" width="256" height="256" />
+</p>
+
+
+# Aptos-Unity-SDK #
 
 Aptos-Cpp-SDK is a cpp package written in C++ to help developers integrate Aptos blockchain technology into their cpp and Unreal projects.
 
@@ -13,6 +18,7 @@ Aptos-Cpp-SDK is a cpp package written in C++ to help developers integrate Aptos
   - [TokenClient](#tokenclient)
   - [EntryFunction](#entryfunction)
   - [Wallet](#wallet)
+- [Using Aptos-Cpp-SDK with Blueprint](#using-aptos-cpp-sdk-with-blueprint)
 - [Examples](#examples)
 - [License](#license)
 
@@ -234,6 +240,25 @@ Signature signature = acct.Sign(Utils::ByteVectorToSecBlock(MessageUt8Bytes));
 
 // Initialize a Boolean Verified.
 bool verified = acct.Verify(MessageUt8Bytes, signature);
+```
+### Using Aptos-Cpp-SDK with Blueprint
+**Create Wallet**
+![](./Resource/create_wallet.png)
+
+**Import Wallet**
+![](./Resource/import_wallet.png)
+
+**Send Transaction**
+![](./Resource/send_transaction.png)
+
+**Create Collection**
+![](./Resource/create_collection.png)
+
+**Create NFT**
+![](./Resource/create_nft.png)
+
+**Airdrop**
+![](./Resource/airdrop.png)
 
 ### Examples ###
 
