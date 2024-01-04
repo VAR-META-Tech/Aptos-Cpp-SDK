@@ -78,7 +78,7 @@ namespace Aptos::BCS
         std::string ToString() const override;
 
     private:
-        VariantType Variant;
+        VariantType m_variant;
         std::shared_ptr<IAuthenticator> m_authenticator;
     };
 
@@ -178,12 +178,12 @@ namespace Aptos::BCS
         /// <summary>
         /// The multi agent authenticator's sender's authenticator.
         /// </summary>
-        Authenticator sender;
+        Authenticator m_sender;
 
         /// <summary>
         /// A list of acount address to authenticator tuples.
         /// </summary>
-        std::vector<std::tuple<std::shared_ptr<Accounts::AccountAddress>, std::shared_ptr<Authenticator>>> secondarySigners;
+        std::vector<std::tuple<std::shared_ptr<Accounts::AccountAddress>, std::shared_ptr<Authenticator>>> m_secondarySigners;
     };
 
     /// <summary>
