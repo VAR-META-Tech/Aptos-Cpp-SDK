@@ -116,7 +116,7 @@ CryptoPP::SecByteBlock g_signatureSerializedOutput = Utils::ByteVectorToSecBlock
                                                                                   58, 211, 152, 215, 248, 78, 130, 239, 5 });
 
 TEST(AccountTest, GeneratePrivateKeysWithBytesSuccess) {
-    PrivateKey* privateKey = new PrivateKey(g_privateKeyBytes);
+    std::unique_ptr<PrivateKey> privateKey = std::make_unique<PrivateKey>(g_privateKeyBytes);
     ASSERT_TRUE(privateKey->KeyBytes().data() != nullptr);
     ASSERT_EQ(32, privateKey->KeyBytes().size());
     ASSERT_EQ(privateKey->KeyBytes(), g_privateKeyBytes);
@@ -127,8 +127,8 @@ TEST(AccountTest, GeneratePrivateKeysWithBytesSuccess) {
 
 TEST(AccountTest, GenerateKeysWithBytesSuccess)
 {
-    PrivateKey* privateKey = new PrivateKey(g_privateKeyBytes);
-    PublicKey* publicKey = new PublicKey(g_publicKeyBytes);
+    std::unique_ptr<PrivateKey> privateKey = std::make_unique<PrivateKey>(g_privateKeyBytes);
+    std::unique_ptr<PublicKey> publicKey = std::make_unique<PublicKey>(g_publicKeyBytes);
 
     ASSERT_TRUE(privateKey->KeyBytes().data() != nullptr);
     ASSERT_TRUE(publicKey->KeyBytes().data() != nullptr);
@@ -142,8 +142,8 @@ TEST(AccountTest, GenerateKeysWithBytesSuccess)
 
 TEST(AccountTest, GenerateKeysWithStringSuccess)
 {
-    PrivateKey* privateKey = new PrivateKey(g_privateKeyHex);
-    PublicKey* publicKey = new PublicKey(g_publicKeyHex);
+    std::unique_ptr<PrivateKey> privateKey = std::make_unique<PrivateKey>(g_privateKeyHex);
+    std::unique_ptr<PublicKey> publicKey = std::make_unique<PublicKey>(g_publicKeyHex);
 
     ASSERT_TRUE(privateKey->KeyBytes().data() != nullptr);
     ASSERT_TRUE(publicKey->KeyBytes().data() != nullptr);
@@ -160,7 +160,7 @@ TEST(AccountTest, GenerateKeysWithStringSuccess)
 
 TEST(AccountTest, GeneratePublicKeyFromPrivateKeySuccess)
 {
-    PrivateKey* privateKey = new PrivateKey(g_privateKeyHex);
+    std::unique_ptr<PrivateKey> privateKey = std::make_unique<PrivateKey>(g_privateKeyHex);
     PublicKey publicKey = privateKey->GetPublicKey();
 
     ASSERT_EQ(g_publicKeyBytes, publicKey.KeyBytes());
@@ -168,7 +168,7 @@ TEST(AccountTest, GeneratePublicKeyFromPrivateKeySuccess)
 
 TEST(AccountTest, PrivateKeyFromHexSignSuccess)
 {
-    PrivateKey * privateKey = new PrivateKey(g_privateKeyHex);
+    std::unique_ptr<PrivateKey> privateKey = std::make_unique<PrivateKey>(g_privateKeyHex);
     ASSERT_EQ(privateKey->Key(), g_privateKeyHex);
     ASSERT_EQ(privateKey->KeyBytes(), g_privateKeyBytes);
 
@@ -189,15 +189,15 @@ TEST(AccountTest, PrivateKeyFromBytesSignSuccess)
 TEST(AccountTest, InvalidKeyGeneration)
 {
     ASSERT_THROW( {
-        PrivateKey* privateKey = new PrivateKey(g_privateKeyBytesInvalid);
-        PublicKey* publicKey = new PublicKey(g_publicKeyBytesInvalid);
+        std::unique_ptr<PrivateKey> privateKey = std::make_unique<PrivateKey>(g_privateKeyBytesInvalid);
+        std::unique_ptr<PublicKey> publicKey = std::make_unique<PublicKey>(g_publicKeyBytesInvalid);
     },std::invalid_argument);
 }
 
 TEST(AccountTest, PublicKeySerialization)
 {
     Serialization serializer;
-    PublicKey* publicKey = new PublicKey(g_publicKeyBytes);
+    std::unique_ptr<PublicKey> publicKey = std::make_unique<PublicKey>(g_publicKeyBytes);
     publicKey->Serialize(serializer);
     CryptoPP::SecByteBlock output = Utils::ByteVectorToSecBlock(serializer.GetBytes());
 
@@ -231,8 +231,8 @@ TEST(AccountTest, PrivateKeySerialization)
 
 TEST(AccountTest, SignatureEquality)
 {
-    Signature* sigOne = new Signature(g_signatureBytes);
-    Signature* sigTwo = new Signature(g_signatureBytes);
+    std::unique_ptr<Signature> sigOne = std::make_unique<Signature>(g_signatureBytes);
+    std::unique_ptr<Signature> sigTwo = std::make_unique<Signature>(g_signatureBytes);
     ASSERT_TRUE(sigOne->Equals(*sigTwo));
 }
 
@@ -716,7 +716,7 @@ TEST(PublicKeyTest, ConstructorWithEmptyValue)
 
     // Execute & Verify: Check if constructing with an empty SecByteBlock throws std::invalid_argument
     ASSERT_THROW({
-        PublicKey *publicKey = new PublicKey(emptySecByteBlock);
+        std::unique_ptr<PublicKey> publicKey = std::make_unique<PublicKey>(emptySecByteBlock);
     },
                  std::invalid_argument);
 }
@@ -728,7 +728,7 @@ TEST(PublicKeyTest, ConstructorWithInvalidKey)
 
     // Execute & Verify: Check if constructing with an invalid key string throws std::invalid_argument
     ASSERT_THROW({
-        PublicKey *publicKey = new PublicKey(g_publicKeySerializedOutput);
+        std::unique_ptr<PublicKey> publicKey = std::make_unique<PublicKey>(g_publicKeySerializedOutput);
     },
                  std::invalid_argument);
 }
@@ -739,7 +739,7 @@ TEST(PublicKeyTest, ConstructorWithValidKey)
     std::string validKey = "0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5"; // Replace with an actual valid key
 
     // Execute & Verify: Check if constructing with a valid key does not throw
-    ASSERT_NO_THROW(PublicKey *publicKey = new PublicKey(g_publicKeyHex));
+    ASSERT_NO_THROW(std::unique_ptr<PublicKey> publicKey = std::make_unique<PublicKey>(g_publicKeyHex));
 
     // Additional verification steps can be added here if needed
 }
@@ -752,7 +752,7 @@ TEST(PublicKeyTest, ConstructorWithEmptyKey)
     // Execute & Verify: Ensure the constructor throws an std::invalid_argument exception
     // when an empty key is passed
     ASSERT_THROW({
-        PublicKey *publicKey = new PublicKey(emptyKey);
+        std::unique_ptr<PublicKey> publicKey = std::make_unique<PublicKey>(emptyKey);
     },
                  std::invalid_argument);
 }
