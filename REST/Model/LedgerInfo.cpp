@@ -18,19 +18,15 @@ nlohmann::json LedgerInfo::ToJson() const {
 LedgerInfo LedgerInfo::FromJson(const nlohmann::json &jsonData) {
     LedgerInfo ledgerInfo;
 
-    try {
-        ledgerInfo.ChainId = jsonData["chain_id"];
-        ledgerInfo.Epoch = jsonData["epoch"];
-        ledgerInfo.LedgerVersion = jsonData["ledger_version"];
-        ledgerInfo.OldestLedgerVersion = jsonData["oldest_ledger_version"];
-        ledgerInfo.LedgerTimestamp = jsonData["ledger_timestamp"];
-        ledgerInfo.NodeRole = jsonData["node_role"];
-        ledgerInfo.OldestBlockHeight = jsonData["oldest_block_height"];
-        ledgerInfo.BlockHeight = jsonData["block_height"];
-        ledgerInfo.GitHash = jsonData["git_hash"];
-    } catch (const nlohmann::json::exception& e) {
-        std::cerr << "JSON parsing error: " << e.what() << std::endl;
-    }
+    ledgerInfo.ChainId = jsonData["chain_id"];
+    ledgerInfo.Epoch = jsonData["epoch"];
+    ledgerInfo.LedgerVersion = jsonData["ledger_version"];
+    ledgerInfo.OldestLedgerVersion = jsonData["oldest_ledger_version"];
+    ledgerInfo.LedgerTimestamp = jsonData["ledger_timestamp"];
+    ledgerInfo.NodeRole = jsonData["node_role"];
+    ledgerInfo.OldestBlockHeight = jsonData["oldest_block_height"];
+    ledgerInfo.BlockHeight = jsonData["block_height"];
+    ledgerInfo.GitHash = jsonData["git_hash"];
 
     return ledgerInfo;
 }

@@ -21,4 +21,34 @@ ViewRequest ViewRequest::FromJson(const nlohmann::json &requestJson) {
     }
     return request;
 }
+
+std::string ViewRequest::getFunction() const
+{
+    return Function;
+}
+
+void ViewRequest::setFunction(const std::string &newFunction)
+{
+    Function = newFunction;
+}
+
+std::vector<std::string> ViewRequest::getTypeArguments() const
+{
+    return TypeArguments;
+}
+
+void ViewRequest::setTypeArguments(const std::vector<std::string> &newTypeArguments)
+{
+    TypeArguments = newTypeArguments;
+}
+
+std::vector<std::string> ViewRequest::getArguments() const
+{
+    return Arguments;
+}
+
+void ViewRequest::setArguments(const std::vector<std::string> &newArguments)
+{
+    Arguments = newArguments;
+}
 }

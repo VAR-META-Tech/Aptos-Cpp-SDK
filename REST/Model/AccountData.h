@@ -20,6 +20,9 @@ public:
     static AccountData FromJson(const nlohmann::json& jsonObject);
     const std::string &getSequenceNumber() const;
 
+    std::string getAuthenticationKey() const;
+    void setAuthenticationKey(const std::string &newAuthenticationKey);
+
 private:
     std::string SequenceNumber;
     std::string AuthenticationKey;

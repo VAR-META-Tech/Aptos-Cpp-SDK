@@ -9,7 +9,11 @@
 
 namespace AptosSDKDemo {
 
-TransferCoinExample::TransferCoinExample() {}
+TransferCoinExample::TransferCoinExample() {
+    std::cout << "=== =========================== ===" << std::endl;
+    std::cout << "=== TransferCoinExample ===" << std::endl;
+    std::cout << "=== =========================== ===" << std::endl;
+}
 
 void TransferCoinExample::Start()
 {

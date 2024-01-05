@@ -169,6 +169,7 @@ namespace Aptos::Rest
 
     class AptosTokenClient
     {
+    public:
         AptosTokenClient(RestClient& client);
         void ReadObject(std::function<void (Aptos::Rest::ReadObject,  AptosRESTModel::ResponseInfo)> callback, const AccountAddress& address);
     private:

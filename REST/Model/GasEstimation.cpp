@@ -12,14 +12,9 @@ nlohmann::json GasEstimation::ToJson() const {
 
 GasEstimation GasEstimation::FromJson(const nlohmann::json &jsonData) {
     GasEstimation gasEstimation;
-
-    try {
-        gasEstimation.DeprioritizedGasEstimate = jsonData["deprioritized_gas_estimate"];
-        gasEstimation.GasEstimate = jsonData["gas_estimate"];
-        gasEstimation.PrioritizedGasEstimate = jsonData.value("prioritized_gas_estimate", 0);
-    } catch (const nlohmann::json::exception& e) {
-        std::cerr << "JSON parsing error: " << e.what() << std::endl;
-    }
+    gasEstimation.DeprioritizedGasEstimate = jsonData["deprioritized_gas_estimate"];
+    gasEstimation.GasEstimate = jsonData["gas_estimate"];
+    gasEstimation.PrioritizedGasEstimate = jsonData.value("prioritized_gas_estimate", 0);
 
     return gasEstimation;
 }

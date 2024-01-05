@@ -3,6 +3,8 @@
 
 #include "TransactionRequest.h"
 
+namespace AptosRESTModel {
+
 class TransactionRequestConverter
 {
 public:
@@ -10,4 +12,5 @@ public:
     static nlohmann::json WriteJson(const AptosRESTModel::TransactionRequest &transactionRequest);
 };
 
+}
 #endif // TRANSACTIONREQUESTCONVERTER_H

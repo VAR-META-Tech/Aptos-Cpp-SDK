@@ -466,7 +466,7 @@ namespace Aptos::Rest
             std::string collectionName,
             std::string tokenName,
             int amount,
-            int propertyVersion);
+            int propertyVersion  = 0);
         /// <summary>
         /// Claim a token that was offered by <paramref name="sender"/>
         /// </summary>
@@ -562,8 +562,7 @@ namespace Aptos::Rest
         /// <returns>Calls <c>callback</c> function with <c>(TableItemToken, ResponseInfo)</c>: \n
         /// An object the represents the NFT's token metadata - null if the transaction to get a token failed, and a response object that contains the response details.
         /// </returns>
-        void GetTokenData(
-            std::function<void(AptosRESTModel::TableItemTokenMetadata, AptosRESTModel::ResponseInfo)> callback,
+        void GetTokenData(std::function<void (std::shared_ptr<AptosRESTModel::TableItemTokenMetadata>, AptosRESTModel::ResponseInfo)> callback,
             AccountAddress creator,
             std::string collectionName,
             std::string tokenName,
@@ -602,6 +601,8 @@ namespace Aptos::Rest
             std::function<void(bool, long, std::string)> callback,
             AccountAddress &accountAddress,
             std::string resourceType);
+
+        int ChainId() const;
 
     private:
        std::string endpoint;

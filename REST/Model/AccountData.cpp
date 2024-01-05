@@ -29,4 +29,14 @@ const std::string &AccountData::getSequenceNumber() const
 {
     return SequenceNumber;
 }
+
+std::string AccountData::getAuthenticationKey() const
+{
+    return AuthenticationKey;
+}
+
+void AccountData::setAuthenticationKey(const std::string &newAuthenticationKey)
+{
+    AuthenticationKey = newAuthenticationKey;
+}
 }

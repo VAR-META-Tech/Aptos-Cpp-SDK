@@ -1,5 +1,6 @@
 #include "TransactionRequestConverter.h"
 #include "../Constant.h"
+namespace AptosRESTModel {
 
 AptosRESTModel::TransactionRequest TransactionRequestConverter::ReadJson(const nlohmann::json &jsonData)
 {
@@ -125,4 +126,5 @@ nlohmann::json TransactionRequestConverter::WriteJson(const AptosRESTModel::Tran
     oTransactionRequest["signature"] = signature;
 
     return oTransactionRequest;
+}
 }

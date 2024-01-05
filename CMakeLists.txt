@@ -225,6 +225,8 @@ add_library(Aptos SHARED
         REST/Model/Resources/Base/ResourceBaseListConverter.cpp
         REST/Model/TransactionRequestConverter.h
         REST/Model/TransactionRequestConverter.cpp
+        REST/Model/TransactionConverter.h
+        REST/Model/TransactionConverter.cpp
         REST/FaucetClient.h
         REST/FaucetClient.cpp
         REST/RequestClient.h
@@ -235,6 +237,8 @@ add_library(Aptos SHARED
         REST/RestClient.cpp
         Accounts/Ed25519Bip32.h
         Accounts/Ed25519Bip32.cpp
+        Accounts/RotationProofChallenge.h
+        Accounts/RotationProofChallenge.cpp
 )
 
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
@@ -341,6 +345,12 @@ add_executable(AptosSDKDemo
     AptosSDKDemo/main.cpp
     AptosSDKDemo/TransferCoin/TransferCoinExample.h
     AptosSDKDemo/TransferCoin/TransferCoinExample.cpp
+    AptosSDKDemo/SimulateTransferCoin/SimulateTransferCoin.h
+    AptosSDKDemo/SimulateTransferCoin/SimulateTransferCoin.cpp
+    AptosSDKDemo/SimpleNftExample.h
+    AptosSDKDemo/SimpleNftExample.cpp
+    AptosSDKDemo/Multisig/Multisig.h
+    AptosSDKDemo/Multisig/Multisig.cpp
 )
 
 target_link_libraries(AptosSDKDemo PRIVATE Aptos )

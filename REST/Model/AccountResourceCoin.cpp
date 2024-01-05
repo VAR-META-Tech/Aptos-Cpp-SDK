@@ -23,19 +23,15 @@ AccountResourceCoin::AccountResourceCoin() {}
 
 AccountResourceCoin AccountResourceCoin::FromJson(const nlohmann::json &jsonData) {
     AccountResourceCoin accountResource;
-    try {
-        accountResource.m_type = jsonData["type"];
-        accountResource.m_dataProp = Data::FromJson(jsonData["data"]);
-    } catch (const nlohmann::json::exception& e) {
-        std::cerr << "JSON parsing error: " << e.what() << std::endl;
-    }
+    accountResource.m_type = jsonData["type"];
+    accountResource.m_dataProp = Data::FromJson(jsonData["data"]);
 
     return accountResource;
 }
 
 nlohmann::json AccountResourceCoin::ToJson() const {
     return nlohmann::json{
-                          {"type", m_type},
+        {"type", m_type},
         {"data", m_dataProp.ToJson()}
     };
 }
@@ -55,7 +51,7 @@ AccountResourceCoin::Guid AccountResourceCoin::Guid::FromJson(const nlohmann::js
 
 nlohmann::json AccountResourceCoin::Guid::ToJson() const {
     return nlohmann::json{
-                          {"id", m_idProp.ToJson()}
+        {"id", m_idProp.ToJson()}
     };
 }
 
@@ -70,7 +66,7 @@ AccountResourceCoin::WithdrawEvents AccountResourceCoin::WithdrawEvents::FromJso
 
 nlohmann::json AccountResourceCoin::WithdrawEvents::ToJson() const {
     return nlohmann::json{
-                          {"counter", m_counter},
+        {"counter", m_counter},
         {"guid", m_guidProp.ToJson()}
     };
 }
@@ -86,7 +82,7 @@ AccountResourceCoin::DespositEvents AccountResourceCoin::DespositEvents::FromJso
 
 nlohmann::json AccountResourceCoin::DespositEvents::ToJson() const {
     return nlohmann::json{
-                          {"counter", m_counter},
+        {"counter", m_counter},
         {"guid", m_guidProp.ToJson()}
     };
 }
@@ -102,7 +98,7 @@ AccountResourceCoin::Data AccountResourceCoin::Data::FromJson(const nlohmann::js
 
 nlohmann::json AccountResourceCoin::Data::ToJson() const {
     return nlohmann::json{
-                          {"coin", m_coinProp.ToJson()},
+        {"coin", m_coinProp.ToJson()},
         {"deposit_events", m_depositEvents.ToJson()},
         {"frozen", m_frozen},
         {"withdraw_events", m_withdrawEvents.ToJson()}
@@ -124,7 +120,7 @@ AccountResourceCoin::Coin AccountResourceCoin::Coin::FromJson(const nlohmann::js
 
 nlohmann::json AccountResourceCoin::Coin::ToJson() const {
     return nlohmann::json{
-                          {"value", m_value}
+        {"value", m_value}
     };
 }
 

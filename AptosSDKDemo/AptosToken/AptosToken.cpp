@@ -6,13 +6,17 @@
 #include "../../REST/Constant.h"
 namespace AptosSDKDemo {
 
-AptosToken::AptosToken() {}
+AptosToken::AptosToken() {
+    std::cout << "=== =========================== ===" << std::endl;
+    std::cout << "=== AptosToken                  ===" << std::endl;
+    std::cout << "=== =========================== ===" << std::endl;
+}
 
 void AptosToken::Start()
 {
-    std::cout << "<color=cyan>=== =========================== ===</color>" << std::endl;
-    std::cout << "<color=cyan>=== Set Up Faucet & REST Client ===</color>" << std::endl;
-    std::cout << "<color=cyan>=== =========================== ===</color>" << std::endl;
+    std::cout << "=== =========================== ===" << std::endl;
+    std::cout << "=== Set Up Faucet & REST Client ===" << std::endl;
+    std::cout << "=== =========================== ===" << std::endl;
 
     std::string faucetEndpoint = "https://faucet.devnet.aptoslabs.com";
 

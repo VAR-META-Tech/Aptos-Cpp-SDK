@@ -14,12 +14,8 @@ nlohmann::json ResourceCollectionOLD::ToJson() const {
 
 ResourceCollectionOLD ResourceCollectionOLD::FromJson(const nlohmann::json &jsonData) {
     ResourceCollectionOLD resourceCollection;
-    try {
-        resourceCollection.Type = jsonData["type"];
-        resourceCollection.DataProp = Data::FromJson(jsonData["data"]);
-    } catch (const nlohmann::json::exception& e) {
-        std::cerr << "JSON parsing error: " << e.what() << std::endl;
-    }
+    resourceCollection.Type = jsonData["type"];
+    resourceCollection.DataProp = Data::FromJson(jsonData["data"]);
 
     return resourceCollection;
 }

@@ -12,12 +12,8 @@ nlohmann::json AccountResourceTokenStore::ToJson() const {
 
 AccountResourceTokenStore AccountResourceTokenStore::FromJson(const nlohmann::json &jsonData) {
     AccountResourceTokenStore resourceTokenStore;
-    try {
-        resourceTokenStore.Type = jsonData["type"];
-        resourceTokenStore.DataProp = Data::FromJson(jsonData["data"]);
-    } catch (const nlohmann::json::exception& e) {
-        std::cerr << "JSON parsing error: " << e.what() << std::endl;
-    }
+    resourceTokenStore.Type = jsonData["type"];
+    resourceTokenStore.DataProp = Data::FromJson(jsonData["data"]);
 
     return resourceTokenStore;
 }
@@ -41,7 +37,7 @@ AccountResourceTokenStore::Data AccountResourceTokenStore::Data::FromJson(const 
     Data data;
     data.BurnEvent = BurnEvents::FromJson(jsonData["burn_events"]);
     data.DepositEvents = DespositEvents::FromJson(jsonData["deposit_events"]);
-    data.DirectTransfer = jsonData["direct_transfer"];
+    data.DirectTransfer = jsonData["direct_transfer"].dump();
     data.MutateTokenPropertyEventsProp = MutateTokenPropertyEvents::FromJson(jsonData["mutate_token_property_events"]);
     data.TokensProp = Tokens::FromJson(jsonData["tokens"]);
     return data;

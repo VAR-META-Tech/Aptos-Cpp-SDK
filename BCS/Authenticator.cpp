@@ -274,6 +274,11 @@ namespace Aptos::BCS
         return nullptr;
     }
 
+    std::string MultiEd25519Authenticator::ToString() const
+    {
+        return "MultiEd25519Authenticator";
+    }
+
     bool operator==(const Authenticator &lhs, const Authenticator &rhs)
     {
         return lhs.Equals(rhs);

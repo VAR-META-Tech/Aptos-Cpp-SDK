@@ -109,7 +109,7 @@ nlohmann::json ResourceCollection::CollectionEvents::ToJson() const {
 ResourceCollection::CollectionEvents ResourceCollection::CollectionEvents::FromJson(const nlohmann::json &jsonData) {
     CollectionEvents events;
     events.Counter = jsonData["counter"].get<std::string>();
-    events.Guid = jsonData["guid"].get<std::string>();
+    events.Guid = jsonData["guid"].dump();
     return events;
 }
 
