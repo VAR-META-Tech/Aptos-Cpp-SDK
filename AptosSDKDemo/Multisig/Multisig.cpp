@@ -1,6 +1,7 @@
 #include "Multisig.h"
 #include <iostream>
 #include <string>
+#include <sstream>
 #include "../../REST/RestClient.h"
 #include "../../REST/FaucetClient.h"
 #include "../../REST/Constant.h"

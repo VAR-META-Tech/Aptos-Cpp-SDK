@@ -18,10 +18,15 @@ namespace Aptos::Accounts::Types
     {
         size_t secBlockSize = (PublicKeys.size() * Utils::Ed25519PublicKeySizeInBytes) + 1;
         CryptoPP::SecByteBlock bytes(secBlockSize);
-        //    for (int i = 0; i < PublicKeys.size(); i++) {
-        //        bytes[i * Utils::Ed25519PublicKeySizeInBytes] = PublicKeys[i] ;
-        //    }
-        //    bytes[PublicKeys.size() * Utils::Ed25519PublicKeySizeInBytes] = static_cast<CryptoPP::byte>(threshold);
+
+        for (size_t i = 0; i < PublicKeys.size(); ++i)
+        {
+            // Get the key bytes for the current public key
+            bytes.Append(PublicKeys[i].KeyBytes());
+        }
+
+        // Set the threshold value at the end of the SecByteBlock
+        bytes.Append(1,threshold);
 
         return bytes;
     }
