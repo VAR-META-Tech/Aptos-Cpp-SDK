@@ -10,17 +10,11 @@ nlohmann::json AptosError::ToJson() const {
     };
 }
 
-AptosError AptosError::FromJson(const std::string &jsonStr) {
+AptosError AptosError::FromJson(const nlohmann::json &jsonData) {
     AptosError aptosError;
-
-    try {
-        nlohmann::json jsonData = nlohmann::json::parse(jsonStr);
-        aptosError.Message = jsonData["message"];
-        aptosError.ErrorCode = jsonData["error_code"];
-        aptosError.VMErrorCode = jsonData["vm_error_code"];
-    } catch (const nlohmann::json::exception& e) {
-        std::cerr << "JSON parsing error: " << e.what() << std::endl;
-    }
+    aptosError.Message = jsonData["message"];
+    aptosError.ErrorCode = jsonData["error_code"];
+    aptosError.VMErrorCode = jsonData["vm_error_code"];
 
     return aptosError;
 }

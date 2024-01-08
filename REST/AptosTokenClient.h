@@ -6,7 +6,7 @@
 #include "../Accounts/AccountAddress.h"
 #include "../BCS/BString.h"
 #include "../BCS/Bytes.h"
-
+#include "RestClient.h"
 namespace Aptos::Rest
 {
     /// <summary>
@@ -146,9 +146,9 @@ namespace Aptos::Rest
 
     public:
         static const std::string StructTag;
-        explicit PropertyMap(const std::vector<Property> &Properties);
+        PropertyMap(const std::vector<Property> &Properties);
         std::string ToString() const override;
-        std::tuple<std::vector<BCS::BString>, std::vector<BCS::BString>, std::vector<std::vector<uint8_t>>> ToTuple() const;
+        std::tuple<std::vector<BCS::BString>, std::vector<BCS::BString>, std::vector<std::vector<uint8_t>>> ToTuple();
         static std::shared_ptr<IResource> Parse(std::shared_ptr<AptosRESTModel::ResourceDataBase> resource);
         std::string GetStructTag() const override;
     };
@@ -158,11 +158,20 @@ namespace Aptos::Rest
     public:
         using FuncValue = std::shared_ptr<IResource>(std::shared_ptr<AptosRESTModel::ResourceDataBase>);
         static std::map<std::string, FuncValue *> ResourceMap;
-        explicit ReadObject(const std::unordered_map<std::string, std::shared_ptr<IResource>> &Resources);
+        ReadObject(const std::unordered_map<std::string, std::shared_ptr<IResource>> &R1);
         std::string ToString() const;
 
     private:
         std::unordered_map<std::string, std::shared_ptr<IResource>> Resources;
+    };
+
+    class AptosTokenClient
+    {
+    public:
+        AptosTokenClient(RestClient& client);
+        void ReadObject(std::function<void (Aptos::Rest::ReadObject,  AptosRESTModel::ResponseInfo)> callback, const Accounts::AccountAddress& address);
+    private:
+        RestClient& m_restClient;
     };
 }
 #endif // APTOSTOKENCLIENT_H

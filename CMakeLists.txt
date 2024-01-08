@@ -221,6 +221,12 @@ add_library(Aptos SHARED
         REST/Model/TableItemToken/TableItemToken.cpp
         REST/Model/TableItemToken/TableItemTokenMetadata.h
         REST/Model/TableItemToken/TableItemTokenMetadata.cpp
+        REST/Model/Resources/Base/ResourceBaseListConverter.h
+        REST/Model/Resources/Base/ResourceBaseListConverter.cpp
+        REST/Model/TransactionRequestConverter.h
+        REST/Model/TransactionRequestConverter.cpp
+        REST/Model/TransactionConverter.h
+        REST/Model/TransactionConverter.cpp
         REST/FaucetClient.h
         REST/FaucetClient.cpp
         REST/RequestClient.h
@@ -231,6 +237,8 @@ add_library(Aptos SHARED
         REST/RestClient.cpp
         Accounts/Ed25519Bip32.h
         Accounts/Ed25519Bip32.cpp
+        Accounts/RotationProofChallenge.h
+        Accounts/RotationProofChallenge.cpp
 )
 
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
@@ -312,3 +320,42 @@ add_executable(AptosUILogicTest
 )
 
 target_link_libraries(AptosUILogicTest PRIVATE Aptos AptosUILogic )
+
+add_executable(AptosSDKDemo
+    AptosSDKDemo/AptosToken/Model/AddTokenPropertyResponse.h
+    AptosSDKDemo/AptosToken/Model/AddTokenPropertyResponse.cpp
+    AptosSDKDemo/AptosToken/Model/CreateCollectionResponse.h
+    AptosSDKDemo/AptosToken/Model/CreateCollectionResponse.cpp
+    AptosSDKDemo/AptosToken/Model/CreateTokenResponse.h
+    AptosSDKDemo/AptosToken/Model/CreateTokenResponse.cpp
+    AptosSDKDemo/AptosToken/Model/MintTokenResponse.h
+    AptosSDKDemo/AptosToken/Model/MintTokenResponse.cpp
+    AptosSDKDemo/AptosToken/Model/TransferObjectResponse.h
+    AptosSDKDemo/AptosToken/Model/TransferObjectResponse.cpp
+    AptosSDKDemo/AptosToken/Model/UpdateTokenResponse.h
+    AptosSDKDemo/AptosToken/Model/UpdateTokenResponse.cpp
+    AptosSDKDemo/Multisig/Model/MultisigTransferBcsTransactionResponse.h
+    AptosSDKDemo/Multisig/Model/MultisigTransferBcsTransactionResponse.cpp
+    AptosSDKDemo/Multisig/Model/RotateKeyBcsTransactionResponse.h
+    AptosSDKDemo/Multisig/Model/RotateKeyBcsTransactionResponse.cpp
+    AptosSDKDemo/TransferCoin/Model/TransferCoinBCSResponse.h
+    AptosSDKDemo/TransferCoin/Model/TransferCoinBCSResponse.cpp
+    AptosSDKDemo/AptosToken/AptosToken.h
+    AptosSDKDemo/AptosToken/AptosToken.cpp
+    AptosSDKDemo/main.cpp
+    AptosSDKDemo/TransferCoin/TransferCoinExample.h
+    AptosSDKDemo/TransferCoin/TransferCoinExample.cpp
+    AptosSDKDemo/SimulateTransferCoin/SimulateTransferCoin.h
+    AptosSDKDemo/SimulateTransferCoin/SimulateTransferCoin.cpp
+    AptosSDKDemo/SimpleNftExample.h
+    AptosSDKDemo/SimpleNftExample.cpp
+    AptosSDKDemo/Multisig/Multisig.h
+    AptosSDKDemo/Multisig/Multisig.cpp
+)
+
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+  target_link_libraries(AptosSDKDemo PRIVATE Aptos )
+else()
+  target_link_libraries(AptosSDKDemo PRIVATE Aptos nlohmann_json::nlohmann_json Aptos bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
+endif()

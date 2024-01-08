@@ -91,6 +91,16 @@ void TransactionRequest::setSignature(const SignatureData &newSignature)
     Signature = newSignature;
 }
 
+Aptos::BCS::EntryFunction TransactionRequest::getEntryFunction() const
+{
+    return EntryFunction;
+}
+
+void TransactionRequest::setEntryFunction(const Aptos::BCS::EntryFunction &newEntryFunction)
+{
+    EntryFunction = newEntryFunction;
+}
+
 nlohmann::json SignatureData::ToJson() const {
     nlohmann::json signatureJson;
     signatureJson["type"] = Type;

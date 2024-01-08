@@ -9,8 +9,7 @@ nlohmann::json ResourceCollection::ToJson() const {
     };
 }
 
-ResourceCollection ResourceCollection::FromJson(const std::string &jsonStr) {
-    nlohmann::json jsonData = nlohmann::json::parse(jsonStr);
+ResourceCollection ResourceCollection::FromJson(const nlohmann::json &jsonData) {
     ResourceCollection resourceCollection;
     resourceCollection.Type = jsonData["type"].get<std::string>();
     resourceCollection.DataProp = Data::FromJson(jsonData["data"]);
@@ -110,7 +109,7 @@ nlohmann::json ResourceCollection::CollectionEvents::ToJson() const {
 ResourceCollection::CollectionEvents ResourceCollection::CollectionEvents::FromJson(const nlohmann::json &jsonData) {
     CollectionEvents events;
     events.Counter = jsonData["counter"].get<std::string>();
-    events.Guid = jsonData["guid"].get<std::string>();
+    events.Guid = jsonData["guid"].dump();
     return events;
 }
 

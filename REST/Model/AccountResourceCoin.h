@@ -13,7 +13,7 @@ class AccountResourceCoin {
 public:
     class Id {
     public:
-        Id() = default;
+        Id();
         static AccountResourceCoin::Id FromJson(const nlohmann::json& jsonData);
         nlohmann::json ToJson() const;
     private:
@@ -23,7 +23,7 @@ public:
 
     class Guid {
     public:
-        Guid() = default;
+        Guid();
         static AccountResourceCoin::Guid FromJson(const nlohmann::json& jsonData);
         nlohmann::json ToJson() const;
     private:
@@ -32,7 +32,7 @@ public:
 
     class Coin {
     public:
-        Coin() = default;
+        Coin();
         static AccountResourceCoin::Coin FromJson(const nlohmann::json& jsonData);
         nlohmann::json ToJson() const;
         std::string value() const;
@@ -43,7 +43,7 @@ public:
 
     class DespositEvents {
     public:
-        DespositEvents() = default;
+        DespositEvents();
         static AccountResourceCoin::DespositEvents FromJson(const nlohmann::json& jsonData);
         nlohmann::json ToJson() const;
     private:
@@ -53,7 +53,7 @@ public:
 
     class WithdrawEvents {
     public:
-        WithdrawEvents() = default;
+        WithdrawEvents();
         static AccountResourceCoin::WithdrawEvents FromJson(const nlohmann::json& jsonData);
         nlohmann::json ToJson() const;
     private:
@@ -63,7 +63,7 @@ public:
 
     class Data {
     public:
-        Data() = default;
+        Data() {}
         static AccountResourceCoin::Data FromJson(const nlohmann::json& jsonData);
         nlohmann::json ToJson() const;
         Coin coinProp() const;
@@ -75,8 +75,8 @@ public:
         WithdrawEvents m_withdrawEvents;
     };
 
-    AccountResourceCoin() = default;
-    static AccountResourceCoin FromJson(const std::string& jsonStr);
+    AccountResourceCoin();
+    static AccountResourceCoin FromJson(const nlohmann::json &jsonData);
     nlohmann::json ToJson() const;
     AccountResourceCoin::Data dataProp() const;
 private:

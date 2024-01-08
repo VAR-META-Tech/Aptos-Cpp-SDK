@@ -3,6 +3,7 @@
 
 #include <nlohmann/json.hpp>
 #include "TransactionPayload.h"
+#include "../../BCS/EntryFunction.h"
 
 namespace AptosRESTModel {
 
@@ -49,6 +50,9 @@ public:
     SignatureData getSignature() const;
     void setSignature(const SignatureData &newSignature);
 
+    Aptos::BCS::EntryFunction getEntryFunction() const;
+    void setEntryFunction(const Aptos::BCS::EntryFunction &newEntryFunction);
+
 private:
     std::string Sender;
     std::string SequenceNumber;
@@ -56,7 +60,7 @@ private:
     std::string GasUnitPrice;
     std::string ExpirationTimestampSecs;
     TransactionPayload Payload;
-//    EntryFunction EntryFunction;
+    Aptos::BCS::EntryFunction EntryFunction;
     SignatureData Signature;
 };
 

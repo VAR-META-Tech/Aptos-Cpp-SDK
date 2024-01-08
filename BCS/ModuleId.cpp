@@ -3,7 +3,8 @@
 using namespace Aptos::Accounts;
 namespace Aptos::BCS
 {
-    ModuleId::ModuleId(const AccountAddress &address, const std::string &name)
+
+ModuleId::ModuleId(const AccountAddress &address, const std::string &name)
         : address(address), name(name) {}
 
     void ModuleId::Serialize(Serialization &serializer) const

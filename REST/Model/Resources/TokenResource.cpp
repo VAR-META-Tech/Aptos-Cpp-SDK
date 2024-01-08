@@ -16,6 +16,26 @@ TokenResource TokenResource::FromJson(const nlohmann::json &tokenResourceJson) {
     return tokenResource;
 }
 
+std::string TokenResource::getType() const
+{
+    return Type;
+}
+
+void TokenResource::setType(const std::string &newType)
+{
+    Type = newType;
+}
+
+TokenResourceData TokenResource::getData() const
+{
+    return Data;
+}
+
+void TokenResource::setData(const TokenResourceData &newData)
+{
+    Data = newData;
+}
+
 nlohmann::json TokenResourceData::ToJson() const {
     nlohmann::json tokenDataJson;
     tokenDataJson["collection"] = CollectionProp.ToJson();

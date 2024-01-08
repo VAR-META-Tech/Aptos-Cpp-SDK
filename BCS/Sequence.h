@@ -34,6 +34,7 @@ namespace Aptos::BCS
         /// </summary>
         /// <param name="serializable">A list of serializable objects.</param>
         explicit Sequence(const std::vector<std::shared_ptr<ISerializable>> &values);
+        Sequence() = default;
 
         /// <summary>
         /// The length of the Sequence.

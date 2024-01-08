@@ -65,7 +65,7 @@ namespace Aptos::Accounts
         /// </summary>
         /// <param name="addressBytes">Byte array representing address.</param>
         explicit AccountAddress(const CryptoPP::SecByteBlock &addressBytes);
-
+        AccountAddress();
         /// <summary>
         /// Represent an account address in a way that is compliant with the v1 address
         /// standard.The standard is defined as part of AIP-40, read more here:

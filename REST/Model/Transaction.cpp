@@ -142,6 +142,111 @@ std::string Transaction::getHash() const
     return Hash;
 }
 
+std::string Transaction::getVersion() const
+{
+    return Version;
+}
+
+void Transaction::setVersion(const std::string &newVersion)
+{
+    Version = newVersion;
+}
+
+void Transaction::setHash(const std::string &newHash)
+{
+    Hash = newHash;
+}
+
+std::string Transaction::getStateChangeHash() const
+{
+    return StateChangeHash;
+}
+
+void Transaction::setStateChangeHash(const std::string &newStateChangeHash)
+{
+    StateChangeHash = newStateChangeHash;
+}
+
+std::string Transaction::getEventRootHash() const
+{
+    return EventRootHash;
+}
+
+void Transaction::setEventRootHash(const std::string &newEventRootHash)
+{
+    EventRootHash = newEventRootHash;
+}
+
+std::string Transaction::getStateCheckpointHash() const
+{
+    return StateCheckpointHash;
+}
+
+void Transaction::setStateCheckpointHash(const std::string &newStateCheckpointHash)
+{
+    StateCheckpointHash = newStateCheckpointHash;
+}
+
+std::string Transaction::getGasUsed() const
+{
+    return GasUsed;
+}
+
+void Transaction::setGasUsed(const std::string &newGasUsed)
+{
+    GasUsed = newGasUsed;
+}
+
+std::string Transaction::getVmStatus() const
+{
+    return VmStatus;
+}
+
+void Transaction::setVmStatus(const std::string &newVmStatus)
+{
+    VmStatus = newVmStatus;
+}
+
+std::string Transaction::getAccumulatorRootHash() const
+{
+    return AccumulatorRootHash;
+}
+
+void Transaction::setAccumulatorRootHash(const std::string &newAccumulatorRootHash)
+{
+    AccumulatorRootHash = newAccumulatorRootHash;
+}
+
+std::string Transaction::getTimestamp() const
+{
+    return Timestamp;
+}
+
+void Transaction::setTimestamp(const std::string &newTimestamp)
+{
+    Timestamp = newTimestamp;
+}
+
+std::vector<Change> Transaction::getChanges() const
+{
+    return Changes;
+}
+
+void Transaction::setChanges(const std::vector<Change> &newChanges)
+{
+    Changes = newChanges;
+}
+
+std::vector<TransactionEvent> Transaction::getEvents() const
+{
+    return Events;
+}
+
+void Transaction::setEvents(const std::vector<TransactionEvent> &newEvents)
+{
+    Events = newEvents;
+}
+
 nlohmann::json ChangeWriteResourceWriteTableItem::ToJson() const {
     nlohmann::json changeWriteResourceWriteTableItemJson = Change::ToJson();
     changeWriteResourceWriteTableItemJson["state_key_hash"] = StateKeyHash;

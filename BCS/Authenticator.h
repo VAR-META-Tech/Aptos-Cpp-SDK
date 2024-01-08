@@ -211,6 +211,7 @@ namespace Aptos::BCS
 
         /// <inheritdoc/>
         static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
+        std::string ToString() const override;
 
     private:
         /// <summary>

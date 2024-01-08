@@ -47,6 +47,12 @@ class CollectionResource : public IResourceBase{
 public:
     nlohmann::json ToJson() const;
     static CollectionResource FromJson(const nlohmann::json& collectionResourceJson);
+    CollectionResourceData getData() const;
+    void setData(const CollectionResourceData &newData);
+
+    std::string getType() const;
+    void setType(const std::string &newType);
+
 private:
     std::string Type;
     CollectionResourceData Data;

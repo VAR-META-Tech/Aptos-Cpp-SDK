@@ -4,10 +4,15 @@
 
 namespace Aptos::BCS
 {
-    EntryFunction::EntryFunction(const ModuleId &moduleId, const std::string &function, const TagSequence &typeArgs, const Sequence &args)
-        : moduleId(moduleId), function(function), typeArgs(typeArgs), args(args) {}
+EntryFunction::EntryFunction()
+{
 
-    EntryFunction EntryFunction::Natural(const ModuleId &moduleId, const std::string &function, const TagSequence &typeArgs, const Sequence &args)
+}
+
+EntryFunction::EntryFunction(const ModuleId &module, const std::string &function, const TagSequence &typeArgs, const Sequence &args)
+        : moduleId(module), function(function), typeArgs(typeArgs), args(args) {}
+
+    EntryFunction EntryFunction::Natural(const ModuleId &module, const std::string &function, const TagSequence &typeArgs, const Sequence &args)
     {
         auto value = args.GetValue();
 
@@ -34,7 +39,7 @@ namespace Aptos::BCS
         }
 
         Sequence seqBytes(valuesAsBytes);
-        return EntryFunction(moduleId, function, typeArgs, seqBytes);
+        return EntryFunction(module, function, typeArgs, seqBytes);
     }
 
     void EntryFunction::Serialize(Serialization &serializer) const
@@ -47,11 +52,11 @@ namespace Aptos::BCS
 
     std::shared_ptr<ISerializable> EntryFunction::Deserialize(Deserialization &deserializer)
     {
-        auto moduleId = std::dynamic_pointer_cast<ModuleId>(ModuleId::Deserialize(deserializer));
+        auto module = std::dynamic_pointer_cast<ModuleId>(ModuleId::Deserialize(deserializer));
         std::string function = deserializer.DeserializeString();
         auto typeArgs = std::dynamic_pointer_cast<TagSequence>(deserializer.DeserializeTagSequence());
         auto args = std::dynamic_pointer_cast<Sequence>(Sequence::Deserialize(deserializer));
-        return std::make_shared<EntryFunction>(*moduleId, function, *typeArgs, *args);
+        return std::make_shared<EntryFunction>(*module, function, *typeArgs, *args);
     }
 
     bool EntryFunction::Equals(const EntryFunction &other) const
@@ -76,5 +81,45 @@ namespace Aptos::BCS
         hash = hash * 23 + typeArgs.GetHashCode();
         hash = hash * 23 + args.GetHashCode();
         return hash;
+    }
+
+    ModuleId EntryFunction::getModule() const
+    {
+        return moduleId;
+    }
+
+    void EntryFunction::setModule(const ModuleId &newModule)
+    {
+        moduleId = newModule;
+    }
+
+    std::string EntryFunction::getFunction() const
+    {
+        return function;
+    }
+
+    void EntryFunction::setFunction(const std::string &newFunction)
+    {
+        function = newFunction;
+    }
+
+    TagSequence EntryFunction::getTypeArgs() const
+    {
+        return typeArgs;
+    }
+
+    void EntryFunction::setTypeArgs(const TagSequence &newTypeArgs)
+    {
+        typeArgs = newTypeArgs;
+    }
+
+    Sequence EntryFunction::getArgs() const
+    {
+        return args;
+    }
+
+    void EntryFunction::setArgs(const Sequence &newArgs)
+    {
+        args = newArgs;
     }
 }
