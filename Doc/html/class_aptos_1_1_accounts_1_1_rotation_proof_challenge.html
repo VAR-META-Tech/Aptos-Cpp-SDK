@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Aptos C++ SDK: Member List</title>
+<title>Aptos C++ SDK: Aptos::Accounts::RotationProofChallenge Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,23 +69,31 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>Aptos</b></li><li class="navelem"><b>Rest</b></li><li class="navelem"><a class="el" href="class_aptos_1_1_rest_1_1_property_map.html">PropertyMap</a></li>  </ul>
+<li class="navelem"><b>Aptos</b></li><li class="navelem"><b>Accounts</b></li><li class="navelem"><a class="el" href="class_aptos_1_1_accounts_1_1_rotation_proof_challenge.html">RotationProofChallenge</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">Aptos::Rest::PropertyMap Member List</div></div>
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_aptos_1_1_accounts_1_1_rotation_proof_challenge-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Aptos::Accounts::RotationProofChallenge Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>This is the complete list of members for <a class="el" href="class_aptos_1_1_rest_1_1_property_map.html">Aptos::Rest::PropertyMap</a>, including all inherited members.</p>
-<table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>GetStructTag</b>() const override (defined in <a class="el" href="class_aptos_1_1_rest_1_1_property_map.html">Aptos::Rest::PropertyMap</a>)</td><td class="entry"><a class="el" href="class_aptos_1_1_rest_1_1_property_map.html">Aptos::Rest::PropertyMap</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>Parse</b>(std::shared_ptr&lt; AptosRESTModel::ResourceDataBase &gt; resource) (defined in <a class="el" href="class_aptos_1_1_rest_1_1_property_map.html">Aptos::Rest::PropertyMap</a>)</td><td class="entry"><a class="el" href="class_aptos_1_1_rest_1_1_property_map.html">Aptos::Rest::PropertyMap</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>PropertyMap</b>(const std::vector&lt; Property &gt; &amp;Properties) (defined in <a class="el" href="class_aptos_1_1_rest_1_1_property_map.html">Aptos::Rest::PropertyMap</a>)</td><td class="entry"><a class="el" href="class_aptos_1_1_rest_1_1_property_map.html">Aptos::Rest::PropertyMap</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>StructTag</b> (defined in <a class="el" href="class_aptos_1_1_rest_1_1_property_map.html">Aptos::Rest::PropertyMap</a>)</td><td class="entry"><a class="el" href="class_aptos_1_1_rest_1_1_property_map.html">Aptos::Rest::PropertyMap</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>ToString</b>() const override (defined in <a class="el" href="class_aptos_1_1_rest_1_1_property_map.html">Aptos::Rest::PropertyMap</a>)</td><td class="entry"><a class="el" href="class_aptos_1_1_rest_1_1_property_map.html">Aptos::Rest::PropertyMap</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>ToTuple</b>() (defined in <a class="el" href="class_aptos_1_1_rest_1_1_property_map.html">Aptos::Rest::PropertyMap</a>)</td><td class="entry"><a class="el" href="class_aptos_1_1_rest_1_1_property_map.html">Aptos::Rest::PropertyMap</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aefc6281e3166033e20416901ea6c2ba4" id="r_aefc6281e3166033e20416901ea6c2ba4"><td class="memItemLeft" align="right" valign="top"><a id="aefc6281e3166033e20416901ea6c2ba4" name="aefc6281e3166033e20416901ea6c2ba4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RotationProofChallenge</b> (int sequenceNumber, const <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">AccountAddress</a> &amp;originator, const <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">AccountAddress</a> &amp;currentAuthKey, const std::vector&lt; uint8_t &gt; &amp;newPublicKey)</td></tr>
+<tr class="separator:aefc6281e3166033e20416901ea6c2ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac21c771a37800a518e4f8cd8fe34957a" id="r_ac21c771a37800a518e4f8cd8fe34957a"><td class="memItemLeft" align="right" valign="top"><a id="ac21c771a37800a518e4f8cd8fe34957a" name="ac21c771a37800a518e4f8cd8fe34957a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Serialize</b> (<a class="el" href="class_aptos_1_1_b_c_s_1_1_serialization.html">BCS::Serialization</a> &amp;serializer)</td></tr>
+<tr class="separator:ac21c771a37800a518e4f8cd8fe34957a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>Accounts/<a class="el" href="_rotation_proof_challenge_8h_source.html">RotationProofChallenge.h</a></li>
+<li>Accounts/<b>RotationProofChallenge.cpp</b></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8

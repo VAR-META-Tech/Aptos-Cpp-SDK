@@ -6,6 +6,12 @@
 \Hypertarget{class_aptos_1_1_rest_1_1_rest_client_a803125b73fb02138381f5d4e1e03102d}\label{class_aptos_1_1_rest_1_1_rest_client_a803125b73fb02138381f5d4e1e03102d} 
 void {\bfseries Set\+Endpoint} (const std\+::string \&url)
 \item 
+\Hypertarget{class_aptos_1_1_rest_1_1_rest_client_a7bfaf0e22c28dcdc6e87da96cfef0994}\label{class_aptos_1_1_rest_1_1_rest_client_a7bfaf0e22c28dcdc6e87da96cfef0994} 
+{\bfseries Rest\+Client} (const std\+::string \&url)
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_rest_client_a7bafdc23ae552a1ff59dcc822c6f21c2}\label{class_aptos_1_1_rest_1_1_rest_client_a7bafdc23ae552a1ff59dcc822c6f21c2} 
+void {\bfseries Set\+Up} ()
+\item 
 void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a430892f3a61264a5684e50e66fa1fbbd}{Get\+Account}} (std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Account\+Data $>$, Aptos\+RESTModel\+::\+Response\+Info)$>$ callback, const \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} \&account\+Address)
 \begin{DoxyCompactList}\small\item\em Get Account Details. Return the authentication key and the sequence number for an account address. Optionally, a ledger version can be specified. If the ledger version is not specified in the request, the latest ledger version is used. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a7df07f2a4dc5f17f0689229a8a68fff0}{Get\+Account\+Sequence\+Number}} (std\+::function$<$ void(std\+::string, Aptos\+RESTModel\+::\+Response\+Info)$>$ callback, const \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} \&account\+Address)
@@ -67,7 +73,7 @@ void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a2f4c717a01809b8e90c7
 \begin{DoxyCompactList}\small\item\em Create a NFT collection. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a165f1609410df158b53937b034c4a3ee}{Create\+Token}} (std\+::function$<$ void(Aptos\+RESTModel\+::\+Transaction, Aptos\+RESTModel\+::\+Response\+Info)$>$ callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} sender\+Royalty\+Payee\+Address, std\+::string collection\+Name, std\+::string token\+Name, std\+::string description, int supply, int max, std\+::string uri, int royalty\+Points\+Per\+Million)
 \begin{DoxyCompactList}\small\item\em Create Non-\/\+Fungible \doxylink{class_aptos_1_1_rest_1_1_token}{Token} (NFT) See token \doxylink{}{reference.} \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_ac7dff8bf6a1a12fa0ebb0a4f7a033458}{Offer\+Token}} (std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Transaction $>$, Aptos\+RESTModel\+::\+Response\+Info)$>$ callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} account, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} receiver, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} creator, std\+::string collection\+Name, std\+::string token\+Name, int amount, int property\+Version)
+void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a323aba7137a03702f7d143fee0516798}{Offer\+Token}} (std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Transaction $>$, Aptos\+RESTModel\+::\+Response\+Info)$>$ callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} account, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} receiver, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} creator, std\+::string collection\+Name, std\+::string token\+Name, int amount, int property\+Version=0)
 \begin{DoxyCompactList}\small\item\em Offer a token to a given address. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_addb696dfda1dab1a9eee764039fdea36}{Claim\+Token}} (std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Transaction $>$, Aptos\+RESTModel\+::\+Response\+Info)$>$ callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} account, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} sender, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} creator, std\+::string collection\+Name, std\+::string token\+Name, int property\+Version)
 \begin{DoxyCompactList}\small\item\em Claim a token that was offered by {\itshape sender}  \end{DoxyCompactList}\item 
@@ -75,7 +81,7 @@ void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_ad73d9ecad479d8c66b04
 \begin{DoxyCompactList}\small\item\em Get token information. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_aa11c03c15aeff128e02d478196a207b0}{Get\+Token\+Balance}} (std\+::function$<$ void(std\+::string)$>$ callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} owner\+Address, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} creator\+Address, std\+::string collection\+Name, std\+::string token\+Name, int property\+Version)
 \begin{DoxyCompactList}\small\item\em Get balance for a given non-\/fungible token (NFT). \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a95f6603263bf02f41ff9136fd6501834}{Get\+Token\+Data}} (std\+::function$<$ void(Aptos\+RESTModel\+::\+Table\+Item\+Token\+Metadata, Aptos\+RESTModel\+::\+Response\+Info)$>$ callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} creator, std\+::string collection\+Name, std\+::string token\+Name, int property\+Version)
+void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_ae797b8da2764b11b20af59c4748a8984}{Get\+Token\+Data}} (std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Table\+Item\+Token\+Metadata $>$, Aptos\+RESTModel\+::\+Response\+Info)$>$ callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} creator, std\+::string collection\+Name, std\+::string token\+Name, int property\+Version)
 \begin{DoxyCompactList}\small\item\em Read \doxylink{class_aptos_1_1_rest_1_1_collection}{Collection}\textquotesingle{}s token data table. An example {\ttfamily  \{ "{}default\+\_\+properties"{}\+:\{ "{}map"{}\+:\{ "{}data"{}\+:\mbox{[} \mbox{]} \} \}, "{}description"{}\+:"{}\+Alice\textquotesingle{}s simple token"{}, "{}largest\+\_\+property\+\_\+version"{}\+:"{}0"{}, "{}maximum"{}\+:"{}1"{}, "{}mutability\+\_\+config"{}\+:\{ "{}description"{}\+:false, "{}maximum"{}\+:false, "{}properties"{}\+:false, "{}royalty"{}\+:false, "{}uri"{}\+:false \}, "{}name"{}\+:"{}\+Alice\textquotesingle{}s first token"{}, "{}royalty"{}\+:\{ "{}payee\+\_\+address"{}\+:"{}0x3f99ffee67853e129173b9df0e2e9c6af6f08fe2a4417daf43df46ad957a8bbe"{}, "{}royalty\+\_\+points\+\_\+denominator"{}\+:"{}1000000"{}, "{}royalty\+\_\+points\+\_\+numerator"{}\+:"{}0"{} \}, "{}supply"{}\+:"{}1"{}, "{}uri"{}\+:"{}https\+://aptos.\+dev/img/nyan.\+jpeg"{} \} } \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_abb5614d25535943c08928464da9d320d}{Get\+Collection}} (std\+::function$<$ void(std\+::string)$>$ callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} creator, std\+::string collection\+Name)
 \begin{DoxyCompactList}\small\item\em Get collection information. This return a JSON representation that will be parsed by the developer that know the specific return types. \end{DoxyCompactList}\item 
@@ -83,7 +89,10 @@ void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_abb5614d25535943c0892
 void {\bfseries Transfer\+Object} (std\+::function$<$ void(std\+::string, Aptos\+RESTModel\+::\+Response\+Info)$>$ callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} Owner, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} \mbox{\hyperlink{class_aptos_1_1_rest_1_1_object}{Object}}, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} To)
 \item 
 void \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client_a19cc2e1edaf2f0ebf35bb799e07cda8d}{Get\+Account\+Resource}} (std\+::function$<$ void(bool, long, std\+::string)$>$ callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} \&account\+Address, std\+::string resource\+Type)
-\begin{DoxyCompactList}\small\item\em Get a resource of a given type from an account. NOTE\+: The response is a complex object of types only known to the developer writing the contracts. This function return a string and expect the developer to deserialize it into an object. See \doxylink{}{Get\+Account\+Resource\+Collection} for an example. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get a resource of a given type from an account. NOTE\+: The response is a complex object of types only known to the developer writing the contracts. This function return a string and expect the developer to deserialize it into an object. See \doxylink{}{Get\+Account\+Resource\+Collection} for an example. \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_rest_client_a1e48de439c21aadda9efda12a0808aa4}\label{class_aptos_1_1_rest_1_1_rest_client_a1e48de439c21aadda9efda12a0808aa4} 
+int {\bfseries Chain\+Id} () const
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Member Function Documentation}
@@ -101,7 +110,7 @@ Claim a token that was offered by {\itshape sender}
 \begin{DoxyParams}{Parameters}
 {\em callback} & Callback function used when response is received.\\
 \hline
-{\em account} & Account making the claim\\
+{\em account} & \doxylink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account} making the claim\\
 \hline
 {\em sender} & Address of the sender of the non-\/fungible token (NFT)\\
 \hline
@@ -635,11 +644,11 @@ Get balance for a given non-\/fungible token (NFT).
 \begin{DoxyReturn}{Returns}
 \doxylink{class_aptos_1_1_rest_1_1_token}{Token} balance as a string.
 \end{DoxyReturn}
-\Hypertarget{class_aptos_1_1_rest_1_1_rest_client_a95f6603263bf02f41ff9136fd6501834}\label{class_aptos_1_1_rest_1_1_rest_client_a95f6603263bf02f41ff9136fd6501834} 
+\Hypertarget{class_aptos_1_1_rest_1_1_rest_client_ae797b8da2764b11b20af59c4748a8984}\label{class_aptos_1_1_rest_1_1_rest_client_ae797b8da2764b11b20af59c4748a8984} 
 \index{Aptos::Rest::RestClient@{Aptos::Rest::RestClient}!GetTokenData@{GetTokenData}}
 \index{GetTokenData@{GetTokenData}!Aptos::Rest::RestClient@{Aptos::Rest::RestClient}}
 \doxysubsubsection{\texorpdfstring{GetTokenData()}{GetTokenData()}}
-{\footnotesize\ttfamily void Aptos\+::\+Rest\+::\+Rest\+Client\+::\+Get\+Token\+Data (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(Aptos\+RESTModel\+::\+Table\+Item\+Token\+Metadata, Aptos\+RESTModel\+::\+Response\+Info)$>$}]{callback,  }\item[{\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}}}]{creator,  }\item[{std\+::string}]{collection\+Name,  }\item[{std\+::string}]{token\+Name,  }\item[{int}]{property\+Version }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Aptos\+::\+Rest\+::\+Rest\+Client\+::\+Get\+Token\+Data (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Table\+Item\+Token\+Metadata $>$, Aptos\+RESTModel\+::\+Response\+Info)$>$}]{callback,  }\item[{\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}}}]{creator,  }\item[{std\+::string}]{collection\+Name,  }\item[{std\+::string}]{token\+Name,  }\item[{int}]{property\+Version }\end{DoxyParamCaption})}
 
 
 
@@ -662,11 +671,11 @@ Read \doxylink{class_aptos_1_1_rest_1_1_collection}{Collection}\textquotesingle{
 Calls {\ttfamily callback} function with {\ttfamily (Table\+Item\+Token, Response\+Info)}\+: ~\newline
 An object the represents the NFT\textquotesingle{}s token metadata -\/ null if the transaction to get a token failed, and a response object that contains the response details. 
 \end{DoxyReturn}
-\Hypertarget{class_aptos_1_1_rest_1_1_rest_client_ac7dff8bf6a1a12fa0ebb0a4f7a033458}\label{class_aptos_1_1_rest_1_1_rest_client_ac7dff8bf6a1a12fa0ebb0a4f7a033458} 
+\Hypertarget{class_aptos_1_1_rest_1_1_rest_client_a323aba7137a03702f7d143fee0516798}\label{class_aptos_1_1_rest_1_1_rest_client_a323aba7137a03702f7d143fee0516798} 
 \index{Aptos::Rest::RestClient@{Aptos::Rest::RestClient}!OfferToken@{OfferToken}}
 \index{OfferToken@{OfferToken}!Aptos::Rest::RestClient@{Aptos::Rest::RestClient}}
 \doxysubsubsection{\texorpdfstring{OfferToken()}{OfferToken()}}
-{\footnotesize\ttfamily void Aptos\+::\+Rest\+::\+Rest\+Client\+::\+Offer\+Token (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Transaction $>$, Aptos\+RESTModel\+::\+Response\+Info)$>$}]{callback,  }\item[{\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}}}]{account,  }\item[{\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}}}]{receiver,  }\item[{\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}}}]{creator,  }\item[{std\+::string}]{collection\+Name,  }\item[{std\+::string}]{token\+Name,  }\item[{int}]{amount,  }\item[{int}]{property\+Version }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Aptos\+::\+Rest\+::\+Rest\+Client\+::\+Offer\+Token (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ Aptos\+RESTModel\+::\+Transaction $>$, Aptos\+RESTModel\+::\+Response\+Info)$>$}]{callback,  }\item[{\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}}}]{account,  }\item[{\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}}}]{receiver,  }\item[{\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}}}]{creator,  }\item[{std\+::string}]{collection\+Name,  }\item[{std\+::string}]{token\+Name,  }\item[{int}]{amount,  }\item[{int}]{property\+Version = {\ttfamily 0} }\end{DoxyParamCaption})}
 
 
 
@@ -676,7 +685,7 @@ Offer a token to a given address.
 \begin{DoxyParams}{Parameters}
 {\em callback} & Callback function used when response is received.\\
 \hline
-{\em account} & Account offering the token.\\
+{\em account} & \doxylink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account} offering the token.\\
 \hline
 {\em receiver} & Address of recipient.\\
 \hline

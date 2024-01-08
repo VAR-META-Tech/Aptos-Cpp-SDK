@@ -18,8 +18,10 @@ Inheritance diagram for Aptos\+::BCS\+::Entry\+Function\+:\begin{figure}[H]
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_acdaa65c5f4c12e054e3b714dc85403ad}\label{class_aptos_1_1_b_c_s_1_1_entry_function_acdaa65c5f4c12e054e3b714dc85403ad} 
-{\bfseries Entry\+Function} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{Module\+Id}} \&module\+Id, const std\+::string \&function, const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{Tag\+Sequence}} \&type\+Args, const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}} \&args)
+\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function_aacaf6996b632cd65e411dbbe48b4854c}{Entry\+Function}} ()
+\begin{DoxyCompactList}\small\item\em Converts a \doxylink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence} of \doxylink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable} objects and converts it to a \doxylink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence} of \doxylink{class_aptos_1_1_b_c_s_1_1_bytes}{Bytes} objects. \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_afcac10570f6aac677cfd6323849571c4}\label{class_aptos_1_1_b_c_s_1_1_entry_function_afcac10570f6aac677cfd6323849571c4} 
+{\bfseries Entry\+Function} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{Module\+Id}} \&module, const std\+::string \&function, const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{Tag\+Sequence}} \&type\+Args, const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}} \&args)
 \item 
 void \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function_afe9b19a83bcefcf155123387f9cf7326}{Serialize}} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}} \&serializer) const override
 \begin{DoxyCompactList}\small\item\em Serialize the object. \end{DoxyCompactList}\item 
@@ -28,13 +30,38 @@ bool {\bfseries Equals} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_
 \item 
 std\+::string \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function_abe63a62fe0f6aa7a3536f17c749b4fd4}{To\+String}} () const override
 \item 
-size\+\_\+t \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function_a0a3d64c55480388ffca27d59ace8b2c3}{Get\+Hash\+Code}} () const override
+size\+\_\+t \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function_a1445750d870adcc49753c21662d98236}{Get\+Hash\+Code}} () const
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_a522ec3112e0e03fcca3a92b46fe3ad5b}\label{class_aptos_1_1_b_c_s_1_1_entry_function_a522ec3112e0e03fcca3a92b46fe3ad5b} 
+\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{Module\+Id}} {\bfseries get\+Module} () const
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_aa0431b718ce3dc76db074e42984e2724}\label{class_aptos_1_1_b_c_s_1_1_entry_function_aa0431b718ce3dc76db074e42984e2724} 
+void {\bfseries set\+Module} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{Module\+Id}} \&new\+Module)
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_a6fa78285d048c1ec297cf5900e9198d7}\label{class_aptos_1_1_b_c_s_1_1_entry_function_a6fa78285d048c1ec297cf5900e9198d7} 
+std\+::string {\bfseries get\+Function} () const
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_ab26a97845a15fdd6b0933910bbbf6d09}\label{class_aptos_1_1_b_c_s_1_1_entry_function_ab26a97845a15fdd6b0933910bbbf6d09} 
+void {\bfseries set\+Function} (const std\+::string \&new\+Function)
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_ad330db9ebc474eaf255837504b2a0d56}\label{class_aptos_1_1_b_c_s_1_1_entry_function_ad330db9ebc474eaf255837504b2a0d56} 
+\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{Tag\+Sequence}} {\bfseries get\+Type\+Args} () const
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_ab81280fca6f742db5ff10090c94f1db4}\label{class_aptos_1_1_b_c_s_1_1_entry_function_ab81280fca6f742db5ff10090c94f1db4} 
+void {\bfseries set\+Type\+Args} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{Tag\+Sequence}} \&new\+Type\+Args)
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_a6ee45facadf2f044ccc20a75e977f2a9}\label{class_aptos_1_1_b_c_s_1_1_entry_function_a6ee45facadf2f044ccc20a75e977f2a9} 
+\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}} {\bfseries get\+Args} () const
+\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_a032b28e0fd7b137ea74e8fa96fb74892}\label{class_aptos_1_1_b_c_s_1_1_entry_function_a032b28e0fd7b137ea74e8fa96fb74892} 
+void {\bfseries set\+Args} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}} \&new\+Args)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function}{Entry\+Function}} \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function_a9f834f50a5a23ce057430eee3e52d40f}{Natural}} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{Module\+Id}} \&module\+Id, const std\+::string \&function, const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{Tag\+Sequence}} \&type\+Args, const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}} \&args)
-\begin{DoxyCompactList}\small\item\em Converts a \doxylink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence} of \doxylink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable} objects and converts it to a \doxylink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence} of \doxylink{class_aptos_1_1_b_c_s_1_1_bytes}{Bytes} objects. \end{DoxyCompactList}\item 
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_a23105004ce87a7e260f3aa8f9845cfe6}\label{class_aptos_1_1_b_c_s_1_1_entry_function_a23105004ce87a7e260f3aa8f9845cfe6} 
+static \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function}{Entry\+Function}} {\bfseries Natural} (const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{Module\+Id}} \&module, const std\+::string \&function, const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{Tag\+Sequence}} \&type\+Args, const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}} \&args)
+\item 
 \Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_a3c95fee010a009d0e0b7c7b37fe1d795}\label{class_aptos_1_1_b_c_s_1_1_entry_function_a3c95fee010a009d0e0b7c7b37fe1d795} 
 static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}} $>$ {\bfseries Deserialize} (\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}} \&deserializer)
 \end{DoxyCompactItemize}
@@ -48,22 +75,12 @@ static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_se
 \doxysubsection{Detailed Description}
 Representation of an entry function. 
 
-\doxysubsection{Member Function Documentation}
-\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_a0a3d64c55480388ffca27d59ace8b2c3}\label{class_aptos_1_1_b_c_s_1_1_entry_function_a0a3d64c55480388ffca27d59ace8b2c3} 
-\index{Aptos::BCS::EntryFunction@{Aptos::BCS::EntryFunction}!GetHashCode@{GetHashCode}}
-\index{GetHashCode@{GetHashCode}!Aptos::BCS::EntryFunction@{Aptos::BCS::EntryFunction}}
-\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}}
-{\footnotesize\ttfamily size\+\_\+t Aptos\+::\+BCS\+::\+Entry\+Function\+::\+Get\+Hash\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
-
-
-
-Reimplemented from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}.
-
-\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_a9f834f50a5a23ce057430eee3e52d40f}\label{class_aptos_1_1_b_c_s_1_1_entry_function_a9f834f50a5a23ce057430eee3e52d40f} 
-\index{Aptos::BCS::EntryFunction@{Aptos::BCS::EntryFunction}!Natural@{Natural}}
-\index{Natural@{Natural}!Aptos::BCS::EntryFunction@{Aptos::BCS::EntryFunction}}
-\doxysubsubsection{\texorpdfstring{Natural()}{Natural()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function}{Entry\+Function}} Aptos\+::\+BCS\+::\+Entry\+Function\+::\+Natural (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{Module\+Id}} \&}]{module\+Id,  }\item[{const std\+::string \&}]{function,  }\item[{const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{Tag\+Sequence}} \&}]{type\+Args,  }\item[{const \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}} \&}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_aacaf6996b632cd65e411dbbe48b4854c}\label{class_aptos_1_1_b_c_s_1_1_entry_function_aacaf6996b632cd65e411dbbe48b4854c} 
+\index{Aptos::BCS::EntryFunction@{Aptos::BCS::EntryFunction}!EntryFunction@{EntryFunction}}
+\index{EntryFunction@{EntryFunction}!Aptos::BCS::EntryFunction@{Aptos::BCS::EntryFunction}}
+\doxysubsubsection{\texorpdfstring{EntryFunction()}{EntryFunction()}}
+{\footnotesize\ttfamily Aptos\+::\+BCS\+::\+Entry\+Function\+::\+Entry\+Function (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -83,6 +100,19 @@ Converts a \doxylink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence} of \doxylink{
 \begin{DoxyReturn}{Returns}
 
 \end{DoxyReturn}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_a1445750d870adcc49753c21662d98236}\label{class_aptos_1_1_b_c_s_1_1_entry_function_a1445750d870adcc49753c21662d98236} 
+\index{Aptos::BCS::EntryFunction@{Aptos::BCS::EntryFunction}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!Aptos::BCS::EntryFunction@{Aptos::BCS::EntryFunction}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}}
+{\footnotesize\ttfamily size\+\_\+t Aptos\+::\+BCS\+::\+Entry\+Function\+::\+Get\+Hash\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{Aptos\+::\+BCS\+::\+ISerializable}}.
+
 \Hypertarget{class_aptos_1_1_b_c_s_1_1_entry_function_afe9b19a83bcefcf155123387f9cf7326}\label{class_aptos_1_1_b_c_s_1_1_entry_function_afe9b19a83bcefcf155123387f9cf7326} 
 \index{Aptos::BCS::EntryFunction@{Aptos::BCS::EntryFunction}!Serialize@{Serialize}}
 \index{Serialize@{Serialize}!Aptos::BCS::EntryFunction@{Aptos::BCS::EntryFunction}}

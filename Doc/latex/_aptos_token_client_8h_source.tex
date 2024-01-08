@@ -10,7 +10,7 @@
 \DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../Accounts/AccountAddress.h"{}}}
 \DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../BCS/BString.h"{}}}
 \DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../BCS/Bytes.h"{}}}
-\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}RestClient.h"{}}}
 \DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }Aptos::Rest}
 \DoxyCodeLine{00011\ \{}
 \DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_i_resource}{IResource}}}
@@ -132,9 +132,9 @@
 \DoxyCodeLine{00146\ }
 \DoxyCodeLine{00147\ \ \ \ \ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\ StructTag;}
-\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property_map}{PropertyMap}}(\textcolor{keyword}{const}\ std::vector<Property>\ \&Properties);}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property_map}{PropertyMap}}(\textcolor{keyword}{const}\ std::vector<Property>\ \&Properties);}
 \DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const\ override};}
-\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ std::tuple<std::vector<BCS::BString>,\ std::vector<BCS::BString>,\ std::vector<std::vector<uint8\_t>>>\ ToTuple()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ std::tuple<std::vector<BCS::BString>,\ std::vector<BCS::BString>,\ std::vector<std::vector<uint8\_t>>>\ ToTuple();}
 \DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IResource>\ Parse(std::shared\_ptr<AptosRESTModel::ResourceDataBase>\ resource);}
 \DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ std::string\ GetStructTag()\ \textcolor{keyword}{const\ override};}
 \DoxyCodeLine{00154\ \ \ \ \ \};}
@@ -144,13 +144,96 @@
 \DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }FuncValue\ =\ std::shared\_ptr<IResource>(std::shared\_ptr<AptosRESTModel::ResourceDataBase>);}
 \DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::map<std::string,\ FuncValue\ *>\ ResourceMap;}
-\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_read_object}{ReadObject}}(\textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::shared\_ptr<IResource>>\ \&Resources);}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_read_object}{ReadObject}}(\textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::shared\_ptr<IResource>>\ \&R1);}
 \DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const};}
 \DoxyCodeLine{00163\ }
 \DoxyCodeLine{00164\ \ \ \ \ \textcolor{keyword}{private}:}
 \DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ std::unordered\_map<std::string,\ std::shared\_ptr<IResource>>\ Resources;}
 \DoxyCodeLine{00166\ \ \ \ \ \};}
-\DoxyCodeLine{00167\ \}}
-\DoxyCodeLine{00168\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ APTOSTOKENCLIENT\_H}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_aptos_token_client}{AptosTokenClient}}}
+\DoxyCodeLine{00169\ \ \ \ \ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_aptos_token_client}{AptosTokenClient}}(\mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client}{RestClient}}\&\ client);}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_read_object}{ReadObject}}(std::function<\textcolor{keywordtype}{void}\ (\mbox{\hyperlink{class_aptos_1_1_rest_1_1_read_object}{Aptos::Rest::ReadObject}},\ \ AptosRESTModel::ResponseInfo)>\ callback,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\&\ address);}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CreateCollection(}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}\ (std::string,\ \ AptosRESTModel::ResponseInfo)>\ callback,}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts::Account}}\ Creator,}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ Description,}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ MaxSupply,}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ Name,}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ Uri,}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ MutableDescription,}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ MutableRoyalty,}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ MutableUri,}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ MutableTokenDescription,}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ MutableTokenName,}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ MutableTokenProperties,}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ MutableTokenUri,}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ TokensBurnableByCreator,}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ TokensFreezableByCreator,}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ RoyaltyNumerator,}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ RoyaltyDenominator}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ MintToken(std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ Callback,\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts::Account}}\ Creator,\ std::string\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_collection}{Collection}},\ std::string\ Description,\ std::string\ Name,\ std::string\ Uri,\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property_map}{PropertyMap}}\ Properties);}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ IMintSoulBoundToken(}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ Callback,}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts::Account}}\ Creator,}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_collection}{Collection}},}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ Description,}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ Name,}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ Uri,}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property_map}{PropertyMap}}\ Properties,}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ SoulBoundTo}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ TransferToken(}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ Callback,}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts::Account}}\ Owner,}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}},}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ To}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ BurnToken(}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ Callback,}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts::Account}}\ Creator,}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}}}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ FreezeToken(}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ Callback,}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts::Account}}\ Creator,}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}}}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ UnfreezeToken(}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ Callback,}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts::Account}}\ Creator,}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}}}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ AddTokenProperty(}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ Callback,}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts::Account}}\ Creator,}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}},}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property}{Property}}\ Prop}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ RemoveTokenProperty(}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ Callback,}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts::Account}}\ Creator,}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}},}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ Name}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateTokenProperty(}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::string,\ AptosRESTModel::ResponseInfo)>\ Callback,}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts::Account}}\ Creator,}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}},}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property}{Property}}\ Prop}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ TokensMintedFromTransaction(}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::vector<Accounts::AccountAddress>,\ AptosRESTModel::ResponseInfo)>\ Callback,}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ TransactionHash}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client}{RestClient}}\&\ m\_restClient;}
+\DoxyCodeLine{00249\ \ \ \ \ \};}
+\DoxyCodeLine{00250\ \}}
+\DoxyCodeLine{00251\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ APTOSTOKENCLIENT\_H}}
 
 \end{DoxyCode}

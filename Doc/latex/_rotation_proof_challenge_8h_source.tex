@@ -1,0 +1,38 @@
+\doxysection{Rotation\+Proof\+Challenge.\+h}
+\hypertarget{_rotation_proof_challenge_8h_source}{}\label{_rotation_proof_challenge_8h_source}\index{Accounts/RotationProofChallenge.h@{Accounts/RotationProofChallenge.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ROTATIONPROOFCHALLENGE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ROTATIONPROOFCHALLENGE\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Account.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}AccountAddress.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }Aptos::Accounts}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_accounts_1_1_rotation_proof_challenge}{RotationProofChallenge}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ TypeInfoAccountAddress\ =\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address_a912af84aca30a0414c0cf3c5f4e53653}{AccountAddress::FromHex}}(\textcolor{stringliteral}{"{}0x1"{}});}
+\DoxyCodeLine{00014\ \ \ \ \ std::string\ TypeInfoModuleName\ =\ \textcolor{stringliteral}{"{}account"{}};}
+\DoxyCodeLine{00015\ \ \ \ \ std::string\ TypeInfoStructName\ =\ \textcolor{stringliteral}{"{}RotationProofChallenge"{}};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ SequenceNumber;}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ Originator;}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\ CurrentAuthKey;}
+\DoxyCodeLine{00019\ \ \ \ \ std::vector<uint8\_t>\ NewPublicKey;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_rotation_proof_challenge}{RotationProofChallenge}}(}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ sequenceNumber,}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\&\ originator,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{AccountAddress}}\&\ currentAuthKey,}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ newPublicKey}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ Serialize(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{BCS::Serialization}}\&\ serializer);}
+\DoxyCodeLine{00030\ \};}
+\DoxyCodeLine{00031\ \}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ROTATIONPROOFCHALLENGE\_H}}
+
+\end{DoxyCode}

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['natural_0',['Natural',['../class_aptos_1_1_b_c_s_1_1_entry_function.html#a9f834f50a5a23ce057430eee3e52d40f',1,'Aptos::BCS::EntryFunction']]]
+  ['offertoken_0',['OfferToken',['../class_aptos_1_1_rest_1_1_rest_client.html#a323aba7137a03702f7d143fee0516798',1,'Aptos::Rest::RestClient']]],
+  ['operator_3d_3d_1',['operator==',['../class_aptos_1_1_accounts_1_1_private_key.html#ae7bc2a3ff011be315ac70950e39a209f',1,'Aptos::Accounts::PrivateKey']]]
 ];

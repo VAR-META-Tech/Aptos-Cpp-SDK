@@ -98,29 +98,30 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keyword">explicit</span> <a class="code hl_class" href="class_aptos_1_1_b_c_s_1_1_sequence.html">Sequence</a>(<span class="keyword">const</span> std::vector&lt;std::shared_ptr&lt;ISerializable&gt;&gt; &amp;values);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordtype">int</span> <a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#a51cabb496c12b3d6945f7c171f7815f2">Length</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        std::vector&lt;std::shared_ptr&lt;ISerializable&gt;&gt; <a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#ad61ce6e6af0ea45216690f684edcfeda">GetValue</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#aba289d4ffd7f82d9d0356cce704348bb">Serialize</a>(<a class="code hl_class" href="class_aptos_1_1_b_c_s_1_1_serialization.html">Serialization</a> &amp;serializer) <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keyword">static</span> std::shared_ptr&lt;ISerializable&gt; <a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#a26949e9e87e54aad76ecf1f109f3e880">Deserialize</a>(<a class="code hl_class" href="class_aptos_1_1_b_c_s_1_1_deserialization.html">Deserialization</a> &amp;deserializer);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#ae9445c948efc79b52741a2daed2f6e64">Equals</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_aptos_1_1_b_c_s_1_1_sequence.html">Sequence</a> &amp;other) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        std::string <a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#a536afb736da3c2bf7c024d0436e172b2">ToString</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#af66a35f9fe8135fa1cf611f848fc222a">GetHashCode</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keyword">const</span> std::vector&lt;std::shared_ptr&lt;ISerializable&gt;&gt; &amp;<a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#ac4fcd46fb5063b343281621371080b5b">getValues</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        std::vector&lt;std::shared_ptr&lt;ISerializable&gt;&gt; values;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    };</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <a class="code hl_class" href="class_aptos_1_1_b_c_s_1_1_sequence.html">Sequence</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordtype">int</span> <a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#a51cabb496c12b3d6945f7c171f7815f2">Length</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        std::vector&lt;std::shared_ptr&lt;ISerializable&gt;&gt; <a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#ad61ce6e6af0ea45216690f684edcfeda">GetValue</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#aba289d4ffd7f82d9d0356cce704348bb">Serialize</a>(<a class="code hl_class" href="class_aptos_1_1_b_c_s_1_1_serialization.html">Serialization</a> &amp;serializer) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keyword">static</span> std::shared_ptr&lt;ISerializable&gt; <a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#a26949e9e87e54aad76ecf1f109f3e880">Deserialize</a>(<a class="code hl_class" href="class_aptos_1_1_b_c_s_1_1_deserialization.html">Deserialization</a> &amp;deserializer);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#ae9445c948efc79b52741a2daed2f6e64">Equals</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_aptos_1_1_b_c_s_1_1_sequence.html">Sequence</a> &amp;other) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        std::string <a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#a536afb736da3c2bf7c024d0436e172b2">ToString</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#af66a35f9fe8135fa1cf611f848fc222a">GetHashCode</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keyword">const</span> std::vector&lt;std::shared_ptr&lt;ISerializable&gt;&gt; &amp;<a class="code hl_function" href="class_aptos_1_1_b_c_s_1_1_sequence.html#ac4fcd46fb5063b343281621371080b5b">getValues</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        std::vector&lt;std::shared_ptr&lt;ISerializable&gt;&gt; values;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    };</div>
 </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>}</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#endif </span><span class="comment">// APTOS_SEQUENCE_H</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#endif </span><span class="comment">// APTOS_SEQUENCE_H</span></div>
 <div class="ttc" id="aclass_aptos_1_1_b_c_s_1_1_deserialization_html"><div class="ttname"><a href="class_aptos_1_1_b_c_s_1_1_deserialization.html">Aptos::BCS::Deserialization</a></div><div class="ttdef"><b>Definition</b> Deserialization.h:23</div></div>
 <div class="ttc" id="aclass_aptos_1_1_b_c_s_1_1_i_serializable_html"><div class="ttname"><a href="class_aptos_1_1_b_c_s_1_1_i_serializable.html">Aptos::BCS::ISerializable</a></div><div class="ttdoc">An interfaces that enforces types to implement a serialization method.</div><div class="ttdef"><b>Definition</b> BCSTypes.h:40</div></div>
 <div class="ttc" id="aclass_aptos_1_1_b_c_s_1_1_sequence_html"><div class="ttname"><a href="class_aptos_1_1_b_c_s_1_1_sequence.html">Aptos::BCS::Sequence</a></div><div class="ttdoc">Representation of a Transaction Argument sequence / list. NOTE: Transaction Arguments have different ...</div><div class="ttdef"><b>Definition</b> Sequence.h:28</div></div>

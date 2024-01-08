@@ -89,7 +89,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;../Accounts/AccountAddress.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;../BCS/BString.h&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;../BCS/Bytes.h&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;RestClient.h&quot;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span>Aptos::Rest</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
 <div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
@@ -224,9 +224,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keyword">static</span> <span class="keyword">const</span> std::string StructTag;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keyword">explicit</span> <a class="code hl_class" href="class_aptos_1_1_rest_1_1_property_map.html">PropertyMap</a>(<span class="keyword">const</span> std::vector&lt;Property&gt; &amp;Properties);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <a class="code hl_class" href="class_aptos_1_1_rest_1_1_property_map.html">PropertyMap</a>(<span class="keyword">const</span> std::vector&lt;Property&gt; &amp;Properties);</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        std::string ToString() <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        std::tuple&lt;std::vector&lt;BCS::BString&gt;, std::vector&lt;BCS::BString&gt;, std::vector&lt;std::vector&lt;uint8_t&gt;&gt;&gt; ToTuple() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        std::tuple&lt;std::vector&lt;BCS::BString&gt;, std::vector&lt;BCS::BString&gt;, std::vector&lt;std::vector&lt;uint8_t&gt;&gt;&gt; ToTuple();</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keyword">static</span> std::shared_ptr&lt;IResource&gt; Parse(std::shared_ptr&lt;AptosRESTModel::ResourceDataBase&gt; resource);</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        std::string GetStructTag() <span class="keyword">const override</span>;</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    };</div>
@@ -238,25 +238,113 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="keyword">using </span>FuncValue = std::shared_ptr&lt;IResource&gt;(std::shared_ptr&lt;AptosRESTModel::ResourceDataBase&gt;);</div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <span class="keyword">static</span> std::map&lt;std::string, FuncValue *&gt; ResourceMap;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="keyword">explicit</span> <a class="code hl_class" href="class_aptos_1_1_rest_1_1_read_object.html">ReadObject</a>(<span class="keyword">const</span> std::unordered_map&lt;std::string, std::shared_ptr&lt;IResource&gt;&gt; &amp;Resources);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <a class="code hl_class" href="class_aptos_1_1_rest_1_1_read_object.html">ReadObject</a>(<span class="keyword">const</span> std::unordered_map&lt;std::string, std::shared_ptr&lt;IResource&gt;&gt; &amp;R1);</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        std::string ToString() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keyword">private</span>:</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        std::unordered_map&lt;std::string, std::shared_ptr&lt;IResource&gt;&gt; Resources;</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    };</div>
 </div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>}</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="preprocessor">#endif </span><span class="comment">// APTOSTOKENCLIENT_H</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="foldopen" id="foldopen00168" data-start="{" data-end="};">
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="class_aptos_1_1_rest_1_1_aptos_token_client.html">  168</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_aptos_1_1_rest_1_1_aptos_token_client.html">AptosTokenClient</a></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    {</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <a class="code hl_class" href="class_aptos_1_1_rest_1_1_aptos_token_client.html">AptosTokenClient</a>(<a class="code hl_class" href="class_aptos_1_1_rest_1_1_rest_client.html">RestClient</a>&amp; client);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordtype">void</span> <a class="code hl_class" href="class_aptos_1_1_rest_1_1_read_object.html">ReadObject</a>(std::function&lt;<span class="keywordtype">void</span> (<a class="code hl_class" href="class_aptos_1_1_rest_1_1_read_object.html">Aptos::Rest::ReadObject</a>,  AptosRESTModel::ResponseInfo)&gt; callback, <span class="keyword">const</span> <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a>&amp; address);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <span class="keywordtype">void</span> CreateCollection(</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            std::function&lt;<span class="keywordtype">void</span> (std::string,  AptosRESTModel::ResponseInfo)&gt; callback,</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account.html">Accounts::Account</a> Creator,</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            std::string Description,</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>            <span class="keywordtype">int</span> MaxSupply,</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>            std::string Name,</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            std::string Uri,</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>            <span class="keywordtype">bool</span> MutableDescription,</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            <span class="keywordtype">bool</span> MutableRoyalty,</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>            <span class="keywordtype">bool</span> MutableUri,</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            <span class="keywordtype">bool</span> MutableTokenDescription,</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            <span class="keywordtype">bool</span> MutableTokenName,</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <span class="keywordtype">bool</span> MutableTokenProperties,</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            <span class="keywordtype">bool</span> MutableTokenUri,</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            <span class="keywordtype">bool</span> TokensBurnableByCreator,</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            <span class="keywordtype">bool</span> TokensFreezableByCreator,</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            <span class="keywordtype">int</span> RoyaltyNumerator,</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            <span class="keywordtype">int</span> RoyaltyDenominator</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            );</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="keywordtype">void</span> MintToken(std::function&lt;<span class="keywordtype">void</span>(std::string, AptosRESTModel::ResponseInfo)&gt; Callback, <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account.html">Accounts::Account</a> Creator, std::string <a class="code hl_class" href="class_aptos_1_1_rest_1_1_collection.html">Collection</a>, std::string Description, std::string Name, std::string Uri, <a class="code hl_class" href="class_aptos_1_1_rest_1_1_property_map.html">PropertyMap</a> Properties);</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        <span class="keywordtype">void</span> IMintSoulBoundToken(</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            std::function&lt;<span class="keywordtype">void</span>(std::string, AptosRESTModel::ResponseInfo)&gt; Callback,</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account.html">Accounts::Account</a> Creator,</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            std::string <a class="code hl_class" href="class_aptos_1_1_rest_1_1_collection.html">Collection</a>,</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            std::string Description,</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            std::string Name,</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            std::string Uri,</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            <a class="code hl_class" href="class_aptos_1_1_rest_1_1_property_map.html">PropertyMap</a> Properties,</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> SoulBoundTo</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            );</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <span class="keywordtype">void</span> TransferToken(</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            std::function&lt;<span class="keywordtype">void</span>(std::string, AptosRESTModel::ResponseInfo)&gt; Callback,</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account.html">Accounts::Account</a> Owner,</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> <a class="code hl_class" href="class_aptos_1_1_rest_1_1_token.html">Token</a>,</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> To</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            );</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        <span class="keywordtype">void</span> BurnToken(</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>            std::function&lt;<span class="keywordtype">void</span>(std::string, AptosRESTModel::ResponseInfo)&gt; Callback,</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account.html">Accounts::Account</a> Creator,</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> <a class="code hl_class" href="class_aptos_1_1_rest_1_1_token.html">Token</a></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>            );</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <span class="keywordtype">void</span> FreezeToken(</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            std::function&lt;<span class="keywordtype">void</span>(std::string, AptosRESTModel::ResponseInfo)&gt; Callback,</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account.html">Accounts::Account</a> Creator,</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> <a class="code hl_class" href="class_aptos_1_1_rest_1_1_token.html">Token</a></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            );</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="keywordtype">void</span> UnfreezeToken(</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            std::function&lt;<span class="keywordtype">void</span>(std::string, AptosRESTModel::ResponseInfo)&gt; Callback,</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account.html">Accounts::Account</a> Creator,</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> <a class="code hl_class" href="class_aptos_1_1_rest_1_1_token.html">Token</a></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            );</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        <span class="keywordtype">void</span> AddTokenProperty(</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            std::function&lt;<span class="keywordtype">void</span>(std::string, AptosRESTModel::ResponseInfo)&gt; Callback,</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account.html">Accounts::Account</a> Creator,</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> <a class="code hl_class" href="class_aptos_1_1_rest_1_1_token.html">Token</a>,</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            <a class="code hl_class" href="class_aptos_1_1_rest_1_1_property.html">Property</a> Prop</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            );</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        <span class="keywordtype">void</span> RemoveTokenProperty(</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>            std::function&lt;<span class="keywordtype">void</span>(std::string, AptosRESTModel::ResponseInfo)&gt; Callback,</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account.html">Accounts::Account</a> Creator,</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> <a class="code hl_class" href="class_aptos_1_1_rest_1_1_token.html">Token</a>,</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            std::string Name</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            );</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        <span class="keywordtype">void</span> UpdateTokenProperty(</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            std::function&lt;<span class="keywordtype">void</span>(std::string, AptosRESTModel::ResponseInfo)&gt; Callback,</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account.html">Accounts::Account</a> Creator,</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            <a class="code hl_class" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> <a class="code hl_class" href="class_aptos_1_1_rest_1_1_token.html">Token</a>,</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            <a class="code hl_class" href="class_aptos_1_1_rest_1_1_property.html">Property</a> Prop</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>            );</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        <span class="keywordtype">void</span> TokensMintedFromTransaction(</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            std::function&lt;<span class="keywordtype">void</span>(std::vector&lt;Accounts::AccountAddress&gt;, AptosRESTModel::ResponseInfo)&gt; Callback,</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>            std::string TransactionHash</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>            );</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        <a class="code hl_class" href="class_aptos_1_1_rest_1_1_rest_client.html">RestClient</a>&amp; m_restClient;</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    };</div>
+</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>}</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="preprocessor">#endif </span><span class="comment">// APTOSTOKENCLIENT_H</span></div>
 <div class="ttc" id="aclass_aptos_1_1_accounts_1_1_account_address_html"><div class="ttname"><a href="class_aptos_1_1_accounts_1_1_account_address.html">Aptos::Accounts::AccountAddress</a></div><div class="ttdoc">Represents an Aptos account address. More details can her found here.</div><div class="ttdef"><b>Definition</b> AccountAddress.h:53</div></div>
+<div class="ttc" id="aclass_aptos_1_1_accounts_1_1_account_html"><div class="ttname"><a href="class_aptos_1_1_accounts_1_1_account.html">Aptos::Accounts::Account</a></div><div class="ttdoc">Represents an Aptos Accounts. An Aptos account is represented by an extended private key,...</div><div class="ttdef"><b>Definition</b> Account.h:23</div></div>
 <div class="ttc" id="aclass_aptos_1_1_b_c_s_1_1_b_string_html"><div class="ttname"><a href="class_aptos_1_1_b_c_s_1_1_b_string.html">Aptos::BCS::BString</a></div><div class="ttdoc">Representation of a string in BCS.</div><div class="ttdef"><b>Definition</b> BString.h:15</div></div>
 <div class="ttc" id="aclass_aptos_1_1_b_c_s_1_1_bytes_html"><div class="ttname"><a href="class_aptos_1_1_b_c_s_1_1_bytes.html">Aptos::BCS::Bytes</a></div><div class="ttdoc">Representation of Bytes in BCS.</div><div class="ttdef"><b>Definition</b> Bytes.h:16</div></div>
+<div class="ttc" id="aclass_aptos_1_1_rest_1_1_aptos_token_client_html"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_aptos_token_client.html">Aptos::Rest::AptosTokenClient</a></div><div class="ttdef"><b>Definition</b> AptosTokenClient.h:169</div></div>
 <div class="ttc" id="aclass_aptos_1_1_rest_1_1_collection_html"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_collection.html">Aptos::Rest::Collection</a></div><div class="ttdoc">Represents a Collection resource.</div><div class="ttdef"><b>Definition</b> AptosTokenClient.h:51</div></div>
 <div class="ttc" id="aclass_aptos_1_1_rest_1_1_i_resource_html"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_i_resource.html">Aptos::Rest::IResource</a></div><div class="ttdoc">Interface implemented by all resource types. Necessary to create Dictionaries or Lists of different r...</div><div class="ttdef"><b>Definition</b> AptosTokenClient.h:17</div></div>
 <div class="ttc" id="aclass_aptos_1_1_rest_1_1_object_html"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_object.html">Aptos::Rest::Object</a></div><div class="ttdoc">Represents an Object resource.</div><div class="ttdef"><b>Definition</b> AptosTokenClient.h:28</div></div>
-<div class="ttc" id="aclass_aptos_1_1_rest_1_1_object_html_a303cf9ae7397f1290330b7eab1966edd"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_object.html#a303cf9ae7397f1290330b7eab1966edd">Aptos::Rest::Object::Parse</a></div><div class="ttdeci">static std::shared_ptr&lt; IResource &gt; Parse(std::shared_ptr&lt; AptosRESTModel::ResourceDataBase &gt; resource)</div><div class="ttdoc">Parses a JSON string representation of a resource into an Object.</div><div class="ttdef"><b>Definition</b> AptosTokenClient.cpp:42</div></div>
+<div class="ttc" id="aclass_aptos_1_1_rest_1_1_object_html_a303cf9ae7397f1290330b7eab1966edd"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_object.html#a303cf9ae7397f1290330b7eab1966edd">Aptos::Rest::Object::Parse</a></div><div class="ttdeci">static std::shared_ptr&lt; IResource &gt; Parse(std::shared_ptr&lt; AptosRESTModel::ResourceDataBase &gt; resource)</div><div class="ttdoc">Parses a JSON string representation of a resource into an Object.</div><div class="ttdef"><b>Definition</b> AptosTokenClient.cpp:47</div></div>
 <div class="ttc" id="aclass_aptos_1_1_rest_1_1_property_html"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_property.html">Aptos::Rest::Property</a></div><div class="ttdef"><b>Definition</b> AptosTokenClient.h:106</div></div>
 <div class="ttc" id="aclass_aptos_1_1_rest_1_1_property_map_html"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_property_map.html">Aptos::Rest::PropertyMap</a></div><div class="ttdef"><b>Definition</b> AptosTokenClient.h:143</div></div>
 <div class="ttc" id="aclass_aptos_1_1_rest_1_1_read_object_html"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_read_object.html">Aptos::Rest::ReadObject</a></div><div class="ttdef"><b>Definition</b> AptosTokenClient.h:157</div></div>
+<div class="ttc" id="aclass_aptos_1_1_rest_1_1_rest_client_html"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_rest_client.html">Aptos::Rest::RestClient</a></div><div class="ttdef"><b>Definition</b> RestClient.h:32</div></div>
 <div class="ttc" id="aclass_aptos_1_1_rest_1_1_royalty_html"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_royalty.html">Aptos::Rest::Royalty</a></div><div class="ttdef"><b>Definition</b> AptosTokenClient.h:70</div></div>
 <div class="ttc" id="aclass_aptos_1_1_rest_1_1_token_html"><div class="ttname"><a href="class_aptos_1_1_rest_1_1_token.html">Aptos::Rest::Token</a></div><div class="ttdoc">Represent a Token resource.</div><div class="ttdef"><b>Definition</b> AptosTokenClient.h:89</div></div>
 </div><!-- fragment --></div><!-- contents -->

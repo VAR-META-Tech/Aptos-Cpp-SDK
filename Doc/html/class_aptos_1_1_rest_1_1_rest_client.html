@@ -85,6 +85,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a803125b73fb02138381f5d4e1e03102d" id="r_a803125b73fb02138381f5d4e1e03102d"><td class="memItemLeft" align="right" valign="top"><a id="a803125b73fb02138381f5d4e1e03102d" name="a803125b73fb02138381f5d4e1e03102d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetEndpoint</b> (const std::string &amp;url)</td></tr>
 <tr class="separator:a803125b73fb02138381f5d4e1e03102d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bfaf0e22c28dcdc6e87da96cfef0994" id="r_a7bfaf0e22c28dcdc6e87da96cfef0994"><td class="memItemLeft" align="right" valign="top"><a id="a7bfaf0e22c28dcdc6e87da96cfef0994" name="a7bfaf0e22c28dcdc6e87da96cfef0994"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RestClient</b> (const std::string &amp;url)</td></tr>
+<tr class="separator:a7bfaf0e22c28dcdc6e87da96cfef0994"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bafdc23ae552a1ff59dcc822c6f21c2" id="r_a7bafdc23ae552a1ff59dcc822c6f21c2"><td class="memItemLeft" align="right" valign="top"><a id="a7bafdc23ae552a1ff59dcc822c6f21c2" name="a7bafdc23ae552a1ff59dcc822c6f21c2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetUp</b> ()</td></tr>
+<tr class="separator:a7bafdc23ae552a1ff59dcc822c6f21c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a430892f3a61264a5684e50e66fa1fbbd" id="r_a430892f3a61264a5684e50e66fa1fbbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aptos_1_1_rest_1_1_rest_client.html#a430892f3a61264a5684e50e66fa1fbbd">GetAccount</a> (std::function&lt; void(std::shared_ptr&lt; AptosRESTModel::AccountData &gt;, AptosRESTModel::ResponseInfo)&gt; callback, const <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> &amp;accountAddress)</td></tr>
 <tr class="memdesc:a430892f3a61264a5684e50e66fa1fbbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Account Details. Return the authentication key and the sequence number for an account address. Optionally, a ledger version can be specified. If the ledger version is not specified in the request, the latest ledger version is used.  <br /></td></tr>
 <tr class="separator:a430892f3a61264a5684e50e66fa1fbbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,9 +173,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>BCSTransfer</b> (std:
 <tr class="memitem:a165f1609410df158b53937b034c4a3ee" id="r_a165f1609410df158b53937b034c4a3ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aptos_1_1_rest_1_1_rest_client.html#a165f1609410df158b53937b034c4a3ee">CreateToken</a> (std::function&lt; void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)&gt; callback, <a class="el" href="class_aptos_1_1_accounts_1_1_account.html">Accounts::Account</a> senderRoyaltyPayeeAddress, std::string collectionName, std::string tokenName, std::string description, int supply, int max, std::string uri, int royaltyPointsPerMillion)</td></tr>
 <tr class="memdesc:a165f1609410df158b53937b034c4a3ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create Non-Fungible <a class="el" href="class_aptos_1_1_rest_1_1_token.html" title="Represent a Token resource.">Token</a> (NFT) See token <a class="el" href="">reference.</a>  <br /></td></tr>
 <tr class="separator:a165f1609410df158b53937b034c4a3ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7dff8bf6a1a12fa0ebb0a4f7a033458" id="r_ac7dff8bf6a1a12fa0ebb0a4f7a033458"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aptos_1_1_rest_1_1_rest_client.html#ac7dff8bf6a1a12fa0ebb0a4f7a033458">OfferToken</a> (std::function&lt; void(std::shared_ptr&lt; AptosRESTModel::Transaction &gt;, AptosRESTModel::ResponseInfo)&gt; callback, <a class="el" href="class_aptos_1_1_accounts_1_1_account.html">Accounts::Account</a> account, <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> receiver, <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> creator, std::string collectionName, std::string tokenName, int amount, int propertyVersion)</td></tr>
-<tr class="memdesc:ac7dff8bf6a1a12fa0ebb0a4f7a033458"><td class="mdescLeft">&#160;</td><td class="mdescRight">Offer a token to a given address.  <br /></td></tr>
-<tr class="separator:ac7dff8bf6a1a12fa0ebb0a4f7a033458"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a323aba7137a03702f7d143fee0516798" id="r_a323aba7137a03702f7d143fee0516798"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aptos_1_1_rest_1_1_rest_client.html#a323aba7137a03702f7d143fee0516798">OfferToken</a> (std::function&lt; void(std::shared_ptr&lt; AptosRESTModel::Transaction &gt;, AptosRESTModel::ResponseInfo)&gt; callback, <a class="el" href="class_aptos_1_1_accounts_1_1_account.html">Accounts::Account</a> account, <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> receiver, <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> creator, std::string collectionName, std::string tokenName, int amount, int propertyVersion=0)</td></tr>
+<tr class="memdesc:a323aba7137a03702f7d143fee0516798"><td class="mdescLeft">&#160;</td><td class="mdescRight">Offer a token to a given address.  <br /></td></tr>
+<tr class="separator:a323aba7137a03702f7d143fee0516798"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addb696dfda1dab1a9eee764039fdea36" id="r_addb696dfda1dab1a9eee764039fdea36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aptos_1_1_rest_1_1_rest_client.html#addb696dfda1dab1a9eee764039fdea36">ClaimToken</a> (std::function&lt; void(std::shared_ptr&lt; AptosRESTModel::Transaction &gt;, AptosRESTModel::ResponseInfo)&gt; callback, <a class="el" href="class_aptos_1_1_accounts_1_1_account.html">Accounts::Account</a> account, <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> sender, <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> creator, std::string collectionName, std::string tokenName, int propertyVersion)</td></tr>
 <tr class="memdesc:addb696dfda1dab1a9eee764039fdea36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Claim a token that was offered by <em>sender</em>   <br /></td></tr>
 <tr class="separator:addb696dfda1dab1a9eee764039fdea36"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -179,9 +185,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>BCSTransfer</b> (std:
 <tr class="memitem:aa11c03c15aeff128e02d478196a207b0" id="r_aa11c03c15aeff128e02d478196a207b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aptos_1_1_rest_1_1_rest_client.html#aa11c03c15aeff128e02d478196a207b0">GetTokenBalance</a> (std::function&lt; void(std::string)&gt; callback, <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> ownerAddress, <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> creatorAddress, std::string collectionName, std::string tokenName, int propertyVersion)</td></tr>
 <tr class="memdesc:aa11c03c15aeff128e02d478196a207b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get balance for a given non-fungible token (NFT).  <br /></td></tr>
 <tr class="separator:aa11c03c15aeff128e02d478196a207b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95f6603263bf02f41ff9136fd6501834" id="r_a95f6603263bf02f41ff9136fd6501834"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aptos_1_1_rest_1_1_rest_client.html#a95f6603263bf02f41ff9136fd6501834">GetTokenData</a> (std::function&lt; void(AptosRESTModel::TableItemTokenMetadata, AptosRESTModel::ResponseInfo)&gt; callback, <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> creator, std::string collectionName, std::string tokenName, int propertyVersion)</td></tr>
-<tr class="memdesc:a95f6603263bf02f41ff9136fd6501834"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read <a class="el" href="class_aptos_1_1_rest_1_1_collection.html" title="Represents a Collection resource.">Collection</a>'s token data table. An example <code> { "default_properties":{ "map":{ "data":[ ] } }, "description":"Alice's simple token", "largest_property_version":"0", "maximum":"1", "mutability_config":{ "description":false, "maximum":false, "properties":false, "royalty":false, "uri":false }, "name":"Alice's first token", "royalty":{ "payee_address":"0x3f99ffee67853e129173b9df0e2e9c6af6f08fe2a4417daf43df46ad957a8bbe", "royalty_points_denominator":"1000000", "royalty_points_numerator":"0" }, "supply":"1", "uri":"https://aptos.dev/img/nyan.jpeg" } </code>  <br /></td></tr>
-<tr class="separator:a95f6603263bf02f41ff9136fd6501834"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae797b8da2764b11b20af59c4748a8984" id="r_ae797b8da2764b11b20af59c4748a8984"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aptos_1_1_rest_1_1_rest_client.html#ae797b8da2764b11b20af59c4748a8984">GetTokenData</a> (std::function&lt; void(std::shared_ptr&lt; AptosRESTModel::TableItemTokenMetadata &gt;, AptosRESTModel::ResponseInfo)&gt; callback, <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> creator, std::string collectionName, std::string tokenName, int propertyVersion)</td></tr>
+<tr class="memdesc:ae797b8da2764b11b20af59c4748a8984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read <a class="el" href="class_aptos_1_1_rest_1_1_collection.html" title="Represents a Collection resource.">Collection</a>'s token data table. An example <code> { "default_properties":{ "map":{ "data":[ ] } }, "description":"Alice's simple token", "largest_property_version":"0", "maximum":"1", "mutability_config":{ "description":false, "maximum":false, "properties":false, "royalty":false, "uri":false }, "name":"Alice's first token", "royalty":{ "payee_address":"0x3f99ffee67853e129173b9df0e2e9c6af6f08fe2a4417daf43df46ad957a8bbe", "royalty_points_denominator":"1000000", "royalty_points_numerator":"0" }, "supply":"1", "uri":"https://aptos.dev/img/nyan.jpeg" } </code>  <br /></td></tr>
+<tr class="separator:ae797b8da2764b11b20af59c4748a8984"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb5614d25535943c08928464da9d320d" id="r_abb5614d25535943c08928464da9d320d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aptos_1_1_rest_1_1_rest_client.html#abb5614d25535943c08928464da9d320d">GetCollection</a> (std::function&lt; void(std::string)&gt; callback, <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> creator, std::string collectionName)</td></tr>
 <tr class="memdesc:abb5614d25535943c08928464da9d320d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get collection information. This return a JSON representation that will be parsed by the developer that know the specific return types.  <br /></td></tr>
 <tr class="separator:abb5614d25535943c08928464da9d320d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -191,6 +197,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>TransferObject</b> (s
 <tr class="memitem:a19cc2e1edaf2f0ebf35bb799e07cda8d" id="r_a19cc2e1edaf2f0ebf35bb799e07cda8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aptos_1_1_rest_1_1_rest_client.html#a19cc2e1edaf2f0ebf35bb799e07cda8d">GetAccountResource</a> (std::function&lt; void(bool, long, std::string)&gt; callback, <a class="el" href="class_aptos_1_1_accounts_1_1_account_address.html">Accounts::AccountAddress</a> &amp;accountAddress, std::string resourceType)</td></tr>
 <tr class="memdesc:a19cc2e1edaf2f0ebf35bb799e07cda8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a resource of a given type from an account. NOTE: The response is a complex object of types only known to the developer writing the contracts. This function return a string and expect the developer to deserialize it into an object. See <a class="el" href="">GetAccountResourceCollection</a> for an example.  <br /></td></tr>
 <tr class="separator:a19cc2e1edaf2f0ebf35bb799e07cda8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e48de439c21aadda9efda12a0808aa4" id="r_a1e48de439c21aadda9efda12a0808aa4"><td class="memItemLeft" align="right" valign="top"><a id="a1e48de439c21aadda9efda12a0808aa4" name="a1e48de439c21aadda9efda12a0808aa4"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>ChainId</b> () const</td></tr>
+<tr class="separator:a1e48de439c21aadda9efda12a0808aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="addb696dfda1dab1a9eee764039fdea36" name="addb696dfda1dab1a9eee764039fdea36"></a>
@@ -253,7 +262,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>TransferObject</b> (s
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">callback</td><td>Callback function used when response is received.</td></tr>
-    <tr><td class="paramname">account</td><td>Account making the claim</td></tr>
+    <tr><td class="paramname">account</td><td><a class="el" href="class_aptos_1_1_accounts_1_1_account.html" title="Represents an Aptos Accounts. An Aptos account is represented by an extended private key,...">Accounts::Account</a> making the claim</td></tr>
     <tr><td class="paramname">sender</td><td>Address of the sender of the non-fungible token (NFT)</td></tr>
     <tr><td class="paramname">creator</td><td>Address of the creator of the token (NFT)</td></tr>
     <tr><td class="paramname">collectionName</td><td>Name of the NFT collection</td></tr>
@@ -1272,8 +1281,8 @@ An object the represents the transaction submitted - null if the transaction to 
 
 </div>
 </div>
-<a id="a95f6603263bf02f41ff9136fd6501834" name="a95f6603263bf02f41ff9136fd6501834"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95f6603263bf02f41ff9136fd6501834">&#9670;&#160;</a></span>GetTokenData()</h2>
+<a id="ae797b8da2764b11b20af59c4748a8984" name="ae797b8da2764b11b20af59c4748a8984"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae797b8da2764b11b20af59c4748a8984">&#9670;&#160;</a></span>GetTokenData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1281,7 +1290,7 @@ An object the represents the transaction submitted - null if the transaction to 
         <tr>
           <td class="memname">void Aptos::Rest::RestClient::GetTokenData </td>
           <td>(</td>
-          <td class="paramtype">std::function&lt; void(AptosRESTModel::TableItemTokenMetadata, AptosRESTModel::ResponseInfo)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(std::shared_ptr&lt; AptosRESTModel::TableItemTokenMetadata &gt;, AptosRESTModel::ResponseInfo)&gt;&#160;</td>
           <td class="paramname"><em>callback</em>, </td>
         </tr>
         <tr>
@@ -1332,8 +1341,8 @@ An object the represents the NFT's token metadata - null if the transaction to g
 
 </div>
 </div>
-<a id="ac7dff8bf6a1a12fa0ebb0a4f7a033458" name="ac7dff8bf6a1a12fa0ebb0a4f7a033458"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7dff8bf6a1a12fa0ebb0a4f7a033458">&#9670;&#160;</a></span>OfferToken()</h2>
+<a id="a323aba7137a03702f7d143fee0516798" name="a323aba7137a03702f7d143fee0516798"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a323aba7137a03702f7d143fee0516798">&#9670;&#160;</a></span>OfferToken()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1384,7 +1393,7 @@ An object the represents the NFT's token metadata - null if the transaction to g
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>propertyVersion</em>&#160;</td>
+          <td class="paramname"><em>propertyVersion</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1398,7 +1407,7 @@ An object the represents the NFT's token metadata - null if the transaction to g
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">callback</td><td>Callback function used when response is received.</td></tr>
-    <tr><td class="paramname">account</td><td>Account offering the token.</td></tr>
+    <tr><td class="paramname">account</td><td><a class="el" href="class_aptos_1_1_accounts_1_1_account.html" title="Represents an Aptos Accounts. An Aptos account is represented by an extended private key,...">Accounts::Account</a> offering the token.</td></tr>
     <tr><td class="paramname">receiver</td><td>Address of recipient.</td></tr>
     <tr><td class="paramname">creator</td><td>Address of token creator.</td></tr>
     <tr><td class="paramname">collectionName</td><td>Name of the collection.</td></tr>

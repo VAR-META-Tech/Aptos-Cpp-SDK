@@ -16,23 +16,36 @@
 \DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function}{EntryFunction}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_i_serializable}{ISerializable}}}
 \DoxyCodeLine{00016\ \ \ \ \ \{}
 \DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function}{EntryFunction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{ModuleId}}\ \&moduleId,\ \textcolor{keyword}{const}\ std::string\ \&function,}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{TagSequence}}\ \&typeArgs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}}\ \&args);}
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function}{EntryFunction}}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function_a9f834f50a5a23ce057430eee3e52d40f}{Natural}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{ModuleId}}\ \&moduleId,\ \textcolor{keyword}{const}\ std::string\ \&function,}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{TagSequence}}\ \&typeArgs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}}\ \&args);}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function_afe9b19a83bcefcf155123387f9cf7326}{Serialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&serializer)\ \textcolor{keyword}{const\ override};}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<ISerializable>\ Deserialize(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}\ \&deserializer);}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ Equals(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function}{EntryFunction}}\ \&other)\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const\ override};}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ GetHashCode()\ \textcolor{keyword}{const\ override};}
-\DoxyCodeLine{00035\ }
-\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{ModuleId}}\ moduleId;}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ std::string\ function;}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{TagSequence}}\ typeArgs;}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}}\ args;}
-\DoxyCodeLine{00041\ \ \ \ \ \};}
-\DoxyCodeLine{00042\ \}}
-\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ENTRYFUNCTION\_H}}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function_aacaf6996b632cd65e411dbbe48b4854c}{EntryFunction}}();}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function_aacaf6996b632cd65e411dbbe48b4854c}{EntryFunction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{ModuleId}}\ \&module,\ \textcolor{keyword}{const}\ std::string\ \&function,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{TagSequence}}\ \&typeArgs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}}\ \&args);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function}{EntryFunction}}\ Natural(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{ModuleId}}\ \&module,\ \textcolor{keyword}{const}\ std::string\ \&function,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{TagSequence}}\ \&typeArgs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}}\ \&args);}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function_afe9b19a83bcefcf155123387f9cf7326}{Serialize}}(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_serialization}{Serialization}}\ \&serializer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<ISerializable>\ Deserialize(\mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_deserialization}{Deserialization}}\ \&deserializer);}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ Equals(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_entry_function}{EntryFunction}}\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ GetHashCode()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{ModuleId}}\ getModule()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setModule(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{ModuleId}}\ \&newModule);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ std::string\ getFunction()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setFunction(\textcolor{keyword}{const}\ std::string\ \&newFunction);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{TagSequence}}\ getTypeArgs()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setTypeArgs(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{TagSequence}}\ \&newTypeArgs);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}}\ getArgs()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setArgs(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}}\ \&newArgs);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_module_id}{ModuleId}}\ moduleId;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ std::string\ function;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_tag_sequence}{TagSequence}}\ typeArgs;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_b_c_s_1_1_sequence}{Sequence}}\ args;}
+\DoxyCodeLine{00054\ \ \ \ \ \};}
+\DoxyCodeLine{00055\ \}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ENTRYFUNCTION\_H}}
 
 \end{DoxyCode}

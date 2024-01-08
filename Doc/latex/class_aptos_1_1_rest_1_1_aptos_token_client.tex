@@ -1,0 +1,50 @@
+\doxysection{Aptos\+::Rest\+::Aptos\+Token\+Client Class Reference}
+\hypertarget{class_aptos_1_1_rest_1_1_aptos_token_client}{}\label{class_aptos_1_1_rest_1_1_aptos_token_client}\index{Aptos::Rest::AptosTokenClient@{Aptos::Rest::AptosTokenClient}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_aptos_token_client_ae94c9d71b8e56878f9973ddfc856fae8}\label{class_aptos_1_1_rest_1_1_aptos_token_client_ae94c9d71b8e56878f9973ddfc856fae8} 
+{\bfseries Aptos\+Token\+Client} (\mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client}{Rest\+Client}} \&client)
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_aptos_token_client_a6342550bea465bede0deba7fa7178eee}\label{class_aptos_1_1_rest_1_1_aptos_token_client_a6342550bea465bede0deba7fa7178eee} 
+void {\bfseries Read\+Object} (std\+::function$<$ void(\mbox{\hyperlink{class_aptos_1_1_rest_1_1_read_object}{Aptos\+::\+Rest\+::\+Read\+Object}}, Aptos\+RESTModel\+::\+Response\+Info)$>$ callback, const \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} \&address)
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_aptos_token_client_adcaa134c9c34bdcfb3bd0bd87117eb29}\label{class_aptos_1_1_rest_1_1_aptos_token_client_adcaa134c9c34bdcfb3bd0bd87117eb29} 
+void {\bfseries Create\+Collection} (std\+::function$<$ void(std\+::string, Aptos\+RESTModel\+::\+Response\+Info)$>$ callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} Creator, std\+::string Description, int Max\+Supply, std\+::string Name, std\+::string Uri, bool Mutable\+Description, bool Mutable\+Royalty, bool Mutable\+Uri, bool Mutable\+Token\+Description, bool Mutable\+Token\+Name, bool Mutable\+Token\+Properties, bool Mutable\+Token\+Uri, bool Tokens\+Burnable\+By\+Creator, bool Tokens\+Freezable\+By\+Creator, int Royalty\+Numerator, int Royalty\+Denominator)
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_aptos_token_client_aeb3af33cfe2e7760f2e995807f6ca7ba}\label{class_aptos_1_1_rest_1_1_aptos_token_client_aeb3af33cfe2e7760f2e995807f6ca7ba} 
+void {\bfseries Mint\+Token} (std\+::function$<$ void(std\+::string, Aptos\+RESTModel\+::\+Response\+Info)$>$ Callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} Creator, std\+::string \mbox{\hyperlink{class_aptos_1_1_rest_1_1_collection}{Collection}}, std\+::string Description, std\+::string Name, std\+::string Uri, \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property_map}{Property\+Map}} Properties)
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_aptos_token_client_ac649ba2eb690ea1a1bfb6f537b58ac10}\label{class_aptos_1_1_rest_1_1_aptos_token_client_ac649ba2eb690ea1a1bfb6f537b58ac10} 
+void {\bfseries IMint\+Soul\+Bound\+Token} (std\+::function$<$ void(std\+::string, Aptos\+RESTModel\+::\+Response\+Info)$>$ Callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} Creator, std\+::string \mbox{\hyperlink{class_aptos_1_1_rest_1_1_collection}{Collection}}, std\+::string Description, std\+::string Name, std\+::string Uri, \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property_map}{Property\+Map}} Properties, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} Soul\+Bound\+To)
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_aptos_token_client_a3c9c53446a2ef9160de4f41b3776d2e3}\label{class_aptos_1_1_rest_1_1_aptos_token_client_a3c9c53446a2ef9160de4f41b3776d2e3} 
+void {\bfseries Transfer\+Token} (std\+::function$<$ void(std\+::string, Aptos\+RESTModel\+::\+Response\+Info)$>$ Callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} Owner, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}}, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} To)
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_aptos_token_client_aa80deedf65c260bd0779f7bcc32da725}\label{class_aptos_1_1_rest_1_1_aptos_token_client_aa80deedf65c260bd0779f7bcc32da725} 
+void {\bfseries Burn\+Token} (std\+::function$<$ void(std\+::string, Aptos\+RESTModel\+::\+Response\+Info)$>$ Callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} Creator, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}})
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_aptos_token_client_a6f0b45195a308d9b3b71558cd9471f3d}\label{class_aptos_1_1_rest_1_1_aptos_token_client_a6f0b45195a308d9b3b71558cd9471f3d} 
+void {\bfseries Freeze\+Token} (std\+::function$<$ void(std\+::string, Aptos\+RESTModel\+::\+Response\+Info)$>$ Callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} Creator, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}})
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_aptos_token_client_a92f9304856d68f51b5c5ad3804931c17}\label{class_aptos_1_1_rest_1_1_aptos_token_client_a92f9304856d68f51b5c5ad3804931c17} 
+void {\bfseries Unfreeze\+Token} (std\+::function$<$ void(std\+::string, Aptos\+RESTModel\+::\+Response\+Info)$>$ Callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} Creator, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}})
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_aptos_token_client_a7568358614145a35868971c98a7b4bd2}\label{class_aptos_1_1_rest_1_1_aptos_token_client_a7568358614145a35868971c98a7b4bd2} 
+void {\bfseries Add\+Token\+Property} (std\+::function$<$ void(std\+::string, Aptos\+RESTModel\+::\+Response\+Info)$>$ Callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} Creator, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}}, \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property}{Property}} Prop)
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_aptos_token_client_a672150a19252ab9212209a7d150ee480}\label{class_aptos_1_1_rest_1_1_aptos_token_client_a672150a19252ab9212209a7d150ee480} 
+void {\bfseries Remove\+Token\+Property} (std\+::function$<$ void(std\+::string, Aptos\+RESTModel\+::\+Response\+Info)$>$ Callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} Creator, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}}, std\+::string Name)
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_aptos_token_client_a9ad4d0904a646de4ad4a0277c30cdf0d}\label{class_aptos_1_1_rest_1_1_aptos_token_client_a9ad4d0904a646de4ad4a0277c30cdf0d} 
+void {\bfseries Update\+Token\+Property} (std\+::function$<$ void(std\+::string, Aptos\+RESTModel\+::\+Response\+Info)$>$ Callback, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account}{Accounts\+::\+Account}} Creator, \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} \mbox{\hyperlink{class_aptos_1_1_rest_1_1_token}{Token}}, \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property}{Property}} Prop)
+\item 
+\Hypertarget{class_aptos_1_1_rest_1_1_aptos_token_client_a172ac1fcb7e9696df4275e7923648a2b}\label{class_aptos_1_1_rest_1_1_aptos_token_client_a172ac1fcb7e9696df4275e7923648a2b} 
+void {\bfseries Tokens\+Minted\+From\+Transaction} (std\+::function$<$ void(std\+::vector$<$ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts\+::\+Account\+Address}} $>$, Aptos\+RESTModel\+::\+Response\+Info)$>$ Callback, std\+::string Transaction\+Hash)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+REST/Aptos\+Token\+Client.\+h\item 
+REST/Aptos\+Token\+Client.\+cpp\end{DoxyCompactItemize}
