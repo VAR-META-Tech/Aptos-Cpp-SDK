@@ -103,7 +103,7 @@ nlohmann::json TransactionRequestConverter::WriteJson(const AptosRESTModel::Tran
     nlohmann::json oPayload;
     oPayload["function"] = entryFunction.getModule().ToString() + "::" + entryFunction.getFunction();
 
-    nlohmann::json jTypeArguments;
+    nlohmann::json jTypeArguments = nlohmann::json::array();;
     Aptos::BCS::TagSequence tagSeq = entryFunction.getTypeArgs();
     std::vector<std::shared_ptr<ISerializableTag>> typeArgs = tagSeq.GetValue();
 
@@ -126,8 +126,11 @@ nlohmann::json TransactionRequestConverter::WriteJson(const AptosRESTModel::Tran
     oTransactionRequest["payload"] = oPayload;
 
     // SIGNATURE
+    if (!transactionRequest.getSignature().getType().empty())
+    {
     nlohmann::json signature = transactionRequest.getSignature().ToJson();
     oTransactionRequest["signature"] = signature;
+    }
 
     return oTransactionRequest;
 }

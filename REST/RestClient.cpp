@@ -484,7 +484,7 @@ void RestClient::SubmitTransaction(std::function<void(std::shared_ptr<AptosRESTM
     {
         ResponseInfo responseInfo;
         std::vector<std::string> values;
-        if (response->status == 200) {
+        if (response->status == 200 || response->status == 202) {
             auto transaction = std::make_shared<Transaction>(TransactionConverter::ReadJson(nlohmann::json::parse(response->body)));
             responseInfo.status = ResponseInfo::Status::Success;
             responseInfo.message = response->body;

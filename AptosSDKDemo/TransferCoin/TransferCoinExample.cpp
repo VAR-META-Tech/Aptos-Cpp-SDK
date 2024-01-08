@@ -178,7 +178,8 @@ void TransferCoinExample::Start()
         return;
     }
     std::cout << "BCS TRANSFER: " << responseStr << std::endl;
-    response = TransferCoinBCSResponse::from_json(responseStr);
+    nlohmann::json responseObj = nlohmann::json::parse(responseStr);
+    response = TransferCoinBCSResponse::from_json(responseObj);
     restClient.WaitForTransaction([&](bool _pending, AptosRESTModel::ResponseInfo _responseInfo) {
         waitForTxnSuccess = _pending;
         responseInfo = _responseInfo;
