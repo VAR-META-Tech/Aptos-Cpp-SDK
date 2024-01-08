@@ -26,6 +26,16 @@ AccountResourceData AccountResourceData::FromJson(const nlohmann::json &dataJson
     return data;
 }
 
+std::string AccountResourceData::getGuidCreationNum() const
+{
+    return GuidCreationNum;
+}
+
+void AccountResourceData::setGuidCreationNum(const std::string &newGuidCreationNum)
+{
+    GuidCreationNum = newGuidCreationNum;
+}
+
 nlohmann::json AccountResource::ToJson() const {
     nlohmann::json resourceJson;
     resourceJson["data"] = Data.ToJson();
@@ -36,5 +46,15 @@ AccountResource AccountResource::FromJson(const nlohmann::json &resourceJson) {
     AccountResource resource;
     resource.Data = AccountResourceData::FromJson(resourceJson["data"]);
     return resource;
+}
+
+AccountResourceData AccountResource::getData() const
+{
+    return Data;
+}
+
+void AccountResource::setData(const AccountResourceData &newData)
+{
+    Data = newData;
 }
 }

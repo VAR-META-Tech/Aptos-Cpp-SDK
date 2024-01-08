@@ -45,6 +45,12 @@ class CreateCollectionResponse
 public:
     nlohmann::json to_json() const;
     static CreateCollectionResponse from_json(const nlohmann::json& j);
+    std::string getHash() const;
+    void setHash(const std::string &newHash);
+
+    std::string getSender() const;
+    void setSender(const std::string &newSender);
+
 private:
     std::string Hash;
     std::string Sender;

@@ -170,6 +170,80 @@ namespace Aptos::Rest
     public:
         AptosTokenClient(RestClient& client);
         void ReadObject(std::function<void (Aptos::Rest::ReadObject,  AptosRESTModel::ResponseInfo)> callback, const Accounts::AccountAddress& address);
+        void CreateCollection(
+            std::function<void (std::string,  AptosRESTModel::ResponseInfo)> callback,
+            Accounts::Account Creator,
+            std::string Description,
+            int MaxSupply,
+            std::string Name,
+            std::string Uri,
+            bool MutableDescription,
+            bool MutableRoyalty,
+            bool MutableUri,
+            bool MutableTokenDescription,
+            bool MutableTokenName,
+            bool MutableTokenProperties,
+            bool MutableTokenUri,
+            bool TokensBurnableByCreator,
+            bool TokensFreezableByCreator,
+            int RoyaltyNumerator,
+            int RoyaltyDenominator
+            );
+
+        void MintToken(std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback, Accounts::Account Creator, std::string Collection, std::string Description, std::string Name, std::string Uri, PropertyMap Properties);
+        void IMintSoulBoundToken(
+            std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
+            Accounts::Account Creator,
+            std::string Collection,
+            std::string Description,
+            std::string Name,
+            std::string Uri,
+            PropertyMap Properties,
+            Accounts::AccountAddress SoulBoundTo
+            );
+        void TransferToken(
+            std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
+            Accounts::Account Owner,
+            Accounts::AccountAddress Token,
+            Accounts::AccountAddress To
+            );
+        void BurnToken(
+            std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
+            Accounts::Account Creator,
+            Accounts::AccountAddress Token
+            );
+        void FreezeToken(
+            std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
+            Accounts::Account Creator,
+            Accounts::AccountAddress Token
+            );
+        void UnfreezeToken(
+            std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
+            Accounts::Account Creator,
+            Accounts::AccountAddress Token
+            );
+        void AddTokenProperty(
+            std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
+            Accounts::Account Creator,
+            Accounts::AccountAddress Token,
+            Property Prop
+            );
+        void RemoveTokenProperty(
+            std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
+            Accounts::Account Creator,
+            Accounts::AccountAddress Token,
+            std::string Name
+            );
+        void UpdateTokenProperty(
+            std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
+            Accounts::Account Creator,
+            Accounts::AccountAddress Token,
+            Property Prop
+            );
+        void TokensMintedFromTransaction(
+            std::function<void(std::vector<Accounts::AccountAddress>, AptosRESTModel::ResponseInfo)> Callback,
+            std::string TransactionHash
+            );
     private:
         RestClient& m_restClient;
     };

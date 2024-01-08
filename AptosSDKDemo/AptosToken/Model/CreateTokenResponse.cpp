@@ -16,3 +16,27 @@ AptosSDKDemo::CreateTokenResponse AptosSDKDemo::CreateTokenResponse::from_json(c
     response.Sender = j.value("sender", "");
     return response;
 }
+
+
+namespace AptosSDKDemo {
+std::string CreateTokenResponse::getHash() const
+{
+    return Hash;
+}
+
+void CreateTokenResponse::setHash(const std::string &newHash)
+{
+    Hash = newHash;
+}
+
+std::string CreateTokenResponse::getSender() const
+{
+    return Sender;
+}
+
+void CreateTokenResponse::setSender(const std::string &newSender)
+{
+    Sender = newSender;
+}
+
+}

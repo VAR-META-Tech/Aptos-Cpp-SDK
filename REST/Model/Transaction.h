@@ -14,6 +14,9 @@ public:
     public:
         static DataObject FromJson(const nlohmann::json& j);
         nlohmann::json ToJson() const;
+        std::string getToken() const;
+        void setToken(const std::string &newToken);
+
     private:
         std::string Index;
         std::string Token;
@@ -33,6 +36,15 @@ public:
 
     static TransactionEvent FromJson(const nlohmann::json& j);
     nlohmann::json ToJson() const;
+    std::string getType() const;
+    void setType(const std::string &newType);
+
+    std::string getSequenceNumber() const;
+    void setSequenceNumber(const std::string &newSequenceNumber);
+
+    DataObject getData() const;
+    void setData(const DataObject &newData);
+
 private:
     GUIDAddress GUID;
     std::string SequenceNumber;

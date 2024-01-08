@@ -11,8 +11,7 @@ std::vector<std::shared_ptr<AptosRESTModel::IResourceBase> > ResourceBaseListCon
     std::vector<std::shared_ptr<IResourceBase>> resources;
     for (const auto& item : json) {
         std::string type = item["type"];
-        nlohmann::json data = item["data"];
-        std::string dataJson = data.dump();
+        nlohmann::json dataJson = item["data"];
 
         if (type == "0x4::collection::Collection") {
             auto collectionRes = std::make_shared<CollectionResource>();

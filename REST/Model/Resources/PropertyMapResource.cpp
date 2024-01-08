@@ -63,7 +63,7 @@ nlohmann::json Inner::ToJson() const {
 
 Inner Inner::FromJson(const nlohmann::json &innerJson) {
     Inner inner;
-    for (const auto& item : innerJson) {
+    for (const auto& item : innerJson.array()) {
         inner.Data.push_back(PropertyResource::FromJson(item));
     }
     return inner;

@@ -40,6 +40,9 @@ public:
     nlohmann::json to_json() const;
     static AddTokenPropertyResponse from_json(const nlohmann::json& j);
 
+    std::string getHash() const;
+    void setHash(const std::string &newHash);
+
 private:
     std::string Hash;
     std::string Sender;

@@ -16,3 +16,17 @@ AptosSDKDemo::AddTokenPropertyResponse AptosSDKDemo::AddTokenPropertyResponse::f
 
     return response;
 }
+
+
+namespace AptosSDKDemo {
+std::string AddTokenPropertyResponse::getHash() const
+{
+    return Hash;
+}
+
+void AddTokenPropertyResponse::setHash(const std::string &newHash)
+{
+    Hash = newHash;
+}
+
+}

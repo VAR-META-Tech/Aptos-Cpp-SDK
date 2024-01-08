@@ -16,3 +16,27 @@ AptosSDKDemo::CreateCollectionResponse AptosSDKDemo::CreateCollectionResponse::f
     response.Sender = j.value("sender", "");
     return response;
 }
+
+
+namespace AptosSDKDemo {
+std::string CreateCollectionResponse::getHash() const
+{
+    return Hash;
+}
+
+void CreateCollectionResponse::setHash(const std::string &newHash)
+{
+    Hash = newHash;
+}
+
+std::string CreateCollectionResponse::getSender() const
+{
+    return Sender;
+}
+
+void CreateCollectionResponse::setSender(const std::string &newSender)
+{
+    Sender = newSender;
+}
+
+}

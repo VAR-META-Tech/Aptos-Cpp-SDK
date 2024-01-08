@@ -22,6 +22,16 @@ nlohmann::json TransactionEvent::DataObject::ToJson() const {
     return j;
 }
 
+std::string TransactionEvent::DataObject::getToken() const
+{
+    return Token;
+}
+
+void TransactionEvent::DataObject::setToken(const std::string &newToken)
+{
+    Token = newToken;
+}
+
 TransactionEvent::GUIDAddress TransactionEvent::GUIDAddress::FromJson(const nlohmann::json &j) {
     GUIDAddress guidAddress;
     guidAddress.CreationNumber = j.value("creation_number", "");
@@ -52,6 +62,36 @@ nlohmann::json TransactionEvent::ToJson() const {
     j["type"] = Type;
     j["data"] = Data.ToJson();
     return j;
+}
+
+std::string TransactionEvent::getType() const
+{
+    return Type;
+}
+
+void TransactionEvent::setType(const std::string &newType)
+{
+    Type = newType;
+}
+
+std::string TransactionEvent::getSequenceNumber() const
+{
+    return SequenceNumber;
+}
+
+void TransactionEvent::setSequenceNumber(const std::string &newSequenceNumber)
+{
+    SequenceNumber = newSequenceNumber;
+}
+
+TransactionEvent::DataObject TransactionEvent::getData() const
+{
+    return Data;
+}
+
+void TransactionEvent::setData(const DataObject &newData)
+{
+    Data = newData;
 }
 
 Transaction::Transaction(const TransactionRequest &transactionRequest) : TransactionRequest(transactionRequest) {}

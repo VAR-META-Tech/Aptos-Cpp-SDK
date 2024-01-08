@@ -1,5 +1,6 @@
 #include "AptosTokenClient.h"
 #include <stdexcept>
+#include "Constant.h"
 #include "Model/Resources/ObjectResource.h"
 #include "Model/Resources/CollectionResource.h"
 #include "Model/Resources/RoyaltyResource.h"
@@ -13,8 +14,11 @@
 #include "../BCS/U32.h"
 #include "../BCS/U64.h"
 #include "../BCS/U8.h"
+#include "../BCS/BString.h"
+#include "../BCS/ByteSequence.h"
 #include "../HDWallet/Utils/Utils.h"
 #include "Model/Resources/Base/ResourceBaseListConverter.h"
+#include "../BCS/StructTag.h"
 
 using namespace Aptos::Accounts;
 using namespace Aptos::BCS;
@@ -464,7 +468,7 @@ void AptosTokenClient::ReadObject(std::function<void (Aptos::Rest::ReadObject,  
         return;
     }
     std::unordered_map<std::string, std::shared_ptr<IResource>> resources;
-    std::vector<std::shared_ptr<IResourceBase>> readResources = ResourceBaseListConverter::ReadJson(resourcesResp);
+    std::vector<std::shared_ptr<IResourceBase>> readResources = ResourceBaseListConverter::ReadJson(nlohmann::json::parse(resourcesResp));
     for (const auto& resource : readResources) {
         std::string type = resource->getType();
 
@@ -502,6 +506,421 @@ void AptosTokenClient::ReadObject(std::function<void (Aptos::Rest::ReadObject,  
     responseInfo.status = ResponseInfo::Status::Success;
     responseInfo.message = resourcesResp;
     callback(Aptos::Rest::ReadObject(resources), responseInfo);
+}
+
+void AptosTokenClient::CreateCollection(std::function<void (std::string, AptosRESTModel::ResponseInfo)> callback, Account Creator, std::string Description, int MaxSupply, std::string Name, std::string Uri, bool MutableDescription, bool MutableRoyalty, bool MutableUri, bool MutableTokenDescription, bool MutableTokenName, bool MutableTokenProperties, bool MutableTokenUri, bool TokensBurnableByCreator, bool TokensFreezableByCreator, int RoyaltyNumerator, int RoyaltyDenominator) {
+
+    std::vector<std::shared_ptr<ISerializable>> transactionArguments = {
+        std::make_shared<BString>(Description),
+        std::make_shared<U64>(static_cast<ulong>(MaxSupply)),
+        std::make_shared<BString>(Name),
+        std::make_shared<BString>(Uri),
+        std::make_shared<Bool>(MutableDescription),
+        std::make_shared<Bool>(MutableRoyalty),
+        std::make_shared<Bool>(MutableUri),
+        std::make_shared<Bool>(MutableTokenDescription),
+        std::make_shared<Bool>(MutableTokenName),
+        std::make_shared<Bool>(MutableTokenProperties),
+        std::make_shared<Bool>(MutableTokenUri),
+        std::make_shared<Bool>(TokensBurnableByCreator),
+        std::make_shared<Bool>(TokensFreezableByCreator),
+        std::make_shared<U64>(static_cast<ulong>(RoyaltyNumerator)),
+        std::make_shared<U64>(static_cast<ulong>(RoyaltyDenominator))
+    };
+
+    EntryFunction payload = EntryFunction::Natural(ModuleId(AccountAddress::FromHex("0x4"), "aptos_token"),
+                                                   "create_collection",
+                                                   TagSequence{std::vector<std::shared_ptr<ISerializableTag>>{}},
+                                                   Sequence{transactionArguments});
+
+    std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
+    m_restClient.CreateBCSSignedTransaction(
+        [&](std::shared_ptr<SignedTransaction> _signedTransaction) {
+            signedTransaction = _signedTransaction;
+        },
+        Creator,
+        BCS::TransactionPayload(std::make_shared<EntryFunction>(payload))
+        );
+
+    std::string submitBcsTxnJsonResponse = "";
+    AptosRESTModel::ResponseInfo responseInfo;
+
+    m_restClient.SubmitBCSTransaction(
+        [&](std::string _responseJson, AptosRESTModel::ResponseInfo _responseInfo) {
+            submitBcsTxnJsonResponse = _responseJson;
+            responseInfo = _responseInfo;
+        },
+        *signedTransaction
+        );
+
+    callback(submitBcsTxnJsonResponse, responseInfo);
+}
+
+void AptosTokenClient::MintToken(std::function<void (std::string, AptosRESTModel::ResponseInfo)> Callback, Account Creator, std::string Collection, std::string Description, std::string Name, std::string Uri, PropertyMap Properties) {
+    auto propertiesTuple = Properties.ToTuple();
+
+    std::vector<std::shared_ptr<ISerializable>> sq1, sq2;
+    for (const auto b1 : std::get<0>(propertiesTuple)) {
+        sq1.push_back(std::make_shared<BString>(b1));
+    }
+    for (const auto b2 : std::get<1>(propertiesTuple)) {
+        sq2.push_back(std::make_shared<BString>(b2));
+    }
+
+    std::vector<std::shared_ptr<ISerializable>> transactionArguments = {
+        std::make_shared<BString>(Collection),
+        std::make_shared<BString>(Description),
+        std::make_shared<BString>(Name),
+        std::make_shared<BString>(Uri),
+        std::make_shared<Sequence>(sq1),
+        std::make_shared<Sequence>(sq2),
+        std::make_shared<BytesSequence>(std::get<2>(propertiesTuple))
+    };
+
+    EntryFunction payload = EntryFunction::Natural(ModuleId(AccountAddress::FromHex("0x4"), "aptos_token"),
+                                                   "mint",
+                                                   TagSequence{std::vector<std::shared_ptr<ISerializableTag>>{}},
+                                                   Sequence{transactionArguments});
+
+    std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
+    m_restClient.CreateBCSSignedTransaction(
+        [&](std::shared_ptr<SignedTransaction> _signedTransaction) {
+            signedTransaction = _signedTransaction;
+        },
+        Creator,
+        BCS::TransactionPayload(std::make_shared<EntryFunction>(payload))
+        );
+
+    std::string submitBcsTxnJsonResponse = "";
+    AptosRESTModel::ResponseInfo responseInfo;
+
+    m_restClient.SubmitBCSTransaction(
+        [&](std::string _responseJson, AptosRESTModel::ResponseInfo _responseInfo) {
+            submitBcsTxnJsonResponse = _responseJson;
+            responseInfo = _responseInfo;
+        },
+        *signedTransaction
+        );
+
+    Callback(submitBcsTxnJsonResponse, responseInfo);
+}
+
+void AptosTokenClient::IMintSoulBoundToken(std::function<void (std::string, AptosRESTModel::ResponseInfo)> Callback, Account Creator, std::string Collection, std::string Description, std::string Name, std::string Uri, PropertyMap Properties, AccountAddress SoulBoundTo) {
+    auto propertiesTuple = Properties.ToTuple();
+
+    std::vector<std::shared_ptr<ISerializable>> sq1, sq2;
+    for (const auto b1 : std::get<0>(propertiesTuple)) {
+        sq1.push_back(std::make_shared<BString>(b1));
+    }
+    for (const auto b2 : std::get<1>(propertiesTuple)) {
+        sq2.push_back(std::make_shared<BString>(b2));
+    }
+
+    std::vector<std::shared_ptr<ISerializable>> transactionArguments = {
+        std::make_shared<BString>(Collection),
+        std::make_shared<BString>(Description),
+        std::make_shared<BString>(Name),
+        std::make_shared<BString>(Uri),
+        std::make_shared<Sequence>(sq1),
+        std::make_shared<Sequence>(sq2),
+        std::make_shared<BytesSequence>(std::get<2>(propertiesTuple)),
+        std::make_shared<AccountAddress>(SoulBoundTo)
+    };
+
+    EntryFunction payload = EntryFunction::Natural(ModuleId(AccountAddress::FromHex("0x4"), "aptos_token"),
+                                                   "mint_soul_bound",
+                                                   TagSequence{std::vector<std::shared_ptr<ISerializableTag>>{}},
+                                                   Sequence{transactionArguments});
+
+    std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
+    m_restClient.CreateBCSSignedTransaction(
+        [&](std::shared_ptr<SignedTransaction> _signedTransaction) {
+            signedTransaction = _signedTransaction;
+        },
+        Creator,
+        BCS::TransactionPayload(std::make_shared<EntryFunction>(payload))
+        );
+
+
+    std::string submitBcsTxnJsonResponse = "";
+    AptosRESTModel::ResponseInfo responseInfo;
+
+    m_restClient.SubmitBCSTransaction(
+        [&](std::string _responseJson, AptosRESTModel::ResponseInfo _responseInfo) {
+            submitBcsTxnJsonResponse = _responseJson;
+            responseInfo = _responseInfo;
+        },
+        *signedTransaction
+        );
+
+    Callback(submitBcsTxnJsonResponse, responseInfo);
+}
+
+void AptosTokenClient::TransferToken(std::function<void (std::string, AptosRESTModel::ResponseInfo)> Callback, Account Owner, AccountAddress Token, AccountAddress To) {
+    return m_restClient.TransferObject(Callback, Owner, Token, To);
+}
+
+void AptosTokenClient::BurnToken(std::function<void (std::string, AptosRESTModel::ResponseInfo)> Callback, Account Creator, AccountAddress Token) {
+    StructTag tokenStructTag(
+        AccountAddress::FromHex("0x4"),
+        "token",
+        "Token",
+        {}
+        );
+    std::vector<std::shared_ptr<ISerializable>> transactionArguments = {
+        std::make_shared<AccountAddress>(Token),
+    };
+    EntryFunction payload = EntryFunction::Natural(
+            ModuleId(AccountAddress::FromHex("0x4"), "aptos_token"),
+            "burn",
+            TagSequence{{ std::make_shared<StructTag>(tokenStructTag) }},
+            Sequence{ transactionArguments }
+            );
+
+    std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
+    m_restClient.CreateBCSSignedTransaction(
+        [&](std::shared_ptr<SignedTransaction> _signedTransaction) {
+            signedTransaction = _signedTransaction;
+        },
+        Creator,
+        BCS::TransactionPayload(std::make_shared<EntryFunction>(payload))
+        );
+
+    std::string submitBcsTxnJsonResponse = "";
+    AptosRESTModel::ResponseInfo responseInfo;
+    m_restClient.SubmitBCSTransaction(
+        [&](std::string _responseJson, AptosRESTModel::ResponseInfo _responseInfo) {
+            submitBcsTxnJsonResponse = _responseJson;
+            responseInfo = _responseInfo;
+        },
+        *signedTransaction
+        );
+
+    Callback(submitBcsTxnJsonResponse, responseInfo);
+}
+
+void AptosTokenClient::FreezeToken(std::function<void (std::string, AptosRESTModel::ResponseInfo)> Callback, Account Creator, AccountAddress Token) {
+    StructTag tokenStructTag(
+        AccountAddress::FromHex("0x4"),
+        "token",
+        "Token",
+        {}
+        );
+
+    EntryFunction payload = EntryFunction::Natural(
+        ModuleId(AccountAddress::FromHex("0x4"), "aptos_token"),
+        "freeze_transfer",
+        TagSequence{{ std::make_shared<StructTag>(tokenStructTag )}},
+        Sequence{{std::make_shared<AccountAddress>(Token) }}
+        );
+
+    std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
+    m_restClient.CreateBCSSignedTransaction(
+        [&](std::shared_ptr<SignedTransaction> _signedTransaction) {
+            signedTransaction = _signedTransaction;
+        },
+        Creator,
+        BCS::TransactionPayload(std::make_shared<EntryFunction>(payload))
+        );
+
+    std::string submitBcsTxnJsonResponse = "";
+    AptosRESTModel::ResponseInfo responseInfo;
+    m_restClient.SubmitBCSTransaction(
+        [&](std::string _responseJson, AptosRESTModel::ResponseInfo _responseInfo) {
+            submitBcsTxnJsonResponse = _responseJson;
+            responseInfo = _responseInfo;
+        },
+        *signedTransaction
+        );
+
+    Callback(submitBcsTxnJsonResponse, responseInfo);
+}
+
+void AptosTokenClient::UnfreezeToken(std::function<void (std::string, AptosRESTModel::ResponseInfo)> Callback, Account Creator, AccountAddress Token) {
+    StructTag tokenStructTag = StructTag(
+        AccountAddress::FromHex("0x4"),
+        "token",
+        "Token",
+        {}
+        );
+
+    EntryFunction payload = EntryFunction::Natural(
+        ModuleId(AccountAddress::FromHex("0x4"), "aptos_token"),
+        "unfreeze_transfer",
+        TagSequence{{ std::make_shared<StructTag>(tokenStructTag )}},
+        Sequence{{std::make_shared<AccountAddress>(Token) }}
+        );
+
+    std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
+    m_restClient.CreateBCSSignedTransaction(
+        [&](std::shared_ptr<SignedTransaction> _signedTransaction) {
+            signedTransaction = _signedTransaction;
+        },
+        Creator,
+        BCS::TransactionPayload(std::make_shared<EntryFunction>(payload))
+        );
+
+
+    std::string submitBcsTxnJsonResponse = "";
+    AptosRESTModel::ResponseInfo responseInfo;
+    m_restClient.SubmitBCSTransaction(
+        [&](std::string _responseJson, AptosRESTModel::ResponseInfo _responseInfo) {
+            submitBcsTxnJsonResponse = _responseJson;
+            responseInfo = _responseInfo;
+        },
+        *signedTransaction
+        );
+
+    Callback(submitBcsTxnJsonResponse, responseInfo);
+}
+
+void AptosTokenClient::AddTokenProperty(std::function<void (std::string, AptosRESTModel::ResponseInfo)> Callback, Account Creator, AccountAddress Token, Property Prop) {
+    auto txnArgumentsList = Prop.ToTransactionArguments();
+    txnArgumentsList.insert(txnArgumentsList.begin(), std::make_shared<AccountAddress>(Token));
+    std::vector<std::shared_ptr<ISerializable>> transactionArguments(txnArgumentsList.begin(), txnArgumentsList.end());
+
+    StructTag tokenStructTag = StructTag(
+        AccountAddress::FromHex("0x4"),
+        "token",
+        "Token",
+        {}
+        );
+
+    EntryFunction payload = EntryFunction::Natural(
+        ModuleId(AccountAddress::FromHex("0x4"), "aptos_token"),
+        "add_property",
+        TagSequence{{ std::make_shared<StructTag>(tokenStructTag )}},
+        Sequence(transactionArguments)
+        );
+
+    std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
+    m_restClient.CreateBCSSignedTransaction(
+        [&](std::shared_ptr<SignedTransaction> _signedTransaction) {
+            signedTransaction = _signedTransaction;
+        },
+        Creator,
+        BCS::TransactionPayload(std::make_shared<EntryFunction>(payload))
+        );
+
+
+    std::string submitBcsTxnJsonResponse = "";
+    AptosRESTModel::ResponseInfo responseInfo;
+    m_restClient.SubmitBCSTransaction(
+        [&](std::string _responseJson, AptosRESTModel::ResponseInfo _responseInfo) {
+            submitBcsTxnJsonResponse = _responseJson;
+            responseInfo = _responseInfo;
+        },
+        *signedTransaction
+        );
+
+    Callback(submitBcsTxnJsonResponse, responseInfo);
+}
+
+void AptosTokenClient::RemoveTokenProperty(std::function<void (std::string, AptosRESTModel::ResponseInfo)> Callback, Account Creator, AccountAddress Token, std::string Name) {
+    std::vector<std::shared_ptr<ISerializable>> transactionArguments = {
+        std::make_shared<AccountAddress>(Token),
+        std::make_shared<BString>(Name)
+    };
+
+    StructTag tokenStructTag = StructTag(
+        AccountAddress::FromHex("0x4"),
+        "token",
+        "Token",
+        {}
+        );
+
+    EntryFunction payload = EntryFunction::Natural(
+        ModuleId(AccountAddress::FromHex("0x4"), "aptos_token"),
+        "remove_property",
+        TagSequence{{ std::make_shared<StructTag>(tokenStructTag )}},
+        Sequence(transactionArguments)
+        );
+
+    std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
+    m_restClient.CreateBCSSignedTransaction(
+        [&](std::shared_ptr<SignedTransaction> _signedTransaction) {
+            signedTransaction = _signedTransaction;
+        },
+        Creator,
+        BCS::TransactionPayload(std::make_shared<EntryFunction>(payload))
+        );
+
+    std::string submitBcsTxnJsonResponse = "";
+    AptosRESTModel::ResponseInfo responseInfo;
+    m_restClient.SubmitBCSTransaction(
+        [&](std::string _responseJson, AptosRESTModel::ResponseInfo _responseInfo) {
+            submitBcsTxnJsonResponse = _responseJson;
+            responseInfo = _responseInfo;
+        },
+        *signedTransaction
+        );
+
+    Callback(submitBcsTxnJsonResponse, responseInfo);
+}
+
+void AptosTokenClient::UpdateTokenProperty(std::function<void (std::string, AptosRESTModel::ResponseInfo)> Callback, Account Creator, AccountAddress Token, Property Prop) {
+    auto txnArgumentsList = Prop.ToTransactionArguments();
+    txnArgumentsList.insert(txnArgumentsList.begin(), std::make_shared<AccountAddress>(Token));
+    std::vector<std::shared_ptr<ISerializable>> transactionArguments(txnArgumentsList.begin(), txnArgumentsList.end());
+
+    StructTag tokenStructTag = StructTag(
+        AccountAddress::FromHex("0x4"),
+        "token",
+        "Token",
+        {}
+        );
+
+    EntryFunction payload = EntryFunction::Natural(
+        ModuleId(AccountAddress::FromHex("0x4"), "aptos_token"),
+        "update_property",
+        TagSequence{{ std::make_shared<StructTag>(tokenStructTag )}},
+        Sequence(transactionArguments)
+        );
+
+    std::shared_ptr<SignedTransaction> signedTransaction = nullptr;
+    m_restClient.CreateBCSSignedTransaction(
+        [&](std::shared_ptr<SignedTransaction> _signedTransaction) {
+            signedTransaction = _signedTransaction;
+        },
+        Creator,
+        BCS::TransactionPayload(std::make_shared<EntryFunction>(payload))
+        );
+
+    std::string submitBcsTxnJsonResponse = "";
+    AptosRESTModel::ResponseInfo responseInfo;
+    m_restClient.SubmitBCSTransaction(
+        [&](std::string _responseJson, AptosRESTModel::ResponseInfo _responseInfo) {
+            submitBcsTxnJsonResponse = _responseJson;
+            responseInfo = _responseInfo;
+        },
+        *signedTransaction
+        );
+
+    Callback(submitBcsTxnJsonResponse, responseInfo);
+}
+
+void AptosTokenClient::TokensMintedFromTransaction(std::function<void (std::vector<AccountAddress>, AptosRESTModel::ResponseInfo)> Callback, std::string TransactionHash) {
+    AptosRESTModel::ResponseInfo responseInfo;
+    AptosRESTModel::Transaction responseTx;
+
+    m_restClient.TransactionByHash(
+        [&](AptosRESTModel::Transaction _responseTx, AptosRESTModel::ResponseInfo _responseInfo) {
+            responseTx = _responseTx;
+            responseInfo = _responseInfo;
+        },
+        TransactionHash
+        );
+
+
+    std::vector<AccountAddress> mints;
+
+    for (const AptosRESTModel::TransactionEvent& txEvent : responseTx.getEvents()) {
+        if (txEvent.getType() == Constants::APTOS_MINT_EVENT) {
+            mints.push_back(AccountAddress::FromHex(txEvent.getData().getToken()));
+        }
+    }
+
+    Callback(mints, responseInfo);
 }
 
 }
