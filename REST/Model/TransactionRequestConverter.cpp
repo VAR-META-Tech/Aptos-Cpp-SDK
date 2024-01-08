@@ -76,8 +76,10 @@ AptosRESTModel::TransactionRequest TransactionRequestConverter::ReadJson(const n
         AptosRESTModel::SignatureData signature;
 
         signature.setType(signatureData["type"]);
-        signature.setPublicKey(signatureData["public_key"]);
-        signature.setSignature(signatureData["signature"]);
+        if (signature.getType() != "multi_ed25519_signature"){
+            signature.setPublicKey(signatureData["public_key"]);
+            signature.setSignature(signatureData["signature"]);
+        }
         transactionRequest.setSignature(signature);
     }
     return transactionRequest;

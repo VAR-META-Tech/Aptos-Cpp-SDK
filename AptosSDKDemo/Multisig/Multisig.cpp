@@ -61,9 +61,9 @@ void Multisig::Start()
     std::cout << "=== Create MultiSig ===" << std::endl;
     std::cout << "=== ================= ===" << std::endl;
     CryptoPP::byte threshold = 2;
-    auto alicePublicKey = Account().getPublicKey();
-    auto bobPublicKey = Account().getPublicKey();
-    auto chadPublicKey = Account().getPublicKey();
+    auto alicePublicKey = alice.getPublicKey();
+    auto bobPublicKey = bob.getPublicKey();
+    auto chadPublicKey = chad.getPublicKey();
     MultiPublicKey multisigPublicKey({*alicePublicKey, *bobPublicKey, *chadPublicKey}, threshold);
     AccountAddress multisigAddress = AccountAddress::FromMultiEd25519(multisigPublicKey);
     std::cout << "=== ======================= ===" << std::endl;
@@ -432,7 +432,7 @@ void Multisig::Start()
     std::vector<uint8_t> toPublicKeyBytes = multisigPublicKey.ToBytes();
 
     // Transaction Arguments
-    std::vector<std::shared_ptr<ISerializable>> transactionArguments2 = {
+    std::vector<std::shared_ptr<ISerializable>> transactionArgumentsKeyRotation = {
         std::make_shared<U8>(static_cast<uint8_t>(fromScheme)),
         std::make_shared<Bytes>(Aptos::Utils::SecBlockToByteVector(fromPublicKeyBytes)),
         std::make_shared<U8>(static_cast<uint8_t>(toScheme)),
@@ -442,16 +442,16 @@ void Multisig::Start()
     };
 
     ModuleId moduleId(AccountAddress::FromHex("0x1"), "account");
-    EntryFunction entryFunction2 = EntryFunction::Natural(
+    EntryFunction entryFunctionKeyRotation = EntryFunction::Natural(
         moduleId,
         "rotate_authentication_key",
         TagSequence(),
-        transactionArguments2
+        transactionArgumentsKeyRotation
         );
-    std::shared_ptr<SignedTransaction> signedTransaction1;
+    std::shared_ptr<SignedTransaction> signedTransactionKeyRotation;
     restClient.CreateBCSSignedTransaction([&](std::shared_ptr<SignedTransaction> _signedTransaction) {
-        signedTransaction1 = _signedTransaction;
-    }, *deedee, Aptos::BCS::TransactionPayload(std::make_shared<EntryFunction>(entryFunction)));
+        signedTransactionKeyRotation = _signedTransaction;
+    }, *deedee, Aptos::BCS::TransactionPayload(std::make_shared<EntryFunction>(entryFunctionKeyRotation)));
 
     std::shared_ptr<AptosRESTModel::AccountData> accountData;
     restClient.GetAccount([&](std::shared_ptr<AptosRESTModel::AccountData> _accountData, AptosRESTModel::ResponseInfo _responseInfo) {
@@ -470,7 +470,7 @@ void Multisig::Start()
     restClient.SubmitBCSTransaction([&](std::string _responseJson, AptosRESTModel::ResponseInfo _responseInfo) {
         submitBcsTxnJsonResponse = _responseJson;
         responseInfo = _responseInfo;
-    }, signedTransaction);
+    }, *signedTransactionKeyRotation);
 
     std::cout << "Submit BCS Transaction:\n" << submitBcsTxnJsonResponse << std::endl;
     auto bcsTxnResponse = RotateKeyBcsTransactionResponse::from_json(nlohmann::json::parse(submitBcsTxnJsonResponse));

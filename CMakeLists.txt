@@ -353,4 +353,9 @@ add_executable(AptosSDKDemo
     AptosSDKDemo/Multisig/Multisig.cpp
 )
 
-target_link_libraries(AptosSDKDemo PRIVATE Aptos )
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+  target_link_libraries(AptosSDKDemo PRIVATE Aptos )
+else()
+  target_link_libraries(AptosSDKDemo PRIVATE Aptos nlohmann_json::nlohmann_json Aptos bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
+endif()
