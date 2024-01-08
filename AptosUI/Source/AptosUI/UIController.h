@@ -44,7 +44,7 @@ class APTOSUI_API UUIController : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnLogout Clicked"), Category = "UIController")
 	static void Logout();
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "On SendTransaction Clicked"), Category = "UIController")
-	static void SendToken(FString targetAddress, int amount, bool &IsSendTokenOk, FString &Notification);
+	static void SendToken(FString targetAddress, int amount, bool &IsSendTokenOk, FString &Notification, FString &balance_return);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnCreateCollection Clicked"), Category = "UIController")
 	static void CreateCollection(FString collectionName, FString collectionDescription, FString collectionUri, bool &IsCreateCollectionOk, FString &Notification);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnCreateNFT Clicked"), Category = "UIController")

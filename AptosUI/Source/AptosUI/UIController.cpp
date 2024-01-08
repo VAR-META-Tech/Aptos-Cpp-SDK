@@ -148,7 +148,7 @@ void UUIController::Logout()
     m_controller = AptosUILogic_createUiController();
 }
 
-void UUIController::SendToken(FString targetAddress, int amount, bool &IsSendTokenOk, FString &Notification)
+void UUIController::SendToken(FString targetAddress, int amount, bool &IsSendTokenOk, FString &Notification, FString &balance_return)
 {
     std::string _targetAddress(TCHAR_TO_UTF8(*targetAddress));
     long _amount = amount * 100000000;
@@ -166,7 +166,7 @@ void UUIController::SendToken(FString targetAddress, int amount, bool &IsSendTok
         {
             // notification
             IsSendTokenOk = true;
-            Notification = FString::Printf(TEXT("Successfully send %.4f APT to %s "), (float)_amount, _targetAddress.c_str());
+            Notification = FString::Printf(TEXT("Successfully send %.f APT to %s "), (float)amount, _targetAddress.c_str());
         }
         else
         {
@@ -175,6 +175,9 @@ void UUIController::SendToken(FString targetAddress, int amount, bool &IsSendTok
             Notification = FString::Printf(TEXT("Send Token Transaction Failed"));
         }
     }
+    char *balance = AptosUILogic_getCurrentWalletBalanceText(m_controller);
+    balance_return = balance;
+    AptosUILogic_deleteString(balance);
 }
 
 void UUIController::CreateCollection(FString collectionName, FString collectionDescription, FString collectionUri, bool &IsCreateCollectionOk, FString &Notification)
