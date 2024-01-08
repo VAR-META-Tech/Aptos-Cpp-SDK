@@ -112,7 +112,7 @@ std::shared_ptr<IResource> Royalty::Parse(std::shared_ptr<AptosRESTModel::Resour
         int denominator = std::stoi(royaltyResData->getDenominator());
         AccountAddress payeeAddress = AccountAddress::FromHex(royaltyResData->getPayeeAddress());
 
-        std::make_shared<Royalty>(numerator, denominator, payeeAddress);
+        return std::make_shared<Royalty>(numerator, denominator, payeeAddress);
     }
 
     throw std::runtime_error("Invalid resource data type");
@@ -512,7 +512,7 @@ void AptosTokenClient::CreateCollection(std::function<void (std::string, AptosRE
 
     std::vector<std::shared_ptr<ISerializable>> transactionArguments = {
         std::make_shared<BString>(Description),
-        std::make_shared<U64>(static_cast<ulong>(MaxSupply)),
+        std::make_shared<U64>(static_cast<uint64_t>(MaxSupply)),
         std::make_shared<BString>(Name),
         std::make_shared<BString>(Uri),
         std::make_shared<Bool>(MutableDescription),
@@ -524,8 +524,8 @@ void AptosTokenClient::CreateCollection(std::function<void (std::string, AptosRE
         std::make_shared<Bool>(MutableTokenUri),
         std::make_shared<Bool>(TokensBurnableByCreator),
         std::make_shared<Bool>(TokensFreezableByCreator),
-        std::make_shared<U64>(static_cast<ulong>(RoyaltyNumerator)),
-        std::make_shared<U64>(static_cast<ulong>(RoyaltyDenominator))
+        std::make_shared<U64>(static_cast<uint64_t>(RoyaltyNumerator)),
+        std::make_shared<U64>(static_cast<uint64_t>(RoyaltyDenominator))
     };
 
     EntryFunction payload = EntryFunction::Natural(ModuleId(AccountAddress::FromHex("0x4"), "aptos_token"),

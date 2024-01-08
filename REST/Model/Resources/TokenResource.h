@@ -40,7 +40,7 @@ class TokenResource : public IResourceBase {
 public:
     nlohmann::json ToJson() const;
     static TokenResource FromJson(const nlohmann::json& tokenResourceJson);
-    std::string getType() const;
+    std::string getType() const override;
     void setType(const std::string &newType);
 
     TokenResourceData getData() const;

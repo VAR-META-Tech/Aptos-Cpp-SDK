@@ -125,7 +125,7 @@ void AptosToken::Start()
         return;
     }
     // Get Account Resource
-    std::cout << "<color=cyan>=== Get Account Resource for Alice ===</color>" << std::endl;
+    std::cout << "=== Get Account Resource for Alice ===" << std::endl;
     long responseCode = 0;
     std::string accountResourceResp = "";
 
@@ -151,9 +151,9 @@ void AptosToken::Start()
     std::cout << "Creation Num: " << creationNum << std::endl;
 
     // Mint Token
-    std::cout << "<color=cyan>=== ========== ===</color>" << std::endl;
-    std::cout << "<color=cyan>=== Mint Token ===</color>" << std::endl;
-    std::cout << "<color=cyan>=== ========== ===</color>" << std::endl;
+    std::cout << "<>=== ========== ===" << std::endl;
+    std::cout << "<>=== Mint Token ===" << std::endl;
+    std::cout << "<>=== ========== ===" << std::endl;
 
     std::string mintTokenTxn = "";
     tokenClient.MintToken([&](const std::string& _mintTokenTxn, AptosRESTModel::ResponseInfo _responseInfo) {
@@ -198,9 +198,9 @@ void AptosToken::Start()
     std::cout << "AccountAddress ForNamedCollection: " << collectionAddress.ToString() << std::endl;
     std::cout << "AccountAddress ForGuidObject: " << tokenAddress.ToString() << std::endl;
     // Token Client read_object Collection
-    std::cout << "<color=cyan>=== ====================== ===</color>" << std::endl;
-    std::cout << "<color=cyan>=== Read Collection Object ===</color>" << std::endl;
-    std::cout << "<color=cyan>=== =================== ===</color>" << std::endl;
+    std::cout << "=== ====================== ===" << std::endl;
+    std::cout << "=== Read Collection Object ===" << std::endl;
+    std::cout << "=== =================== ===" << std::endl;
 
     Aptos::Rest::ReadObject readObjectCollection({});
     tokenClient.ReadObject([&](Aptos::Rest::ReadObject _readObjectCollection, AptosRESTModel::ResponseInfo _responseInfo) {
@@ -210,7 +210,7 @@ void AptosToken::Start()
     std::cout << "Alice's collection: " << readObjectCollection.ToString() << std::endl;
 
     // Token client read_object Token Address
-    std::cout << "<color=cyan>=== Read Token Object ===</color>" << std::endl;
+    std::cout << "=== Read Token Object ===" << std::endl;
 
     Aptos::Rest::ReadObject readObjectToken({});
 
@@ -226,9 +226,9 @@ void AptosToken::Start()
 
     std::cout << "Alice's token: " << readObjectToken.ToString() << std::endl;
     // Add token property
-    std::cout << "<color=cyan>=== ================== ===</color>\n"
-              << "<color=cyan>=== Add Token Property ===</color>\n"
-              << "<color=cyan>=== ================== ===</color>" << std::endl;
+    std::cout << "=== ================== ===\n"
+              << "=== Add Token Property ===\n"
+              << "=== ================== ===" << std::endl;
     std::string responseString;
     tokenClient.AddTokenProperty([&](std::string _responseString, AptosRESTModel::ResponseInfo _responseInfo) {
         responseString = _responseString;
@@ -253,9 +253,9 @@ void AptosToken::Start()
     }, tokenAddress);
 
     std::cout << "Alice's token: " << readObjectToken.ToString() << std::endl;
-    std::cout << "<color=cyan>=== =================== ===</color>\n"
-              << "<color=cyan>=== Remove Property ===</color>\n"
-              << "<color=cyan>=== =================== ===</color>" << std::endl;
+    std::cout << "=== =================== ===\n"
+              << "=== Remove Property ===\n"
+              << "=== =================== ===" << std::endl;
 
     tokenClient.RemoveTokenProperty([&](std::string _responseString, AptosRESTModel::ResponseInfo _responseInfo) {
         responseString = _responseString;
@@ -279,9 +279,9 @@ void AptosToken::Start()
 
     std::cout << "Alice's token: " << readObjectToken.ToString() << std::endl;
     // Update Token Property
-    std::cout << "<color=cyan>=== ================== ===</color>\n"
-              << "<color=cyan>=== Update Token Property ===</color>\n"
-              << "<color=cyan>=== ================== ===</color>" << std::endl;
+    std::cout << "=== ================== ===\n"
+              << "=== Update Token Property ===\n"
+              << "=== ================== ===" << std::endl;
     tokenClient.UpdateTokenProperty([&](std::string _responseString, AptosRESTModel::ResponseInfo _responseInfo) {
         responseString = _responseString;
         responseInfo = _responseInfo;
@@ -305,9 +305,9 @@ void AptosToken::Start()
 
     std::cout << "Alice's token: " << readObjectToken.ToString() << std::endl;
     // Add token property -- binary data
-    std::cout << "<color=cyan>=== ==================================== ===</color>\n"
-              << "<color=cyan>=== Add Token Property - Binary Sequence ===</color>\n"
-              << "<color=cyan>=== ==================================== ===</color>" << std::endl;
+    std::cout << "=== ==================================== ===\n"
+              << "=== Add Token Property - Binary Sequence ===\n"
+              << "=== ==================================== ===" << std::endl;
     tokenClient.AddTokenProperty([&](std::string _responseString, AptosRESTModel::ResponseInfo _responseInfo) {
         responseString = _responseString;
         responseInfo = _responseInfo;
@@ -334,9 +334,9 @@ void AptosToken::Start()
 
     std::cout << "Alice's token: " << readObjectToken.ToString() << std::endl;
     // Transferring Tokens
-    std::cout << "<color=cyan>=== ======================================== ===</color>\n"
-              << "<color=cyan>=== Transferring the Token from Alice to Bob ===</color>\n"
-              << "<color=cyan>=== ======================================== ===</color>" << std::endl;
+    std::cout << "=== ======================================== ===\n"
+              << "=== Transferring the Token from Alice to Bob ===\n"
+              << "=== ======================================== ===" << std::endl;
 
     std::cout << "Alice: " << alice.getAccountAddress()->ToString() << std::endl;
     std::cout << "Bob: " << bob.getAccountAddress()->ToString() << std::endl;

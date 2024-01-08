@@ -11,7 +11,7 @@ public:
     virtual ~IResourceBase();
     nlohmann::json ToJson() const;
     static IResourceBase FromJson(const nlohmann::json& resourceJson);
-    std::string getType() const;
+    virtual std::string getType() const;
     void setType(const std::string &newType);
 
 private:

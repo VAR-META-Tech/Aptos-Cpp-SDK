@@ -50,7 +50,7 @@ public:
     CollectionResourceData getData() const;
     void setData(const CollectionResourceData &newData);
 
-    std::string getType() const;
+    std::string getType() const override;
     void setType(const std::string &newType);
 
 private:
