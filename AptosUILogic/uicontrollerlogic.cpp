@@ -125,7 +125,7 @@ void UIController::loadCurrentWalletBalance()
                                        {
                                            m_balance = std::stof(coin.value());
                                        } },
-                                   *m_wallet->Account().getAccountAddress());
+                                   *m_accountList.at(m_currentAddressIndexKey).getAccountAddress());
 }
 
 void UIController::setNetwork(std::string _target)
