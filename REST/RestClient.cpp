@@ -33,11 +33,6 @@ RestClient::RestClient(const std::string &url) {
     SetEndpoint(url);
 }
 
-RestClient::RestClient()
-{
-
-}
-
 void RestClient::SetUp()
 {
     using namespace AptosRESTModel;

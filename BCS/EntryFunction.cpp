@@ -4,13 +4,9 @@
 
 namespace Aptos::BCS
 {
-EntryFunction::EntryFunction()
-{
 
-}
-
-EntryFunction::EntryFunction(const ModuleId &module, const std::string &function, const TagSequence &typeArgs, const Sequence &args)
-        : moduleId(module), function(function), typeArgs(typeArgs), args(args) {}
+    EntryFunction::EntryFunction(const ModuleId &moduleId, const std::string &function, const TagSequence &typeArgs, const Sequence &args)
+        : moduleId(moduleId), function(function), typeArgs(typeArgs), args(args) {}
 
     EntryFunction EntryFunction::Natural(const ModuleId &module, const std::string &function, const TagSequence &typeArgs, const Sequence &args)
     {
@@ -52,11 +48,11 @@ EntryFunction::EntryFunction(const ModuleId &module, const std::string &function
 
     std::shared_ptr<ISerializable> EntryFunction::Deserialize(Deserialization &deserializer)
     {
-        auto module = std::dynamic_pointer_cast<ModuleId>(ModuleId::Deserialize(deserializer));
+        auto moduleId = std::dynamic_pointer_cast<ModuleId>(ModuleId::Deserialize(deserializer));
         std::string function = deserializer.DeserializeString();
         auto typeArgs = std::dynamic_pointer_cast<TagSequence>(deserializer.DeserializeTagSequence());
         auto args = std::dynamic_pointer_cast<Sequence>(Sequence::Deserialize(deserializer));
-        return std::make_shared<EntryFunction>(*module, function, *typeArgs, *args);
+        return std::make_shared<EntryFunction>(*moduleId, function, *typeArgs, *args);
     }
 
     bool EntryFunction::Equals(const EntryFunction &other) const

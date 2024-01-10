@@ -386,7 +386,7 @@ std::string PropertyMap::ToString() const
     return response;
 }
 
-std::tuple<std::vector<BString>, std::vector<BString>, std::vector<std::vector<uint8_t>>> PropertyMap::ToTuple()
+std::tuple<std::vector<BString>, std::vector<BString>, std::vector<std::vector<uint8_t>>> PropertyMap::ToTuple() const
 {
     std::vector<BString> names;
     std::vector<BString> types;
@@ -451,7 +451,7 @@ void AptosTokenClient::ReadObject(std::function<void (Aptos::Rest::ReadObject,  
     long responseCode = 0;
     std::string resourcesResp = "";
 
-    m_restClient.GetAccountResources([&success, &responseCode, &resourcesResp] (bool _success, long _responseCode,                                                                    std::string _resourcesResp)
+    m_restClient.GetAccountResources([&success, &responseCode, &resourcesResp] (bool _success, long _responseCode, std::string const &_resourcesResp)
                                      {
                                          success = _success;
                                          responseCode = _responseCode;

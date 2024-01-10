@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['rawtransaction_0',['RawTransaction',['../class_aptos_1_1_b_c_s_1_1_raw_transaction.html',1,'Aptos::BCS']]],
-  ['readobject_1',['ReadObject',['../class_aptos_1_1_rest_1_1_read_object.html',1,'Aptos::Rest']]],
-  ['removebom_2',['RemoveBOM',['../class_aptos_1_1_b_c_s_1_1_b_string.html#a53847517d15859d5de05691b5efcc1c9',1,'Aptos::BCS::BString']]],
-  ['requestclient_3',['RequestClient',['../class_aptos_1_1_rest_1_1_request_client.html',1,'Aptos::Rest']]],
-  ['restclient_4',['RestClient',['../class_aptos_1_1_rest_1_1_rest_client.html',1,'Aptos::Rest']]],
-  ['rotationproofchallenge_5',['RotationProofChallenge',['../class_aptos_1_1_accounts_1_1_rotation_proof_challenge.html',1,'Aptos::Accounts']]],
-  ['royalty_6',['Royalty',['../class_aptos_1_1_rest_1_1_royalty.html',1,'Aptos::Rest']]]
+  ['parse_0',['Parse',['../class_aptos_1_1_rest_1_1_object.html#a303cf9ae7397f1290330b7eab1966edd',1,'Aptos::Rest::Object']]],
+  ['privatekey_1',['privatekey',['../class_aptos_1_1_accounts_1_1_private_key.html#a1775994a89cd3db863692e12d4211103',1,'Aptos::Accounts::PrivateKey::PrivateKey(CryptoPP::SecByteBlock privateKey)'],['../class_aptos_1_1_accounts_1_1_private_key.html#a3bd5ba5a078311ffba5eb0464aa06707',1,'Aptos::Accounts::PrivateKey::PrivateKey(std::string const &amp;key)'],['../class_aptos_1_1_accounts_1_1_private_key.html#a8edbe4f7790d3920ee32fdbf4e235fce',1,'Aptos::Accounts::PrivateKey::PrivateKey(std::array&lt; CryptoPP::byte, KeyLength &gt; privateKey)'],['../class_aptos_1_1_accounts_1_1_private_key.html',1,'Aptos::Accounts::PrivateKey']]],
+  ['property_2',['Property',['../class_aptos_1_1_rest_1_1_property.html',1,'Aptos::Rest']]],
+  ['propertymap_3',['PropertyMap',['../class_aptos_1_1_rest_1_1_property_map.html',1,'Aptos::Rest']]],
+  ['publickey_4',['publickey',['../class_aptos_1_1_accounts_1_1_public_key.html',1,'Aptos::Accounts::PublicKey'],['../class_aptos_1_1_accounts_1_1_public_key.html#a6a64caa7648d5895d4ed05f9671cca83',1,'Aptos::Accounts::PublicKey::PublicKey(const CryptoPP::SecByteBlock &amp;publicKey)'],['../class_aptos_1_1_accounts_1_1_public_key.html#a5823cc9f987427a7f8826783fee0fb6f',1,'Aptos::Accounts::PublicKey::PublicKey(std::string key)']]]
 ];

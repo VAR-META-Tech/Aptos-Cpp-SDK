@@ -32,8 +32,8 @@ namespace Aptos::Rest
     {
     public:
         void SetEndpoint(const std::string &url);
-        RestClient(const std::string &url);
-        RestClient();
+        explicit RestClient(const std::string &url);
+        RestClient() = default;
         void SetUp();
         /// <summary>
         /// Get Account Details.

@@ -132,9 +132,9 @@
 \DoxyCodeLine{00146\ }
 \DoxyCodeLine{00147\ \ \ \ \ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\ StructTag;}
-\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property_map}{PropertyMap}}(\textcolor{keyword}{const}\ std::vector<Property>\ \&Properties);}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_property_map}{PropertyMap}}(\textcolor{keyword}{const}\ std::vector<Property>\ \&Properties);}
 \DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const\ override};}
-\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ std::tuple<std::vector<BCS::BString>,\ std::vector<BCS::BString>,\ std::vector<std::vector<uint8\_t>>>\ ToTuple();}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ std::tuple<std::vector<BCS::BString>,\ std::vector<BCS::BString>,\ std::vector<std::vector<uint8\_t>>>\ ToTuple()\ \textcolor{keyword}{const};}
 \DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IResource>\ Parse(std::shared\_ptr<AptosRESTModel::ResourceDataBase>\ resource);}
 \DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ std::string\ GetStructTag()\ \textcolor{keyword}{const\ override};}
 \DoxyCodeLine{00154\ \ \ \ \ \};}
@@ -144,7 +144,7 @@
 \DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }FuncValue\ =\ std::shared\_ptr<IResource>(std::shared\_ptr<AptosRESTModel::ResourceDataBase>);}
 \DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::map<std::string,\ FuncValue\ *>\ ResourceMap;}
-\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_read_object}{ReadObject}}(\textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::shared\_ptr<IResource>>\ \&R1);}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_read_object}{ReadObject}}(\textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::shared\_ptr<IResource>>\ \&R1);}
 \DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ std::string\ ToString()\ \textcolor{keyword}{const};}
 \DoxyCodeLine{00163\ }
 \DoxyCodeLine{00164\ \ \ \ \ \textcolor{keyword}{private}:}
@@ -154,7 +154,7 @@
 \DoxyCodeLine{00168\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_aptos_1_1_rest_1_1_aptos_token_client}{AptosTokenClient}}}
 \DoxyCodeLine{00169\ \ \ \ \ \{}
 \DoxyCodeLine{00170\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_aptos_token_client}{AptosTokenClient}}(\mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client}{RestClient}}\&\ client);}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_aptos_token_client}{AptosTokenClient}}(\mbox{\hyperlink{class_aptos_1_1_rest_1_1_rest_client}{RestClient}}\&\ client);}
 \DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_aptos_1_1_rest_1_1_read_object}{ReadObject}}(std::function<\textcolor{keywordtype}{void}\ (\mbox{\hyperlink{class_aptos_1_1_rest_1_1_read_object}{Aptos::Rest::ReadObject}},\ \ AptosRESTModel::ResponseInfo)>\ callback,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_aptos_1_1_accounts_1_1_account_address}{Accounts::AccountAddress}}\&\ address);}
 \DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CreateCollection(}
 \DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}\ (std::string,\ \ AptosRESTModel::ResponseInfo)>\ callback,}

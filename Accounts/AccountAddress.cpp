@@ -24,12 +24,7 @@ namespace Aptos::Accounts
         }
         _addressBytes = addressBytes;
     }
-
-    AccountAddress::AccountAddress()
-    {
-
-    }
-
+    
     std::string AccountAddress::ToString() const
     {
         std::ostringstream addressHexStream;
