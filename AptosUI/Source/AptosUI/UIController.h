@@ -49,6 +49,10 @@ class APTOSUI_API UUIController : public UBlueprintFunctionLibrary
 	static void CreateCollection(FString collectionName, FString collectionDescription, FString collectionUrl, bool &IsCreateCollectionOk, FString &Notification);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnCreateNFT Clicked"), Category = "UIController")
 	static void CreateNFT(FString collectionName, FString tokenName, FString tokenDescription, int supply, int max, FString url, int royaltyPointsPerMillion, bool &IsCreateNFTOk, FString &Notification);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnInitApp"), Category = "UIController")
+	static void OnInitApp(FString &mnemonic_key);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnQuitApp"), Category = "UIController")
+	static void OnQuitApp();
 
 private:
 	static void *m_controller;

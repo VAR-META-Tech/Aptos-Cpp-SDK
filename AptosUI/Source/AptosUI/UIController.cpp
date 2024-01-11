@@ -6,6 +6,20 @@
 
 void *UUIController::m_controller = AptosUILogic_createUiController();
 int curindex = 0;
+// Saving data
+void SaveDataToFile(FString SaveData)
+{
+    FString SavePath = FPaths::ProjectSavedDir() / TEXT("SaveData.json");
+    FFileHelper::SaveStringToFile(SaveData, *SavePath);
+}
+// Loading data
+FString LoadDataFromFile()
+{
+    FString SavePath = FPaths::ProjectSavedDir() / TEXT("SaveData.json");
+    FString LoadedData;
+    FFileHelper::LoadFileToString(LoadedData, *SavePath);
+    return LoadedData;
+}
 void UUIController::OnCreateWalletClicked(class UWidget *TargetComboBox, FString netWork, FString &balance_return, FString &mnemonic_key_return, bool &IsCreateOk)
 {
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCreateWalletClicked"));
@@ -244,4 +258,22 @@ void UUIController::CreateNFT(FString collectionName, FString tokenName, FString
             Notification = FString::Printf(TEXT("Failed to Create NFT: %s "), *tokenName);
         }
     }
+}
+
+void UUIController::OnInitApp(FString &mnemonic_key)
+{
+    mnemonic_key = LoadDataFromFile();
+    if (!mnemonic_key.IsEmpty())
+    {
+        std::string _collectionName(TCHAR_TO_UTF8(*mnemonic_key));
+        AptosUILogic_setNetwork(m_controller, "Devnet");
+    }
+}
+
+void UUIController::OnQuitApp()
+{
+    char *mnemonic = AptosUILogic_getMnemonicsKey(m_controller);
+    FString mnemonic_key = mnemonic;
+    SaveDataToFile(mnemonic_key);
+    AptosUILogic_deleteString(mnemonic);
 }
