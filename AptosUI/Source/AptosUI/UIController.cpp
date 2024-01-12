@@ -20,6 +20,10 @@ FString LoadDataFromFile()
     FFileHelper::LoadFileToString(LoadedData, *SavePath);
     return LoadedData;
 }
+void UUIController::CopyCurrentWalletAdress(FString text)
+{
+    FPlatformMisc::ClipboardCopy(*text);
+}
 void UUIController::OnCreateWalletClicked(class UWidget *TargetComboBox, FString netWork, FString &balance_return, FString &mnemonic_key_return, bool &IsCreateOk)
 {
     UE_LOG(LogTemp, Warning, TEXT("UUIController::OnCreateWalletClicked"));

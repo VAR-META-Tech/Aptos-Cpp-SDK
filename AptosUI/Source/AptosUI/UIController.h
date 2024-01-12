@@ -29,6 +29,8 @@ UCLASS()
 class APTOSUI_API UUIController : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "CopyCurrentWalletAdress"), Category = "UIController")
+	static void CopyCurrentWalletAdress(FString text);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnCreateWallet Clicked"), Category = "UIController")
 	static void OnCreateWalletClicked(class UWidget *TargetComboBox, FString netWork, FString &balance_return, FString &mnemonic_key_return, bool &IsCreateOk);
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "OnImportWallet Clicked"), Category = "UIController")
