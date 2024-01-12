@@ -174,7 +174,7 @@ void UIController::airdrop(int amount)
                                                } else {
                                                    std::cout << "airdrop failed" << std::endl;
                                                } },
-                                           m_wallet->Account().getAccountAddress()->ToString(),
+                                           m_accountList.at(m_currentAddressIndexKey).getAccountAddress()->ToString(),
                                            amount,
                                            faucetEndpoint);
     std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -219,7 +219,7 @@ bool UIController::createCollection(std::string _collectionName, std::string _co
                                   {
                                       createCollectionTxn = _createCollectionTxn;
                                       responseInfo = _responseInfo; },
-                                  m_wallet->Account(),
+                                  m_accountList.at(m_currentAddressIndexKey),
                                   _collectionName, _collectionDescription, _collectionUri);
     bool success = false;
     if (responseInfo.status == AptosRESTModel::ResponseInfo::Status::Success)
@@ -244,7 +244,7 @@ bool UIController::createNFT(std::string _collectionName, std::string _tokenName
                              {
                                  createTokenTxn = _createTokenTxn;
                                  responseInfo = _responseInfo; },
-                             m_wallet->Account(),
+                             m_accountList.at(m_currentAddressIndexKey),
                              _collectionName,
                              _tokenName,
                              _tokenDescription,
