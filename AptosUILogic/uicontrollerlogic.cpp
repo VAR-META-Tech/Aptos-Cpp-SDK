@@ -191,7 +191,7 @@ bool UIController::sendToken(std::string _targetAddress, long _amount)
                           {
                               transferTxn = _transferTxn;
                               responseInfo = _responseInfo; },
-                          m_wallet->Account(), _targetAddress, _amount);
+                          m_accountList.at(m_currentAddressIndexKey), _targetAddress, _amount);
 
     if (responseInfo.status == AptosRESTModel::ResponseInfo::Status::Success)
     {
