@@ -4,11 +4,26 @@ namespace AptosRESTModel {
 
 TransactionEvent::DataObject TransactionEvent::DataObject::FromJson(const nlohmann::json &j) {
     DataObject dataObject;
-    dataObject.Index = j.value("index", "");
-    dataObject.Token = j.value("token", "");
-    dataObject.From = j.value("from", "");
-    dataObject.To = j.value("to", "");
-    dataObject.Object = j.value("object", "");
+    if (j.count("index") > 0)
+    {
+        dataObject.Index = j["index"].value("value", "");
+    }
+    if (j.count("token") > 0)
+    {
+        dataObject.Token = j.value("token", "");
+    }
+    if (j.count("from") > 0)
+    {
+        dataObject.From = j.value("from", "");
+    }
+    if (j.count("to") > 0)
+    {
+        dataObject.To = j.value("to", "");
+    }
+    if (j.count("object") > 0)
+    {
+        dataObject.Object = j.value("object", "");
+    }
     return dataObject;
 }
 
