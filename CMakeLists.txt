@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Debug)
 
+add_subdirectory(third_party/bip3x) 
+
 include(CTest)
 enable_testing()
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
@@ -79,8 +81,7 @@ if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-instr-generate -fcoverage-mapping")
 endif()
 
-include_directories(Plugins/include)
-link_directories(Plugins/lib)
+include_directories(third_party/bip3x/include)
 include_directories(${httplib_INCLUDE_DIR})
 include_directories(${cryptopp_INCLUDE_DIRS_RELEASE})
 

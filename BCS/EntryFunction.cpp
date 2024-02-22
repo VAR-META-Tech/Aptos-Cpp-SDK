@@ -8,7 +8,7 @@ namespace Aptos::BCS
     EntryFunction::EntryFunction(const ModuleId &moduleId, const std::string &function, const TagSequence &typeArgs, const Sequence &args)
         : moduleId(moduleId), function(function), typeArgs(typeArgs), args(args) {}
 
-    EntryFunction EntryFunction::Natural(const ModuleId &module, const std::string &function, const TagSequence &typeArgs, const Sequence &args)
+    EntryFunction EntryFunction::Natural(const ModuleId &moduleId, const std::string &function, const TagSequence &typeArgs, const Sequence &args)
     {
         auto value = args.GetValue();
 
@@ -35,7 +35,7 @@ namespace Aptos::BCS
         }
 
         Sequence seqBytes(valuesAsBytes);
-        return EntryFunction(module, function, typeArgs, seqBytes);
+        return EntryFunction(moduleId, function, typeArgs, seqBytes);
     }
 
     void EntryFunction::Serialize(Serialization &serializer) const
