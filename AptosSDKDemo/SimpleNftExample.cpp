@@ -1,9 +1,9 @@
 #include "SimpleNftExample.h"
 #include <iostream>
 #include <string>
-#include "../REST/RestClient.h"
-#include "../REST/FaucetClient.h"
-#include "../REST/Constant.h"
+#include "REST/RestClient.h"
+#include "REST/FaucetClient.h"
+#include "REST/Constant.h"
 
 using namespace Aptos::Accounts;
 using namespace Aptos::BCS;

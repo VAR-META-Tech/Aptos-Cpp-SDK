@@ -1,15 +1,15 @@
 #include "SimulateTransferCoin.h"
 #include <iostream>
 #include <string>
-#include "../../REST/RestClient.h"
-#include "../../REST/FaucetClient.h"
-#include "../../REST/Constant.h"
-#include "../../REST/AptosTokenClient.h"
-#include "../../BCS/StructTag.h"
-#include "../../BCS/TagSequence.h"
-#include "../../BCS/U64.h"
-#include "../../HDWallet/Utils/Utils.h"
-#include "../../REST/Model/TransactionConverter.h"
+#include "REST/RestClient.h"
+#include "REST/FaucetClient.h"
+#include "REST/Constant.h"
+#include "REST/AptosTokenClient.h"
+#include "BCS/StructTag.h"
+#include "BCS/TagSequence.h"
+#include "BCS/U64.h"
+#include "HDWallet/Utils/Utils.h"
+#include "REST/Model/TransactionConverter.h"
 
 using namespace Aptos::Accounts;
 using namespace Aptos::BCS;

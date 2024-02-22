@@ -2,18 +2,18 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "../../REST/RestClient.h"
-#include "../../REST/FaucetClient.h"
-#include "../../REST/Constant.h"
-#include "../../REST/AptosTokenClient.h"
-#include "../../BCS/StructTag.h"
-#include "../../BCS/U64.h"
-#include "../../REST/Constant.h"
-#include "../../HDWallet/Utils/Utils.h"
+#include "REST/RestClient.h"
+#include "REST/FaucetClient.h"
+#include "REST/Constant.h"
+#include "REST/AptosTokenClient.h"
+#include "BCS/StructTag.h"
+#include "BCS/U64.h"
+#include "REST/Constant.h"
+#include "HDWallet/Utils/Utils.h"
 #include "Model/MultisigTransferBcsTransactionResponse.h"
-#include "../../Accounts/RotationProofChallenge.h"
-#include "../../BCS/U8.h"
-#include "../../BCS/Bytes.h"
+#include "Accounts/RotationProofChallenge.h"
+#include "BCS/U8.h"
+#include "BCS/Bytes.h"
 #include "Model/RotateKeyBcsTransactionResponse.h"
 
 using namespace Aptos::Accounts;

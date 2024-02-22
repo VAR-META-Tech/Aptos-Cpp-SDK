@@ -1,11 +1,11 @@
 #include "uicontrollerlogic.h"
-#include "../HDWallet/wallet.h"
-#include "../REST/Model/AccountResourceCoin.h"
-#include "../REST/Model/ResponseInfo.h"
-#include "../REST/RestClient.cpp"
-#include "../REST/Constant.h"
-#include "../HDWallet/Utils/Utils.h"
-#include "../REST/FaucetClient.h"
+#include "HDWallet/wallet.h"
+#include "REST/Model/AccountResourceCoin.h"
+#include "REST/Model/ResponseInfo.h"
+#include "REST/RestClient.cpp"
+#include "REST/Constant.h"
+#include "HDWallet/Utils/Utils.h"
+#include "REST/FaucetClient.h"
 #include <memory>
 
 namespace AptosUILogic
