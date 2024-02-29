@@ -2,7 +2,7 @@
 #define TRANSACTIONARGUMENT_H
 #include <iostream>
 #include <vector>
-#include "BCSTypes.h"
+#include "BCS/BCSTypes.h"
 
 namespace Aptos::BCS
 {

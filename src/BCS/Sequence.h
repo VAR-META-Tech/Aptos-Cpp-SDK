@@ -51,7 +51,7 @@ namespace Aptos::BCS
         void Serialize(Serialization &serializer) const override;
 
         /// <inheritdoc/>
-        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
+        static std::shared_ptr<Sequence> Deserialize(Deserialization &deserializer);
 
         /// <inheritdoc/>
         bool Equals(const Sequence &other) const;

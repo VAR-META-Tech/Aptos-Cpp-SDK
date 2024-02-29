@@ -20,7 +20,7 @@ namespace Aptos::BCS
         void Serialize(Serialization &serializer) const override;
 
         /// <inheritdoc/>
-        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
+        static std::shared_ptr<TagSequence> Deserialize(Deserialization &deserializer);
 
         /// <summary>
         /// Gets the internal list of objects inside the TagSequence.

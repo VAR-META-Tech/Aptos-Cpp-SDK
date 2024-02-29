@@ -2,8 +2,8 @@
 #include "Model/TableItemRequest.h"
 #include "Model/TableItemRequestNFT.h"
 #include "Model/TableItemRequestTokenData.h"
-#include "../BCS/Authenticator.h"
-#include "../BCS/SignedTransaction.h"
+#include "../Transactions/Authenticator.h"
+#include "../Transactions/SignedTransaction.h"
 #include "../HDWallet/Utils/Utils.h"
 #include "Constant.h"
 #include <thread>

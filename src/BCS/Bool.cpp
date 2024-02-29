@@ -17,7 +17,7 @@ namespace Aptos::BCS
         serializer.SerializeBool(this->value);
     }
 
-    std::shared_ptr<ISerializableTag> Bool::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<Bool> Bool::Deserialize(Deserialization &deserializer)
     {
         bool value = deserializer.DeserializeBool();
         return std::make_shared<Bool>(value);

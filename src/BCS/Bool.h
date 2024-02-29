@@ -30,7 +30,7 @@ namespace Aptos::BCS
         void Serialize(Serialization &serializer) const override;
 
         /// <inheritdoc/>
-        static std::shared_ptr<ISerializableTag> Deserialize(Deserialization &deserializer);
+        static std::shared_ptr<Bool> Deserialize(Deserialization &deserializer);
 
         /// <inheritdoc/>
         TypeTag Variant() const override;

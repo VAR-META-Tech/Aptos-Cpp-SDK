@@ -20,7 +20,7 @@ namespace Aptos::BCS
         }
     }
 
-    std::shared_ptr<ISerializable> TagSequence::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<TagSequence> TagSequence::Deserialize(Deserialization &deserializer)
     {
         int length = deserializer.DeserializeUleb128();
 

@@ -30,7 +30,7 @@ namespace Aptos::BCS
         void Serialize(Serialization &serializer) const override;
 
         /// <inheritdoc/>
-        static BytesSequence *Deserialize(Deserialization &deserializer);
+        static std::shared_ptr<BytesSequence> Deserialize(Deserialization &deserializer);
 
         /// <inheritdoc/>
         std::vector<std::vector<uint8_t>> GetValue() const;

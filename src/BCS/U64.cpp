@@ -17,7 +17,7 @@ namespace Aptos::BCS
         serializer.SerializeU64(this->value);
     }
 
-    std::shared_ptr<ISerializableTag> U64::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<U64> U64::Deserialize(Deserialization &deserializer)
     {
         uint64_t value = deserializer.DeserializeU64();
         return std::make_shared<U64>(value);

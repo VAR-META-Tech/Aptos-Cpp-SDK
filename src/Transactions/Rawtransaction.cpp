@@ -63,7 +63,7 @@ namespace Aptos::BCS
         serializer.SerializeU8(static_cast<uint8_t>(this->chainId));
     }
 
-    std::shared_ptr<ISerializable> RawTransaction::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<RawTransaction> RawTransaction::Deserialize(Deserialization &deserializer)
     {
         auto sender = std::dynamic_pointer_cast<AccountAddress>(AccountAddress::Deserialize(deserializer));
         auto sequenceNumber = deserializer.DeserializeU64();

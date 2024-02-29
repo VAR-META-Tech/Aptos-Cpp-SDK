@@ -1,11 +1,11 @@
 #ifndef AUTHENTICATOR_H
 #define AUTHENTICATOR_H
 
-#include "BCSTypes.h"
-#include "Serialization.h"
+#include "BCS/BCSTypes.h"
+#include "BCS/Serialization.h"
 #include "../Accounts/Signature.h"
 #include "../Accounts/PublicKey.h"
-#include "Sequence.h"
+#include "BCS/Sequence.h"
 #include "../Accounts/AccountAddress.h"
 #include "../Accounts/multisignature.h"
 
@@ -66,7 +66,7 @@ namespace Aptos::BCS
         void Serialize(Serialization &serializer) const override;
 
         /// <inheritdoc/>
-        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
+        static std::shared_ptr<Authenticator> Deserialize(Deserialization &deserializer);
 
         /// <inheritdoc/>
         bool Equals(const Authenticator &other) const;

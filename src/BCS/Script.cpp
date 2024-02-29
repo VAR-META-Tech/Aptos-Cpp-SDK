@@ -18,7 +18,7 @@ namespace Aptos::BCS
         serializer.Serialize(this->scriptArgs);
     }
 
-    std::shared_ptr<ISerializable> Script::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<Script> Script::Deserialize(Deserialization &deserializer)
     {
         std::vector<uint8_t> code = deserializer.ToBytes();
         auto typeArgs = deserializer.DeserializeTagSequence();

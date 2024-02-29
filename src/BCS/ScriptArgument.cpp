@@ -65,7 +65,7 @@ namespace Aptos::BCS
         }
     }
 
-    std::shared_ptr<ISerializable> ScriptArgument::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<ScriptArgument> ScriptArgument::Deserialize(Deserialization &deserializer)
     {
         auto variant = static_cast<ScriptArgumentTypeTag>(deserializer.DeserializeU8());
         std::shared_ptr<ISerializableTag> value;

@@ -31,7 +31,7 @@ namespace Aptos::BCS
         void Serialize(Serialization &serializer) const override;
 
         /// <inheritdoc/>
-        static Bytes *Deserialize(Deserialization &deserializer);
+        static std::shared_ptr<Bytes> Deserialize(Deserialization &deserializer);
 
         /// <summary>
         /// Gets the byte array containes within the Bytes object.

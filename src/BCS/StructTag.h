@@ -31,7 +31,7 @@ namespace Aptos::BCS
         void Serialize(Serialization &serializer) const override;
 
         /// <inheritdoc/>
-        static std::shared_ptr<ISerializableTag> Deserialize(Deserialization &deserializer);
+        static std::shared_ptr<StructTag> Deserialize(Deserialization &deserializer);
 
         /// <inheritdoc/>
         bool Equals(const StructTag &other) const;

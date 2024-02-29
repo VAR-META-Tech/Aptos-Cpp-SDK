@@ -16,7 +16,7 @@ namespace Aptos::BCS
         serializer.SerializeU16(this->value);
     }
 
-    std::shared_ptr<ISerializableTag> U16::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<U16> U16::Deserialize(Deserialization &deserializer)
     {
         uint16_t value = deserializer.DeserializeU16();
         return std::make_shared<U16>(value);

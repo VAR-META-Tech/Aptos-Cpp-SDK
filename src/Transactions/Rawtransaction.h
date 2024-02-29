@@ -23,7 +23,7 @@ namespace Aptos::BCS
         Accounts::Signature Sign(Accounts::PrivateKey key);
         bool Verify(Accounts::PublicKey key, const Accounts::Signature &signature);
         void Serialize(Serialization &serializer) const override;
-        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
+        static std::shared_ptr<RawTransaction> Deserialize(Deserialization &deserializer);
         std::string ToString() const override;
         bool Equals(const RawTransaction &other) const;
 

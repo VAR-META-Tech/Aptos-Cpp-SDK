@@ -22,10 +22,10 @@ namespace Aptos::BCS
         serializer.SerializeBytes(this->values);
     }
 
-    Bytes *Bytes::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<Bytes> Bytes::Deserialize(Deserialization &deserializer)
     {
         std::vector<uint8_t> values = deserializer.ToBytes();
-        return new Bytes(values);
+        return std::make_shared<Bytes>(values);
     }
 
     std::vector<uint8_t> Bytes::getValue() const

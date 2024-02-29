@@ -20,7 +20,7 @@ namespace Aptos::BCS
             serializer.SerializeBytes(element);
     }
 
-    BytesSequence *BytesSequence::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<BytesSequence> BytesSequence::Deserialize(Deserialization &deserializer)
     {
         int length = deserializer.DeserializeUleb128();
         std::vector<std::vector<uint8_t>> bytesList;
@@ -28,7 +28,7 @@ namespace Aptos::BCS
         while (bytesList.size() < length)
             bytesList.push_back(deserializer.ToBytes());
 
-        return new BytesSequence(bytesList);
+        return std::make_shared<BytesSequence>(bytesList);
     }
 
     std::vector<std::vector<uint8_t>> BytesSequence::GetValue() const

@@ -19,7 +19,7 @@ namespace Aptos::BCS
         serializer.SerializeU128(value);
     }
 
-    std::shared_ptr<ISerializableTag> U128::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<U128> U128::Deserialize(Deserialization &deserializer)
     {
         CryptoPP::Integer value = deserializer.DeserializeU128();
         return std::make_shared<U128>(value);

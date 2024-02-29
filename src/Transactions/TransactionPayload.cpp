@@ -1,6 +1,6 @@
 #include "TransactionPayload.h"
-#include "Script.h"
-#include "EntryFunction.h"
+#include "BCS/Script.h"
+#include "BCS/EntryFunction.h"
 
 namespace Aptos::BCS
 {
@@ -33,7 +33,7 @@ namespace Aptos::BCS
         this->value->Serialize(serializer);
     }
 
-    std::shared_ptr<ISerializable> TransactionPayload::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<TransactionPayload> TransactionPayload::Deserialize(Deserialization &deserializer)
     {
         auto variant = static_cast<TransactionPayloadTypeTag>(deserializer.DeserializeUleb128());
         std::shared_ptr<ISerializable> payload = nullptr;

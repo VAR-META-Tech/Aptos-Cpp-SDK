@@ -51,7 +51,7 @@ namespace Aptos::BCS
         }
     }
 
-    std::shared_ptr<ISerializable> Sequence::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<Sequence> Sequence::Deserialize(Deserialization &deserializer)
     {
         int length = deserializer.DeserializeUleb128();
         std::vector<std::shared_ptr<ISerializable>> values;

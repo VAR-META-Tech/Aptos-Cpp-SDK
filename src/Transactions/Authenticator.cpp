@@ -1,5 +1,5 @@
 #include "Authenticator.h"
-#include "Sequence.h"
+#include "BCS/Sequence.h"
 
 using namespace Aptos::Accounts;
 namespace Aptos::BCS
@@ -45,7 +45,7 @@ namespace Aptos::BCS
         m_authenticator->Serialize(serializer);
     }
 
-    std::shared_ptr<ISerializable> Authenticator::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<Authenticator> Authenticator::Deserialize(Deserialization &deserializer)
     {
         int variant = deserializer.DeserializeUleb128();
         std::shared_ptr<IAuthenticator> authenticator = nullptr;

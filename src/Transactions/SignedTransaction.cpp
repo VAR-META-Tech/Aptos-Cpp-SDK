@@ -40,7 +40,7 @@ namespace Aptos::BCS
         authenticator.Serialize(serializer);
     }
 
-    std::shared_ptr<ISerializable> SignedTransaction::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<SignedTransaction> SignedTransaction::Deserialize(Deserialization &deserializer)
     {
         auto transaction = std::dynamic_pointer_cast<RawTransaction>(RawTransaction::Deserialize(deserializer));
         auto authenticator = std::dynamic_pointer_cast<Authenticator>(Authenticator::Deserialize(deserializer));

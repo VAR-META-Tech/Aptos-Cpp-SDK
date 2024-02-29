@@ -16,7 +16,7 @@ namespace Aptos::BCS
         serializer.SerializeU32(this->value);
     }
 
-    std::shared_ptr<ISerializableTag> U32::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<U32> U32::Deserialize(Deserialization &deserializer)
     {
         uint32_t value = deserializer.DeserializeU32();
         return std::make_shared<U32>(value);

@@ -14,7 +14,7 @@ namespace Aptos::BCS
         serializer.SerializeU8(this->value);
     }
 
-    std::shared_ptr<ISerializableTag> U8::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<U8> U8::Deserialize(Deserialization &deserializer)
     {
         uint8_t value = deserializer.DeserializeU8();
         return std::make_shared<U8>(value);

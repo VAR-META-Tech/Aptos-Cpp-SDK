@@ -46,7 +46,7 @@ namespace Aptos::BCS
         serializer.Serialize(args);
     }
 
-    std::shared_ptr<ISerializable> EntryFunction::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<EntryFunction> EntryFunction::Deserialize(Deserialization &deserializer)
     {
         auto moduleId = std::dynamic_pointer_cast<ModuleId>(ModuleId::Deserialize(deserializer));
         std::string function = deserializer.DeserializeString();

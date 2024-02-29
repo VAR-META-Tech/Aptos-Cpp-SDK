@@ -21,7 +21,7 @@ namespace Aptos::BCS
         serializer.Serialize(value);
     }
 
-    std::shared_ptr<ISerializable> BString::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<BString> BString::Deserialize(Deserialization &deserializer)
     {
         std::string deserStr = deserializer.DeserializeString();
         return std::make_shared<BString>(deserStr);

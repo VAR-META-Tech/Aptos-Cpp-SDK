@@ -18,7 +18,7 @@ namespace Aptos::BCS
         explicit Script(const std::vector<uint8_t> &code, const TagSequence &typeArgs, const Sequence &scriptArgs);
 
         void Serialize(Serialization &serializer) const override;
-        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
+        static std::shared_ptr<Script> Deserialize(Deserialization &deserializer);
         bool Equals(const Script &other) const;
         std::string ToString();
         size_t GetHashCode() const override;

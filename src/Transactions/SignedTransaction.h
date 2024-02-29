@@ -2,7 +2,7 @@
 #define SIGNEDTRANSACTION_H
 
 #include <iostream>
-#include "BCSTypes.h"
+#include "BCS/BCSTypes.h"
 #include "rawtransaction.h"
 #include "Authenticator.h"
 
@@ -18,7 +18,7 @@ namespace Aptos::BCS
         std::vector<uint8_t> Bytes() const;
         bool Verify();
         void Serialize(Serialization &serializer) const override;
-        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
+        static std::shared_ptr<SignedTransaction> Deserialize(Deserialization &deserializer);
         bool Equals(const SignedTransaction &other) const;
         std::string ToString() const override;
         size_t GetHashCode() const override;

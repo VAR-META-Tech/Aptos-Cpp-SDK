@@ -13,7 +13,7 @@ ModuleId::ModuleId(const AccountAddress &address, const std::string &name)
         serializer.SerializeString(name);
     }
 
-    std::shared_ptr<ISerializable> ModuleId::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<ModuleId> ModuleId::Deserialize(Deserialization &deserializer)
     {
         auto addr = std::dynamic_pointer_cast<AccountAddress>(AccountAddress::Deserialize(deserializer));
         std::string name = deserializer.DeserializeString();

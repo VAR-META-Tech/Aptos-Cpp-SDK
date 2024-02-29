@@ -30,7 +30,7 @@ namespace Aptos::BCS
         static EntryFunction Natural(const ModuleId &moduleId, const std::string &function,
                                      const TagSequence &typeArgs, const Sequence &args);
         void Serialize(Serialization &serializer) const override;
-        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
+        static std::shared_ptr<EntryFunction> Deserialize(Deserialization &deserializer);
         bool Equals(const EntryFunction &other) const;
         std::string ToString() const override;
         size_t GetHashCode() const;

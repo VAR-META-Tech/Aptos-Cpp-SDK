@@ -23,7 +23,7 @@ namespace Aptos::BCS
         }
     }
 
-    std::shared_ptr<ISerializableTag> StructTag::Deserialize(Deserialization &deserializer)
+    std::shared_ptr<StructTag> StructTag::Deserialize(Deserialization &deserializer)
     {
         auto address = std::dynamic_pointer_cast<AccountAddress>(AccountAddress::Deserialize(deserializer));
         std::string moduleName = deserializer.DeserializeString();

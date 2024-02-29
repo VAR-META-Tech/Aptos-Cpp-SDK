@@ -30,7 +30,7 @@ namespace Aptos::BCS
         static uint32_t Deserialize(const std::vector<uint8_t> &data);
 
         /// <inheritdoc/>
-        static std::shared_ptr<ISerializableTag> Deserialize(Deserialization &deserializer);
+        static std::shared_ptr<U32> Deserialize(Deserialization &deserializer);
 
         /// <inheritdoc/>
         TypeTag Variant() const override;

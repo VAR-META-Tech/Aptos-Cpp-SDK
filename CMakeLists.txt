@@ -119,12 +119,12 @@ add_library(Aptos SHARED
         src/BCS/BCSMap.h
         src/BCS/BString.cpp
         src/BCS/BString.h
-        src/BCS/rawtransaction.h
-        src/BCS/rawtransaction.cpp
-        src/BCS/MultiAgentRawTransaction.h
-        src/BCS/MultiAgentRawTransaction.cpp
-        src/BCS/TransactionPayload.h
-        src/BCS/TransactionPayload.cpp
+        src/Transactions/Rawtransaction.h
+        src/Transactions/Rawtransaction.cpp
+        src/Transactions/MultiAgentRawTransaction.h
+        src/Transactions/MultiAgentRawTransaction.cpp
+        src/Transactions/TransactionPayload.h
+        src/Transactions/TransactionPayload.cpp
         src/BCS/Script.h
         src/BCS/Script.cpp
         src/BCS/ScriptArgument.h
@@ -133,10 +133,10 @@ add_library(Aptos SHARED
         src/BCS/EntryFunction.cpp
         src/BCS/ModuleId.h
         src/BCS/ModuleId.cpp
-        src/BCS/TransactionArgument.h
-        src/BCS/TransactionArgument.cpp
-        src/BCS/SignedTransaction.h
-        src/BCS/SignedTransaction.cpp
+        src/Transactions/TransactionArgument.h
+        src/Transactions/TransactionArgument.cpp
+        src/Transactions/SignedTransaction.h
+        src/Transactions/SignedTransaction.cpp
         src/Accounts/PublicKey.cpp
         src/Accounts/PublicKey.h
         src/HDWallet/Utils/Utils.cpp
@@ -149,14 +149,14 @@ add_library(Aptos SHARED
         src/Accounts/AccountAddress.cpp
         src/Accounts/Account.cpp
         src/Accounts/AuthenticationKey.cpp
-        src/Accounts/multipublickey.h
-        src/Accounts/multipublickey.cpp
-        src/Accounts/multisignature.h
-        src/Accounts/multisignature.cpp
-        src/HDWallet/wallet.h
-        src/HDWallet/wallet.cpp
-        src/BCS/Authenticator.h
-        src/BCS/Authenticator.cpp
+        src/Accounts/Multipublickey.h
+        src/Accounts/Multipublickey.cpp
+        src/Accounts/Multisignature.h
+        src/Accounts/Multisignature.cpp
+        src/HDWallet/Wallet.h
+        src/HDWallet/Wallet.cpp
+        src/Transactions/Authenticator.h
+        src/Transactions/Authenticator.cpp
         src/BCS/StructTag.h
         src/BCS/StructTag.cpp
         src/REST/Constant.h

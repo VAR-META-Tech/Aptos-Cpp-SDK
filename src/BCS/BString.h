@@ -46,7 +46,7 @@ namespace Aptos::BCS
         /// </summary>
         /// <param name="deserializer">The Deserializer that contains the bytes.</param>
         /// <returns>A BString object.</returns>
-        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
+        static std::shared_ptr<BString> Deserialize(Deserialization &deserializer);
 
         /// <inheritdoc/>
         bool Equals(const BString &other) const;

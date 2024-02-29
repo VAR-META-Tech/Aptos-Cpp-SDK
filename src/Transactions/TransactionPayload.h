@@ -1,6 +1,6 @@
 #ifndef TRANSACTIONPAYLOAD_H
 #define TRANSACTIONPAYLOAD_H
-#include "BCSTypes.h"
+#include "BCS/BCSTypes.h"
 
 namespace Aptos::BCS
 {
@@ -20,7 +20,7 @@ namespace Aptos::BCS
         explicit TransactionPayload(const std::shared_ptr<ISerializable> &payload);
         TransactionPayloadTypeTag Variant() const;
         void Serialize(Serialization &serializer) const override;
-        static std::shared_ptr<ISerializable> Deserialize(Deserialization &deserializer);
+        static std::shared_ptr<TransactionPayload> Deserialize(Deserialization &deserializer);
         bool Equals(const TransactionPayload &other) const;
         std::string ToString() const override;
         size_t GetHashCode() const override;
