@@ -538,10 +538,7 @@ void RestClient::WaitForTransaction(std::function<void(bool, AptosRESTModel::Res
         }
 
         count += 1;
-        std::this_thread::sleep_for(std::chrono::seconds(2));
     }
-
-    std::this_thread::sleep_for(std::chrono::seconds(3));
     callback(isTxnSuccessful, responseInfo);
 }
 

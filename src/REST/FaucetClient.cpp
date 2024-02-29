@@ -23,7 +23,6 @@ namespace Aptos::Rest
             {
                 responseInfo.status = ResponseInfo::Status::Success;
                 responseInfo.message = "Funding succeeded!";
-                std::this_thread::sleep_for(std::chrono::seconds(2));
                 callback(true, responseInfo);
             }
         } else {
@@ -31,6 +30,5 @@ namespace Aptos::Rest
             responseInfo.message = "Request Failed";
             callback(false, responseInfo);
         }
-        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 }
