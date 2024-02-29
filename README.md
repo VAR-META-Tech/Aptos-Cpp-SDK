@@ -48,6 +48,11 @@ Aptos-Cpp-SDK is a cpp package written in C++ to help developers integrate Aptos
 - https://github.com/weidai11/cryptopp
 
 ### Installation ###
+#Update submodule
+```
+git submodule update --recursive --remote
+```
+
 #Install package management
 ```
 brew install conan

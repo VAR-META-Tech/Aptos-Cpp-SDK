@@ -1,17 +1,6 @@
 cmake_minimum_required(VERSION 3.27.6)
 project(Aptos VERSION 0.1.0 LANGUAGES C CXX)
 
-function(add_git_submodule SUBMODULE_URL DESTINATION)
-    if(NOT EXISTS "${DESTINATION}")
-        message(STATUS "Submodule not found, cloning ${SUBMODULE_URL}...")
-        execute_process(COMMAND git submodule update --init --recursive ${DESTINATION})
-    else()
-        message(STATUS "Submodule already exists at ${DESTINATION}")
-    endif()
-endfunction()
-
-add_git_submodule(https://github.com/edwardstock/bip3x.git ThirdParty/bip3x)
-
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Debug)
