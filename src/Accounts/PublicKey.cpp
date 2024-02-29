@@ -3,7 +3,7 @@
 //
 
 #include "PublicKey.h"
-#include "Signature.h"
+#include "Ed25519Signature.h"
 #include "../HDWallet/Utils/Utils.h"
 #include "cryptopp/hex.h"
 #include "cryptopp/xed25519.h"
@@ -98,7 +98,7 @@ namespace Aptos::Accounts
         _keyBytes = bytes;
     }
 
-    bool PublicKey::Verify(const CryptoPP::SecByteBlock &message, const Signature &signature) const
+    bool PublicKey::Verify(const CryptoPP::SecByteBlock &message, const Ed25519Signature &signature) const
     {
         CryptoPP::ed25519::Verifier verifier(_keyBytes);
         return verifier.VerifyMessage(message.data(), message.size(),

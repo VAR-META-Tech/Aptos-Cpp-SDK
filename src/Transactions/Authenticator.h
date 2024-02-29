@@ -3,7 +3,7 @@
 
 #include "BCS/BCSTypes.h"
 #include "BCS/Serialization.h"
-#include "../Accounts/Signature.h"
+#include "../Accounts/Ed25519Signature.h"
 #include "../Accounts/PublicKey.h"
 #include "BCS/Sequence.h"
 #include "../Accounts/AccountAddress.h"
@@ -95,7 +95,7 @@ namespace Aptos::BCS
         /// </summary>
         /// <param name="publicKey"></param>
         /// <param name="signature"></param>
-        Ed25519Authenticator(Accounts::PublicKey publicKey, Accounts::Signature signature);
+        Ed25519Authenticator(Accounts::PublicKey publicKey, Accounts::Ed25519Signature signature);
 
         /// <summary>
         /// Verifies the data with the signature.
@@ -128,7 +128,7 @@ namespace Aptos::BCS
         /// <summary>
         /// The authenticator's public key.
         /// </summary>
-        Accounts::Signature m_signature;
+        Accounts::Ed25519Signature m_signature;
     };
 
     /// <summary>

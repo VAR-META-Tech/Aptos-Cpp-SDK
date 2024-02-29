@@ -90,7 +90,7 @@ namespace Aptos::Accounts
         return PublicKey(publicKeyBytes);
     }
 
-    Signature PrivateKey::Sign(CryptoPP::SecByteBlock message)
+    Ed25519Signature PrivateKey::Sign(CryptoPP::SecByteBlock message)
     {
         if (_keyBytes.empty())
         {
@@ -106,7 +106,7 @@ namespace Aptos::Accounts
         CryptoPP::SecByteBlock signatureData;
         signatureData.resize(signature.size());
         std::ranges::copy(signature.begin(), signature.end(), signatureData.begin());
-        return Signature(signatureData);
+        return Ed25519Signature(signatureData);
     }
 
     void PrivateKey::Serialize(BCS::Serialization &serializer)

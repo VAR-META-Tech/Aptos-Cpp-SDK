@@ -9,7 +9,7 @@
 
 namespace Aptos::Accounts
 {
-    MultiSignature::MultiSignature(const MultiPublicKey &PublicKeyMulti, const std::vector<std::pair<PublicKey, Signature>> &SignatureMap)
+    MultiSignature::MultiSignature(const MultiPublicKey &PublicKeyMulti, const std::vector<std::pair<PublicKey, Ed25519Signature>> &SignatureMap)
     {
         int bitmap = 0;
         auto keys = PublicKeyMulti.getKeys();
@@ -28,7 +28,7 @@ namespace Aptos::Accounts
     std::vector<uint8_t> MultiSignature::ToBytes() const
     {
         std::vector<uint8_t> concatenatedSignatures;
-        for (const Signature &signature : Signatures)
+        for (const Ed25519Signature &signature : Signatures)
         {
             std::vector<uint8_t> signatureBytes = Utils::SecBlockToByteVector(signature.Data());
             concatenatedSignatures.insert(std::end(concatenatedSignatures), std::begin(signatureBytes), std::end(signatureBytes));

@@ -144,8 +144,8 @@ add_library(Aptos SHARED
         src/Accounts/PrivateKey.cpp
         src/Accounts/PrivateKey.h
         src/Accounts/Types/MultiEd25519PublicKey.cpp
-        src/Accounts/Signature.cpp
-        src/Accounts/Signature.h
+        src/Accounts/Ed25519Signature.cpp
+        src/Accounts/Ed25519Signature.h
         src/Accounts/AccountAddress.cpp
         src/Accounts/Account.cpp
         src/Accounts/AuthenticationKey.cpp

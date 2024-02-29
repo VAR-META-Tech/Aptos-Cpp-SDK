@@ -2,7 +2,7 @@
 // Created by Anh NPH on 11/09/2023.
 //
 
-#include "Signature.h"
+#include "Ed25519Signature.h"
 #include <stdexcept>
 #include <sstream>
 #include <cryptopp/hex.h>
@@ -13,41 +13,41 @@
 #include <sstream>
 namespace Aptos::Accounts
 {
-    Signature::Signature(const CryptoPP::SecByteBlock &signature)
+    Ed25519Signature::Ed25519Signature(const CryptoPP::SecByteBlock &signature)
         : _signatureBytes(signature) {}
 
-    bool Signature::Equals(const Signature &rhs) const
+    bool Ed25519Signature::Equals(const Ed25519Signature &rhs) const
     {
         return _signatureBytes == rhs._signatureBytes;
     }
 
-    CryptoPP::SecByteBlock Signature::Data() const
+    CryptoPP::SecByteBlock Ed25519Signature::Data() const
     {
         return _signatureBytes;
     }
 
-    void Signature::Serialize(BCS::Serialization &serializer) const
+    void Ed25519Signature::Serialize(BCS::Serialization &serializer) const
     {
         auto bytes = Utils::SecBlockToByteVector(_signatureBytes);
         serializer.SerializeBytes(bytes);
     }
 
-    std::shared_ptr<BCS::ISerializable> Signature::Deserialize(BCS::Deserialization &deserializer)
+    std::shared_ptr<BCS::ISerializable> Ed25519Signature::Deserialize(BCS::Deserialization &deserializer)
     {
         CryptoPP::SecByteBlock sigBytes = Utils::ByteVectorToSecBlock(deserializer.ToBytes());
         if (sigBytes.size() != SignatureLength)
         {
             throw std::runtime_error("Length mismatch");
         }
-        return std::make_shared<Signature>(sigBytes);
+        return std::make_shared<Ed25519Signature>(sigBytes);
     }
 
-    bool Signature::operator==(const Signature &other) const
+    bool Ed25519Signature::operator==(const Ed25519Signature &other) const
     {
         return ToString() == other.ToString();
     }
 
-    std::string Signature::ToString() const
+    std::string Ed25519Signature::ToString() const
     {
         std::ostringstream stream;
         for (auto byte : _signatureBytes)

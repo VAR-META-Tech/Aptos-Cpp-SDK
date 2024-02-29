@@ -2,7 +2,7 @@
 #define MULTISIGNATURE_H
 #include <vector>
 #include <tuple>
-#include "Signature.h"
+#include "Ed25519Signature.h"
 #include "PublicKey.h"
 #include "multipublickey.h"
 #include "../BCS/BCSTypes.h"
@@ -20,7 +20,7 @@ namespace Aptos::Accounts
         /// </summary>
         /// <param name="PublicKeyMulti">The multi public key object containing the public keys used to generate the Bitmap.</param>
         /// <param name="SignatureMap">The tuple list containing the public keys associated with their signatures.</param>
-        MultiSignature(const MultiPublicKey &PublicKeyMulti, const std::vector<std::pair<PublicKey, Signature>> &SignatureMap);
+        MultiSignature(const MultiPublicKey &PublicKeyMulti, const std::vector<std::pair<PublicKey, Ed25519Signature>> &SignatureMap);
 
         /// <summary>
         /// Serialize the concatenated signatures and bitmap of an ED25519 Multi-signature instance to a Data object.
@@ -37,7 +37,7 @@ namespace Aptos::Accounts
         /// <summary>
         /// The signatures themselves.
         /// </summary>
-        std::vector<Signature> Signatures;
+        std::vector<Ed25519Signature> Signatures;
 
         /// <summary>
         /// The compact representation of which keys among a set of N possible keys have signed a given message.

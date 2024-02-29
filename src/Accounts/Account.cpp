@@ -53,12 +53,12 @@ namespace Aptos::Accounts
         return authkey.DerivedAddress();
     }
 
-    bool Account::Verify(const CryptoPP::SecByteBlock &message, Signature signature)
+    bool Account::Verify(const CryptoPP::SecByteBlock &message, Ed25519Signature signature)
     {
         return m_publicKey->Verify(message, signature);
     }
 
-    Signature Account::Sign(CryptoPP::SecByteBlock message)
+    Ed25519Signature Account::Sign(CryptoPP::SecByteBlock message)
     {
         return m_privateKey->Sign(message);
     }

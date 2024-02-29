@@ -7,7 +7,7 @@
 
 #include <string>
 #include <vector>
-#include "Signature.h"
+#include "Ed25519Signature.h"
 #include "PublicKey.h"
 #include "../BCS/Serialization.h"
 #include <stdexcept>
@@ -100,7 +100,7 @@ namespace Aptos::Accounts
         /// </summary>
         /// <param name="message">The message to sign, represented in bytes.</param>
         /// <returns>The signature generated for the message as an object</returns>
-        Signature Sign(CryptoPP::SecByteBlock message);
+        Ed25519Signature Sign(CryptoPP::SecByteBlock message);
 
         /// <summary>
         /// Serialize private key

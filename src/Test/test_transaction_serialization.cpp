@@ -946,7 +946,7 @@ TEST(EntryFunctionWithCorpusTest, EntryFunction_WithCorpus_Serialize)
         chainIdInput);
 
     // Sign the RawTransaction
-    Signature senderSignature = rawTransactionGenerated.Sign(senderPrivateKey);
+    Ed25519Signature senderSignature = rawTransactionGenerated.Sign(senderPrivateKey);
     bool verifySenderSignature = rawTransactionGenerated.Verify(senderPublicKey, senderSignature);
     ASSERT_TRUE(verifySenderSignature);
 
@@ -1026,8 +1026,8 @@ TEST(EntryFunction_MultiAgentWithCorpusTest, EntryFunction_MultiAgentWithCorpus_
     std::vector<uint8_t> keyedExpected = {94, 250, 60, 79, 2, 248, 58, 15, 75, 45, 105, 252, 149, 198, 7, 204, 2, 130, 92, 196, 231, 190, 83, 110, 240, 153, 45, 240, 80, 217, 230, 124, 0, 125, 238, 204, 177, 8, 8, 84, 244, 153, 236, 139, 76, 27, 33, 59, 130, 197, 227, 75, 146, 92, 246, 135, 95, 236, 2, 212, 183, 122, 219, 210, 214, 11, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 5, 116, 111, 107, 101, 110, 22, 100, 105, 114, 101, 99, 116, 95, 116, 114, 97, 110, 115, 102, 101, 114, 95, 115, 99, 114, 105, 112, 116, 0, 4, 32, 45, 19, 61, 221, 40, 27, 182, 32, 85, 88, 53, 124, 198, 172, 117, 102, 24, 23, 233, 170, 234, 195, 175, 235, 195, 40, 66, 117, 156, 191, 127, 169, 16, 15, 99, 111, 108, 108, 101, 99, 116, 105, 111, 110, 95, 110, 97, 109, 101, 11, 10, 116, 111, 107, 101, 110, 95, 110, 97, 109, 101, 8, 1, 0, 0, 0, 0, 0, 0, 0, 208, 7, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 210, 2, 150, 73, 0, 0, 0, 0, 4, 1, 45, 19, 61, 221, 40, 27, 182, 32, 85, 88, 53, 124, 198, 172, 117, 102, 24, 23, 233, 170, 234, 195, 175, 235, 195, 40, 66, 117, 156, 191, 127, 169};
 
     EXPECT_EQ(keyedExpected, keyedActual);
-    Signature senderSignature = rawTransactionGenerated.Sign(senderPrivateKey);
-    Signature receiverSignature = rawTransactionGenerated.Sign(receiverPrivateKey);
+    Ed25519Signature senderSignature = rawTransactionGenerated.Sign(senderPrivateKey);
+    Ed25519Signature receiverSignature = rawTransactionGenerated.Sign(receiverPrivateKey);
 
     bool verifySenderSignature = rawTransactionGenerated.Verify(senderPublicKey, senderSignature);
     EXPECT_TRUE(verifySenderSignature);

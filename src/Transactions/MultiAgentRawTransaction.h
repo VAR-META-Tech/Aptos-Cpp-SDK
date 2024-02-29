@@ -15,8 +15,8 @@ namespace Aptos::BCS
         RawTransaction Inner();
         std::vector<uint8_t> Prehash();
         std::vector<uint8_t> Keyed();
-        Accounts::Signature Sign(Accounts::PrivateKey key);
-        bool Verify(const Accounts::PublicKey &key, const Accounts::Signature &signature);
+        Accounts::Ed25519Signature Sign(Accounts::PrivateKey key);
+        bool Verify(const Accounts::PublicKey &key, const Accounts::Ed25519Signature &signature);
 
     private:
         RawTransaction rawTransaction;

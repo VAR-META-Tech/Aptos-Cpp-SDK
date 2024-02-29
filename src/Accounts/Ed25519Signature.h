@@ -14,11 +14,11 @@ namespace Aptos::Accounts
     /// <summary>
     /// Representation of a ED25519 signature
     /// </summary>
-    class Signature : public BCS::ISerializable
+    class Ed25519Signature : public BCS::ISerializable
     {
     public:
         /// <summary>
-        /// Signature length
+        /// Ed25519Signature length
         /// </summary>
         static const int SignatureLength = 64;
 
@@ -33,7 +33,7 @@ namespace Aptos::Accounts
         /// Initialize the signature.
         /// </summary>
         /// <param name="signature">The raw signature in byte array format.</param>
-        explicit Signature(const CryptoPP::SecByteBlock &signature);
+        explicit Ed25519Signature(const CryptoPP::SecByteBlock &signature);
 
         /// <summary>
         /// The signature data in 64-bytes.
@@ -47,13 +47,13 @@ namespace Aptos::Accounts
         /// <param name="serializer">Serializer object</param>
         void Serialize(BCS::Serialization &serializer) const override;
         static std::shared_ptr<BCS::ISerializable> Deserialize(BCS::Deserialization &deserializer);
-        bool operator==(const Signature &other) const;
+        bool operator==(const Ed25519Signature &other) const;
 
         /// <inheritdoc cref="ToString"/>
         std::string ToString() const override;
 
         /// <inheritdoc cref="Equals(object)"/>
-        bool Equals(const Signature &rhs) const;
+        bool Equals(const Ed25519Signature &rhs) const;
     };
 }
 #endif // APTOS_SIGNATURE_H

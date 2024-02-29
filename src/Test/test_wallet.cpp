@@ -3,7 +3,7 @@
 #include "../Accounts/Account.h"
 
 #include "../HDWallet/wallet.h"
-#include "../Accounts/Signature.h"
+#include "../Accounts/Ed25519Signature.h"
 #include "../HDWallet/Utils/Utils.h"
 
 using namespace Aptos;
@@ -42,15 +42,15 @@ TEST(WalletTest, CreateWallet) {
 }
 
 TEST(WalletTest, SignMessage) {
-    Signature signatureObject = Signature(Utils::ByteVectorToSecBlock(SignatureBytes));
+    Ed25519Signature signatureObject = Ed25519Signature(Utils::ByteVectorToSecBlock(SignatureBytes));
     Wallet wallet = Wallet(mnemo);
     Account acct = wallet.Account();
-    Signature signature = acct.Sign(Utils::ByteVectorToSecBlock(MessageUt8Bytes));
+    Ed25519Signature signature = acct.Sign(Utils::ByteVectorToSecBlock(MessageUt8Bytes));
     EXPECT_EQ(signatureObject, signature);
 }
 
 TEST(WalletTest, VerifySignature) {
-    Signature signatureObject = Signature(Utils::ByteVectorToSecBlock(SignatureBytes));
+    Ed25519Signature signatureObject = Ed25519Signature(Utils::ByteVectorToSecBlock(SignatureBytes));
     Wallet wallet = Wallet(mnemo);
     Account acct = wallet.Account();
     bool verify = acct.Verify(Utils::ByteVectorToSecBlock(MessageUt8Bytes), signatureObject);

@@ -207,8 +207,8 @@ void Multisig::Start()
 
     std::cout << "RAW TXN: " << rawTransaction.ToString() << std::endl;
 
-    Signature aliceSignature = alice.Sign(Aptos::Utils::ByteVectorToSecBlock(rawTransaction.Keyed()));
-    Signature bobSignature = bob.Sign(Aptos::Utils::ByteVectorToSecBlock(rawTransaction.Keyed()));
+    Ed25519Signature aliceSignature = alice.Sign(Aptos::Utils::ByteVectorToSecBlock(rawTransaction.Keyed()));
+    Ed25519Signature bobSignature = bob.Sign(Aptos::Utils::ByteVectorToSecBlock(rawTransaction.Keyed()));
 
     if (!rawTransaction.Verify(*alice.getPublicKey(), aliceSignature)) {
         std::cout << "Alice signature cannot be verified" << std::endl;
@@ -227,10 +227,10 @@ void Multisig::Start()
     std::cout << "Bob signature: " << bobSignature.ToString() << std::endl;
 
     // Section 5: Submit transfer transaction
-    std::pair<PublicKey, Signature> aliceTuple(*alicePublicKey, aliceSignature);
-    std::pair<PublicKey, Signature> bobTuple(*bobPublicKey, bobSignature);
+    std::pair<PublicKey, Ed25519Signature> aliceTuple(*alicePublicKey, aliceSignature);
+    std::pair<PublicKey, Ed25519Signature> bobTuple(*bobPublicKey, bobSignature);
 
-    std::vector<std::pair<PublicKey, Signature>> SignatureMap = {
+    std::vector<std::pair<PublicKey, Ed25519Signature>> SignatureMap = {
         aliceTuple,
         bobTuple
     };

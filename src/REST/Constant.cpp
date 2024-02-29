@@ -23,5 +23,5 @@ const std::string Constants::COIN_TRANSFER_FUNCTION = "0x1::aptos_account::trans
 const std::string Constants::APTOS_ASSET_TYPE = "0x1::aptos_coin::AptosCoin";
 const std::string Constants::APTOS_OBJECT_TYPE = "0x1::object";
 const std::string Constants::APTOS_TRANSFER_CALL = "transfer_call";
-const std::string Constants::APTOS_MINT_EVENT = "0x4::collection::ConcurrentMintEvent";
+const std::string Constants::APTOS_MINT_EVENT = "0x4::collection::Mint";
 

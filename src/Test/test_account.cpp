@@ -5,7 +5,7 @@
 #include "gtest/gtest.h"
 #include <string>
 #define private public
-#include "../Accounts/Signature.h"
+#include "../Accounts/Ed25519Signature.h"
 #include "../Accounts/PublicKey.h"
 #include "../Accounts/PrivateKey.h"
 #include "../Accounts/AccountAddress.h"
@@ -101,7 +101,7 @@ CryptoPP::SecByteBlock g_signatureBytes = Utils::ByteVectorToSecBlock({
     211, 152, 215, 248, 78, 130, 239, 5
 });
 
-Signature signatureObject(g_signatureBytes);
+Ed25519Signature signatureObject(g_signatureBytes);
 
 std::string g_signatureHex = "0xaa42bbc2a9fc751beeee3b312b8452c445c7d4ab8698036b0cf9f2e46a098bb02c369fbc8dfefd231a128d8a4bb9adcfe45e07188b758c3ad398d7f84e82ef05";
 
@@ -172,7 +172,7 @@ TEST(AccountTest, PrivateKeyFromHexSignSuccess)
     ASSERT_EQ(privateKey->Key(), g_privateKeyHex);
     ASSERT_EQ(privateKey->KeyBytes(), g_privateKeyBytes);
 
-    Signature signature = privateKey->Sign(g_messageUtf8Bytes);
+    Ed25519Signature signature = privateKey->Sign(g_messageUtf8Bytes);
     ASSERT_EQ(signature, signatureObject);
 }
 
@@ -182,7 +182,7 @@ TEST(AccountTest, PrivateKeyFromBytesSignSuccess)
     ASSERT_EQ(privateKey.Key(), g_privateKeyHex);
     ASSERT_EQ(privateKey.KeyBytes(), g_privateKeyBytes);
 
-    Signature signature = privateKey.Sign(g_messageUtf8Bytes);
+    Ed25519Signature signature = privateKey.Sign(g_messageUtf8Bytes);
     ASSERT_EQ(signature, signatureObject);
 }
 
@@ -231,15 +231,15 @@ TEST(AccountTest, PrivateKeySerialization)
 
 TEST(AccountTest, SignatureEquality)
 {
-    std::unique_ptr<Signature> sigOne = std::make_unique<Signature>(g_signatureBytes);
-    std::unique_ptr<Signature> sigTwo = std::make_unique<Signature>(g_signatureBytes);
+    std::unique_ptr<Ed25519Signature> sigOne = std::make_unique<Ed25519Signature>(g_signatureBytes);
+    std::unique_ptr<Ed25519Signature> sigTwo = std::make_unique<Ed25519Signature>(g_signatureBytes);
     ASSERT_TRUE(sigOne->Equals(*sigTwo));
 }
 
 TEST(AccountTest, SignatureSerialization)
 {
     Serialization serializer;
-    Signature sig(g_signatureBytes);
+    Ed25519Signature sig(g_signatureBytes);
     sig.Serialize(serializer);
     CryptoPP::SecByteBlock output = Utils::ByteVectorToSecBlock(serializer.GetBytes());
     ASSERT_EQ(output, g_signatureSerializedOutput);
@@ -248,12 +248,12 @@ TEST(AccountTest, SignatureSerialization)
 TEST(AccountTest, SignatureDeserialization)
 {
     Serialization serializer;
-    Signature sig(g_signatureBytes);
+    Ed25519Signature sig(g_signatureBytes);
     sig.Serialize(serializer);
     CryptoPP::SecByteBlock output = Utils::ByteVectorToSecBlock(serializer.GetBytes());
 
     Deserialization deser(Utils::SecBlockToByteVector(output));
-    auto actualSig = std::dynamic_pointer_cast<Signature>(Signature::Deserialize(deser));
+    auto actualSig = std::dynamic_pointer_cast<Ed25519Signature>(Ed25519Signature::Deserialize(deser));
     ASSERT_EQ(sig, *actualSig);
 }
 
@@ -308,13 +308,13 @@ TEST(AccountTests, AuthKeyGeneration) {
 
 TEST(AccountTests, AccountSignSuccess) {
     Account acc = Account(g_privateKeyBytes, g_publicKeyBytes);
-    Signature signature = acc.Sign(g_messageUtf8Bytes);
+    Ed25519Signature signature = acc.Sign(g_messageUtf8Bytes);
     ASSERT_EQ(signature, signatureObject);
 }
 
 TEST(AccountTests, AccountSignVerify) {
     Account acc = Account(g_privateKeyBytes, g_publicKeyBytes);
-    Signature signature = acc.Sign(g_messageUtf8Bytes);
+    Ed25519Signature signature = acc.Sign(g_messageUtf8Bytes);
     ASSERT_EQ(signature, signatureObject);
     bool verify = acc.Verify(g_messageUtf8Bytes, signature);
     ASSERT_TRUE(verify);
@@ -361,10 +361,10 @@ TEST(AccountTests, TestMultisig) {
     ASSERT_EQ(publicKeyBcs, publicKeyBCs);
 
     // Have one signer sign arbitrary message.
-    Signature signature = privateKey2.Sign(Utils::StringToSecByteBlock("multisig"));
+    Ed25519Signature signature = privateKey2.Sign(Utils::StringToSecByteBlock("multisig"));
 
     // Compose multisig signature.
-    std::vector<std::pair<PublicKey, Signature>> signMap = {
+    std::vector<std::pair<PublicKey, Ed25519Signature>> signMap = {
         std::make_pair(privateKey2.GetPublicKey(), signature)
     };
     MultiSignature multiSignature = MultiSignature(multisigPublicKey, signMap);

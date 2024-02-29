@@ -20,8 +20,8 @@ namespace Aptos::BCS
                        int gasUnitPrice, uint64_t expirationTimestampsSecs, int chainId);
         std::vector<uint8_t> Prehash();
         std::vector<uint8_t> Keyed();
-        Accounts::Signature Sign(Accounts::PrivateKey key);
-        bool Verify(Accounts::PublicKey key, const Accounts::Signature &signature);
+        Accounts::Ed25519Signature Sign(Accounts::PrivateKey key);
+        bool Verify(Accounts::PublicKey key, const Accounts::Ed25519Signature &signature);
         void Serialize(Serialization &serializer) const override;
         static std::shared_ptr<RawTransaction> Deserialize(Deserialization &deserializer);
         std::string ToString() const override;

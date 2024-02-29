@@ -56,14 +56,14 @@ namespace Aptos::Accounts
         /// <param name="message">The signed message.</param>
         /// <param name="signature">The signature of the message.</param>
         /// <returns>True is the signature is valid, False otherwise</returns>
-        bool Verify(const CryptoPP::SecByteBlock &message, Signature signature);
+        bool Verify(const CryptoPP::SecByteBlock &message, Ed25519Signature signature);
 
         /// <summary>
         /// Sign a given byte array (data) with the current account's private key
         /// </summary>
         /// <param name="message"></param> The signature of the data.
         /// <returns>The signature as an object</returns>
-        Signature Sign(CryptoPP::SecByteBlock message);
+        Ed25519Signature Sign(CryptoPP::SecByteBlock message);
 
         /// <summary>
         /// Private key representation.

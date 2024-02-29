@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
-#include "Signature.h"
+#include "Ed25519Signature.h"
 
 namespace Aptos::Accounts
 {
@@ -61,7 +61,7 @@ namespace Aptos::Accounts
         /// <param name="message">Message that was signed.</param>
         /// <param name="signature">The signature from the message.</param>
         /// <returns></returns>
-        bool Verify(const CryptoPP::SecByteBlock &message, const Signature &signature) const;
+        bool Verify(const CryptoPP::SecByteBlock &message, const Ed25519Signature &signature) const;
 
         /// <summary>
         /// Check if PubliKey is a valid on the Ed25519 curve.

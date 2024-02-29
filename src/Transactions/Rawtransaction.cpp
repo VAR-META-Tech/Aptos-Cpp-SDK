@@ -42,12 +42,12 @@ namespace Aptos::BCS
         return res;
     }
 
-    Signature RawTransaction::Sign(PrivateKey key)
+    Ed25519Signature RawTransaction::Sign(PrivateKey key)
     {
         return key.Sign(Utils::ByteVectorToSecBlock(this->Keyed()));
     }
 
-    bool RawTransaction::Verify(PublicKey key, const Signature &signature)
+    bool RawTransaction::Verify(PublicKey key, const Ed25519Signature &signature)
     {
         return key.Verify(Utils::ByteVectorToSecBlock(Keyed()), signature);
     }

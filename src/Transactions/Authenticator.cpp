@@ -4,7 +4,7 @@
 using namespace Aptos::Accounts;
 namespace Aptos::BCS
 {
-    Authenticator::Authenticator(const std::shared_ptr<IAuthenticator> &authenticator): m_authenticator(authenticator)
+    Authenticator::Authenticator(const std::shared_ptr<IAuthenticator> &authenticator): m_authenticator(std::move(authenticator))
     {
         if (std::dynamic_pointer_cast<Ed25519Authenticator>(authenticator))
         {
@@ -67,7 +67,7 @@ namespace Aptos::BCS
             throw std::runtime_error("Invalid type: " + std::to_string(variant));
         }
 
-        return std::make_shared<Authenticator>(authenticator);
+        return std::make_shared<Authenticator>(std::move(authenticator));
     }
 
     bool Authenticator::Equals(const Authenticator &other) const
@@ -109,7 +109,7 @@ namespace Aptos::BCS
         return m_authenticator->ToString();
     }
 
-    Ed25519Authenticator::Ed25519Authenticator(PublicKey publicKey, Signature signature)
+    Ed25519Authenticator::Ed25519Authenticator(PublicKey publicKey, Ed25519Signature signature)
         : m_publicKey(publicKey), m_signature(signature) {}
 
     bool Ed25519Authenticator::Verify(const CryptoPP::SecByteBlock &data)
@@ -126,7 +126,7 @@ namespace Aptos::BCS
     std::shared_ptr<ISerializable> Ed25519Authenticator::Deserialize(Deserialization &deserializer)
     {
         auto key = std::dynamic_pointer_cast<PublicKey>(PublicKey::Deserialize(deserializer));
-        auto signature = std::dynamic_pointer_cast<Signature>(Signature::Deserialize(deserializer));
+        auto signature = std::dynamic_pointer_cast<Ed25519Signature>(Ed25519Signature::Deserialize(deserializer));
         return std::make_shared<Ed25519Authenticator>(*key, *signature);
     }
 
@@ -143,7 +143,7 @@ namespace Aptos::BCS
 
     std::string Ed25519Authenticator::ToString() const
     {
-        return "PublicKey: " + m_publicKey.ToString() + ", Signature: " + m_signature.ToString();
+        return "PublicKey: " + m_publicKey.ToString() + ", Ed25519Signature: " + m_signature.ToString();
     }
 
     MultiAgentAuthenticator::MultiAgentAuthenticator(Authenticator sender, const std::vector<std::tuple<std::shared_ptr<AccountAddress>, std::shared_ptr<Authenticator>>> &secondarySigners)

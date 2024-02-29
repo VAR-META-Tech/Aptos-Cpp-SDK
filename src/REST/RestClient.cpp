@@ -350,9 +350,9 @@ void RestClient::SimulateTransaction(std::function<void(std::string, AptosRESTMo
                                      RawTransaction transaction, std::vector<uint8_t> publicKey)
 {
     using namespace AptosRESTModel;
-    CryptoPP::SecByteBlock byteBlock(Signature::SignatureLength);
+    CryptoPP::SecByteBlock byteBlock(Ed25519Signature::SignatureLength);
     std::memset(byteBlock.BytePtr(), 0, byteBlock.SizeInBytes());
-    Signature emptySignature(byteBlock);
+    Ed25519Signature emptySignature(byteBlock);
     Authenticator authenticator{std::make_shared<Ed25519Authenticator>(PublicKey(Aptos::Utils::ByteVectorToSecBlock(publicKey)), emptySignature)};
     SignedTransaction signedTransaction(transaction, authenticator);
 
@@ -464,7 +464,7 @@ void RestClient::SubmitTransaction(std::function<void(std::shared_ptr<AptosRESTM
                      txnRequestJson.dump());
     std::vector<uint8_t> toSign = Aptos::Utils::ByteArrayFromHexString(Aptos::Utils::trim(encodedSubmission, "\"").substr(2));
 
-    Signature signature = sender.Sign(Aptos::Utils::ByteVectorToSecBlock(toSign));
+    Ed25519Signature signature = sender.Sign(Aptos::Utils::ByteVectorToSecBlock(toSign));
 
     SignatureData sigData;
     sigData.setType(Constants::ED25519_SIGNATURE);
@@ -599,7 +599,7 @@ void RestClient::CreateBCSSignedTransaction(std::function<void(std::shared_ptr<S
                          { rawTransaction = _rawTransaction; },
                          Sender, Payload);
 
-    Signature signature = Sender.Sign(Aptos::Utils::ByteVectorToSecBlock(rawTransaction->Keyed()));
+    Ed25519Signature signature = Sender.Sign(Aptos::Utils::ByteVectorToSecBlock(rawTransaction->Keyed()));
     Authenticator authenticator(std::make_shared<Ed25519Authenticator>(*Sender.getPublicKey(), signature));
 
     Callback(std::make_shared<SignedTransaction>(*rawTransaction, authenticator));
