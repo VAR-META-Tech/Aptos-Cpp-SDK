@@ -1,3 +1,3 @@
-[submodule "ThirdRarty/bip3x"]
-	path = ThirdRarty/bip3x
+[submodule "ThirdParty/bip3x"]
+	path = ThirdParty/bip3x
 	url = https://github.com/edwardstock/bip3x.git
