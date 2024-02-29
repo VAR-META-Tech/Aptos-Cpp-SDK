@@ -9,7 +9,7 @@
 #include <cryptopp/xed25519.h>
 #include "../BCS/Serialization.h"
 #include "../BCS/Deserialization.h"
-#include "multipublickey.h"
+#include "Multipublickey.h"
 
 namespace Aptos::Accounts
 {
