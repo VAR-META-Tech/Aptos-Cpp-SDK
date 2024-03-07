@@ -3,7 +3,7 @@
 </p>
 
 
-# Aptos-Unity-SDK #
+# Aptos-Cpp-SDK #
 
 Aptos-Cpp-SDK is a cpp package written in C++ to help developers integrate Aptos blockchain technology into their cpp and Unreal projects.
 
