@@ -359,8 +359,8 @@ add_executable(AptosSDKDemo
     AptosSDKDemo/TransferCoin/TransferCoinExample.cpp
     AptosSDKDemo/SimulateTransferCoin/SimulateTransferCoin.h
     AptosSDKDemo/SimulateTransferCoin/SimulateTransferCoin.cpp
-    AptosSDKDemo/SimpleNftExample.h
-    AptosSDKDemo/SimpleNftExample.cpp
+    AptosSDKDemo/SimpleNftExample/SimpleNftExample.h
+    AptosSDKDemo/SimpleNftExample/SimpleNftExample.cpp
     AptosSDKDemo/Multisig/Multisig.h
     AptosSDKDemo/Multisig/Multisig.cpp
 )
