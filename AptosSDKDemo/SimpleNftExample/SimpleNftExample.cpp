@@ -11,7 +11,7 @@ namespace AptosSDKDemo {
 
 SimpleNftExample::SimpleNftExample() {
     std::cout << "=== =========================== ===" << std::endl;
-    std::cout << "=== SimulateTransferCoin ===" << std::endl;
+    std::cout << "=== SimpleNftExample ===" << std::endl;
     std::cout << "=== =========================== ===" << std::endl;
 }
 
