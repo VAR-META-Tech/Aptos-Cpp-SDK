@@ -22,7 +22,7 @@ namespace AptosSDKDemo {
 
 Multisig::Multisig() {
     std::cout << "=== =========================== ===" << std::endl;
-    std::cout << "=== SimulateTransferCoin ===" << std::endl;
+    std::cout << "=== Multisig Example            ===" << std::endl;
     std::cout << "=== =========================== ===" << std::endl;
 }
 

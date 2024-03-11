@@ -17,7 +17,7 @@ namespace AptosSDKDemo {
 
 SimulateTransferCoin::SimulateTransferCoin() {
     std::cout << "=== =========================== ===" << std::endl;
-    std::cout << "=== SimulateTransferCoin ===" << std::endl;
+    std::cout << "=== SimulateTransferCoin        ===" << std::endl;
     std::cout << "=== =========================== ===" << std::endl;
 
 }
