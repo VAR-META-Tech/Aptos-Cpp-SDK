@@ -22,6 +22,12 @@ SimulateTransferCoin::SimulateTransferCoin() {
 
 }
 
+// This code demonstrates the use of transaction simulation on the Aptos blockchain. It highlights:
+//
+// * **Setup:** Creates accounts for Alice and Bob, funds Alice through the Devnet faucet.
+// * **Transaction Creation:** Generates a BCS transaction to transfer coins from Alice to Bob.
+// * **Simulation (Before Bob's Account Exists):** Simulates the transaction, demonstrating its expected failure due to Bob's account not yet existing.
+// * **Simulation (After Bob's Account Exists):**  Funds Bob's account and then re-simulates the transaction, showing its expected success. 
 void SimulateTransferCoin::Start()
 {
     // REST & Faucet Client Setup

@@ -2,7 +2,7 @@
 #include "AptosToken/AptosToken.h"
 #include "TransferCoin/TransferCoinExample.h"
 #include "SimulateTransferCoin/SimulateTransferCoin.h"
-#include "SimpleNftExample.h"
+#include "SimpleNftExample/SimpleNftExample.h"
 #include "Multisig/Multisig.h"
 
 int main() {

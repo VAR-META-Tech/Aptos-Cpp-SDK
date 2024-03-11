@@ -16,6 +16,12 @@ TransferCoinExample::TransferCoinExample() {
     std::cout << "=== =========================== ===" << std::endl;
 }
 
+// This code demonstrates basic coin transfers on the Aptos blockchain using the Devnet:
+//
+// * **Setup:**  Creates mnemonic-based wallets for Alice & Bob, funds them using the Devnet faucet.
+// * **Balances:** Demonstrates how to fetch account balances.
+// * **Transfer (REST):**  Executes a coin transfer from Alice to Bob using the REST API.
+// * **Transfer (BCS):**  Performs another transfer from Alice to Bob using a BCS transaction. 
 void TransferCoinExample::Start()
 {
     std::string mnemo = "stadium valid laundry unknown tuition train december camera fiber vault sniff ripple";

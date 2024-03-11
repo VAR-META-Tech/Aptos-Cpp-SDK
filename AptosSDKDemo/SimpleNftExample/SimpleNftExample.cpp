@@ -15,6 +15,13 @@ SimpleNftExample::SimpleNftExample() {
     std::cout << "=== =========================== ===" << std::endl;
 }
 
+// This code demonstrates basic NFT (Non-Fungible Token) operations on the Aptos blockchain using the Devnet:
+//
+// * **Setup:**  Creates accounts for Alice and Bob, funds them using the Devnet faucet.
+// * **Collection Creation:**  Alice creates an NFT collection.
+// * **Token Minting:**  Alice mints a new NFT within her collection.
+// * **Token Transfer:**  Alice offers the NFT to Bob, and Bob claims it.
+// * **Lookup:** Demonstrates looking up token balances and metadata. 
 void SimpleNftExample::Start()
 {
     Account alice;

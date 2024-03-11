@@ -26,6 +26,16 @@ Multisig::Multisig() {
     std::cout << "=== =========================== ===" << std::endl;
 }
 
+// This code demonstrates multisig (multi-signature) operations on the Aptos blockchain using the Devnet:
+//
+// * **Account Setup:** Generates accounts for Alice, Bob, Chad, a multisig account, and a vanity address ("Deedee").
+// * **Multisig Creation:** Sets up a 2-out-of-3 multisig account, meaning 2 of the 3 associated signatures are required for transactions.
+// * **Funding:** Funds accounts through the Devnet faucet.
+// * **Transfer Initiation:** Initiates a coin transfer from the multisig account to Chad's account.
+// * **Signing:** Collects individual signatures from Alice and Bob for the transfer.
+// * **Submission:** Submits the signed multisig transaction to the blockchain.
+// * **Vanity Funding:** Funds the "Deedee" vanity address.
+// * **Key Rotation:** Demonstrates rotating the authentication key of the "Deedee" account to the multisig public key. 
 void Multisig::Start()
 {
     std::cout << "=== =========================== ===" << std::endl;

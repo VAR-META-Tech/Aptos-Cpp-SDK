@@ -21,6 +21,14 @@ AptosToken::AptosToken() {
     std::cout << "=== =========================== ===" << std::endl;
 }
 
+// This code demonstrates basic Aptos blockchain token operations using the Devnet:
+//
+// * Sets up Faucet and REST clients for interacting with the Aptos blockchain.
+// * Creates accounts for Alice and Bob, funding them through the Devnet faucet.
+// * Creates a collection for Alice.
+// * Mints a token within Alice's collection.
+// * Adds, removes, and updates properties on the minted token.
+// * Transfers the token from Alice to Bob.
 void AptosToken::Start()
 {
     std::cout << "=== =========================== ===" << std::endl;
