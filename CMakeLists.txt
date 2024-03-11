@@ -89,6 +89,7 @@ include_directories(${nlohmann_json_INCLUDE_DIRS})
 include_directories(${OpenSSL_INCLUDE_DIRS})
 
 add_library(Aptos SHARED
+	Src/BCS/BCS.h
         Src/BCS/Deserialization.cpp
         Src/BCS/Deserialization.h
         Src/BCS/Serialization.cpp
