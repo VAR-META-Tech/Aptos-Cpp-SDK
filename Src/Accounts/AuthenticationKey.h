@@ -28,20 +28,24 @@ namespace Aptos::Accounts
         static const int LENGTH = 32;
 
         /// <summary>
-        /// Byte that represents multi-ed25519 scheme.
+        /// Represents various Ed25519 and resource account derivation schemes used in the Aptos blockchain.
         /// </summary>
-        static const CryptoPP::byte MULTI_ED25519_SCHEME = 0x01;
+        enum Scheme : CryptoPP::byte { 
+            /// <summary>
+            /// Denotes the multi-Ed25519 authentication scheme.
+            /// </summary>
+            MULTI_ED25519 = 0x01,
 
-        /// <summary>
-        /// Byte that represents single key ed25519 scheme.
-        /// </summary>
-        static const CryptoPP::byte ED25519_SCHEME = 0x00;
+            /// <summary>
+            /// Denotes the single-key Ed25519 authentication scheme.
+            /// </summary>
+            ED25519 = 0x00,
 
-        /// <summary>
-        /// Byte that represents derive resource account scheme.
-        /// </summary>
-        static const CryptoPP::byte DERIVE_RESOURCE_ACCOUNT_SCHEME = 255;
-
+            /// <summary>
+            /// Denotes the scheme used for deriving resource accounts.
+            /// </summary>
+            DERIVE_RESOURCE_ACCOUNT = 255
+        };
         /// <summary>
         /// Initialize the Authentication Key.
         /// </summary>
