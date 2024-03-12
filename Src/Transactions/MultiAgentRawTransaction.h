@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include "rawtransaction.h"
-#include "BCS/Sequence.h"
+#include "BCS/BCS.h"
 namespace Aptos::BCS
 {
     class MultiAgentRawTransaction

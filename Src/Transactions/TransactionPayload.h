@@ -1,6 +1,6 @@
 #ifndef TRANSACTIONPAYLOAD_H
 #define TRANSACTIONPAYLOAD_H
-#include "BCS/BCSTypes.h"
+#include "BCS/BCS.h"
 
 namespace Aptos::BCS
 {

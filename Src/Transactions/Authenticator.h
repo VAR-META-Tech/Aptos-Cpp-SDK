@@ -1,11 +1,9 @@
 #ifndef AUTHENTICATOR_H
 #define AUTHENTICATOR_H
 
-#include "BCS/BCSTypes.h"
-#include "BCS/Serialization.h"
+#include "BCS/BCS.h"
 #include "../Accounts/Ed25519Signature.h"
 #include "../Accounts/PublicKey.h"
-#include "BCS/Sequence.h"
 #include "../Accounts/AccountAddress.h"
 #include "../Accounts/multisignature.h"
 

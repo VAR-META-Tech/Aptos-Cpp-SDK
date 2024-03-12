@@ -2,7 +2,7 @@
 #define SIGNEDTRANSACTION_H
 
 #include <iostream>
-#include "BCS/BCSTypes.h"
+#include "BCS/BCS.h"
 #include "rawtransaction.h"
 #include "Authenticator.h"
 
