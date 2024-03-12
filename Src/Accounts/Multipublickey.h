@@ -4,7 +4,7 @@
 #include <vector>
 #include <stdexcept>
 #include "PublicKey.h"
-#include "../BCS/BCSTypes.h"
+#include "../BCS/BCS.h"
 
 namespace Aptos::Accounts
 {

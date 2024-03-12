@@ -7,8 +7,8 @@
 
 #include <vector>
 #include <string>
-#include "../BCS/Serialization.h"
-#include "../BCS/Deserialization.h"
+#include "../BCS/BCS.h"
+
 namespace Aptos::Accounts
 {
     /// <summary>

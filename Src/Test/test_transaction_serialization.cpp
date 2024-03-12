@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-#include "../BCS/Serialization.h"
 #include "../Accounts/AccountAddress.h"
 #include <string>
 
@@ -12,13 +11,8 @@
 #include <cryptopp/modes.h>
 #include "../BCS/ModuleId.h"
 #include "../BCS/EntryFunction.h"
-#include "../BCS/TagSequence.h"
-#include "../BCS/U64.h"
-#include "../BCS/Bool.h"
-#include "../BCS/Sequence.h"
 #include "../BCS/StructTag.h"
-#include "../BCS/Script.h"
-#include "../BCS/ScriptArgument.h"
+#include "../BCS/BCS.h"
 #include "../Transactions/TransactionPayload.h"
 #include "../Transactions/rawtransaction.h"
 #include "../Transactions/Authenticator.h"
@@ -26,12 +20,6 @@
 #include "../Transactions/MultiAgentRawTransaction.h"
 #include "../HDWallet/Utils/Utils.h"
 #include <fstream>
-#include "../BCS/U8.h"
-#include "../BCS/U16.h"
-#include "../BCS/U32.h"
-#include "../BCS/U128.h"
-#include "../BCS/U256.h"
-#include "../BCS/Bool.h"
 
 using CryptoPP::byte;
 using namespace Aptos;
@@ -575,7 +563,7 @@ TEST(EntryFunctionSerializeTest, EntryFunction_PayloadForTransferCoin_Serialize)
     std::vector<uint8_t> expected = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 99, 111, 105, 110, 8, 116, 114, 97, 110, 115, 102, 101, 114, 1, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 10, 97, 112, 116, 111, 115, 95, 99, 111, 105, 110, 9, 65, 112, 116, 111, 115, 67, 111, 105, 110, 0, 2, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 8, 232, 3, 0, 0, 0, 0, 0, 0};
 
     ASSERT_EQ(expected, actual);
-    ASSERT_NE(payload.GetHashCode(),0);
+    ASSERT_NE(payload.GetHashCode(), 0);
 }
 
 TEST(ScriptSerializeTest, ScriptSerialize)
@@ -1303,7 +1291,7 @@ TEST(ScriptArgumentTest, ToString)
     AccountAddress senderAccountAddress = AccountAddress::FromKey(senderPublicKey);
     auto scriptArg = std::make_shared<ScriptArgument>(ScriptArgumentTypeTag::ACCOUNT_ADDRESS, std::make_shared<AccountAddress>(senderAccountAddress));
 
-    ASSERT_EQ(scriptArg->ToString(),"[3] 0x7deeccb1080854f499ec8b4c1b213b82c5e34b925cf6875fec02d4b77adbd2d6");
+    ASSERT_EQ(scriptArg->ToString(), "[3] 0x7deeccb1080854f499ec8b4c1b213b82c5e34b925cf6875fec02d4b77adbd2d6");
 }
 
 TEST(ScriptArgumentTest, getHashCode)
@@ -1315,5 +1303,5 @@ TEST(ScriptArgumentTest, getHashCode)
     auto scriptArg = std::make_shared<ScriptArgument>(ScriptArgumentTypeTag::ACCOUNT_ADDRESS, std::make_shared<AccountAddress>(senderAccountAddress));
     auto scriptArg2 = std::make_shared<ScriptArgument>(ScriptArgumentTypeTag::BOOL, std::make_shared<Bool>(true));
 
-    ASSERT_NE(scriptArg->GetHashCode(),scriptArg2->GetHashCode());
+    ASSERT_NE(scriptArg->GetHashCode(), scriptArg2->GetHashCode());
 }

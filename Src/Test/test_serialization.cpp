@@ -1,29 +1,16 @@
 // test_serialization.cpp
 
 #include <gtest/gtest.h>
-#include "../BCS/Serialization.h"
-#include "../BCS/Deserialization.h"
-#include "../BCS/BCSTypes.h"
-#include "../BCS/BCSMap.h"
-#include "../BCS/U32.h"
-#include "../BCS/BString.h"
-#include "../BCS//Sequence.h"
-#include "../BCS/Bool.h"
+#include "../BCS/BCS.h"
 #include <cryptopp/integer.h>
 #include "../BCS/StructTag.h"
-#include "../BCS/Bytes.h"
-#include "../BCS/BCSMap.h"
-#include "../BCS/U8.h"
-#include "../BCS/U16.h"
-#include "../BCS/U64.h"
-#include "../BCS/U128.h"
-#include "../BCS/U256.h"
 #include "../HDWallet/Utils/Utils.h"
 
 using namespace Aptos::BCS;
 using namespace Aptos::Accounts;
 
-TEST(SerializationTest, BoolSerialize) {
+TEST(SerializationTest, BoolSerialize)
+{
     Serialization s;
     s.SerializeBool(true);
     std::vector<uint8_t> res = s.GetBytes();
@@ -32,7 +19,8 @@ TEST(SerializationTest, BoolSerialize) {
     ASSERT_EQ(expected, res);
 }
 
-TEST(SerializationTest, BoolTrueDeserialize) {
+TEST(SerializationTest, BoolTrueDeserialize)
+{
     bool actual = true;
     Serialization s;
     s.SerializeBool(actual);
@@ -44,7 +32,8 @@ TEST(SerializationTest, BoolTrueDeserialize) {
     ASSERT_EQ(expected, actual);
 }
 
-TEST(SerializationTest, BoolFalseSerialize) {
+TEST(SerializationTest, BoolFalseSerialize)
+{
     Serialization s;
     s.SerializeBool(false);
     std::vector<uint8_t> res = s.GetBytes();
@@ -53,7 +42,8 @@ TEST(SerializationTest, BoolFalseSerialize) {
     ASSERT_EQ(expected, res);
 }
 
-TEST(SerializationTest, BoolFalseDeserialize) {
+TEST(SerializationTest, BoolFalseDeserialize)
+{
     bool expected = false;
     Serialization s;
     s.SerializeBool(expected);
@@ -65,7 +55,8 @@ TEST(SerializationTest, BoolFalseDeserialize) {
     ASSERT_EQ(expected, actual);
 }
 
-TEST(SerializationTest, ByteArraySerialize) {
+TEST(SerializationTest, ByteArraySerialize)
+{
 
     std::string value = "1234567890";
 
@@ -78,10 +69,10 @@ TEST(SerializationTest, ByteArraySerialize) {
 
     std::vector<uint8_t> expected = {10, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
     ASSERT_EQ(expected, actual);
-
 }
 
-TEST(SerializationTest, ByteArrayDeserialize) {
+TEST(SerializationTest, ByteArrayDeserialize)
+{
     std::string value = "1234567890";
 
     std::vector<uint8_t> bytes(value.begin(), value.end());
@@ -97,7 +88,8 @@ TEST(SerializationTest, ByteArrayDeserialize) {
     ASSERT_EQ(std::vector<uint8_t>(value.begin(), value.end()), actual);
 }
 
-TEST(SerializationTest, U8Serialize) {
+TEST(SerializationTest, U8Serialize)
+{
 
     Serialization s;
     s.SerializeU8(123);
@@ -106,10 +98,10 @@ TEST(SerializationTest, U8Serialize) {
     auto actual = s.GetBytes();
 
     ASSERT_EQ(expected, actual);
-
 }
 
-TEST(SerializationTest, U8Deserialize) {
+TEST(SerializationTest, U8Deserialize)
+{
 
     uint8_t expected = 123;
 
@@ -122,10 +114,10 @@ TEST(SerializationTest, U8Deserialize) {
     uint8_t actual = d.DeserializeU8();
 
     ASSERT_EQ(expected, actual);
-
 }
 
-TEST(SerializationTest, U32Serialize) {
+TEST(SerializationTest, U32Serialize)
+{
 
     uint32_t input = 57615782;
 
@@ -136,10 +128,10 @@ TEST(SerializationTest, U32Serialize) {
     auto actual = s.GetBytes();
 
     ASSERT_EQ(expected, actual);
-
 }
 
-TEST(SerializationTest, U32Deserialize) {
+TEST(SerializationTest, U32Deserialize)
+{
 
     uint32_t expected = 57615782;
 
@@ -152,11 +144,10 @@ TEST(SerializationTest, U32Deserialize) {
     uint32_t actual = d.DeserializeU32();
 
     ASSERT_EQ(expected, actual);
-
 }
 
-
-TEST(SerializationTest, U64Serialize) {
+TEST(SerializationTest, U64Serialize)
+{
 
     uint64_t input = 9432012321182;
 
@@ -167,10 +158,10 @@ TEST(SerializationTest, U64Serialize) {
     auto actual = s.GetBytes();
 
     ASSERT_EQ(expected, actual);
-
 }
 
-TEST(SerializationTest, U64Deserialize) {
+TEST(SerializationTest, U64Deserialize)
+{
 
     uint64_t expected = 9432012321182;
 
@@ -183,10 +174,10 @@ TEST(SerializationTest, U64Deserialize) {
     uint64_t actual = d.DeserializeU64();
 
     ASSERT_EQ(expected, actual);
-
 }
 
-TEST(SerializationTest, U128Serialize) {
+TEST(SerializationTest, U128Serialize)
+{
 
     CryptoPP::Integer input1 = 10;
 
@@ -198,7 +189,6 @@ TEST(SerializationTest, U128Serialize) {
 
     ASSERT_EQ(expected1, s1.GetBytes());
 
-
     CryptoPP::Integer input2 = CryptoPP::Integer("749382032131231323910498053");
 
     Serialization s2;
@@ -208,10 +198,10 @@ TEST(SerializationTest, U128Serialize) {
                                       209, 223, 107, 2, 0, 0, 0, 0};
 
     ASSERT_EQ(expected2, s2.GetBytes());
-
 }
 
-TEST(SerializationTest, U128Deserialize) {
+TEST(SerializationTest, U128Deserialize)
+{
     CryptoPP::Integer expected = 10;
     std::vector<uint8_t> bytes = Serialization().SerializeU128(expected).GetBytes();
     CryptoPP::Integer actual = Deserialization(bytes).DeserializeU128();
@@ -223,74 +213,81 @@ TEST(SerializationTest, U128Deserialize) {
     ASSERT_EQ(expected, actual);
 }
 
-TEST(SerializationTest, U32AsUleb128Serialize) {
+TEST(SerializationTest, U32AsUleb128Serialize)
+{
     std::vector<uint8_t> res = Serialization().SerializeU32AsUleb128(1160).GetBytes();
     std::vector<uint8_t> expected = {136, 9};
     ASSERT_EQ(expected, res);
 }
 
-TEST(SerializationTest, U32AsUleb128Deserialize) {
+TEST(SerializationTest, U32AsUleb128Deserialize)
+{
     uint32_t expected = 1160;
     std::vector<uint8_t> bytes = Serialization().SerializeU32AsUleb128(expected).GetBytes();
     uint32_t actual = Deserialization(bytes).DeserializeUleb128();
     ASSERT_EQ(expected, actual);
 }
 
-TEST(SerializationTest, StringSerialize) {
+TEST(SerializationTest, StringSerialize)
+{
     std::vector<uint8_t> res = Serialization().SerializeString("potato UTF8: 🥔").GetBytes();
-    std::vector<uint8_t> exp = { 17, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165, 148 };
+    std::vector<uint8_t> exp = {17, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165, 148};
     ASSERT_EQ(exp, res);
 }
 
-TEST(SerializationTest, StringDeserialize) {
+TEST(SerializationTest, StringDeserialize)
+{
     std::string expected = "potato UTF8: 🥔";
     std::vector<uint8_t> bytes = Serialization().SerializeString(expected).GetBytes();
     std::string actual = Deserialization(bytes).DeserializeString();
     ASSERT_EQ(expected, actual);
 }
 
-TEST(SerializationTest, StringLongSerialize) {
+TEST(SerializationTest, StringLongSerialize)
+{
     std::string longString = "potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔";
     std::vector<uint8_t> res = Serialization().SerializeString(longString).GetBytes();
 
-    std::vector<uint8_t> exp = { 231, 2, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
-                                 56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
-                                 116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
-                                 148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
-                                 56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
-                                 116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
-                                 148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
-                                 56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
-                                 116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
-                                 148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
-                                 56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
-                                 116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
-                                 148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
-                                 56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
-                                 116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
-                                 148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
-                                 56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
-                                 116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
-                                 148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
-                                 56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
-                                 116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
-                                 148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
-                                 56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
-                                 116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
-                                 148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
-                                 56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
-                                 116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
-                                 148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
-                                 56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
-                                 116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
-                                 148 };
+    std::vector<uint8_t> exp = {231, 2, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
+                                56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
+                                116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
+                                148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
+                                56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
+                                116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
+                                148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
+                                56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
+                                116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
+                                148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
+                                56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
+                                116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
+                                148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
+                                56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
+                                116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
+                                148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
+                                56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
+                                116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
+                                148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
+                                56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
+                                116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
+                                148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
+                                56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
+                                116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
+                                148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
+                                56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
+                                116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
+                                148, 32, 112, 111, 116, 97, 116, 111, 32, 85, 84, 70,
+                                56, 58, 32, 240, 159, 165, 148, 32, 112, 111, 116, 97,
+                                116, 111, 32, 85, 84, 70, 56, 58, 32, 240, 159, 165,
+                                148};
 
-    for (int i =0; i < exp.size(); i++){
+    for (int i = 0; i < exp.size(); i++)
+    {
         ASSERT_EQ(exp[i], res[i]);
     }
 }
 
-TEST(SerializationTest, StringLongDeserialize) {
+TEST(SerializationTest, StringLongDeserialize)
+{
     std::string expected = "potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔 potato UTF8: 🥔";
     std::vector<uint8_t> bytes = Serialization().SerializeString(expected).GetBytes();
     std::string actual = Deserialization(bytes).DeserializeString();
@@ -300,7 +297,8 @@ TEST(SerializationTest, StringLongDeserialize) {
 
 using MapType = std::map<BString, std::shared_ptr<ISerializable>>;
 
-TEST(SerializationTest, MapBStringU32Test) {
+TEST(SerializationTest, MapBStringU32Test)
+{
     MapType map;
     map[BString("a")] = std::make_shared<U32>(12345);
     map[BString("b")] = std::make_shared<U32>(99234);
@@ -316,7 +314,8 @@ TEST(SerializationTest, MapBStringU32Test) {
     EXPECT_EQ(expected, serialized);
 }
 
-TEST(SerializationTest, Map_BString_U32_Deserialize) {
+TEST(SerializationTest, Map_BString_U32_Deserialize)
+{
     MapType expectedMap;
     expectedMap[BString("x")] = std::make_shared<U32>(12345);
     expectedMap[BString("b")] = std::make_shared<U32>(99234);
@@ -329,13 +328,15 @@ TEST(SerializationTest, Map_BString_U32_Deserialize) {
     std::vector<uint8_t> bytes = ser.GetBytes();
     Deserialization deser(bytes);
     BCSMap actualBcsMap = deser.DeserializeMap(
-        [](Deserialization& d) -> std::shared_ptr<ISerializable> { return U32::Deserialize(d); });
+        [](Deserialization &d) -> std::shared_ptr<ISerializable>
+        { return U32::Deserialize(d); });
 
     auto values = actualBcsMap.getValues();
     // Expect the keys and values to be the same, but in sorted order
     std::vector<BString> key;
     std::vector<std::shared_ptr<ISerializable>> value;
-    for(auto it = values.begin(); it != values.end(); ++it) {
+    for (auto it = values.begin(); it != values.end(); ++it)
+    {
         key.push_back(it->first);
         value.push_back(it->second);
     }
@@ -348,8 +349,8 @@ TEST(SerializationTest, Map_BString_U32_Deserialize) {
     EXPECT_TRUE(U32(12345).Equals(*(std::dynamic_pointer_cast<U32>(value[2]))));
 }
 
-
-TEST(SerializationTest, MapBStringU32Test1) {
+TEST(SerializationTest, MapBStringU32Test1)
+{
     MapType map;
     map[BString("x")] = std::make_shared<U32>(12345);
     map[BString("b")] = std::make_shared<U32>(99234);
@@ -365,7 +366,8 @@ TEST(SerializationTest, MapBStringU32Test1) {
     EXPECT_EQ(expected, serialized);
 }
 
-TEST(SerializationTest, MapBStringU32Test2) {
+TEST(SerializationTest, MapBStringU32Test2)
+{
     MapType map;
     map[BString("b")] = std::make_shared<U32>(12345);
     map[BString("x")] = std::make_shared<U32>(99234);
@@ -376,13 +378,13 @@ TEST(SerializationTest, MapBStringU32Test2) {
     bcsMap.Serialize(ser);
 
     std::vector<uint8_t> serialized = ser.GetBytes();
-    std::vector<uint8_t> expected = {3, 1, 98, 57, 48, 0, 0, 1, 99, 21, 93, 0, 0, 1, 120, 162, 131, 1, 0 };
+    std::vector<uint8_t> expected = {3, 1, 98, 57, 48, 0, 0, 1, 99, 21, 93, 0, 0, 1, 120, 162, 131, 1, 0};
 
     EXPECT_EQ(expected, serialized);
 }
 
-
-TEST(SerializationTest, MapBStringU32Test3) {
+TEST(SerializationTest, MapBStringU32Test3)
+{
     MapType map;
     map[BString("b")] = std::make_shared<U32>(99234);
     map[BString("x")] = std::make_shared<U32>(12345);
@@ -393,12 +395,13 @@ TEST(SerializationTest, MapBStringU32Test3) {
     bcsMap.Serialize(ser);
 
     std::vector<uint8_t> serialized = ser.GetBytes();
-    std::vector<uint8_t> expected = {3, 1, 98, 162, 131, 1, 0, 1, 99, 21, 93, 0, 0, 1, 120, 57, 48, 0, 0 };
+    std::vector<uint8_t> expected = {3, 1, 98, 162, 131, 1, 0, 1, 99, 21, 93, 0, 0, 1, 120, 57, 48, 0, 0};
 
     EXPECT_EQ(expected, serialized);
 }
 
-TEST(SerializationTest, MapBStringBStringTest) {
+TEST(SerializationTest, MapBStringBStringTest)
+{
     MapType map;
     map[BString("a")] = std::make_shared<BString>("a");
     map[BString("b")] = std::make_shared<BString>("b");
@@ -409,12 +412,13 @@ TEST(SerializationTest, MapBStringBStringTest) {
     bcsMap.Serialize(ser);
 
     std::vector<uint8_t> serialized = ser.GetBytes();
-    std::vector<uint8_t> expected = {3, 1, 97, 1, 97, 1, 98, 1, 98, 1, 99, 1, 99 };
+    std::vector<uint8_t> expected = {3, 1, 97, 1, 97, 1, 98, 1, 98, 1, 99, 1, 99};
 
     EXPECT_EQ(expected, serialized);
 }
 
-TEST(SerializationTest, StringBytesEmptySerialize) {
+TEST(SerializationTest, StringBytesEmptySerialize)
+{
     std::vector<uint8_t> value(1160, 0); // empty byte string of size 1160
 
     Serialization serializer;
@@ -429,97 +433,106 @@ TEST(SerializationTest, StringBytesEmptySerialize) {
     EXPECT_EQ(exp, res);
 }
 
-TEST(SerializationTest, MultipleValues_Serialize) {
+TEST(SerializationTest, MultipleValues_Serialize)
+{
     Serialization serializer;
     serializer.Serialize(std::string("potato"));
     serializer.Serialize(static_cast<uint32_t>(123));
     serializer.Serialize(true);
     serializer.Serialize(static_cast<uint32_t>(456));
     std::vector<uint8_t> res = serializer.GetBytes();
-    std::vector<uint8_t> exp = { 6, 112, 111, 116, 97, 116, 111, 123, 0, 0, 0, 1, 200, 1, 0, 0 };
+    std::vector<uint8_t> exp = {6, 112, 111, 116, 97, 116, 111, 123, 0, 0, 0, 1, 200, 1, 0, 0};
     EXPECT_EQ(exp, res);
 }
 
-TEST(SerializationTest, SequenceBStringEmptySerialize) {
+TEST(SerializationTest, SequenceBStringEmptySerialize)
+{
     Serialization ser;
-    std::vector<std::shared_ptr<ISerializable>> strArr = { std::make_shared<BString>("") };
+    std::vector<std::shared_ptr<ISerializable>> strArr = {std::make_shared<BString>("")};
     Sequence seq(strArr);
 
     seq.Serialize(ser);
 
     std::vector<uint8_t> actual = ser.GetBytes();
-    std::vector<uint8_t> expected = { 1, 1, 0 };
+    std::vector<uint8_t> expected = {1, 1, 0};
     EXPECT_EQ(expected, actual);
 }
 
-TEST(SerializationTest, SequenceBStringLongDeserialize) {
+TEST(SerializationTest, SequenceBStringLongDeserialize)
+{
     Serialization ser;
-    std::vector<std::shared_ptr<ISerializable>> expectedStrArr = { std::make_shared<BString>("a"), std::make_shared<BString>("abc"),
-                                                              std::make_shared<BString>("def"), std::make_shared<BString>("ghi") };
+    std::vector<std::shared_ptr<ISerializable>> expectedStrArr = {std::make_shared<BString>("a"), std::make_shared<BString>("abc"),
+                                                                  std::make_shared<BString>("def"), std::make_shared<BString>("ghi")};
     ser.Serialize(expectedStrArr);
 
     Sequence expectedSeq(expectedStrArr);
 
     std::vector<uint8_t> actual = ser.GetBytes();
-    std::vector<uint8_t> exp = { 4, 1, 97, 3, 97, 98, 99, 3, 100, 101, 102, 3, 103, 104, 105 };
+    std::vector<uint8_t> exp = {4, 1, 97, 3, 97, 98, 99, 3, 100, 101, 102, 3, 103, 104, 105};
     EXPECT_EQ(exp, actual);
 
     Deserialization deser(actual);
     std::vector<std::shared_ptr<ISerializable>> actualSequenceArr = deser.DeserializeSequence(
-        [](Deserialization& d) -> std::shared_ptr<ISerializable> { return BString::Deserialize(d); });
+        [](Deserialization &d) -> std::shared_ptr<ISerializable>
+        { return BString::Deserialize(d); });
 
-    for (int i = 0; i < expectedStrArr.size(); i++){
+    for (int i = 0; i < expectedStrArr.size(); i++)
+    {
         EXPECT_EQ(expectedStrArr[i]->ToString(), actualSequenceArr[i]->ToString());
     }
 }
 
-
-TEST(SerializationTest, SequenceBStringSerialize) {
+TEST(SerializationTest, SequenceBStringSerialize)
+{
     Serialization ser;
-    std::vector<std::shared_ptr<ISerializable>> expectedStrArr = { std::make_shared<BString>("a"), std::make_shared<BString>("abc"),
-                                                   std::make_shared<BString>("def"), std::make_shared<BString>("ghi") };
+    std::vector<std::shared_ptr<ISerializable>> expectedStrArr = {std::make_shared<BString>("a"), std::make_shared<BString>("abc"),
+                                                                  std::make_shared<BString>("def"), std::make_shared<BString>("ghi")};
     ser.Serialize(expectedStrArr);
 
     std::vector<uint8_t> actual = ser.GetBytes();
-    std::vector<uint8_t> exp = { 4, 1, 97, 3, 97, 98, 99, 3, 100, 101, 102, 3, 103, 104, 105 };
+    std::vector<uint8_t> exp = {4, 1, 97, 3, 97, 98, 99, 3, 100, 101, 102, 3, 103, 104, 105};
     EXPECT_EQ(exp, actual);
 }
 
-TEST(SerializationTest, SequenceBoolSerialize) {
+TEST(SerializationTest, SequenceBoolSerialize)
+{
     Serialization ser;
-    std::vector<std::shared_ptr<ISerializable>> expectedStrArr = { std::make_shared<Bool>(false), std::make_shared<Bool>(true),
-                                                   std::make_shared<Bool>(false)};
+    std::vector<std::shared_ptr<ISerializable>> expectedStrArr = {std::make_shared<Bool>(false), std::make_shared<Bool>(true),
+                                                                  std::make_shared<Bool>(false)};
     ser.Serialize(expectedStrArr);
 
     std::vector<uint8_t> actual = ser.GetBytes();
-    std::vector<uint8_t> exp = { 3, 0, 1, 0 };
+    std::vector<uint8_t> exp = {3, 0, 1, 0};
     EXPECT_EQ(exp, actual);
 }
 
-TEST(SerializationTest, SequenceBoolDeserializer) {
+TEST(SerializationTest, SequenceBoolDeserializer)
+{
     Serialization ser;
-    std::vector<std::shared_ptr<ISerializable>> expectedBoolArr = { std::make_shared<Bool>(false), std::make_shared<Bool>(true),
-                                                   std::make_shared<Bool>(false)};
+    std::vector<std::shared_ptr<ISerializable>> expectedBoolArr = {std::make_shared<Bool>(false), std::make_shared<Bool>(true),
+                                                                   std::make_shared<Bool>(false)};
     ser.Serialize(expectedBoolArr);
 
-    std::vector<uint8_t> expectedByteArr = { 3, 0, 1, 0 };
+    std::vector<uint8_t> expectedByteArr = {3, 0, 1, 0};
     std::vector<uint8_t> actualByteArr = ser.GetBytes();
     EXPECT_EQ(expectedByteArr, actualByteArr);
 
     Deserialization deser(expectedByteArr);
     std::vector<std::shared_ptr<ISerializable>> actualBoolArr = deser.DeserializeSequence(
-            [](Deserialization& d) -> std::shared_ptr<ISerializable> { return Bool::Deserialize(d); });
+        [](Deserialization &d) -> std::shared_ptr<ISerializable>
+        { return Bool::Deserialize(d); });
     EXPECT_EQ(expectedBoolArr.size(), actualBoolArr.size());
-    for (std::size_t i = 0; i < expectedBoolArr.size(); ++i) {
+    for (std::size_t i = 0; i < expectedBoolArr.size(); ++i)
+    {
         EXPECT_EQ(*std::dynamic_pointer_cast<Bool>(expectedBoolArr[i]),
                   *std::dynamic_pointer_cast<Bool>(actualBoolArr[i]));
     }
 }
 
+// Addition testcase for Unit Test
 
-//Addition testcase for Unit Test
-
-TEST(SerializationTest, BCSMapSerialize) {
+TEST(SerializationTest, BCSMapSerialize)
+{
     // Instantiate some ISerializable objects to use as values in the BCSMap
     auto boolValue1 = std::make_shared<Bool>(true);
     auto boolValue2 = std::make_shared<Bool>(false);
@@ -527,8 +540,7 @@ TEST(SerializationTest, BCSMapSerialize) {
     // Create a BCSMap
     std::map<BString, std::shared_ptr<ISerializable>> mapValues = {
         {BString("key1"), boolValue1},
-        {BString("key2"), boolValue2}
-    };
+        {BString("key2"), boolValue2}};
     BCSMap map(mapValues);
 
     // Serialize the map
@@ -542,14 +554,14 @@ TEST(SerializationTest, BCSMapSerialize) {
     // The expected output depends on the implementation of BCSMap, BString, and Bool.
     // Modify this to match your expected output.
     std::vector<uint8_t> expected = {
-        '\x2', '\x4', 'k', 'e', 'y', '1', '\x1', '\x4', 'k', 'e', 'y', '2', '\0' 
-    };
+        '\x2', '\x4', 'k', 'e', 'y', '1', '\x1', '\x4', 'k', 'e', 'y', '2', '\0'};
 
     // Check if the serialized data matches the expected output
     EXPECT_EQ(expected, actual);
 }
 
-TEST(SerializationTest, BCSMapToString) {
+TEST(SerializationTest, BCSMapToString)
+{
     // Instantiate some ISerializable objects to use as values in the BCSMap
     auto boolValue1 = std::make_shared<Bool>(true);
     auto boolValue2 = std::make_shared<Bool>(false);
@@ -557,8 +569,7 @@ TEST(SerializationTest, BCSMapToString) {
     // Create a BCSMap
     std::map<BString, std::shared_ptr<ISerializable>> mapValues = {
         {BString("key1"), boolValue1},
-        {BString("key2"), boolValue2}
-    };
+        {BString("key2"), boolValue2}};
     BCSMap map(mapValues);
 
     // Convert the map to a string
@@ -573,7 +584,8 @@ TEST(SerializationTest, BCSMapToString) {
     EXPECT_EQ(expected, actual);
 }
 
-TEST(SerializationTest, BString) {
+TEST(SerializationTest, BString)
+{
     // Create a string to be used in the test
     std::string testStr = "Test string";
 
@@ -587,7 +599,8 @@ TEST(SerializationTest, BString) {
     EXPECT_EQ(testStr, actualStr);
 }
 
-TEST(BStringTest, GetHashCode) {
+TEST(BStringTest, GetHashCode)
+{
     // Create a string to be used in the test
     std::string testStr = "Test string";
 
@@ -603,7 +616,8 @@ TEST(BStringTest, GetHashCode) {
     EXPECT_EQ(hashCode1, hashCode2);
 }
 
-TEST(BStringTest, Equals) {
+TEST(BStringTest, Equals)
+{
     // Create two BString objects with the same value
     BString bStr1("Test string");
     BString bStr2("Test string");
@@ -618,7 +632,8 @@ TEST(BStringTest, Equals) {
     EXPECT_FALSE(bStr1.Equals(bStr3));
 }
 
-TEST(BStringTest, EqualOperator) {
+TEST(BStringTest, EqualOperator)
+{
     // Create two BString objects with the same value
     BString bStr1("Test string");
     BString bStr2("Test string");
@@ -633,7 +648,8 @@ TEST(BStringTest, EqualOperator) {
     EXPECT_FALSE(bStr1 == bStr3);
 }
 
-TEST(BStringTest, RemoveBOM) {
+TEST(BStringTest, RemoveBOM)
+{
     // Create a BString object
     BString bstring;
 
@@ -659,15 +675,17 @@ TEST(BStringTest, RemoveBOM) {
     EXPECT_EQ(dataWithoutBOM, resultWithoutBOM);
 }
 
-TEST(BoolTest, Variant) {
+TEST(BoolTest, Variant)
+{
     // Create a Bool object
-    Bool b(true);  // assuming Bool has a constructor that takes a bool
+    Bool b(true); // assuming Bool has a constructor that takes a bool
 
     // Use the Variant method and check if it returns TypeTag::BOOL
     EXPECT_EQ(b.Variant(), TypeTag::BOOL);
 }
 
-TEST(BoolTest, GetValue) {
+TEST(BoolTest, GetValue)
+{
     // Create a Bool object with the value true
     Bool bTrue(true);
 
@@ -681,7 +699,8 @@ TEST(BoolTest, GetValue) {
     EXPECT_FALSE(bFalse.GetValue());
 }
 
-TEST(BoolTest, GetHashCode) {
+TEST(BoolTest, GetHashCode)
+{
     // Create two Bool objects with the same value
     Bool bTrue1(true);
     Bool bTrue2(true);
@@ -696,8 +715,8 @@ TEST(BoolTest, GetHashCode) {
     EXPECT_NE(bTrue1.GetHashCode(), bFalse.GetHashCode());
 }
 
-
-TEST(DeserializationTest, Remaining) {
+TEST(DeserializationTest, Remaining)
+{
     // Create a vector of bytes
     std::vector<uint8_t> data = {0x01, 0x02, 0x03, 0x04, 0xFF};
 
@@ -708,7 +727,8 @@ TEST(DeserializationTest, Remaining) {
     EXPECT_EQ(data.size(), deserializer.Remaining());
 }
 
-TEST(DeserializationTest, FixedBytes) {
+TEST(DeserializationTest, FixedBytes)
+{
     // Create a vector of bytes
     std::vector<uint8_t> data = {0x01, 0x02, 0x03, 0x04, 0xFF};
 
@@ -727,7 +747,8 @@ TEST(DeserializationTest, FixedBytes) {
     EXPECT_EQ(data.size() - length, deserializer.Remaining());
 }
 
-TEST(DeserializationTest, DeserializeU16) {
+TEST(DeserializationTest, DeserializeU16)
+{
     // Create a vector of bytes representing uint16_t value of 500
     // Assuming the system uses little endian byte order
     std::vector<uint8_t> data = {0xF4, 0x01};
@@ -743,7 +764,8 @@ TEST(DeserializationTest, DeserializeU16) {
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST(DeserializationTest, DeserializeU256) {
+TEST(DeserializationTest, DeserializeU256)
+{
     // Create a Deserialization object with a known sequence of bytes
     // representing a 256-bit integer
     std::vector<uint8_t> known_data = {0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -766,8 +788,8 @@ TEST(DeserializationTest, DeserializeU256) {
     ASSERT_THROW(deserializer.DeserializeU256(), std::runtime_error);
 }
 
-
-TEST(U32Test, Variant) {
+TEST(U32Test, Variant)
+{
     // Create a U32 object
     uint32_t value = 12345;
     U32 u32(value);
@@ -779,7 +801,8 @@ TEST(U32Test, Variant) {
     EXPECT_EQ(variant, TypeTag::U32);
 }
 
-TEST(U32Test, GetValue) {
+TEST(U32Test, GetValue)
+{
     // Create a U32 object with a known value
     uint32_t known_value = 12345;
     U32 u32(known_value);
@@ -791,7 +814,8 @@ TEST(U32Test, GetValue) {
     EXPECT_EQ(returned_value, known_value);
 }
 
-TEST(U32Test, Equals) {
+TEST(U32Test, Equals)
+{
     // Create two U32 objects with the same value
     uint32_t value1 = 12345;
     U32 u321(value1);
@@ -810,7 +834,8 @@ TEST(U32Test, Equals) {
     EXPECT_FALSE(u321.Equals(u323));
 }
 
-TEST(U32Test, ToString) {
+TEST(U32Test, ToString)
+{
     // Create a U32 object with a known value
     uint32_t known_value = 12345;
     U32 u32(known_value);
@@ -825,7 +850,8 @@ TEST(U32Test, ToString) {
     EXPECT_EQ(returned_str, expected_str);
 }
 
-TEST(U32Test, GetHashCode) {
+TEST(U32Test, GetHashCode)
+{
     // Create a U32 object with a known value
     uint32_t known_value = 12345;
     U32 u32(known_value);
@@ -844,7 +870,8 @@ TEST(U32Test, GetHashCode) {
     EXPECT_EQ(returned_hash, returned_hash_again);
 }
 
-TEST(U32Test, Deserialize) {
+TEST(U32Test, Deserialize)
+{
     // Create a known uint32_t value and its corresponding byte representation
     uint32_t known_value = 12345;
     std::vector<uint8_t> byte_representation(sizeof(uint32_t));
@@ -864,8 +891,8 @@ TEST(U32Test, Deserialize) {
     EXPECT_THROW(U32::Deserialize(small_data), std::runtime_error);
 }
 
-
-TEST(U8Test, Constructor) {
+TEST(U8Test, Constructor)
+{
     // Create a U8 object with a known value
     uint8_t known_value = 123;
     U8 u8(known_value);
@@ -874,7 +901,8 @@ TEST(U8Test, Constructor) {
     EXPECT_EQ(u8.GetValue(), known_value);
 }
 
-TEST(U8Test, Serialize) {
+TEST(U8Test, Serialize)
+{
     // Create a U8 object with a known value
     uint8_t known_value = 123;
     U8 u8(known_value);
@@ -886,7 +914,8 @@ TEST(U8Test, Serialize) {
     ASSERT_NO_THROW(u8.Serialize(serializer));
 }
 
-TEST(U8Test, Variant) {
+TEST(U8Test, Variant)
+{
     // Create a U8 object
     U8 u8(123);
 
@@ -897,7 +926,8 @@ TEST(U8Test, Variant) {
     EXPECT_EQ(variant, TypeTag::U8);
 }
 
-TEST(U8Test, Equals) {
+TEST(U8Test, Equals)
+{
     // Create two U8 objects with the same value
     U8 u8_1(123);
     U8 u8_2(123);
@@ -912,7 +942,8 @@ TEST(U8Test, Equals) {
     EXPECT_FALSE(u8_1.Equals(u8_3));
 }
 
-TEST(U8Test, ToString) {
+TEST(U8Test, ToString)
+{
     // Create a U8 object with a known value
     uint8_t known_value = 123;
     U8 u8(known_value);
@@ -924,7 +955,8 @@ TEST(U8Test, ToString) {
     EXPECT_EQ(str, "123");
 }
 
-TEST(U8Test, GetHashCode) {
+TEST(U8Test, GetHashCode)
+{
     // Create two U8 objects with the same value
     uint8_t known_value = 123;
     U8 u8_1(known_value);
@@ -941,8 +973,9 @@ TEST(U8Test, GetHashCode) {
     EXPECT_NE(u8_1.GetHashCode(), u8_3.GetHashCode());
 }
 
-TEST(U8Test, Deserialize) {
-     // Create a vector of bytes
+TEST(U8Test, Deserialize)
+{
+    // Create a vector of bytes
     std::vector<uint8_t> data = {0x01, 0x02, 0x03, 0x04, 0xFF};
 
     // Use the constructor to create a Deserialization object
@@ -952,8 +985,8 @@ TEST(U8Test, Deserialize) {
     ASSERT_NO_THROW(U8::Deserialize(deserializer));
 }
 
-
-TEST(U64Test, Serialize) {
+TEST(U64Test, Serialize)
+{
     // Create a U64 object with a known value
     uint64_t known_value = 1234567890123456789;
     U64 u64(known_value);
@@ -965,7 +998,8 @@ TEST(U64Test, Serialize) {
     ASSERT_NO_THROW(u64.Serialize(serializer));
 }
 
-TEST(U64Test, Variant) {
+TEST(U64Test, Variant)
+{
     // Create a U64 object
     uint64_t known_value = 1234567890123456789;
     U64 u64(known_value);
@@ -977,7 +1011,8 @@ TEST(U64Test, Variant) {
     EXPECT_EQ(typeTag, TypeTag::U64);
 }
 
-TEST(U64Test, GetValue) {
+TEST(U64Test, GetValue)
+{
     // Create a U64 object with a known value
     uint64_t known_value = 1234567890123456789;
     U64 u64(known_value);
@@ -989,7 +1024,8 @@ TEST(U64Test, GetValue) {
     EXPECT_EQ(retrieved_value, known_value);
 }
 
-TEST(U64Test, Equals) {
+TEST(U64Test, Equals)
+{
     // Create two U64 objects with the same value
     uint64_t known_value = 1234567890123456789;
     U64 u64_1(known_value);
@@ -1006,7 +1042,8 @@ TEST(U64Test, Equals) {
     EXPECT_FALSE(u64_1.Equals(u64_3));
 }
 
-TEST(U64Test, ToString) {
+TEST(U64Test, ToString)
+{
     // Create a U64 object with a known value
     uint64_t known_value = 2112454933;
     U64 u64(known_value);
@@ -1023,7 +1060,8 @@ TEST(U64Test, ToString) {
     EXPECT_EQ(returned_string, expected_string);
 }
 
-TEST(U64Test, GetHashCode) {
+TEST(U64Test, GetHashCode)
+{
     // Create a U64 object with a known value
     uint64_t known_value = 2112454933;
     U64 u64(known_value);
@@ -1038,7 +1076,8 @@ TEST(U64Test, GetHashCode) {
     EXPECT_EQ(returned_hash_code, expected_hash_code);
 }
 
-TEST(U64Test, Deserialize) {
+TEST(U64Test, Deserialize)
+{
     // Create a known uint64_t value
     uint64_t known_value = 1234567890123456789;
     uint64_t little_endian_value;
@@ -1051,13 +1090,13 @@ TEST(U64Test, Deserialize) {
     {
         // Convert the known_value to little-endian byte order
         little_endian_value = (static_cast<uint64_t>(known_value) << 56) |
-                                       ((static_cast<uint64_t>(known_value) & 0x000000000000FF00) << 40) |
-                                       ((static_cast<uint64_t>(known_value) & 0x0000000000FF0000) << 24) |
-                                       ((static_cast<uint64_t>(known_value) & 0x00000000FF000000) << 8) |
-                                       ((static_cast<uint64_t>(known_value) & 0x000000FF00000000) >> 8) |
-                                       ((static_cast<uint64_t>(known_value) & 0x0000FF0000000000) >> 24) |
-                                       ((static_cast<uint64_t>(known_value) & 0x00FF000000000000) >> 40) |
-                                       (static_cast<uint64_t>(known_value) >> 56);
+                              ((static_cast<uint64_t>(known_value) & 0x000000000000FF00) << 40) |
+                              ((static_cast<uint64_t>(known_value) & 0x0000000000FF0000) << 24) |
+                              ((static_cast<uint64_t>(known_value) & 0x00000000FF000000) << 8) |
+                              ((static_cast<uint64_t>(known_value) & 0x000000FF00000000) >> 8) |
+                              ((static_cast<uint64_t>(known_value) & 0x0000FF0000000000) >> 24) |
+                              ((static_cast<uint64_t>(known_value) & 0x00FF000000000000) >> 40) |
+                              (static_cast<uint64_t>(known_value) >> 56);
         ;
     }
 
@@ -1079,8 +1118,8 @@ TEST(U64Test, Deserialize) {
     ASSERT_THROW(U64::Deserialize(data), std::runtime_error);
 }
 
-
-TEST(U16Test, Serialize) {
+TEST(U16Test, Serialize)
+{
     // Create a U16 object with a known value
     uint16_t known_value = 12345;
     U16 u16(known_value);
@@ -1092,7 +1131,8 @@ TEST(U16Test, Serialize) {
     ASSERT_NO_THROW(u16.Serialize(serializer));
 }
 
-TEST(U16Test, Variant) {
+TEST(U16Test, Variant)
+{
     // Create a U16 object
     U16 u16(12345);
 
@@ -1103,7 +1143,8 @@ TEST(U16Test, Variant) {
     EXPECT_EQ(variant, TypeTag::U16);
 }
 
-TEST(U16Test, GetValue) {
+TEST(U16Test, GetValue)
+{
     // Create a U16 object with a known value
     uint16_t known_value = 12345;
     U16 u16(known_value);
@@ -1115,7 +1156,8 @@ TEST(U16Test, GetValue) {
     EXPECT_EQ(value, known_value);
 }
 
-TEST(U16Test, Equals) {
+TEST(U16Test, Equals)
+{
     // Create two U16 objects with the same value
     uint16_t known_value = 12345;
     U16 u16_1(known_value);
@@ -1131,7 +1173,8 @@ TEST(U16Test, Equals) {
     EXPECT_FALSE(u16_1.Equals(u16_3));
 }
 
-TEST(U16Test, ToString) {
+TEST(U16Test, ToString)
+{
     // Create a U16 object with a known value
     uint16_t known_value = 12345;
     U16 u16(known_value);
@@ -1143,7 +1186,8 @@ TEST(U16Test, ToString) {
     EXPECT_EQ(str, std::to_string(known_value));
 }
 
-TEST(U16Test, GetHashCode) {
+TEST(U16Test, GetHashCode)
+{
     // Create a U16 object with a known value
     uint16_t known_value = 12345;
     U16 u16(known_value);
@@ -1158,7 +1202,8 @@ TEST(U16Test, GetHashCode) {
     EXPECT_EQ(hash_code, expected_hash_code);
 }
 
-TEST(U16Test, Deserialize) {
+TEST(U16Test, Deserialize)
+{
     // Create a known uint64_t value
     uint16_t known_value = 1234567890123456789;
     uint16_t little_endian_value;
@@ -1191,7 +1236,8 @@ TEST(U16Test, Deserialize) {
     ASSERT_THROW(U16::Deserialize(data), std::runtime_error);
 }
 
-TEST(U128Test, Serialize) {
+TEST(U128Test, Serialize)
+{
     // Create a U128 object with a known value
     CryptoPP::Integer known_value("1234567890123456789012345678901234567890");
     U128 u128(known_value);
@@ -1203,8 +1249,8 @@ TEST(U128Test, Serialize) {
     ASSERT_NO_THROW(u128.Serialize(serializer));
 }
 
-
-TEST(U128Test, ToString) {
+TEST(U128Test, ToString)
+{
     // Create a U128 object with a known value
     CryptoPP::Integer known_value("1234567890123456789012345678901234567890");
     U128 u128(known_value);
@@ -1220,7 +1266,8 @@ TEST(U128Test, ToString) {
     EXPECT_EQ(str, oss.str());
 }
 
-TEST(U128Test, Equals) {
+TEST(U128Test, Equals)
+{
     // Create two U128 objects with the same value
     CryptoPP::Integer known_value("1234567890123456789012345678901234567890");
     U128 u128_1(known_value);
@@ -1237,7 +1284,8 @@ TEST(U128Test, Equals) {
     EXPECT_FALSE(u128_1.Equals(u128_3));
 }
 
-TEST(U128Test, Variant) {
+TEST(U128Test, Variant)
+{
     // Create a U128 object
     CryptoPP::Integer known_value("1234567890123456789012345678901234567890");
     U128 u128(known_value);
@@ -1249,7 +1297,8 @@ TEST(U128Test, Variant) {
     EXPECT_EQ(variant, TypeTag::U128);
 }
 
-TEST(U128Test, GetValue) {
+TEST(U128Test, GetValue)
+{
     // Create a U128 object with a known value
     CryptoPP::Integer known_value("1234567890123456789012345678901234567890");
     U128 u128(known_value);
@@ -1261,7 +1310,8 @@ TEST(U128Test, GetValue) {
     EXPECT_EQ(returned_value, known_value);
 }
 
-TEST(U128Test, GetHashCode) {
+TEST(U128Test, GetHashCode)
+{
     // Create a U128 object with a known value
     CryptoPP::Integer known_value("1234567890123456789012345678901234567890");
     U128 u128(known_value);
@@ -1275,7 +1325,8 @@ TEST(U128Test, GetHashCode) {
     EXPECT_NE(hash_code, 0);
 }
 
-TEST(U128Test, Deserialize) {
+TEST(U128Test, Deserialize)
+{
     // Create a std::vector<uint8_t> with known contents
     std::vector<uint8_t> data = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -1291,8 +1342,8 @@ TEST(U128Test, Deserialize) {
     EXPECT_THROW(U128::Deserialize(short_data), std::runtime_error);
 }
 
-
-TEST(U256Test, Serialize) {
+TEST(U256Test, Serialize)
+{
     // Create a mock Serialization object
     Serialization serializer;
 
@@ -1304,7 +1355,8 @@ TEST(U256Test, Serialize) {
     u256.Serialize(serializer);
 }
 
-TEST(U256Test, ToString) {
+TEST(U256Test, ToString)
+{
     // Create a U256 object with a known value
     CryptoPP::Integer known_value("2345678901234567890");
     U256 u256(known_value);
@@ -1320,7 +1372,8 @@ TEST(U256Test, ToString) {
     EXPECT_EQ(str, oss.str());
 }
 
-TEST(U256Test, Equals) {
+TEST(U256Test, Equals)
+{
     // Create a U256 object with a known value
     CryptoPP::Integer known_value("1234567890123456789012345678901234567890");
     U256 u256(known_value);
@@ -1339,7 +1392,8 @@ TEST(U256Test, Equals) {
     EXPECT_FALSE(u256.Equals(u256_different));
 }
 
-TEST(U256Test, Variant) {
+TEST(U256Test, Variant)
+{
     // Create a U256 object
     CryptoPP::Integer known_value("1234567890123456789012345678901234567890");
     U256 u256(known_value);
@@ -1351,7 +1405,8 @@ TEST(U256Test, Variant) {
     EXPECT_EQ(tag, TypeTag::U256);
 }
 
-TEST(U256Test, GetValue) {
+TEST(U256Test, GetValue)
+{
     // Create a U256 object with a known value
     CryptoPP::Integer known_value("1234567890123456789012345678901234567890");
     U256 u256(known_value);
@@ -1363,7 +1418,8 @@ TEST(U256Test, GetValue) {
     EXPECT_EQ(returned_value, known_value);
 }
 
-TEST(U256Test, GetHashCode) {
+TEST(U256Test, GetHashCode)
+{
     // Create a U256 object with a known value
     CryptoPP::Integer known_value("1234567890123456789012345678901234567890");
     U256 u256(known_value);
@@ -1377,7 +1433,8 @@ TEST(U256Test, GetHashCode) {
     EXPECT_NE(hash_code, 0);
 }
 
-TEST(U256Test, Deserialize) {
+TEST(U256Test, Deserialize)
+{
     // Create a byte array with a known value
     std::vector<uint8_t> known_data = {0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                                        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -1397,8 +1454,8 @@ TEST(U256Test, Deserialize) {
     ASSERT_THROW(U256::Deserialize(short_data), std::runtime_error);
 }
 
-
-TEST(BytesTest, GetValue) {
+TEST(BytesTest, GetValue)
+{
     // Create a Bytes object with a known vector of bytes
     std::vector<uint8_t> known_values = {1, 2, 3, 4, 5};
     Bytes bytes(known_values);
@@ -1410,7 +1467,8 @@ TEST(BytesTest, GetValue) {
     EXPECT_EQ(returned_values, known_values);
 }
 
-TEST(BytesTest, Equals) {
+TEST(BytesTest, Equals)
+{
     // Create two Bytes objects with the same vector of bytes
     std::vector<uint8_t> known_values1 = {1, 2, 3, 4, 5};
     Bytes bytes1(known_values1);
@@ -1430,7 +1488,8 @@ TEST(BytesTest, Equals) {
     ASSERT_FALSE(bytes3.Equals(bytes4));
 }
 
-TEST(BytesTest, ToString) {
+TEST(BytesTest, ToString)
+{
     // Create a Bytes object with a known vector of bytes
     std::vector<uint8_t> known_values = {1, 2, 3, 4, 5};
     Bytes bytes(known_values);
@@ -1439,11 +1498,12 @@ TEST(BytesTest, ToString) {
     std::string returned_string = bytes.ToString();
 
     // Check the returned string
-    std::string expected_string = "12345";  // This depends on how the ToString function is implemented
+    std::string expected_string = "12345"; // This depends on how the ToString function is implemented
     EXPECT_EQ(returned_string, expected_string);
 }
 
-TEST(BytesTest, GetHashCode) {
+TEST(BytesTest, GetHashCode)
+{
     // Create a Bytes object with a known vector of bytes
     std::vector<uint8_t> known_values = {1, 2, 3, 4, 5};
     Bytes bytes(known_values);
@@ -1453,12 +1513,13 @@ TEST(BytesTest, GetHashCode) {
 
     // Check the returned hash code
     // Calculate the expected hash code
-    std::string str = "12345";  // This is the string representation of the known_values
+    std::string str = "12345"; // This is the string representation of the known_values
     size_t expected_hash = std::hash<std::string>{}(str);
     EXPECT_EQ(returned_hash, expected_hash);
 }
 
-TEST(BytesTest, Serialize) {
+TEST(BytesTest, Serialize)
+{
     // Create a Bytes object with a known sequence of bytes
     std::vector<uint8_t> known_values = {0x01, 0x02, 0x03, 0x04, 0x05};
     Bytes bytes_obj(known_values);
@@ -1470,8 +1531,8 @@ TEST(BytesTest, Serialize) {
     ASSERT_NO_THROW(bytes_obj.Serialize(serializer));
 }
 
-
-TEST(SequenceTest, Length) {
+TEST(SequenceTest, Length)
+{
     // Create a Sequence object with three values
     std::shared_ptr<ISerializable> value1; // Assume these are valid pointers to ISerializable objects
     std::shared_ptr<ISerializable> value2;
@@ -1494,7 +1555,8 @@ TEST(SequenceTest, Length) {
     EXPECT_EQ(otherSequence.Length(), 2);
 }
 
-TEST(SequenceTest, GetValue) {
+TEST(SequenceTest, GetValue)
+{
     // Create a Sequence object with three values
     std::shared_ptr<ISerializable> value1; // Assume these are valid pointers to ISerializable objects
     std::shared_ptr<ISerializable> value2;
@@ -1506,13 +1568,14 @@ TEST(SequenceTest, GetValue) {
     // The values returned by GetValue should be the same as the values we used to create the sequence
     std::vector<std::shared_ptr<ISerializable>> returnedValues = sequence.GetValue();
     EXPECT_EQ(returnedValues.size(), values.size());
-    for (size_t i = 0; i < values.size(); i++) {
+    for (size_t i = 0; i < values.size(); i++)
+    {
         EXPECT_EQ(returnedValues[i], values[i]);
     }
 }
 
-
-TEST(SequenceTest, ToString) {
+TEST(SequenceTest, ToString)
+{
     // Instantiate some ISerializable objects to use as values in the Sequence
     Bool boolValue1(true);
     Bool boolValue2(false);
@@ -1524,8 +1587,7 @@ TEST(SequenceTest, ToString) {
         std::make_shared<Bool>(boolValue1),
         std::make_shared<BString>(stringValue1),
         std::make_shared<Bool>(boolValue2),
-        std::make_shared<BString>(stringValue2)
-    };
+        std::make_shared<BString>(stringValue2)};
 
     Sequence sequence(sequenceValues);
 
@@ -1539,16 +1601,15 @@ TEST(SequenceTest, ToString) {
     EXPECT_EQ(expected, actual);
 }
 
-
-TEST(SequenceTest, GetHashCode) {
-     // Create a Sequence object with three values
+TEST(SequenceTest, GetHashCode)
+{
+    // Create a Sequence object with three values
     std::shared_ptr<ISerializable> value1; // Assume these are valid pointers to ISerializable objects
     std::shared_ptr<ISerializable> value2;
     std::shared_ptr<ISerializable> value3;
     std::vector<std::shared_ptr<ISerializable>> values = {value1, value2, value3};
     // Create a BString with the test string
     Sequence sequence(values);
-
 
     // Use the GetHashCode method to retrieve the hash code
     size_t hashCode1 = sequence.GetHashCode();
@@ -1559,7 +1620,8 @@ TEST(SequenceTest, GetHashCode) {
     EXPECT_EQ(hashCode1, hashCode2);
 }
 
-TEST(SequenceTest, Deserialize) {
+TEST(SequenceTest, Deserialize)
+{
     // Create a known Sequence value
     std::vector<uint8_t> bytes1 = {1};
     std::vector<uint8_t> bytes2 = {2};
@@ -1583,8 +1645,8 @@ TEST(SequenceTest, Deserialize) {
     Deserialization bad_deserializer(data);
 }
 
-
-TEST(SerializationTest, SerializeU8) {
+TEST(SerializationTest, SerializeU8)
+{
     // Create a mock Serialization object
     Serialization serializer;
 
@@ -1603,7 +1665,8 @@ TEST(SerializationTest, SerializeU8) {
     ASSERT_EQ(serialized_bytes[0], known_value);
 }
 
-TEST(SerializationTest, SerializeU64) {
+TEST(SerializationTest, SerializeU64)
+{
     // Create a mock Serialization object
     Serialization serializer;
 
@@ -1620,12 +1683,14 @@ TEST(SerializationTest, SerializeU64) {
     // Since uint64_t is eight bytes, the serialized bytes should be a vector of length 8
     // Also, we need to account for endianness. Assuming you're using little-endian order:
     ASSERT_EQ(serialized_bytes.size(), 8);
-    for (int i = 0; i < 8; i++) {
-        ASSERT_EQ(serialized_bytes[i], static_cast<uint8_t>((known_value >> (8*i)) & 0xFF));
+    for (int i = 0; i < 8; i++)
+    {
+        ASSERT_EQ(serialized_bytes[i], static_cast<uint8_t>((known_value >> (8 * i)) & 0xFF));
     }
 }
 
-TEST(SerializationTest, SerializeU128) {
+TEST(SerializationTest, SerializeU128)
+{
     // Create a mock Serialization object
     Serialization serializer;
 
@@ -1642,14 +1707,16 @@ TEST(SerializationTest, SerializeU128) {
     // Since we're dealing with a 128-bit integer, the serialized bytes should be a vector of length 16
     // Also, we need to account for endianness. Assuming you're using little-endian order:
     ASSERT_EQ(serialized_bytes.size(), 16);
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < 16; i++)
+    {
         // Convert the CryptoPP::Integer to bytes
         uint8_t byte = static_cast<uint8_t>(known_value.GetByte(i));
         ASSERT_EQ(serialized_bytes[i], byte);
     }
 }
 
-TEST(SerializationTest, SerializeVectorU8) {
+TEST(SerializationTest, SerializeVectorU8)
+{
     // Create a mock Serialization object
     Serialization serializer;
 
@@ -1671,7 +1738,8 @@ TEST(SerializationTest, SerializeVectorU8) {
     ASSERT_EQ(serialized_bytes, expected_bytes);
 }
 
-TEST(SerializationTest, SerializeU16) {
+TEST(SerializationTest, SerializeU16)
+{
     // Create a mock Serialization object
     Serialization serializer;
 
@@ -1688,7 +1756,8 @@ TEST(SerializationTest, SerializeU16) {
     ASSERT_EQ(serialized_bytes.size(), 2);
 
     // Test for little-endian order
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 2; i++)
+    {
         uint8_t expected_byte = static_cast<uint8_t>((known_value >> (8 * i)) & 0xFF);
         ASSERT_EQ(serialized_bytes[i], expected_byte)
             << "Failed at index " << i << ". "
@@ -1697,7 +1766,8 @@ TEST(SerializationTest, SerializeU16) {
     }
 }
 
-TEST(TagSequenceTest, GetValueTest) {
+TEST(TagSequenceTest, GetValueTest)
+{
     AccountAddress accountAddress = AccountAddress::FromHex("0x1");
     std::string module = "aptos_coin";
     std::string name = "AptosCoin";
@@ -1715,7 +1785,8 @@ TEST(TagSequenceTest, GetValueTest) {
     EXPECT_EQ(typeTags, actualTags);
 }
 
-TEST(TagSequenceTest, ToStringTest) {
+TEST(TagSequenceTest, ToStringTest)
+{
     AccountAddress accountAddress = AccountAddress::FromHex("0x1");
     std::string module = "aptos_coin";
     std::string name = "AptosCoin";
@@ -1731,7 +1802,8 @@ TEST(TagSequenceTest, ToStringTest) {
 
     // Compute the expected string
     std::ostringstream oss;
-    for (const auto& tag : typeTags) {
+    for (const auto &tag : typeTags)
+    {
         oss << tag->ToString();
     }
     std::string expected = oss.str();
@@ -1740,7 +1812,8 @@ TEST(TagSequenceTest, ToStringTest) {
     EXPECT_EQ(expected, actual);
 }
 
-TEST(StructTagTest, ToStringTest) {
+TEST(StructTagTest, ToStringTest)
+{
     AccountAddress accountAddress = AccountAddress::FromHex("0x1");
     std::string module = "aptos_coin";
     std::string name = "AptosCoin";
@@ -1753,9 +1826,11 @@ TEST(StructTagTest, ToStringTest) {
 
     // Compute the expected string
     std::string expected = accountAddress.ToString() + "::" + module + "::" + name;
-    if (!typeArgs.empty()) {
+    if (!typeArgs.empty())
+    {
         expected += "<" + typeArgs[0]->ToString();
-        for (size_t i = 1; i < typeArgs.size(); ++i) {
+        for (size_t i = 1; i < typeArgs.size(); ++i)
+        {
             expected += ", " + typeArgs[i]->ToString();
         }
         expected += ">";
@@ -1765,7 +1840,8 @@ TEST(StructTagTest, ToStringTest) {
     EXPECT_EQ(expected, actual);
 }
 
-TEST(StructTagTest, FromStrTest) {
+TEST(StructTagTest, FromStrTest)
+{
     // Define the typeTag string
     std::string typeTag = "0x1::aptos_coin::AptosCoin";
 
@@ -1791,11 +1867,11 @@ TEST(ISerializableTag, DeserializeTagBool)
     std::vector<uint8_t> res;
     std::vector<uint8_t> data = s.GetBytes();
     res.push_back((uint8_t)TypeTag::BOOL);
-    res.insert(res.end(),data.begin(),data.end());
+    res.insert(res.end(), data.begin(), data.end());
 
     Deserialization d(res);
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
-    ASSERT_EQ(std::dynamic_pointer_cast<Bool>(result)->Variant(),TypeTag::BOOL);
+    ASSERT_EQ(std::dynamic_pointer_cast<Bool>(result)->Variant(), TypeTag::BOOL);
     ASSERT_EQ(std::dynamic_pointer_cast<Bool>(result)->GetValue(), true);
 }
 
@@ -1806,11 +1882,11 @@ TEST(ISerializableTag, DeserializeTagU8)
     std::vector<uint8_t> res;
     std::vector<uint8_t> data = s.GetBytes();
     res.push_back((uint8_t)TypeTag::U8);
-    res.insert(res.end(),data.begin(),data.end());
+    res.insert(res.end(), data.begin(), data.end());
 
     Deserialization d(res);
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
-    ASSERT_EQ(std::dynamic_pointer_cast<U8>(result)->Variant(),TypeTag::U8);
+    ASSERT_EQ(std::dynamic_pointer_cast<U8>(result)->Variant(), TypeTag::U8);
     ASSERT_EQ(std::dynamic_pointer_cast<U8>(result)->GetValue(), 1);
     ASSERT_EQ(result->ISerializableTag::ToString(), "ISerializableTag (U8)");
 }
@@ -1820,11 +1896,11 @@ TEST(ISerializableTag, DeserializeTagU16)
     std::vector<uint8_t> res;
     std::vector<uint8_t> data = {0xF4, 0x01};
     res.push_back((uint8_t)TypeTag::U16);
-    res.insert(res.end(),data.begin(),data.end());
+    res.insert(res.end(), data.begin(), data.end());
 
     Deserialization d(res);
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
-    ASSERT_EQ(std::dynamic_pointer_cast<U16>(result)->Variant(),TypeTag::U16);
+    ASSERT_EQ(std::dynamic_pointer_cast<U16>(result)->Variant(), TypeTag::U16);
     ASSERT_EQ(std::dynamic_pointer_cast<U16>(result)->GetValue(), 500);
     ASSERT_EQ(result->ISerializableTag::ToString(), "ISerializableTag (U16)");
 }
@@ -1836,11 +1912,11 @@ TEST(ISerializableTag, DeserializeTagU32)
     std::vector<uint8_t> res;
     std::vector<uint8_t> data = s.GetBytes();
     res.push_back((uint8_t)TypeTag::U32);
-    res.insert(res.end(),data.begin(),data.end());
+    res.insert(res.end(), data.begin(), data.end());
 
     Deserialization d(res);
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
-    ASSERT_EQ(std::dynamic_pointer_cast<U32>(result)->Variant(),TypeTag::U32);
+    ASSERT_EQ(std::dynamic_pointer_cast<U32>(result)->Variant(), TypeTag::U32);
     ASSERT_EQ(std::dynamic_pointer_cast<U32>(result)->GetValue(), 1);
     ASSERT_EQ(result->ISerializableTag::ToString(), "ISerializableTag (U32)");
 }
@@ -1852,11 +1928,11 @@ TEST(ISerializableTag, DeserializeTagU64)
     std::vector<uint8_t> res;
     std::vector<uint8_t> data = s.GetBytes();
     res.push_back((uint8_t)TypeTag::U64);
-    res.insert(res.end(),data.begin(),data.end());
+    res.insert(res.end(), data.begin(), data.end());
 
     Deserialization d(res);
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
-    ASSERT_EQ(std::dynamic_pointer_cast<U64>(result)->Variant(),TypeTag::U64);
+    ASSERT_EQ(std::dynamic_pointer_cast<U64>(result)->Variant(), TypeTag::U64);
     ASSERT_EQ(std::dynamic_pointer_cast<U64>(result)->GetValue(), 1);
     ASSERT_EQ(result->ISerializableTag::ToString(), "ISerializableTag (U64)");
 }
@@ -1868,11 +1944,11 @@ TEST(ISerializableTag, DeserializeTagU128)
     std::vector<uint8_t> res;
     std::vector<uint8_t> data = s.GetBytes();
     res.push_back((uint8_t)TypeTag::U128);
-    res.insert(res.end(),data.begin(),data.end());
+    res.insert(res.end(), data.begin(), data.end());
 
     Deserialization d(res);
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
-    ASSERT_EQ(std::dynamic_pointer_cast<U128>(result)->Variant(),TypeTag::U128);
+    ASSERT_EQ(std::dynamic_pointer_cast<U128>(result)->Variant(), TypeTag::U128);
     ASSERT_EQ(std::dynamic_pointer_cast<U128>(result)->GetValue(), 1);
     ASSERT_EQ(result->ISerializableTag::ToString(), "ISerializableTag (U128)");
 }
@@ -1884,23 +1960,21 @@ TEST(ISerializableTag, DeserializeTagU256)
     std::vector<uint8_t> res;
     std::vector<uint8_t> data = s.GetBytes();
     res.push_back((uint8_t)TypeTag::U256);
-    res.insert(res.end(),data.begin(),data.end());
+    res.insert(res.end(), data.begin(), data.end());
 
     Deserialization d(res);
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
-    ASSERT_EQ(std::dynamic_pointer_cast<U256>(result)->Variant(),TypeTag::U256);
+    ASSERT_EQ(std::dynamic_pointer_cast<U256>(result)->Variant(), TypeTag::U256);
     ASSERT_EQ(std::dynamic_pointer_cast<U256>(result)->GetValue(), 1);
     ASSERT_EQ(result->ISerializableTag::ToString(), "ISerializableTag (U256)");
 }
 
 TEST(ISerializableTag, DeserializeTagAccountAddress)
 {
-    CryptoPP::SecByteBlock publicKeyBytes = Aptos::Utils::ByteVectorToSecBlock({
-    88, 110, 60, 141, 68, 125, 118, 121,
-    34, 46, 19, 144, 51, 227, 130, 2,
-    53, 227, 61, 165, 9, 30, 155, 11,
-    184, 241, 161, 18, 207, 12, 143, 245
-});
+    CryptoPP::SecByteBlock publicKeyBytes = Aptos::Utils::ByteVectorToSecBlock({88, 110, 60, 141, 68, 125, 118, 121,
+                                                                                34, 46, 19, 144, 51, 227, 130, 2,
+                                                                                53, 227, 61, 165, 9, 30, 155, 11,
+                                                                                184, 241, 161, 18, 207, 12, 143, 245});
     PublicKey publicKey(publicKeyBytes);
     AccountAddress accountAddress = AccountAddress::FromKey(publicKey.KeyBytes());
     Serialization s;
@@ -1908,10 +1982,10 @@ TEST(ISerializableTag, DeserializeTagAccountAddress)
     std::vector<uint8_t> res;
     std::vector<uint8_t> data = s.GetBytes();
     res.push_back((uint8_t)TypeTag::ACCOUNT_ADDRESS);
-    res.insert(res.end(),data.begin(),data.end());
+    res.insert(res.end(), data.begin(), data.end());
 
     Deserialization d(res);
     std::shared_ptr<ISerializableTag> result = ISerializableTag::DeserializeTag(d);
-    ASSERT_EQ(std::dynamic_pointer_cast<AccountAddress>(result)->Variant(),TypeTag::ACCOUNT_ADDRESS);
+    ASSERT_EQ(std::dynamic_pointer_cast<AccountAddress>(result)->Variant(), TypeTag::ACCOUNT_ADDRESS);
     ASSERT_EQ(result->ISerializableTag::ToString(), "ISerializableTag (ACCOUNT_ADDRESS)");
 }

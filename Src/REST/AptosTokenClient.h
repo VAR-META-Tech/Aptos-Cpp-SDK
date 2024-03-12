@@ -4,8 +4,7 @@
 #include <memory>
 #include "Model/Resources/Base/ResourceDataBase.h"
 #include "../Accounts/AccountAddress.h"
-#include "../BCS/BString.h"
-#include "../BCS/Bytes.h"
+#include "../BCS/BCS.h"
 #include "RestClient.h"
 namespace Aptos::Rest
 {
@@ -168,10 +167,10 @@ namespace Aptos::Rest
     class AptosTokenClient
     {
     public:
-        explicit AptosTokenClient(RestClient& client);
-        void ReadObject(std::function<void (Aptos::Rest::ReadObject,  AptosRESTModel::ResponseInfo)> callback, const Accounts::AccountAddress& address);
+        explicit AptosTokenClient(RestClient &client);
+        void ReadObject(std::function<void(Aptos::Rest::ReadObject, AptosRESTModel::ResponseInfo)> callback, const Accounts::AccountAddress &address);
         void CreateCollection(
-            std::function<void (std::string,  AptosRESTModel::ResponseInfo)> callback,
+            std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback,
             Accounts::Account Creator,
             std::string Description,
             int MaxSupply,
@@ -187,8 +186,7 @@ namespace Aptos::Rest
             bool TokensBurnableByCreator,
             bool TokensFreezableByCreator,
             int RoyaltyNumerator,
-            int RoyaltyDenominator
-            );
+            int RoyaltyDenominator);
 
         void MintToken(std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback, Accounts::Account Creator, std::string Collection, std::string Description, std::string Name, std::string Uri, PropertyMap Properties);
         void IMintSoulBoundToken(
@@ -199,53 +197,45 @@ namespace Aptos::Rest
             std::string Name,
             std::string Uri,
             PropertyMap Properties,
-            Accounts::AccountAddress SoulBoundTo
-            );
+            Accounts::AccountAddress SoulBoundTo);
         void TransferToken(
             std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
             Accounts::Account Owner,
             Accounts::AccountAddress Token,
-            Accounts::AccountAddress To
-            );
+            Accounts::AccountAddress To);
         void BurnToken(
             std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
             Accounts::Account Creator,
-            Accounts::AccountAddress Token
-            );
+            Accounts::AccountAddress Token);
         void FreezeToken(
             std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
             Accounts::Account Creator,
-            Accounts::AccountAddress Token
-            );
+            Accounts::AccountAddress Token);
         void UnfreezeToken(
             std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
             Accounts::Account Creator,
-            Accounts::AccountAddress Token
-            );
+            Accounts::AccountAddress Token);
         void AddTokenProperty(
             std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
             Accounts::Account Creator,
             Accounts::AccountAddress Token,
-            Property Prop
-            );
+            Property Prop);
         void RemoveTokenProperty(
             std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
             Accounts::Account Creator,
             Accounts::AccountAddress Token,
-            std::string Name
-            );
+            std::string Name);
         void UpdateTokenProperty(
             std::function<void(std::string, AptosRESTModel::ResponseInfo)> Callback,
             Accounts::Account Creator,
             Accounts::AccountAddress Token,
-            Property Prop
-            );
+            Property Prop);
         void TokensMintedFromTransaction(
             std::function<void(std::vector<Accounts::AccountAddress>, AptosRESTModel::ResponseInfo)> Callback,
-            std::string TransactionHash
-            );
+            std::string TransactionHash);
+
     private:
-        RestClient& m_restClient;
+        RestClient &m_restClient;
     };
 }
 #endif // APTOSTOKENCLIENT_H

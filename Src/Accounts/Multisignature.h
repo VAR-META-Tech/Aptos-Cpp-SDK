@@ -5,7 +5,7 @@
 #include "Ed25519Signature.h"
 #include "PublicKey.h"
 #include "multipublickey.h"
-#include "../BCS/BCSTypes.h"
+#include "../BCS/BCS.h"
 
 namespace Aptos::Accounts
 {

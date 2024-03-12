@@ -9,7 +9,7 @@
 #include <vector>
 #include "Ed25519Signature.h"
 #include "PublicKey.h"
-#include "../BCS/Serialization.h"
+#include "../BCS/BCS.h"
 #include <stdexcept>
 #include <cryptopp/xed25519.h>
 

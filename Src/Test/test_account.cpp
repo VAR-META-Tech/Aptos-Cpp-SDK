@@ -9,7 +9,7 @@
 #include "../Accounts/PublicKey.h"
 #include "../Accounts/PrivateKey.h"
 #include "../Accounts/AccountAddress.h"
-#include "../BCS/Serialization.h"
+#include "../BCS/BCS.h"
 #include "../Accounts/multipublickey.h"
 #include "../HDWallet/Utils/Utils.h"
 #include "../Accounts/multisignature.h"
@@ -22,100 +22,134 @@ using namespace Aptos::BCS;
 using namespace Aptos::Accounts;
 using namespace Aptos;
 // Extended PrivateKey for reference
-CryptoPP::SecByteBlock g_extendedPrivateKeyBytes = Utils::ByteVectorToSecBlock({
-    100, 245, 118, 3, 181, 138, 241, 105,
-    7, 193, 138, 134, 97, 35, 40, 110,
-    28, 188, 232, 151, 144, 97, 53, 88,
-    220, 23, 117, 171, 179, 252, 92, 140,
-    88, 110, 60, 141, 68, 125, 118, 121,
-    34, 46, 19, 144, 51, 227, 130, 2,
-    53, 227, 61, 165, 9, 30, 155, 11,
-    184, 241, 161, 18, 207, 12, 143, 245
-});
-CryptoPP::SecByteBlock g_privateKeyBytes = Utils::ByteVectorToSecBlock({
-    100, 245, 118, 3, 181, 138, 241, 105,
-    7, 193, 138, 134, 97, 35, 40, 110,
-    28, 188, 232, 151, 144, 97, 53, 88,
-    220, 23, 117, 171, 179, 252, 92, 140
-});
+CryptoPP::SecByteBlock g_extendedPrivateKeyBytes = Utils::ByteVectorToSecBlock({100, 245, 118, 3, 181, 138, 241, 105,
+                                                                                7, 193, 138, 134, 97, 35, 40, 110,
+                                                                                28, 188, 232, 151, 144, 97, 53, 88,
+                                                                                220, 23, 117, 171, 179, 252, 92, 140,
+                                                                                88, 110, 60, 141, 68, 125, 118, 121,
+                                                                                34, 46, 19, 144, 51, 227, 130, 2,
+                                                                                53, 227, 61, 165, 9, 30, 155, 11,
+                                                                                184, 241, 161, 18, 207, 12, 143, 245});
+CryptoPP::SecByteBlock g_privateKeyBytes = Utils::ByteVectorToSecBlock({100, 245, 118, 3, 181, 138, 241, 105,
+                                                                        7, 193, 138, 134, 97, 35, 40, 110,
+                                                                        28, 188, 232, 151, 144, 97, 53, 88,
+                                                                        220, 23, 117, 171, 179, 252, 92, 140});
 
 std::string g_privateKeyHex = "0x64f57603b58af16907c18a866123286e1cbce89790613558dc1775abb3fc5c8c";
 
-CryptoPP::SecByteBlock g_privateKeySerializedOutput = Utils::ByteVectorToSecBlock({
-    32, 100, 245, 118, 3, 181, 138, 241,
-    105, 7, 193, 138, 134, 97, 35, 40,
-    110, 28, 188, 232, 151, 144, 97, 53,
-    88, 220, 23, 117, 171, 179, 252, 92, 140
-});
+CryptoPP::SecByteBlock g_privateKeySerializedOutput = Utils::ByteVectorToSecBlock({32, 100, 245, 118, 3, 181, 138, 241,
+                                                                                   105, 7, 193, 138, 134, 97, 35, 40,
+                                                                                   110, 28, 188, 232, 151, 144, 97, 53,
+                                                                                   88, 220, 23, 117, 171, 179, 252, 92, 140});
 
-CryptoPP::SecByteBlock g_publicKeyBytes = Utils::ByteVectorToSecBlock({
-    88, 110, 60, 141, 68, 125, 118, 121,
-    34, 46, 19, 144, 51, 227, 130, 2,
-    53, 227, 61, 165, 9, 30, 155, 11,
-    184, 241, 161, 18, 207, 12, 143, 245
-});
+CryptoPP::SecByteBlock g_publicKeyBytes = Utils::ByteVectorToSecBlock({88, 110, 60, 141, 68, 125, 118, 121,
+                                                                       34, 46, 19, 144, 51, 227, 130, 2,
+                                                                       53, 227, 61, 165, 9, 30, 155, 11,
+                                                                       184, 241, 161, 18, 207, 12, 143, 245});
 std::string g_publicKeyHex = "0x586e3c8d447d7679222e139033e3820235e33da5091e9b0bb8f1a112cf0c8ff5";
 
 std::string g_accountAddress = "0x9f628c43d1c1c0f54683cf5ccbd2b944608df4ff2649841053b1790a4d7c187d";
 
-CryptoPP::SecByteBlock g_publicKeySerializedOutput = Utils::ByteVectorToSecBlock({
-    32, 88, 110, 60, 141, 68, 125, 118,
-    121, 34, 46, 19, 144, 51, 227, 130,
-    2, 53, 227, 61, 165, 9, 30, 155,
-    11, 184, 241, 161, 18, 207, 12, 143, 245
-});
+CryptoPP::SecByteBlock g_publicKeySerializedOutput = Utils::ByteVectorToSecBlock({32, 88, 110, 60, 141, 68, 125, 118,
+                                                                                  121, 34, 46, 19, 144, 51, 227, 130,
+                                                                                  2, 53, 227, 61, 165, 9, 30, 155,
+                                                                                  11, 184, 241, 161, 18, 207, 12, 143, 245});
 
 CryptoPP::SecByteBlock g_privateKeyBytesInvalid = Utils::ByteVectorToSecBlock({
-    100, 245, 118, 3, 181, 138, 241, 105,
-    7, 193, 138, 134, 97, 35, 40, 110,
-    28, 188, 232, 151, 144, 97, 53, 88,
-    220, 23, 117, 171, 179, 252, 92, 140,
-    88, 110, 60, 141, 68, 125, 118, 121,
-    34, 46, 19, 144, 51, 227, 130, 2,
-    53, 227, 61, 165, 9, 30, 155, 11,
+    100,
+    245,
+    118,
+    3,
+    181,
+    138,
+    241,
+    105,
+    7,
+    193,
+    138,
+    134,
+    97,
+    35,
+    40,
+    110,
+    28,
+    188,
+    232,
+    151,
+    144,
+    97,
+    53,
+    88,
+    220,
+    23,
+    117,
+    171,
+    179,
+    252,
+    92,
+    140,
+    88,
+    110,
+    60,
+    141,
+    68,
+    125,
+    118,
+    121,
+    34,
+    46,
+    19,
+    144,
+    51,
+    227,
+    130,
+    2,
+    53,
+    227,
+    61,
+    165,
+    9,
+    30,
+    155,
+    11,
 });
 
-CryptoPP::SecByteBlock g_publicKeyBytesInvalid = Utils::ByteVectorToSecBlock({
-    88, 110, 60, 141, 68, 125, 118, 121,
-    34, 46, 19, 144, 51, 227, 130, 2,
-    53, 227, 61, 165, 9, 30, 155, 11,
-    184, 241, 161, 18, 207, 12, 143, 245
-});
+CryptoPP::SecByteBlock g_publicKeyBytesInvalid = Utils::ByteVectorToSecBlock({88, 110, 60, 141, 68, 125, 118, 121,
+                                                                              34, 46, 19, 144, 51, 227, 130, 2,
+                                                                              53, 227, 61, 165, 9, 30, 155, 11,
+                                                                              184, 241, 161, 18, 207, 12, 143, 245});
 
 std::string g_accountAddressHex = "0x9f628c43d1c1c0f54683cf5ccbd2b944608df4ff2649841053b1790a4d7c187d";
 std::string g_ccountAuthKeyHex = "0x9f628c43d1c1c0f54683cf5ccbd2b944608df4ff2649841053b1790a4d7c187d";
 
-CryptoPP::SecByteBlock g_messageUtf8Bytes = Utils::ByteVectorToSecBlock({
-                                                                         87, 69, 76, 67, 79, 77, 69, 32,
-                                                                         84, 79, 32, 65, 80, 84, 79, 83, 33 });
+CryptoPP::SecByteBlock g_messageUtf8Bytes = Utils::ByteVectorToSecBlock({87, 69, 76, 67, 79, 77, 69, 32,
+                                                                         84, 79, 32, 65, 80, 84, 79, 83, 33});
 std::string g_message = "WELCOME TO APTOS!";
 
-CryptoPP::SecByteBlock g_signatureBytes = Utils::ByteVectorToSecBlock({
-    170, 66, 187, 194, 169, 252, 117, 27,
-    238, 238, 59, 49, 43, 132, 82, 196,
-    69, 199, 212, 171, 134, 152, 3, 107,
-    12, 249, 242, 228, 106, 9, 139, 176,
-    44, 54, 159, 188, 141, 254, 253, 35,
-    26, 18, 141, 138, 75, 185, 173, 207,
-    228, 94, 7, 24, 139, 117, 140, 58,
-    211, 152, 215, 248, 78, 130, 239, 5
-});
+CryptoPP::SecByteBlock g_signatureBytes = Utils::ByteVectorToSecBlock({170, 66, 187, 194, 169, 252, 117, 27,
+                                                                       238, 238, 59, 49, 43, 132, 82, 196,
+                                                                       69, 199, 212, 171, 134, 152, 3, 107,
+                                                                       12, 249, 242, 228, 106, 9, 139, 176,
+                                                                       44, 54, 159, 188, 141, 254, 253, 35,
+                                                                       26, 18, 141, 138, 75, 185, 173, 207,
+                                                                       228, 94, 7, 24, 139, 117, 140, 58,
+                                                                       211, 152, 215, 248, 78, 130, 239, 5});
 
 Ed25519Signature signatureObject(g_signatureBytes);
 
 std::string g_signatureHex = "0xaa42bbc2a9fc751beeee3b312b8452c445c7d4ab8698036b0cf9f2e46a098bb02c369fbc8dfefd231a128d8a4bb9adcfe45e07188b758c3ad398d7f84e82ef05";
 
-CryptoPP::SecByteBlock g_signatureSerializedOutput = Utils::ByteVectorToSecBlock({
-                                                                                  64, 170, 66, 187, 194, 169, 252, 117,
+CryptoPP::SecByteBlock g_signatureSerializedOutput = Utils::ByteVectorToSecBlock({64, 170, 66, 187, 194, 169, 252, 117,
                                                                                   27, 238, 238, 59, 49, 43, 132, 82,
                                                                                   196, 69, 199, 212, 171, 134, 152, 3,
                                                                                   107, 12, 249, 242, 228, 106, 9, 139,
                                                                                   176, 44, 54, 159, 188, 141, 254, 253,
                                                                                   35, 26, 18, 141, 138, 75, 185, 173,
                                                                                   207, 228, 94, 7, 24, 139, 117, 140,
-                                                                                  58, 211, 152, 215, 248, 78, 130, 239, 5 });
+                                                                                  58, 211, 152, 215, 248, 78, 130, 239, 5});
 
-TEST(AccountTest, GeneratePrivateKeysWithBytesSuccess) {
+TEST(AccountTest, GeneratePrivateKeysWithBytesSuccess)
+{
     std::unique_ptr<PrivateKey> privateKey = std::make_unique<PrivateKey>(g_privateKeyBytes);
     ASSERT_TRUE(privateKey->KeyBytes().data() != nullptr);
     ASSERT_EQ(32, privateKey->KeyBytes().size());
@@ -188,10 +222,11 @@ TEST(AccountTest, PrivateKeyFromBytesSignSuccess)
 
 TEST(AccountTest, InvalidKeyGeneration)
 {
-    ASSERT_THROW( {
+    ASSERT_THROW({
         std::unique_ptr<PrivateKey> privateKey = std::make_unique<PrivateKey>(g_privateKeyBytesInvalid);
         std::unique_ptr<PublicKey> publicKey = std::make_unique<PublicKey>(g_publicKeyBytesInvalid);
-    },std::invalid_argument);
+    },
+                 std::invalid_argument);
 }
 
 TEST(AccountTest, PublicKeySerialization)
@@ -257,14 +292,15 @@ TEST(AccountTest, SignatureDeserialization)
     ASSERT_EQ(sig, *actualSig);
 }
 
-TEST(AccountTests, GenerateAccountAddressFromPublicKey) {
+TEST(AccountTests, GenerateAccountAddressFromPublicKey)
+{
     PublicKey publicKey(g_publicKeyBytes);
     AccountAddress accountAddress = AccountAddress::FromKey(publicKey.KeyBytes());
     ASSERT_EQ(accountAddress.ToString(), g_accountAddressHex);
 }
 
-
-TEST(AccountTests, CreateAccountFromKeys) {
+TEST(AccountTests, CreateAccountFromKeys)
+{
     Account acc(g_privateKeyBytes, g_publicKeyBytes);
     auto privateKey = acc.getPrivateKey();
     auto publicKey = acc.getPublicKey();
@@ -276,7 +312,8 @@ TEST(AccountTests, CreateAccountFromKeys) {
     ASSERT_TRUE(publicKey->Key() == validPublicKey.Key());
 }
 
-TEST(AccountTests, GenerateAccountFromPrivateKeyStringSuccess) {
+TEST(AccountTests, GenerateAccountFromPrivateKeyStringSuccess)
+{
     Account acc = Account::LoadKey(g_privateKeyHex);
     auto privateKey = acc.getPrivateKey();
     auto publicKey = acc.getPublicKey();
@@ -289,30 +326,35 @@ TEST(AccountTests, GenerateAccountFromPrivateKeyStringSuccess) {
 
     ASSERT_EQ(g_accountAddress, acc.getAccountAddress()->ToString());
 }
-TEST(AccountTests, CreateDefaultAccountSuccess) {
+TEST(AccountTests, CreateDefaultAccountSuccess)
+{
     Account acc = Account();
     ASSERT_TRUE(acc.getPrivateKey() != nullptr);
     ASSERT_TRUE(acc.getPublicKey() != nullptr);
     ASSERT_TRUE(acc.getAccountAddress() != nullptr);
 }
 
-TEST(AccountTests, InvalidAccountCreationWithShorterKeys) {
+TEST(AccountTests, InvalidAccountCreationWithShorterKeys)
+{
     ASSERT_THROW(Account acc(g_privateKeyBytesInvalid, g_publicKeyBytesInvalid), std::invalid_argument);
 }
 
-TEST(AccountTests, AuthKeyGeneration) {
+TEST(AccountTests, AuthKeyGeneration)
+{
     Account acc = Account(g_privateKeyBytes, g_publicKeyBytes);
     std::string authKey = acc.AuthKey();
     ASSERT_EQ(authKey, g_ccountAuthKeyHex);
 }
 
-TEST(AccountTests, AccountSignSuccess) {
+TEST(AccountTests, AccountSignSuccess)
+{
     Account acc = Account(g_privateKeyBytes, g_publicKeyBytes);
     Ed25519Signature signature = acc.Sign(g_messageUtf8Bytes);
     ASSERT_EQ(signature, signatureObject);
 }
 
-TEST(AccountTests, AccountSignVerify) {
+TEST(AccountTests, AccountSignVerify)
+{
     Account acc = Account(g_privateKeyBytes, g_publicKeyBytes);
     Ed25519Signature signature = acc.Sign(g_messageUtf8Bytes);
     ASSERT_EQ(signature, signatureObject);
@@ -320,15 +362,13 @@ TEST(AccountTests, AccountSignVerify) {
     ASSERT_TRUE(verify);
 }
 
-
-TEST(AccountTests, TestMultisig) {
-    //Generate signatory private keys.
+TEST(AccountTests, TestMultisig)
+{
+    // Generate signatory private keys.
     PrivateKey privateKey1 = PrivateKey::FromHex(
-        "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5fe"
-        );
+        "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5fe");
     PrivateKey privateKey2 = PrivateKey::FromHex(
-        "1e70e49b78f976644e2c51754a2f049d3ff041869c669523ba95b172c7329901"
-        );
+        "1e70e49b78f976644e2c51754a2f049d3ff041869c669523ba95b172c7329901");
 
     // Generate multisig public key with threshold of 1.
     std::vector<PublicKey> publicKeys;
@@ -341,8 +381,8 @@ TEST(AccountTests, TestMultisig) {
     multiSigPublicKey.Serialize(serializer);
     std::string publicKeyBcs = Utils::HexStringFromByteArray(serializer.GetBytes());
     // Check against expected BCS representation.
-    std::string expectedPublicKeyBcs = "41754bb6a4720a658bdd5f532995955db0971ad3519acbde2f1149c3857348006c" \
-        "1634cd4607073f2be4a6f2aadc2b866ddb117398a675f2096ed906b20e0bf2c901";
+    std::string expectedPublicKeyBcs = "41754bb6a4720a658bdd5f532995955db0971ad3519acbde2f1149c3857348006c"
+                                       "1634cd4607073f2be4a6f2aadc2b866ddb117398a675f2096ed906b20e0bf2c901";
 
     ASSERT_EQ(publicKeyBcs, expectedPublicKeyBcs);
 
@@ -365,8 +405,7 @@ TEST(AccountTests, TestMultisig) {
 
     // Compose multisig signature.
     std::vector<std::pair<PublicKey, Ed25519Signature>> signMap = {
-        std::make_pair(privateKey2.GetPublicKey(), signature)
-    };
+        std::make_pair(privateKey2.GetPublicKey(), signature)};
     MultiSignature multiSignature = MultiSignature(multisigPublicKey, signMap);
 
     // Get signature BCS representation.
@@ -381,17 +420,15 @@ TEST(AccountTests, TestMultisig) {
     ASSERT_EQ(multisigSignatureBcs, expectedMultisigSignatureBcs);
 }
 
-
-TEST(AccountTests, TestMultiEd25519) {
+TEST(AccountTests, TestMultiEd25519)
+{
     PrivateKey privateKey1 = PrivateKey::FromHex(
-        "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5fe"
-        );
+        "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5fe");
 
     PrivateKey privateKey2 = PrivateKey::FromHex(
-        "1e70e49b78f976644e2c51754a2f049d3ff041869c669523ba95b172c7329901"
-        );
+        "1e70e49b78f976644e2c51754a2f049d3ff041869c669523ba95b172c7329901");
 
-    MultiPublicKey multiSigPublicKey = MultiPublicKey(std::vector<PublicKey> {privateKey1.GetPublicKey(), privateKey2.GetPublicKey()}, 1);
+    MultiPublicKey multiSigPublicKey = MultiPublicKey(std::vector<PublicKey>{privateKey1.GetPublicKey(), privateKey2.GetPublicKey()}, 1);
 
     AccountAddress expected = AccountAddress::FromHex("835bb8c5ee481062946b18bbb3b42a40b998d6bf5316ca63834c959dc739acf0");
 
@@ -400,8 +437,8 @@ TEST(AccountTests, TestMultiEd25519) {
     ASSERT_EQ(expected, actual);
 }
 
-
-TEST(AccountTests, TestResourceAccount) {
+TEST(AccountTests, TestResourceAccount)
+{
     AccountAddress baseAddress = AccountAddress::FromHex("b0b");
     AccountAddress expected = AccountAddress::FromHex("ee89f8c763c27f9d942d496c1a0dcf32d5eacfe78416f9486b8db66155b163b0");
 
@@ -411,8 +448,8 @@ TEST(AccountTests, TestResourceAccount) {
     ASSERT_EQ(actual, expected);
 }
 
-
-TEST(AccountTests, TestNamedObject) {
+TEST(AccountTests, TestNamedObject)
+{
     AccountAddress baseAddress = AccountAddress::FromHex("b0b");
     AccountAddress expected = AccountAddress::FromHex("f417184602a828a3819edf5e36285ebef5e4db1ba36270be580d6fd2d7bcc321");
 
@@ -423,8 +460,8 @@ TEST(AccountTests, TestNamedObject) {
     ASSERT_EQ(actual, expected);
 }
 
-
-TEST(AccountTests, TestCollection) {
+TEST(AccountTests, TestCollection)
+{
     AccountAddress baseAddress = AccountAddress::FromHex("b0b");
     AccountAddress expected = AccountAddress::FromHex("f417184602a828a3819edf5e36285ebef5e4db1ba36270be580d6fd2d7bcc321");
 
@@ -433,8 +470,8 @@ TEST(AccountTests, TestCollection) {
     ASSERT_EQ(actual, expected);
 }
 
-
-TEST(AccountTests, TestToken) {
+TEST(AccountTests, TestToken)
+{
     AccountAddress baseAddress = AccountAddress::FromHex("b0b");
     AccountAddress expected = AccountAddress::FromHex("e20d1f22a5400ba7be0f515b7cbd00edc42dbcc31acc01e31128b2b5ddb3c56e");
 
@@ -443,9 +480,8 @@ TEST(AccountTests, TestToken) {
     ASSERT_EQ(actual, expected);
 }
 
-
-
-TEST(AccountTests, TestToStandardString) {
+TEST(AccountTests, TestToStandardString)
+{
     // Test special address: 0x0
     ASSERT_EQ(AccountAddress::FromHex("0x0000000000000000000000000000000000000000000000000000000000000000").ToString(), "0x0");
 
@@ -538,22 +574,21 @@ TEST(AuthenticationKeyTest, FromMultiEd25519PublicKey)
 
     ASSERT_FALSE(key.DerivedAddress().empty());
 }
-   
 
 TEST(PrivateKeyTest, ConstructorWithKeyInvalid)
 {
     // Setup: Create a PrivateKey instance
     std::string keyString = "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5feaa";
-    
-    ASSERT_THROW(PrivateKey privateKey(keyString),std::invalid_argument);
+
+    ASSERT_THROW(PrivateKey privateKey(keyString), std::invalid_argument);
 }
 
 TEST(PrivateKeyTest, ConstructorWithKeyEmpty)
 {
     // Setup: Create a PrivateKey instance
     std::string keyString = "";
-    
-    ASSERT_THROW(PrivateKey privateKey(keyString),std::invalid_argument);
+
+    ASSERT_THROW(PrivateKey privateKey(keyString), std::invalid_argument);
 }
 
 TEST(PrivateKeyTest, RandomMethod)
@@ -568,11 +603,11 @@ TEST(PrivateKeyTest, RandomMethod)
 }
 
 TEST(PrivateKeyTest, SerializeMethodWithEmpty)
- {
-     // Setup: Create a PrivateKey instance
-     std::string keyString = "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5fe";
-     PrivateKey privateKey(keyString);
- 
+{
+    // Setup: Create a PrivateKey instance
+    std::string keyString = "4e5e3be60f4bbd5e98d086d932f3ce779ff4b58da99bf9e5241ae1212a29e5fe";
+    PrivateKey privateKey(keyString);
+
     Serialization serializer;
 
     // Execute: Call the Serialize method
@@ -583,8 +618,7 @@ TEST(PrivateKeyTest, SerializeMethodWithEmpty)
 
     // Verify: Check if the serialized data matches the expected output
     ASSERT_TRUE(serializedData.size() > 0);
- }
-
+}
 
 TEST(PrivateKeyTest, EqualsWithDifferentKeys)
 {
@@ -666,8 +700,6 @@ TEST(PrivateKeyTest, SignEmptyMessage)
     // Optionally fill validBlock with some data
     ASSERT_NO_THROW(privateKey.Sign(Utils::StringToSecByteBlock("multisig")));
 }
-
-
 
 TEST(PublicKeyTest, IsOnCurveAlwaysReturnsFalse)
 {
@@ -871,8 +903,8 @@ TEST(MultiPublicKeyTest, ConstructorFail)
     int validThreshold = 15;
     std::vector<uint8_t> keyBytes;
 
-    ASSERT_THROW(Aptos::Accounts::MultiPublicKey(publicKeys, validThreshold),std::invalid_argument);
-    ASSERT_THROW(Aptos::Accounts::MultiPublicKey::FromBytes(keyBytes),std::invalid_argument);
+    ASSERT_THROW(Aptos::Accounts::MultiPublicKey(publicKeys, validThreshold), std::invalid_argument);
+    ASSERT_THROW(Aptos::Accounts::MultiPublicKey::FromBytes(keyBytes), std::invalid_argument);
 }
 
 TEST(MultiPublicKeyTest, NoCheck)
@@ -892,18 +924,16 @@ TEST(MultiPublicKeyTest, ConstructorFailThressholdMin)
     // Setup: Create a vector of PublicKeys and define a valid threshold
     PublicKey key1(g_publicKeyBytes);
     PublicKey key2(g_publicKeyHex);
-     std::vector<PublicKey> publicKeys = {key1, key2};
+    std::vector<PublicKey> publicKeys = {key1, key2};
     int validThreshold = 0;
-     std::vector<uint8_t> keyBytes({
-    88, 110, 60, 141, 68, 125, 118, 121,
-    34, 46, 19, 144, 51, 227, 130, 2,
-    53, 227, 61, 165, 9, 30, 155, 11,
-    184, 241, 161, 18, 207, 12, 143, 245
-});
-     keyBytes.push_back((uint8_t)0);
+    std::vector<uint8_t> keyBytes({88, 110, 60, 141, 68, 125, 118, 121,
+                                   34, 46, 19, 144, 51, 227, 130, 2,
+                                   53, 227, 61, 165, 9, 30, 155, 11,
+                                   184, 241, 161, 18, 207, 12, 143, 245});
+    keyBytes.push_back((uint8_t)0);
 
-    ASSERT_THROW(Aptos::Accounts::MultiPublicKey(publicKeys, validThreshold),std::invalid_argument);
-    ASSERT_THROW(Aptos::Accounts::MultiPublicKey::FromBytes(keyBytes),std::invalid_argument);
+    ASSERT_THROW(Aptos::Accounts::MultiPublicKey(publicKeys, validThreshold), std::invalid_argument);
+    ASSERT_THROW(Aptos::Accounts::MultiPublicKey::FromBytes(keyBytes), std::invalid_argument);
 }
 
 TEST(MultiPublicKeyTest, ToString)
@@ -911,29 +941,28 @@ TEST(MultiPublicKeyTest, ToString)
     // Setup: Create a vector of PublicKeys and define a valid threshold
     PublicKey key1(g_publicKeyBytes);
     PublicKey key2(g_publicKeyHex);
-     std::vector<PublicKey> publicKeys = {key1, key2};
+    std::vector<PublicKey> publicKeys = {key1, key2};
     int validThreshold = 1;
 
     Aptos::Accounts::MultiPublicKey multiPublicKey(publicKeys, validThreshold);
-    
 
-    ASSERT_EQ(multiPublicKey.ToString(),"1-of-2 Multi-Ed25519 public key");
+    ASSERT_EQ(multiPublicKey.ToString(), "1-of-2 Multi-Ed25519 public key");
 }
 
-TEST(Ed25519Bip32Test,IsValidPath)
+TEST(Ed25519Bip32Test, IsValidPath)
 {
     bool result = Ed25519Bip32::IsValidPath("m/44'/0'/0'");
     ASSERT_TRUE(result);
 }
 
-TEST(Ed25519Bip32Test,DerivePath)
+TEST(Ed25519Bip32Test, DerivePath)
 {
     std::vector<uint8_t> seed;
     Ed25519Bip32 ed25519Bip32(seed);
-    ASSERT_THROW(ed25519Bip32.DerivePath(""),std::invalid_argument);
+    ASSERT_THROW(ed25519Bip32.DerivePath(""), std::invalid_argument);
 }
 
-TEST(Ed25519Bip32Test,InValidPath)
+TEST(Ed25519Bip32Test, InValidPath)
 {
 
     // Test with a path that doesn't start with 'm'
@@ -952,9 +981,10 @@ TEST(Ed25519Bip32Test,InValidPath)
     EXPECT_FALSE(Ed25519Bip32::IsValidPath("m/'/0'/0'"));
 }
 
-TEST(PrivateKey, keyEmpty){
+TEST(PrivateKey, keyEmpty)
+{
     PrivateKey privateKey(g_privateKeyHex);
     CryptoPP::SecByteBlock value;
     EXPECT_ANY_THROW(privateKey.KeyBytes(value));
-    EXPECT_ANY_THROW( PrivateKey privateKey2(value));
+    EXPECT_ANY_THROW(PrivateKey privateKey2(value));
 }
