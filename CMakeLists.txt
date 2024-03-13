@@ -318,8 +318,8 @@ if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 add_library(AptosUILogic SHARED
-    AptosUILogic/uicontrollerlogic.h
-    AptosUILogic/uicontrollerlogic.cpp
+    AptosUI/Source/LIB/uicontrollerlogic.h
+    AptosUI/Source/LIB//uicontrollerlogic.cpp
 )
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
   target_link_libraries(AptosUILogic PRIVATE nlohmann_json::nlohmann_json pthread Aptos bip3x ${CryptoPP_LIB})
@@ -329,7 +329,7 @@ else()
 endif()
 
 add_executable(AptosUILogicTest
-    AptosUILogic/main.cpp
+  AptosUI/Source/Test/main.cpp
 )
 
 target_link_libraries(AptosUILogicTest PRIVATE Aptos AptosUILogic )
