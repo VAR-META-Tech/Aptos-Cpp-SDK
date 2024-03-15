@@ -140,12 +140,12 @@ add_library(Aptos SHARED
         Src/Transactions/TransactionArgument.cpp
         Src/Transactions/SignedTransaction.h
         Src/Transactions/SignedTransaction.cpp
-        Src/Accounts/PublicKey.cpp
-        Src/Accounts/PublicKey.h
+        Src/Accounts/Ed25519/PublicKey.cpp
+        Src/Accounts/Ed25519/PublicKey.h
         Src/HDWallet/Utils/Utils.cpp
         Src/HDWallet/Utils/Utils.h
-        Src/Accounts/PrivateKey.cpp
-        Src/Accounts/PrivateKey.h
+        Src/Accounts/Ed25519/PrivateKey.cpp
+        Src/Accounts/Ed25519/PrivateKey.h
         Src/Accounts/Types/MultiEd25519PublicKey.cpp
         Src/Accounts/Ed25519Signature.cpp
         Src/Accounts/Ed25519Signature.h

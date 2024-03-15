@@ -6,8 +6,8 @@
 #include <string>
 #define private public
 #include "../Accounts/Ed25519Signature.h"
-#include "../Accounts/PublicKey.h"
-#include "../Accounts/PrivateKey.h"
+#include "../Accounts/Ed25519/PublicKey.h"
+#include "../Accounts/Ed25519/PrivateKey.h"
 #include "../Accounts/AccountAddress.h"
 #include "../BCS/BCS.h"
 #include "../Accounts/multipublickey.h"

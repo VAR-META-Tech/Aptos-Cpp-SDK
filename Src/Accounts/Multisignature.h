@@ -3,7 +3,7 @@
 #include <vector>
 #include <tuple>
 #include "Ed25519Signature.h"
-#include "PublicKey.h"
+#include "Ed25519/PublicKey.h"
 #include "multipublickey.h"
 #include "../BCS/BCS.h"
 

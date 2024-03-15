@@ -5,7 +5,7 @@
 #include <vector>
 #include "../Accounts/AccountAddress.h"
 #include "TransactionPayload.h"
-#include "../Accounts/PrivateKey.h"
+#include "../Accounts/Ed25519/PrivateKey.h"
 
 namespace Aptos::BCS
 {

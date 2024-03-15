@@ -6,7 +6,7 @@
 #include <cryptopp/xed25519.h>
 #include <sstream>
 #include <iomanip>
-#include "../../Accounts/PrivateKey.h"
+#include "../../Accounts/Ed25519/PrivateKey.h"
 
 using namespace Aptos::Accounts;
 namespace Aptos::Utils

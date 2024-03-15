@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <stdexcept>
-#include "PublicKey.h"
+#include "Ed25519/PublicKey.h"
 #include "../BCS/BCS.h"
 
 namespace Aptos::Accounts

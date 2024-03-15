@@ -3,8 +3,8 @@
 //
 
 #include "PublicKey.h"
-#include "Ed25519Signature.h"
-#include "../HDWallet/Utils/Utils.h"
+#include "../Ed25519Signature.h"
+#include "../../HDWallet/Utils/Utils.h"
 #include "cryptopp/hex.h"
 #include "cryptopp/xed25519.h"
 

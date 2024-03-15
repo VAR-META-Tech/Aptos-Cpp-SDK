@@ -7,8 +7,8 @@
 
 #include <stdlib.h>
 #include <cstring>
-#include "PrivateKey.h"
-#include "PublicKey.h"
+#include "Ed25519/PrivateKey.h"
+#include "Ed25519/PublicKey.h"
 #include "AccountAddress.h"
 #include <memory>
 

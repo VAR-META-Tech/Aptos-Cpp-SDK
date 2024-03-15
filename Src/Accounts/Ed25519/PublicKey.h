@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
-#include "Ed25519Signature.h"
+#include "../Ed25519Signature.h"
 
 namespace Aptos::Accounts
 {
