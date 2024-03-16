@@ -9,7 +9,7 @@
 #include <stdexcept>
 #include "../Ed25519Signature.h"
 
-namespace Aptos::Accounts
+namespace Aptos::Accounts::Ed25519
 {
     /// <summary>
     /// Represents a 32-byte public key.

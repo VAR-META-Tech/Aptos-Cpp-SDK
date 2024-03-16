@@ -21,6 +21,8 @@
 using namespace Aptos::BCS;
 using namespace Aptos::Accounts;
 using namespace Aptos;
+using namespace Aptos::Accounts::Ed25519;
+
 // Extended PrivateKey for reference
 CryptoPP::SecByteBlock g_extendedPrivateKeyBytes = Utils::ByteVectorToSecBlock({100, 245, 118, 3, 181, 138, 241, 105,
                                                                                 7, 193, 138, 134, 97, 35, 40, 110,

@@ -7,6 +7,7 @@
 #include "../Ed25519/PublicKey.h"
 #include <sstream>
 
+using namespace Aptos::Accounts::Ed25519;
 namespace Aptos
 {
     namespace Accounts

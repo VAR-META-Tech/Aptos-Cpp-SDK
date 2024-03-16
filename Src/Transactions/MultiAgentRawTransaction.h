@@ -5,6 +5,9 @@
 #include <vector>
 #include "rawtransaction.h"
 #include "BCS/BCS.h"
+
+using namespace Aptos::Accounts::Ed25519;
+
 namespace Aptos::BCS
 {
     class MultiAgentRawTransaction
@@ -15,8 +18,8 @@ namespace Aptos::BCS
         RawTransaction Inner();
         std::vector<uint8_t> Prehash();
         std::vector<uint8_t> Keyed();
-        Accounts::Ed25519Signature Sign(Accounts::PrivateKey key);
-        bool Verify(const Accounts::PublicKey &key, const Accounts::Ed25519Signature &signature);
+        Accounts::Ed25519Signature Sign(PrivateKey key);
+        bool Verify(const PublicKey &key, const Accounts::Ed25519Signature &signature);
 
     private:
         RawTransaction rawTransaction;

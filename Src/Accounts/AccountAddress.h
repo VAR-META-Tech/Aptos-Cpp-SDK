@@ -8,6 +8,7 @@
 #include "../BCS/BCS.h"
 #include <cryptopp/xed25519.h>
 #include "Multipublickey.h"
+using namespace Aptos::Accounts::Ed25519;
 
 namespace Aptos::Accounts
 {

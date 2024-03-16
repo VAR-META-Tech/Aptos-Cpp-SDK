@@ -12,6 +12,8 @@
 #include "AccountAddress.h"
 #include <memory>
 
+using namespace Aptos::Accounts::Ed25519;
+
 namespace Aptos::Accounts
 {
     /// <summary>
@@ -81,7 +83,7 @@ namespace Aptos::Accounts
         std::shared_ptr<AccountAddress> getAccountAddress() const;
 
     private:
-        std::shared_ptr<PrivateKey> m_privateKey = nullptr ;
+        std::shared_ptr<PrivateKey> m_privateKey = nullptr;
         std::shared_ptr<PublicKey> m_publicKey = nullptr;
         std::shared_ptr<AccountAddress> m_accountAddress = nullptr;
     };

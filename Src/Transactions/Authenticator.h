@@ -7,6 +7,8 @@
 #include "../Accounts/AccountAddress.h"
 #include "../Accounts/multisignature.h"
 
+using namespace Aptos::Accounts::Ed25519;
+
 namespace Aptos::BCS
 {
     /// <summary>
@@ -93,7 +95,7 @@ namespace Aptos::BCS
         /// </summary>
         /// <param name="publicKey"></param>
         /// <param name="signature"></param>
-        Ed25519Authenticator(Accounts::PublicKey publicKey, Accounts::Ed25519Signature signature);
+        Ed25519Authenticator(PublicKey publicKey, Accounts::Ed25519Signature signature);
 
         /// <summary>
         /// Verifies the data with the signature.
@@ -121,7 +123,7 @@ namespace Aptos::BCS
         /// <summary>
         /// The authenticators public key.
         /// </summary>
-        Accounts::PublicKey m_publicKey;
+        PublicKey m_publicKey;
 
         /// <summary>
         /// The authenticator's public key.

@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include "Ed25519/PublicKey.h"
 #include "../BCS/BCS.h"
+using namespace Aptos::Accounts::Ed25519;
 
 namespace Aptos::Accounts
 {

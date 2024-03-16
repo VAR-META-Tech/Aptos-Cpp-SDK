@@ -8,6 +8,7 @@
 
 using namespace Aptos::BCS;
 using namespace Aptos::Accounts;
+using namespace Aptos::Accounts::Ed25519;
 
 TEST(SerializationTest, BoolSerialize)
 {

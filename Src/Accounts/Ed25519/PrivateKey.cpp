@@ -11,7 +11,7 @@
 #include <iostream>
 #include "../../HDWallet/Utils/Utils.h"
 
-namespace Aptos::Accounts
+namespace Aptos::Accounts::Ed25519
 {
     std::string PrivateKey::Key()
     {

@@ -25,6 +25,7 @@ using CryptoPP::byte;
 using namespace Aptos;
 using namespace Aptos::BCS;
 using namespace Aptos::Accounts;
+using namespace Aptos::Accounts::Ed25519;
 
 AccountAddress testAddress()
 {

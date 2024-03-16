@@ -13,7 +13,7 @@
 #include <stdexcept>
 #include <cryptopp/xed25519.h>
 
-namespace Aptos::Accounts
+namespace Aptos::Accounts::Ed25519
 {
     /// <summary>
     /// Represents a 64-byte extended private key.
