@@ -1,7 +1,7 @@
 #include "Script.h"
 #include <stdexcept>
-#include "Serialization.h"
-#include "Deserialization.h"
+#include "../Serialization.h"
+#include "../Deserialization.h"
 #include <sstream>
 
 namespace Aptos::BCS

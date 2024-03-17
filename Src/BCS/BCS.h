@@ -11,7 +11,7 @@
 #include "Bytes.h"
 #include "ByteSequence.h"
 #include "Deserialization.h"
-#include "Script.h"
+#include "Script/Script.h"
 #include "ScriptArgument.h"
 #include "Sequence.h"
 #include "Serialization.h"

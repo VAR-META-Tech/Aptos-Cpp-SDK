@@ -128,8 +128,8 @@ add_library(Aptos SHARED
         Src/Transactions/MultiAgentRawTransaction.cpp
         Src/Transactions/TransactionPayload.h
         Src/Transactions/TransactionPayload.cpp
-        Src/BCS/Script.h
-        Src/BCS/Script.cpp
+        Src/BCS/Script/Script.h
+        Src/BCS/Script/Script.cpp
         Src/BCS/ScriptArgument.h
         Src/BCS/ScriptArgument.cpp
         Src/BCS/EntryFunctions/EntryFunction.h
