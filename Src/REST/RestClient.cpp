@@ -7,7 +7,7 @@
 #include "../HDWallet/Utils/Utils.h"
 #include "Constant.h"
 #include <thread>
-#include "../BCS/ModuleId.h"
+#include "../BCS/Modules/ModuleId.h"
 #include "../BCS/EntryFunction.h"
 #include "../BCS/BCS.h"
 #include "Model/AccountResourceTokenStore.h"

@@ -5,7 +5,7 @@
 #include <list>
 #include "TagSequence.h"
 #include "Sequence.h"
-#include "ModuleId.h"
+#include "Modules/ModuleId.h"
 
 namespace Aptos::BCS
 {
@@ -17,7 +17,7 @@ namespace Aptos::BCS
     public:
         EntryFunction() = default;
         explicit EntryFunction(const ModuleId &moduleId, const std::string &function,
-                      const TagSequence &typeArgs, const Sequence &args);
+                               const TagSequence &typeArgs, const Sequence &args);
 
         /// <summary>
         /// Converts a Sequence of ISerializable objects and converts it to a Sequence of Bytes objects

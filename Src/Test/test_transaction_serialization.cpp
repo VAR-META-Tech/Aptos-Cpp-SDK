@@ -9,7 +9,7 @@
 #include <cryptopp/secblock.h>
 #include <cryptopp/aes.h>
 #include <cryptopp/modes.h>
-#include "../BCS/ModuleId.h"
+#include "../BCS/Modules/ModuleId.h"
 #include "../BCS/EntryFunction.h"
 #include "../BCS/StructTag.h"
 #include "../BCS/BCS.h"
