@@ -1,6 +1,6 @@
 #include "EntryFunction.h"
 #include <stdexcept>
-#include "Bytes.h"
+#include "../Bytes.h"
 
 namespace Aptos::BCS
 {

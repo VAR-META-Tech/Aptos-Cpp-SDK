@@ -132,8 +132,8 @@ add_library(Aptos SHARED
         Src/BCS/Script.cpp
         Src/BCS/ScriptArgument.h
         Src/BCS/ScriptArgument.cpp
-        Src/BCS/EntryFunction.h
-        Src/BCS/EntryFunction.cpp
+        Src/BCS/EntryFunctions/EntryFunction.h
+        Src/BCS/EntryFunctions/EntryFunction.cpp
         Src/BCS/Modules/ModuleId.h
         Src/BCS/Modules/ModuleId.cpp
         Src/Transactions/TransactionArgument.h

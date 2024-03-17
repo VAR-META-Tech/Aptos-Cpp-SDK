@@ -8,7 +8,7 @@
 #include "Constant.h"
 #include <thread>
 #include "../BCS/Modules/ModuleId.h"
-#include "../BCS/EntryFunction.h"
+#include "../BCS/EntryFunctions/EntryFunction.h"
 #include "../BCS/BCS.h"
 #include "Model/AccountResourceTokenStore.h"
 #include "RequestClient.h"

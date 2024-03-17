@@ -15,7 +15,7 @@
 #include "Model/Transaction.h"
 #include "Model/ViewRequest.h"
 #include "../Accounts/Account.h"
-#include "../BCS/EntryFunction.h"
+#include "../BCS/EntryFunctions/EntryFunction.h"
 
 namespace Aptos::Rest
 {

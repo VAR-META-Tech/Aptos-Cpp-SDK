@@ -10,7 +10,7 @@
 #include <cryptopp/aes.h>
 #include <cryptopp/modes.h>
 #include "../BCS/Modules/ModuleId.h"
-#include "../BCS/EntryFunction.h"
+#include "../BCS/EntryFunctions/EntryFunction.h"
 #include "../BCS/StructTag.h"
 #include "../BCS/BCS.h"
 #include "../Transactions/TransactionPayload.h"

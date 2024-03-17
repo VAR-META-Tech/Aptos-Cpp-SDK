@@ -3,9 +3,9 @@
 
 #include <string>
 #include <list>
-#include "TagSequence.h"
-#include "Sequence.h"
-#include "Modules/ModuleId.h"
+#include "../TagSequence.h"
+#include "../Sequence.h"
+#include "../Modules/ModuleId.h"
 
 namespace Aptos::BCS
 {
