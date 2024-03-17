@@ -12,7 +12,7 @@
 #include "ByteSequence.h"
 #include "Deserialization.h"
 #include "Script/Script.h"
-#include "ScriptArgument.h"
+#include "ScriptArgument/ScriptArgument.h"
 #include "Sequence.h"
 #include "Serialization.h"
 #include "TagSequence.h"
