@@ -49,6 +49,8 @@ elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
         message(FATAL_ERROR "Crypto++ library not found")
     endif()
     find_package(httplib REQUIRED)
+    find_library(CORE_FOUNDATION_LIBRARY CoreFoundation)
+    find_library(SECURITY_FRAMEWORK_LIBRARY Security)
 endif()
 
 # Check for doxygen presence
@@ -65,14 +67,15 @@ if (GEN_DOC AND DOXYGEN_FOUND)
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
         COMMENT "Generating API documentation with Doxygen"
         VERBATIM)
-    find_package(cryptopp REQUIRED)
-    find_package(httplib REQUIRED)
 endif(DOXYGEN_FOUND)
 
 find_package(nlohmann_json REQUIRED)
 find_package(GTest REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(ZLIB REQUIRED)
+find_package(cryptopp REQUIRED)
+find_package(cpprestsdk REQUIRED)
+find_package(Boost REQUIRED)
 
 # Code coverage configuration
 option(CODE_COVERAGE "Enable coverage reporting" OFF)
@@ -87,6 +90,8 @@ include_directories(${httplib_INCLUDE_DIR})
 include_directories(${cryptopp_INCLUDE_DIRS_RELEASE})
 include_directories(${nlohmann_json_INCLUDE_DIRS})
 include_directories(${OpenSSL_INCLUDE_DIRS})
+include_directories(${cpprestsdk_INCLUDE_DIRS})
+include_directories(${Boost_INCLUDE_DIRS})
 
 add_library(Aptos SHARED
         Src/BCS/Deserialization.cpp
@@ -252,8 +257,8 @@ if (CMAKE_SYSTEM_NAME MATCHES "Linux")
 else()
   target_link_libraries(Aptos PRIVATE 
   nlohmann_json::nlohmann_json bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
-  ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a
-  toolbox)
+  ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a ${cpprestsdk_LIB_DIRS_RELEASE}/libcpprest.a
+  toolbox Boost::boost ${CORE_FOUNDATION_LIBRARY} ${SECURITY_FRAMEWORK_LIBRARY})
 endif()
 
 
@@ -304,7 +309,6 @@ else()
   target_link_libraries(runAllTests PRIVATE ${GTest_LIB} ${GTest_main_LIB} pthread Aptos toolbox ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
   ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
 endif()
-
 
 
 if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")

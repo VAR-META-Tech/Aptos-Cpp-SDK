@@ -1,17 +1,19 @@
 #include "RequestClient.h"
 #include <iostream>
+#include <cpprest/json.h>
 
 namespace Aptos::Rest
 {
-    httplib::Client RequestClient::GetWebClient(std::string &uri)
+    web::http::http_request RequestClient::SubmitRequest(web::uri uri, web::http::method method)
     {
-        httplib::Client cli(uri);
-        cli.enable_server_certificate_verification(false);
-        return cli;
+        web::http::http_request request(method);
+        request.headers().add(U("x-aptos-client"), GetAptosHeaderValue());
+        request.set_request_uri(uri);
+        return request;
     }
 
-    std::string RequestClient::GetAptosHeaderValue()
+    utility::string_t RequestClient::GetAptosHeaderValue()
     {
-        return "aptos-cpp-sdk/0.0.1";
+        return U("aptos-cpp-sdk/") + utility::conversions::to_string_t("0.0.1");
     }
 }

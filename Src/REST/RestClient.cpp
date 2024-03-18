@@ -55,19 +55,22 @@ void RestClient::GetAccount(std::function<void(std::shared_ptr<AptosRESTModel::A
 {
     using namespace AptosRESTModel;
 
-    std::string uri = "/v1/accounts/" + accountAddress.ToString();
-    ResponseInfo responseInfo;
-    if (auto response = RequestClient::GetWebClient(endpoint).Get(uri))
+    std::string uri = endpoint + "/v1/accounts/" + accountAddress.ToString();
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::GET);
+    request.headers().set_content_type(U("application/json"));
+    client.request(request).then([callback](web::http::http_response response)
     {
-        if (response->status == 200)
+        ResponseInfo responseInfo;
+        if (response.status_code() == 200)
         {
             responseInfo.status = ResponseInfo::Status::Success;
-            responseInfo.message = response->body;
-            AccountData accountData = AccountData::FromJson(nlohmann::json::parse(response->body));
+            responseInfo.message = response.extract_string().get();
+            AccountData accountData = AccountData::FromJson(nlohmann::json::parse(responseInfo.message));
 
             callback(std::make_shared<AccountData>(accountData), responseInfo);
         }
-        else if (response->status == 404)
+        else if (response.status_code() == 404)
         {
             responseInfo.status = ResponseInfo::Status::NotFound;
             responseInfo.message = "Account not found";
@@ -76,16 +79,10 @@ void RestClient::GetAccount(std::function<void(std::shared_ptr<AptosRESTModel::A
         else
         {
             responseInfo.status = ResponseInfo::Status::Failed;
-            responseInfo.message = response->body;
+            responseInfo.message = response.extract_string().get();
             callback(nullptr, responseInfo);
         }
-    }
-    else
-    {
-        responseInfo.status = ResponseInfo::Status::Failed;
-        responseInfo.message = httplib::to_string(response.error());
-        callback(nullptr, responseInfo);
-    }
+    }).wait();
 }
 
 void RestClient::GetAccountSequenceNumber(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const AccountAddress &accountAddress)
@@ -114,24 +111,25 @@ void RestClient::GetAccountBalance(std::function<void(AptosRESTModel::AccountRes
                                    const AccountAddress &accountAddress)
 {
     using namespace AptosRESTModel;
-    std::string uri = "/v1/accounts/" + accountAddress.ToString() + "/resource/" + Constants::APTOS_COIN_TYPE;
-    ResponseInfo responseInfo;
-    if (auto response = RequestClient::GetWebClient(endpoint).Get(uri))
+    std::string uri = endpoint + "/v1/accounts/" + accountAddress.ToString() + "/resource/" + Constants::APTOS_COIN_TYPE;
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::GET);
+    request.headers().set_content_type(U("application/json"));
+    client.request(request).then([callback](web::http::http_response response)
     {
-        if (response->status == 200)
+        ResponseInfo responseInfo;
+        if (response.status_code() == 200)
         {
             responseInfo.status = ResponseInfo::Status::Success;
-            responseInfo.message = response->body;
-
+            responseInfo.message = response.extract_string().get();
             // Parse the response and fill the Coin object accordingly
-            AccountResourceCoin acctResourceCoin = AccountResourceCoin::FromJson(nlohmann::json::parse(response->body));\
-
-                callback(acctResourceCoin.dataProp().coinProp(), responseInfo);
+            AccountResourceCoin acctResourceCoin = AccountResourceCoin::FromJson(nlohmann::json::parse(responseInfo.message));
+            callback(acctResourceCoin.dataProp().coinProp(), responseInfo);
         }
-        else if (response->status == 404)
+        else if (response.status_code() == 404)
         {
             responseInfo.status = ResponseInfo::Status::NotFound;
-            responseInfo.message = "Resource not found. " + response->body;
+            responseInfo.message = "Resource not found. " + response.extract_string().get();
 
             AptosRESTModel::AccountResourceCoin::Coin coin;
             coin.value() = "0";
@@ -140,46 +138,46 @@ void RestClient::GetAccountBalance(std::function<void(AptosRESTModel::AccountRes
         else
         {
             responseInfo.status = ResponseInfo::Status::Failed;
-            responseInfo.message = "Connection error. " + response->body;
+            responseInfo.message = "Connection error. " + response.extract_string().get();
             callback(AptosRESTModel::AccountResourceCoin::Coin(), responseInfo);
         }
-    }
-    else
-    {
-        responseInfo.status = ResponseInfo::Status::Failed;
-        responseInfo.message = httplib::to_string(response.error());
-        callback(AptosRESTModel::AccountResourceCoin::Coin(), responseInfo);
-    }
+    }).wait();
 }
 
 void RestClient::GetAccountResource(std::function<void(bool, long, std::string)> callback, const AccountAddress &accountAddress, const std::string &resourceType, const std::string &ledgerVersion)
 {
-    std::string uri = "/v1/accounts/" + accountAddress.ToString() + "/resource/" + resourceType;
-    if (auto response = RequestClient::GetWebClient(endpoint).Get(uri))
+    std::string uri = endpoint + "/v1/accounts/" + accountAddress.ToString() + "/resource/" + resourceType;
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::GET);
+    request.headers().set_content_type(U("application/json"));
+    client.request(request).then([callback](web::http::http_response response)
     {
-        if (response->status == 200) {
-            callback(true, response->status, response->body);
-        }  else if (response->status >= 400) {
-            callback(false, response->status, response->body);
+        if (response.status_code() == 200) {
+            callback(true, response.status_code(), response.extract_string().get());
+        }  else if (response.status_code() >= 400) {
+            callback(false, response.status_code(), response.extract_string().get());
         } else {
             callback(false, 0, "ERROR: Connection Error");
         }
-    }
+    }).wait();
 }
 
 void RestClient::GetAccountResources(std::function<void(bool, long, std::string)> callback, const AccountAddress &accountAddress, const std::string &ledgerVersion)
 {
-    std::string uri = "/v1/accounts/" + accountAddress.ToString() + "/resources";
-    if (auto response = RequestClient::GetWebClient(endpoint).Get(uri))
+    std::string uri = endpoint + "/v1/accounts/" + accountAddress.ToString() + "/resources";
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::GET);
+    request.headers().set_content_type(U("application/json"));
+    client.request(request).then([callback](web::http::http_response response)
     {
-        if (response->status == 200) {
-            callback(true, response->status, response->body);
-        }  else if (response->status >= 400) {
-            callback(false, response->status, response->body);
+        if (response.status_code() == 200) {
+            callback(true, response.status_code(), response.extract_string().get());
+        }  else if (response.status_code() >= 400) {
+            callback(false, response.status_code(), response.extract_string().get());
         } else {
             callback(false, 0, "ERROR: Connection Error");
         }
-    }
+    }).wait();
 }
 
 void RestClient::GetAccountResourceCollection(std::function<void(std::shared_ptr<AptosRESTModel::ResourceCollection>, AptosRESTModel::ResponseInfo)> callback,
@@ -187,49 +185,55 @@ void RestClient::GetAccountResourceCollection(std::function<void(std::shared_ptr
                                               const std::string &resourceType)
 {
     using namespace AptosRESTModel;
-    std::string uri = "/v1/accounts/" + accountAddress.ToString() + "/resource/" + resourceType;
-    if (auto response = RequestClient::GetWebClient(endpoint).Get(uri))
+    std::string uri = endpoint + "/v1/accounts/" + accountAddress.ToString() + "/resource/" + resourceType;
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::GET);
+    request.headers().set_content_type(U("application/json"));
+    client.request(request).then([callback](web::http::http_response response)
     {
         ResponseInfo responseInfo;
-        if (response->status == 200) {
-            ResourceCollection acctResource = ResourceCollection::FromJson(nlohmann::json::parse(response->body));
+        if (response.status_code() == 200) {
             responseInfo.status = ResponseInfo::Status::Success;
-            responseInfo.message = response->body;
+            responseInfo.message = response.extract_string().get();
+            ResourceCollection acctResource = ResourceCollection::FromJson(nlohmann::json::parse(responseInfo.message));
             callback(std::make_shared<ResourceCollection>(acctResource), responseInfo);
-        }  else if (response->status >= 400) {
+        }  else if (response.status_code() >= 400) {
             responseInfo.status = ResponseInfo::Status::Failed;
-            responseInfo.message = "Account resource not found. " + response->body;
+            responseInfo.message = "Account resource not found. " + response.extract_string().get();
             callback(nullptr, responseInfo);
         } else {
             responseInfo.status = ResponseInfo::Status::Failed;
-            responseInfo.message = "Connection error. " + response->body;
+            responseInfo.message = "Connection error. " + response.extract_string().get();
             callback(nullptr, responseInfo);
         }
-    }
+    }).wait();
 }
 
 void RestClient::GetTableItemCoin(std::function<void(std::shared_ptr<AptosRESTModel::AccountResourceCoin>, AptosRESTModel::ResponseInfo)> callback, const std::string &handle, const std::string &keyType, const std::string &valueType, const std::string &key)
 {
     using namespace AptosRESTModel;
-    std::string uri = "/v1/tables/" + handle + "/item/";
-    if (auto response = RequestClient::GetWebClient(endpoint).Get(uri))
+    std::string uri = endpoint + "/v1/tables/" + handle + "/item/";
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::GET);
+    request.headers().set_content_type(U("application/json"));
+    client.request(request).then([callback](web::http::http_response response)
     {
         ResponseInfo responseInfo;
-        if (response->status == 200) {
-            AccountResourceCoin acctResource = AccountResourceCoin::FromJson(nlohmann::json::parse(response->body));
+        if (response.status_code() == 200) {
             responseInfo.status = ResponseInfo::Status::Success;
-            responseInfo.message = response->body;
+            responseInfo.message = response.extract_string().get();
+            AccountResourceCoin acctResource = AccountResourceCoin::FromJson(nlohmann::json::parse(responseInfo.message));
             callback(std::make_shared<AccountResourceCoin>(acctResource), responseInfo);
-        }  else if (response->status >= 400) {
+        }  else if (response.status_code() >= 400) {
             responseInfo.status = ResponseInfo::Status::NotFound;
-            responseInfo.message = "Table item not found. " + response->body;
+            responseInfo.message = "Table item not found. " + response.extract_string().get();
             callback(nullptr, responseInfo);
         } else {
             responseInfo.status = ResponseInfo::Status::Failed;
-            responseInfo.message = "Error while sending request for table item. " + response->body;
+            responseInfo.message = "Error while sending request for table item. " + response.extract_string().get();
             callback(nullptr, responseInfo);
         }
-    }
+    }).wait();
 }
 
 void RestClient::GetTableItem(std::function<void(std::string)> callback, const std::string &handle, const std::string &keyType, const std::string &valueType, const std::string &key)
@@ -239,15 +243,19 @@ void RestClient::GetTableItem(std::function<void(std::string)> callback, const s
     tableItemRequest.setKeyType(keyType);
     tableItemRequest.setValueType(valueType);
     tableItemRequest.setKey(key);
-    std::string uri = "/v1/tables/" + handle + "/item";
-    if (auto response = RequestClient::GetWebClient(endpoint).Post(uri, tableItemRequest.ToJson().dump(), "application/json"))
+    std::string uri = endpoint + "/v1/tables/" + handle + "/item";
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::POST);
+    request.headers().set_content_type(U("application/json"));
+    request.set_body(tableItemRequest.ToJson().dump());
+    client.request(request).then([callback](web::http::http_response response)
     {
-        if (response->status == 200) {
-            callback(response->body);
+        if (response.status_code() == 200) {
+            callback(response.extract_string().get());
         } else {
             callback(nullptr);
         }
-    }
+    }).wait();
 }
 
 void RestClient::GetTableItemNFT(std::function<void(std::shared_ptr<AptosRESTModel::TableItemToken>, AptosRESTModel::ResponseInfo)> callback,
@@ -264,17 +272,21 @@ void RestClient::GetTableItemNFT(std::function<void(std::shared_ptr<AptosRESTMod
 
     // Serialize the request object to JSON
     std::string tableItemRequestJson = tableItemRequest.ToJson().dump();
-    std::string uri = "/v1/tables/" + handle + "/item";
-    if (auto response = RequestClient::GetWebClient(endpoint).Post(uri, tableItemRequestJson, "application/json"))
+    std::string uri = endpoint + "/v1/tables/" + handle + "/item";
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::POST);
+    request.headers().set_content_type(U("application/json"));
+    request.set_body(tableItemRequestJson);
+    client.request(request).then([callback,key](web::http::http_response response)
     {
         ResponseInfo responseInfo;
         TableItemToken tableItemToken;
-        if (response->status == 200) {
-            tableItemToken = TableItemToken::FromJson(nlohmann::json::parse(response->body));
+        if (response.status_code() == 200) {
             responseInfo.status = ResponseInfo::Status::Success;
-            responseInfo.message = response->body;
+            responseInfo.message = response.extract_string().get();
+            tableItemToken = TableItemToken::FromJson(nlohmann::json::parse(responseInfo.message));
             callback(std::make_shared<TableItemToken>(tableItemToken), responseInfo);
-        }  else if (response->status >= 400) {
+        }  else if (response.status_code() >= 400) {
             tableItemToken.getIdProp().getTokenDataIdProp().setCreator(key.getTokenDataIdProp().getCreator());
             tableItemToken.getIdProp().getTokenDataIdProp().setCollection(key.getTokenDataIdProp().getCollection());
             tableItemToken.getIdProp().getTokenDataIdProp().setName(key.getTokenDataIdProp().getName());
@@ -285,10 +297,10 @@ void RestClient::GetTableItemNFT(std::function<void(std::shared_ptr<AptosRESTMod
             callback(std::make_shared<TableItemToken>(tableItemToken), responseInfo);
         } else {
             responseInfo.status = ResponseInfo::Status::Failed;
-            responseInfo.message = response->body;
+            responseInfo.message = response.extract_string().get();
             callback(nullptr, responseInfo);
         }
-    }
+    }).wait();
 }
 
 void RestClient::GetTableItemTokenData(std::function<void(std::shared_ptr<AptosRESTModel::TableItemTokenMetadata>, AptosRESTModel::ResponseInfo)> callback, const std::string &handle, const std::string &keyType, const std::string &valueType, AptosRESTModel::TokenDataId key)
@@ -304,46 +316,54 @@ void RestClient::GetTableItemTokenData(std::function<void(std::shared_ptr<AptosR
 
     // Perform the HTTP request using the serialized JSON
 
-    std::string uri = "/v1/tables/" + handle + "/item";
-    if (auto response = RequestClient::GetWebClient(endpoint).Post(uri, tableItemRequestJson, "application/json"))
+    std::string uri = endpoint + "/v1/tables/" + handle + "/item";
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::POST);
+    request.headers().set_content_type(U("application/json"));
+    request.set_body(tableItemRequestJson);
+   client.request(request).then([callback](web::http::http_response response)
     {
         ResponseInfo responseInfo;
         std::shared_ptr<TableItemTokenMetadata> tableItemToken = nullptr;
-        if (response->status >= 400) {
+        if (response.status_code() >= 400) {
             responseInfo.status = ResponseInfo::Status::NotFound;
             responseInfo.message = "Table item not found.";
         } else {
-            tableItemToken = std::make_shared<TableItemTokenMetadata>(TableItemTokenMetadata::FromJson(nlohmann::json::parse(response->body)));
             responseInfo.status = ResponseInfo::Status::Success;
-            responseInfo.message = response->body;
+            responseInfo.message = response.extract_string().get();
+            tableItemToken = std::make_shared<TableItemTokenMetadata>(
+                TableItemTokenMetadata::FromJson(nlohmann::json::parse(responseInfo.message)));
         }
         callback(tableItemToken, responseInfo);
-    }
+    }).wait();
 }
 
 void RestClient::GetInfo(std::function<void(std::shared_ptr<AptosRESTModel::LedgerInfo>, AptosRESTModel::ResponseInfo)> callback)
 {
     using namespace AptosRESTModel;
     // Perform the HTTP request to get info
-    std::string uri = "/v1/";
-    if (auto response = RequestClient::GetWebClient(endpoint).Get(uri))
+    std::string uri = endpoint + "/v1/";
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::GET);
+    request.headers().set_content_type(U("application/json"));
+    client.request(request).then([callback](web::http::http_response response)
     {
         ResponseInfo responseInfo;
         std::shared_ptr<LedgerInfo> ledgerInfo = nullptr;
 
-        if (response->status == 200) {
-            ledgerInfo = std::make_shared<LedgerInfo>(LedgerInfo::FromJson(nlohmann::json::parse(response->body)));
+        if (response.status_code() == 200) {
             responseInfo.status = ResponseInfo::Status::Success;
-            responseInfo.message = response->body;
-        }  else if (response->status >= 400) {
+            responseInfo.message = response.extract_string().get();
+            ledgerInfo = std::make_shared<LedgerInfo>(LedgerInfo::FromJson(nlohmann::json::parse(responseInfo.message)));
+        }  else if (response.status_code() >= 400) {
             responseInfo.status = ResponseInfo::Status::NotFound;
             responseInfo.message = "Resource not found.";
         } else {
             responseInfo.status = ResponseInfo::Status::Failed;
-            responseInfo.message = response->body;
+            responseInfo.message = response.extract_string().get();
         }
         callback(ledgerInfo, responseInfo);
-    }
+    }).wait();
 }
 
 void RestClient::SimulateTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback,
@@ -357,72 +377,79 @@ void RestClient::SimulateTransaction(std::function<void(std::string, AptosRESTMo
     SignedTransaction signedTransaction(transaction, authenticator);
 
     // Perform the HTTP request to simulate a transaction
-    std::string uri = "/v1/transactions/simulate";
-    auto bytes = signedTransaction.Bytes();
-    std::string data(bytes.begin(), bytes.end());
-    if (auto response = RequestClient::GetWebClient(endpoint).Post(uri, data, "application/x.aptos.signed_transaction+bcs"))
+    std::string uri = endpoint + "/v1/transactions/simulate";
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::POST);
+    request.headers().set_content_type(U("application/x.aptos.signed_transaction+bcs"));
+    request.set_body(signedTransaction.Bytes());
+    client.request(request).then([callback](web::http::http_response response)
     {
         ResponseInfo responseInfo;
         std::string res;
-        if (response->status == 200) {
-            res = response->body;
+        if (response.status_code() == 200) {
+            res = response.extract_string().get();
             responseInfo.status = ResponseInfo::Status::Success;
-            responseInfo.message = response;
-        }  else if (response->status >= 400) {
+            responseInfo.message = response.extract_string().get();
+        }  else if (response.status_code() >= 400) {
             responseInfo.status = ResponseInfo::Status::NotFound;
             responseInfo.message = "Endpoint not found.";
         } else {
             responseInfo.status = ResponseInfo::Status::Failed;
-            responseInfo.message = response->body;
+            responseInfo.message = response.extract_string().get();
         }
         callback(res, responseInfo);
-    }
+    }).wait();
 }
 
 void RestClient::SubmitBCSTransaction(std::function<void(std::string, AptosRESTModel::ResponseInfo)> callback, const SignedTransaction &signedTransaction)
 {
     using namespace AptosRESTModel;
-    std::string uri = "/v1/transactions";
-    auto bytes = signedTransaction.Bytes();
-    std::string data(bytes.begin(), bytes.end());
+    std::string uri = endpoint + "/v1/transactions";
     // Perform the request and handle the response
-    if (auto response = RequestClient::GetWebClient(endpoint).Post(uri, data, "application/x.aptos.signed_transaction+bcs"))
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::POST);
+    request.headers().set_content_type(U("application/x.aptos.signed_transaction+bcs"));
+    request.set_body(signedTransaction.Bytes());
+    client.request(request).then([callback](web::http::http_response response)
     {
         ResponseInfo responseInfo;
         std::string responseStr;
-        if (response->status >= 400) {
+        if (response.status_code() >= 400) {
             responseInfo.status = ResponseInfo::Status::NotFound;
             responseInfo.message = "Endpoint for BCS transaction not found.";
         } else {
-            responseStr = response->body;
+            responseStr = response.extract_string().get();
             responseInfo.status = ResponseInfo::Status::Success;
             responseInfo.message = responseStr;
         }
         callback(responseStr, responseInfo);
-    }
-
+    }).wait();
 }
 
 void RestClient::View(std::function<void(std::vector<std::string>, AptosRESTModel::ResponseInfo)> callback,
                       const AptosRESTModel::ViewRequest &viewRequest)
 {
     using namespace AptosRESTModel;
-    std::string uri = "/v1/view";
+    std::string uri = endpoint + "/v1/view";
     // Perform the request and handle the response
-    if (auto response = RequestClient::GetWebClient(endpoint).Post(uri, viewRequest.ToJson().dump(), "application/json"))
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::POST);
+    request.headers().set_content_type(U("application/json"));
+    request.set_body(viewRequest.ToJson().dump());
+    client.request(request).then([callback](web::http::http_response response)
     {
         ResponseInfo responseInfo;
         std::vector<std::string> values;
-        if (response->status == 200) {
+        if (response.status_code() == 200) {
             responseInfo.status = ResponseInfo::Status::Success;
-            responseInfo.message = response->body;
-            values = nlohmann::json::parse(response->body).get<std::vector<std::string>>();
+            responseInfo.message = response.extract_string().get();
+            values = nlohmann::json::parse(responseInfo.message).get<std::vector<std::string>>();
         }  else {
             responseInfo.status = ResponseInfo::Status::Failed;
-            responseInfo.message = response->body;
+            responseInfo.message = response.extract_string().get();
         }
         callback(values, responseInfo);
-    }
+    }).wait();
 }
 
 void RestClient::SubmitTransaction(std::function<void(std::shared_ptr<AptosRESTModel::Transaction>, AptosRESTModel::ResponseInfo)> callback,
@@ -473,23 +500,28 @@ void RestClient::SubmitTransaction(std::function<void(std::shared_ptr<AptosRESTM
     txnRequest.setSignature(sigData);
     txnRequestJson = txnRequestJson = TransactionRequestConverter::WriteJson(txnRequest);
 
-    std::string uri = "/v1/transactions";
+    std::string uri = endpoint + "/v1/transactions";
     // Perform the request and handle the response
-    if (auto response = RequestClient::GetWebClient(endpoint).Post(uri, txnRequestJson.dump(), "application/json"))
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::POST);
+    request.headers().set_content_type(U("application/json"));
+    request.set_body(txnRequestJson.dump());
+    client.request(request).then([callback](web::http::http_response response)
     {
         ResponseInfo responseInfo;
         std::vector<std::string> values;
-        if (response->status == 200 || response->status == 202) {
-            auto transaction = std::make_shared<Transaction>(TransactionConverter::ReadJson(nlohmann::json::parse(response->body)));
+        if (response.status_code() == 200 || response.status_code() == 202) {
             responseInfo.status = ResponseInfo::Status::Success;
-            responseInfo.message = response->body;
+            responseInfo.message = response.extract_string().get();
+            auto transaction = std::make_shared<Transaction>(
+                TransactionConverter::ReadJson(nlohmann::json::parse(responseInfo.message)));
             callback(transaction, responseInfo);
         }  else {
             responseInfo.status = ResponseInfo::Status::Failed;
             responseInfo.message = "Error in processing the response.";
             callback(nullptr, responseInfo);
         }
-    }
+    }).wait();
 }
 
 void RestClient::WaitForTransaction(std::function<void(bool, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash)
@@ -545,48 +577,52 @@ void RestClient::WaitForTransaction(std::function<void(bool, AptosRESTModel::Res
 void RestClient::TransactionPending(std::function<void(bool, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash)
 {
     using namespace AptosRESTModel;
-    std::string uri = "/v1/transactions/by_hash/" + txnHash;
-    if (auto response = RequestClient::GetWebClient(endpoint).Get(uri))
+    std::string uri = endpoint + "/v1/transactions/by_hash/" + txnHash;
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::GET);
+    request.headers().set_content_type(U("application/json"));
+    client.request(request).then([callback](web::http::http_response response)
     {
         ResponseInfo responseInfo;
-        if (response->status == 200) {
-            auto transactionResult = TransactionConverter::ReadJson(nlohmann::json::parse(response->body));
-            bool isPending = transactionResult.getType() == "pending_transaction";
-
+        if (response.status_code() == 200) {
             responseInfo.status = ResponseInfo::Status::Success;
-            responseInfo.message = response->body;
-
+            responseInfo.message = response.extract_string().get();
+            auto transactionResult = TransactionConverter::ReadJson(nlohmann::json::parse(responseInfo.message));
+            bool isPending = transactionResult.getType() == "pending_transaction";
             callback(isPending, responseInfo);
         }  else {
             responseInfo.status = ResponseInfo::Status::Failed;
-            responseInfo.message = "Transaction Call Error: " + std::to_string(response->status) + " : " +
-                                   response->body;
+            responseInfo.message = "Transaction Call Error: " + std::to_string(response.status_code()) + " : " +
+                                   response.extract_string().get();
 
             callback(true, responseInfo);
         }
-    }
+    }).wait();
 }
 
 void RestClient::TransactionByHash(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)> callback, const std::string &txnHash)
 {
     using namespace AptosRESTModel;
-    std::string uri = "/v1/transactions/by_hash/" + txnHash;
-    if (auto response = RequestClient::GetWebClient(endpoint).Get(uri))
+    std::string uri = endpoint + "/v1/transactions/by_hash/" + txnHash;
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::GET);
+    request.headers().set_content_type(U("application/json"));
+    client.request(request).then([callback](web::http::http_response response)
     {
         ResponseInfo responseInfo;
-        if (response->status == 200) {
-            auto transactionResult = TransactionConverter::ReadJson(nlohmann::json::parse(response->body));
+        if (response.status_code() == 200) {
             responseInfo.status = ResponseInfo::Status::Success;
-            responseInfo.message = response->body;
+            responseInfo.message = response.extract_string().get();
+            auto transactionResult = TransactionConverter::ReadJson(nlohmann::json::parse(responseInfo.message));
             callback(transactionResult, responseInfo);
         }  else {
             responseInfo.status = ResponseInfo::Status::Failed;
-            responseInfo.message = "Transaction Call Error: " + std::to_string(response->status) + " : " +
-                                   response->body;
+            responseInfo.message = "Transaction Call Error: " + std::to_string(response.status_code()) + " : " +
+                                   response.extract_string().get();
 
             callback({}, responseInfo);
         }
-    }
+    }).wait();
 }
 
 void RestClient::CreateBCSSignedTransaction(std::function<void(std::shared_ptr<SignedTransaction>)> Callback, Account Sender, TransactionPayload Payload)
@@ -710,28 +746,36 @@ void RestClient::BCSTransfer(std::function<void(std::string, AptosRESTModel::Res
 
 void RestClient::EncodeSubmission(const std::function<void(const std::string &)> &callback, const std::string &txnRequestJson)
 {
-    std::string uri = "/v1/transactions/encode_submission";
-    if (auto response = RequestClient::GetWebClient(endpoint).Post(uri, txnRequestJson, "application/json"))
+    std::string uri = endpoint + "/v1/transactions/encode_submission";
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::POST);
+    request.set_body(txnRequestJson);
+    request.headers().set_content_type(U("application/json"));
+    client.request(request).then([callback](web::http::http_response response)
     {
-        if (response->status == 200) {
-            callback(response->body);
+        if (response.status_code() == 200) {
+            callback(response.extract_string().get());
         } else {
-            std::cerr << "Error encode submission " << response->status << " body " << response->body << std::endl;
+            std::cerr << "Error encode submission " << response.status_code() << " body " << response.extract_string().get() << std::endl;
         }
-    }
+    }).wait();
 }
 
 void RestClient::EncodeSubmissionAsBytes(const std::function<void(const std::vector<uint8_t> &)> &callback, const std::string &txnRequestJson)
 {
-    std::string uri = "/v1/transactions/encode_submission";
-    if (auto response = RequestClient::GetWebClient(endpoint).Post(uri, txnRequestJson, "application/json"))
+    std::string uri = endpoint + "/v1/transactions/encode_submission";
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::POST);
+    request.headers().set_content_type(U("application/json"));
+    request.set_body(txnRequestJson);
+    client.request(request).then([callback](web::http::http_response response)
     {
-        if (response->status == 200) {
-            std::string msg = response->body;
+        if (response.status_code() == 200) {
+            std::string msg = response.extract_string().get();
             std::vector<uint8_t> byteVector(msg.begin(), msg.end());
             callback(byteVector);
         }
-    }
+    }).wait();
 }
 
 void RestClient::CreateCollection(std::function<void(AptosRESTModel::Transaction, AptosRESTModel::ResponseInfo)> callback, Account sender, std::string collectionName, std::string collectionDescription, std::string uri)
@@ -1111,15 +1155,18 @@ void RestClient::TransferObject(std::function<void(std::string, AptosRESTModel::
 
 void RestClient::GetAccountResource(std::function<void(bool, long, std::string)> callback, AccountAddress &accountAddress, std::string resourceType)
 {
-    std::string uri = "/v1/accounts/" + accountAddress.ToString() + "/resource/" + resourceType;
-    if (auto response = RequestClient::GetWebClient(endpoint).Get(uri))
+    std::string uri = endpoint + "/v1/accounts/" + accountAddress.ToString() + "/resource/" + resourceType;
+    web::http::client::http_client client(uri);
+    web::http::http_request request(web::http::methods::GET);
+    request.headers().set_content_type(U("application/json"));
+    client.request(request).then([callback](web::http::http_response response)
     {
-        if (response->status == 200) {
-            callback(true, response->status, response->body);
+        if (response.status_code() == 200) {
+            callback(true, response.status_code(), response.extract_string().get());
         } else {
-            callback(false, response->status, response->body);
+            callback(false, response.status_code(), response.extract_string().get());
         }
-    }
+    }).wait();
 }
 
 int RestClient::ChainId() const

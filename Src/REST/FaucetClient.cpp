@@ -1,7 +1,8 @@
 #include "FaucetClient.h"
 #include <iostream>
 #include <thread>
-#include "RequestClient.h"
+#include <cpprest/http_client.h>
+#include <cpprest/json.h>
 
 namespace Aptos::Rest
 {
@@ -9,11 +10,14 @@ namespace Aptos::Rest
                                    const std::string &address, int amount, std::string &endpoint)
     {
         using namespace AptosRESTModel;
-        std::string uri = "/mint?amount=" + std::to_string(amount) + "&address=" + address;
-        ResponseInfo responseInfo;
-        if (auto response = RequestClient::GetWebClient(endpoint).Post(uri, "", "application/json"))
+        std::string uri = endpoint + "/mint?amount=" + std::to_string(amount) + "&address=" + address;
+        web::http::client::http_client client(uri);
+        web::http::http_request request(web::http::methods::POST);
+        request.headers().set_content_type(U("application/json"));
+        client.request(request).then([callback](web::http::http_response response)
         {
-            if (response->status >= 400)
+            ResponseInfo responseInfo;
+            if (response.status_code() >= 400)
             {
                 responseInfo.status = ResponseInfo::Status::Failed;
                 responseInfo.message = "Request Failed";
@@ -25,10 +29,6 @@ namespace Aptos::Rest
                 responseInfo.message = "Funding succeeded!";
                 callback(true, responseInfo);
             }
-        } else {
-            responseInfo.status = ResponseInfo::Status::Failed;
-            responseInfo.message = "Request Failed";
-            callback(false, responseInfo);
-        }
+        } ).wait();
     }
 }
