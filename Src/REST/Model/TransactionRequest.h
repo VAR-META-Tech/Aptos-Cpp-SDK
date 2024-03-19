@@ -3,7 +3,7 @@
 
 #include <nlohmann/json.hpp>
 #include "TransactionPayload.h"
-#include "../../BCS/EntryFunction.h"
+#include "../../BCS/EntryFunctions/EntryFunction.h"
 
 namespace AptosRESTModel {
 

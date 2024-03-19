@@ -1,6 +1,6 @@
 #include "TransactionPayload.h"
-#include "BCS/Script.h"
-#include "BCS/EntryFunction.h"
+#include "BCS/BCS.h"
+#include "BCS/EntryFunctions/EntryFunction.h"
 
 namespace Aptos::BCS
 {

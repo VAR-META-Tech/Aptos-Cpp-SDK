@@ -7,13 +7,13 @@
 
 #include <string>
 #include <vector>
-#include "Ed25519Signature.h"
+#include "../Ed25519Signature.h"
 #include "PublicKey.h"
-#include "../BCS/Serialization.h"
+#include "../../BCS/BCS.h"
 #include <stdexcept>
 #include <cryptopp/xed25519.h>
 
-namespace Aptos::Accounts
+namespace Aptos::Accounts::Ed25519
 {
     /// <summary>
     /// Represents a 64-byte extended private key.

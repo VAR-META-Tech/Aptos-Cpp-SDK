@@ -94,6 +94,7 @@ include_directories(${cpprestsdk_INCLUDE_DIRS})
 include_directories(${Boost_INCLUDE_DIRS})
 
 add_library(Aptos SHARED
+	Src/BCS/BCS.h
         Src/BCS/Deserialization.cpp
         Src/BCS/Deserialization.h
         Src/BCS/Serialization.cpp
@@ -132,24 +133,24 @@ add_library(Aptos SHARED
         Src/Transactions/MultiAgentRawTransaction.cpp
         Src/Transactions/TransactionPayload.h
         Src/Transactions/TransactionPayload.cpp
-        Src/BCS/Script.h
-        Src/BCS/Script.cpp
-        Src/BCS/ScriptArgument.h
-        Src/BCS/ScriptArgument.cpp
-        Src/BCS/EntryFunction.h
-        Src/BCS/EntryFunction.cpp
-        Src/BCS/ModuleId.h
-        Src/BCS/ModuleId.cpp
+        Src/BCS/Script/Script.h
+        Src/BCS/Script/Script.cpp
+        Src/BCS/ScriptArgument/ScriptArgument.h
+        Src/BCS/ScriptArgument/ScriptArgument.cpp
+        Src/BCS/EntryFunctions/EntryFunction.h
+        Src/BCS/EntryFunctions/EntryFunction.cpp
+        Src/BCS/Modules/ModuleId.h
+        Src/BCS/Modules/ModuleId.cpp
         Src/Transactions/TransactionArgument.h
         Src/Transactions/TransactionArgument.cpp
         Src/Transactions/SignedTransaction.h
         Src/Transactions/SignedTransaction.cpp
-        Src/Accounts/PublicKey.cpp
-        Src/Accounts/PublicKey.h
+        Src/Accounts/Ed25519/PublicKey.cpp
+        Src/Accounts/Ed25519/PublicKey.h
         Src/HDWallet/Utils/Utils.cpp
         Src/HDWallet/Utils/Utils.h
-        Src/Accounts/PrivateKey.cpp
-        Src/Accounts/PrivateKey.h
+        Src/Accounts/Ed25519/PrivateKey.cpp
+        Src/Accounts/Ed25519/PrivateKey.h
         Src/Accounts/Types/MultiEd25519PublicKey.cpp
         Src/Accounts/Ed25519Signature.cpp
         Src/Accounts/Ed25519Signature.h
@@ -321,8 +322,8 @@ if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 add_library(AptosUILogic SHARED
-    AptosUILogic/uicontrollerlogic.h
-    AptosUILogic/uicontrollerlogic.cpp
+    AptosUI/Source/LIB/uicontrollerlogic.h
+    AptosUI/Source/LIB//uicontrollerlogic.cpp
 )
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
   target_link_libraries(AptosUILogic PRIVATE nlohmann_json::nlohmann_json pthread Aptos bip3x ${CryptoPP_LIB})
@@ -332,7 +333,7 @@ else()
 endif()
 
 add_executable(AptosUILogicTest
-    AptosUILogic/main.cpp
+  AptosUI/Source/Test/main.cpp
 )
 
 target_link_libraries(AptosUILogicTest PRIVATE Aptos AptosUILogic )

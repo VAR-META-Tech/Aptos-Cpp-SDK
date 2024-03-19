@@ -3,12 +3,12 @@
 //
 
 #include "PublicKey.h"
-#include "Ed25519Signature.h"
-#include "../HDWallet/Utils/Utils.h"
+#include "../Ed25519Signature.h"
+#include "../../HDWallet/Utils/Utils.h"
 #include "cryptopp/hex.h"
 #include "cryptopp/xed25519.h"
 
-namespace Aptos::Accounts
+namespace Aptos::Accounts::Ed25519
 {
     PublicKey::PublicKey(const CryptoPP::SecByteBlock &publicKey)
     {

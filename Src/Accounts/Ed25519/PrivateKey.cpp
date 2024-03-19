@@ -9,9 +9,9 @@
 #include "cryptopp/xed25519.h"
 #include "cryptopp/osrng.h"
 #include <iostream>
-#include "../HDWallet/Utils/Utils.h"
+#include "../../HDWallet/Utils/Utils.h"
 
-namespace Aptos::Accounts
+namespace Aptos::Accounts::Ed25519
 {
     std::string PrivateKey::Key()
     {
@@ -126,7 +126,7 @@ namespace Aptos::Accounts
 
     int PrivateKey::GetHashCode() const
     {
-         return std::hash<std::string>{}(_key);
+        return std::hash<std::string>{}(_key);
     }
 
     std::string PrivateKey::ToString()

@@ -5,11 +5,10 @@
 #ifndef APTOS_ACCOUNTADDRESS_H
 #define APTOS_ACCOUNTADDRESS_H
 
-#include "../BCS/BCSTypes.h"
+#include "../BCS/BCS.h"
 #include <cryptopp/xed25519.h>
-#include "../BCS/Serialization.h"
-#include "../BCS/Deserialization.h"
 #include "Multipublickey.h"
+using namespace Aptos::Accounts::Ed25519;
 
 namespace Aptos::Accounts
 {

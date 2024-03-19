@@ -1,5 +1,5 @@
 #include "TransactionArgument.h"
-#include "BCS/Serialization.h"
+#include "BCS/BCS.h"
 
 namespace Aptos::BCS
 {

@@ -16,7 +16,7 @@
 #undef verify
 #endif
 
-#include "AptosUILogic/uicontrollerlogic.h"
+#include "../LIB/uicontrollerlogic.h"
 #pragma GCC diagnostic pop
 
 #include <string>

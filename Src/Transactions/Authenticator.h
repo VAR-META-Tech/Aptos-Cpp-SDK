@@ -1,13 +1,13 @@
 #ifndef AUTHENTICATOR_H
 #define AUTHENTICATOR_H
 
-#include "BCS/BCSTypes.h"
-#include "BCS/Serialization.h"
+#include "BCS/BCS.h"
 #include "../Accounts/Ed25519Signature.h"
-#include "../Accounts/PublicKey.h"
-#include "BCS/Sequence.h"
+#include "../Accounts/Ed25519/PublicKey.h"
 #include "../Accounts/AccountAddress.h"
 #include "../Accounts/multisignature.h"
+
+using namespace Aptos::Accounts::Ed25519;
 
 namespace Aptos::BCS
 {
@@ -95,7 +95,7 @@ namespace Aptos::BCS
         /// </summary>
         /// <param name="publicKey"></param>
         /// <param name="signature"></param>
-        Ed25519Authenticator(Accounts::PublicKey publicKey, Accounts::Ed25519Signature signature);
+        Ed25519Authenticator(PublicKey publicKey, Accounts::Ed25519Signature signature);
 
         /// <summary>
         /// Verifies the data with the signature.
@@ -123,7 +123,7 @@ namespace Aptos::BCS
         /// <summary>
         /// The authenticators public key.
         /// </summary>
-        Accounts::PublicKey m_publicKey;
+        PublicKey m_publicKey;
 
         /// <summary>
         /// The authenticator's public key.

@@ -1,7 +1,7 @@
 #ifndef SCRIPTARGUMENT_H
 #define SCRIPTARGUMENT_H
 #include <iostream>
-#include "BCSTypes.h"
+#include "../BCSTypes.h"
 
 namespace Aptos::BCS
 {

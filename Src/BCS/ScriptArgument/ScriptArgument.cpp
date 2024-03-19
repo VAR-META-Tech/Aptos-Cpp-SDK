@@ -1,14 +1,14 @@
 #include "ScriptArgument.h"
 #include <stdexcept>
-#include "Bool.h"
-#include "Serialization.h"
-#include "../Accounts/AccountAddress.h"
-#include "U128.h"
-#include "U16.h"
-#include "U256.h"
-#include "U32.h"
-#include "U64.h"
-#include "U8.h"
+#include "../Bool.h"
+#include "../Serialization.h"
+#include "../../Accounts/AccountAddress.h"
+#include "../U128.h"
+#include "../U16.h"
+#include "../U256.h"
+#include "../U32.h"
+#include "../U64.h"
+#include "../U8.h"
 
 using namespace Aptos::Accounts;
 namespace Aptos::BCS

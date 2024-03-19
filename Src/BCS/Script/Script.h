@@ -3,8 +3,8 @@
 
 #include <vector>
 #include <string>
-#include "Sequence.h"
-#include "TagSequence.h"
+#include "../Sequence.h"
+#include "../TagSequence.h"
 #include <cstdint>
 
 namespace Aptos::BCS

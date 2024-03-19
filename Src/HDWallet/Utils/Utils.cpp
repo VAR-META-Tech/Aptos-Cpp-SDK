@@ -6,9 +6,11 @@
 #include <cryptopp/xed25519.h>
 #include <sstream>
 #include <iomanip>
-#include "../../Accounts/PrivateKey.h"
+#include "../../Accounts/Ed25519/PrivateKey.h"
 
 using namespace Aptos::Accounts;
+using namespace Aptos::Accounts::Ed25519;
+
 namespace Aptos::Utils
 {
     bool IsValidAddress(std::string walletAddress)
@@ -143,10 +145,11 @@ namespace Aptos::Utils
         return rtrim(ltrim(s, charsToTrim), charsToTrim);
     }
 
-    std::string floatToStringWithFormat(float value, int precision) {
+    std::string floatToStringWithFormat(float value, int precision)
+    {
         std::stringstream stream;
         stream << std::fixed << std::setprecision(precision) << value;
         return stream.str();
     }
 
-    }
+}

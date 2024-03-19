@@ -3,8 +3,9 @@
 
 #include <vector>
 #include <stdexcept>
-#include "PublicKey.h"
-#include "../BCS/BCSTypes.h"
+#include "Ed25519/PublicKey.h"
+#include "../BCS/BCS.h"
+using namespace Aptos::Accounts::Ed25519;
 
 namespace Aptos::Accounts
 {

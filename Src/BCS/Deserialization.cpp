@@ -11,7 +11,7 @@
 #include "U256.h"
 #include "BString.h"
 #include "TagSequence.h"
-#include "ScriptArgument.h"
+#include "ScriptArgument/ScriptArgument.h"
 
 namespace Aptos::BCS
 {

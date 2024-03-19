@@ -1,5 +1,5 @@
 #include <iostream>
-#include "uicontrollerlogic.h"
+#include "../LIB/uicontrollerlogic.h"
 
 int main() {
     void* controller = AptosUILogic_createUiController();
