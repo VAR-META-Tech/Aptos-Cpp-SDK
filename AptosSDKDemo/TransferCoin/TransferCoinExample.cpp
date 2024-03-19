@@ -4,7 +4,7 @@
 #include "REST/RestClient.h"
 #include "REST/FaucetClient.h"
 #include "REST/Constant.h"
-#include "HDWallet/wallet.h"
+#include "HDWallet/Wallet.h"
 #include "Model/TransferCoinBCSResponse.h"
 
 using namespace Aptos::Accounts;

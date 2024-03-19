@@ -4,7 +4,7 @@
 #include <tuple>
 #include "Ed25519Signature.h"
 #include "Ed25519/PublicKey.h"
-#include "multipublickey.h"
+#include "Multipublickey.h"
 #include "../BCS/BCS.h"
 using namespace Aptos::Accounts::Ed25519;
 

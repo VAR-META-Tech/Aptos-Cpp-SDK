@@ -10,7 +10,7 @@
 #include "Model/TableItemToken/TableItemToken.h"
 #include "Model/TableItemToken/TableItemTokenMetadata.h"
 #include "Model/TokenIdRequest.h"
-#include "../Transactions/rawtransaction.h"
+#include "../Transactions/Rawtransaction.h"
 #include "../Transactions/SignedTransaction.h"
 #include "Model/Transaction.h"
 #include "Model/ViewRequest.h"

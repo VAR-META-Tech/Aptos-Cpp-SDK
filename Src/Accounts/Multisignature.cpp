@@ -1,4 +1,4 @@
-#include "multisignature.h"
+#include "Multisignature.h"
 #include "../HDWallet/Utils/Utils.h"
 #if defined(__APPLE__)
 #include <libkern/OSByteOrder.h>

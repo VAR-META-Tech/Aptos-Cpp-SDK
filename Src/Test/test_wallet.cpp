@@ -2,7 +2,7 @@
 #include <gtest/gtest.h>
 #include "../Accounts/Account.h"
 
-#include "../HDWallet/wallet.h"
+#include "../HDWallet/Wallet.h"
 #include "../Accounts/Ed25519Signature.h"
 #include "../HDWallet/Utils/Utils.h"
 

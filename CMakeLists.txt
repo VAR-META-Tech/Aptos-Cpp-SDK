@@ -10,45 +10,9 @@ add_subdirectory(ThirdParty/bip3x)
 include(CTest)
 enable_testing()
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
-    # include(${CMAKE_BINARY_DIR}/Release/generators/conan_toolchain.cmake)
-    include(FetchContent)
-    fetchcontent_declare(
-            toolbox
-            GIT_REPOSITORY https://github.com/edwardstock/toolbox.git
-            GIT_TAG 3.4.0
-    )
-    set(toolbox_BUILD_TESTS OFF)
-    set(toolbox_BUILD_SHARED_LIBS OFF)
-    fetchcontent_makeavailable(toolbox)
-
-    fetchcontent_declare(
-            bip3x
-            GIT_REPOSITORY https://github.com/edwardstock/bip3x.git
-            GIT_TAG 3.0.0
-    )
-    fetchcontent_makeavailable(bip3x)
-    if(TARGET toolbox)
-        target_compile_options(toolbox PRIVATE
-            -include cstdint
-        )
-    endif()
-    if(TARGET bip3x)
-        target_compile_options(bip3x PRIVATE
-            -include cstdint
-        )
-    endif()
-    find_library(CryptoPP_LIB NAMES libcryptopp.a PATHS /usr/local/lib)
-    if (NOT CryptoPP_LIB)
-        message(FATAL_ERROR "Crypto++ library not found")
-    endif()
+    include(${CMAKE_BINARY_DIR}/Release/generators/conan_toolchain.cmake)
 elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
     include(${CMAKE_BINARY_DIR}/Release/generators/conan_toolchain.cmake)
-    find_package(cryptopp REQUIRED)
-    find_library(CryptoPP_LIB NAMES libcryptopp.a PATHS ${cryptopp_LIB_DIRS_RELEASE})
-    if (NOT CryptoPP_LIB)
-        message(FATAL_ERROR "Crypto++ library not found")
-    endif()
-    find_package(httplib REQUIRED)
     find_library(CORE_FOUNDATION_LIBRARY CoreFoundation)
     find_library(SECURITY_FRAMEWORK_LIBRARY Security)
 endif()
@@ -253,8 +217,9 @@ add_library(Aptos SHARED
 
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
   target_link_libraries(Aptos PRIVATE 
-  nlohmann_json::nlohmann_json bip3x ${CryptoPP_LIB}  ${OPENSSL_LIBRARIES} ${ZLIB_LIBRARIES}
-  toolbox)
+  nlohmann_json::nlohmann_json bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+  ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a ${cpprestsdk_LIB_DIRS_RELEASE}/libcpprest.a
+  toolbox Boost::boost)
 else()
   target_link_libraries(Aptos PRIVATE 
   nlohmann_json::nlohmann_json bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
@@ -269,13 +234,8 @@ set(CMAKE_BUILD_TYPE Debug)
 include(CPack)
 include_directories(${GTest_INCLUDE_DIRS})
 
-if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
-  set(GTest_LIB ${GTest_INCLUDE_DIRS}/../lib/libgtest.a )
-  set(GTest_main_LIB ${GTest_INCLUDE_DIRS}/../lib/libgtest_main.a )
-else()
-  set(GTest_LIB GTest::gtest )
-  set(GTest_main_LIB GTest::gtest_main )
-endif()
+set(GTest_LIB ${GTest_INCLUDE_DIRS}/../lib/libgtest.a )
+set(GTest_main_LIB ${GTest_INCLUDE_DIRS}/../lib/libgtest_main.a )
 
 add_executable(test_serialization Src/Test/test_serialization.cpp)
 add_executable(test_account Src/Test/test_account.cpp)
@@ -283,11 +243,16 @@ add_executable(test_utils Src/Test/test_utils.cpp)
 add_executable(test_wallet Src/Test/test_wallet.cpp)
 add_executable(test_transaction_serialization Src/Test/test_transaction_serialization.cpp)
 
-target_link_libraries(test_serialization PRIVATE ${GTest_LIB} ${GTest_main_LIB} pthread Aptos ${CryptoPP_LIB})
-target_link_libraries(test_account PRIVATE ${GTest_LIB} ${GTest_main_LIB} pthread Aptos ${CryptoPP_LIB})
-target_link_libraries(test_utils PRIVATE ${GTest_LIB} ${GTest_main_LIB} pthread Aptos ${CryptoPP_LIB})
-target_link_libraries(test_wallet PRIVATE ${GTest_LIB} ${GTest_main_LIB} pthread Aptos ${CryptoPP_LIB} toolbox)
-target_link_libraries(test_transaction_serialization PRIVATE ${GTest_LIB} ${GTest_main_LIB} pthread Aptos ${CryptoPP_LIB})
+target_link_libraries(test_serialization PRIVATE ${GTest_LIB} ${GTest_main_LIB} pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+  ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
+target_link_libraries(test_account PRIVATE ${GTest_LIB} ${GTest_main_LIB} pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+  ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
+target_link_libraries(test_utils PRIVATE ${GTest_LIB} ${GTest_main_LIB} pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+  ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
+target_link_libraries(test_wallet PRIVATE ${GTest_LIB} ${GTest_main_LIB} pthread Aptos toolbox ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+  ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
+target_link_libraries(test_transaction_serialization PRIVATE ${GTest_LIB} ${GTest_main_LIB} pthread Aptos ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+  ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
 
 add_test(NAME SerializationTest COMMAND test_serialization)
 add_test(NAME AccountTest COMMAND test_account)
@@ -304,12 +269,10 @@ add_executable(runAllTests
     Src/Test/test_transaction_serialization.cpp 
     Src/Test/test_serialization.cpp
 )
-if (CMAKE_SYSTEM_NAME MATCHES "Linux")
-  target_link_libraries(runAllTests PRIVATE ${GTest_LIB} ${GTest_main_LIB} pthread Aptos toolbox ${CryptoPP_LIB})
-else()
-  target_link_libraries(runAllTests PRIVATE ${GTest_LIB} ${GTest_main_LIB} pthread Aptos toolbox ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+
+target_link_libraries(runAllTests PRIVATE ${GTest_LIB} ${GTest_main_LIB} pthread Aptos toolbox ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
   ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
-endif()
+
 
 
 if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -325,12 +288,10 @@ add_library(AptosUILogic SHARED
     AptosUI/Source/LIB/uicontrollerlogic.h
     AptosUI/Source/LIB//uicontrollerlogic.cpp
 )
-if (CMAKE_SYSTEM_NAME MATCHES "Linux")
-  target_link_libraries(AptosUILogic PRIVATE nlohmann_json::nlohmann_json pthread Aptos bip3x ${CryptoPP_LIB})
-else()
-  target_link_libraries(AptosUILogic PRIVATE nlohmann_json::nlohmann_json pthread Aptos bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+
+target_link_libraries(AptosUILogic PRIVATE nlohmann_json::nlohmann_json pthread Aptos bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
   ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
-endif()
+
 
 add_executable(AptosUILogicTest
   AptosUI/Source/Test/main.cpp
@@ -370,9 +331,6 @@ add_executable(AptosSDKDemo
     AptosSDKDemo/Multisig/Multisig.cpp
 )
 
-if (CMAKE_SYSTEM_NAME MATCHES "Linux")
-  target_link_libraries(AptosSDKDemo PRIVATE Aptos )
-else()
-  target_link_libraries(AptosSDKDemo PRIVATE Aptos nlohmann_json::nlohmann_json Aptos bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
+
+target_link_libraries(AptosSDKDemo PRIVATE Aptos nlohmann_json::nlohmann_json Aptos bip3x ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a  ${openssl_LIB_DIRS_RELEASE}/libssl.a
 ${openssl_LIB_DIRS_RELEASE}/libcrypto.a ${zlib_LIB_DIRS_RELEASE}/libz.a)
-endif()

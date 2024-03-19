@@ -1,4 +1,4 @@
-#include "wallet.h"
+#include "Wallet.h"
 #include "Utils/Utils.h"
 
 using namespace Aptos::Accounts;

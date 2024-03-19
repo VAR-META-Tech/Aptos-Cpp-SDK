@@ -5,7 +5,7 @@
 #include "../Accounts/Ed25519Signature.h"
 #include "../Accounts/Ed25519/PublicKey.h"
 #include "../Accounts/AccountAddress.h"
-#include "../Accounts/multisignature.h"
+#include "../Accounts/Multisignature.h"
 
 using namespace Aptos::Accounts::Ed25519;
 

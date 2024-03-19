@@ -1,5 +1,5 @@
 #include "uicontrollerlogic.h"
-#include "HDWallet/wallet.h"
+#include "HDWallet/Wallet.h"
 #include "REST/Model/AccountResourceCoin.h"
 #include "REST/Model/ResponseInfo.h"
 #include "REST/RestClient.cpp"

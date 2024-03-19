@@ -14,7 +14,7 @@
 #include "../BCS/StructTag.h"
 #include "../BCS/BCS.h"
 #include "../Transactions/TransactionPayload.h"
-#include "../Transactions/rawtransaction.h"
+#include "../Transactions/Rawtransaction.h"
 #include "../Transactions/Authenticator.h"
 #include "../Transactions/SignedTransaction.h"
 #include "../Transactions/MultiAgentRawTransaction.h"
