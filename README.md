@@ -50,7 +50,7 @@ Aptos-Cpp-SDK is a cpp package written in C++ to help developers integrate Aptos
 ### Installation ###
 #Update submodule
 ```
-git submodule update --recursive --remote
+git submodule update --init --recursive
 ```
 
 #Install package management
