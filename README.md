@@ -28,7 +28,7 @@ Aptos-Cpp-SDK is a cpp package written in C++ to help developers integrate Aptos
 1. **`AptosSDKDemo/`**:: This directory contains examples showcasing how to use the Aptos Cpp SDK.
 2. **`AptosUI/`**:: This directory contains Wallet example Unreal Project using Aptos Cpp SDK.
 3. **`Doc/`**:: Documentation related to the project, which include setup API, Class references.
-4. *`Resource/`**:: A place for various resources needed for the project, like images, data files, or other assets.
+4. **`Resource/`**:: A place for various resources needed for the project, like images, data files, or other assets.
 5. **`Src/`**: Contains the main source code for the SDK. This is where you'll find the core functionality, client classes, and utility modules.
 6. **`ThirdParty/`**: Holds unit tests and integration tests for verifying the correctness of your code. Writing comprehensive tests ensures robustness.
 
