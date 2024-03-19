@@ -7,6 +7,7 @@
 
 Aptos-Cpp-SDK is a cpp package written in C++ to help developers integrate Aptos blockchain technology into their cpp and Unreal projects.
 
+- [Project Layout](#project-layout)
 - [Features](#features)
 - [Requirements](#requirements)
 - [Dependencies](#dependencies)
@@ -21,6 +22,15 @@ Aptos-Cpp-SDK is a cpp package written in C++ to help developers integrate Aptos
 - [Using Aptos-Cpp-SDK with Blueprint](#using-aptos-cpp-sdk-with-blueprint)
 - [Examples](#examples)
 - [License](#license)
+
+### Project Layout ###  
+
+1. **`AptosSDKDemo/`**:: This directory contains examples showcasing how to use the Aptos Cpp SDK.
+2. **`AptosUI/`**:: This directory contains Wallet example Unreal Project using Aptos Cpp SDK.
+3. **`Doc/`**:: Documentation related to the project, which include setup API, Class references.
+4. **`Resource/`**:: A place for various resources needed for the project, like images, data files, or other assets.
+5. **`Src/`**: Contains the main source code for the SDK. This is where you'll find the core functionality, client classes, and utility modules.
+6. **`ThirdParty/`**: Holds unit tests and integration tests for verifying the correctness of your code. Writing comprehensive tests ensures robustness.
 
 ### Features ###
 
@@ -46,6 +56,7 @@ Aptos-Cpp-SDK is a cpp package written in C++ to help developers integrate Aptos
 - https://github.com/edwardstock/bip3x
 - https://github.com/edwardstock/toolbox
 - https://github.com/weidai11/cryptopp
+- https://github.com/microsoft/cpprestsdk
 
 ### Installation ###
 #Update submodule
@@ -274,4 +285,4 @@ https://github.com/VAR-META-Tech/Aptos-Cpp-SDK/assets/59425826/1ec2cded-a68d-4fe
 
 
 ### License ###
-
+This project is licensed under the Apache-2.0 License. Refer to the LICENSE.txt file for details.
