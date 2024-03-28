@@ -11,7 +11,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of a string in BCS.
     /// </summary>
-    class BString : public ISerializable
+    class APTOS_API BString : public ISerializable
     {
     private:
         /// <summary>

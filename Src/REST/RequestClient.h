@@ -3,13 +3,14 @@
 
 #include <cpprest/http_client.h>
 #include <cpprest/uri.h>
+#include "BCS/BCSTypes.h"
 
 namespace Aptos::Rest
 {
     /// <summary>
     /// UnityWebRequest wrapper client
     /// </summary>
-    class RequestClient
+    class APTOS_API RequestClient
     {
     public:
         /// <summary>

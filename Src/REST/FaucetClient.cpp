@@ -11,7 +11,7 @@ namespace Aptos::Rest
     {
         using namespace AptosRESTModel;
         std::string uri = endpoint + "/mint?amount=" + std::to_string(amount) + "&address=" + address;
-        web::http::client::http_client client(uri);
+        web::http::client::http_client client(utility::conversions::to_string_t(uri));
         web::http::http_request request(web::http::methods::POST);
         request.headers().set_content_type(U("application/json"));
         client.request(request).then([callback](web::http::http_response response)

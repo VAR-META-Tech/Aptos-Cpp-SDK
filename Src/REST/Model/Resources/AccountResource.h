@@ -4,9 +4,11 @@
 #include <nlohmann/json.hpp>
 #include "Base/ResourceEvent.h"
 #include "Base/CapabilityOffer.h"
+#include "BCS/BCSTypes.h"
+
 namespace AptosRESTModel {
 
-class AccountResourceData {
+class APTOS_API AccountResourceData {
 public:
     nlohmann::json ToJson() const;
     static AccountResourceData FromJson(const nlohmann::json& dataJson);
@@ -23,7 +25,7 @@ private:
     CapabilityOffer SignerCapabilityOffer;
 };
 
-class AccountResource {
+class APTOS_API AccountResource {
 public:
     nlohmann::json ToJson() const;
     static AccountResource FromJson(const nlohmann::json& resourceJson);

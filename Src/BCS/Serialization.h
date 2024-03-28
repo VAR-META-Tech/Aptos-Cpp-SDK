@@ -16,7 +16,7 @@ namespace Aptos::BCS
     /// <summary>
     /// An implementation of BCS Serialization in C#
     /// </summary>
-    class Serialization
+    class APTOS_API Serialization
     {
     public:
         /// <summary>

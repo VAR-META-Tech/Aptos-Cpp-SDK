@@ -10,7 +10,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of a struct tag.
     /// </summary>
-    class StructTag : public ISerializableTag
+    class APTOS_API StructTag : public ISerializableTag
     {
     public:
         /// <summary>
@@ -64,6 +64,6 @@ namespace Aptos::BCS
         std::vector<std::shared_ptr<ISerializableTag>> typeArgs;
     };
 
-    bool operator==(const StructTag &lhs, const StructTag &rhs);
+    bool APTOS_API operator==(const StructTag &lhs, const StructTag &rhs);
 }
 #endif // STRUCTTAG_H

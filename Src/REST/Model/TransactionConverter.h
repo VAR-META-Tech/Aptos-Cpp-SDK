@@ -5,7 +5,7 @@
 
 namespace AptosRESTModel {
 
-class TransactionConverter
+class APTOS_API TransactionConverter
 {
 public:
     TransactionConverter();

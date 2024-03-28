@@ -1,6 +1,14 @@
 #include "Ed25519Bip32.h"
 #include "../HDWallet/Utils/Utils.h"
+
+#if defined(_WIN32) || defined(_WIN64)
+#include <winsock2.h>
+#include <ws2tcpip.h>
+// Additional Windows-specific includes and code
+#pragma comment(lib, "Ws2_32.lib")
+#else
 #include <netinet/in.h>
+#endif
 #include <regex>
 
 namespace Aptos::Accounts

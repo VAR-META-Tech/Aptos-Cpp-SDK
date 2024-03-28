@@ -12,7 +12,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of a script passed as bytes.
     /// </summary>
-    class Script : public ISerializable
+    class APTOS_API Script : public ISerializable
     {
     public:
         explicit Script(const std::vector<uint8_t> &code, const TagSequence &typeArgs, const Sequence &scriptArgs);
@@ -30,6 +30,6 @@ namespace Aptos::BCS
         Sequence scriptArgs;
     };
 
-    bool operator==(const Script &lhs, const Script &rhs);
+    bool APTOS_API operator==(const Script &lhs, const Script &rhs);
 }
 #endif // SCRIPT_H

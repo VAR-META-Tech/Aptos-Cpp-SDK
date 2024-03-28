@@ -9,7 +9,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of a 256.
     /// </summary>
-    class U256 : public ISerializableTag
+    class APTOS_API U256 : public ISerializableTag
     {
     private:
         /// <summary>

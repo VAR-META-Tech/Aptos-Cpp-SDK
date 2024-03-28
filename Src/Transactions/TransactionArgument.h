@@ -6,7 +6,7 @@
 
 namespace Aptos::BCS
 {
-    class TransactionArgument
+    class APTOS_API TransactionArgument
     {
     public:
         explicit TransactionArgument(ISerializable *value, TypeTag encoderType);

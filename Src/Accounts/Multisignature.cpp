@@ -7,6 +7,16 @@
 #define be32toh(x) OSSwapBigToHostInt32(x)
 #endif
 
+#if defined(_WIN32) || defined(_WIN64)
+
+#include <Winsock2.h>
+uint32_t htobe32(uint32_t host_32bits)
+{
+    return htonl(host_32bits);
+}
+#endif
+
+
 namespace Aptos::Accounts
 {
     MultiSignature::MultiSignature(const MultiPublicKey &PublicKeyMulti, const std::vector<std::pair<PublicKey, Ed25519Signature>> &SignatureMap)

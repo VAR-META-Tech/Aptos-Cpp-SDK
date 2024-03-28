@@ -3,12 +3,14 @@
 
 #include <iostream>
 #include <nlohmann/json.hpp>
+#include "BCS/BCSTypes.h"
+
 namespace AptosRESTModel {
 /// <summary>
 /// Represents a table item request
 /// https://fullnode.mainnet.aptoslabs.com/v1/spec#/schemas/TableItemRequest
 /// </summary>
-class TableItemRequest {
+class APTOS_API TableItemRequest {
 public:
     nlohmann::json ToJson() const;
     static TableItemRequest FromJson(const nlohmann::json& jsonData);

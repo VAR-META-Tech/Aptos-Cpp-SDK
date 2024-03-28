@@ -3,13 +3,14 @@
 
 #include <string>
 #include <nlohmann/json.hpp>
+#include "BCS/BCSTypes.h"
 
 namespace AptosRESTModel {
 /// <summary>
 /// Represents Account Data object
 /// https://fullnode.mainnet.aptoslabs.com/v1/spec#/schemas/AccountData
 /// </summary>
-class AccountData {
+class APTOS_API AccountData {
 public:
     explicit AccountData() = default;
 

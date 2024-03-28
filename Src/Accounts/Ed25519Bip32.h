@@ -7,13 +7,14 @@
 #include <cryptopp/hmac.h>
 #include <cryptopp/sha.h>
 #include <cryptopp/filters.h>
+#include "BCS/BCSTypes.h"
 
 namespace Aptos::Accounts
 {
     /// <summary>
     /// An implementation of Ed25519 based BIP32 key generation.
     /// </summary>
-    class Ed25519Bip32
+    class APTOS_API Ed25519Bip32
     {
     private:
         /// <summary>
@@ -63,14 +64,6 @@ namespace Aptos::Accounts
         static std::pair<CryptoPP::SecByteBlock, CryptoPP::SecByteBlock> HmacSha512(const CryptoPP::SecByteBlock &keyBuffer,
                                                                                     const CryptoPP::SecByteBlock &data);
 
-        /// <summary>
-        /// Checks if the derivation path is valid.
-        /// <remarks>Returns true if the path is valid, otherwise false.</remarks>
-        /// </summary>
-        /// <param name="path">The derivation path.</param>
-        /// <returns>A boolean.</returns>
-        static bool IsValidPath(const std::string &path);
-
     public:
         /// <summary>
         /// Initialize the ed25519 based bip32 key generator with the passed seed.
@@ -85,6 +78,14 @@ namespace Aptos::Accounts
         /// <returns>The key and chaincode.</returns>
         /// <exception cref="FormatException">Thrown when the passed derivation path is invalid.</exception>
         std::pair<CryptoPP::SecByteBlock, CryptoPP::SecByteBlock> DerivePath(const std::string &path);
+
+        /// <summary>
+        /// Checks if the derivation path is valid.
+        /// <remarks>Returns true if the path is valid, otherwise false.</remarks>
+        /// </summary>
+        /// <param name="path">The derivation path.</param>
+        /// <returns>A boolean.</returns>
+        static bool IsValidPath(const std::string& path);
     };
 }
 #endif // ED25519BIP32_H

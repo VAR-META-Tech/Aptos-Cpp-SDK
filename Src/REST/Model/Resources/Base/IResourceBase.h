@@ -2,9 +2,11 @@
 #define IRESOURCEBASE_H
 
 #include <nlohmann/json.hpp>
+#include "BCS/BCSTypes.h"
+
 namespace AptosRESTModel {
 
-class IResourceBase {
+class APTOS_API IResourceBase {
 public:
     explicit IResourceBase(const std::string& type);
     IResourceBase();

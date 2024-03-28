@@ -11,7 +11,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Signed transaction implementation.
     /// </summary>
-    class SignedTransaction : public BCS::ISerializable
+    class APTOS_API SignedTransaction : public BCS::ISerializable
     {
     public:
         explicit SignedTransaction(const RawTransaction &transaction, const Authenticator &authenticator);
@@ -29,6 +29,6 @@ namespace Aptos::BCS
         Authenticator authenticator;
     };
 
-    bool operator==(const SignedTransaction &lhs, const SignedTransaction &rhs);
+    bool APTOS_API operator==(const SignedTransaction &lhs, const SignedTransaction &rhs);
 }
 #endif // SIGNEDTRANSACTION_H

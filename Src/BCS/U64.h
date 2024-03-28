@@ -7,7 +7,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of U64.
     /// </summary>
-    class U64 : public ISerializableTag
+    class APTOS_API U64 : public ISerializableTag
     {
     private:
         /// <summary>

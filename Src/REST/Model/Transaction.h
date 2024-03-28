@@ -8,9 +8,9 @@
 
 namespace AptosRESTModel {
 
-class TransactionEvent {
+class APTOS_API TransactionEvent {
 public:
-    class DataObject {
+    class APTOS_API DataObject {
     public:
         static DataObject FromJson(const nlohmann::json& j);
         nlohmann::json ToJson() const;
@@ -25,7 +25,7 @@ public:
         std::string Object;
     };
 
-    class GUIDAddress {
+    class APTOS_API GUIDAddress {
     public:
         static GUIDAddress FromJson(const nlohmann::json& j);
         nlohmann::json ToJson() const;
@@ -52,7 +52,7 @@ private:
     DataObject Data;
 };
 
-class Change {
+class APTOS_API Change {
 public:
     virtual nlohmann::json ToJson() const;
     static Change FromJson(const nlohmann::json& changeJson);
@@ -60,7 +60,7 @@ protected:
     std::string Type;
 };
 
-class ChangeWriteResource : public Change {
+class APTOS_API ChangeWriteResource : public Change {
 public:
     virtual nlohmann::json ToJson() const;
     static ChangeWriteResource FromJson(const nlohmann::json& changeWriteResourceJson);
@@ -69,9 +69,9 @@ protected:
     std::string StateKeyHash;
 };
 
-class ChangeWriteResourceAptosCoin : public ChangeWriteResource {};
+class APTOS_API ChangeWriteResourceAptosCoin : public ChangeWriteResource {};
 
-class ChangeWriteResourceAccount : public ChangeWriteResource {
+class APTOS_API ChangeWriteResourceAccount : public ChangeWriteResource {
 public:
     nlohmann::json ToJson() const;
     static ChangeWriteResourceAccount FromJson(const nlohmann::json& changeWriteResourceAccountJson);
@@ -81,7 +81,7 @@ private:
     std::string SequenceNumber;
 };
 
-class ChangeWriteResourceWriteTableItem : public Change {
+class APTOS_API ChangeWriteResourceWriteTableItem : public Change {
 public:
     nlohmann::json ToJson() const;
     static ChangeWriteResourceWriteTableItem FromJson(const nlohmann::json& changeWriteResourceWriteTableItemJson);
@@ -98,7 +98,7 @@ private:
 /// NOTE: A TransactionRequest is a subset of a Transaction
 /// https://fullnode.mainnet.aptoslabs.com/v1/spec#/schemas/Transaction
 /// </summary>
-class Transaction : public TransactionRequest {
+class APTOS_API Transaction : public TransactionRequest {
 public:
     explicit Transaction(const TransactionRequest& transactionRequest);
     Transaction();

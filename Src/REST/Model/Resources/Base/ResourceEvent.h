@@ -2,6 +2,8 @@
 #define RESOURCEEVENT_H
 #include <iostream>
 #include <nlohmann/json.hpp>
+#include "BCS/BCSTypes.h"
+
 namespace AptosRESTModel {
 
 /// <summary>
@@ -15,9 +17,9 @@ namespace AptosRESTModel {
 ///     }
 /// }
 /// </summary>
-class ResourceEvent {
+class APTOS_API ResourceEvent {
 public:
-    class EventId {
+    class APTOS_API EventId {
     public:
         nlohmann::json ToJson() const;
         static EventId FromJson(const nlohmann::json& eventIdJson);
@@ -26,7 +28,7 @@ public:
         std::string CreationNumber;
     };
 
-    class GUid {
+    class APTOS_API GUid {
     public:
         nlohmann::json ToJson() const;
         static GUid FromJson(const nlohmann::json& guidJson);

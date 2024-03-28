@@ -7,7 +7,7 @@
 
 namespace AptosRESTModel {
 
-class PropertyValue {
+class APTOS_API PropertyValue {
 public:
     nlohmann::json ToJson() const;
     static PropertyValue FromJson(const nlohmann::json& propertyValueJson);
@@ -20,7 +20,7 @@ private:
     std::string Value;
 };
 
-class PropertyResource {
+class APTOS_API PropertyResource {
 public:
     nlohmann::json ToJson() const;
     static PropertyResource FromJson(const nlohmann::json& propertyResourceJson);
@@ -33,7 +33,7 @@ private:
     PropertyValue Value;
 };
 
-class Inner {
+class APTOS_API Inner {
 public:
     nlohmann::json ToJson() const;
     static Inner FromJson(const nlohmann::json& innerJson);
@@ -43,7 +43,7 @@ private:
     std::vector<PropertyResource> Data;
 };
 
-class PropertyMapResourceData : public ResourceDataBase {
+class APTOS_API PropertyMapResourceData : public ResourceDataBase {
 public:
     nlohmann::json ToJson() const;
     static PropertyMapResourceData FromJson(const nlohmann::json& propertyMapDataJson);
@@ -53,7 +53,7 @@ private:
     Inner InnerData;
 };
 
-class PropertyMapResource : public IResourceBase {
+class APTOS_API PropertyMapResource : public IResourceBase {
 public:
     nlohmann::json ToJson() const;
     static PropertyMapResource FromJson(const nlohmann::json& propertyMapResourceJson);

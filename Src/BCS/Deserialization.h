@@ -19,7 +19,7 @@
 
 namespace Aptos::BCS
 {
-    class Deserialization
+    class APTOS_API Deserialization
     {
     public:
         explicit Deserialization(const std::vector<uint8_t> &data);

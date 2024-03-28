@@ -3,15 +3,16 @@
 
 #include <string>
 #include <nlohmann/json.hpp>
+#include "BCS/BCSTypes.h"
 
 namespace AptosRESTModel {
 /// <summary>
 /// Represents Account Resource for Aptos Coin
 /// https://fullnode.mainnet.aptoslabs.com/v1/spec#/schemas/MoveResource
 /// </summary>
-class AccountResourceCoin {
+class APTOS_API AccountResourceCoin {
 public:
-    class Id {
+    class APTOS_API Id {
     public:
         Id();
         static AccountResourceCoin::Id FromJson(const nlohmann::json& jsonData);
@@ -21,7 +22,7 @@ public:
         std::string m_creationNum;
     };
 
-    class Guid {
+    class APTOS_API Guid {
     public:
         Guid();
         static AccountResourceCoin::Guid FromJson(const nlohmann::json& jsonData);
@@ -30,7 +31,7 @@ public:
         Id m_idProp;
     };
 
-    class Coin {
+    class APTOS_API Coin {
     public:
         Coin();
         static AccountResourceCoin::Coin FromJson(const nlohmann::json& jsonData);
@@ -41,7 +42,7 @@ public:
         std::string m_value;
     };
 
-    class DespositEvents {
+    class APTOS_API DespositEvents {
     public:
         DespositEvents();
         static AccountResourceCoin::DespositEvents FromJson(const nlohmann::json& jsonData);
@@ -51,7 +52,7 @@ public:
         Guid m_guidProp;
     };
 
-    class WithdrawEvents {
+    class APTOS_API WithdrawEvents {
     public:
         WithdrawEvents();
         static AccountResourceCoin::WithdrawEvents FromJson(const nlohmann::json& jsonData);
@@ -61,7 +62,7 @@ public:
         Guid m_guidProp;
     };
 
-    class Data {
+    class APTOS_API Data {
     public:
         Data() {}
         static AccountResourceCoin::Data FromJson(const nlohmann::json& jsonData);

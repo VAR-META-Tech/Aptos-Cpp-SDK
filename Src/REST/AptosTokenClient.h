@@ -12,7 +12,7 @@ namespace Aptos::Rest
     /// Interface implemented by all resource types.
     /// Necessary to create Dictionaries or Lists of different resources.
     /// </summary>
-    class IResource
+    class APTOS_API IResource
     {
     public:
         virtual std::string GetStructTag() const = 0;
@@ -23,7 +23,7 @@ namespace Aptos::Rest
     /// <summary>
     /// Represents an Object resource.
     /// </summary>
-    class Object : public IResource
+    class APTOS_API Object : public IResource
     {
     private:
         bool AllowUngatedTransfer;
@@ -46,7 +46,7 @@ namespace Aptos::Rest
     /// <summary>
     /// Represents a Collection resource.
     /// </summary>
-    class Collection : public IResource
+    class APTOS_API Collection : public IResource
     {
     private:
         Accounts::AccountAddress Creator;
@@ -65,7 +65,7 @@ namespace Aptos::Rest
         std::string ToString() const override;
     };
 
-    class Royalty : public IResource
+    class APTOS_API Royalty : public IResource
     {
     private:
         int Numerator;
@@ -84,7 +84,7 @@ namespace Aptos::Rest
     /// <summary>
     /// Represent a Token resource.
     /// </summary>
-    class Token : public IResource
+    class APTOS_API Token : public IResource
     {
     private:
         Accounts::AccountAddress Collection;
@@ -101,7 +101,7 @@ namespace Aptos::Rest
         std::string ToString() const override;
     };
 
-    class Property
+    class APTOS_API Property
     {
     private:
         BCS::BString Name;
@@ -138,7 +138,7 @@ namespace Aptos::Rest
         const std::shared_ptr<BCS::ISerializable> &getValue() const;
     };
 
-    class PropertyMap : public IResource
+    class APTOS_API PropertyMap : public IResource
     {
     private:
         std::vector<Property> Properties;
@@ -152,7 +152,7 @@ namespace Aptos::Rest
         std::string GetStructTag() const override;
     };
 
-    class ReadObject
+    class APTOS_API ReadObject
     {
     public:
         using FuncValue = std::shared_ptr<IResource>(std::shared_ptr<AptosRESTModel::ResourceDataBase>);
@@ -164,7 +164,7 @@ namespace Aptos::Rest
         std::unordered_map<std::string, std::shared_ptr<IResource>> Resources;
     };
 
-    class AptosTokenClient
+    class APTOS_API AptosTokenClient
     {
     public:
         explicit AptosTokenClient(RestClient &client);

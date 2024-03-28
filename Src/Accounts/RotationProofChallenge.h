@@ -7,7 +7,7 @@
 namespace Aptos::Accounts
 {
 
-class RotationProofChallenge
+class APTOS_API RotationProofChallenge
 {
 private:
     AccountAddress TypeInfoAccountAddress = AccountAddress::FromHex("0x1");

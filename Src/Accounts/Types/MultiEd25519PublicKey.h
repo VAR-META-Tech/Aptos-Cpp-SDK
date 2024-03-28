@@ -19,7 +19,7 @@ namespace Aptos
             /// Represents a multi-signature public key.
             /// More details can be found <see cref="https://aptos.dev/guides/creating-a-signed-transaction/#multisignature-transactions">here</see>.
             /// </summary>
-            class MultiEd25519PublicKey
+            class APTOS_API MultiEd25519PublicKey
             {
             public:
                 /// Max number of signature supported

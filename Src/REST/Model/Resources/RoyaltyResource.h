@@ -7,7 +7,7 @@
 
 namespace AptosRESTModel {
 
-class RoyaltyResourceData : public ResourceDataBase {
+class APTOS_API RoyaltyResourceData : public ResourceDataBase {
 public:
     nlohmann::json ToJson() const;
     static RoyaltyResourceData FromJson(const nlohmann::json& royaltyDataJson);
@@ -21,7 +21,7 @@ private:
     std::string PayeeAddress;
 };
 
-class RoyaltyResource : public IResourceBase {
+class APTOS_API RoyaltyResource : public IResourceBase {
 public:
     nlohmann::json ToJson() const;
     static RoyaltyResource FromJson(const nlohmann::json& royaltyResourceJson);

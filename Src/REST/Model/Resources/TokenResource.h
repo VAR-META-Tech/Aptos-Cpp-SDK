@@ -7,7 +7,7 @@
 #include "Base/ResourceEvent.h"
 
 namespace AptosRESTModel {
-class Collection {
+class APTOS_API Collection {
 public:
     nlohmann::json ToJson() const;
     static Collection FromJson(const nlohmann::json& collectionJson);
@@ -17,7 +17,7 @@ private:
     std::string Inner;
 };
 
-class TokenResourceData : public ResourceDataBase {
+class APTOS_API TokenResourceData : public ResourceDataBase {
 public:
     nlohmann::json ToJson() const;
     static TokenResourceData FromJson(const nlohmann::json& tokenDataJson);
@@ -36,7 +36,7 @@ private:
     std::string Uri;
 };
 
-class TokenResource : public IResourceBase {
+class APTOS_API TokenResource : public IResourceBase {
 public:
     nlohmann::json ToJson() const;
     static TokenResource FromJson(const nlohmann::json& tokenResourceJson);

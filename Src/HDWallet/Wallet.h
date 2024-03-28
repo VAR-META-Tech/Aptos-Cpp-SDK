@@ -3,6 +3,7 @@
 #define BOOST_ASIO_HAS_STD_INVOKE_RESULT
 #include "../Accounts/Ed25519Bip32.h"
 #include "../Accounts/Account.h"
+#define BIP3X_BUILT_AS_STATIC
 #include "bip3x/bip3x_mnemonic.h"
 #include "bip3x/bip3x_hdkey_encoder.h"
 #include <memory>
@@ -34,7 +35,7 @@ namespace Aptos::HDWallet
     /// <summary>
     /// Represents an Aptos wallet.
     /// </summary>
-    class Wallet
+    class APTOS_API Wallet
     {
     private:
         /// <summary>

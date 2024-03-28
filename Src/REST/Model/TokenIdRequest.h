@@ -6,7 +6,7 @@
 #include "TokenDataId.h"
 namespace AptosRESTModel {
 
-class TokenIdRequest {
+class APTOS_API TokenIdRequest {
 public:
     nlohmann::json ToJson() const;
     static TokenIdRequest FromJson(const nlohmann::json& jsonData);

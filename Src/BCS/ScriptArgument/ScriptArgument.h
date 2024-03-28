@@ -21,7 +21,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of a script argument.
     /// </summary>
-    class ScriptArgument : public ISerializable
+    class APTOS_API ScriptArgument : public ISerializable
     {
     public:
         explicit ScriptArgument(ScriptArgumentTypeTag variant, std::shared_ptr<ISerializableTag> value);

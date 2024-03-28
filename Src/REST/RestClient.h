@@ -19,7 +19,7 @@
 
 namespace Aptos::Rest
 {
-    class ClientConfig
+    class APTOS_API ClientConfig
     {
     public:
         static constexpr int EXPIRATION_TTL = 600;
@@ -28,7 +28,7 @@ namespace Aptos::Rest
         static constexpr int TRANSACTION_WAIT_IN_SECONDS = 20; // Amount of seconds to wait during each polling cycle.
     };
 
-    class RestClient
+    class APTOS_API RestClient
     {
     public:
         void SetEndpoint(const std::string &url);

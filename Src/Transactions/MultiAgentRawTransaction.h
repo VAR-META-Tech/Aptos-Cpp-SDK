@@ -10,7 +10,7 @@ using namespace Aptos::Accounts::Ed25519;
 
 namespace Aptos::BCS
 {
-    class MultiAgentRawTransaction
+    class APTOS_API MultiAgentRawTransaction
     {
     public:
         explicit MultiAgentRawTransaction(const RawTransaction &rawTransaction, const Sequence &secondarySigners);

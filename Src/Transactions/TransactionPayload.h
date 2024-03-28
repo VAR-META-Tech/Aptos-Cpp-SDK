@@ -14,7 +14,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of a transaction's payload.
     /// </summary>
-    class TransactionPayload : public ISerializable
+    class APTOS_API TransactionPayload : public ISerializable
     {
     public:
         explicit TransactionPayload(const std::shared_ptr<ISerializable> &payload);
@@ -30,6 +30,6 @@ namespace Aptos::BCS
         TransactionPayloadTypeTag variant;
     };
 
-    bool operator==(const TransactionPayload &lhs, const TransactionPayload &rhs);
+    bool APTOS_API operator==(const TransactionPayload &lhs, const TransactionPayload &rhs);
 }
 #endif // TRANSACTIONPAYLOAD_H

@@ -21,7 +21,7 @@ namespace Aptos::Accounts::Ed25519
     ///
     /// Note that the hexadecimal string representation is of the 32-byte private key on it's own.
     /// </summary>
-    class PrivateKey : public CryptoPP::ed25519PrivateKey
+    class APTOS_API PrivateKey : public CryptoPP::ed25519PrivateKey
     {
     public:
         /// <summary>

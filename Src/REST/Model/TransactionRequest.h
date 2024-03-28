@@ -7,7 +7,7 @@
 
 namespace AptosRESTModel {
 
-class SignatureData {
+class APTOS_API SignatureData {
 public:
     nlohmann::json ToJson() const;
     static SignatureData FromJson(const nlohmann::json& signatureJson);
@@ -28,7 +28,7 @@ private:
 /// Represents a Transaction Request, a subset of Transaction
 /// https://fullnode.mainnet.aptoslabs.com/v1/spec#/schemas/Transaction
 /// </summary>
-class TransactionRequest {
+class APTOS_API TransactionRequest {
 public:
     virtual nlohmann::json ToJson() const;
     static TransactionRequest FromJson(const nlohmann::json& requestJson);

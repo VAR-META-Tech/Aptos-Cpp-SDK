@@ -12,7 +12,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of Bytes in BCS.
     /// </summary>
-    class Bytes : public ISerializable
+    class APTOS_API Bytes : public ISerializable
     {
     private:
         /// <summary>

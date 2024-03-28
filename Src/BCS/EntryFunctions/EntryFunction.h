@@ -12,7 +12,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of an entry function.
     /// </summary>
-    class EntryFunction : public ISerializable
+    class APTOS_API EntryFunction : public ISerializable
     {
     public:
         EntryFunction() = default;

@@ -21,7 +21,7 @@ namespace Aptos::Accounts
     /// An Aptos account is represented by an extended private key,
     /// a public key and it's authentication key.
     /// </summary>
-    class Account
+    class APTOS_API Account
     {
     public:
         /// <summary>

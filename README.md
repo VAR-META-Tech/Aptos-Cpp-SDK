@@ -59,31 +59,81 @@ Aptos-Cpp-SDK is a cpp package written in C++ to help developers integrate Aptos
 - https://github.com/microsoft/cpprestsdk
 
 ### Installation ###
-#Update submodule
-```
-git submodule update --init --recursive
-```
+# Installation Guide
 
-#Install package management
-```
-brew install conan
-```
+This guide provides step-by-step instructions for installing and setting up our library which is compatible with Windows, Linux, and macOS platforms. Ensure you have the following prerequisites installed to build the project:
 
-#For setup project env
-```
-conan install . -s compiler.cppstd=20 --build=missing
-```
+## Prerequisites
 
-#For build project
-```
-mkdir build
-cd build
-cmake ..
-```
-Note: For MacOS maybe have error when not found path 'macos'. To fix that update file conan_toolchain.cmake like below:
-```
+### All Platforms
+- **Conan**: C++ Package Manager
+
+### Windows Specific
+- **CMake** (version 3.14 or higher)
+- **Visual Studio** with C++ development environment
+
+### Linux/macOS Specific
+- **CMake** (version 3.14 or higher)
+
+Additionally, for macOS, to perform code coverage, you'll need **LLVM** and **lcov**.
+
+## Installation Steps
+
+### Windows
+1. Install Visual Studio with the C++ development environment.
+2. Install CMake if not included in the Visual Studio installation.
+3. Install Conan using pip or download it from the official website.
+
+### Linux
+1. Install CMake and Conan using your distribution's package manager.
+
+### macOS
+1. Install Homebrew (if not already installed):
+    ```sh
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    ```
+2. Install CMake and Conan using Homebrew:
+    ```sh
+    brew install cmake conan
+    ```
+3. For code coverage tools, install LLVM and lcov:
+    ```sh
+    brew install llvm lcov
+    ```
+
+## Project Setup
+
+Follow these steps to set up the project environment:
+
+1. Clone the repository and initialize submodules:
+    ```sh
+    git clone <repository-url>
+    cd <repository-name>
+    git submodule update --init --recursive
+    ```
+
+2. Install the project dependencies using Conan:
+    ```sh
+    conan install . -s compiler.cppstd=20 --build=missing
+    ```
+
+3. Build the project:
+
+   ### Windows
+   Open the solution file `.sln` in Visual Studio and build the project using the IDE's build tools.
+
+   ### Linux/macOS
+   ```sh
+   mkdir build
+   cd build
+   cmake ..
+   make
+
+### macOS Specific Instructions
+
+If you encounter any errors regarding the 'macos' path not being found, you can update the `conan_toolchain.cmake` file as follows:
+```sh
 set(CMAKE_OSX_SYSROOT /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk CACHE STRING "" FORCE)
-```
 
 #For run code coverage on MacOS
 First of all, make sure you have llvm and lcov installed. You can install them using brew:

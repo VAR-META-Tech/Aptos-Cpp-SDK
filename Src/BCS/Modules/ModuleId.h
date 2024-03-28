@@ -9,7 +9,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of a module ID.
     /// </summary>
-    class ModuleId : public ISerializable
+    class APTOS_API ModuleId : public ISerializable
     {
     public:
         ModuleId() = default;
@@ -26,6 +26,6 @@ namespace Aptos::BCS
         std::string name;
     };
 
-    bool operator==(const ModuleId &lhs, const ModuleId &rhs);
+    bool APTOS_API operator==(const ModuleId &lhs, const ModuleId &rhs);
 }
 #endif // MODULEID_H

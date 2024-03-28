@@ -11,7 +11,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of a byte sequence.
     /// </summary>
-    class BytesSequence : public ISerializable
+    class APTOS_API BytesSequence : public ISerializable
     {
     private:
         /// <summary>

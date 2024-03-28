@@ -5,7 +5,7 @@
 
 namespace AptosRESTModel {
 
-class TransactionRequestConverter
+class APTOS_API TransactionRequestConverter
 {
 public:
     static AptosRESTModel::TransactionRequest ReadJson(const nlohmann::json& jsonData);

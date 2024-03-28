@@ -3,7 +3,7 @@
 
 #include "IResourceBase.h"
 
-class ResourceBaseListConverter
+class APTOS_API ResourceBaseListConverter
 {
 public:
     static std::vector<std::shared_ptr<AptosRESTModel::IResourceBase>> ReadJson(const nlohmann::json& json);

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <nlohmann/json.hpp>
+#include "BCS/BCSTypes.h"
 
 namespace AptosRESTModel {
 
@@ -10,9 +11,9 @@ namespace AptosRESTModel {
 /// Represents Account Resource for Aptos Coin
 /// https://fullnode.mainnet.aptoslabs.com/v1/spec#/schemas/MoveResource
 /// </summary>
-class AccountResourceTokenStore {
+class APTOS_API AccountResourceTokenStore {
 public:
-    class Tokens {
+    class APTOS_API Tokens {
     public:
         nlohmann::json ToJson() const;
         static Tokens FromJson(const nlohmann::json& jsonData);
@@ -23,7 +24,7 @@ public:
     };
 
 
-    class Id {
+    class APTOS_API Id {
     public:
         nlohmann::json ToJson() const;
         static Id FromJson(const nlohmann::json& jsonData);
@@ -32,7 +33,7 @@ public:
         std::string CreationNum;
     };
 
-    class Guid {
+    class APTOS_API Guid {
     public:
         nlohmann::json ToJson() const;
         static Guid FromJson(const nlohmann::json& jsonData);
@@ -40,7 +41,7 @@ public:
         Id IdProp;
     };
 
-    class WithdrawEvents {
+    class APTOS_API WithdrawEvents {
     public:
         nlohmann::json ToJson() const;
         static WithdrawEvents FromJson(const nlohmann::json& jsonData);
@@ -49,7 +50,7 @@ public:
         Guid GuidProp;
     };
 
-    class MutateTokenPropertyEvents {
+    class APTOS_API MutateTokenPropertyEvents {
     public:
         nlohmann::json ToJson() const;
         static MutateTokenPropertyEvents FromJson(const nlohmann::json& jsonData);
@@ -58,7 +59,7 @@ public:
         Guid GuidProp;
     };
 
-    class DespositEvents {
+    class APTOS_API DespositEvents {
     public:
         nlohmann::json ToJson() const;
         static DespositEvents FromJson(const nlohmann::json& jsonData);
@@ -67,7 +68,7 @@ public:
         Guid GuidProp;
     };
 
-    class BurnEvents {
+    class APTOS_API BurnEvents {
     public:
         nlohmann::json ToJson() const;
         static BurnEvents FromJson(const nlohmann::json& jsonData);
@@ -76,7 +77,7 @@ public:
         Guid GuidProp;
     };
 
-    class Data {
+    class APTOS_API Data {
     public:
         nlohmann::json ToJson() const;
         static Data FromJson(const nlohmann::json& jsonData);

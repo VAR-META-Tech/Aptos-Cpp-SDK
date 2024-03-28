@@ -12,7 +12,7 @@ namespace Aptos::Accounts
     /// <summary>
     /// The ED25519 Multi-Public Key implementation.
     /// </summary>
-    class MultiPublicKey : public BCS::ISerializable
+    class APTOS_API MultiPublicKey : public BCS::ISerializable
     {
     public:
         /// <summary>

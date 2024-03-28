@@ -2,9 +2,11 @@
 #define RESPONSEINFO_H
 
 #include <string>
+#include "BCS/BCSTypes.h"
+
 namespace AptosRESTModel {
 
-class ResponseInfo {
+class APTOS_API ResponseInfo {
 public:
     enum class Status {
         Success,

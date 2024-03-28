@@ -48,7 +48,7 @@ namespace Aptos::Accounts
     /// Represents an Aptos account address.
     /// More details can her found <see cref="https://aptos.dev/concepts/accounts">here</see>.
     /// </summary>
-    class AccountAddress : public BCS::ISerializableTag
+    class APTOS_API AccountAddress : public BCS::ISerializableTag
     {
     private:
         CryptoPP::SecByteBlock _addressBytes;
@@ -184,6 +184,6 @@ namespace Aptos::Accounts
         bool IsSpecial() const;
     };
 
-    bool operator==(const AccountAddress &lhs, const AccountAddress &rhs);
+    bool APTOS_API operator==(const AccountAddress &lhs, const AccountAddress &rhs);
 }
 #endif // APTOS_ACCOUNTADDRESS_H

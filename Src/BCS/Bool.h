@@ -11,7 +11,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of a Boolean.
     /// </summary>
-    class Bool : public ISerializableTag
+    class APTOS_API Bool : public ISerializableTag
     {
     private:
         /// <summary>
@@ -48,6 +48,6 @@ namespace Aptos::BCS
         size_t GetHashCode() const override;
     };
 
-    bool operator==(const Bool &lhs, const Bool &rhs);
+    bool APTOS_API operator==(const Bool &lhs, const Bool &rhs);
 }
 #endif // APTOS_BOOL_H

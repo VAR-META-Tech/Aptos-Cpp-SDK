@@ -14,7 +14,7 @@ namespace Aptos::Accounts::Ed25519
     /// <summary>
     /// Represents a 32-byte public key.
     /// </summary>
-    class PublicKey : public BCS::ISerializable
+    class APTOS_API PublicKey : public BCS::ISerializable
     {
         /// <summary>
         /// Public key length.

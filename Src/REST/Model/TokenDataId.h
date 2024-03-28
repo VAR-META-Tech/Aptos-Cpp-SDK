@@ -3,9 +3,11 @@
 
 #include <iostream>
 #include <nlohmann/json.hpp>
+#include "BCS/BCSTypes.h"
+
 namespace AptosRESTModel {
 
-class TokenDataId {
+class APTOS_API TokenDataId {
 public:
     nlohmann::json ToJson() const;
     static TokenDataId FromJson(const nlohmann::json& jsonData);

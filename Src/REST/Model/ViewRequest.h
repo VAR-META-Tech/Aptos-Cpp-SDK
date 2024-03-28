@@ -2,12 +2,13 @@
 #define VIEWREQUEST_H
 
 #include <nlohmann/json.hpp>
+#include "BCS/BCSTypes.h"
 
 namespace AptosRESTModel {
 /// <summary>
 /// Represents a view function request
 /// </summary>
-class ViewRequest {
+class APTOS_API ViewRequest {
 public:
     nlohmann::json ToJson() const;
     static ViewRequest FromJson(const nlohmann::json& requestJson);

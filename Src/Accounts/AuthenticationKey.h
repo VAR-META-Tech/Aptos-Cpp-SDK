@@ -19,7 +19,7 @@ namespace Aptos::Accounts
     /// whether the account is a single signature or a multisig account: \n
     /// More info on account addresses found <see cref="https://aptos.dev/concepts/accounts/#account-Address">here</see>.
     /// </summary>
-    class AuthenticationKey
+    class APTOS_API AuthenticationKey
     {
     public:
         /// <summary>

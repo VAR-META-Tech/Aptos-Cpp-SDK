@@ -5,7 +5,7 @@
 
 namespace AptosRESTModel {
 
-class Map {
+class APTOS_API Map {
 public:
     nlohmann::json ToJson() const;
     static Map FromJson(const nlohmann::json& mapJson);
@@ -13,7 +13,7 @@ private:
     std::vector<std::string> Data;
 };
 
-class TokenProperties {
+class APTOS_API TokenProperties {
 public:
     nlohmann::json ToJson() const;
     static TokenProperties FromJson(const nlohmann::json& tokenPropertiesJson);
@@ -21,7 +21,7 @@ private:
     Map MapProp;
 };
 
-class Id {
+class APTOS_API Id {
 public:
     nlohmann::json ToJson() const;
     static Id FromJson(const nlohmann::json& idJson);
@@ -35,7 +35,7 @@ private:
 /// <summary>
 /// https://fullnode.mainnet.aptoslabs.com/v1/spec#/operations/get_table_item
 /// </summary>
-class TableItemToken {
+class APTOS_API TableItemToken {
 public:
     nlohmann::json ToJson() const;
     static TableItemToken FromJson(const nlohmann::json& tableItemTokenJson);

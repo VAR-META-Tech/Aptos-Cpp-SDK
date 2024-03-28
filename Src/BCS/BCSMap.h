@@ -13,7 +13,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of a map in BCS.
     /// </summary>
-    class BCSMap : public ISerializable
+    class APTOS_API BCSMap : public ISerializable
     {
     private:
         /// <summary>

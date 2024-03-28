@@ -14,7 +14,7 @@ namespace Aptos::Accounts
     /// <summary>
     /// Representation of a ED25519 signature
     /// </summary>
-    class Ed25519Signature : public BCS::ISerializable
+    class APTOS_API Ed25519Signature : public BCS::ISerializable
     {
     public:
         /// <summary>

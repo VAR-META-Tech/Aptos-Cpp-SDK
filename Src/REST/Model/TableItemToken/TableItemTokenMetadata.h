@@ -6,7 +6,7 @@
 
 namespace AptosRESTModel {
 
-class MutabilityConfig {
+class APTOS_API MutabilityConfig {
 public:
     nlohmann::json ToJson() const;
     static MutabilityConfig FromJson(const nlohmann::json& mutabilityConfigJson);
@@ -18,7 +18,7 @@ private:
     bool Uri;
 };
 
-class Royalty {
+class APTOS_API Royalty {
 public:
     nlohmann::json ToJson() const;
     static Royalty FromJson(const nlohmann::json& royaltyJson);
@@ -28,7 +28,7 @@ private:
     std::string RoyaltyPointsNumerator;
 };
 
-class TableItemTokenMetadata {
+class APTOS_API TableItemTokenMetadata {
 public:
     nlohmann::json ToJson() const;
     static TableItemTokenMetadata FromJson(const nlohmann::json& tokenMetadataJson);

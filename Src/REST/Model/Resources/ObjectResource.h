@@ -6,7 +6,7 @@
 #include "Base/IResourceBase.h"
 namespace AptosRESTModel {
 
-class ObjectResourceData : public ResourceDataBase {
+class APTOS_API ObjectResourceData : public ResourceDataBase {
 public:
     nlohmann::json ToJson() const;
     static ObjectResourceData FromJson(const nlohmann::json& objectDataJson);
@@ -40,7 +40,7 @@ private:
 /// }
 /// </summary>
 ///
-class ObjectResource : public IResourceBase{
+class APTOS_API ObjectResource : public IResourceBase{
 public:
     nlohmann::json ToJson() const;
     static ObjectResource FromJson(const nlohmann::json& objectResourceJson);

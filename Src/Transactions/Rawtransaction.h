@@ -13,7 +13,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of a raw transaction.
     /// </summary>
-    class RawTransaction : public ISerializable
+    class APTOS_API RawTransaction : public ISerializable
     {
     public:
         explicit RawTransaction(const Accounts::AccountAddress &sender, int sequenceNumber,
@@ -38,6 +38,6 @@ namespace Aptos::BCS
         int chainId;
     };
 
-    bool operator==(const RawTransaction &lhs, const RawTransaction &rhs);
+    bool APTOS_API operator==(const RawTransaction &lhs, const RawTransaction &rhs);
 }
 #endif // RAWTRANSACTION_H

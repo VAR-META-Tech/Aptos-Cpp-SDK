@@ -8,7 +8,7 @@ namespace AptosRESTModel {
 /// <summary>
 /// Represents a table item request
 /// </summary>
-class TableItemRequestTokenData {
+class APTOS_API TableItemRequestTokenData {
 public:
     nlohmann::json ToJson() const;
     static TableItemRequestTokenData FromJson(const nlohmann::json& jsonData);

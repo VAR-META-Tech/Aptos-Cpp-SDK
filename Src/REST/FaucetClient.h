@@ -11,7 +11,7 @@ namespace Aptos::Rest
     /// Faucet Client for claiming APT from Devnet.
     /// To claim APT from Testnet you can visit Aptos Testnet Airdrop site.
     /// </summary>
-    class FaucetClient
+    class APTOS_API FaucetClient
     {
     public:
         /// <summary>

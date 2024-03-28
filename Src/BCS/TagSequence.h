@@ -7,7 +7,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of a tag sequence.
     /// </summary>
-    class TagSequence : public ISerializable
+    class APTOS_API TagSequence : public ISerializable
     {
     public:
         /// <summary>
@@ -44,6 +44,6 @@ namespace Aptos::BCS
         std::vector<std::shared_ptr<ISerializableTag>> serializableTags;
     };
 
-    bool operator==(const TagSequence &lhs, const TagSequence &rhs);
+    bool APTOS_API operator==(const TagSequence &lhs, const TagSequence &rhs);
 }
 #endif // APTOS_TAGSEQUENCE_H

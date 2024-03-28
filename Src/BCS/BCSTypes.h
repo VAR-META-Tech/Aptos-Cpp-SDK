@@ -10,6 +10,14 @@
 #include <cstdint>
 #include <memory>
 
+#if defined(_WIN32) || defined(_WIN64)
+    #if defined(BUILDING_APTOS_DLL)
+        #define APTOS_API __declspec(dllexport)
+    #else
+        #define APTOS_API __declspec(dllimport)
+#endif
+#endif
+
 namespace Aptos::BCS
 {
     class Serialization;
@@ -36,7 +44,7 @@ namespace Aptos::BCS
     /// <summary>
     /// An interfaces that enforces types to implement a serialization method.
     /// </summary>
-    class ISerializable
+    class APTOS_API ISerializable
     {
     public:
         /// <summary>
@@ -56,7 +64,7 @@ namespace Aptos::BCS
         virtual std::string ToString() const = 0;
     };
 
-    class ISerializableTag : public ISerializable
+    class APTOS_API ISerializableTag : public ISerializable
     {
     public:
         /// <summary>

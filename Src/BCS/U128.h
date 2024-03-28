@@ -9,7 +9,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of a U128.
     /// </summary>
-    class U128 : public ISerializableTag
+    class APTOS_API U128 : public ISerializableTag
     {
     private:
         /// <summary>

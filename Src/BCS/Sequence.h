@@ -24,7 +24,7 @@ namespace Aptos::BCS
     /// indicating the number of elements in the sequence. All variable length sequences must
     /// be MAX_SEQUENCE_LENGTH elements long or less.
     /// </summary>
-    class Sequence : public ISerializable
+    class APTOS_API Sequence : public ISerializable
     {
 
     public:

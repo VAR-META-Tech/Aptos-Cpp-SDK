@@ -13,7 +13,7 @@ namespace Aptos::Accounts
     /// <summary>
     /// The ED25519 Multi-Signature Implementation.
     /// </summary>
-    class MultiSignature : public BCS::ISerializable
+    class APTOS_API MultiSignature : public BCS::ISerializable
     {
     public:
         /// <summary>

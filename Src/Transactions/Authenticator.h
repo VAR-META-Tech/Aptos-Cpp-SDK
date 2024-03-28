@@ -18,7 +18,7 @@ namespace Aptos::BCS
     /// `AccountAuthenticator`'s `AuthenticationKeyPreimage` matches the `AuthenticationKey` stored
     /// under the participating signer's account address.
     /// </summary>
-    class IAuthenticator : public ISerializable
+    class APTOS_API IAuthenticator : public ISerializable
     {
     public:
         virtual bool Verify(const CryptoPP::SecByteBlock &data) = 0;
@@ -27,7 +27,7 @@ namespace Aptos::BCS
     /// <summary>
     /// A generic Authenticator.
     /// </summary>
-    class Authenticator : public IAuthenticator
+    class APTOS_API Authenticator : public IAuthenticator
     {
     public:
         enum VariantType
@@ -82,12 +82,12 @@ namespace Aptos::BCS
         std::shared_ptr<IAuthenticator> m_authenticator;
     };
 
-    bool operator==(const Authenticator &lhs, const Authenticator &rhs);
+    bool APTOS_API operator==(const Authenticator &lhs, const Authenticator &rhs);
 
     /// <summary>
     /// ED25519 Authenticator.
     /// </summary>
-    class Ed25519Authenticator : public IAuthenticator
+    class APTOS_API Ed25519Authenticator : public IAuthenticator
     {
     public:
         /// <summary>
@@ -134,7 +134,7 @@ namespace Aptos::BCS
     /// <summary>
     /// An Authenticator that uses a list of tuples of account addresses and authenticator pairs.
     /// </summary>
-    class MultiAgentAuthenticator : public IAuthenticator
+    class APTOS_API MultiAgentAuthenticator : public IAuthenticator
     {
     public:
         /// <summary>
@@ -189,7 +189,7 @@ namespace Aptos::BCS
     /// <summary>
     /// MultiEd25519Authenticator
     /// </summary>
-    class MultiEd25519Authenticator : public IAuthenticator
+    class APTOS_API MultiEd25519Authenticator : public IAuthenticator
     {
     public:
         /// <summary>

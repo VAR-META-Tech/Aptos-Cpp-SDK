@@ -8,7 +8,7 @@ namespace Aptos::BCS
     /// <summary>
     /// Representation of a U32.
     /// </summary>
-    class U32 : public ISerializableTag
+    class APTOS_API U32 : public ISerializableTag
     {
     private:
         /// <summary>

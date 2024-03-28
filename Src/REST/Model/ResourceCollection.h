@@ -4,15 +4,17 @@
 
 #include <iostream>
 #include <nlohmann/json.hpp>
+#include "BCS/BCSTypes.h"
+
 namespace AptosRESTModel {
 
 /// <summary>
 /// Represents account resource for a collection.
 /// https://fullnode.mainnet.aptoslabs.com/v1/spec#/schemas/MoveResource
 /// </summary>
-class ResourceCollection {
+class APTOS_API ResourceCollection {
 public:
-    class CollectionEvents {
+    class APTOS_API CollectionEvents {
     public:
         nlohmann::json ToJson() const;
         static CollectionEvents FromJson(const nlohmann::json& jsonData);
@@ -21,7 +23,7 @@ public:
         std::string Guid;
     };
 
-    class TokenData {
+    class APTOS_API TokenData {
     public:
         nlohmann::json ToJson() const;
         static TokenData FromJson(const nlohmann::json& jsonData);
@@ -31,7 +33,7 @@ public:
         std::string Handle;
     };
 
-    class Guid {
+    class APTOS_API Guid {
     public:
         nlohmann::json ToJson() const;
         static Guid FromJson(const nlohmann::json& jsonData);
@@ -40,7 +42,7 @@ public:
         std::string CreationNum;
     };
 
-    class CollectionData {
+    class APTOS_API CollectionData {
     public:
         nlohmann::json ToJson() const;
         static CollectionData FromJson(const nlohmann::json& jsonData);
@@ -50,7 +52,7 @@ public:
         std::string Handle;
     };
 
-    class Data {
+    class APTOS_API Data {
     public:
         nlohmann::json ToJson() const;
         static Data FromJson(const nlohmann::json& jsonData);

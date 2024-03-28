@@ -3,9 +3,11 @@
 
 #include <nlohmann/json.hpp>
 #include <vector>
+#include "BCS/BCSTypes.h"
+
 namespace AptosRESTModel {
 
-class Arguments {
+class APTOS_API Arguments {
 public:
     nlohmann::json ToJson() const;
 
@@ -29,7 +31,7 @@ private:
 /// https://fullnode.mainnet.aptoslabs.com/v1/spec#/schemas/TransactionPayload
 /// NOTE: Arguments is serialized to a single object that contains arrays of different types
 /// </summary>
-class TransactionPayload {
+class APTOS_API TransactionPayload {
 public:
     nlohmann::json ToJson() const;
     static TransactionPayload FromJson(const nlohmann::json& payloadJson);
