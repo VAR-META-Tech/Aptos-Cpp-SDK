@@ -273,20 +273,6 @@ add_test(NAME WalletTest COMMAND test_wallet)
 add_test(NAME TransactionSerializationTest COMMAND test_transaction_serialization)
 file(COPY Src/Test/two_by_two_transfer.mv DESTINATION ${CMAKE_BINARY_DIR})
 
-# Link test executable against gtest & gtest_main
-add_executable(runAllTests 
-    Src/Test/test_account.cpp 
-    Src/Test/test_utils.cpp 
-    Src/Test/test_wallet.cpp 
-    Src/Test/test_transaction_serialization.cpp 
-    Src/Test/test_serialization.cpp
-)
-
-target_link_libraries(runAllTests PRIVATE ${GTest_LIB} ${GTest_main_LIB} Aptos ${cryptopp_LIB}  ${openssl_LIB}
-${crypto_LIB} ${zlib_LIB} ${cpprestsdk_LIB} GTest::gtest GTest::gtest_main nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk)
-
-
-
 if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_custom_target(coverage
     COMMAND xcrun ${CMAKE_CURRENT_BINARY_DIR}/runAllTests
@@ -344,6 +330,17 @@ add_executable(AptosSDKDemo
     AptosSDKDemo/Multisig/Multisig.cpp
 )
 
-
 target_link_libraries(AptosSDKDemo PRIVATE Aptos ${GTest_LIB} ${GTest_main_LIB}  ${cryptopp_LIB}  ${openssl_LIB}
 ${crypto_LIB} ${zlib_LIB} ${cpprestsdk_LIB} nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk)
+
+# Define top-level targets
+add_custom_target(build 
+  DEPENDS Aptos AptosUILogic
+  COMMENT "Builds the Aptos and AptosUILogic targets"
+)
+
+add_custom_target(demo
+  DEPENDS AptosSDKDemo
+  COMMAND AptosSDKDemo
+  COMMENT "Builds and runs the AptosSDKDemo target"
+)
