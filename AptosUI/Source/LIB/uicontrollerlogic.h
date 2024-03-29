@@ -4,11 +4,13 @@
 #include <string>
 
 #if defined(_WIN32) || defined(_WIN64)
-#if defined(BUILDING_APTOS_DLL)
-#define APTOS_API __declspec(dllexport)
+    #if defined(BUILDING_APTOS_DLL)
+    #define APTOS_API __declspec(dllexport)
+    #else
+    #define APTOS_API __declspec(dllimport)
+    #endif
 #else
-#define APTOS_API __declspec(dllimport)
-#endif
+    #define APTOS_API
 #endif
 
 extern "C" {
