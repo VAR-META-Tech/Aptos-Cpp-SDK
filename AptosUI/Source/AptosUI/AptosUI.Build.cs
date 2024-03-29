@@ -16,16 +16,16 @@ public class AptosUI : ModuleRules
         {
 			string AptosUiLogicPath = Path.Combine(ModuleDirectory, "../../../build/", "libAptosUILogic.dylib");
 			string AptosLibPath = Path.Combine(ModuleDirectory, "../../../build/", "libAptos.dylib");
-			string Bip3xLibPath = Path.Combine(ModuleDirectory, "../../../Plugins/lib/", "libbip3x.dylib");
+			// string Bip3xLibPath = Path.Combine(ModuleDirectory, "../../../Plugins/lib/", "libbip3x.dylib");
 			string destinationDirectory = Target.ProjectFile.Directory.FullName;
 			File.Copy(AptosUiLogicPath, Path.Combine(destinationDirectory, "libAptosUILogic.dylib"), true);
 			File.Copy(AptosLibPath, Path.Combine(destinationDirectory, "libAptos.dylib"), true);
-			File.Copy(Bip3xLibPath, Path.Combine(destinationDirectory, "libbip3x.dylib"), true);
+			// File.Copy(Bip3xLibPath, Path.Combine(destinationDirectory, "libbip3x.dylib"), true);
 
 			PublicIncludePaths.AddRange(new string[] { Path.Combine(ModuleDirectory, "../../../") });
 			PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libAptos.dylib"));
 			PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libAptosUILogic.dylib"));
-			PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libbip3x.dylib"));
+			// PublicAdditionalLibraries.Add(Path.Combine(destinationDirectory, "libbip3x.dylib"));
         }
         else if (Target.Platform == UnrealTargetPlatform.Linux)
         {

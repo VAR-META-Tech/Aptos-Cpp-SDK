@@ -120,21 +120,35 @@ Follow these steps to set up the project environment:
 3. Build the project:
 
    ### Windows
-   Open the solution file `.sln` in Visual Studio and build the project using the IDE's build tools.
+   Open the solution file `.sln` in Visual Studio and build the project using the IDE's build tools. (Currently only support build Release)
 
    ### Linux/macOS
    ```sh
    mkdir build
    cd build
    cmake ..
-   make
+   ```
+   Once the environment is set up, you can use the following make options:
+   
+   Builds all the libraries of the project.
+   ```sh
+   make build
+   ```
+   Runs the unit tests and integration tests.
+   ```sh
+   make test
+   ```
+   Executes a sample demo to showcase features used in the SDK.
+   ```sh
+   make demo
+   ```
 
 ### macOS Specific Instructions
 
 If you encounter any errors regarding the 'macos' path not being found, you can update the `conan_toolchain.cmake` file as follows:
 ```sh
 set(CMAKE_OSX_SYSROOT /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk CACHE STRING "" FORCE)
-
+```
 #For run code coverage on MacOS
 First of all, make sure you have llvm and lcov installed. You can install them using brew:
 brew install llvm lcov
