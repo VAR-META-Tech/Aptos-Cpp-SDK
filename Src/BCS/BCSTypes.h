@@ -15,7 +15,9 @@
         #define APTOS_API __declspec(dllexport)
     #else
         #define APTOS_API __declspec(dllimport)
-#endif
+    #endif
+#else
+    #define APTOS_API
 #endif
 
 namespace Aptos::BCS

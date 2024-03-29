@@ -5,6 +5,8 @@ cryptopp/8.8.0
 cmake/3.27.9
 gtest/1.14.0
 cpprestsdk/2.10.19
+boost/1.83.0
+openssl/3.2.0
 
 [generators]
 CMakeDeps

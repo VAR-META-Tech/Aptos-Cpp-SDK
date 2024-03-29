@@ -42,6 +42,8 @@ find_package(cryptopp)
 find_package(cmake)
 find_package(GTest)
 find_package(cpprestsdk)
+find_package(Boost REQUIRED)
+find_package(OpenSSL REQUIRED)
 
 # Code coverage configuration
 option(CODE_COVERAGE "Enable coverage reporting" OFF)
@@ -55,6 +57,8 @@ include_directories(ThirdParty/bip3x/include)
 include_directories(${cryptopp_INCLUDE_DIRS})
 include_directories(${nlohmann_json_INCLUDE_DIRS})
 include_directories(${cpprestsdk_INCLUDE_DIRS})
+include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${OpenSSL_INCLUDE_DIRS})
 
 add_library(Aptos SHARED
 	Src/BCS/BCS.h
@@ -214,6 +218,14 @@ add_library(Aptos SHARED
         Src/Accounts/RotationProofChallenge.cpp
 )
 
+set(openssl_LIB ${openssl_LIB_DIRS_RELEASE}/libssl.a )
+set(cryptopp_LIB ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a )
+set(zlib_LIB ${zlib_LIB_DIRS_RELEASE}/libz.a )
+set(crypto_LIB ${openssl_LIB_DIRS_RELEASE}/libcrypto.a )
+set(cpprestsdk_LIB ${cpprestsdk_LIB_DIRS_RELEASE}/libcpprest.a )
+set(GTest_LIB ${GTest_INCLUDE_DIRS}/../lib/libgtest.a )
+set(GTest_main_LIB ${GTest_INCLUDE_DIRS}/../lib/libgtest_main.a )
+
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
   target_link_libraries(Aptos PRIVATE
   nlohmann_json::nlohmann_json bip3x ${cryptopp_LIB}  ${openssl_LIB}
@@ -243,11 +255,16 @@ add_executable(test_utils Src/Test/test_utils.cpp)
 add_executable(test_wallet Src/Test/test_wallet.cpp)
 add_executable(test_transaction_serialization Src/Test/test_transaction_serialization.cpp)
 
-target_link_libraries(test_serialization PRIVATE GTest::gtest GTest::gtest_main nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
-target_link_libraries(test_account PRIVATE GTest::gtest GTest::gtest_main nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
-target_link_libraries(test_utils PRIVATE GTest::gtest GTest::gtest_main nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
-target_link_libraries(test_wallet PRIVATE GTest::gtest GTest::gtest_main nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
-target_link_libraries(test_transaction_serialization PRIVATE GTest::gtest GTest::gtest_main nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
+target_link_libraries(test_serialization PRIVATE ${GTest_LIB} ${GTest_main_LIB}  ${cryptopp_LIB}  ${openssl_LIB}
+${crypto_LIB} ${zlib_LIB} ${cpprestsdk_LIB} GTest::gtest GTest::gtest_main nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos )
+target_link_libraries(test_account PRIVATE ${GTest_LIB} ${GTest_main_LIB}  ${cryptopp_LIB}  ${openssl_LIB}
+${crypto_LIB} ${zlib_LIB} ${cpprestsdk_LIB} GTest::gtest GTest::gtest_main nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
+target_link_libraries(test_utils PRIVATE ${GTest_LIB} ${GTest_main_LIB}  ${cryptopp_LIB}  ${openssl_LIB}
+${crypto_LIB} ${zlib_LIB} ${cpprestsdk_LIB} GTest::gtest GTest::gtest_main nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
+target_link_libraries(test_wallet PRIVATE ${GTest_LIB} ${GTest_main_LIB}  ${cryptopp_LIB}  ${openssl_LIB}
+${crypto_LIB} ${zlib_LIB} ${cpprestsdk_LIB} GTest::gtest GTest::gtest_main nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
+target_link_libraries(test_transaction_serialization PRIVATE ${GTest_LIB} ${GTest_main_LIB}  ${cryptopp_LIB}  ${openssl_LIB}
+${crypto_LIB} ${zlib_LIB} ${cpprestsdk_LIB} GTest::gtest GTest::gtest_main nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
 
 add_test(NAME SerializationTest COMMAND test_serialization)
 add_test(NAME AccountTest COMMAND test_account)
@@ -265,7 +282,8 @@ add_executable(runAllTests
     Src/Test/test_serialization.cpp
 )
 
-target_link_libraries(runAllTests PRIVATE GTest::gtest GTest::gtest_main nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
+target_link_libraries(runAllTests PRIVATE ${GTest_LIB} ${GTest_main_LIB}  ${cryptopp_LIB}  ${openssl_LIB}
+${crypto_LIB} ${zlib_LIB} ${cpprestsdk_LIB} GTest::gtest GTest::gtest_main nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
 
 
 
@@ -283,14 +301,16 @@ add_library(AptosUILogic SHARED
     AptosUI/Source/LIB//uicontrollerlogic.cpp
 )
 
-target_link_libraries(AptosUILogic PRIVATE nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
+target_link_libraries(AptosUILogic PRIVATE ${GTest_LIB} ${GTest_main_LIB}  ${cryptopp_LIB}  ${openssl_LIB}
+${crypto_LIB} ${zlib_LIB} ${cpprestsdk_LIB}  ${CORE_FOUNDATION_LIBRARY} ${SECURITY_FRAMEWORK_LIBRARY} nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
 
 
 add_executable(AptosUILogicTest
   AptosUI/Source/Test/main.cpp
 )
 
-target_link_libraries(AptosUILogicTest PRIVATE Aptos AptosUILogic )
+target_link_libraries(AptosUILogicTest PRIVATE Aptos AptosUILogic ${GTest_LIB} ${GTest_main_LIB}  ${cryptopp_LIB}  ${openssl_LIB}
+${crypto_LIB} ${zlib_LIB} ${cpprestsdk_LIB} nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk)
 
 add_executable(AptosSDKDemo
     AptosSDKDemo/AptosToken/Model/AddTokenPropertyResponse.h
@@ -325,4 +345,5 @@ add_executable(AptosSDKDemo
 )
 
 
-target_link_libraries(AptosSDKDemo PRIVATE Aptos nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
+target_link_libraries(AptosSDKDemo PRIVATE Aptos ${GTest_LIB} ${GTest_main_LIB}  ${cryptopp_LIB}  ${openssl_LIB}
+${crypto_LIB} ${zlib_LIB} ${cpprestsdk_LIB} nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk Aptos)
