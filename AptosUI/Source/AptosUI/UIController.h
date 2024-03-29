@@ -4,11 +4,12 @@
 #define BOOST_NO_CXX98_FUNCTION_BASE
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#pragma GCC diagnostic ignored "-Wall"
-#pragma GCC diagnostic ignored "-Wdeprecated-builtins"
-#pragma GCC diagnostic ignored "-Wshadow"
-#pragma GCC diagnostic ignored "-Wenum-constexpr-conversion"
-
+#ifdef __GNUC__ 
+	#pragma GCC diagnostic ignored "-Wall"
+	#pragma GCC diagnostic ignored "-Wdeprecated-builtins"
+	#pragma GCC diagnostic ignored "-Wshadow"
+	#pragma GCC diagnostic ignored "-Wenum-constexpr-conversion"
+#endif
 #ifdef check
 #undef check
 #endif
@@ -17,8 +18,9 @@
 #endif
 
 #include "../LIB/uicontrollerlogic.h"
-#pragma GCC diagnostic pop
-
+#ifdef __GNUC__ 
+	#pragma GCC diagnostic pop
+#endif
 #include <string>
 #include "UIController.generated.h"
 
