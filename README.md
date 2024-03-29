@@ -160,17 +160,6 @@ make coverage
 A examples unreal project can be found in the following directory:  
 `AptosUI/`.
 
-The SDK's test suite can be found in the following directory:   
-`Test/`.   
-
-The test suite covers:
-- Account - private / public keys, signatures and verification
-- Transactions - creation and serialization
-- BCS serialization and deserialization
-
-### Using Aptos-Cpp-SDK
-Aptos-Cpp-SDK can integrate into your own any cpp or Unreal projects. The main functionality comes from several key classes: `RestClient`, `FacetClient`, `TokenClient`, `EntryFunction`, `Account`, and `Wallet`.
-
 For Unreal project please reference example in ```AptosUI```, you need define Build.cs to integration Aptos library with Unreal engine.
 Here is an example:
 ```cshape
@@ -208,6 +197,13 @@ public class AptosUI : ModuleRules
 	}
 }
 ```
+Video we using SDK on windows with sample unreal project:
+
+
+https://github.com/VAR-META-Tech/Aptos-Cpp-SDK/assets/133180467/1d728fa3-d722-4dbb-8240-bcc3b43b824e
+
+### Using Aptos-Cpp-SDK
+Aptos-Cpp-SDK can integrate into your own any cpp or Unreal projects. The main functionality comes from several key classes: `RestClient`, `FacetClient`, `TokenClient`, `EntryFunction`, `Account`, and `Wallet`.
 
 There are three core client classes:
 - **FaucetClient** - used to request for airdrops
