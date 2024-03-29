@@ -218,20 +218,26 @@ add_library(Aptos SHARED
         Src/Accounts/RotationProofChallenge.cpp
 )
 
-set(openssl_LIB ${openssl_LIB_DIRS_RELEASE}/libssl.a )
-set(cryptopp_LIB ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a )
-set(zlib_LIB ${zlib_LIB_DIRS_RELEASE}/libz.a )
-set(crypto_LIB ${openssl_LIB_DIRS_RELEASE}/libcrypto.a )
-set(cpprestsdk_LIB ${cpprestsdk_LIB_DIRS_RELEASE}/libcpprest.a )
-set(GTest_LIB ${GTest_INCLUDE_DIRS}/../lib/libgtest.a )
-set(GTest_main_LIB ${GTest_INCLUDE_DIRS}/../lib/libgtest_main.a )
-
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+  set(openssl_LIB ${openssl_LIB_DIRS_RELEASE}/libssl.a )
+  set(cryptopp_LIB ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a )
+  set(zlib_LIB ${zlib_LIB_DIRS_RELEASE}/libz.a )
+  set(crypto_LIB ${openssl_LIB_DIRS_RELEASE}/libcrypto.a )
+  set(cpprestsdk_LIB ${cpprestsdk_LIB_DIRS_RELEASE}/libcpprest.a )
+  set(GTest_LIB ${GTest_INCLUDE_DIRS}/../lib/libgtest.a )
+  set(GTest_main_LIB ${GTest_INCLUDE_DIRS}/../lib/libgtest_main.a )
   target_link_libraries(Aptos PRIVATE
   nlohmann_json::nlohmann_json bip3x ${cryptopp_LIB}  ${openssl_LIB}
   ${crypto_LIB} ${zlib_LIB} ${cpprestsdk_LIB}
   toolbox Boost::boost)
 elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
+  set(openssl_LIB ${openssl_LIB_DIRS_RELEASE}/libssl.a )
+  set(cryptopp_LIB ${cryptopp_LIB_DIRS_RELEASE}/libcryptopp.a )
+  set(zlib_LIB ${zlib_LIB_DIRS_RELEASE}/libz.a )
+  set(crypto_LIB ${openssl_LIB_DIRS_RELEASE}/libcrypto.a )
+  set(cpprestsdk_LIB ${cpprestsdk_LIB_DIRS_RELEASE}/libcpprest.a )
+  set(GTest_LIB ${GTest_INCLUDE_DIRS}/../lib/libgtest.a )
+  set(GTest_main_LIB ${GTest_INCLUDE_DIRS}/../lib/libgtest_main.a )
   target_link_libraries(Aptos PRIVATE
   nlohmann_json::nlohmann_json bip3x ${cryptopp_LIB}  ${openssl_LIB}
   ${crypto_LIB} ${zlib_LIB} ${cpprestsdk_LIB}
@@ -287,7 +293,7 @@ add_library(AptosUILogic SHARED
     AptosUI/Source/LIB//uicontrollerlogic.cpp
 )
 
-target_link_libraries(AptosUILogic PRIVATE ${GTest_LIB} ${GTest_main_LIB} Aptos ${cryptopp_LIB}  ${openssl_LIB}
+target_link_libraries(AptosUILogic PRIVATE Aptos ${cryptopp_LIB}  ${openssl_LIB}
 ${crypto_LIB} ${zlib_LIB} ${cpprestsdk_LIB}  ${CORE_FOUNDATION_LIBRARY} ${SECURITY_FRAMEWORK_LIBRARY} nlohmann_json::nlohmann_json bip3x toolbox cryptopp::cryptopp cpprestsdk::cpprestsdk)
 
 

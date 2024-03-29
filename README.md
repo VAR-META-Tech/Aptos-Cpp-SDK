@@ -119,15 +119,14 @@ Follow these steps to set up the project environment:
 
 3. Build the project:
 
+   ```sh
+   cd build
+   cmake ..
+   ```
    ### Windows
    Open the solution file `.sln` in Visual Studio and build the project using the IDE's build tools. (Currently only support build Release)
 
    ### Linux/macOS
-   ```sh
-   mkdir build
-   cd build
-   cmake ..
-   ```
    Once the environment is set up, you can use the following make options:
    
    Builds all the libraries of the project.

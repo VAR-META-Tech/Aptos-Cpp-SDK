@@ -10,6 +10,7 @@
 #if defined(_WIN32) || defined(_WIN64)
 
 #include <Winsock2.h>
+#include <bit>
 uint32_t htobe32(uint32_t host_32bits)
 {
     return htonl(host_32bits);
